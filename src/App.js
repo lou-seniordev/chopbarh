@@ -1,9 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
+import Layout from "./container/Layout";
 
-class App extends Component {
-  render() {
-    return null;
-  }
+export default function App() {
+  return <Layout />;
 }
-
-export default App;
