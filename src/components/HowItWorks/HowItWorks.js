@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
-
 const HowItWorksWrapper = styled.div`
   text-align: center;
   padding: 2rem;
