@@ -48,6 +48,7 @@ const Button = styled.button`
   all: unset;
   border: 3px solid ${color.colorWhite};
   padding: 1rem 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   transform: skew(-20deg);
   display: inline-block;
@@ -70,13 +71,13 @@ export default function Hero() {
       <HeroContentWrapper>
         <img src="assets/img/Smiling guy.png" className="hero__image" alt="" />
         <HeadingTwo className="hero__title">Bet.Play.Win.</HeadingTwo>
-        <div className="mt-n4">
+        <div className="mt-n4 ml-lg-1 ml-md-1">
           <ParagraphOne>
             Play and win from collection of childhood games that live up to the
             moment
           </ParagraphOne>
         </div>
-        <div className="hero__buttons mt-3">
+        <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
           <Button className="mr-4">
             <span>Start Playing</span>
           </Button>
