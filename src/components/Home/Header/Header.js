@@ -5,7 +5,10 @@ import breakPoints from "../../styles/breakpoints";
 import Logo from "../../UI/Logo/Logo";
 
 const HeaderWrapper = styled.div`
-  background: ${colors.colorGrayDarkOne} !important;
+  background: ${props =>
+    props.transparent
+      ? "transparent"
+      : `${colors.colorGrayDarkOne}`} !important;
   min-height: 6rem;
   padding: 0.4rem 2rem;
   position: relative;
@@ -48,9 +51,9 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-export default function Header() {
+export default function Header({ transparent }) {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper transparent={transparent}>
       <nav
         className="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
         role="navigation"
