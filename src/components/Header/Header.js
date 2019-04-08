@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
+import breakPoints from "../styles/breakpoints";
 import Logo from "../UI/Logo/Logo";
 
 const HeaderWrapper = styled.div`
@@ -26,6 +27,13 @@ const HeaderWrapper = styled.div`
     font-size: 1.3rem;
     z-index: 200;
 
+    @media only screen and (max-width: ${breakPoints.mediumLite}) {
+      align-self: flex-start;
+      padding: 0.5rem 1.7rem;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
     span {
       display: inline-block;
       transform: skew(20deg);
@@ -44,14 +52,14 @@ export default function Header() {
   return (
     <HeaderWrapper>
       <nav
-        class="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
+        className="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
         role="navigation"
       >
-        <a class="navbar-brand navbar-logo mt-n4" href="index">
+        <a className="navbar-brand navbar-logo mt-n4" href="index">
           <Logo />
         </a>
         <button
-          class="navbar-toggler custom-toggler"
+          className="navbar-toggler custom-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -59,38 +67,40 @@ export default function Header() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon" />
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto" />
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link text-uppercase mr-5" href="home">
-                How To <span class="sr-only">(current)</span>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto" />
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <a className="nav-link text-uppercase mr-5" href="home">
+                How To <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-uppercase mr-5" href="games">
+            <li className="nav-item">
+              <a className="nav-link text-uppercase mr-5" href="games">
                 Games
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link mr-5" href="faqs">
+            <li className="nav-item">
+              <a className="nav-link mr-5" href="faqs">
                 FAQs
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-uppercase mr-5" href="about">
+            <li className="nav-item">
+              <a className="nav-link text-uppercase mr-5" href="about">
                 About Us
               </a>
             </li>
-            <button class="mr-2">
-              <span>Login</span>
-            </button>
-            <button class="hero__button">
-              <span>Sign Up</span>
-            </button>
+            <div>
+              <button className="mr-2">
+                <span>Login</span>
+              </button>
+              <button className="hero__button">
+                <span>Sign Up</span>
+              </button>
+            </div>
           </ul>
         </div>
       </nav>
