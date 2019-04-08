@@ -5,7 +5,7 @@ import HowItWorks from "../HowItWorks/HowItWorks";
 import PlayAndChop from "../PlayAndChop/PlayAndChop";
 import Testimonials from "../Testimonials/Testimonials";
 import Games from "../Games/Games";
-import Footer from "../Footer/Footer";
+import Footer from "../UI/Footer/Footer";
 
 /*
 
