@@ -4,6 +4,7 @@ import Logo from "../assets/img/Logo.png";
 
 const FooterWrapper = styled.footer`
   background: #353434;
+  margin-top: 5rem;
   min-height: auto;
   padding: 5rem 2rem;
   position: relative;
@@ -27,6 +28,15 @@ const FooterContainer = styled.div`
   }
 `;
 
+const FooterLinkHeader = styled.div`
+  p {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    font-size: 1.4rem;
+  }
+`;
+
 export default function Footer() {
   return (
     <FooterWrapper className="footer">
@@ -35,9 +45,9 @@ export default function Footer() {
           <img src={Logo} alt="" />
         </div>
         <div>
-          <div className="footer-link__header">
+          <FooterLinkHeader>
             <p>Chopbarh</p>
-          </div>
+          </FooterLinkHeader>
           <div className="footer-link__item-container">
             <p>
               <a href="about">About Us</a>
@@ -56,10 +66,10 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="">
-          <div className="footer-link__header">
+        <div>
+          <FooterLinkHeader>
             <p>Gaming</p>
-          </div>
+          </FooterLinkHeader>
           <div className="footer-link__item-container">
             <p>
               <a href="play">How to Play</a>
@@ -79,9 +89,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="align-self-start">
-          <div className="footer-link__header">
+          <FooterLinkHeader>
             <p>Contact Us</p>
-          </div>
+          </FooterLinkHeader>
           <div className="footer-link__item-container">
             <p>Telephone: 09038764982</p>
             <p>Email: help@chopbarh.com</p>
