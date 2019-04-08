@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
 import HowItWorks from "../HowItWorks/HowItWorks";
+import PlayAndChop from "../PlayAndChop/PlayAndChop";
 
 /*
 
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
       <Hero />
       <HowItWorks />
+      <PlayAndChop />
       <p>Footer</p>
     </div>
   );
