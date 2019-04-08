@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
 import Home from "../components/Home/Home";
+import Games from "../components/Games/Games";
 
 /*
 
@@ -40,7 +41,8 @@ export default class Layout extends Component {
     return (
       <ErrorBoundary>
         <GlobalStyles />
-        <Home />
+        <Games />
+        {/* <Home /> */}
       </ErrorBoundary>
     );
   }

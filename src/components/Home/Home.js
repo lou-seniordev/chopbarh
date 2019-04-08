@@ -4,7 +4,7 @@ import Hero from "../Hero/Hero";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import PlayAndChop from "./PlayAndChop/PlayAndChop";
 import Testimonials from "./Testimonials/Testimonials";
-import Games from "../Games/Games";
+import GameList from "../GameList/GameList";
 import Footer from "../UI/Footer/Footer";
 
 /*
@@ -23,7 +23,7 @@ export default function Home() {
       <HowItWorks />
       <PlayAndChop />
       <Testimonials />
-      <Games />
+      <GameList />
       <Footer />
     </>
   );

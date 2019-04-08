@@ -50,7 +50,7 @@ const Button = styled.button`
   }
 `;
 
-export default function Games() {
+export default function GameList() {
   return (
     <GamesWrapper>
       <div className="container">
