@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
+import breakPoints from "../styles/breakpoints";
 
 const TestimonialsWrapper = styled.div`
   text-align: center;
@@ -25,6 +26,10 @@ const ContentBlock = styled.div`
   align-items: center;
   background: ${color.colorPrimary};
   color: ${color.colorWhite};
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    margin: 0 auto;
+  }
 
   & > * {
     transform: skew(8deg);
