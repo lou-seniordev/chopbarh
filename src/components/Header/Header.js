@@ -92,28 +92,6 @@ export default function Header() {
               <span>Sign Up</span>
             </button>
           </ul>
-          {/* <form class="form-inline my-2 my-lg-0">
-            <div class="form__container mr-sm-2">
-              <input
-                class="form-login mr-sm-2"
-                type="tel"
-                placeholder="Phone Number"
-                aria-label="Phone Number"
-              />
-            </div>
-            <div class="form__container">
-              <input
-                class="form-login mr-sm-2"
-                type="password"
-                placeholder="Password"
-                aria-label="Password"
-              />
-              <button>Login</button>
-            </div>
-            <button class="btn my-2 my-sm-0" type="submit">
-              Sign Up
-            </button>
-          </form>  */}
         </div>
       </nav>
     </HeaderWrapper>
