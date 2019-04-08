@@ -23,7 +23,6 @@ const ContentBlock = styled.div`
   display: flex;
   background: ${color.colorPrimary};
   justify-content: center;
-  align-items: center;
   color: ${color.colorWhite};
 
   & > * {
@@ -48,24 +47,39 @@ export default function Testimonials() {
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <h4 className="text-uppercase">Choose your Game</h4>
-                <p className="p--2">Choose your game you love</p>
+                <h4 className="text-uppercase">Judith Bello</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Alias soluta recusandae cupiditate similique modi accusantium
+                  deserunt quos, sapiente laudantium sunt, expedita porro magni
+                  hic, rerum ullam consequatur voluptatibus et quisquam!
+                </p>
               </div>
             </ContentBlock>
           </div>
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <h4 className="text-uppercase">Bet Away!</h4>
-                <p className="p--2">Put in the amount you want to bet</p>
+                <h4 className="text-uppercase">Fellow Man</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                  accusamus fugiat magnam voluptatem quia, reprehenderit nam,
+                  saepe qui aliquam voluptatum expedita aspernatur nostrum.
+                  Harum, culpa dolores commodi voluptate cum sunt.
+                </p>
               </div>
             </ContentBlock>
           </div>
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <h4 className="text-uppercase">Play and Win!</h4>
-                <p className="p--2">Win as much as you can!</p>
+                <h4 className="text-uppercase">Shaun Lee</h4>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Dolorum numquam aspernatur dicta nemo unde maiores molestias
+                  impedit quasi quae, ullam dolore amet deleniti doloribus
+                  ratione, quidem eligendi at eaque officiis
+                </p>
               </div>
             </ContentBlock>
           </div>

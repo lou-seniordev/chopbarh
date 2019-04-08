@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import PlayAndChop from "../PlayAndChop/PlayAndChop";
+import Testimonials from "../Testimonials/Testimonials";
 
 /*
 
@@ -19,6 +20,7 @@ export default function Home() {
       <Hero />
       <HowItWorks />
       <PlayAndChop />
+      <Testimonials />
       <p>Footer</p>
     </div>
   );
