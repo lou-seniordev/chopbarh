@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
-import Logo from "../assets/img/Logo.png";
+import Logo from "../UI/Logo/Logo";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne} !important;
@@ -47,8 +47,8 @@ export default function Header() {
         class="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
         role="navigation"
       >
-        <a class="navbar-brand navbar-logo" href="index.html">
-          <img src={Logo} alt="Logo" />
+        <a class="navbar-brand navbar-logo mt-n4" href="index">
+          <Logo />
         </a>
         <button
           class="navbar-toggler custom-toggler"
