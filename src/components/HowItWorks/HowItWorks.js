@@ -25,6 +25,14 @@ const ContentBlock = styled.div`
   }
 `;
 
+const HeadingThree = styled.h3`
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: bold;
+  color: ${color.colorPrimary};
+`;
+
 /* 
 
 This component has Box Shadow added in the UI
@@ -35,7 +43,7 @@ export default function HowItWorks() {
   return (
     <HowItWorksWrapper>
       <div className="container">
-        <h3 className="mb-5">How it Works</h3>
+        <HeadingThree className="mb-5">How it Works</HeadingThree>
         <div className="row mb-5">
           <div className="col-md-4 mb-2">
             <ContentBlock>
