@@ -45,6 +45,14 @@ const HeadingTwo = styled.h2`
   text-transform: uppercase;
   font-style: italic;
   font-weight: bold;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    font-size: 6rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    font-size: 4.5rem;
+  }
 `;
 
 const ParagraphOne = styled.p`
