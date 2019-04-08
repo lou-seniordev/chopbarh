@@ -14,19 +14,19 @@ export default function Footer() {
           </div>
           <div class="footer-link__item-container">
             <p>
-              <a href="">About Us</a>
+              <a href="about">About Us</a>
             </p>
             <p>
-              <a href="">Terms and Conditions</a>
+              <a href="terms">Terms and Conditions</a>
             </p>
             <p>
-              <a href="">Privacy Policy</a>
+              <a href="privacy">Privacy Policy</a>
             </p>
             <p>
-              <a href="">Responsible Gambling</a>
+              <a href="gambling">Responsible Gambling</a>
             </p>
             <p>
-              <a href="">Become a Partner</a>
+              <a href="parnter">Become a Partner</a>
             </p>
           </div>
         </div>
@@ -36,19 +36,19 @@ export default function Footer() {
           </div>
           <div class="footer-link__item-container">
             <p>
-              <a href="">How to Play</a>
+              <a href="play">How to Play</a>
             </p>
             <p>
-              <a href="">Games</a>
+              <a href="games">Games</a>
             </p>
             <p>
-              <a href="">Betting</a>
+              <a href="betting">Betting</a>
             </p>
             <p>
-              <a href="">Download</a>
+              <a href="download">Download</a>
             </p>
             <p>
-              <a href="">Talk to us</a>
+              <a href="talk">Talk to us</a>
             </p>
           </div>
         </div>
