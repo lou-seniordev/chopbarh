@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
+import breakPoints from "../styles/breakpoints";
 import GameConsole from "../assets/svg/Game.svg";
 import BetAway from "../assets/svg/BetAway.svg";
 import VersusAndWin from "../assets/svg/VersusAndWin.svg";
@@ -22,6 +23,10 @@ const ContentBlock = styled.div`
   justify-content: center;
   align-items: center;
   color: ${color.colorWhite};
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    margin: 0 auto;
+  }
 
   & > * {
     transform: skew(8deg);
