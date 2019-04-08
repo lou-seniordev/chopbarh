@@ -24,6 +24,12 @@ const ContentBlock = styled.div`
   }
 `;
 
+/* 
+
+This component has Box Shadow added in the UI
+
+*/
+
 export default function HowItWorks() {
   return (
     <HowItWorksWrapper>
