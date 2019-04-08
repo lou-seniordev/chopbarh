@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
+import GameConsole from "../assets/svg/Game.svg";
+
 const HowItWorksWrapper = styled.div`
   text-align: center;
   padding: 2rem;
@@ -47,7 +49,7 @@ export default function HowItWorks() {
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <img src="assets/svg/Game.svg" className="mb-4" alt="" />
+                <img src={GameConsole} className="mb-4" alt="" />
                 <h4 className="text-uppercase">Choose your Game</h4>
                 <p className="p--2">Choose your game you love</p>
               </div>
