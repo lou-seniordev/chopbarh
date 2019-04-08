@@ -25,7 +25,9 @@ export default class Layout extends Component {
     return (
       <>
         <GlobalStyles />
-        <div />
+        <div>
+          <h2>App Layout</h2>
+        </div>
       </>
     );
   }
