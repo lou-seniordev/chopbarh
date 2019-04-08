@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
+import Home from "../components/Home/Home";
 
 const GlobalStyles = createGlobalStyle`
   *, 
@@ -25,9 +26,7 @@ export default class Layout extends Component {
     return (
       <>
         <GlobalStyles />
-        <div>
-          <h2>App Layout</h2>
-        </div>
+        <Home />
       </>
     );
   }
