@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import Hero from "../Hero/Hero";
+import HowItWorks from "../HowItWorks/HowItWorks";
 
 /*
 
@@ -15,7 +16,7 @@ export default function Home() {
     <div>
       <Header />
       <Hero />
-      <p>Content</p>
+      <HowItWorks />
       <p>Footer</p>
     </div>
   );
