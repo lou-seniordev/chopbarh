@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../styles/colors";
+import Logo from "../assets/img/Logo.png";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne} !important;
@@ -47,7 +48,7 @@ export default function Header() {
         role="navigation"
       >
         <a class="navbar-brand navbar-logo" href="index.html">
-          <img src="assets/img/Chopbarr@2x.png" alt="Logo" />
+          <img src={Logo} alt="Logo" />
         </a>
         <button
           class="navbar-toggler custom-toggler"
