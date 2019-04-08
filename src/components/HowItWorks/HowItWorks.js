@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import color from "../styles/colors";
 
 const HowItWorksWrapper = styled.div`
   text-align: center;
@@ -13,9 +14,14 @@ const ContentBlock = styled.div`
   transform: skew(-8deg);
   padding: 1rem;
   display: flex;
-  background: peru;
+  background: ${color.colorPrimary};
   justify-content: center;
   align-items: center;
+  color: ${color.colorWhite};
+
+  & > * {
+    transform: skew(8deg);
+  }
 `;
 
 export default function HowItWorks() {
