@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
-import Logo from "../../UI/Logo/Logo";
+import Logo from "../Logo/Logo";
 
 const HeaderWrapper = styled.div`
   background: ${props =>

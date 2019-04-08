@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header/Header";
+import Header from "../UI/Header/Header";
 import Hero from "../Hero/Hero";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import PlayAndChop from "./PlayAndChop/PlayAndChop";
