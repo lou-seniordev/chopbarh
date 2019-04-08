@@ -89,6 +89,14 @@ const Button = styled.button`
     color: ${color.colorWhite};
     background: ${color.colorPrimaryHover};
   }
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    font-size: 1.3rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export default function Hero() {
