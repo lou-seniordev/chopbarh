@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
+import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
 import Home from "../components/Home/Home";
 
@@ -30,10 +31,10 @@ const GlobalStyles = createGlobalStyle`
 export default class Layout extends Component {
   render() {
     return (
-      <>
+      <ErrorBoundary>
         <GlobalStyles />
         <Home />
-      </>
+      </ErrorBoundary>
     );
   }
 }
