@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
 import GameConsole from "../assets/svg/Game.svg";
+import BetAway from "../assets/svg/BetAway.svg";
+import VersusAndWin from "../assets/svg/VersusAndWin.svg";
 
 const HowItWorksWrapper = styled.div`
   text-align: center;
@@ -58,7 +60,7 @@ export default function HowItWorks() {
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <img src="assets/svg/Bet away.svg" className="mb-3" alt="" />
+                <img src={BetAway} className="mb-3 mt-n1" alt="" />
                 <h4 className="text-uppercase">Bet Away!</h4>
                 <p className="p--2">Put in the amount you want to bet</p>
               </div>
@@ -67,11 +69,7 @@ export default function HowItWorks() {
           <div className="col-md-4 mb-2">
             <ContentBlock>
               <div>
-                <img
-                  src="assets/svg/Versus and win.svg"
-                  className="mb-4"
-                  alt=""
-                />
+                <img src={VersusAndWin} className="mb-4" alt="" />
                 <h4 className="text-uppercase">Play and Win!</h4>
                 <p className="p--2">Win as much as you can!</p>
               </div>
