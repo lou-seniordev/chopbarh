@@ -1,18 +1,44 @@
 import React from "react";
+import styled from "styled-components";
+import Logo from "../assets/img/Logo.png";
+
+const FooterWrapper = styled.footer`
+  background: #353434;
+  min-height: auto;
+  padding: 5rem 2rem;
+  position: relative;
+  text-align: left !important;
+`;
+
+const FooterContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+
+  /* @media screen and (max-width: $bp-medium-lite) {
+      justify-content: space-between;
+      align-items: flex-start;
+    } */
+
+  & > * {
+    margin-right: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+`;
 
 export default function Footer() {
   return (
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="">
-          <img src="assets/img/Chopbarr@2x.png" alt="" srcset="" />
-          <p>Paragraph</p>
+    <FooterWrapper className="footer">
+      <FooterContainer className="footer__container">
+        <div>
+          <img src={Logo} alt="" />
         </div>
-        <div class="">
-          <div class="footer-link__header">
+        <div>
+          <div className="footer-link__header">
             <p>Chopbarh</p>
           </div>
-          <div class="footer-link__item-container">
+          <div className="footer-link__item-container">
             <p>
               <a href="about">About Us</a>
             </p>
@@ -30,11 +56,11 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div class="">
-          <div class="footer-link__header">
+        <div className="">
+          <div className="footer-link__header">
             <p>Gaming</p>
           </div>
-          <div class="footer-link__item-container">
+          <div className="footer-link__item-container">
             <p>
               <a href="play">How to Play</a>
             </p>
@@ -52,17 +78,17 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div class="align-self-start">
-          <div class="footer-link__header">
+        <div className="align-self-start">
+          <div className="footer-link__header">
             <p>Contact Us</p>
           </div>
-          <div class="footer-link__item-container">
+          <div className="footer-link__item-container">
             <p>Telephone: 09038764982</p>
             <p>Email: help@chopbarh.com</p>
             <p>&copy; 2019</p>
           </div>
         </div>
-      </div>
-    </footer>
+      </FooterContainer>
+    </FooterWrapper>
   );
 }
