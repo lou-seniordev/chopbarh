@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../styles/colors";
+import breakPoints from "../styles/breakpoints";
 
 const HeroWrapper = styled.div`
   height: 85vh;
@@ -30,6 +31,13 @@ const HeroContentWrapper = styled.div`
   top: 50%;
   left: 10%;
   transform: translateY(-50%);
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 `;
 
 const HeadingTwo = styled.h2`
