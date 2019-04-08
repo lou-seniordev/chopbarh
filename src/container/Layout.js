@@ -4,6 +4,13 @@ import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
 import Home from "../components/Home/Home";
 
+/*
+
+To prevent this component from bloat, consider moving the
+globalStyles to a different component
+
+*/
+
 const GlobalStyles = createGlobalStyle`
   *, 
   *:after, 
