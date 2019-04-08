@@ -6,9 +6,7 @@ import Logo from "../Logo/Logo";
 
 const HeaderWrapper = styled.div`
   background: ${props =>
-    props.transparent
-      ? "transparent"
-      : `${colors.colorGrayDarkOne}`} !important;
+    props.transparent ? "transparent" : `${colors.colorGrayDarkOne}`};
   min-height: 6rem;
   padding: 0.4rem 2rem;
   position: relative;
