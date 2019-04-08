@@ -50,6 +50,13 @@ const Button = styled.button`
   }
 `;
 
+const HR = styled.hr`
+  width: 50%;
+  height: 15%;
+  margin: 7rem auto;
+  background: rgba($color: ${color.colorGrayDarkOne}, $alpha: 0.7);
+`;
+
 export default function PlayAndChop() {
   return (
     <PlayAndChopWrapper>
@@ -66,6 +73,7 @@ export default function PlayAndChop() {
         <Button className="mt-3">
           <span>Explore</span>
         </Button>
+        <HR />
       </div>
     </PlayAndChopWrapper>
   );
