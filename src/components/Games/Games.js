@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../UI/Header/Header";
+import Header from "./Header/Header";
 
 export default function Games() {
   return (

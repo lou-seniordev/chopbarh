@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
 import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
-import Home from "../components/Home/Home";
+//import Home from "../components/Home/Home";
 import Games from "../components/Games/Games";
 
 /*

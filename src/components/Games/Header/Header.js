@@ -5,10 +5,7 @@ import breakPoints from "../../styles/breakpoints";
 import Logo from "../Logo/Logo";
 
 const HeaderWrapper = styled.div`
-  background: ${props =>
-    props.transparent
-      ? "transparent"
-      : `${colors.colorGrayDarkOne}`} !important;
+  background: blue !important;
   min-height: 6rem;
   padding: 0.4rem 2rem;
   position: relative;
