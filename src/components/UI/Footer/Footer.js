@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../assets/img/Logo.png";
+import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 
 const FooterWrapper = styled.footer`
