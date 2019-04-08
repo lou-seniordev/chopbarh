@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../assets/img/Logo.png";
+import color from "../styles/colors";
 
 const FooterWrapper = styled.footer`
   background: #353434;
@@ -30,10 +31,28 @@ const FooterContainer = styled.div`
 
 const FooterLinkHeader = styled.div`
   p {
-    color: #fff;
+    color: ${color.colorWhite};
     font-weight: 500;
     margin-bottom: 1.2rem;
     font-size: 1.4rem;
+  }
+`;
+
+const FooterLinkContainer = styled.div`
+  p {
+    color: ${color.colorWhite};
+  }
+
+  a {
+    color: #dddddd;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-size: 1.3rem;
+
+    &:hover {
+      color: ${color.colorWhite};
+      cursor: pointer;
+    }
   }
 `;
 
@@ -48,7 +67,7 @@ export default function Footer() {
           <FooterLinkHeader>
             <p>Chopbarh</p>
           </FooterLinkHeader>
-          <div className="footer-link__item-container">
+          <FooterLinkContainer>
             <p>
               <a href="about">About Us</a>
             </p>
@@ -64,13 +83,13 @@ export default function Footer() {
             <p>
               <a href="parnter">Become a Partner</a>
             </p>
-          </div>
+          </FooterLinkContainer>
         </div>
         <div>
           <FooterLinkHeader>
             <p>Gaming</p>
           </FooterLinkHeader>
-          <div className="footer-link__item-container">
+          <FooterLinkContainer>
             <p>
               <a href="play">How to Play</a>
             </p>
@@ -86,17 +105,17 @@ export default function Footer() {
             <p>
               <a href="talk">Talk to us</a>
             </p>
-          </div>
+          </FooterLinkContainer>
         </div>
         <div className="align-self-start">
           <FooterLinkHeader>
             <p>Contact Us</p>
           </FooterLinkHeader>
-          <div className="footer-link__item-container">
+          <FooterLinkContainer>
             <p>Telephone: 09038764982</p>
             <p>Email: help@chopbarh.com</p>
             <p>&copy; 2019</p>
-          </div>
+          </FooterLinkContainer>
         </div>
       </FooterContainer>
     </FooterWrapper>
