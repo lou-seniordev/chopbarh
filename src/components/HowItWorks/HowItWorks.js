@@ -5,6 +5,7 @@ import color from "../styles/colors";
 const HowItWorksWrapper = styled.div`
   text-align: center;
   padding: 2rem;
+  margin-top: 3rem;
 `;
 
 const ContentBlock = styled.div`
