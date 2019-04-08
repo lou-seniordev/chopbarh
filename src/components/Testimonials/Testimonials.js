@@ -21,8 +21,9 @@ const ContentBlock = styled.div`
   transform: skew(-8deg);
   padding: 1rem;
   display: flex;
-  background: ${color.colorPrimary};
   justify-content: center;
+  align-items: center;
+  background: ${color.colorPrimary};
   color: ${color.colorWhite};
 
   & > * {

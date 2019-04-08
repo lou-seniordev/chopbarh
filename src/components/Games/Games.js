@@ -54,12 +54,11 @@ export default function Games() {
   return (
     <GamesWrapper>
       <div className="container">
-        <HeadingThree className="mb-5">Play and Chop!</HeadingThree>
+        <HeadingThree className="mb-5">Games</HeadingThree>
         <ParagraphOne>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
           praesentium placeat dolorum doloribus alias temporibus autem aliquam
-          fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat
-          explicabo a quos!
+          fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat.
         </ParagraphOne>
         <Button className="mt-3">
           <span>Explore</span>

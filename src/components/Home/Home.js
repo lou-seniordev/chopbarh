@@ -4,6 +4,8 @@ import Hero from "../Hero/Hero";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import PlayAndChop from "../PlayAndChop/PlayAndChop";
 import Testimonials from "../Testimonials/Testimonials";
+import Games from "../Games/Games";
+import Footer from "../Footer/Footer";
 
 /*
 
@@ -21,7 +23,8 @@ export default function Home() {
       <HowItWorks />
       <PlayAndChop />
       <Testimonials />
-      <p>Footer</p>
+      <Games />
+      <Footer />
     </div>
   );
 }
