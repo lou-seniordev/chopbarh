@@ -17,7 +17,7 @@ reason about in the end
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Header />
       <Hero />
       <HowItWorks />
@@ -25,6 +25,6 @@ export default function Home() {
       <Testimonials />
       <Games />
       <Footer />
-    </div>
+    </>
   );
 }
