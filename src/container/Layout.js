@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
 import Home from "../components/Home/Home";
+import color from "../components/styles/colors";
 
 const GlobalStyles = createGlobalStyle`
   *, 
@@ -9,6 +10,10 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing:inherit;
+  }
+
+  *::selection {
+    background: ${color.colorPrimaryHover}
   }
 
   html {
