@@ -63,9 +63,6 @@ const FormCheckBox = styled.div`
     margin-left: 5px;
     font-size: 1.3rem;
   }
-
-  input {
-  }
 `;
 
 const FormAction = styled.div`
