@@ -79,7 +79,8 @@ const FormItem = styled.div`
     margin-bottom: 1rem;
   }
 
-  input {
+  input,
+  select {
     color: #8d8e8d;
     width: 100%;
     height: 3.4rem;
@@ -96,14 +97,12 @@ const FormItem = styled.div`
   }
 `;
 
-const FormItemHalf = styled(FormItem)`
-  input {
-    width: 50%;
-  }
-`;
-
 const HalfColumn = styled.div`
   display: flex;
+
+  div {
+    width: 50%;
+  }
 `;
 
 // const Image = styled.img`
@@ -130,18 +129,18 @@ export default function SignUp() {
               <input type="tel" required />
             </FormItem>
             <HalfColumn>
-              <FormItemHalf>
+              <FormItem className="mr-3">
                 <label>Date of Birth</label>
                 <input type="date" required />
-              </FormItemHalf>
-              <FormItemHalf>
+              </FormItem>
+              <FormItem>
                 <label>Sex</label>
                 <select>
-                  <options>Male</options>
-                  <options>Female</options>
-                  <options>Other</options>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
                 </select>
-              </FormItemHalf>
+              </FormItem>
             </HalfColumn>
             <FormItem>
               <label>Email</label>
