@@ -96,6 +96,16 @@ const FormItem = styled.div`
   }
 `;
 
+const FormItemHalf = styled(FormItem)`
+  input {
+    width: 50%;
+  }
+`;
+
+const HalfColumn = styled.div`
+  display: flex;
+`;
+
 // const Image = styled.img`
 //   width: 100%;
 //   height: 10%;
@@ -113,11 +123,29 @@ export default function SignUp() {
             <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
             <FormItem>
               <label>Full Name</label>
-              <input type="text" />
+              <input type="text" required />
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
-              <input type="text" />
+              <input type="tel" required />
+            </FormItem>
+            <HalfColumn>
+              <FormItemHalf>
+                <label>Date of Birth</label>
+                <input type="date" required />
+              </FormItemHalf>
+              <FormItemHalf>
+                <label>Sex</label>
+                <select>
+                  <options>Male</options>
+                  <options>Female</options>
+                  <options>Other</options>
+                </select>
+              </FormItemHalf>
+            </HalfColumn>
+            <FormItem>
+              <label>Email</label>
+              <input type="email" required />
             </FormItem>
             <button type="submit" className="mr-2">
               <span>Create Account</span>
