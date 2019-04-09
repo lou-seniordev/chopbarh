@@ -53,7 +53,6 @@ export default class Layout extends Component {
           <Route path="/reset" component={ForgotPassword} />
           <Redirect to="/" />
         </Switch>
-        {/* <Home /> */}
       </>
     );
   }
