@@ -68,6 +68,9 @@ const FormCheckBox = styled.div`
 `;
 
 const FormAction = styled.div`
+  display: flex;
+  justify-content: space-between;
+
   button {
     all: unset;
     padding: 0.5rem 1.3rem;
@@ -132,7 +135,7 @@ export default function Login() {
               <label>Remember Me</label>
               <input type="checkbox" />
             </FormCheckBox>
-            <button type="submit">
+            <button type="submit" className="mr-2">
               <span>Login</span>
             </button>
           </FormAction>
