@@ -72,15 +72,17 @@ export default function GameItems() {
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
-            <Button>
-              <span>Place Bet</span>
-            </Button>
-            <Button>
-              <span>Google Play</span>
-            </Button>
-            <Button>
-              <span>iOS Store</span>
-            </Button>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
           </Column>
           <Column className="col-md-6">
             <Image alt="Whot" src={Whot} />
