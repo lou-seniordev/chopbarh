@@ -15,16 +15,16 @@ const SignUpWrapper = styled.div`
   margin-top: -10rem;
   z-index: 2000;
   padding: 10rem;
+`;
 
-  div {
-    display: flex;
-    justify-content: center;
-    margin: 10rem auto;
-    width: 60vw;
-    background: #fff;
-    padding: 2rem;
-    border: 1px solid gray;
-  }
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10rem auto;
+  width: 60vw;
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid gray;
 `;
 
 const HeadingTwo = styled.h2`
@@ -46,9 +46,9 @@ export default function SignUp() {
       <Header transparent />
       {/* <Image src={Background} alt="Background" /> */}
       <SignUpWrapper>
-        <div>
+        <Container>
           <HeadingTwo>Sign Up</HeadingTwo>
-        </div>
+        </Container>
       </SignUpWrapper>
     </>
   );
