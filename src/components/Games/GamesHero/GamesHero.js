@@ -5,18 +5,20 @@ import breakPoints from "../../styles/breakpoints";
 import bg from "../../assets/svg/WavyHeader.svg";
 
 const GamesHeroWrapper = styled.div`
-  height: 85vh;
+  height: 90vh;
   padding: 3rem 1rem;
   position: relative;
+  margin-top: -8rem;
   background: ${color.colorPrimary};
   color: ${color.colorWhite};
+  text-align: center;
 `;
 
 const GamesHeroContentWrapper = styled.div`
   position: absolute;
   top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media only screen and (max-width: ${breakPoints.medium}) {
     top: 30%;
@@ -90,7 +92,7 @@ export default function GamesHero() {
     <GamesHeroWrapper>
       <GamesHeroContentWrapper>
         {/* <img src="assets/img/Smiling guy.png" className="hero__image" alt="" /> */}
-        <HeadingTwo className="hero__title">Bet.Play.Win.</HeadingTwo>
+        <HeadingTwo className="hero__title">Games</HeadingTwo>
         <div className="mt-n4 ml-lg-1 ml-md-1">
           <ParagraphOne>
             Play and win from collection of childhood games that live up to the
