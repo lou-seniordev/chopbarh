@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import colors from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Logo from "../Logo/Logo";
@@ -38,6 +39,7 @@ const HeaderWrapper = styled.div`
     span {
       display: inline-block;
       transform: skew(20deg);
+      color: #fff;
     }
 
     &:hover {
@@ -75,36 +77,40 @@ export default function Header({ transparent }) {
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link text-uppercase mr-5" href="home">
-                How To <span className="sr-only">(current)</span>
-              </a>
+              <Link to="howto" className="nav-link text-uppercase mr-5">
+                How to
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-uppercase mr-5" href="games">
+              <Link to="games" className="nav-link text-uppercase mr-5">
                 Games
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-uppercase mr-5" href="partner">
-                Become a Partner
-              </a>
+              <Link to="partner" className="nav-link text-uppercase mr-5">
+                Partner
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link mr-5" href="faqs">
+              <Link to="faqs" className="nav-link text-uppercase mr-5">
                 FAQs
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-uppercase mr-5" href="about">
+              <Link to="about" className="nav-link text-uppercase mr-5">
                 About Us
-              </a>
+              </Link>
             </li>
             <div>
               <button className="mr-2">
-                <span>Login</span>
+                <Link to="login">
+                  <span>Login</span>
+                </Link>
               </button>
-              <button className="hero__button">
-                <span>Sign Up</span>
+              <button>
+                <Link to="signup">
+                  <span>Sign Up</span>
+                </Link>
               </button>
             </div>
           </ul>
