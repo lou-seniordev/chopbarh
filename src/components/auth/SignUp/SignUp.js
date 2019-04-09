@@ -12,11 +12,11 @@ Swap out the border thing for some Box Shadow and add Placeholders to form input
 
 */
 const SignUpWrapper = styled.div`
-  height: 40vh;
+  height: 60vh;
   background: ${color.colorPrimary};
-  margin-top: -10rem;
+  margin-top: -26rem;
   z-index: 2000;
-  padding: 10rem;
+  padding: 20rem 10rem;
 `;
 
 const Container = styled.div`
@@ -25,6 +25,10 @@ const Container = styled.div`
   background: #fff;
   padding: 4rem 10rem;
   border: 1px solid gray;
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    padding: 4rem 5rem;
+  }
 `;
 
 const HeadingTwo = styled.h2`
@@ -50,13 +54,6 @@ const Form = styled.form`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
-
-    /* @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      align-self: flex-start;
-      padding: 0.5rem 1.7rem;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem;
-    } */
 
     span {
       display: inline-block;
