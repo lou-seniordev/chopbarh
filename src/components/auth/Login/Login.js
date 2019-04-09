@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
+import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 
 const AuthWrapper = styled.div`
@@ -67,6 +68,39 @@ const FormCheckBox = styled.div`
   }
 `;
 
+const FormAction = styled.div`
+  button {
+    all: unset;
+    border: 3px solid ${colors.colorWhite};
+    padding: 0.5rem 1.3rem;
+    transform: skew(-20deg);
+    display: inline-block;
+    transition: all 0.2s;
+    color: ${colors.colorWhite};
+    font-size: 1.3rem;
+    z-index: 200;
+
+    @media only screen and (max-width: ${breakPoints.mediumLite}) {
+      align-self: flex-start;
+      padding: 0.5rem 1.7rem;
+      margin-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    span {
+      display: inline-block;
+      transform: skew(20deg);
+      color: #fff;
+    }
+
+    &:hover {
+      transform: translateY(-3px) skew(-20deg);
+      background: ${colors.colorPrimary};
+      color: ${colors.colorWhite};
+      border: 3px solid ${colors.colorPrimary};
+    }
+`;
+
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
   color: #c5c7c5;
@@ -94,10 +128,12 @@ export default function Login() {
             <label>Enter Pin</label>
             <input type="password" />
           </FormItem>
-          <FormCheckBox>
-            <label>Remember Me</label>
-            <input type="checkbox" />
-          </FormCheckBox>
+          <FormAction>
+            <FormCheckBox>
+              <label>Remember Me</label>
+              <input type="checkbox" />
+            </FormCheckBox>
+          </FormAction>
         </div>
       </FormWrapper>
     </AuthWrapper>
