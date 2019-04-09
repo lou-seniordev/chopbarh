@@ -29,23 +29,24 @@ const GamesHeroContentWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 8rem;
+  font-size: 10rem;
   text-transform: uppercase;
   font-style: italic;
   font-weight: bold;
 
   @media only screen and (max-width: ${breakPoints.medium}) {
-    font-size: 6rem;
+    font-size: 7rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 4.5rem;
+    font-size: 5.5rem;
   }
 `;
 
 const ParagraphOne = styled.p`
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 2.5rem;
+  font-weight: 500;
+  font-style: italic;
 
   @media only screen and (max-width: ${breakPoints.medium}) {
     font-size: 1.3rem;
@@ -57,36 +58,6 @@ const ParagraphOne = styled.p`
   }
 `;
 
-const Button = styled.button`
-  all: unset;
-  border: 3px solid ${color.colorWhite};
-  padding: 1rem 1.3rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  transform: skew(-20deg);
-  display: inline-block;
-  transition: all 0.2s;
-
-  span {
-    display: inline-block;
-    transform: skew(20deg);
-  }
-
-  &:hover {
-    transform: translateY(-3px) skew(-20deg);
-    color: ${color.colorWhite};
-    background: ${color.colorPrimaryHover};
-  }
-
-  @media only screen and (max-width: ${breakPoints.medium}) {
-    font-size: 1.3rem;
-  }
-
-  @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 1.2rem;
-  }
-`;
-
 export default function GamesHero() {
   return (
     <GamesHeroWrapper>
@@ -94,10 +65,7 @@ export default function GamesHero() {
         {/* <img src="assets/img/Smiling guy.png" className="hero__image" alt="" /> */}
         <HeadingTwo className="hero__title">Games</HeadingTwo>
         <div className="mt-n4 ml-lg-1 ml-md-1">
-          <ParagraphOne>
-            Play and win from collection of childhood games that live up to the
-            moment
-          </ParagraphOne>
+          <ParagraphOne>Play and Chop barh!</ParagraphOne>
         </div>
       </GamesHeroContentWrapper>
     </GamesHeroWrapper>
