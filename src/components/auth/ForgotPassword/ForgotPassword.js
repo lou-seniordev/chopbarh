@@ -39,7 +39,7 @@ const FormItem = styled.div`
 
   input {
     color: #8d8e8d;
-    width: 30rem;
+    width: 35rem;
     height: 3.4rem;
     margin-bottom: 2rem;
     border: 0;
@@ -56,7 +56,7 @@ const FormItem = styled.div`
 
 const FormAction = styled.div`
   position: relative;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 
   button {
     all: unset;
@@ -69,7 +69,7 @@ const FormAction = styled.div`
     font-size: 1.3rem;
     z-index: 200;
     position: absolute;
-    left: 50%;
+    right: 0;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       align-self: flex-start;
@@ -101,6 +101,15 @@ const HeadingTwo = styled.h2`
     display: block;
     font-size: 1.7rem;
     font-weight: 500;
+    width: 35rem;
+  }
+`;
+
+const Divider = styled.div`
+  text-align: center;
+  p {
+    color: #c5c7c5;
+    font-size: 1.5rem;
   }
 `;
 
@@ -125,16 +134,19 @@ export default function ForgotPassword() {
             <input type="text" />
           </FormItem>
           <FormAction>
-            <button>
+            <button className="mr-2">
               <span>Send</span>
             </button>
           </FormAction>
+          <Divider>
+            <p>Or</p>
+          </Divider>
           <FormItem className="mt-5">
             <label>Email</label>
             <input type="email" />
           </FormItem>
           <FormAction>
-            <button>
+            <button className="mr-2">
               <span>Send</span>
             </button>
           </FormAction>
