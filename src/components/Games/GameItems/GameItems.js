@@ -23,6 +23,7 @@ const HeadingThree = styled.h3`
 
 const Column = styled.div`
   text-align: center;
+  margin-bottom: 4rem;
 
   p {
     text-align: left;
