@@ -58,6 +58,12 @@ const HeadingTwo = styled.h2`
   font-weight: bold;
 `;
 
+/* 
+
+Change Checkbox styling momentarily to improve UX
+
+*/
+
 export default function Login() {
   return (
     <AuthWrapper>
@@ -73,6 +79,7 @@ export default function Login() {
             <label>Enter Pin</label>
             <input type="password" />
           </FormItem>
+          <input type="checkbox" />
         </div>
       </FormWrapper>
     </AuthWrapper>
