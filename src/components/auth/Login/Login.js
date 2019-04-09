@@ -28,9 +28,29 @@ const FormWrapper = styled.div`
 `;
 
 const FormItem = styled.div`
+  label {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #737773;
+  }
+
+  input {
+    color: #8d8e8d;
+    width: 30rem;
+    height: 3.2rem;
+    margin-bottom: 2rem;
+  }
+
   & > * {
     display: block;
+    font-family: inherit;
   }
+`;
+
+const HeadingTwo = styled.h2`
+  font-size: 3.5rem;
+  color: #c5c7c5;
+  font-weight: bold;
 `;
 
 export default function Login() {
@@ -39,7 +59,7 @@ export default function Login() {
       <ImageContainer />
       <FormWrapper>
         <div>
-          <h2>Login</h2>
+          <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
           <FormItem>
             <label>Phone Number</label>
             <input type="text" />
