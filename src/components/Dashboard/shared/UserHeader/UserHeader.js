@@ -51,7 +51,7 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-export default function Header({ transparent }) {
+export default function UserHeader({ transparent }) {
   return (
     <HeaderWrapper transparent={transparent}>
       <nav
