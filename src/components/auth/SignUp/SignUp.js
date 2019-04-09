@@ -40,6 +40,31 @@ const Form = styled.form`
   }
 `;
 
+const FormItem = styled.div`
+  label {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #737773;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    color: #8d8e8d;
+    width: 30rem;
+    height: 3.4rem;
+    margin-bottom: 2rem;
+    border: 0;
+    background: #f6f6f6;
+    outline: none;
+    padding: 3px 5px;
+  }
+
+  & > * {
+    display: block;
+    font-family: inherit;
+  }
+`;
+
 // const Image = styled.img`
 //   width: 100%;
 //   height: 10%;
@@ -55,10 +80,10 @@ export default function SignUp() {
         <Container>
           <Form>
             <HeadingTwo>Sign Up</HeadingTwo>
-            <div>
+            <FormItem>
               <label>Full Name</label>
               <input type="text" />
-            </div>
+            </FormItem>
             <div>
               <label>Full Name</label>
               <input type="text" />
