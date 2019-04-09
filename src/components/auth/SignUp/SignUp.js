@@ -17,6 +17,14 @@ const SignUpWrapper = styled.div`
   margin-top: -26rem;
   z-index: 2000;
   padding: 20rem 10rem;
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    padding: 20rem 5rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    padding: 20rem 0rem;
+  }
 `;
 
 const Container = styled.div`
@@ -28,6 +36,11 @@ const Container = styled.div`
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     padding: 4rem 5rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    width: 80vw;
+    padding: 4rem 1rem;
   }
 `;
 
@@ -54,6 +67,10 @@ const Form = styled.form`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
+
+    @media only screen and (max-width: ${breakPoints.mediumLite}) {
+      font-size: 1.1rem;
+    }
 
     span {
       display: inline-block;
