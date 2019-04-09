@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 
@@ -9,7 +8,7 @@ const AuthWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100vh;
 
-  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+  @media only screen and (max-width: ${breakPoints.medium}) {
     grid-template-columns: 1fr;
   }
 `;
@@ -17,7 +16,7 @@ const AuthWrapper = styled.div`
 const ImageContainer = styled.div`
   background: ${color.colorPrimary};
 
-  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+  @media only screen and (max-width: ${breakPoints.medium}) {
     display: none;
   }
 `;
@@ -27,6 +26,7 @@ const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 3rem;
 `;
 
 const FormItem = styled.div`
@@ -124,7 +124,7 @@ export default function ForgotPassword() {
             <input type="text" />
           </FormItem>
           <FormAction>
-            <button className="mr-2">
+            <button>
               <span>Send</span>
             </button>
           </FormAction>
@@ -133,7 +133,7 @@ export default function ForgotPassword() {
             <input type="email" />
           </FormItem>
           <FormAction>
-            <button className="mr-2">
+            <button>
               <span>Send</span>
             </button>
           </FormAction>
