@@ -6,7 +6,7 @@ import Icon from "../Icon/Icon";
 import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
 import Withdrawal from "../../../assets/svg/Withdrawal.svg";
-import Game from "../../../assets/svg/Game.svg";
+import Play from "../../../assets/svg/Play.svg";
 import Transaction from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
@@ -21,7 +21,7 @@ const HeaderWrapper = styled.div`
   flex-wrap: wrap;
 
   a {
-    font-size: 1.35rem;
+    font-size: 1.34rem;
     color: #737773;
 
     &:hover {
@@ -52,8 +52,8 @@ export default function UserNavigation() {
         <Link className="ml-2">Withdraw</Link>
       </NavItem>
       <NavItem>
-        <Icon icon={Game} height="18" />
-        <Link className="ml-2">Game</Link>
+        <Icon icon={Play} height="18" />
+        <Link className="ml-2">Play</Link>
       </NavItem>
       <NavItem>
         <Icon icon={Transaction} height="18" />
