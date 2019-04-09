@@ -55,7 +55,7 @@ export default function Header({ transparent }) {
   return (
     <HeaderWrapper transparent={transparent}>
       <nav
-        className="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
+        className="navbar navbar-expand-lg navbar-dark mt-2"
         role="navigation"
       >
         <a className="navbar-brand navbar-logo mt-n4" href="index">
