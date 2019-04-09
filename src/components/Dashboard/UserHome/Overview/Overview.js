@@ -5,7 +5,7 @@ import color from "../../../styles/colors";
 const OverviewWrapper = styled.div`
   background: #c5c7c5;
   padding: 2rem;
-  width: 60vw;
+  width: 81vw;
   border-radius: 5px;
   margin: 4rem auto;
 `;
@@ -41,11 +41,11 @@ export default function Overview() {
           <OverviewContentDescription>Coin Balance</OverviewContentDescription>
         </OverviewContent>
         <OverviewContent className="col-lg-4">
-          <OverviewContentHeader>#43,590.55</OverviewContentHeader>
+          <OverviewContentHeader>&#8358;43,590.55</OverviewContentHeader>
           <OverviewContentDescription>Cash Balance</OverviewContentDescription>
         </OverviewContent>
         <OverviewContent className="col-lg-4">
-          <OverviewContentHeader>#43,590.55</OverviewContentHeader>
+          <OverviewContentHeader>&#8358;43,590.55</OverviewContentHeader>
           <OverviewContentDescription>Earnings</OverviewContentDescription>
         </OverviewContent>
       </OverviewContainer>

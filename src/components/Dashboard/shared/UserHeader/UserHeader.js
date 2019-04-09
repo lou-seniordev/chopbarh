@@ -56,7 +56,7 @@ export default function UserHeader() {
             <li className="nav-item">
               <Link to="" className="nav-link text-uppercase mr-5">
                 <Icon icon={CashIcon} height="18" />
-                43,590.55
+                &#8358;43,590.55
                 <Icon icon={VisibilityButton} height="10" />
               </Link>
             </li>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 
@@ -69,19 +70,19 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>
-              <a href="about">About Us</a>
+              <Link>About Us</Link>
             </p>
             <p>
-              <a href="terms">Terms and Conditions</a>
+              <Link>Terms and Conditions</Link>
             </p>
             <p>
-              <a href="privacy">Privacy Policy</a>
+              <Link>Privacy Policy</Link>
             </p>
             <p>
-              <a href="gambling">Responsible Gambling</a>
+              <Link>Responsible Gambling</Link>
             </p>
             <p>
-              <a href="parnter">Become a Partner</a>
+              <Link>Become a Partner</Link>
             </p>
           </FooterLinkContainer>
         </div>
@@ -91,19 +92,19 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>
-              <a href="play">How to Play</a>
+              <Link>How to Play</Link>
             </p>
             <p>
-              <a href="games">Games</a>
+              <Link>Games</Link>
             </p>
             <p>
-              <a href="betting">Betting</a>
+              <Link>Betting</Link>
             </p>
             <p>
-              <a href="download">Download</a>
+              <Link>Download</Link>
             </p>
             <p>
-              <a href="talk">Talk to us</a>
+              <Link>Talk to us</Link>
             </p>
           </FooterLinkContainer>
         </div>

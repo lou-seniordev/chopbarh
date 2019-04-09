@@ -9,7 +9,6 @@ const VoucherWrapper = styled.div`
 
 const FormWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
 
   button {
@@ -82,7 +81,7 @@ export default function Voucher() {
               <FormItem>
                 <input type="text" placeholder="Voucher Code" />
               </FormItem>
-              <button type="submit" className="mr-2">
+              <button type="submit" className="ml-2 mr-2">
                 <span>Load</span>
               </button>
             </form>
@@ -101,17 +100,17 @@ export default function Voucher() {
               <tr>
                 <td>Ade Kola</td>
                 <td>Lagos</td>
-                <td>70,000</td>
+                <td>&#8358;70,000</td>
               </tr>
               <tr>
                 <td>Joe Fesobi</td>
                 <td>Benin</td>
-                <td>50,000</td>
+                <td>&#8358;50,000</td>
               </tr>
               <tr>
                 <td>Adewale Jacob</td>
                 <td>Ibadan</td>
-                <td>60,000</td>
+                <td>&#8358;60,000</td>
               </tr>
             </tbody>
           </table>
