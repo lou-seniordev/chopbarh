@@ -27,6 +27,13 @@ const SignUpWrapper = styled.div`
   }
 `;
 
+const HeadingTwo = styled.h2`
+  font-size: 2.5rem;
+  color: ${color.colorPrimary};
+  /* color: #c5c7c5; */
+  font-weight: bold;
+`;
+
 // const Image = styled.img`
 //   width: 100%;
 //   height: 10%;
@@ -39,7 +46,9 @@ export default function SignUp() {
       <Header transparent />
       {/* <Image src={Background} alt="Background" /> */}
       <SignUpWrapper>
-        <div>ITEM HERE</div>
+        <div>
+          <HeadingTwo>Sign Up</HeadingTwo>
+        </div>
       </SignUpWrapper>
     </>
   );
