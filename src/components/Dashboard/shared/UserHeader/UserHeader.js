@@ -75,29 +75,14 @@ export default function UserHeader() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link to="howto" className="nav-link text-uppercase mr-5">
-                How to
+            <li className="nav-item">
+              <Link to="" className="nav-link text-uppercase mr-5">
+                167
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="games" className="nav-link text-uppercase mr-5">
-                Games
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="partner" className="nav-link text-uppercase mr-5">
-                Become a Partner
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="faqs" className="nav-link text-uppercase mr-5">
-                FAQs
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="about" className="nav-link text-uppercase mr-5">
-                About Us
+              <Link to="" className="nav-link text-uppercase mr-5">
+                43,590.55
               </Link>
             </li>
             <li class="nav-item dropdown">
