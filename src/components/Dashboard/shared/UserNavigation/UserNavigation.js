@@ -5,6 +5,7 @@ import color from "../../../styles/colors";
 import Icon from "../Icon/Icon";
 import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
+import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 
 const HeaderWrapper = styled.div`
   background: #dfebdf;
@@ -45,7 +46,8 @@ export default function UserNavigation() {
         <Link className="ml-2">Deposit</Link>
       </NavItem>
       <NavItem>
-        <p>Withdraw</p>
+        <Icon icon={Withdrawal} height="15" />
+        <Link className="ml-2">Withdraw</Link>
       </NavItem>
       <NavItem>
         <p>Play</p>
