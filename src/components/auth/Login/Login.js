@@ -52,6 +52,19 @@ const FormItem = styled.div`
   }
 `;
 
+const FormCheckBox = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    order: 2;
+    margin-top: 5px;
+  }
+
+  input {
+  }
+`;
+
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
   color: #c5c7c5;
@@ -79,7 +92,10 @@ export default function Login() {
             <label>Enter Pin</label>
             <input type="password" />
           </FormItem>
-          <input type="checkbox" />
+          <FormCheckBox>
+            <label>Remember Me</label>
+            <input type="checkbox" />
+          </FormCheckBox>
         </div>
       </FormWrapper>
     </AuthWrapper>
