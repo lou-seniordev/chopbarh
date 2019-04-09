@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import colors from "../../../styles/colors";
+import color from "../../../styles/colors";
 import Icon from "../Icon/Icon";
+import Home from "../../../assets/svg/home.svg";
+import Deposit from "../../../assets/svg/Deposit.svg";
 
 const HeaderWrapper = styled.div`
   background: #dfebdf;
@@ -17,19 +19,30 @@ const HeaderWrapper = styled.div`
 
   a {
     font-size: 1.35rem;
+    color: #737773;
+
+    &:hover {
+      text-decoration: none;
+      color: ${color.colorPrimary};
+    }
   }
 `;
 
-const NavItem = styled.div``;
+const NavItem = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default function UserNavigation() {
   return (
     <HeaderWrapper>
       <NavItem>
-        <p>Home</p>
+        <Icon icon={Home} height="15" />
+        <Link className="ml-2">Home</Link>
       </NavItem>
       <NavItem>
-        <p>Deposit</p>
+        <Icon icon={Deposit} height="15" />
+        <Link className="ml-2">Deposit</Link>
       </NavItem>
       <NavItem>
         <p>Withdraw</p>
