@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import color from "../components/styles/colors";
 import Home from "../components/Home/Home";
 import Games from "../components/Games/Games";
+import Login from "../components/auth/Login/Login";
 
 /*
 
@@ -47,6 +48,7 @@ export default class Layout extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/games" component={Games} />
+          <Route path="/login" component={Login} />
           <Redirect to="/" />
         </Switch>
         {/* <Home /> */}
