@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
-import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 
 const AuthWrapper = styled.div`
@@ -71,12 +70,12 @@ const FormCheckBox = styled.div`
 const FormAction = styled.div`
   button {
     all: unset;
-    border: 3px solid ${colors.colorWhite};
     padding: 0.5rem 1.3rem;
     transform: skew(-20deg);
     display: inline-block;
     transition: all 0.2s;
-    color: ${colors.colorWhite};
+    color: ${color.colorWhite};
+    background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
 
@@ -95,10 +94,10 @@ const FormAction = styled.div`
 
     &:hover {
       transform: translateY(-3px) skew(-20deg);
-      background: ${colors.colorPrimary};
-      color: ${colors.colorWhite};
-      border: 3px solid ${colors.colorPrimary};
+      background: ${color.colorPrimaryHover};
+      color: ${color.colorWhite};
     }
+  }
 `;
 
 const HeadingTwo = styled.h2`
@@ -118,7 +117,7 @@ export default function Login() {
     <AuthWrapper>
       <ImageContainer />
       <FormWrapper>
-        <div>
+        <form>
           <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
           <FormItem>
             <label>Phone Number</label>
@@ -133,8 +132,11 @@ export default function Login() {
               <label>Remember Me</label>
               <input type="checkbox" />
             </FormCheckBox>
+            <button type="submit">
+              <span>Login</span>
+            </button>
           </FormAction>
-        </div>
+        </form>
       </FormWrapper>
     </AuthWrapper>
   );
