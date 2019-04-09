@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 
 const AuthWrapper = styled.div`
@@ -13,7 +14,7 @@ const AuthWrapper = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  background: pink;
+  background: ${color.colorPrimary};
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     display: none;
@@ -21,14 +22,34 @@ const ImageContainer = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  background: peru;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FormItem = styled.div`
+  & > * {
+    display: block;
+  }
 `;
 
 export default function Login() {
   return (
     <AuthWrapper>
-      <ImageContainer>IMAGE</ImageContainer>
-      <FormWrapper>FORM</FormWrapper>
+      <ImageContainer />
+      <FormWrapper>
+        <div>
+          <h2>Login</h2>
+          <FormItem>
+            <label>Phone Number</label>
+            <input type="text" />
+          </FormItem>
+          <FormItem>
+            <label>Enter Pin</label>
+            <input type="password" />
+          </FormItem>
+        </div>
+      </FormWrapper>
     </AuthWrapper>
   );
 }
