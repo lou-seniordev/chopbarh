@@ -59,6 +59,8 @@ const FormCheckBox = styled.div`
   label {
     order: 2;
     margin-top: 5px;
+    margin-left: 5px;
+    font-size: 1.3rem;
   }
 
   input {
