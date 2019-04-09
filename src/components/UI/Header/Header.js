@@ -58,9 +58,9 @@ export default function Header({ transparent }) {
         className="navbar navbar-expand-lg navbar-dark mt-2"
         role="navigation"
       >
-        <a className="navbar-brand navbar-logo mt-n4" href="index">
+        <Link className="navbar-brand navbar-logo mt-n4" to="/">
           <Logo />
-        </a>
+        </Link>
         <button
           className="navbar-toggler custom-toggler"
           type="button"
