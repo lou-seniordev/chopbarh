@@ -104,7 +104,14 @@ const FormAction = styled.div`
   }
 `;
 
-const SignUpSignal = styled.div``;
+const SignUpSignal = styled.div`
+  margin-top: 12rem;
+  text-align: center;
+
+  a {
+    color: ${color.colorPrimary};
+  }
+`;
 
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
@@ -143,8 +150,8 @@ export default function Login() {
             </button>
           </FormAction>
           <SignUpSignal>
-            <span>No Account?</span>
-            <Link>Sign Up</Link>
+            <span>No Account? </span>
+            <Link to="signup">Sign Up</Link>
           </SignUpSignal>
         </form>
       </FormWrapper>
