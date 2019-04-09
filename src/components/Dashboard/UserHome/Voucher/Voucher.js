@@ -12,7 +12,7 @@ export default function Voucher() {
         <div className="col-md-6">Play Voucher</div>
         <div className="col-md-6">
           <table class="table table-striped">
-            <thead>
+            <thead style={{ background: "#8C1936", color: "#fff" }}>
               <tr>
                 <th scope="col">Top Earners</th>
                 <th scope="col" />
@@ -21,19 +21,19 @@ export default function Voucher() {
             </thead>
             <tbody>
               <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>Ade Kola</td>
+                <td>Lagos</td>
+                <td>70,000</td>
               </tr>
               <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+                <td>Joe Fesobi</td>
+                <td>Benin</td>
+                <td>50,000</td>
               </tr>
               <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+                <td>Adewale Jacob</td>
+                <td>Ibadan</td>
+                <td>60,000</td>
               </tr>
             </tbody>
           </table>
