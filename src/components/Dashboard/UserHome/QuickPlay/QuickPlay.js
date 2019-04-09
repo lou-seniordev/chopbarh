@@ -13,6 +13,12 @@ const Image = styled.img`
   height: 20rem;
 `;
 
+const HeadingTwo = styled.h3`
+  font-size: 3rem;
+  font-weight: bold;
+  color: #c5c7c5;
+`;
+
 const HeadingThree = styled.h3`
   font-size: 3rem;
   text-transform: uppercase;
@@ -72,6 +78,7 @@ export default function QuickPlay() {
   return (
     <GameItemsWrapper>
       <div className="container">
+        <HeadingTwo className="mt-4 mb-5">Quick Play</HeadingTwo>
         <div className="row">
           <Column className="col-md-10">
             <Content>
