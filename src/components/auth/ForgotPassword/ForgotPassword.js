@@ -56,7 +56,6 @@ const FormItem = styled.div`
 
 const FormAction = styled.div`
   position: relative;
-  margin-bottom: 6rem;
 
   button {
     all: unset;
@@ -106,10 +105,29 @@ const HeadingTwo = styled.h2`
 `;
 
 const Divider = styled.div`
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0;
+
   p {
     color: #c5c7c5;
     font-size: 1.5rem;
+    margin: 0 0.5rem;
+  }
+
+  &:before {
+    content: "";
+    background: #c5c7c5;
+    height: 1px;
+    width: 40%;
+  }
+
+  &:after {
+    content: "";
+    background: #c5c7c5;
+    height: 1px;
+    width: 40%;
   }
 `;
 
@@ -141,7 +159,7 @@ export default function ForgotPassword() {
           <Divider>
             <p>Or</p>
           </Divider>
-          <FormItem className="mt-5">
+          <FormItem>
             <label>Email</label>
             <input type="email" />
           </FormItem>
