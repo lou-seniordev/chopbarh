@@ -5,7 +5,9 @@ import colors from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import Logo from "../../../UI/Logo/Logo";
 import Icon from "../Icon/Icon";
-import Game from "../../../assets/svg/Draught.svg";
+import CoinSymbol from "../../../assets/svg/CoinSymbol.svg";
+import VisibilityButton from "../../../assets/svg/VisibilityButton.svg";
+import CashIcon from "../../../assets/svg/CashIcon.svg";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -16,39 +18,7 @@ const HeaderWrapper = styled.div`
   text-align: left !important;
 
   a {
-    font-size: 1.3rem;
-  }
-
-  button {
-    all: unset;
-    border: 3px solid ${colors.colorWhite};
-    padding: 0.5rem 1.3rem;
-    transform: skew(-20deg);
-    display: inline-block;
-    transition: all 0.2s;
-    color: ${colors.colorWhite};
-    font-size: 1.3rem;
-    z-index: 200;
-
-    @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      align-self: flex-start;
-      padding: 0.5rem 1.7rem;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    span {
-      display: inline-block;
-      transform: skew(20deg);
-      color: #fff;
-    }
-
-    &:hover {
-      transform: translateY(-3px) skew(-20deg);
-      background: ${colors.colorPrimary};
-      color: ${colors.colorWhite};
-      border: 3px solid ${colors.colorPrimary};
-    }
+    font-size: 1.35rem;
   }
 `;
 
@@ -79,18 +49,16 @@ export default function UserHeader() {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="" className="nav-link text-uppercase mr-5">
-                <Icon icon={Game} />
-                Icon Link
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="" className="nav-link text-uppercase mr-5">
+                <Icon icon={CoinSymbol} height="15" />
                 167
+                <Icon icon={VisibilityButton} height="10" />
               </Link>
             </li>
             <li className="nav-item">
               <Link to="" className="nav-link text-uppercase mr-5">
+                <Icon icon={CashIcon} height="18" />
                 43,590.55
+                <Icon icon={VisibilityButton} height="10" />
               </Link>
             </li>
             <li class="nav-item dropdown">
