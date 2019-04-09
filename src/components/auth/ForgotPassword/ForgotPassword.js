@@ -56,6 +56,7 @@ const FormItem = styled.div`
 
 const FormAction = styled.div`
   position: relative;
+  margin-bottom: 10rem;
 
   button {
     all: unset;
@@ -128,7 +129,7 @@ export default function ForgotPassword() {
               <span>Send</span>
             </button>
           </FormAction>
-          <FormItem>
+          <FormItem className="mt-5">
             <label>Email</label>
             <input type="email" />
           </FormItem>
