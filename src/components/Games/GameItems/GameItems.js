@@ -105,6 +105,78 @@ export default function GameItems() {
               </Button>
             </div>
           </Column>
+          <Column className="col-md-6">
+            <Image alt="Ludo" src={Ludo} />
+            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <p>
+              Play and win from childhood collections that live up to the moment
+            </p>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
+          </Column>
+          <Column className="col-md-6">
+            <Image alt="Ludo" src={Ludo} />
+            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <p>
+              Play and win from childhood collections that live up to the moment
+            </p>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
+          </Column>
+          <Column className="col-md-6">
+            <Image alt="Ludo" src={Ludo} />
+            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <p>
+              Play and win from childhood collections that live up to the moment
+            </p>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
+          </Column>
+          <Column className="col-md-6">
+            <Image alt="Ludo" src={Ludo} />
+            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <p>
+              Play and win from childhood collections that live up to the moment
+            </p>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
+          </Column>
         </div>
       </div>
     </GameItemsWrapper>
