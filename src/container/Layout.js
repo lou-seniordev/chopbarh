@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
-import ErrorBoundary from "../hoc/ErrorBoundary";
+// import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
 //import Home from "../components/Home/Home";
 import Games from "../components/Games/Games";
@@ -9,7 +9,8 @@ import Games from "../components/Games/Games";
 
 To prevent this component from bloat, consider moving the
 globalStyles to a different component. Also, move the 
-components that render Pages to the Pages folder
+components that render Pages to the Pages folder. ,ove ErrorBoundary
+to the App component
 
 */
 
@@ -40,11 +41,11 @@ const GlobalStyles = createGlobalStyle`
 export default class Layout extends Component {
   render() {
     return (
-      <ErrorBoundary>
+      <>
         <GlobalStyles />
         <Games />
         {/* <Home /> */}
-      </ErrorBoundary>
+      </>
     );
   }
 }
