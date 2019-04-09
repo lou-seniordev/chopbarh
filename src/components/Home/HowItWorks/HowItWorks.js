@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import color from "../styles/colors";
-import breakPoints from "../styles/breakpoints";
-import GameConsole from "../assets/svg/Game.svg";
-import BetAway from "../assets/svg/BetAway.svg";
-import VersusAndWin from "../assets/svg/VersusAndWin.svg";
+import color from "../../styles/colors";
+import breakPoints from "../../styles/breakpoints";
+import GameConsole from "../../assets/svg/Game.svg";
+import BetAway from "../../assets/svg/BetAway.svg";
+import VersusAndWin from "../../assets/svg/VersusAndWin.svg";
 
 const HowItWorksWrapper = styled.div`
   text-align: center;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import color from "../styles/colors";
-import breakPoints from "../styles/breakpoints";
+import color from "../../styles/colors";
+import breakPoints from "../../styles/breakpoints";
 
 const HeroWrapper = styled.div`
   height: 85vh;

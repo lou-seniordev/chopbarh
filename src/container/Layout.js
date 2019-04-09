@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
+import { Switch, Route } from "react-router-dom";
 // import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
-//import Home from "../components/Home/Home";
+import Home from "../components/Home/Home";
 import Games from "../components/Games/Games";
 
 /*
@@ -43,7 +44,10 @@ export default class Layout extends Component {
     return (
       <>
         <GlobalStyles />
-        <Games />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/games" component={Games} />
+        </Switch>
         {/* <Home /> */}
       </>
     );
