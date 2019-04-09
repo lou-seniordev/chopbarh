@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 
@@ -103,6 +104,8 @@ const FormAction = styled.div`
   }
 `;
 
+const SignUpSignal = styled.div``;
+
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
   color: #c5c7c5;
@@ -139,6 +142,10 @@ export default function Login() {
               <span>Login</span>
             </button>
           </FormAction>
+          <SignUpSignal>
+            <span>No Account?</span>
+            <Link>Sign Up</Link>
+          </SignUpSignal>
         </form>
       </FormWrapper>
     </AuthWrapper>
