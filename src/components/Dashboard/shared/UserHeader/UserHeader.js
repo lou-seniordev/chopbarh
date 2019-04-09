@@ -26,7 +26,7 @@ export default function UserHeader() {
   return (
     <HeaderWrapper>
       <nav
-        className="navbar navbar-expand-lg navbar-dark mt-2"
+        className="navbar navbar-expand-lg navbar-expand-md navbar-dark mt-2"
         role="navigation"
       >
         <Link className="navbar-brand navbar-logo mt-n4" to="/">
