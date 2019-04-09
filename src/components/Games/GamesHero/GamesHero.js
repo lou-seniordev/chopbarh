@@ -29,7 +29,7 @@ const GamesHeroContentWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 7rem;
+  font-size: 8rem;
   text-transform: uppercase;
   font-style: italic;
   font-weight: bold;
@@ -98,14 +98,6 @@ export default function GamesHero() {
             Play and win from collection of childhood games that live up to the
             moment
           </ParagraphOne>
-        </div>
-        <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-          <Button className="mr-4">
-            <span>Start Playing</span>
-          </Button>
-          <Button className="ml-4">
-            <span>Download</span>
-          </Button>
         </div>
       </GamesHeroContentWrapper>
     </GamesHeroWrapper>
