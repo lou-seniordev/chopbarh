@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import colors from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import Logo from "../../UI/Logo/Logo";
+import Logo from "../../../UI/Logo/Logo";
 
 const HeaderWrapper = styled.div`
-  background: ${props =>
-    props.transparent ? "transparent" : `${colors.colorGrayDarkOne}`};
+  background: ${colors.colorGrayDarkOne};
   min-height: 6rem;
   padding: 0.4rem 2rem;
   position: relative;
@@ -51,9 +50,9 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-export default function UserHeader({ transparent }) {
+export default function UserHeader() {
   return (
-    <HeaderWrapper transparent={transparent}>
+    <HeaderWrapper>
       <nav
         className="navbar navbar-expand-lg navbar-dark mt-2"
         role="navigation"
@@ -101,18 +100,27 @@ export default function UserHeader({ transparent }) {
                 About Us
               </Link>
             </li>
-            <div>
-              <button className="mr-2">
-                <Link to="login">
-                  <span>Login</span>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-uppercase"
+                href="drop"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Alisson Becker
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link class="dropdown-item" to="profile">
+                  User Profile
                 </Link>
-              </button>
-              <button>
-                <Link to="signup">
-                  <span>Sign Up</span>
+                <Link class="dropdown-item" to="logout">
+                  Logout
                 </Link>
-              </button>
-            </div>
+              </div>
+            </li>
           </ul>
         </div>
       </nav>
