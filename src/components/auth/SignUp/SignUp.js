@@ -197,7 +197,7 @@ export default function SignUp() {
             <LoginSignal>
               <p>By clicking, you agree to our Terms and Conditions</p>
               <p>
-                Already have an account? <Link> Login</Link>
+                Already have an account? <Link to="login">Login</Link>
               </p>
             </LoginSignal>
           </Form>
