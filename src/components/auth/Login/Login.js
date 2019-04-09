@@ -38,8 +38,12 @@ const FormItem = styled.div`
   input {
     color: #8d8e8d;
     width: 30rem;
-    height: 3.2rem;
+    height: 3.4rem;
     margin-bottom: 2rem;
+    border: 0;
+    background: #f6f6f6;
+    outline: none;
+    padding: 3px 5px;
   }
 
   & > * {
