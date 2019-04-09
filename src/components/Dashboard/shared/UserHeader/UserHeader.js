@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import colors from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import Logo from "../../../UI/Logo/Logo";
+import Icon from "../Icon/Icon";
+import Game from "../../../assets/svg/Draught.svg";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -75,6 +77,12 @@ export default function UserHeader() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link to="" className="nav-link text-uppercase mr-5">
+                <Icon icon={Game} />
+                Icon Link
+              </Link>
+            </li>
             <li className="nav-item">
               <Link to="" className="nav-link text-uppercase mr-5">
                 167
