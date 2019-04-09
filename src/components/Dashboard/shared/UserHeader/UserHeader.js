@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import colors from "../../../styles/colors";
-import breakPoints from "../../../styles/breakpoints";
 import Logo from "../../../UI/Logo/Logo";
 import Icon from "../Icon/Icon";
 import CoinSymbol from "../../../assets/svg/CoinSymbol.svg";
