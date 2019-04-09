@@ -8,7 +8,8 @@ import Games from "../components/Games/Games";
 /*
 
 To prevent this component from bloat, consider moving the
-globalStyles to a different component
+globalStyles to a different component. Also, move the 
+components that render Pages to the Pages folder
 
 */
 

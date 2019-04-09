@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
-import Ludo from "../../assets/img/Ludo@2x.png";
+import Ludo from "../../assets/img/Ludo@2x@2x.png";
 import Whot from "../../assets/img/Whot.png";
 import Snookers from "../../assets/svg/Snookers.svg";
+import Dice from "../../assets/svg/Dice.svg";
+import Soccer from "../../assets/svg/SoccerFootball.svg";
+import Draught from "../../assets/svg/Draught.svg";
 
 const GameItemsWrapper = styled.div`
   margin-top: 7rem;
@@ -25,6 +28,7 @@ const HeadingThree = styled.h3`
 const Column = styled.div`
   text-align: center;
   margin-bottom: 6rem;
+  transition: all 0.2s;
 
   p {
     text-align: left;
@@ -32,6 +36,10 @@ const Column = styled.div`
     color: #c5c7c5;
     font-size: 1.5rem;
     margin: 0 auto;
+  }
+
+  &:hover {
+    transform: scale(1.02);
   }
 `;
 
@@ -126,8 +134,8 @@ export default function GameItems() {
             </div>
           </Column>
           <Column className="col-md-6">
-            <Image alt="Ludo" src={Ludo} />
-            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <Image alt="Dice" src={Dice} />
+            <HeadingThree className="mt-4">Dice</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
@@ -144,8 +152,8 @@ export default function GameItems() {
             </div>
           </Column>
           <Column className="col-md-6">
-            <Image alt="Ludo" src={Ludo} />
-            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <Image alt="Table Soccer" src={Soccer} />
+            <HeadingThree className="mt-4">Table Soccer</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
@@ -162,8 +170,8 @@ export default function GameItems() {
             </div>
           </Column>
           <Column className="col-md-6">
-            <Image alt="Ludo" src={Ludo} />
-            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <Image alt="Draught" src={Draught} />
+            <HeadingThree className="mt-4">Draught</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
