@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Header from "../../UI/Header/Header";
@@ -105,6 +106,18 @@ const HalfColumn = styled.div`
   }
 `;
 
+const LoginSignal = styled.div`
+  margin-top: 6rem;
+
+  p {
+    text-align: center;
+  }
+
+  a {
+    color: ${color.colorPrimary};
+  }
+`;
+
 // const Image = styled.img`
 //   width: 100%;
 //   height: 10%;
@@ -159,6 +172,12 @@ export default function SignUp() {
             <button type="submit" className="mr-2">
               <span>Create Account</span>
             </button>
+            <LoginSignal>
+              <p>By clicking, you agree to our Terms and Conditions</p>
+              <p>
+                Already have an account? <Link> Login</Link>
+              </p>
+            </LoginSignal>
           </Form>
         </Container>
       </SignUpWrapper>
