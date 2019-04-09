@@ -6,6 +6,7 @@ import Icon from "../Icon/Icon";
 import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
 import Withdrawal from "../../../assets/svg/Withdrawal.svg";
+import Transaction from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
   background: #dfebdf;
@@ -38,22 +39,23 @@ export default function UserNavigation() {
   return (
     <HeaderWrapper>
       <NavItem>
-        <Icon icon={Home} height="15" />
+        <Icon icon={Home} height="18" />
         <Link className="ml-2">Home</Link>
       </NavItem>
       <NavItem>
-        <Icon icon={Deposit} height="15" />
+        <Icon icon={Deposit} height="18" />
         <Link className="ml-2">Deposit</Link>
       </NavItem>
       <NavItem>
-        <Icon icon={Withdrawal} height="15" />
+        <Icon icon={Withdrawal} height="18" />
         <Link className="ml-2">Withdraw</Link>
       </NavItem>
       <NavItem>
         <p>Play</p>
       </NavItem>
       <NavItem>
-        <p>Transaction</p>
+        <Icon icon={Transaction} height="18" />
+        <Link className="ml-2">Transaction</Link>
       </NavItem>
     </HeaderWrapper>
   );
