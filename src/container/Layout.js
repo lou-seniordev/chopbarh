@@ -8,6 +8,7 @@ import Games from "../components/Games/Games";
 import Login from "../components/auth/Login/Login";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
+import UserHome from "../components/Dashboard/UserHome/UserHome";
 
 /*
 
@@ -52,6 +53,7 @@ export default class Layout extends Component {
           <Route path="/games" component={Games} />
           <Route path="/login" component={Login} />
           <Route path="/reset" component={ForgotPassword} />
+          <Route path="/user" component={UserHome} />
           <Route path="/signup" component={SignUp} />
           <Redirect to="/" />
         </Switch>
