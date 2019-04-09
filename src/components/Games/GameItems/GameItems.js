@@ -71,7 +71,7 @@ export default function GameItems() {
         <div className="row">
           <Column className="col-md-6">
             <Image alt="Ludo" src={Ludo} />
-            <HeadingThree>Ludo</HeadingThree>
+            <HeadingThree className="mt-4">Ludo</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
@@ -89,7 +89,7 @@ export default function GameItems() {
           </Column>
           <Column className="col-md-6">
             <Image alt="Whot" src={Whot} />
-            <HeadingThree>Whot</HeadingThree>
+            <HeadingThree className="mt-4">Whot</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
