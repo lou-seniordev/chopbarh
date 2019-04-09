@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
+import Image1 from "../../assets/img/ChopBarhPairs2.png";
+import Image2 from "../../assets/img/ChopBarhPairs3.png";
+import Image3 from "../../assets/img/ChopBarhPairs4.png";
+import Image4 from "../../assets/img/ChopBarhPairs5.png";
+import Image5 from "../../assets/img/ChopBarhPairs6.png";
 
 const GamesWrapper = styled.div`
   text-align: center;
@@ -50,6 +55,18 @@ const Button = styled.button`
   }
 `;
 
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.2rem 0;
+`;
+
+const Image = styled.img`
+  height: 12rem;
+  margin: 0 10px 5px 0;
+`;
+
 export default function GameList() {
   return (
     <GamesWrapper>
@@ -60,6 +77,13 @@ export default function GameList() {
           praesentium placeat dolorum doloribus alias temporibus autem aliquam
           fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat.
         </ParagraphOne>
+        <ImageContainer>
+          <Image src={Image1} alt="Game" />
+          <Image src={Image2} alt="Game" />
+          <Image src={Image3} alt="Game" />
+          <Image src={Image4} alt="Game" />
+          <Image src={Image5} alt="Game" />
+        </ImageContainer>
         <Button className="mt-3">
           <span>Explore</span>
         </Button>
