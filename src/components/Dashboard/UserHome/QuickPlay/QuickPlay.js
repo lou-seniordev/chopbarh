@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import Image1 from "../../../assets/img/ChopBarhPairs6.png";
+import Image2 from "../../../assets/img/ChopBarhPairs2.png";
 
 const GameItemsWrapper = styled.div`
   margin-top: 7rem;
@@ -32,6 +34,7 @@ const Column = styled.div`
 
 const Content = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Button = styled.button`
@@ -70,14 +73,41 @@ export default function QuickPlay() {
     <GameItemsWrapper>
       <div className="container">
         <div className="row">
-          <Column className="col-md-12">
+          <Column className="col-md-10">
             <Content>
-              <Image alt="Ludo" className="mr-3" src="" />
+              <Image alt="Ludo" className="mr-5" src={Image1} />
               <div>
-                <HeadingThree className="mt-4">Ludo</HeadingThree>
+                <HeadingThree className="mt-4 mb-3">Table Soccer</HeadingThree>
                 <p>
-                  Play and win from childhood collections that live up to the
-                  moment
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+                  mollitia fugiat veritatis omnis, iste, itaque cupiditate
+                  facilis reiciendis ex repellat accusamus sint, nostrum non
+                  blanditiis at pariatur distinctio beatae magni.
+                </p>
+                <div className="mt-2">
+                  <Button>
+                    <span>Place Bet</span>
+                  </Button>
+                  <Button>
+                    <span>Google Play</span>
+                  </Button>
+                  <Button>
+                    <span>iOS Store</span>
+                  </Button>
+                </div>
+              </div>
+            </Content>
+          </Column>
+          <Column className="col-md-10">
+            <Content>
+              <Image alt="Ludo" className="mr-5" src={Image2} />
+              <div>
+                <HeadingThree className="mt-4 mb-3">Dice</HeadingThree>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+                  mollitia fugiat veritatis omnis, iste, itaque cupiditate
+                  facilis reiciendis ex repellat accusamus sint, nostrum non
+                  blanditiis at pariatur distinctio beatae magni.
                 </p>
                 <div className="mt-2">
                   <Button>
