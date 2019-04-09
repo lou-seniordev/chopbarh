@@ -4,9 +4,10 @@ import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Ludo from "../../assets/img/Ludo@2x.png";
 import Whot from "../../assets/img/Whot.png";
+import Snookers from "../../assets/svg/Snookers.svg";
 
 const GameItemsWrapper = styled.div`
-  margin-top: 5rem;
+  margin-top: 7rem;
 `;
 
 const Image = styled.img`
@@ -23,7 +24,7 @@ const HeadingThree = styled.h3`
 
 const Column = styled.div`
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
 
   p {
     text-align: left;
@@ -107,8 +108,8 @@ export default function GameItems() {
             </div>
           </Column>
           <Column className="col-md-6">
-            <Image alt="Ludo" src={Ludo} />
-            <HeadingThree className="mt-4">Ludo</HeadingThree>
+            <Image alt="Snookers" src={Snookers} />
+            <HeadingThree className="mt-4">Snookers</HeadingThree>
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
