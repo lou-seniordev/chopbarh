@@ -9,7 +9,9 @@ const GameItemsWrapper = styled.div`
   margin-top: 5rem;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  height: 20rem;
+`;
 
 const HeadingThree = styled.h3`
   font-size: 3rem;
@@ -40,6 +42,7 @@ const Button = styled.button`
   transform: skew(-20deg);
   display: inline-block;
   transition: all 0.2s;
+  color: #c5c7c5;
 
   span {
     display: inline-block;
@@ -90,6 +93,17 @@ export default function GameItems() {
             <p>
               Play and win from childhood collections that live up to the moment
             </p>
+            <div className="mt-2">
+              <Button>
+                <span>Place Bet</span>
+              </Button>
+              <Button>
+                <span>Google Play</span>
+              </Button>
+              <Button>
+                <span>iOS Store</span>
+              </Button>
+            </div>
           </Column>
         </div>
       </div>
