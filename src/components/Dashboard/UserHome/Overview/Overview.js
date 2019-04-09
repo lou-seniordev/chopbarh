@@ -36,15 +36,15 @@ export default function Overview() {
     <OverviewWrapper>
       <HeadingFour className="mb-4">Overview</HeadingFour>
       <OverviewContainer className="row text-center">
-        <OverviewContent className="col-md-4">
+        <OverviewContent className="col-lg-4">
           <OverviewContentHeader>167</OverviewContentHeader>
           <OverviewContentDescription>Coin Balance</OverviewContentDescription>
         </OverviewContent>
-        <OverviewContent className="col-md-4">
+        <OverviewContent className="col-lg-4">
           <OverviewContentHeader>#43,590.55</OverviewContentHeader>
           <OverviewContentDescription>Cash Balance</OverviewContentDescription>
         </OverviewContent>
-        <OverviewContent className="col-md-4">
+        <OverviewContent className="col-lg-4">
           <OverviewContentHeader>#43,590.55</OverviewContentHeader>
           <OverviewContentDescription>Earnings</OverviewContentDescription>
         </OverviewContent>
