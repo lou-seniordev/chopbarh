@@ -142,9 +142,14 @@ export default function Login() {
               <label>Remember Me</label>
               <input type="checkbox" />
             </FormCheckBox>
-            <button type="submit" className="mr-2">
+            {/* <button type="submit" className="mr-2">
               <span>Login</span>
-            </button>
+            </button> */}
+            <Link to="user">
+              <button className="mr-2">
+                <span>Login</span>
+              </button>
+            </Link>
           </FormAction>
           <SignUpSignal>
             <span>No Account? </span>
