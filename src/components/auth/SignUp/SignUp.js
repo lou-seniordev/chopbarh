@@ -101,8 +101,16 @@ const FormItem = styled.div`
 const HalfColumn = styled.div`
   display: flex;
 
+  @media only screen and (max-width: ${breakPoints.large}) {
+    flex-direction: column;
+  }
+
   div {
     width: 50%;
+
+    @media only screen and (max-width: ${breakPoints.large}) {
+      width: 100%;
+    }
   }
 `;
 
