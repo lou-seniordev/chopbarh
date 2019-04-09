@@ -32,6 +32,7 @@ const FormItem = styled.div`
     font-size: 1.4rem;
     font-weight: 600;
     color: #737773;
+    margin-bottom: 1rem;
   }
 
   input {
