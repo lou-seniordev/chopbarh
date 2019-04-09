@@ -88,7 +88,7 @@ export default function Header({ transparent }) {
             </li>
             <li className="nav-item">
               <Link to="partner" className="nav-link text-uppercase mr-5">
-                Partner
+                Become a Partner
               </Link>
             </li>
             <li className="nav-item">
