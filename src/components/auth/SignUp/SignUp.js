@@ -7,7 +7,7 @@ import Header from "../../UI/Header/Header";
 
 /*
 
-Swap out the border thing for some Box Shadow
+Swap out the border thing for some Box Shadow and add Placeholders to form inputs
 
 */
 const SignUpWrapper = styled.div`
@@ -140,6 +140,16 @@ export default function SignUp() {
                   <option>Female</option>
                   <option>Other</option>
                 </select>
+              </FormItem>
+            </HalfColumn>
+            <HalfColumn>
+              <FormItem className="mr-3">
+                <label>Enter Pin (4 to 6 digits)</label>
+                <input type="password" required />
+              </FormItem>
+              <FormItem>
+                <label>Re-enter Pin</label>
+                <input type="password" required />
               </FormItem>
             </HalfColumn>
             <FormItem>
