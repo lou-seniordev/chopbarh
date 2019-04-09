@@ -10,7 +10,7 @@ Swap out the border thing for some Box Shadow
 
 */
 const SignUpWrapper = styled.div`
-  height: 50vh;
+  height: 40vh;
   background: ${color.colorPrimary};
   margin-top: -10rem;
   z-index: 2000;
@@ -34,6 +34,12 @@ const HeadingTwo = styled.h2`
   font-weight: bold;
 `;
 
+const Form = styled.form`
+  div {
+    display: block;
+  }
+`;
+
 // const Image = styled.img`
 //   width: 100%;
 //   height: 10%;
@@ -47,7 +53,17 @@ export default function SignUp() {
       {/* <Image src={Background} alt="Background" /> */}
       <SignUpWrapper>
         <Container>
-          <HeadingTwo>Sign Up</HeadingTwo>
+          <Form>
+            <HeadingTwo>Sign Up</HeadingTwo>
+            <div>
+              <label>Full Name</label>
+              <input type="text" />
+            </div>
+            <div>
+              <label>Full Name</label>
+              <input type="text" />
+            </div>
+          </Form>
         </Container>
       </SignUpWrapper>
     </>
