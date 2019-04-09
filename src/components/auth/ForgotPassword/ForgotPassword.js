@@ -54,24 +54,8 @@ const FormItem = styled.div`
   }
 `;
 
-const FormCheckBox = styled.div`
-  display: flex;
-  align-items: center;
-
-  label {
-    order: 2;
-    margin-top: 5px;
-    margin-left: 5px;
-    font-size: 1.3rem;
-  }
-
-  input {
-  }
-`;
-
 const FormAction = styled.div`
-  display: flex;
-  justify-content: space-between;
+  position: relative;
 
   button {
     all: unset;
@@ -83,6 +67,8 @@ const FormAction = styled.div`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
+    position: absolute;
+    left: 50%;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       align-self: flex-start;
@@ -109,6 +95,12 @@ const HeadingTwo = styled.h2`
   font-size: 3.5rem;
   color: #c5c7c5;
   font-weight: bold;
+
+  span {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
 `;
 
 /* 
@@ -122,35 +114,30 @@ export default function ForgotPassword() {
     <AuthWrapper>
       <ImageContainer />
       <FormWrapper>
-        <form>
-          <HeadingTwo className="mb-5 mt-n5">Forgot Pin?</HeadingTwo>
+        <div>
+          <HeadingTwo className="mb-5 mt-n5">
+            Forgot Pin?
+            <span>We will send a verification pin to your phone or mail</span>
+          </HeadingTwo>
           <FormItem>
             <label>Phone Number</label>
             <input type="text" />
           </FormItem>
           <FormAction>
-            <FormCheckBox>
-              <label />
-            </FormCheckBox>
-            <button type="submit" className="mr-2">
+            <button className="mr-2">
               <span>Send</span>
             </button>
           </FormAction>
-        </form>
-        <form>
           <FormItem>
             <label>Email</label>
             <input type="email" />
           </FormItem>
           <FormAction>
-            <FormCheckBox>
-              <label />
-            </FormCheckBox>
-            <button type="submit" className="mr-2">
+            <button className="mr-2">
               <span>Send</span>
             </button>
           </FormAction>
-        </form>
+        </div>
       </FormWrapper>
     </AuthWrapper>
   );
