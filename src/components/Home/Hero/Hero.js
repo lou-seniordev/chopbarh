@@ -104,7 +104,7 @@ export default function Hero() {
     <HeroWrapper>
       <HeroContentWrapper>
         <img src="assets/img/Smiling guy.png" className="hero__image" alt="" />
-        <HeadingTwo className="hero__title">Bet.Play.Win.</HeadingTwo>
+        <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
         <div className="mt-n4 ml-lg-1 ml-md-1">
           <ParagraphOne>
             Play and win from collection of childhood games that live up to the

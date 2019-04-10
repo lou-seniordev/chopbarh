@@ -7,7 +7,7 @@ import GameItems from "./GameItems/GameItems";
 export default function Games() {
   return (
     <>
-      <Header transparent />
+      <Header />
       <GamesHero />
       <GameItems />
       <Footer />
