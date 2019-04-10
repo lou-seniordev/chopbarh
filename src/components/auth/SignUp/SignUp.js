@@ -32,7 +32,7 @@ const Container = styled.div`
   width: 60vw;
   background: #fff;
   padding: 4rem 10rem;
-  border: 1px solid gray;
+  box-shadow: 0px 18px 31px 13px rgba(214, 207, 214, 0.83);
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     padding: 4rem 5rem;
