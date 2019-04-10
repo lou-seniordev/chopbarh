@@ -17,12 +17,8 @@ const Image = styled.img`
 `;
 
 const ImageContainer = styled.div`
-  background-image: url(${Background});
-  background-size: 100vmax;
-  margin-top: -5rem;
-  max-width: 99.2vw;
   height: auto;
-  padding: 15rem 0 5rem 0;
+  padding: 20rem 0 5rem 0;
 `;
 
 const HeadingThree = styled.h3`
