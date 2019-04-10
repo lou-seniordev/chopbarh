@@ -9,21 +9,6 @@ const HeroWrapper = styled.div`
   position: relative;
   background: ${color.colorPrimary};
   color: ${color.colorWhite};
-
-  &__image {
-    width: 60rem;
-    position: absolute;
-    top: 60%;
-    /* transform: translateY(-50%); */
-  }
-
-  &__content {
-    /* @media only screen and (max-width: $bp-medium) {
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
-    } */
-  }
 `;
 
 const HeroContentWrapper = styled.div`
@@ -103,7 +88,6 @@ export default function Hero() {
   return (
     <HeroWrapper>
       <HeroContentWrapper>
-        <img src="assets/img/Smiling guy.png" className="hero__image" alt="" />
         <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
         <div className="mt-n4 ml-lg-1 ml-md-1">
           <ParagraphOne>

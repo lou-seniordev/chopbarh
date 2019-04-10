@@ -8,7 +8,6 @@ import Snookers from "../../assets/svg/Snookers.svg";
 import Dice from "../../assets/svg/Dice.svg";
 import Soccer from "../../assets/svg/SoccerFootball.svg";
 import Draught from "../../assets/svg/Draught.svg";
-import Background from "../../assets/svg/WavyBackground.svg";
 
 const GameItemsWrapper = styled.div``;
 
