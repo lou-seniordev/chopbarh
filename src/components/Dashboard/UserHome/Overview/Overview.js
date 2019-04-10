@@ -4,7 +4,7 @@ import color from "../../../styles/colors";
 
 const OverviewWrapper = styled.div`
   background: #c5c7c5;
-  padding: 2rem;
+  padding: 3rem 2rem;
   width: 81vw;
   border-radius: 5px;
   margin: 4rem auto;
