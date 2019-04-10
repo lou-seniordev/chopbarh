@@ -39,17 +39,25 @@ const Column = styled.div`
   text-align: center;
   margin-bottom: 6rem;
   transition: all 0.2s;
+  position: relative;
 
   p {
-    text-align: left;
-    width: 78%;
     color: #c5c7c5;
     font-size: 1.5rem;
+    width: 75%;
     margin: 0 auto;
+
+    @media only screen and (max-width: ${breakPoints.medium}) {
+      text-align: center;
+    }
   }
 
   &:hover {
     transform: scale(1.02);
+  }
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    text-align: center;
   }
 `;
 
@@ -88,7 +96,7 @@ export default function GameItems() {
   return (
     <GameItemsWrapper>
       <ImageContainer className="row">
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Ludo" src={Ludo} />
           <HeadingThree className="mt-4">Ludo</HeadingThree>
           <p>
@@ -106,7 +114,7 @@ export default function GameItems() {
             </Button>
           </div>
         </Column>
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Whot" src={Whot} />
           <HeadingThree className="mt-4">Whot</HeadingThree>
           <p>
@@ -124,7 +132,7 @@ export default function GameItems() {
             </Button>
           </div>
         </Column>
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Snookers" src={Snookers} />
           <HeadingThree className="mt-4">Snookers</HeadingThree>
           <p>
@@ -142,7 +150,7 @@ export default function GameItems() {
             </Button>
           </div>
         </Column>
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Dice" src={Dice} />
           <HeadingThree className="mt-4">Dice</HeadingThree>
           <p>
@@ -160,7 +168,7 @@ export default function GameItems() {
             </Button>
           </div>
         </Column>
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Table Soccer" src={Soccer} />
           <HeadingThree className="mt-4">Table Soccer</HeadingThree>
           <p>
@@ -178,7 +186,7 @@ export default function GameItems() {
             </Button>
           </div>
         </Column>
-        <Column className="col-md-6">
+        <Column className="col-lg-6">
           <Image alt="Draught" src={Draught} />
           <HeadingThree className="mt-4">Draught</HeadingThree>
           <p>
