@@ -9,6 +9,7 @@ import Login from "../components/auth/Login/Login";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
+import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 
 /*
 
@@ -52,9 +53,10 @@ export default class Layout extends Component {
           <Route path="/" exact component={Home} />
           <Route path="/games" component={Games} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={ForgotPassword} />
           <Route path="/user" component={UserHome} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/profile" component={UserProfile} />
           <Redirect to="/" />
         </Switch>
       </>
