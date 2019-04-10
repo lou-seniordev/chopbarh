@@ -7,6 +7,15 @@ import PlayAndChop from "./PlayAndChop/PlayAndChop";
 import Testimonials from "./Testimonials/Testimonials";
 import GameList from "./GameList/GameList";
 import Footer from "../UI/Footer/Footer";
+import Background from "../assets/svg/WavyBackground.svg";
+
+const BackgroundImage = styled.div`
+  background: url(${Background});
+  height: auto;
+  max-width: 99.2vw;
+  margin-top: -7rem;
+  padding-top: 9rem;
+`;
 
 /*
 
@@ -21,10 +30,12 @@ export default function Home() {
     <>
       <Header />
       <Hero />
-      <HowItWorks />
-      <PlayAndChop />
-      <Testimonials />
-      <GameList />
+      <BackgroundImage>
+        <HowItWorks />
+        <PlayAndChop />
+        <Testimonials />
+        <GameList />
+      </BackgroundImage>
       <Footer />
     </>
   );
