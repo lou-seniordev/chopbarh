@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
-//import bg from "../../assets/svg/WavyHeader.svg";
+import Background from "../../assets/svg/WavyHeader.svg";
 
 const GamesHeroWrapper = styled.div`
   height: 90vh;
@@ -58,15 +58,28 @@ const ParagraphOne = styled.p`
   }
 `;
 
+const GamesHeroContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const Image = styled.img`
+  height: 99.05vh;
+`;
+
 export default function GamesHero() {
   return (
     <GamesHeroWrapper>
       <GamesHeroContentWrapper>
-        {/* <img src="assets/img/Smiling guy.png" className="hero__image" alt="" /> */}
-        <HeadingTwo className="hero__title">Games</HeadingTwo>
-        <div className="mt-n4 ml-lg-1 ml-md-1">
-          <ParagraphOne>Play and Chop barh!</ParagraphOne>
-        </div>
+        <Image src={Background} alt="Background" />
+        <GamesHeroContent className="mt-4">
+          <HeadingTwo className="hero__title">Games</HeadingTwo>
+          <div className="mt-n4 ml-lg-1 ml-md-1">
+            <ParagraphOne>Play and Chop barh!</ParagraphOne>
+          </div>
+        </GamesHeroContent>
       </GamesHeroContentWrapper>
     </GamesHeroWrapper>
   );
