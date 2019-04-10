@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import color from "../../styles/colors";
-import breakPoints from "../../styles/breakpoints";
+import color from "../../../styles/colors";
+import breakPoints from "../../../styles/breakpoints";
 
-const SignUpWrapper = styled.div`
-  height: 60vh;
-  background: ${color.colorPrimary};
-  margin-top: -26rem;
+const EditProfileWrapper = styled.div`
   z-index: 2000;
-  padding: 20rem 10rem;
+  padding: 2rem 10rem;
 
   @media only screen and (max-width: ${breakPoints.small}) {
     padding: 20rem 5rem;
@@ -20,11 +17,11 @@ const SignUpWrapper = styled.div`
 `;
 
 const Container = styled.div`
-  margin: 10rem auto;
+  margin: 2rem auto;
   width: 60vw;
   background: #fff;
   padding: 4rem 10rem;
-  border: 1px solid gray;
+  box-shadow: 0px 18px 31px 13px rgba(214, 207, 214, 0.83);
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     padding: 4rem 5rem;
@@ -41,7 +38,6 @@ const HeadingTwo = styled.h2`
   color: ${color.colorPrimary};
   /* color: #c5c7c5; */
   font-weight: bold;
-  text-align: center;
 `;
 
 const Form = styled.form`
@@ -123,10 +119,10 @@ const HalfColumn = styled.div`
 export default function EditProfileForm() {
   return (
     <>
-      <SignUpWrapper>
+      <EditProfileWrapper>
         <Container>
           <Form>
-            <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
+            <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
             <FormItem>
               <label>Full Name</label>
               <input type="text" required />
@@ -168,7 +164,7 @@ export default function EditProfileForm() {
             </button>
           </Form>
         </Container>
-      </SignUpWrapper>
+      </EditProfileWrapper>
     </>
   );
 }
