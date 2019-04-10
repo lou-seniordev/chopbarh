@@ -9,7 +9,7 @@ import Image5 from "../../assets/img/ChopBarhPairs6.png";
 
 const GamesWrapper = styled.div`
   text-align: center;
-  margin-top: 5rem;
+  margin: 5rem 0;
 `;
 
 const HeadingThree = styled.h3`
