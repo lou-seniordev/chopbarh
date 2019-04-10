@@ -5,28 +5,19 @@ import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 
 const GamesHeroWrapper = styled.div`
-  height: 90vh;
-  padding: 3rem 1rem;
+  height: 100vh;
   position: relative;
-  margin-top: -8rem;
-  background: ${color.colorPrimary} url(${Background});
+  margin-top: -255px;
+  background: ${color.colorPrimary};
   color: ${color.colorWhite};
   text-align: center;
   z-index: 200;
 `;
 
 const GamesHeroContentWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  @media only screen and (max-width: ${breakPoints.medium}) {
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
+  background: url(${Background});
+  height: 110vh;
+  padding: 3rem 1rem;
 `;
 
 const HeadingTwo = styled.h2`
@@ -61,13 +52,16 @@ const ParagraphOne = styled.p`
 
 const GamesHeroContent = styled.div`
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
 
-const Image = styled.img`
-  width: 100%;
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 `;
 
 export default function GamesHero() {
