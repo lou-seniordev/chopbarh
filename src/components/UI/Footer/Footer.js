@@ -6,7 +6,6 @@ import color from "../../styles/colors";
 
 const FooterWrapper = styled.footer`
   background: #353434;
-  margin-top: 5rem;
   min-height: auto;
   padding: 5rem 2rem;
   position: relative;

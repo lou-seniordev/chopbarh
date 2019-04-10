@@ -10,9 +10,7 @@ import Soccer from "../../assets/svg/SoccerFootball.svg";
 import Draught from "../../assets/svg/Draught.svg";
 import Background from "../../assets/svg/WavyBackground.svg";
 
-const GameItemsWrapper = styled.div`
-  margin-top: 7rem;
-`;
+const GameItemsWrapper = styled.div``;
 
 const Image = styled.img`
   height: 20rem;
@@ -24,7 +22,7 @@ const ImageContainer = styled.div`
   margin-top: -5rem;
   max-width: 99.2vw;
   height: auto;
-  padding: 5rem 0;
+  padding: 15rem 0 5rem 0;
 `;
 
 const HeadingThree = styled.h3`
