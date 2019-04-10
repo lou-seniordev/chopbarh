@@ -18,6 +18,7 @@ const Image = styled.img`
 const ImageContainer = styled.div`
   height: auto;
   padding: 20rem 0 5rem 0;
+  max-width: 99.2vw;
 `;
 
 const HeadingThree = styled.h3`
