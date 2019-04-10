@@ -9,9 +9,10 @@ const GamesHeroWrapper = styled.div`
   padding: 3rem 1rem;
   position: relative;
   margin-top: -8rem;
-  background: ${color.colorPrimary};
+  background: ${color.colorPrimary} url(${Background});
   color: ${color.colorWhite};
   text-align: center;
+  z-index: 200;
 `;
 
 const GamesHeroContentWrapper = styled.div`
@@ -66,14 +67,13 @@ const GamesHeroContent = styled.div`
 `;
 
 const Image = styled.img`
-  height: 99.05vh;
+  width: 100%;
 `;
 
 export default function GamesHero() {
   return (
     <GamesHeroWrapper>
       <GamesHeroContentWrapper>
-        <Image src={Background} alt="Background" />
         <GamesHeroContent className="mt-4">
           <HeadingTwo className="hero__title">Games</HeadingTwo>
           <div className="mt-n4 ml-lg-1 ml-md-1">

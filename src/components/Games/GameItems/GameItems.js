@@ -8,6 +8,7 @@ import Snookers from "../../assets/svg/Snookers.svg";
 import Dice from "../../assets/svg/Dice.svg";
 import Soccer from "../../assets/svg/SoccerFootball.svg";
 import Draught from "../../assets/svg/Draught.svg";
+import Background from "../../assets/svg/WavyBackground.svg";
 
 const GameItemsWrapper = styled.div`
   margin-top: 7rem;
@@ -15,6 +16,15 @@ const GameItemsWrapper = styled.div`
 
 const Image = styled.img`
   height: 20rem;
+`;
+
+const ImageContainer = styled.div`
+  background-image: url(${Background});
+  background-size: 100vmax;
+  margin-top: -5rem;
+  max-width: 99.2vw;
+  height: auto;
+  padding: 5rem 0;
 `;
 
 const HeadingThree = styled.h3`
@@ -32,7 +42,7 @@ const Column = styled.div`
 
   p {
     text-align: left;
-    width: 75%;
+    width: 78%;
     color: #c5c7c5;
     font-size: 1.5rem;
     margin: 0 auto;
@@ -77,118 +87,116 @@ const Button = styled.button`
 export default function GameItems() {
   return (
     <GameItemsWrapper>
-      <div className="container">
-        <div className="row">
-          <Column className="col-md-6">
-            <Image alt="Ludo" src={Ludo} />
-            <HeadingThree className="mt-4">Ludo</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-          <Column className="col-md-6">
-            <Image alt="Whot" src={Whot} />
-            <HeadingThree className="mt-4">Whot</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-          <Column className="col-md-6">
-            <Image alt="Snookers" src={Snookers} />
-            <HeadingThree className="mt-4">Snookers</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-          <Column className="col-md-6">
-            <Image alt="Dice" src={Dice} />
-            <HeadingThree className="mt-4">Dice</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-          <Column className="col-md-6">
-            <Image alt="Table Soccer" src={Soccer} />
-            <HeadingThree className="mt-4">Table Soccer</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-          <Column className="col-md-6">
-            <Image alt="Draught" src={Draught} />
-            <HeadingThree className="mt-4">Draught</HeadingThree>
-            <p>
-              Play and win from childhood collections that live up to the moment
-            </p>
-            <div className="mt-2">
-              <Button>
-                <span>Place Bet</span>
-              </Button>
-              <Button>
-                <span>Google Play</span>
-              </Button>
-              <Button>
-                <span>iOS Store</span>
-              </Button>
-            </div>
-          </Column>
-        </div>
-      </div>
+      <ImageContainer className="row">
+        <Column className="col-md-6">
+          <Image alt="Ludo" src={Ludo} />
+          <HeadingThree className="mt-4">Ludo</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+        <Column className="col-md-6">
+          <Image alt="Whot" src={Whot} />
+          <HeadingThree className="mt-4">Whot</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+        <Column className="col-md-6">
+          <Image alt="Snookers" src={Snookers} />
+          <HeadingThree className="mt-4">Snookers</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+        <Column className="col-md-6">
+          <Image alt="Dice" src={Dice} />
+          <HeadingThree className="mt-4">Dice</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+        <Column className="col-md-6">
+          <Image alt="Table Soccer" src={Soccer} />
+          <HeadingThree className="mt-4">Table Soccer</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+        <Column className="col-md-6">
+          <Image alt="Draught" src={Draught} />
+          <HeadingThree className="mt-4">Draught</HeadingThree>
+          <p>
+            Play and win from childhood collections that live up to the moment
+          </p>
+          <div className="mt-2">
+            <Button>
+              <span>Place Bet</span>
+            </Button>
+            <Button>
+              <span>Google Play</span>
+            </Button>
+            <Button>
+              <span>iOS Store</span>
+            </Button>
+          </div>
+        </Column>
+      </ImageContainer>
     </GameItemsWrapper>
   );
 }
