@@ -180,11 +180,11 @@ export default function SignUp() {
             <HalfColumn>
               <FormItem className="mr-3">
                 <label>Enter Pin (4 to 6 digits)</label>
-                <input type="password" required />
+                <input type="password" required minlength="4" maxlength="6" />
               </FormItem>
               <FormItem>
                 <label>Re-enter Pin</label>
-                <input type="password" required />
+                <input type="password" required minlength="4" maxlength="6" />
               </FormItem>
             </HalfColumn>
             <FormItem>
