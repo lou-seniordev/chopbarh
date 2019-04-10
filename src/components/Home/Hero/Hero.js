@@ -105,6 +105,33 @@ export default function Hero() {
           </Button>
         </div>
       </HeroContentWrapper>
+      {/* <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+        style={{ marginTop: "-7rem" }}
+      >
+        <ol class="carousel-indicators">
+          <li
+            data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"
+          />
+          <li data-target="#carouselExampleIndicators" data-slide-to="1" />
+          <li data-target="#carouselExampleIndicators" data-slide-to="2" />
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src={Background} alt="First slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={Background} alt="Second slide" />
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src={Background} alt="Third slide" />
+          </div>
+        </div>
+      </div> */}
     </HeroWrapper>
   );
 }
