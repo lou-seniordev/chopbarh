@@ -34,12 +34,11 @@ export default function DepositTabs() {
             <HeadingTwo>Pay with Account Number</HeadingTwo>
           </Tab>
         </TabList>
-        <TabPanel>
-          <h2>Any content 1</h2>
-        </TabPanel>
-        <TabPanel>
-          <h2>Any content 2</h2>
-        </TabPanel>
+        <TabPanel>Card</TabPanel>
+        <TabPanel>Quickteller</TabPanel>
+        <TabPanel>Banks</TabPanel>
+        <TabPanel>Voucher</TabPanel>
+        <TabPanel>Pay with Account Nuumber</TabPanel>
       </Tabs>
     </DepositTabsWrapper>
   );
