@@ -41,15 +41,21 @@ export default function UserNavigation() {
     <HeaderWrapper>
       <NavItem>
         <Icon icon={Home} height="18" />
-        <Link className="ml-2">Home</Link>
+        <Link to="user" className="ml-2">
+          Home
+        </Link>
       </NavItem>
       <NavItem>
         <Icon icon={Deposit} height="18" />
-        <Link className="ml-2">Deposit</Link>
+        <Link to="deposit" className="ml-2">
+          Deposit
+        </Link>
       </NavItem>
       <NavItem>
         <Icon icon={Withdrawal} height="18" />
-        <Link className="ml-2">Withdraw</Link>
+        <Link to="withdraw" className="ml-2">
+          Withdraw
+        </Link>
       </NavItem>
       <NavItem>
         <Icon icon={Play} height="18" />
