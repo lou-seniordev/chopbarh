@@ -36,6 +36,12 @@ const NavItem = styled.div`
   align-items: center;
 `;
 
+/*
+
+Should that be Transaction or Transactions?
+
+*/
+
 export default function UserNavigation() {
   return (
     <HeaderWrapper>
@@ -59,11 +65,15 @@ export default function UserNavigation() {
       </NavItem>
       <NavItem>
         <Icon icon={Play} height="18" />
-        <Link className="ml-2">Play</Link>
+        <Link to="play" className="ml-2">
+          Play
+        </Link>
       </NavItem>
       <NavItem>
         <Icon icon={Transaction} height="18" />
-        <Link className="ml-2">Transaction</Link>
+        <Link to="transaction" className="ml-2">
+          Transaction
+        </Link>
       </NavItem>
     </HeaderWrapper>
   );
