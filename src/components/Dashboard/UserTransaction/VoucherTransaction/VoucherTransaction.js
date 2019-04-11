@@ -4,7 +4,7 @@ import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
 const VoucherTransactionWrapper = styled.div`
-  margin-top: 6rem;
+  margin-top: 7rem;
 `;
 
 const FormWrapper = styled.div`
@@ -72,11 +72,32 @@ export default function VoucherTransaction() {
   return (
     <VoucherTransactionWrapper>
       <div className="row">
-        <div className>
+        <div>
           <FormWrapper>
             <form>
               <FormItem>
-                <label>Load VoucherTransaction</label>
+                <label>Transfer Credit to Friends</label>
+              </FormItem>
+              <FormItem>
+                <input type="text" placeholder="Phone Number" />
+              </FormItem>
+              <FormItem>
+                <input type="text" placeholder="Credit" />
+              </FormItem>
+              <FormItem>
+                <input type="password" placeholder="Pin" />
+              </FormItem>
+              <button type="submit" className="ml-2 mr-2">
+                <span>Load</span>
+              </button>
+            </form>
+          </FormWrapper>
+        </div>
+        <div>
+          <FormWrapper>
+            <form>
+              <FormItem>
+                <label>Load Voucher</label>
               </FormItem>
               <FormItem>
                 <input type="text" placeholder="Voucher Code" />
