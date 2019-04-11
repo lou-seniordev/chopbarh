@@ -3,10 +3,15 @@ import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
-const PagaWrapper = styled.div`
+const Form = styled.form`
+  position: relative;
+
   button {
     all: unset;
     padding: 0.5rem 1.3rem;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
     transform: skew(-20deg) translateX(-50%);
     transition: all 0.2s;
     color: ${color.colorWhite};
@@ -32,44 +37,64 @@ const PagaWrapper = styled.div`
   }
 `;
 
-const StepText = styled.p`
-  font-size: 1.5rem;
-  color: #c5c7c5;
-  font-weight: 500;
+const FormItem = styled.div`
+  label {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #737773;
+    margin-bottom: 1rem;
+  }
+
+  input,
+  select {
+    color: #8d8e8d;
+    width: 100%;
+    height: 3.4rem;
+    margin-bottom: 2rem;
+    border: 0;
+    background: #f6f6f6;
+    outline: none;
+    padding: 3px 5px;
+  }
+
+  & > * {
+    display: block;
+    font-family: inherit;
+  }
 `;
 
-const Info = styled.p`
-  font-size: 1.3rem;
+const HalfColumn = styled.div`
+  display: flex;
+
+  @media only screen and (max-width: ${breakPoints.large}) {
+    flex-direction: column;
+  }
+
+  div {
+    width: 50%;
+
+    @media only screen and (max-width: ${breakPoints.large}) {
+      width: 100%;
+    }
+  }
 `;
 
 export default function Paga() {
   return (
-    <PagaWrapper>
-      <StepText>Step 1:</StepText>
-      <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Info>
-      <StepText>Step 2:</StepText>
-      <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Info>
-      <StepText>Step 3:</StepText>
-      <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Info>
-      <StepText>Step 4:</StepText>
-      <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Info>
-      <StepText>Step 5:</StepText>
-      <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </Info>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>
-          <span>Visit Paga</span>
-        </button>
-      </div>
-    </PagaWrapper>
+    <Form>
+      <HalfColumn>
+        <FormItem className="mr-3">
+          <label>Amount</label>
+          <input type="number" required />
+        </FormItem>
+        <FormItem>
+          <label>Phone Number</label>
+          <input type="number" required />
+        </FormItem>
+      </HalfColumn>
+      <button type="submit" className="mr-2">
+        <span>Withdraw</span>
+      </button>
+    </Form>
   );
 }
