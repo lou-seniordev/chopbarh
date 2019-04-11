@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../Card/Card";
+import Quickteller from "../Quickteller/Quickteller";
 import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 
 const DepositTabsWrapper = styled.div`
@@ -38,7 +39,9 @@ export default function DepositTabs() {
         <TabPanel>
           <Card />
         </TabPanel>
-        <TabPanel>Quickteller</TabPanel>
+        <TabPanel>
+          <Quickteller />
+        </TabPanel>
         <TabPanel>Banks</TabPanel>
         <TabPanel>Voucher</TabPanel>
         <TabPanel>
