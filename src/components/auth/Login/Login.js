@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import color from "../../styles/colors";
@@ -125,6 +126,9 @@ Change Checkbox styling momentarily to improve UX
 export default function Login() {
   return (
     <AuthWrapper>
+      <Helmet>
+        <title>Chopbarh &rarr; Login</title>
+      </Helmet>
       <ImageContainer />
       <FormWrapper>
         <form>
