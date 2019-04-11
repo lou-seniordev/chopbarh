@@ -7,7 +7,7 @@ import Paga from "../Paga/Paga";
 const WithdrawTabsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
 `;
 
 const HeadingTwo = styled.h2`
@@ -17,22 +17,24 @@ const HeadingTwo = styled.h2`
 export default function DepositTabs() {
   return (
     <WithdrawTabsWrapper className="container">
-      <Tabs>
-        <TabList>
-          <Tab>
-            <HeadingTwo>Phone Number</HeadingTwo>
-          </Tab>
-          <Tab>
-            <HeadingTwo>Paga</HeadingTwo>
-          </Tab>
-        </TabList>
-        <TabPanel>
-          <PhoneNumber />
-        </TabPanel>
-        <TabPanel>
-          <Paga />
-        </TabPanel>
-      </Tabs>
+      <div className="col-md-6">
+        <Tabs>
+          <TabList>
+            <Tab>
+              <HeadingTwo>Phone Number</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Paga</HeadingTwo>
+            </Tab>
+          </TabList>
+          <TabPanel>
+            <PhoneNumber />
+          </TabPanel>
+          <TabPanel>
+            <Paga />
+          </TabPanel>
+        </Tabs>
+      </div>
     </WithdrawTabsWrapper>
   );
 }
