@@ -1,4 +1,5 @@
 import React from "react";
+import color from "../../../styles/colors";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
@@ -8,25 +9,29 @@ const DepositTabsWrapper = styled.div`
   padding: 5rem 2rem;
 `;
 
+const HeadingTwo = styled.h2`
+  font-size: 1.7rem;
+`;
+
 export default function DepositTabs() {
   return (
     <DepositTabsWrapper className="container">
       <Tabs>
         <TabList>
           <Tab>
-            <h2>Card</h2>
+            <HeadingTwo>Card</HeadingTwo>
           </Tab>
           <Tab>
-            <h2>Quickteller</h2>
+            <HeadingTwo>Quickteller</HeadingTwo>
           </Tab>
           <Tab>
-            <h2>Banks</h2>
+            <HeadingTwo>Banks</HeadingTwo>
           </Tab>
           <Tab>
-            <h2>Voucher</h2>
+            <HeadingTwo>Voucher</HeadingTwo>
           </Tab>
           <Tab>
-            <h2>Pay with Account Number</h2>
+            <HeadingTwo>Pay with Account Number</HeadingTwo>
           </Tab>
         </TabList>
         <TabPanel>
