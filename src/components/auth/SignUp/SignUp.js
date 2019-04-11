@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import color from "../../styles/colors";
@@ -149,7 +150,10 @@ const LoginSignal = styled.div`
 export default function SignUp() {
   return (
     <>
-      <Header transparent />
+      <Header />
+      <Helmet>
+        <title>Chopbarh &rarr; Sign Up</title>
+      </Helmet>
       {/* <Image src={Background} alt="Background" /> */}
       <SignUpWrapper>
         <Container>
