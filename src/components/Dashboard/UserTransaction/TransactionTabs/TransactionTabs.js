@@ -5,16 +5,16 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 const TransactionTabsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 5rem 2rem;
+  padding: 5rem 0rem;
 `;
 
 const HeadingTwo = styled.h2`
   font-size: 1.7rem;
 `;
 
-export default function DepositTabs() {
+export default function TransactionTabs() {
   return (
-    <TransactionTabsWrapper className="container">
+    <TransactionTabsWrapper>
       <Tabs>
         <TabList>
           <Tab>
