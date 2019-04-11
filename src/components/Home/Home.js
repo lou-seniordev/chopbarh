@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Header from "../UI/Header/Header";
 import Hero from "./Hero/Hero";
 import HowItWorks from "./HowItWorks/HowItWorks";
@@ -18,6 +19,9 @@ reason about in the end
 export default function Home() {
   return (
     <>
+      <Helmet>
+        <title>Chopbarh &rarr; Home</title>
+      </Helmet>
       <Header />
       <Hero />
       <HowItWorks />
