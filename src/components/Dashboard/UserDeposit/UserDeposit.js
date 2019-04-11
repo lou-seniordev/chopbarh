@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
-import Card from "./Card/Card";
+import DepositTabs from "./DepositTabs/DepositTabs";
 
 export default function UserDeposit() {
   return (
@@ -13,6 +13,7 @@ export default function UserDeposit() {
       </Helmet>
       <UserHeader />
       <UserNavigation />
+      <DepositTabs />
       <Footer />
     </>
   );
