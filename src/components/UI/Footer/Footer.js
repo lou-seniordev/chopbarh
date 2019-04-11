@@ -61,7 +61,7 @@ export default function Footer() {
     <FooterWrapper className="footer">
       <FooterContainer className="footer__container">
         <div>
-          <img src={Logo} alt="" />
+          <img src={Logo} alt="Logo" />
         </div>
         <div>
           <FooterLinkHeader>
