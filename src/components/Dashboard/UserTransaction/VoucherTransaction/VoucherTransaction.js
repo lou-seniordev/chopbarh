@@ -94,12 +94,12 @@ export default function VoucherTransaction() {
                 <input type="password" placeholder="Pin" />
               </FormItem>
               <button type="submit" className="ml-2 mr-2">
-                <span>Load</span>
+                <span>Transfer</span>
               </button>
             </form>
           </FormWrapper>
         </div>
-        <div>
+        <div className="mt-5">
           <FormWrapper>
             <form>
               <FormItem>
