@@ -104,11 +104,11 @@ export default function PayWithAccountNumber() {
       <HalfColumn>
         <FormItem className="mr-3">
           <label>Amount</label>
-          <input type="number" required  />
+          <input type="number" required />
         </FormItem>
       </HalfColumn>
       <button type="submit" className="mr-2">
-        <span>Load</span>
+        <span>Deposit</span>
       </button>
     </Form>
   );
