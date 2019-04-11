@@ -1,10 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import color from "../../../styles/colors";
+import breakPoints from "../../../styles/breakpoints";
 
-const QuicktellerWrapper = styled.div``;
+const QuicktellerWrapper = styled.div`
+  button {
+    all: unset;
+    padding: 0.5rem 1.3rem;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: skew(-20deg) translateX(-50%);
+    transition: all 0.2s;
+    color: ${color.colorWhite};
+    background: ${color.colorPrimary};
+    font-size: 1.3rem;
+    z-index: 200;
+
+    @media only screen and (max-width: ${breakPoints.mediumLite}) {
+      font-size: 1.1rem;
+    }
+
+    span {
+      display: inline-block;
+      transform: skew(20deg);
+      color: #fff;
+    }
+
+    &:hover {
+      transform: translateY(-3px) skew(-20deg) translateX(-50%);
+      background: ${color.colorPrimaryHover};
+      color: ${color.colorWhite};
+    }
+  }
+`;
 
 const StepText = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #c5c7c5;
   font-weight: 500;
 `;
@@ -32,11 +64,13 @@ export default function Quickteller() {
       <Info className="mb-4">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Info>
-
       <StepText>Step 5:</StepText>
       <Info className="mb-4">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Info>
+      <button>
+        <span>Visit Quickteller</span>
+      </button>
     </QuicktellerWrapper>
   );
 }
