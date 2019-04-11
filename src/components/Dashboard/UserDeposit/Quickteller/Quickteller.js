@@ -7,9 +7,6 @@ const QuicktellerWrapper = styled.div`
   button {
     all: unset;
     padding: 0.5rem 1.3rem;
-    display: inline-block;
-    position: absolute;
-    left: 50%;
     transform: skew(-20deg) translateX(-50%);
     transition: all 0.2s;
     color: ${color.colorWhite};
@@ -68,9 +65,11 @@ export default function Quickteller() {
       <Info className="mb-4">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Info>
-      <button>
-        <span>Visit Quickteller</span>
-      </button>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <button>
+          <span>Visit Quickteller</span>
+        </button>
+      </div>
     </QuicktellerWrapper>
   );
 }
