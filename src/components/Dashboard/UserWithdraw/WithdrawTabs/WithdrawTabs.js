@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import PhoneNumber from "../PhoneNumber/PhoneNumber";
+import Paga from "../Paga/Paga";
 
 const WithdrawTabsWrapper = styled.div`
   display: flex;
@@ -24,8 +26,12 @@ export default function DepositTabs() {
             <HeadingTwo>Paga</HeadingTwo>
           </Tab>
         </TabList>
-        <TabPanel>Phone Number</TabPanel>
-        <TabPanel>Paga</TabPanel>
+        <TabPanel>
+          <PhoneNumber />
+        </TabPanel>
+        <TabPanel>
+          <Paga />
+        </TabPanel>
       </Tabs>
     </WithdrawTabsWrapper>
   );
