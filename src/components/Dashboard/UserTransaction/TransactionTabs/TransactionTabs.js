@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import TransactionTable from "../TransactionTable/TransactionTable";
 
 const TransactionTabsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  display: block;
+  margin: 0 auto;
   padding: 5rem 0rem;
 `;
 
@@ -14,7 +15,7 @@ const HeadingTwo = styled.h2`
 
 export default function TransactionTabs() {
   return (
-    <TransactionTabsWrapper>
+    <TransactionTabsWrapper className="col-md-8">
       <Tabs>
         <TabList>
           <Tab>
@@ -33,11 +34,21 @@ export default function TransactionTabs() {
             <HeadingTwo>Refunds</HeadingTwo>
           </Tab>
         </TabList>
-        <TabPanel />
-        <TabPanel />
-        <TabPanel>Banks</TabPanel>
-        <TabPanel>Voucher</TabPanel>
-        <TabPanel />
+        <TabPanel>
+          <TransactionTable />
+        </TabPanel>
+        <TabPanel>
+          <TransactionTable />
+        </TabPanel>
+        <TabPanel>
+          <TransactionTable />
+        </TabPanel>
+        <TabPanel>
+          <TransactionTable />
+        </TabPanel>
+        <TabPanel>
+          <TransactionTable />
+        </TabPanel>
       </Tabs>
     </TransactionTabsWrapper>
   );
