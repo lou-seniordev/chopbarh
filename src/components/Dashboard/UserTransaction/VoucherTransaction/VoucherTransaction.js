@@ -4,7 +4,13 @@ import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
 const VoucherTransactionWrapper = styled.div`
-  margin-top: 7rem;
+  margin-top: 8rem;
+  padding-left: 8rem;
+  background: yellow;
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    padding-left: 0rem;
+  }
 `;
 
 const FormWrapper = styled.div`

@@ -16,7 +16,7 @@ export default function UserTransaction() {
       <UserNavigation />
       <div className="container">
         <div className="row">
-          <div className="col-md-6 mr-5">
+          <div className="col-md-6">
             <QuickPlayTransaction />
           </div>
           <div className="col-md-6">
