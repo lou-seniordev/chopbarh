@@ -76,28 +76,48 @@ export default function Header({ transparent }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link to="howto" className="nav-link text-uppercase mr-5">
+            <li className="nav-item">
+              <Link
+                to="howto"
+                activeClassName="active"
+                className="nav-link text-uppercase mr-5"
+              >
                 How to
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="games" className="nav-link text-uppercase mr-5">
+              <Link
+                to="games"
+                activeClassName="active"
+                className="nav-link text-uppercase mr-5"
+              >
                 Games
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="partner" className="nav-link text-uppercase mr-5">
+              <Link
+                to="partner"
+                activeClassName="active"
+                className="nav-link text-uppercase mr-5"
+              >
                 Become a Partner
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="faqs" className="nav-link text-uppercase mr-5">
+              <Link
+                to="faqs"
+                activeClassName="active"
+                className="nav-link text-uppercase mr-5"
+              >
                 FAQs
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="about" className="nav-link text-uppercase mr-5">
+              <Link
+                to="about"
+                activeClassName="active"
+                className="nav-link text-uppercase mr-5"
+              >
                 About Us
               </Link>
             </li>
