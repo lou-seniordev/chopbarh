@@ -10,6 +10,7 @@ import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
+import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 
 /*
 
@@ -57,6 +58,7 @@ export default class Layout extends Component {
           <Route path="/reset" component={ForgotPassword} />
           <Route path="/user" component={UserHome} />
           <Route path="/profile" component={UserProfile} />
+          <Route path="/deposit" component={UserDeposit} />
           <Redirect to="/" />
         </Switch>
       </>
