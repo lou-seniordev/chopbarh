@@ -3,13 +3,21 @@ import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
+/*
+
+This component here still needs fine tuning
+
+*/
+
 const VoucherTransactionWrapper = styled.div`
   margin-top: 8rem;
-  padding-left: 8rem;
-  background: yellow;
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: center;
 
-  @media only screen and (max-width: ${breakPoints.mediumLite}) {
-    padding-left: 0rem;
+  @media only screen and (max-width: ${breakPoints.large}) {
+    padding-left: 0;
+    justify-content: flex-start;
   }
 `;
 
@@ -77,7 +85,7 @@ const FormItem = styled.div`
 export default function VoucherTransaction() {
   return (
     <VoucherTransactionWrapper>
-      <div className="row">
+      <div>
         <div>
           <FormWrapper>
             <form>

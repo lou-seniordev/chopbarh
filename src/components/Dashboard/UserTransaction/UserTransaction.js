@@ -16,10 +16,10 @@ export default function UserTransaction() {
       <UserNavigation />
       <div className="container">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <QuickPlayTransaction />
           </div>
-          <div className="col-md-6">
+          <div className="col-lg-6">
             <VoucherTransaction />
           </div>
         </div>
