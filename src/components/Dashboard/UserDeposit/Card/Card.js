@@ -3,10 +3,38 @@ import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
-const FormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Form = styled.form`
+  position: relative;
+
+  button {
+    all: unset;
+    padding: 0.5rem 1.3rem;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: skew(-20deg) translateX(-50%);
+    transition: all 0.2s;
+    color: ${color.colorWhite};
+    background: ${color.colorPrimary};
+    font-size: 1.3rem;
+    z-index: 200;
+
+    @media only screen and (max-width: ${breakPoints.mediumLite}) {
+      font-size: 1.1rem;
+    }
+
+    span {
+      display: inline-block;
+      transform: skew(20deg);
+      color: #fff;
+    }
+
+    &:hover {
+      transform: translateY(-3px) skew(-20deg) translateX(-50%);
+      background: ${color.colorPrimaryHover};
+      color: ${color.colorWhite};
+    }
+  }
 `;
 
 const FormItem = styled.div`
@@ -17,9 +45,10 @@ const FormItem = styled.div`
     margin-bottom: 1rem;
   }
 
-  input {
+  input,
+  select {
     color: #8d8e8d;
-    width: 30rem;
+    width: 100%;
     height: 3.4rem;
     margin-bottom: 2rem;
     border: 0;
@@ -34,79 +63,52 @@ const FormItem = styled.div`
   }
 `;
 
-const FormCheckBox = styled.div`
+const HalfColumn = styled.div`
   display: flex;
-  align-items: center;
 
-  label {
-    order: 2;
-    margin-top: 5px;
-    margin-left: 5px;
-    font-size: 1.3rem;
+  @media only screen and (max-width: ${breakPoints.large}) {
+    flex-direction: column;
   }
-`;
 
-const FormAction = styled.div`
-  display: flex;
-  justify-content: space-between;
+  div {
+    width: 50%;
 
-  button {
-    all: unset;
-    padding: 0.5rem 1.3rem;
-    transform: skew(-20deg);
-    display: inline-block;
-    transition: all 0.2s;
-    color: ${color.colorWhite};
-    background: ${color.colorPrimary};
-    font-size: 1.3rem;
-    z-index: 200;
-
-    @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      align-self: flex-start;
-      padding: 0.5rem 1.7rem;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    span {
-      display: inline-block;
-      transform: skew(20deg);
-      color: #fff;
-    }
-
-    &:hover {
-      transform: translateY(-3px) skew(-20deg);
-      background: ${color.colorPrimaryHover};
-      color: ${color.colorWhite};
+    @media only screen and (max-width: ${breakPoints.large}) {
+      width: 100%;
     }
   }
 `;
 
 export default function Card() {
   return (
-    <FormWrapper>
-      <form>
-        <FormItem>
-          <label>Phone Number</label>
-          <input type="text" />
+    <Form>
+      <FormItem>
+        <label>Name on Card</label>
+        <input type="text" required />
+      </FormItem>
+      <HalfColumn>
+        <FormItem className="mr-3">
+          <label>Card Number</label>
+          <input type="number" required />
         </FormItem>
         <FormItem>
-          <label>Enter Pin</label>
-          <input type="password" />
+          <label>Expiry</label>
+          <input type="text" required />
         </FormItem>
-        <FormAction>
-          <FormCheckBox>
-            <label>Remember Me</label>
-            <input type="checkbox" />
-          </FormCheckBox>
-          {/* <button type="submit" className="mr-2">
-              <span>Login</span>
-            </button> */}
-          <button className="mr-2">
-            <span>Login</span>
-          </button>
-        </FormAction>
-      </form>
-    </FormWrapper>
+      </HalfColumn>
+      <HalfColumn>
+        <FormItem className="mr-3">
+          <label>CVV</label>
+          <input type="number" required minlength="3" maxlength="3" />
+        </FormItem>
+        <FormItem>
+          <label>Amount</label>
+          <input type="number" required />
+        </FormItem>
+      </HalfColumn>
+      <button type="submit" className="mr-2">
+        <span>Load</span>
+      </button>
+    </Form>
   );
 }

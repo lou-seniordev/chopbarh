@@ -1,7 +1,7 @@
 import React from "react";
-import color from "../../../styles/colors";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Card from "../Card/Card";
 
 const DepositTabsWrapper = styled.div`
   display: flex;
@@ -34,7 +34,9 @@ export default function DepositTabs() {
             <HeadingTwo>Pay with Account Number</HeadingTwo>
           </Tab>
         </TabList>
-        <TabPanel>Card</TabPanel>
+        <TabPanel>
+          <Card />
+        </TabPanel>
         <TabPanel>Quickteller</TabPanel>
         <TabPanel>Banks</TabPanel>
         <TabPanel>Voucher</TabPanel>
