@@ -5,13 +5,7 @@ import { Link } from "react-router-dom";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Header from "../../UI/Header/Header";
-import Background from "../../assets/svg/WavyHeader.svg";
 
-/*
-
-Swap out the border thing for some Box Shadow and add Placeholders to form inputs
-
-*/
 const SignUpWrapper = styled.div`
   height: 60vh;
   background: ${color.colorPrimary} url(${Background});
