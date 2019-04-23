@@ -5,7 +5,6 @@ import color from "../../../styles/colors";
 const OverviewWrapper = styled.div`
   background: #c5c7c5;
   padding: 3rem 2rem;
-  width: 81vw;
   border-radius: 5px;
   margin: 4rem auto;
 `;
@@ -38,7 +37,7 @@ const OverviewContentDescription = styled.p`
 
 export default function Overview() {
   return (
-    <OverviewWrapper>
+    <OverviewWrapper className="container">
       <HeadingFour className="mb-5">Overview</HeadingFour>
       <OverviewContainer className="row text-center">
         <OverviewContent className="col-lg-4">
