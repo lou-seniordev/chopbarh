@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../Pages/LoginPage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
