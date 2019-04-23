@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { createGlobalStyle } from "styled-components";
 import { Switch, Route, Redirect } from "react-router-dom";
-// import ErrorBoundary from "../hoc/ErrorBoundary";
-import color from "../components/styles/colors";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
 import Login from "../components/auth/Login/Login";
@@ -23,36 +20,10 @@ to the App component
 
 */
 
-const GlobalStyles = createGlobalStyle`
-  *, 
-  *:after, 
-  *:before {
-    padding: 0;
-    margin: 0;
-    box-sizing:inherit;
-  }
-
-  *::selection {
-    background: ${color.colorPrimaryHover}
-  }
-
-  html {
-    box-sizing: border-box;
-    font-size: 62.5%;
-  }
-
-  body {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-    color: #737773;
-  }
-`;
-
 export default class Layout extends Component {
   render() {
     return (
       <>
-        <GlobalStyles />
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/games" component={GamesPage} />
