@@ -13,10 +13,7 @@ import UserTransaction from "../components/Dashboard/UserTransaction/UserTransac
 
 /*
 
-To prevent this component from bloat, consider moving the
-globalStyles to a different component. Also, move the 
-components that render Pages to the Pages folder. Move ErrorBoundary
-to the App component
+This component implements routing. We should add React Suspense here
 
 */
 
