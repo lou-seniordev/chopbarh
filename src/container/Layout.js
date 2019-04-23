@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
-import Login from "../components/auth/Login/Login";
+import LoginPage from "../pages/LoginPage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
@@ -24,7 +24,7 @@ export default class Layout extends Component {
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/games" component={GamesPage} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={ForgotPassword} />
           <Route path="/user" component={UserHome} />
