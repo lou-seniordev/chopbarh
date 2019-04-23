@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 // import ErrorBoundary from "../hoc/ErrorBoundary";
 import color from "../components/styles/colors";
 import LandingPage from "../Pages/LandingPage";
-import Games from "../components/Games/Games";
+import GamesPage from "../Pages/GamesPage";
 import Login from "../components/auth/Login/Login";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import SignUp from "../components/auth/SignUp/SignUp";
@@ -55,7 +55,7 @@ export default class Layout extends Component {
         <GlobalStyles />
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/games" component={Games} />
+          <Route path="/games" component={GamesPage} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route path="/reset" component={ForgotPassword} />
