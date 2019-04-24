@@ -14,12 +14,15 @@ import {
 } from "../../styles/SignUpStyles";
 
 export default function SignUp() {
-  const [formState, { text, tel, date, email, password }] = useFormState();
+  const [
+    formState,
+    { text, tel, date, email, password, select }
+  ] = useFormState();
 
   const handleSubmit = event => {
     event.preventDefault();
     // API request here
-    console.log(formState);
+    console.table(formState);
   };
 
   return (
@@ -47,10 +50,9 @@ export default function SignUp() {
               </FormItem>
               <FormItem>
                 <label>Sex</label>
-                <select>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
+                <select {...select("sex")}>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
               </FormItem>
             </HalfColumn>
