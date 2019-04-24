@@ -92,11 +92,7 @@ export default function Header({ transparent }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="faqs"
-                activeClassName="active"
-                className="nav-link text-uppercase mr-5"
-              >
+              <Link to="faqs" className="nav-link text-uppercase mr-5">
                 FAQs
               </Link>
             </li>
