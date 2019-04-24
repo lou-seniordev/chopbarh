@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import { useFormState } from 'react-use-form-state';
 import {
   AuthWrapper,
   HeadingTwo,
@@ -12,19 +13,14 @@ import {
   SignUpSignal
 } from "../../styles/LoginStyles";
 
-export default function Login() {
-  const [state, setState] = useState({
-    username: "",
-    password: ""
-  });
 
-  const handleInputChange = ({ target }) => {
-    setState(state => ({ ...state, [target.name]: target.value }));
-  };
+export default function Login() {
+  const [formState, { tel, password,  }] = useFormState();
 
   const handleSubmit = event => {
     event.preventDefault();
     // API request here
+    console.log(formState)
   };
 
   return (
@@ -39,19 +35,13 @@ export default function Login() {
           <FormItem>
             <label>Phone Number</label>
             <input
-              type="text"
-              name="username"
-              value={state.username}
-              onChange={handleInputChange}
+              {...tel('number')} required
             />
           </FormItem>
           <FormItem>
             <label>Enter Pin</label>
             <input
-              type="password"
-              name="password"
-              value={state.password}
-              onChange={handleInputChange}
+            {...password('password')} required minLength="4" maxLength="6"
             />
           </FormItem>
           <FormAction>
