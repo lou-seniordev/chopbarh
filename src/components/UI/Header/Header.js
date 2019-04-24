@@ -77,29 +77,17 @@ export default function Header({ transparent }) {
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link
-                to="howto"
-                activeClassName="active"
-                className="nav-link text-uppercase mr-5"
-              >
+              <Link to="howto" className="nav-link text-uppercase mr-5">
                 How to
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="games"
-                activeClassName="active"
-                className="nav-link text-uppercase mr-5"
-              >
+              <Link to="games" className="nav-link text-uppercase mr-5">
                 Games
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="partner"
-                activeClassName="active"
-                className="nav-link text-uppercase mr-5"
-              >
+              <Link to="partner" className="nav-link text-uppercase mr-5">
                 Become a Partner
               </Link>
             </li>
@@ -113,11 +101,7 @@ export default function Header({ transparent }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                to="about"
-                activeClassName="active"
-                className="nav-link text-uppercase mr-5"
-              >
+              <Link to="about" className="nav-link text-uppercase mr-5">
                 About Us
               </Link>
             </li>
