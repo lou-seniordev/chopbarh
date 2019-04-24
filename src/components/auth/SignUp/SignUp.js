@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Header from "../../UI/Header/Header";
@@ -12,8 +12,8 @@ import {
   LoginSignal
 } from "../../styles/SignUpStyles";
 
-export default class SignUp extends Component {
-  render() {
+export default function SignUp() {
+  
     return (
       <>
         <Helmet>
@@ -75,4 +75,3 @@ export default class SignUp extends Component {
       </>
     );
   }
-}
