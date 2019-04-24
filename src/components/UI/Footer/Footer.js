@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 
+/* 
+
+Add the Link required to to the Links below
+
+*/
+
 const FooterWrapper = styled.footer`
   background: #353434;
   min-height: auto;
