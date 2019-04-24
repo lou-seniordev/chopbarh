@@ -13,7 +13,8 @@ import UserTransaction from "../components/Dashboard/UserTransaction/UserTransac
 
 /*
 
-This component implements routing. We should add React Suspense here
+This component implements routing. We should add React Suspense here.
+Add auth logic here to change routes dynamically
 
 */
 
