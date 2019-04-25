@@ -22,7 +22,8 @@ export default function SignUp() {
   const handleSubmit = event => {
     event.preventDefault();
     // API request here
-    console.table(formState);
+    // Add possible validation here too
+    console.log(formState);
   };
 
   return (
