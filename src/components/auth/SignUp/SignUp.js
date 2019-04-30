@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
 import axios from "axios";
 import Header from "../../UI/Header/Header";
@@ -14,7 +14,7 @@ import {
   LoginSignal
 } from "../../styles/SignUpStyles";
 
-export default function SignUp() {
+function SignUp(props) {
   const [formState, { text, tel, password }] = useFormState();
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ export default function SignUp() {
     // Add possible validation here too
     // Check for password equality momentarily
     formState.values["@class"] = ".RegistrationRequest";
-    console.log(formState.values);
+    // console.log(formState.values);
     const formValue = JSON.stringify(formState.values);
 
     axios(
@@ -43,6 +43,7 @@ export default function SignUp() {
         localStorage.setItem("chopbarh-token", response.data.authToken);
         localStorage.setItem("chopbarh-id", response.data.userId);
         setLoading({ loading: false });
+        props.history.push("/user");
       })
       .catch(err => {
         console.Console(err);
@@ -115,3 +116,5 @@ export default function SignUp() {
     </>
   );
 }
+
+export default withRouter(SignUp);
