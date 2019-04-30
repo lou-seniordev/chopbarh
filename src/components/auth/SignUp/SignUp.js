@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
 import axios from "axios";
+import { Modal, ModalBody } from "reactstrap";
 import Header from "../../UI/Header/Header";
 import {
   SignUpWrapper,
@@ -17,6 +18,11 @@ import {
 function SignUp(props) {
   const [formState, { text, tel, password }] = useFormState();
   const [loading, setLoading] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const toggle = () => {
+    setModalIsOpen({ modalIsOpen: !modalIsOpen });
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -57,6 +63,12 @@ function SignUp(props) {
       </Helmet>
       <Header />
       <SignUpWrapper>
+        <Modal isOpen={modalIsOpen} toggle={toggle}>
+          <ModalBody>
+            <h2>Ooops!</h2>
+            <p>Something went wrong</p>
+          </ModalBody>
+        </Modal>
         <Container>
           <Form onSubmit={handleSubmit}>
             <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
