@@ -86,22 +86,43 @@ function Login(props) {
               <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
               <FormItem>
                 <label>Phone Number</label>
-                <input {...tel("userName")} required />
-                <ErrorText className="mt-n4 mb-2">
-                  Phone Number should be 11
-                </ErrorText>
+                <input
+                  {...tel({
+                    name: "userName",
+                    validate: (value, values, e) => {
+                      if (value.length !== 11) {
+                        return "Phone Number length must be 11";
+                      }
+                    }
+                  })}
+                  required
+                />
+                {formState.errors.userName && (
+                  <ErrorText className="mt-n4 mb-2">
+                    Phone Number should be 11
+                  </ErrorText>
+                )}
               </FormItem>
               <FormItem>
                 <label>Enter Pin</label>
                 <input
-                  {...password("password")}
+                  {...password({
+                    name: "password",
+                    validate: (value, values, e) => {
+                      if (value.length !== 4) {
+                        return "Password length must be 4";
+                      }
+                    }
+                  })}
                   required
                   minLength="4"
                   maxLength="4"
                 />
-                <ErrorText className="mt-n4 mb-2">
-                  Phone Number should be 11
-                </ErrorText>
+                {formState.errors.userName && (
+                  <ErrorText className="mt-n4 mb-3">
+                    Password should be 4 characters long
+                  </ErrorText>
+                )}
               </FormItem>
               <FormAction>
                 <FormCheckBox>
