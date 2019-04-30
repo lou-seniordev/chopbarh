@@ -40,6 +40,7 @@ function Login(props) {
       }
     )
       .then(response => {
+        console.log(JSON.parse(response.data));
         localStorage.setItem("chopbarh-token", response.data.authToken);
         localStorage.setItem("chopbarh-id", response.data.userId);
         setLoading({ loading: false });
