@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Redirect } from "react-router-dom";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
@@ -8,8 +9,11 @@ import VoucherTransaction from "./VoucherTransaction/VoucherTransaction";
 import TransactionTabs from "./TransactionTabs/TransactionTabs";
 
 export default function UserTransaction() {
+  const auth = localStorage.getItem("chopbarh-token");
+
   return (
     <>
+      {!auth && <Redirect to="/" />}
       <Helmet>
         <title>Chopbarh &rarr; Dashboard</title>
       </Helmet>
