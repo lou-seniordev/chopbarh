@@ -75,7 +75,7 @@ function Login(props) {
         <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
-            <p>Something went wrong</p>
+            <p>Something went wrong. Please try again</p>
           </ModalBody>
         </Modal>
         <AppContext.Consumer>
