@@ -37,7 +37,10 @@ export default function SignUp() {
         data: formValue
       }
     )
-      .then(response => console.log(response))
+      .then(response => {
+        localStorage.setItem("chopbarh-token", response.data.authToken);
+        localStorage.setItem("chopbarh-id", response.data.userId);
+      })
       .catch(err => console.Console(err));
   };
 
