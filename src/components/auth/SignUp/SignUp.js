@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
@@ -16,9 +16,11 @@ import {
 
 export default function SignUp() {
   const [formState, { text, tel, password }] = useFormState();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
+    setLoading({ loading: true });
     // API request here
     // Add possible validation here too
     // Check for password equality momentarily
@@ -40,8 +42,12 @@ export default function SignUp() {
       .then(response => {
         localStorage.setItem("chopbarh-token", response.data.authToken);
         localStorage.setItem("chopbarh-id", response.data.userId);
+        setLoading({ loading: false });
       })
-      .catch(err => console.Console(err));
+      .catch(err => {
+        console.Console(err);
+        setLoading({ loading: false });
+      });
   };
 
   return (
@@ -94,8 +100,8 @@ export default function SignUp() {
               <label>Email</label>
               <input {...email("email")} required />
             </FormItem> */}
-            <button type="submit" className="mr-2">
-              <span>Create Account</span>
+            <button type="submit" className="mr-2" disabled={loading}>
+              <span>{loading ? "Please wait..." : "Create Account"}</span>
             </button>
             <LoginSignal>
               <p>By clicking, you agree to our Terms and Conditions</p>
