@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { AppContext } from "../hoc/AppContext";
 import LandingPage from "../Pages/LandingPage";
@@ -20,48 +20,37 @@ initialising in constructor and using componentWillMount
 
 */
 
-export default class Layout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      auth: localStorage.getItem("chopbarh-token")
-    };
-  }
-
-  componentDidMount = () => {};
-
-  render() {
-    return (
-      <AppContext.Consumer>
-        {({ authenticated }) => {
-          if (authenticated) {
-            return (
-              <Switch>
-                <Route path="/" exact component={LandingPage} />
-                <Route path="/games" component={GamesPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/signup" component={SignUpPage} />
-                <Route path="/reset" component={ForgotPassword} />
-                <Route path="/user" component={UserHome} />
-                <Route path="/profile" component={UserProfile} />
-                <Route path="/deposit" component={UserDeposit} />
-                <Route path="/withdraw" component={UserWithdraw} />
-                <Route path="/transaction" component={UserTransaction} />
-                <Redirect to="/" />
-              </Switch>
-            );
-          }
+export default function Layout() {
+  return (
+    <AppContext.Consumer>
+      {({ authenticated }) => {
+        if (authenticated) {
           return (
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/games" component={GamesPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
+              <Route path="/reset" component={ForgotPassword} />
+              <Route path="/user" component={UserHome} />
+              <Route path="/profile" component={UserProfile} />
+              <Route path="/deposit" component={UserDeposit} />
+              <Route path="/withdraw" component={UserWithdraw} />
+              <Route path="/transaction" component={UserTransaction} />
               <Redirect to="/" />
             </Switch>
           );
-        }}
-      </AppContext.Consumer>
-    );
-  }
+        }
+        return (
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route path="/games" component={GamesPage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignUpPage} />
+            <Redirect to="/" />
+          </Switch>
+        );
+      }}
+    </AppContext.Consumer>
+  );
 }
