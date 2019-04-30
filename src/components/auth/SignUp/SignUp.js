@@ -24,6 +24,7 @@ export default function SignUp() {
     // Check for password equality momentarily
     formState.values["@class"] = ".RegistrationRequest";
     console.log(formState.values);
+    const formValue = JSON.stringify(formState.values);
 
     // axios(
     //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
