@@ -14,10 +14,7 @@ import {
 } from "../../styles/SignUpStyles";
 
 export default function SignUp() {
-  const [
-    formState,
-    { text, tel, date, email, password, select }
-  ] = useFormState();
+  const [formState, { text, tel, password }] = useFormState();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -44,7 +41,7 @@ export default function SignUp() {
               <label>Phone Number</label>
               <input {...tel("number")} required />
             </FormItem>
-            <HalfColumn>
+            {/* <HalfColumn>
               <FormItem className="mr-3">
                 <label>Date of Birth</label>
                 <input {...date("dob")} required />
@@ -56,7 +53,7 @@ export default function SignUp() {
                   <option value="female">Female</option>
                 </select>
               </FormItem>
-            </HalfColumn>
+            </HalfColumn> */}
             <HalfColumn>
               <FormItem className="mr-3">
                 <label>Enter Pin (4 digits)</label>
@@ -77,10 +74,10 @@ export default function SignUp() {
                 />
               </FormItem>
             </HalfColumn>
-            <FormItem>
+            {/* <FormItem>
               <label>Email</label>
               <input {...email("email")} required />
-            </FormItem>
+            </FormItem> */}
             <button type="submit" className="mr-2">
               <span>Create Account</span>
             </button>
