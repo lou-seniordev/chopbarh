@@ -13,13 +13,14 @@ import {
   FormAction,
   SignUpSignal
 } from "../../styles/LoginStyles";
+import { AppContext } from "../../../hoc/AppContext";
 
 function Login(props) {
   const [formState, { tel, password }] = useFormState();
 
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event, authUpdate) => {
     event.preventDefault();
     setLoading({ loading: true });
     // API request here
@@ -47,6 +48,7 @@ function Login(props) {
         } else {
           localStorage.setItem("chopbarh-token", response.data.authToken);
           localStorage.setItem("chopbarh-id", response.data.userId);
+          authUpdate();
           setLoading({ loading: false });
           props.history.push("/user");
         }
@@ -64,40 +66,44 @@ function Login(props) {
       </Helmet>
       <ImageContainer />
       <FormWrapper>
-        <form onSubmit={handleSubmit}>
-          <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
-          <FormItem>
-            <label>Phone Number</label>
-            <input {...tel("userName")} required />
-          </FormItem>
-          <FormItem>
-            <label>Enter Pin</label>
-            <input
-              {...password("password")}
-              required
-              minLength="4"
-              maxLength="6"
-            />
-          </FormItem>
-          <FormAction>
-            <FormCheckBox>
-              <label>Remember Me</label>
-              <input type="checkbox" />
-            </FormCheckBox>
-            <button type="submit" disabled={loading} className="mr-2">
-              <span>{loading ? "Please wait..." : "Login"}</span>
-            </button>
-            {/* <Link to="user">
+        <AppContext.Consumer>
+          {({ authUpdate }) => (
+            <form onSubmit={event => handleSubmit(event, authUpdate)}>
+              <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
+              <FormItem>
+                <label>Phone Number</label>
+                <input {...tel("userName")} required />
+              </FormItem>
+              <FormItem>
+                <label>Enter Pin</label>
+                <input
+                  {...password("password")}
+                  required
+                  minLength="4"
+                  maxLength="4"
+                />
+              </FormItem>
+              <FormAction>
+                <FormCheckBox>
+                  <label>Remember Me</label>
+                  <input type="checkbox" />
+                </FormCheckBox>
+                <button type="submit" disabled={loading} className="mr-2">
+                  <span>{loading ? "Please wait..." : "Login"}</span>
+                </button>
+                {/* <Link to="user">
               <button className="mr-2">
                 <span>Login</span>
-              </button>
+                </button>
             </Link> */}
-          </FormAction>
-          <SignUpSignal>
-            <span>No Account? </span>
-            <Link to="signup">Sign Up</Link>
-          </SignUpSignal>
-        </form>
+              </FormAction>
+              <SignUpSignal>
+                <span>No Account? </span>
+                <Link to="signup">Sign Up</Link>
+              </SignUpSignal>
+            </form>
+          )}
+        </AppContext.Consumer>
       </FormWrapper>
     </AuthWrapper>
   );

@@ -6,9 +6,19 @@ export default class ContextProvider extends Component {
     auth: localStorage.getItem("chopbarh-token") !== null
   };
 
+  componentDidUpdate = () => {
+    console.log("Updating...");
+  };
+
+  authUpdate = () => {
+    this.setState({ auth: localStorage.getItem("chopbarh-token") !== null });
+  };
+
   render() {
     return (
-      <AppContext.Provider value={{ authState: this.state.auth }}>
+      <AppContext.Provider
+        value={{ authState: this.state.auth, authUpdate: this.authUpdate }}
+      >
         {this.props.children}
       </AppContext.Provider>
     );
