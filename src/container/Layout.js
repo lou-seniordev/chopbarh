@@ -23,19 +23,45 @@ export default class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: localStorage.getItem("chopbarh-token") !== null
+      auth: localStorage.getItem("chopbarh-token")
     };
   }
 
-  componentDidMount = () => {
-    console.log(this.state.auth);
-  };
+  componentDidMount = () => {};
 
   render() {
-    let routes = null;
+    // let routes = null;
 
-    if (this.state.auth) {
-      routes = (
+    // if (this.state.auth) {
+    //   routes = (
+    //     <Switch>
+    //       <Route path="/" exact component={LandingPage} />
+    //       <Route path="/games" component={GamesPage} />
+    //       <Route path="/login" component={LoginPage} />
+    //       <Route path="/signup" component={SignUpPage} />
+    //       <Route path="/reset" component={ForgotPassword} />
+    //       <Route path="/user" component={UserHome} />
+    //       <Route path="/profile" component={UserProfile} />
+    //       <Route path="/deposit" component={UserDeposit} />
+    //       <Route path="/withdraw" component={UserWithdraw} />
+    //       <Route path="/transaction" component={UserTransaction} />
+    //       <Redirect to="/" />
+    //     </Switch>
+    //   );
+    // } else {
+    //   routes = (
+    //     <Switch>
+    //       <Route path="/" exact component={LandingPage} />
+    //       <Route path="/games" component={GamesPage} />
+    //       <Route path="/login" component={LoginPage} />
+    //       <Route path="/signup" component={SignUpPage} />
+    //       <Redirect to="/" />
+    //     </Switch>
+    //   );
+    // }
+
+    return (
+      <>
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/games" component={GamesPage} />
@@ -49,19 +75,7 @@ export default class Layout extends Component {
           <Route path="/transaction" component={UserTransaction} />
           <Redirect to="/" />
         </Switch>
-      );
-    } else {
-      routes = (
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <Route path="/games" component={GamesPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/signup" component={SignUpPage} />
-          <Redirect to="/" />
-        </Switch>
-      );
-    }
-
-    return <>{routes}</>;
+      </>
+    );
   }
 }
