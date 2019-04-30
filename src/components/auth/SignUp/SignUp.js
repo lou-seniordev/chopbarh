@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
+import axios from "axios";
 import Header from "../../UI/Header/Header";
 import {
   SignUpWrapper,
@@ -21,7 +22,22 @@ export default function SignUp() {
     // API request here
     // Add possible validation here too
     // Check for password equality momentarily
-    console.log(formState);
+    formState.values["@class"] = ".RegistrationRequest";
+    console.log(formState.values);
+
+    // axios(
+    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: formValue
+    //   }
+    // )
+    //   .then(response => console.log(response))
+    //   .catch(err => console.Console(err));
   };
 
   return (
@@ -36,11 +52,11 @@ export default function SignUp() {
             <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
             <FormItem>
               <label>Full Name</label>
-              <input {...text("fullname")} required />
+              <input {...text("displayName")} required />
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
-              <input {...tel("number")} required />
+              <input {...tel("userName")} required />
             </FormItem>
             {/* <HalfColumn>
               <FormItem className="mr-3">
@@ -57,7 +73,7 @@ export default function SignUp() {
             </HalfColumn> */}
             <HalfColumn>
               <FormItem className="mr-3">
-                <label>Enter Pin (4 digits)</label>
+                <label>Enter Password Pin (4 digits)</label>
                 <input
                   {...password("password")}
                   required
@@ -66,13 +82,8 @@ export default function SignUp() {
                 />
               </FormItem>
               <FormItem>
-                <label>Re-enter Pin</label>
-                <input
-                  {...password("retype-password")}
-                  required
-                  minLength="4"
-                  maxLength="4"
-                />
+                <label>Re-enter Password Pin</label>
+                <input type="password" required minLength="4" maxLength="4" />
               </FormItem>
             </HalfColumn>
             {/* <FormItem>
