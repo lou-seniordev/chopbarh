@@ -63,12 +63,12 @@ export default function UserNavigation() {
           Withdraw
         </Link>
       </NavItem>
-      <NavItem>
+      {/* <NavItem>
         <Icon icon={Play} height="18" />
         <Link to="play" className="ml-2">
           Play
         </Link>
-      </NavItem>
+      </NavItem> */}
       <NavItem>
         <Icon icon={Transaction} height="18" />
         <Link to="transaction" className="ml-2">
