@@ -40,11 +40,16 @@ function Login(props) {
       }
     )
       .then(response => {
-        console.log(JSON.parse(response.data));
-        localStorage.setItem("chopbarh-token", response.data.authToken);
-        localStorage.setItem("chopbarh-id", response.data.userId);
-        setLoading({ loading: false });
-        props.history.push("/user");
+        if (response.data.error) {
+          setLoading({ loading: false });
+          console.log(response.data.error);
+          // Error Handling here
+        } else {
+          localStorage.setItem("chopbarh-token", response.data.authToken);
+          localStorage.setItem("chopbarh-id", response.data.userId);
+          setLoading({ loading: false });
+          props.history.push("/user");
+        }
       })
       .catch(err => {
         console.Console(err);
