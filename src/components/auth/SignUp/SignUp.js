@@ -18,15 +18,15 @@ import {
 function SignUp(props) {
   const [formState, { text, tel, password }] = useFormState();
   const [loading, setLoading] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isOpen, setModalIsOpen] = useState(true);
 
   const toggle = () => {
-    setModalIsOpen({ modalIsOpen: !modalIsOpen });
+    setModalIsOpen(!isOpen);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    setLoading({ loading: true });
+    setLoading(true);
     // Add possible validation here too
     // Check for password equality momentarily
     formState.values["@class"] = ".RegistrationRequest";
@@ -47,12 +47,12 @@ function SignUp(props) {
       .then(response => {
         localStorage.setItem("chopbarh-token", response.data.authToken);
         localStorage.setItem("chopbarh-id", response.data.userId);
-        setLoading({ loading: false });
+        setLoading(false);
         props.history.push("/user");
       })
       .catch(err => {
-        console.Console(err);
-        setLoading({ loading: false });
+        setModalIsOpen(true);
+        setLoading(false);
       });
   };
 
@@ -63,8 +63,8 @@ function SignUp(props) {
       </Helmet>
       <Header />
       <SignUpWrapper>
-        <Modal isOpen={modalIsOpen} toggle={toggle}>
-          <ModalBody>
+        <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
+          <ModalBody className="text-center">
             <h2>Ooops!</h2>
             <p>Something went wrong</p>
           </ModalBody>
