@@ -20,6 +20,17 @@ initialising in constructor and using componentWillMount
 */
 
 export default class Layout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: localStorage.getItem("chopbarh-token") !== null
+    };
+  }
+
+  componentDidMount = () => {
+    console.log(this.state.auth);
+  };
+
   render() {
     return (
       <>
