@@ -32,8 +32,10 @@ export default class Layout extends Component {
   };
 
   render() {
-    return (
-      <>
+    let routes = null;
+
+    if (this.state.auth) {
+      routes = (
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/games" component={GamesPage} />
@@ -47,7 +49,19 @@ export default class Layout extends Component {
           <Route path="/transaction" component={UserTransaction} />
           <Redirect to="/" />
         </Switch>
-      </>
-    );
+      );
+    } else {
+      routes = (
+        <Switch>
+          <Route path="/" exact component={LandingPage} />
+          <Route path="/games" component={GamesPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+
+    return <>{routes}</>;
   }
 }
