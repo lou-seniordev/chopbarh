@@ -10,6 +10,7 @@ import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
+import { AppContext } from "../hoc/AppContext";
 
 /*
 
@@ -61,21 +62,26 @@ export default class Layout extends Component {
     // }
 
     return (
-      <>
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <Route path="/games" component={GamesPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/signup" component={SignUpPage} />
-          <Route path="/reset" component={ForgotPassword} />
-          <Route path="/user" component={UserHome} />
-          <Route path="/profile" component={UserProfile} />
-          <Route path="/deposit" component={UserDeposit} />
-          <Route path="/withdraw" component={UserWithdraw} />
-          <Route path="/transaction" component={UserTransaction} />
-          <Redirect to="/" />
-        </Switch>
-      </>
+      <AppContext.Consumer>
+        {({ authState }) => {
+          console.log(authState);
+          return (
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/games" component={GamesPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignUpPage} />
+              <Route path="/reset" component={ForgotPassword} />
+              <Route path="/user" component={UserHome} />
+              <Route path="/profile" component={UserProfile} />
+              <Route path="/deposit" component={UserDeposit} />
+              <Route path="/withdraw" component={UserWithdraw} />
+              <Route path="/transaction" component={UserTransaction} />
+              <Redirect to="/" />
+            </Switch>
+          );
+        }}
+      </AppContext.Consumer>
     );
   }
 }
