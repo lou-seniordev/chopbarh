@@ -12,7 +12,8 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
-  SignUpSignal
+  SignUpSignal,
+  ErrorText
 } from "../../styles/LoginStyles";
 import { AppContext } from "../../../hoc/AppContext";
 
@@ -86,7 +87,9 @@ function Login(props) {
               <FormItem>
                 <label>Phone Number</label>
                 <input {...tel("userName")} required />
-                <span className="mt-n4">Phone Number should be 11</span>
+                <ErrorText className="mt-n4 mb-2">
+                  Phone Number should be 11
+                </ErrorText>
               </FormItem>
               <FormItem>
                 <label>Enter Pin</label>
@@ -96,7 +99,9 @@ function Login(props) {
                   minLength="4"
                   maxLength="4"
                 />
-                <span className="mt-n4">Phone Number should be 11</span>
+                <ErrorText className="mt-n4 mb-2">
+                  Phone Number should be 11
+                </ErrorText>
               </FormItem>
               <FormAction>
                 <FormCheckBox>
