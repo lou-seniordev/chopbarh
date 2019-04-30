@@ -67,7 +67,12 @@ function SignUp(props) {
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
-              <input {...tel("userName")} required />
+              <input
+                {...tel("userName")}
+                required
+                minLength="11"
+                maxLength="11"
+              />
             </FormItem>
             {/* <HalfColumn>
               <FormItem className="mr-3">
