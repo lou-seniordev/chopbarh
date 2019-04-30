@@ -131,3 +131,7 @@ export const LoginSignal = styled.div`
     color: ${color.colorPrimary};
   }
 `;
+
+export const ErrorText = styled.span`
+  color: #c50000;
+`;
