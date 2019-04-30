@@ -101,18 +101,27 @@ export default function Header({ transparent }) {
                 About Us
               </Link>
             </li>
-            <div>
-              <button className="mr-2">
-                <Link to="login">
-                  <span>Login</span>
+            {localStorage.getItem("chopbarh-token") && (
+              <li className="nav-item">
+                <Link to="user" className="nav-link text-uppercase mr-5">
+                  Dashboard
                 </Link>
-              </button>
-              <button>
-                <Link to="signup">
-                  <span>Sign Up</span>
-                </Link>
-              </button>
-            </div>
+              </li>
+            )}
+            {!localStorage.getItem("chopbarh-token") && (
+              <div>
+                <button className="mr-2">
+                  <Link to="login">
+                    <span>Login</span>
+                  </Link>
+                </button>
+                <button>
+                  <Link to="signup">
+                    <span>Sign Up</span>
+                  </Link>
+                </button>
+              </div>
+            )}
           </ul>
         </div>
       </nav>

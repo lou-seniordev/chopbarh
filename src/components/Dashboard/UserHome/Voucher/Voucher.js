@@ -88,7 +88,7 @@ export default function Voucher() {
           </FormWrapper>
         </div>
         <div className="col-md-6">
-          <table class="table table-striped">
+          <table className="table table-striped">
             <thead style={{ background: "#8C1936", color: "#fff" }}>
               <tr>
                 <th scope="col">Top Earners</th>
