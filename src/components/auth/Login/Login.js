@@ -30,39 +30,40 @@ function Login(props) {
     setLoading(true);
     // API request here
     // Add possible validation here too
+    console.log(formState);
     formState.values["@class"] = ".AuthenticationRequest";
     // console.log(formState.values);
     const formValue = JSON.stringify(formState.values);
 
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          setLoading(false);
-          console.log(response.data.error);
-          setModalIsOpen(true);
-          // Error Handling here
-        } else {
-          localStorage.setItem("chopbarh-token", response.data.authToken);
-          localStorage.setItem("chopbarh-id", response.data.userId);
-          authUpdate();
-          setLoading(false);
-          props.history.push("/user");
-        }
-      })
-      .catch(err => {
-        setModalIsOpen(true);
-        setLoading(false);
-      });
+    // axios(
+    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: formValue
+    //   }
+    // )
+    //   .then(response => {
+    //     if (response.data.error) {
+    //       setLoading(false);
+    //       console.log(response.data.error);
+    //       setModalIsOpen(true);
+    //       // Error Handling here
+    //     } else {
+    //       localStorage.setItem("chopbarh-token", response.data.authToken);
+    //       localStorage.setItem("chopbarh-id", response.data.userId);
+    //       authUpdate();
+    //       setLoading(false);
+    //       props.history.push("/user");
+    //     }
+    //   })
+    //   .catch(err => {
+    //     setModalIsOpen(true);
+    //     setLoading(false);
+    //   });
   };
 
   return (
@@ -85,6 +86,7 @@ function Login(props) {
               <FormItem>
                 <label>Phone Number</label>
                 <input {...tel("userName")} required />
+                <span className="mt-n4">Phone Number should be 11</span>
               </FormItem>
               <FormItem>
                 <label>Enter Pin</label>
@@ -94,6 +96,7 @@ function Login(props) {
                   minLength="4"
                   maxLength="4"
                 />
+                <span className="mt-n4">Phone Number should be 11</span>
               </FormItem>
               <FormAction>
                 <FormCheckBox>

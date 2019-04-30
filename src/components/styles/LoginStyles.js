@@ -113,3 +113,7 @@ export const HeadingTwo = styled.h2`
   color: #c5c7c5;
   font-weight: bold;
 `;
+
+export const ErrorText = styled.span`
+  color: #c50000;
+`;
