@@ -29,42 +29,39 @@ function Login(props) {
   const handleSubmit = (event, authUpdate) => {
     event.preventDefault();
     setLoading(true);
-    // API request here
-    // Add possible validation here too
-    console.log(formState);
     formState.values["@class"] = ".AuthenticationRequest";
     // console.log(formState.values);
     const formValue = JSON.stringify(formState.values);
 
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       setLoading(false);
-    //       console.log(response.data.error);
-    //       setModalIsOpen(true);
-    //       // Error Handling here
-    //     } else {
-    //       localStorage.setItem("chopbarh-token", response.data.authToken);
-    //       localStorage.setItem("chopbarh-id", response.data.userId);
-    //       authUpdate();
-    //       setLoading(false);
-    //       props.history.push("/user");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setModalIsOpen(true);
-    //     setLoading(false);
-    //   });
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        if (response.data.error) {
+          setLoading(false);
+          console.log(response.data.error);
+          setModalIsOpen(true);
+          // Error Handling here
+        } else {
+          localStorage.setItem("chopbarh-token", response.data.authToken);
+          localStorage.setItem("chopbarh-id", response.data.userId);
+          authUpdate();
+          setLoading(false);
+          props.history.push("/user");
+        }
+      })
+      .catch(err => {
+        setModalIsOpen(true);
+        setLoading(false);
+      });
   };
 
   return (
