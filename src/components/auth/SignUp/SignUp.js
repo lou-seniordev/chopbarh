@@ -21,7 +21,6 @@ function SignUp(props) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading({ loading: true });
-    // API request here
     // Add possible validation here too
     // Check for password equality momentarily
     formState.values["@class"] = ".RegistrationRequest";
