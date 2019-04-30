@@ -20,6 +20,7 @@ export default function SignUp() {
     event.preventDefault();
     // API request here
     // Add possible validation here too
+    // Check for password equality momentarily
     console.log(formState);
   };
 
