@@ -59,12 +59,12 @@ export default function SignUp() {
             </HalfColumn>
             <HalfColumn>
               <FormItem className="mr-3">
-                <label>Enter Pin (4 to 6 digits)</label>
+                <label>Enter Pin (4 digits)</label>
                 <input
                   {...password("password")}
                   required
                   minLength="4"
-                  maxLength="6"
+                  maxLength="4"
                 />
               </FormItem>
               <FormItem>
@@ -73,7 +73,7 @@ export default function SignUp() {
                   {...password("retype-password")}
                   required
                   minLength="4"
-                  maxLength="6"
+                  maxLength="4"
                 />
               </FormItem>
             </HalfColumn>
