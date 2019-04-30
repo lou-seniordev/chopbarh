@@ -18,7 +18,7 @@ import {
 function SignUp(props) {
   const [formState, { text, tel, password }] = useFormState();
   const [loading, setLoading] = useState(false);
-  const [isOpen, setModalIsOpen] = useState(true);
+  const [isOpen, setModalIsOpen] = useState(false);
 
   const toggle = () => {
     setModalIsOpen(!isOpen);

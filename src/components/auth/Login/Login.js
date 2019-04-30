@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
 import axios from "axios";
+import { Modal, ModalBody } from "reactstrap";
 import {
   AuthWrapper,
   HeadingTwo,
@@ -17,12 +18,16 @@ import { AppContext } from "../../../hoc/AppContext";
 
 function Login(props) {
   const [formState, { tel, password }] = useFormState();
-
   const [loading, setLoading] = useState(false);
+  const [isOpen, setModalIsOpen] = useState(false);
+
+  const toggle = () => {
+    setModalIsOpen(!isOpen);
+  };
 
   const handleSubmit = (event, authUpdate) => {
     event.preventDefault();
-    setLoading({ loading: true });
+    setLoading(true);
     // API request here
     // Add possible validation here too
     formState.values["@class"] = ".AuthenticationRequest";
@@ -42,20 +47,21 @@ function Login(props) {
     )
       .then(response => {
         if (response.data.error) {
-          setLoading({ loading: false });
+          setLoading(false);
           console.log(response.data.error);
+          setModalIsOpen(true);
           // Error Handling here
         } else {
           localStorage.setItem("chopbarh-token", response.data.authToken);
           localStorage.setItem("chopbarh-id", response.data.userId);
           authUpdate();
-          setLoading({ loading: false });
+          setLoading(false);
           props.history.push("/user");
         }
       })
       .catch(err => {
-        console.Console(err);
-        setLoading({ loading: false });
+        setModalIsOpen(true);
+        setLoading(false);
       });
   };
 
@@ -66,6 +72,12 @@ function Login(props) {
       </Helmet>
       <ImageContainer />
       <FormWrapper>
+        <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
+          <ModalBody className="text-center">
+            <h2>Ooops!</h2>
+            <p>Something went wrong</p>
+          </ModalBody>
+        </Modal>
         <AppContext.Consumer>
           {({ authUpdate }) => (
             <form onSubmit={event => handleSubmit(event, authUpdate)}>
