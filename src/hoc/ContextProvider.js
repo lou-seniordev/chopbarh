@@ -13,7 +13,7 @@ export default class ContextProvider extends Component {
   render() {
     return (
       <AppContext.Provider
-        value={{ authState: this.state.auth, authUpdate: this.authUpdate }}
+        value={{ authenticated: this.state.auth, authUpdate: this.authUpdate }}
       >
         {this.props.children}
       </AppContext.Provider>
