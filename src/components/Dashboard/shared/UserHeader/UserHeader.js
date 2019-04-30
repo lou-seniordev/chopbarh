@@ -60,9 +60,9 @@ export default function UserHeader() {
                 <Icon icon={VisibilityButton} height="10" />
               </Link>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle text-uppercase"
+                className="nav-link dropdown-toggle text-uppercase"
                 href="drop"
                 id="navbarDropdown"
                 role="button"
@@ -72,11 +72,11 @@ export default function UserHeader() {
               >
                 Alisson Becker
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link class="dropdown-item" to="profile">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link className="dropdown-item" to="profile">
                   User Profile
                 </Link>
-                <Link class="dropdown-item" to="logout">
+                <Link className="dropdown-item" to="logout">
                   Logout
                 </Link>
               </div>

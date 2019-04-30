@@ -24,7 +24,6 @@ function Login(props) {
     setLoading({ loading: true });
     // API request here
     // Add possible validation here too
-    // Check for password equality momentarily
     formState.values["@class"] = ".AuthenticationRequest";
     // console.log(formState.values);
     const formValue = JSON.stringify(formState.values);
