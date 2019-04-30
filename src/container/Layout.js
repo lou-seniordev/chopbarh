@@ -6,6 +6,7 @@ import GamesPage from "../Pages/GamesPage";
 import LoginPage from "../Pages/LoginPage";
 import SignUpPage from "../Pages/SignUpPage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
+import Logout from "../components/auth/Logout/Logout";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
@@ -32,6 +33,7 @@ export default function Layout() {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/reset" component={ForgotPassword} />
+              <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHome} />
               <Route path="/profile" component={UserProfile} />
               <Route path="/deposit" component={UserDeposit} />
