@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
-//import axios from "axios";
+import axios from "axios";
 import {
   AuthWrapper,
   HeadingTwo,
@@ -14,15 +14,42 @@ import {
   SignUpSignal
 } from "../../styles/LoginStyles";
 
-export default function Login() {
+function Login(props) {
   const [formState, { tel, password }] = useFormState();
+
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
+    setLoading({ loading: true });
     // API request here
-    console.log(formState);
-    // const url =
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest";
+    // Add possible validation here too
+    // Check for password equality momentarily
+    formState.values["@class"] = ".AuthenticationRequest";
+    // console.log(formState.values);
+    const formValue = JSON.stringify(formState.values);
+
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        localStorage.setItem("chopbarh-token", response.data.authToken);
+        localStorage.setItem("chopbarh-id", response.data.userId);
+        setLoading({ loading: false });
+        props.history.push("/user");
+      })
+      .catch(err => {
+        console.Console(err);
+        setLoading({ loading: false });
+      });
   };
 
   return (
@@ -36,7 +63,7 @@ export default function Login() {
           <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
           <FormItem>
             <label>Phone Number</label>
-            <input {...tel("number")} required />
+            <input {...tel("userName")} required />
           </FormItem>
           <FormItem>
             <label>Enter Pin</label>
@@ -52,8 +79,8 @@ export default function Login() {
               <label>Remember Me</label>
               <input type="checkbox" />
             </FormCheckBox>
-            <button type="submit" className="mr-2">
-              <span>Login</span>
+            <button type="submit" disabled={loading} className="mr-2">
+              <span>{loading ? "Please wait..." : "Login"}</span>
             </button>
             {/* <Link to="user">
               <button className="mr-2">
@@ -70,3 +97,5 @@ export default function Login() {
     </AuthWrapper>
   );
 }
+
+export default Login;
