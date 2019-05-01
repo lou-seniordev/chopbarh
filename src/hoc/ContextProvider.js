@@ -4,7 +4,9 @@ import { AppContext } from "./AppContext";
 export default class ContextProvider extends Component {
   state = {
     auth: localStorage.getItem("chopbarh-token") !== null,
-    userInfo: null
+    userInfo: {
+      name: "Nutod"
+    }
   };
 
   authUpdate = () => {

@@ -31,7 +31,7 @@ function SignUp(props) {
     formState.values["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState.values);
     setUserInfo(JSON.parse(formValue));
-    props.history.push("/complete_profile");
+    // props.history.push("/complete_profile");
     // axios(
     //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
     //   {
