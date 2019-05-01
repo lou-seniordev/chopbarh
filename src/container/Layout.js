@@ -12,6 +12,7 @@ import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
+import CompleteProfile from "../components/auth/CompleteProfile/CompleteProfile";
 
 /*
 
@@ -33,6 +34,7 @@ export default function Layout() {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/reset" component={ForgotPassword} />
+              <Route path="/complete_profile" component={CompleteProfile} />
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHome} />
               <Route path="/profile" component={UserProfile} />
@@ -49,6 +51,7 @@ export default function Layout() {
             <Route path="/games" component={GamesPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignUpPage} />
+            <Route path="/complete_profile" component={CompleteProfile} />
             <Redirect to="/" />
           </Switch>
         );

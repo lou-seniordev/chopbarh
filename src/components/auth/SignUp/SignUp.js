@@ -17,9 +17,7 @@ import {
 import { AppContext } from "../../../hoc/AppContext";
 
 function SignUp(props) {
-  const [formState, { text, tel, password }] = useFormState({
-    displayName: "Nutod"
-  });
+  const [formState, { text, tel, password }] = useFormState();
   const [loading, setLoading] = useState(false);
   const [isOpen, setModalIsOpen] = useState(false);
 
@@ -30,13 +28,10 @@ function SignUp(props) {
   const handleSubmit = (event, setUserInfo) => {
     event.preventDefault();
     setLoading(true);
-    // Add possible validation here too
-    // Check for password equality momentarily
     formState.values["@class"] = ".RegistrationRequest";
-    // console.log(formState.values);
     const formValue = JSON.stringify(formState.values);
     setUserInfo(JSON.parse(formValue));
-
+    props.history.push("/complete_profile");
     // axios(
     //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
     //   {
