@@ -8,7 +8,8 @@ export default class ContextProvider extends Component {
     userInfo: {
       displayName: "Nutod"
     },
-    userGameData: null
+    userGameData: null,
+    dataLoading: true
   };
 
   componentDidMount = () => {
@@ -60,7 +61,8 @@ export default class ContextProvider extends Component {
           authUpdate: this.authUpdate,
           setUserInfo: this.setUserInfo,
           getUserInfo: this.state.userInfo,
-          getUserGameData: this.state.userGameData
+          userGameData: this.state.userGameData,
+          dataLoading: this.state.dataLoading
         }}
       >
         {this.props.children}
