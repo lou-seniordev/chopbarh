@@ -8,6 +8,7 @@ import Icon from "../Icon/Icon";
 import CoinSymbol from "../../../assets/svg/CoinSymbol.svg";
 import VisibilityButton from "../../../assets/svg/VisibilityButton.svg";
 import CashIcon from "../../../assets/svg/CashIcon.svg";
+import { AppContext } from "../../../../hoc/AppContext";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -23,45 +24,45 @@ const HeaderWrapper = styled.div`
 `;
 
 export default function UserHeader() {
-  const [coinValue, setCoinValue] = useState(null);
-  const [moneyValue, setMoneyValue] = useState(null);
-  const [displayName, setdisplayName] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [coinValue, setCoinValue] = useState(null);
+  // const [moneyValue, setMoneyValue] = useState(null);
+  // const [displayName, setdisplayName] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const postRequestData = {
-    "@class": ".LogEventRequest",
-    eventKey: "LOAD_DATA_PLAYER",
-    playerId: localStorage.getItem("chopbarh-id")
-      ? localStorage.getItem("chopbarh-id")
-      : null,
-    Player_ID: localStorage.getItem("chopbarh-id")
-      ? localStorage.getItem("chopbarh-id")
-      : null
-  };
+  // const postRequestData = {
+  //   "@class": ".LogEventRequest",
+  //   eventKey: "LOAD_DATA_PLAYER",
+  //   playerId: localStorage.getItem("chopbarh-id")
+  //     ? localStorage.getItem("chopbarh-id")
+  //     : null,
+  //   Player_ID: localStorage.getItem("chopbarh-id")
+  //     ? localStorage.getItem("chopbarh-id")
+  //     : null
+  // };
 
-  useEffect(() => {
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: postRequestData
-      }
-    ).then(response => {
-      if (response.data.error) {
-        setIsLoading(false);
-      } else {
-        const result = response.data.scriptData.PlayerData;
-        setIsLoading(false);
-        setCoinValue(result.CBCoins);
-        setMoneyValue(result.RealCoins);
-        setdisplayName(result.DisplayName);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios(
+  //     "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       data: postRequestData
+  //     }
+  //   ).then(response => {
+  //     if (response.data.error) {
+  //       setIsLoading(false);
+  //     } else {
+  //       const result = response.data.scriptData.PlayerData;
+  //       setIsLoading(false);
+  //       setCoinValue(result.CBCoins);
+  //       setMoneyValue(result.RealCoins);
+  //       setdisplayName(result.DisplayName);
+  //     }
+  //   });
+  // }, []);
   return (
     <HeaderWrapper>
       <nav
@@ -82,56 +83,75 @@ export default function UserHeader() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto" />
-          <ul className="navbar-nav">
-            {isLoading ? (
-              <li className="nav-item">Loading...</li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link text-uppercase mr-5">
-                    <Icon icon={CoinSymbol} height="15" />
-                    {coinValue}
-                    <Icon icon={VisibilityButton} height="10" />
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link text-uppercase mr-5">
-                    <Icon icon={CashIcon} height="18" />
-                    &#8358;{moneyValue}
-                    <Icon icon={VisibilityButton} height="10" />
-                  </Link>
-                </li>
-                <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle text-uppercase"
-                    href="drop"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {displayName}
-                  </a>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <Link className="dropdown-item" to="profile">
-                      User Profile
+        <AppContext.Consumer>
+          {({ userGameData }) => {
+            if (userGameData !== null) {
+              return (
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul className="navbar-nav mr-auto" />
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <Link className="nav-link text-uppercase mr-5">
+                        <Icon icon={CoinSymbol} height="15" />
+                        {userGameData.CBCoins}
+                        <Icon icon={VisibilityButton} height="10" />
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link text-uppercase mr-5">
+                        <Icon icon={CashIcon} height="18" />
+                        &#8358;{userGameData.RealCoins}
+                        <Icon icon={VisibilityButton} height="10" />
+                      </Link>
+                    </li>
+                    <li className="nav-item dropdown">
+                      <a
+                        className="nav-link dropdown-toggle text-uppercase"
+                        href="drop"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        {userGameData.DisplayName}
+                      </a>
+                      <div
+                        className="dropdown-menu"
+                        aria-labelledby="navbarDropdown"
+                      >
+                        <Link className="dropdown-item" to="profile">
+                          User Profile
+                        </Link>
+                        <Link className="dropdown-item" to="logout">
+                          Logout
+                        </Link>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            }
+            return (
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav mr-auto" />
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link className="nav-link text-uppercase mr-5">
+                      Loading...
                     </Link>
-                    <Link className="dropdown-item" to="logout">
-                      Logout
-                    </Link>
-                  </div>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
+                  </li>
+                </ul>
+              </div>
+            );
+          }}
+        </AppContext.Consumer>
       </nav>
     </HeaderWrapper>
   );

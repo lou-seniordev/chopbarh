@@ -37,9 +37,13 @@ export default class ContextProvider extends Component {
         }
       ).then(response => {
         if (response.data.error) {
+          this.setState({ dataLoading: false });
         } else {
           console.log(response);
-          this.setState({ userGameData: response.data.scriptData.PlayerData });
+          this.setState({
+            userGameData: response.data.scriptData.PlayerData,
+            dataLoading: false
+          });
         }
       });
     }
