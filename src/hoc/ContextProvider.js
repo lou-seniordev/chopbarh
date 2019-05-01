@@ -22,7 +22,8 @@ export default class ContextProvider extends Component {
         value={{
           authenticated: this.state.auth,
           authUpdate: this.authUpdate,
-          setUserInfo: this.setUserInfo
+          setUserInfo: this.setUserInfo,
+          getUserInfo: this.state.userInfo
         }}
       >
         {this.props.children}
