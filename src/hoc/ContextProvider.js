@@ -3,7 +3,8 @@ import { AppContext } from "./AppContext";
 
 export default class ContextProvider extends Component {
   state = {
-    auth: localStorage.getItem("chopbarh-token") !== null
+    auth: localStorage.getItem("chopbarh-token") !== null,
+    userInfo: null
   };
 
   authUpdate = () => {
@@ -12,6 +13,7 @@ export default class ContextProvider extends Component {
 
   setUserInfo = userInfo => {
     console.log(userInfo);
+    this.setState({ userInfo });
   };
 
   render() {
