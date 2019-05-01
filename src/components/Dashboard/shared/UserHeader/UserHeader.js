@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import colors from "../../../styles/colors";
 import Logo from "../../../UI/Logo/Logo";
