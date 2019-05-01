@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import colors from "../../../styles/colors";
 import Logo from "../../../UI/Logo/Logo";
@@ -22,6 +23,45 @@ const HeaderWrapper = styled.div`
 `;
 
 export default function UserHeader() {
+  const [coinValue, setCoinValue] = useState(null);
+  const [moneyValue, setMoneyValue] = useState(null);
+  const [displayName, setdisplayName] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const postRequestData = {
+    "@class": ".LogEventRequest",
+    eventKey: "LOAD_DATA_PLAYER",
+    playerId: localStorage.getItem("chopbarh-id")
+      ? localStorage.getItem("chopbarh-id")
+      : null,
+    Player_ID: localStorage.getItem("chopbarh-id")
+      ? localStorage.getItem("chopbarh-id")
+      : null
+  };
+
+  useEffect(() => {
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: postRequestData
+      }
+    ).then(response => {
+      if (response.data.error) {
+        setIsLoading(false);
+      } else {
+        const result = response.data.scriptData.PlayerData;
+        setIsLoading(false);
+        setCoinValue(result.CBCoins);
+        setMoneyValue(result.RealCoins);
+        setdisplayName(result.DisplayName);
+      }
+    });
+  }, []);
   return (
     <HeaderWrapper>
       <nav
@@ -46,41 +86,50 @@ export default function UserHeader() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="" className="nav-link text-uppercase mr-5">
-                <Icon icon={CoinSymbol} height="15" />
-                167
-                <Icon icon={VisibilityButton} height="10" />
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="" className="nav-link text-uppercase mr-5">
-                <Icon icon={CashIcon} height="18" />
-                &#8358;43,590.55
-                <Icon icon={VisibilityButton} height="10" />
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle text-uppercase"
-                href="drop"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Alisson Becker
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item" to="profile">
-                  User Profile
-                </Link>
-                <Link className="dropdown-item" to="logout">
-                  Logout
-                </Link>
-              </div>
-            </li>
+            {isLoading ? (
+              <li className="nav-item">Loading...</li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link text-uppercase mr-5">
+                    <Icon icon={CoinSymbol} height="15" />
+                    {coinValue}
+                    <Icon icon={VisibilityButton} height="10" />
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-uppercase mr-5">
+                    <Icon icon={CashIcon} height="18" />
+                    &#8358;{moneyValue}
+                    <Icon icon={VisibilityButton} height="10" />
+                  </Link>
+                </li>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle text-uppercase"
+                    href="drop"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {displayName}
+                  </a>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <Link className="dropdown-item" to="profile">
+                      User Profile
+                    </Link>
+                    <Link className="dropdown-item" to="logout">
+                      Logout
+                    </Link>
+                  </div>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
