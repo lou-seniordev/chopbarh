@@ -45,10 +45,15 @@ function SignUp(props) {
       }
     )
       .then(response => {
-        localStorage.setItem("chopbarh-token", response.data.authToken);
-        localStorage.setItem("chopbarh-id", response.data.userId);
-        setLoading(false);
-        props.history.push("/user");
+        if (response.data.error) {
+          setLoading(false);
+          setModalIsOpen(true);
+        } else {
+          localStorage.setItem("chopbarh-token", response.data.authToken);
+          localStorage.setItem("chopbarh-id", response.data.userId);
+          setLoading(false);
+          props.history.push("/user");
+        }
       })
       .catch(err => {
         setModalIsOpen(true);

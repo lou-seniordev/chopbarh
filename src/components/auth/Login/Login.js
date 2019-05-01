@@ -47,7 +47,6 @@ function Login(props) {
       .then(response => {
         if (response.data.error) {
           setLoading(false);
-          console.log(response.data.error);
           setModalIsOpen(true);
           // Error Handling here
         } else {
