@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
+import { AppContext } from "../../../../hoc/AppContext";
 
 const OverviewWrapper = styled.div`
   background: #c5c7c5;
@@ -38,21 +39,49 @@ const OverviewContentDescription = styled.p`
 export default function Overview() {
   return (
     <OverviewWrapper className="container">
-      <HeadingFour className="mb-5">Overview</HeadingFour>
-      <OverviewContainer className="row text-center">
-        <OverviewContent className="col-lg-4">
-          <OverviewContentHeader>167</OverviewContentHeader>
-          <OverviewContentDescription>Coin Balance</OverviewContentDescription>
-        </OverviewContent>
-        <OverviewContent className="col-lg-4">
-          <OverviewContentHeader>&#8358;43,590.55</OverviewContentHeader>
-          <OverviewContentDescription>Cash Balance</OverviewContentDescription>
-        </OverviewContent>
-        <OverviewContent className="col-lg-4">
-          <OverviewContentHeader>&#8358;43,590.55</OverviewContentHeader>
-          <OverviewContentDescription>Earnings</OverviewContentDescription>
-        </OverviewContent>
-      </OverviewContainer>
+      <AppContext.Consumer>
+        {({ userGameData }) => {
+          if (userGameData !== null) {
+            return (
+              <>
+                <HeadingFour className="mb-5">Overview</HeadingFour>
+                <OverviewContainer className="row text-center">
+                  <OverviewContent className="col-lg-4">
+                    <OverviewContentHeader>
+                      {userGameData.CBCoins}
+                    </OverviewContentHeader>
+                    <OverviewContentDescription>
+                      Coin Balance
+                    </OverviewContentDescription>
+                  </OverviewContent>
+                  <OverviewContent className="col-lg-4">
+                    <OverviewContentHeader>
+                      &#8358;{userGameData.RealCoins}
+                    </OverviewContentHeader>
+                    <OverviewContentDescription>
+                      Cash Balance
+                    </OverviewContentDescription>
+                  </OverviewContent>
+                  <OverviewContent className="col-lg-4">
+                    <OverviewContentHeader>
+                      &#8358;{userGameData.RealCoins}
+                    </OverviewContentHeader>
+                    <OverviewContentDescription>
+                      Earnings
+                    </OverviewContentDescription>
+                  </OverviewContent>
+                </OverviewContainer>
+              </>
+            );
+          }
+
+          return (
+            <OverviewContainer className="row text-center">
+              <h5 className="text-center mx-auto">Loading...</h5>
+            </OverviewContainer>
+          );
+        }}
+      </AppContext.Consumer>
     </OverviewWrapper>
   );
 }
