@@ -9,7 +9,7 @@ export default function TransactionTable() {
   return (
     <TransactionTableWrapper>
       <div>
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead style={{ background: "#8C1936", color: "#fff" }}>
             <tr>
               <th scope="col">Transactions</th>
