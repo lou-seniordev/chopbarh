@@ -136,24 +136,24 @@ export default function EditProfileForm() {
                 <label>Date of Birth</label>
                 <input type="date" required />
               </FormItem>
-              <FormItem>
+              {/* <FormItem>
                 <label>Sex</label>
                 <select>
                   <option>Male</option>
                   <option>Female</option>
                   <option>Other</option>
                 </select>
-              </FormItem>
+              </FormItem> */}
             </HalfColumn>
             <HalfColumn>
               <FormItem className="mr-3">
-                <label>Enter Pin (4 to 6 digits)</label>
-                <input type="password" required minlength="4" maxlength="6" />
+                <label>Enter Pin</label>
+                <input type="password" required minLength="4" maxLength="4" />
               </FormItem>
-              <FormItem>
+              {/* <FormItem>
                 <label>Re-enter Pin</label>
-                <input type="password" required minlength="4" maxlength="6" />
-              </FormItem>
+                <input type="password" required minlength="4" maxlength="4" />
+              </FormItem> */}
             </HalfColumn>
             <FormItem>
               <label>Email</label>
