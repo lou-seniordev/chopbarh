@@ -78,7 +78,7 @@ function SignUp(props) {
           </ModalBody>
         </Modal>
         <Container>
-          <AppContext.Provider>
+          <AppContext.Consumer>
             {({ setUserInfo }) => (
               <Form onSubmit={event => handleSubmit(event, setUserInfo)}>
                 <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
@@ -143,7 +143,7 @@ function SignUp(props) {
                 </LoginSignal>
               </Form>
             )}
-          </AppContext.Provider>
+          </AppContext.Consumer>
         </Container>
       </SignUpWrapper>
     </>
