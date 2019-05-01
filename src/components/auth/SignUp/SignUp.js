@@ -14,6 +14,7 @@ import {
   HalfColumn,
   LoginSignal
 } from "../../styles/SignUpStyles";
+import { AppContext } from "../../../hoc/AppContext";
 
 function SignUp(props) {
   const [formState, { text, tel, password }] = useFormState();
@@ -75,22 +76,24 @@ function SignUp(props) {
           </ModalBody>
         </Modal>
         <Container>
-          <Form onSubmit={handleSubmit}>
-            <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
-            <FormItem>
-              <label>Full Name</label>
-              <input {...text("displayName")} required />
-            </FormItem>
-            <FormItem>
-              <label>Phone Number</label>
-              <input
-                {...tel("userName")}
-                required
-                minLength="11"
-                maxLength="11"
-              />
-            </FormItem>
-            {/* <HalfColumn>
+          <AppContext.Provider>
+            {({ getUserInfo }) => (
+              <Form onSubmit={event => handleSubmit(event, getUserInfo)}>
+                <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
+                <FormItem>
+                  <label>Full Name</label>
+                  <input {...text("displayName")} required />
+                </FormItem>
+                <FormItem>
+                  <label>Phone Number</label>
+                  <input
+                    {...tel("userName")}
+                    required
+                    minLength="11"
+                    maxLength="11"
+                  />
+                </FormItem>
+                {/* <HalfColumn>
               <FormItem className="mr-3">
                 <label>Date of Birth</label>
                 <input {...date("dob")} required />
@@ -103,35 +106,42 @@ function SignUp(props) {
                 </select>
               </FormItem>
             </HalfColumn> */}
-            <HalfColumn>
-              <FormItem className="mr-3">
-                <label>Enter Password Pin (4 digits)</label>
-                <input
-                  {...password("password")}
-                  required
-                  minLength="4"
-                  maxLength="4"
-                />
-              </FormItem>
-              <FormItem>
-                <label>Re-enter Password Pin</label>
-                <input type="password" required minLength="4" maxLength="4" />
-              </FormItem>
-            </HalfColumn>
-            {/* <FormItem>
+                <HalfColumn>
+                  <FormItem className="mr-3">
+                    <label>Enter Password Pin (4 digits)</label>
+                    <input
+                      {...password("password")}
+                      required
+                      minLength="4"
+                      maxLength="4"
+                    />
+                  </FormItem>
+                  <FormItem>
+                    <label>Re-enter Password Pin</label>
+                    <input
+                      type="password"
+                      required
+                      minLength="4"
+                      maxLength="4"
+                    />
+                  </FormItem>
+                </HalfColumn>
+                {/* <FormItem>
               <label>Email</label>
               <input {...email("email")} required />
             </FormItem> */}
-            <button type="submit" className="mr-2" disabled={loading}>
-              <span>{loading ? "Please wait..." : "Create Account"}</span>
-            </button>
-            <LoginSignal>
-              <p>By clicking, you agree to our Terms and Conditions</p>
-              <p>
-                Already have an account? <Link to="login">Login</Link>
-              </p>
-            </LoginSignal>
-          </Form>
+                <button type="submit" className="mr-2" disabled={loading}>
+                  <span>{loading ? "Please wait..." : "Create Account"}</span>
+                </button>
+                <LoginSignal>
+                  <p>By clicking, you agree to our Terms and Conditions</p>
+                  <p>
+                    Already have an account? <Link to="login">Login</Link>
+                  </p>
+                </LoginSignal>
+              </Form>
+            )}
+          </AppContext.Provider>
         </Container>
       </SignUpWrapper>
     </>
