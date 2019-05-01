@@ -5,7 +5,7 @@ export default class ContextProvider extends Component {
   state = {
     auth: localStorage.getItem("chopbarh-token") !== null,
     userInfo: {
-      name: "Nutod"
+      displayName: "Nutod"
     }
   };
 
@@ -14,7 +14,6 @@ export default class ContextProvider extends Component {
   };
 
   setUserInfo = userInfo => {
-    console.log(userInfo);
     this.setState({ userInfo });
   };
 

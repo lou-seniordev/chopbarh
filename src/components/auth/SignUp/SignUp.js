@@ -31,34 +31,33 @@ function SignUp(props) {
     formState.values["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState.values);
     setUserInfo(JSON.parse(formValue));
-    // props.history.push("/complete_profile");
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       setLoading(false);
-    //       setModalIsOpen(true);
-    //     } else {
-    //       localStorage.setItem("chopbarh-token", response.data.authToken);
-    //       localStorage.setItem("chopbarh-id", response.data.userId);
-    //       setUserInfo(JSON.parse(formValue));
-    //       setLoading(false);
-    //       props.history.push("/user");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setModalIsOpen(true);
-    //     setLoading(false);
-    //   });
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        if (response.data.error) {
+          setLoading(false);
+          setModalIsOpen(true);
+        } else {
+          localStorage.setItem("chopbarh-token", response.data.authToken);
+          localStorage.setItem("chopbarh-id", response.data.userId);
+          setUserInfo(JSON.parse(formValue));
+          setLoading(false);
+          props.history.push("/complete_profile");
+        }
+      })
+      .catch(err => {
+        setModalIsOpen(true);
+        setLoading(false);
+      });
   };
 
   return (

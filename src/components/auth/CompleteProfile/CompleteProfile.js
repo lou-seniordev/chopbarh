@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
 import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
@@ -15,8 +15,11 @@ import {
 } from "../../styles/SignUpStyles";
 import { AppContext } from "../../../hoc/AppContext";
 
-function CompleteProfile(props) {
-  const [formState, { text, tel, date, select, email }] = useFormState();
+function CompleteProfile({ getUserInfo, history }) {
+  const [formState, { text, tel, date, select, email }] = useFormState({
+    FULL_NAME: getUserInfo.displayName,
+    SEX: "M"
+  });
   const [loading, setLoading] = useState(false);
   const [isOpen, setModalIsOpen] = useState(false);
 
@@ -29,41 +32,40 @@ function CompleteProfile(props) {
     setLoading(true);
     formState.values["@class"] = ".LogEventRequest";
     formState.values["eventKey"] = "REGISTER_PLAYER";
+    formState.values["playerId"] = getUserInfo.userId;
     const formValue = JSON.stringify(formState.values);
 
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       setLoading(false);
-    //       setModalIsOpen(true);
-    //     } else {
-    //       localStorage.setItem("chopbarh-token", response.data.authToken);
-    //       localStorage.setItem("chopbarh-id", response.data.userId);
-    //       setUserInfo(JSON.parse(formValue));
-    //       setLoading(false);
-    //       props.history.push("/user");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setModalIsOpen(true);
-    //     setLoading(false);
-    //   });
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        if (response.data.error) {
+          setLoading(false);
+          setModalIsOpen(true);
+        } else {
+          setLoading(false);
+          //localStorage.setItem("chopbarh-id", response.data.userId);
+          history.push("/user");
+        }
+      })
+      .catch(err => {
+        setModalIsOpen(true);
+        setLoading(false);
+      });
   };
 
   return (
     <>
       <Helmet>
-        <title>Chopbarh &rarr; Sign Up</title>
+        <title>Chopbarh &rarr; Complete Profile</title>
       </Helmet>
       <Header />
       <SignUpWrapper>
@@ -77,15 +79,15 @@ function CompleteProfile(props) {
           <AppContext.Consumer>
             {({ getUserInfo }) => (
               <Form onSubmit={handleSubmit}>
-                <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
+                <HeadingTwo className="mb-4">Complete Profile</HeadingTwo>
                 <FormItem>
                   <label>Full Name</label>
-                  <input {...text("displayName")} required />
+                  <input {...text("FULL_NAME")} required />
                 </FormItem>
                 <FormItem>
                   <label>Phone Number</label>
                   <input
-                    {...tel("userName")}
+                    {...tel("PHONE_NUM")}
                     required
                     minLength="11"
                     maxLength="11"
@@ -99,12 +101,12 @@ function CompleteProfile(props) {
                   <FormItem>
                     <label>Sex</label>
                     <select {...select("SEX")}>
+                      <option disabled>---</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
                     </select>
                   </FormItem>
                 </HalfColumn>
-
                 <FormItem>
                   <label>Email</label>
                   <input {...email("Email")} required />
