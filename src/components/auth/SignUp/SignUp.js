@@ -25,7 +25,7 @@ function SignUp(props) {
     setModalIsOpen(!isOpen);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event, setUserInfo) => {
     event.preventDefault();
     setLoading(true);
     // Add possible validation here too
@@ -52,6 +52,7 @@ function SignUp(props) {
         } else {
           localStorage.setItem("chopbarh-token", response.data.authToken);
           localStorage.setItem("chopbarh-id", response.data.userId);
+          setUserInfo(JSON.parse(formValue));
           setLoading(false);
           props.history.push("/user");
         }
@@ -77,8 +78,8 @@ function SignUp(props) {
         </Modal>
         <Container>
           <AppContext.Provider>
-            {({ getUserInfo }) => (
-              <Form onSubmit={event => handleSubmit(event, getUserInfo)}>
+            {({ setUserInfo }) => (
+              <Form onSubmit={event => handleSubmit(event, setUserInfo)}>
                 <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
                 <FormItem>
                   <label>Full Name</label>
