@@ -17,7 +17,9 @@ import {
 import { AppContext } from "../../../hoc/AppContext";
 
 function SignUp(props) {
-  const [formState, { text, tel, password }] = useFormState();
+  const [formState, { text, tel, password }] = useFormState({
+    displayName: "Nutod"
+  });
   const [loading, setLoading] = useState(false);
   const [isOpen, setModalIsOpen] = useState(false);
 
