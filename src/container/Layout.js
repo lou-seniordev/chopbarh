@@ -13,6 +13,7 @@ import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
+import UserEditProfile from "../components/Dashboard/UserEditProfile/UserEditProfile";
 
 /*
 
@@ -35,6 +36,7 @@ export default function Layout() {
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHome} />
               <Route path="/profile" component={UserProfile} />
+              <Route path="/edit-profile" component={UserEditProfile} />
               <Route path="/deposit" component={UserDeposit} />
               <Route path="/withdraw" component={UserWithdraw} />
               <Route path="/transaction" component={UserTransaction} />
