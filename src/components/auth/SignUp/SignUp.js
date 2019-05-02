@@ -51,7 +51,7 @@ function SignUp(props) {
           localStorage.setItem("chopbarh-id", response.data.userId);
           setUserInfo(JSON.parse(formValue));
           setLoading(false);
-          props.history.push("/complete_profile");
+          props.history.push("/user");
         }
       })
       .catch(err => {
