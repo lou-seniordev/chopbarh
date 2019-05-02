@@ -8,11 +8,10 @@ import VoucherTransaction from "./VoucherTransaction/VoucherTransaction";
 import TransactionTabs from "./TransactionTabs/TransactionTabs";
 
 export default function UserTransaction() {
-
   return (
     <>
       <Helmet>
-        <title>Chopbarh &rarr; Dashboard</title>
+        <title>Chopbarh &rarr; Transactions</title>
       </Helmet>
       <UserHeader />
       <UserNavigation />

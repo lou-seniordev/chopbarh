@@ -6,11 +6,10 @@ import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import DepositTabs from "./DepositTabs/DepositTabs";
 
 export default function UserDeposit() {
-
   return (
     <>
       <Helmet>
-        <title>Chopbarh &rarr; Dashboard</title>
+        <title>Chopbarh &rarr; Deposit</title>
       </Helmet>
       <UserHeader />
       <UserNavigation />

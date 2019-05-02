@@ -9,7 +9,7 @@ export default function UserDeposit() {
   return (
     <>
       <Helmet>
-        <title>Chopbarh &rarr; Dashboard</title>
+        <title>Chopbarh &rarr; Withdraw</title>
       </Helmet>
       <UserHeader />
       <UserNavigation />
