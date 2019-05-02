@@ -7,6 +7,8 @@ import Overview from "./Overview/Overview";
 import Voucher from "./Voucher/Voucher";
 import QuickPlay from "./QuickPlay/QuickPlay";
 
+// Add redirect logic to Complete Registration when it isn't complete
+
 export default function UserHome() {
   return (
     <>
