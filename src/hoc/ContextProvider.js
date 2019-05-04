@@ -5,9 +5,7 @@ import { AppContext } from "./AppContext";
 export default class ContextProvider extends Component {
   state = {
     auth: localStorage.getItem("chopbarh-token") !== null,
-    userInfo: {
-      displayName: "Nutod"
-    },
+    userInfo: null,
     userGameData: null,
     dataLoading: true
   };
