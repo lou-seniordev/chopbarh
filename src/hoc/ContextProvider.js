@@ -47,6 +47,7 @@ export default class ContextProvider extends Component {
         }
       });
     }
+    // Handle possible error case here
   };
 
   authUpdate = () => {

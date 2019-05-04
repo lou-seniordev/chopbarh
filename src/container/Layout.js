@@ -8,13 +8,13 @@ import SignUpPage from "../Pages/SignUpPage";
 import CompleteProfilePage from "../Pages/CompleteProfilePage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import Logout from "../components/auth/Logout/Logout";
+import OTP from "../components/auth/OTP/OTP";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
 import UserEditProfile from "../components/Dashboard/UserEditProfile/UserEditProfile";
-import OTP from "../components/auth/OTP/OTP";
 
 /*
 
