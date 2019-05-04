@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import TopEarners from "../TopEarners/TopEarners";
 
 const VoucherWrapper = styled.div`
   margin-top: 6rem;
@@ -88,32 +89,7 @@ export default function Voucher() {
           </FormWrapper>
         </div>
         <div className="col-md-6">
-          <table className="table table-striped">
-            <thead style={{ background: "#8C1936", color: "#fff" }}>
-              <tr>
-                <th scope="col">Top Earners</th>
-                <th scope="col" />
-                <th scope="col" />
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Ade Kola</td>
-                <td>Lagos</td>
-                <td>&#8358;70,000</td>
-              </tr>
-              <tr>
-                <td>Joe Fesobi</td>
-                <td>Benin</td>
-                <td>&#8358;50,000</td>
-              </tr>
-              <tr>
-                <td>Adewale Jacob</td>
-                <td>Ibadan</td>
-                <td>&#8358;60,000</td>
-              </tr>
-            </tbody>
-          </table>
+          <TopEarners />
         </div>
       </div>
     </VoucherWrapper>
