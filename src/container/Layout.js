@@ -14,6 +14,7 @@ import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
 import UserEditProfile from "../components/Dashboard/UserEditProfile/UserEditProfile";
+import OTP from "../components/auth/OTP/OTP";
 
 /*
 
@@ -50,6 +51,7 @@ export default function Layout() {
             <Route path="/games" component={GamesPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignUpPage} />
+            <Route path="/otp" component={OTP} />
             <Route path="/complete_profile" component={CompleteProfilePage} />
             <Redirect to="/" />
           </Switch>
