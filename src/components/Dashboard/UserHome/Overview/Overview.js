@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
 import { AppContext } from "../../../../hoc/AppContext";
 
@@ -77,7 +78,9 @@ export default function Overview() {
 
           return (
             <OverviewContainer className="row text-center">
-              <h5 className="text-center mx-auto">Loading...</h5>
+              <div className="text-center mx-auto">
+                <Spinner />
+              </div>
             </OverviewContainer>
           );
         }}

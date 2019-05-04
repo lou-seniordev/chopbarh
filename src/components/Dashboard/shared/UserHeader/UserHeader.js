@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Spinner } from "reactstrap";
 import colors from "../../../styles/colors";
 import Logo from "../../../UI/Logo/Logo";
 import Icon from "../Icon/Icon";
@@ -125,6 +126,12 @@ export default function UserHeader() {
                         <Link className="dropdown-item" to="profile">
                           User Profile
                         </Link>
+                        <Link className="dropdown-item" to="edit-profile">
+                          Edit Profile
+                        </Link>
+                        <Link className="dropdown-item" to="profile">
+                          Change Password
+                        </Link>
                         <Link className="dropdown-item" to="logout">
                           Logout
                         </Link>
@@ -143,7 +150,7 @@ export default function UserHeader() {
                 <ul className="navbar-nav">
                   <li className="nav-item">
                     <Link className="nav-link text-uppercase mr-5">
-                      Loading...
+                      <Spinner />
                     </Link>
                   </li>
                 </ul>
