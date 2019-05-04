@@ -92,6 +92,8 @@ function Login(props) {
                     }
                   })}
                   required
+                  minLength="11"
+                  maxLength="11"
                 />
                 {formState.errors.userName && (
                   <ErrorText className="mt-n4 mb-2">

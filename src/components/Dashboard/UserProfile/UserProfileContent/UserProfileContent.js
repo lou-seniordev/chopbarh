@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import Ludo from "../../../assets/img/Ludo@2x.png";
-import Whot from "../../../assets/img/Whot@2x.png";
+// import Ludo from "../../../assets/img/Ludo@2x.png";
+// import Whot from "../../../assets/img/Whot@2x.png";
 
 const UserProfileContentWrapper = styled.div`
   min-height: 30vh;
 `;
 
-const Image = styled.img`
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 100%;
-  height: 100%;
-  padding: 0.4rem;
-`;
+// const Image = styled.img`
+//   border: 1px solid #ddd;
+//   border-radius: 3px;
+//   width: 100%;
+//   height: 100%;
+//   padding: 0.4rem;
+// `;
 
 export default function UserProfileContent() {
   return (
