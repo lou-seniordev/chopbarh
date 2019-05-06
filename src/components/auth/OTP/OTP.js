@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { withRouter, Link } from "react-router-dom";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 import { useFormState } from "react-use-form-state";
 import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
@@ -10,14 +11,18 @@ import {
   Container,
   HeadingTwo,
   Form,
-  FormItem,
-  HalfColumn,
-  LoginSignal
+  FormItem
 } from "../../styles/SignUpStyles";
 import { AppContext } from "../../../hoc/AppContext";
 
+const OTPWrapper = styled(SignUpWrapper)``;
+
+const OTPContainer = styled(Container)`
+  margin: 14rem auto;
+`;
+
 function OTP(props) {
-  const [formState, { text, tel, password }] = useFormState();
+  const [formState, { text }] = useFormState();
   const [loading, setLoading] = useState(false);
   const [isOpen, setModalIsOpen] = useState(false);
 
@@ -51,7 +56,7 @@ function OTP(props) {
           localStorage.setItem("chopbarh-id", response.data.userId);
           setUserInfo(JSON.parse(formValue));
           setLoading(false);
-          props.history.push("/otp");
+          props.history.push("/user");
         }
       })
       .catch(err => {
@@ -66,82 +71,36 @@ function OTP(props) {
         <title>Chopbarh &rarr; Confirm Registration</title>
       </Helmet>
       <Header />
-      <SignUpWrapper>
+      <OTPWrapper>
         <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
             <p>Something went wrong</p>
           </ModalBody>
         </Modal>
-        <Container>
+        <OTPContainer>
           <AppContext.Consumer>
             {({ setUserInfo }) => (
               <Form onSubmit={event => handleSubmit(event, setUserInfo)}>
-                <HeadingTwo className="mb-4">Sign Up</HeadingTwo>
+                <HeadingTwo className="mb-4">Phone Verification</HeadingTwo>
+
                 <FormItem>
-                  <label>Full Name</label>
-                  <input {...text("displayName")} required />
-                </FormItem>
-                <FormItem>
-                  <label>Phone Number</label>
+                  <label>OTP</label>
                   <input
-                    {...tel("userName")}
+                    {...text("OTP")}
                     required
-                    minLength="11"
-                    maxLength="11"
+                    minLength="4"
+                    maxLength="4"
                   />
                 </FormItem>
-                {/* <HalfColumn>
-              <FormItem className="mr-3">
-                <label>Date of Birth</label>
-                <input {...date("dob")} required />
-              </FormItem>
-              <FormItem>
-                <label>Sex</label>
-                <select {...select("sex")}>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </FormItem>
-            </HalfColumn> */}
-                <HalfColumn>
-                  <FormItem className="mr-3">
-                    <label>Enter Password Pin (4 digits)</label>
-                    <input
-                      {...password("password")}
-                      required
-                      minLength="4"
-                      maxLength="4"
-                    />
-                  </FormItem>
-                  <FormItem>
-                    <label>Re-enter Password Pin</label>
-                    <input
-                      type="password"
-                      required
-                      minLength="4"
-                      maxLength="4"
-                    />
-                  </FormItem>
-                </HalfColumn>
-                {/* <FormItem>
-              <label>Email</label>
-              <input {...email("email")} required />
-            </FormItem> */}
                 <button type="submit" className="mr-2" disabled={loading}>
-                  <span>{loading ? "Please wait..." : "Create Account"}</span>
+                  <span>{loading ? "Please wait..." : "Submit"}</span>
                 </button>
-                <LoginSignal>
-                  <p>By clicking, you agree to our Terms and Conditions</p>
-                  <p>
-                    Already have an account? <Link to="login">Login</Link>
-                  </p>
-                </LoginSignal>
               </Form>
             )}
           </AppContext.Consumer>
-        </Container>
-      </SignUpWrapper>
+        </OTPContainer>
+      </OTPWrapper>
     </>
   );
 }

@@ -129,9 +129,6 @@ export default function UserHeader() {
                         <Link className="dropdown-item" to="edit-profile">
                           Edit Profile
                         </Link>
-                        <Link className="dropdown-item" to="profile">
-                          Change Password
-                        </Link>
                         <Link className="dropdown-item" to="logout">
                           Logout
                         </Link>
