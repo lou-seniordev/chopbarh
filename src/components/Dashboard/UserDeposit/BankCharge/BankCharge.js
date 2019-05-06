@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
 import { Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+import SubmitOTP from "./SubmitOTP/SubmitOTP";
 
 export default function BankCharge() {
   const [loading, setLoading] = useState(false);
-  const [formState, { text, email, number, password }] = useFormState();
+  const [referenceValue, setReferenceValue] = useState(null);
+  const [formState, { text, email, date, select }] = useFormState({
+    bank: "044"
+  });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -15,18 +19,16 @@ export default function BankCharge() {
       return;
     }
 
-    const cardExpirationData = formState.values.card_expiry.split("/");
+    console.log(formState);
 
     const postData = {
       email: formState.values.email,
       amount: formState.values.amount,
-      card: {
-        number: formState.values.card_number,
-        cvv: formState.values.cvv,
-        expiry_month: cardExpirationData[0],
-        expiry_year: cardExpirationData[1]
+      bank: {
+        code: formState.values.bank,
+        account_number: formState.values.account_number
       },
-      pin: formState.values.pin
+      birthday: formState.values.birthday
     };
 
     console.log(postData);
@@ -42,6 +44,7 @@ export default function BankCharge() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        setReferenceValue(data.data.refernce);
         setLoading(false);
       })
       .catch(err => {
@@ -66,6 +69,23 @@ export default function BankCharge() {
       ) : (
         <>
           <FormItem>
+            <label>Bank</label>
+            <select
+              {...select("bank")}
+              required
+              placeholder="johndoe@gmail.com"
+            >
+              <option value="044">Access Bank</option>
+              <option value="035A">ALAT by Wema</option>
+              <option value="070">Fidelity Bank</option>
+              <option value="214">First City Monument Bank</option>
+              <option value="232">Sterling Bank</option>
+              <option value="032">Union Bank of Nigeria</option>
+              <option value="215">Unity Bank</option>
+              <option value="057">Zenith Bank</option>
+            </select>
+          </FormItem>
+          <FormItem>
             <label>Email</label>
             <input
               {...email({
@@ -78,8 +98,13 @@ export default function BankCharge() {
           <FormItem>
             <label>Amount</label>
             <input
-              {...number({
-                name: "amount"
+              {...text({
+                name: "amount",
+                validate: value => {
+                  if (!isNaN(value) !== true) {
+                    return "This should be a number";
+                  }
+                }
               })}
               min="0"
               required
@@ -88,52 +113,28 @@ export default function BankCharge() {
           </FormItem>
           <HalfColumn>
             <FormItem className="mr-3">
-              <label>Card Number</label>
-              <input
-                {...number({
-                  name: "card_number"
-                })}
-                required
-                placeholder="5078982018301145"
-              />
-            </FormItem>
-            <FormItem>
-              <label>Expiry</label>
+              <label>Account Number</label>
               <input
                 {...text({
-                  name: "card_expiry"
-                })}
-                required
-                placeholder="12/2020"
-              />
-            </FormItem>
-          </HalfColumn>
-          <HalfColumn>
-            <FormItem className="mr-3">
-              <label>CVV</label>
-              <input
-                {...number({
-                  name: "cvv"
-                })}
-                required
-                min="0"
-                placeholder="720"
-              />
-            </FormItem>
-            <FormItem>
-              <label>Pin</label>
-              <input
-                {...password({
-                  name: "pin",
-                  validate: (value, values, e) => {
-                    if (value.length !== 4) {
-                      return "Pin length should be 4";
+                  name: "account_number",
+                  validate: value => {
+                    if (!isNaN(value) !== true) {
+                      return "This should be a number";
                     }
                   }
                 })}
                 required
-                minLength="4"
-                maxLength="4"
+                placeholder="5078982018"
+              />
+            </FormItem>
+            <FormItem>
+              <label>Birthday</label>
+              <input
+                {...date({
+                  name: "birthday"
+                })}
+                required
+                placeholder="Birthday"
               />
             </FormItem>
           </HalfColumn>
@@ -142,6 +143,7 @@ export default function BankCharge() {
           </button>
         </>
       )}
+      {referenceValue && <SubmitOTP />}
     </Form>
   );
 }
