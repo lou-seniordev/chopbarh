@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useFormState } from "react-use-form-state";
+import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
 const Form = styled.form`
   position: relative;
+  min-height: 20rem;
 
   button {
     all: unset;
@@ -80,30 +83,74 @@ const HalfColumn = styled.div`
 `;
 
 export default function Card() {
+  const [loading, setLoading] = useState(false);
+  const [formState, { text, email, number }] = useFormState();
+
   return (
     <Form>
       <FormItem>
-        <label>Name on Card</label>
-        <input type="text" required />
+        <label>Email</label>
+        <input
+          {...email({
+            name: "email"
+          })}
+          required
+        />
+      </FormItem>
+      <FormItem>
+        <label>Amount</label>
+        <input
+          {...number({
+            name: "amount"
+          })}
+          min="0"
+          required
+        />
       </FormItem>
       <HalfColumn>
         <FormItem className="mr-3">
           <label>Card Number</label>
-          <input type="number" required />
+          <input
+            {...number({
+              name: "card_number"
+            })}
+            required
+          />
         </FormItem>
         <FormItem>
           <label>Expiry</label>
-          <input type="text" required />
+          <input
+            {...text({
+              name: "card_expiry"
+            })}
+            required
+          />
         </FormItem>
       </HalfColumn>
       <HalfColumn>
         <FormItem className="mr-3">
           <label>CVV</label>
-          <input type="number" required minlength="3" maxlength="3" />
+          <input
+            {...number({
+              name: "cvv"
+            })}
+            required
+            min="0"
+          />
         </FormItem>
         <FormItem>
-          <label>Amount</label>
-          <input type="number" required />
+          <label>Pin</label>
+          <input
+            {...number({
+              name: "pin",
+              validate: (value, values, e) => {
+                if (value.length !== 4) {
+                  return "Pin length should be 4";
+                }
+              }
+            })}
+            required
+          />
         </FormItem>
       </HalfColumn>
       <button type="submit" className="mr-2">
@@ -112,3 +159,14 @@ export default function Card() {
     </Form>
   );
 }
+
+/* <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+        className="mt-5"
+      >
+        <Spinner />
+      </div> */
