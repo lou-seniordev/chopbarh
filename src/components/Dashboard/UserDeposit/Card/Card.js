@@ -5,7 +5,7 @@ import axios from "axios";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 
 const increaseCoinBalance = amount => {
-  axios
+  return axios
     .post(
       "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
       {
