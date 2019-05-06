@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
-import { Spinner } from "reactstrap";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 
 export default function Card() {
   const [loading, setLoading] = useState(false);
+  const [formErrorModal, setFormErrorModal] = useState(false);
   const [formState, { text, email, number, password }] = useFormState();
+
+  const formErrorModalToggle = () => {
+    setFormErrorModal(!formErrorModal);
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
 
     if (Object.keys(formState.errors).length > 0) {
+      setFormErrorModal(true);
       return;
     }
 
@@ -52,6 +58,16 @@ export default function Card() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Modal
+        isOpen={formErrorModal}
+        toggle={formErrorModalToggle}
+        className="pt-5 mt-4"
+      >
+        <ModalBody className="text-center">
+          <h2>Ooops!</h2>
+          <p>Something went wrong. Please try again</p>
+        </ModalBody>
+      </Modal>
       {loading ? (
         <div
           style={{
