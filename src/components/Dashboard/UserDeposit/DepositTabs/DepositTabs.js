@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../Card/Card";
 import Quickteller from "../Quickteller/Quickteller";
-import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
+//import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 import BankCharge from "../BankCharge/BankCharge";
 
 const DepositTabsWrapper = styled.div`
@@ -33,9 +33,9 @@ export default function DepositTabs() {
           <Tab>
             <HeadingTwo>Voucher</HeadingTwo>
           </Tab>
-          <Tab>
+          {/* <Tab>
             <HeadingTwo>Pay with Account Number</HeadingTwo>
-          </Tab>
+          </Tab> */}
         </TabList>
         <TabPanel>
           <Card />
@@ -47,9 +47,9 @@ export default function DepositTabs() {
           <BankCharge />
         </TabPanel>
         <TabPanel>Voucher</TabPanel>
-        <TabPanel>
+        {/* <TabPanel>
           <PayWithAccountNumber />
-        </TabPanel>
+        </TabPanel> */}
       </Tabs>
     </DepositTabsWrapper>
   );

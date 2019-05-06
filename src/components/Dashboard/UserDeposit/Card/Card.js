@@ -94,10 +94,14 @@ export default function Card() {
           <FormItem>
             <label>Amount</label>
             <input
-              {...number({
-                name: "amount"
+              {...text({
+                name: "amount",
+                validate: (values) => {
+                  if (!isNaN !== true) {
+                    return 'Must be a number'
+                  }
+                }
               })}
-              min="0"
               required
               placeholder="100"
             />
@@ -106,8 +110,13 @@ export default function Card() {
             <FormItem className="mr-3">
               <label>Card Number</label>
               <input
-                {...number({
-                  name: "card_number"
+                {...text({
+                  name: "card_number",
+                  validate: (values) => {
+                  if (!isNaN !== true) {
+                    return 'Must be a number'
+                  }
+                }
                 })}
                 required
                 placeholder="5078982018301145"
@@ -143,7 +152,7 @@ export default function Card() {
                   name: "pin",
                   validate: (value, values, e) => {
                     if (value.length !== 4) {
-                      return "Pin length should be 4";
+                      return "Pin length must be 4";
                     }
                   }
                 })}
