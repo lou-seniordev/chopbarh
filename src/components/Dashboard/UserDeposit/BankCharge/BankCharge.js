@@ -44,7 +44,7 @@ export default function BankCharge() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        setReferenceValue(data.data.refernce);
+        setReferenceValue(data.data.reference);
         setLoading(false);
       })
       .catch(err => {
