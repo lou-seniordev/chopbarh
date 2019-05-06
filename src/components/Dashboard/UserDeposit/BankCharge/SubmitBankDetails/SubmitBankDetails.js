@@ -3,7 +3,7 @@ import { useFormState } from "react-use-form-state";
 import { Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../../styles/CardCharge";
 
-export default function SubmitBankDetails() {
+export default function SubmitBankDetails({ referenceValueSetter }) {
   const [loading, setLoading] = useState(false);
   const [formState, { text, email, date, select }] = useFormState({
     bank: "044"
@@ -42,6 +42,7 @@ export default function SubmitBankDetails() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        referenceValueSetter(data.data.reference);
         setLoading(false);
       })
       .catch(err => {
