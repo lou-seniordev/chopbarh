@@ -47,9 +47,11 @@ function SignUp(props) {
           setLoading(false);
           setModalIsOpen(true);
         } else {
+          localStorage.setItem("chopbarh-token", response.data.authToken);
+          localStorage.setItem("chopbarh-id", response.data.userId);
           setUserInfo(JSON.parse(formValue));
           setLoading(false);
-          props.history.push("/otp");
+          props.history.push("/user");
         }
       })
       .catch(err => {
