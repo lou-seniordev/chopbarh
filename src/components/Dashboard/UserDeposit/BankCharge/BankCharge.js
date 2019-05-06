@@ -143,7 +143,7 @@ export default function BankCharge() {
           </button>
         </>
       )}
-      {referenceValue && <SubmitOTP />}
+      {referenceValue && <SubmitOTP reference={referenceValue} />}
     </Form>
   );
 }
