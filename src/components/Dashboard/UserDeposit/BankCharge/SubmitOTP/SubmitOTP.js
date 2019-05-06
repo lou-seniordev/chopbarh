@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
-import {Spinner} from 'reactstrap'
+import { Spinner } from "reactstrap";
 import { Form, FormItem } from "../../../../styles/CardCharge";
 
-export default function SubmitOTP({reference}) {
+export default function SubmitOTP({ reference }) {
   const [loading, setLoading] = useState(false);
   const [formState, { text }] = useFormState();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
 
@@ -23,7 +23,7 @@ export default function SubmitOTP({reference}) {
     };
 
     console.log(postData);
-    fetch("https://api.paystack.co/charge", {
+    fetch("https://api.paystack.co/charge/submit_otp", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -41,11 +41,11 @@ export default function SubmitOTP({reference}) {
         console.log(err);
         setLoading(false);
       });
-  }
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
-      {loading ?  (
+      {loading ? (
         <div
           style={{
             display: "flex",
@@ -56,25 +56,29 @@ export default function SubmitOTP({reference}) {
         >
           <Spinner />
         </div>
-      ) : (<FormItem>
-        <label>Amount</label>
-        <input
-          {...text({
-            name: "otp",
-            validate: value => {
-              if (!isNaN(value) !== true) {
-                return "This should be a number";
-              }
-            }
-          })}
-          min="0"
-          required
-          placeholder="100"
-        />
-      </FormItem>
-      <button type="submit" className="mr-2">
-        <span>Submit</span>
-      </button>)}
+      ) : (
+        <>
+          <FormItem>
+            <label>OTP</label>
+            <input
+              {...text({
+                name: "otp",
+                validate: value => {
+                  if (!isNaN(value) !== true) {
+                    return "This should be a number";
+                  }
+                }
+              })}
+              min="0"
+              required
+              placeholder="100"
+            />
+          </FormItem>
+          <button type="submit" className="mr-2">
+            <span>Submit</span>
+          </button>
+        </>
+      )}
     </Form>
   );
 }
