@@ -48,16 +48,6 @@ export default function BankCharge() {
         console.log(err);
         setLoading(false);
       });
-    // axios
-    //   .post("https://api.paystack.co/charge", {
-    //     headers: {
-    //       Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(postData)
-    //   })
-    //   .then(response => console.log(response))
-    //   .catch(err => console.log(err));
   };
 
   return (
