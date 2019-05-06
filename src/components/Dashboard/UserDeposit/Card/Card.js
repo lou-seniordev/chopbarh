@@ -1,7 +1,32 @@
 import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
 import { Modal, ModalBody, Spinner } from "reactstrap";
+import axios from "axios";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+
+const increaseCoinBalance = amount => {
+  axios
+    .post(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          "@class": ".LogEventRequest",
+          eventKey: "PLAYER_COINS_UPDATE",
+          playerId: localStorage.getItem("chopbarh-id")
+            ? localStorage.getItem("chopbarh-id")
+            : null,
+          Coins: amount,
+          Condition: 1
+        })
+      }
+    )
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+};
 
 export default function Card() {
   const [loading, setLoading] = useState(false);
