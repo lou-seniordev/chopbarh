@@ -6,17 +6,25 @@ import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 export default function Card() {
   const [loading, setLoading] = useState(false);
   const [formErrorModal, setFormErrorModal] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
   const [formState, { text, email, number, password }] = useFormState();
 
   const formErrorModalToggle = () => {
     setFormErrorModal(!formErrorModal);
   };
 
+  const successModalToggle = () => {
+    setSuccessModal(!successModal);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
+    console.log("Fetch...");
     setLoading(true);
 
+    console.log(formState);
     if (Object.keys(formState.errors).length > 0) {
+      setLoading(false);
       setFormErrorModal(true);
       return;
     }
@@ -57,7 +65,7 @@ export default function Card() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <>
       <Modal
         isOpen={formErrorModal}
         toggle={formErrorModalToggle}
@@ -66,6 +74,16 @@ export default function Card() {
         <ModalBody className="text-center">
           <h2>Ooops!</h2>
           <p>Something went wrong. Please try again</p>
+        </ModalBody>
+      </Modal>
+      <Modal
+        isOpen={successModal}
+        toggle={successModalToggle}
+        className="pt-5 mt-4"
+      >
+        <ModalBody className="text-center">
+          <h2>Transaction Successful</h2>
+          <p>We'll confirm your payment shortly</p>
         </ModalBody>
       </Modal>
       {loading ? (
@@ -80,7 +98,7 @@ export default function Card() {
           <Spinner />
         </div>
       ) : (
-        <>
+        <Form onSubmit={handleSubmit}>
           <FormItem>
             <label>Email</label>
             <input
@@ -96,9 +114,9 @@ export default function Card() {
             <input
               {...text({
                 name: "amount",
-                validate: (values) => {
-                  if (!isNaN !== true) {
-                    return 'Must be a number'
+                validate: value => {
+                  if (!isNaN(value) !== true) {
+                    return "Must be a number";
                   }
                 }
               })}
@@ -112,11 +130,11 @@ export default function Card() {
               <input
                 {...text({
                   name: "card_number",
-                  validate: (values) => {
-                  if (!isNaN !== true) {
-                    return 'Must be a number'
+                  validate: value => {
+                    if (!isNaN(value) !== true) {
+                      return "Must be a number";
+                    }
                   }
-                }
                 })}
                 required
                 placeholder="5078982018301145"
@@ -165,8 +183,8 @@ export default function Card() {
           <button type="submit" className="mr-2">
             <span>Load</span>
           </button>
-        </>
+        </Form>
       )}
-    </Form>
+    </>
   );
 }
