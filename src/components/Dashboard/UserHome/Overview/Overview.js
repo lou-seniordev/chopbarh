@@ -49,7 +49,7 @@ export default function Overview() {
                 <OverviewContainer className="row text-center">
                   <OverviewContent className="col-lg-4">
                     <OverviewContentHeader>
-                      {userGameData.CBCoins}
+                      {new Intl.NumberFormat().format(userGameData.CBCoins)}
                     </OverviewContentHeader>
                     <OverviewContentDescription>
                       Coin Balance
@@ -57,7 +57,8 @@ export default function Overview() {
                   </OverviewContent>
                   <OverviewContent className="col-lg-4">
                     <OverviewContentHeader>
-                      &#8358;{userGameData.RealCoins}
+                      &#8358;
+                      {new Intl.NumberFormat().format(userGameData.RealCoins)}
                     </OverviewContentHeader>
                     <OverviewContentDescription>
                       Cash Balance
@@ -65,7 +66,8 @@ export default function Overview() {
                   </OverviewContent>
                   <OverviewContent className="col-lg-4">
                     <OverviewContentHeader>
-                      &#8358;{userGameData.RealCoins}
+                      &#8358;
+                      {new Intl.NumberFormat().format(userGameData.RealCoins)}
                     </OverviewContentHeader>
                     <OverviewContentDescription>
                       Earnings
