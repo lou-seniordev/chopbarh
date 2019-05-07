@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
 import { Modal, ModalBody, Spinner } from "reactstrap";
-import axios from "axios";
+//import axios from "axios";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 
 const increaseCoinBalance = amount => {
-  return axios.post(
+  return fetch(
     "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
     {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -55,7 +56,7 @@ export default function Card() {
 
     const postData = {
       email: formState.values.email,
-      amount: formState.values.amount,
+      amount: formState.values.amount * 100,
       card: {
         number: formState.values.card_number,
         cvv: formState.values.cvv,
@@ -66,7 +67,7 @@ export default function Card() {
     };
 
     console.log(postData);
-    const response  = await fetch("https://api.paystack.co/charge", {
+    const response = await fetch("https://api.paystack.co/charge", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -74,9 +75,10 @@ export default function Card() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(postData)
-    })
-    const data = await response.json()
-    increaseCoinBalance(+data.data.amount/100)
+    });
+    const data = await response.json();
+    increaseCoinBalance(+data.data.amount / 100)
+      .then(response => response.json())
       .then(data => {
         console.log(data);
         setLoading(false);
@@ -85,8 +87,6 @@ export default function Card() {
         console.log(err);
         setLoading(false);
       });
-
-      
   };
 
   return (
