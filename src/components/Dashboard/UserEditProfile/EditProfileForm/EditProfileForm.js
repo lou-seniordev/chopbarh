@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useFormState } from "react-use-form-state";
+import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
@@ -116,50 +118,77 @@ const HalfColumn = styled.div`
   }
 `;
 
-export default function EditProfileForm() {
+export default function EditProfileForm({ userInfo }) {
+  const [loading, setLoading] = useState(false);
+  const [formState, { text, tel, select, date, email }] = useFormState({
+    FULL_NAME: userInfo.DisplayName,
+    SEX: "M"
+  });
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    formState.values["@class"] = ".LogEventRequest";
+    formState.values["eventKey"] = "REGISTER_PLAYER";
+    formState.values["playerId"] = userInfo.PlayerID;
+    const formValue = JSON.stringify(formState.values);
+
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        if (response.data.error) {
+          setLoading(false);
+        } else {
+          setLoading(false);
+          //localStorage.setItem("chopbarh-id", response.data.userId);
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <EditProfileWrapper>
         <Container>
-          <Form>
+          <Form onSumit={handleSubmit}>
             <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
             <FormItem>
               <label>Full Name</label>
-              <input type="text" required />
+              <input {...text("FULL_NAME")} />
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
-              <input type="tel" required />
+              <input {...tel("PHONE_NUM")} required />
             </FormItem>
             <HalfColumn>
               <FormItem className="mr-3">
                 <label>Date of Birth</label>
-                <input type="date" required />
+                <input {...date("DOB")} required />
               </FormItem>
-              {/* <FormItem>
+              <FormItem>
                 <label>Sex</label>
-                <select>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
+                <select {...select("SEX")} required>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
                 </select>
-              </FormItem> */}
-            </HalfColumn>
-            <HalfColumn>
-              <FormItem className="mr-3">
-                <label>Enter Pin</label>
-                <input type="password" required minLength="4" maxLength="4" />
               </FormItem>
-              {/* <FormItem>
-                <label>Re-enter Pin</label>
-                <input type="password" required minlength="4" maxlength="4" />
-              </FormItem> */}
             </HalfColumn>
             <FormItem>
               <label>Email</label>
-              <input type="email" required />
+              <input {...email("Email")} required />
             </FormItem>
-            <button type="submit" className="mr-2">
+            <button type="submit" className="mr-2" disablrd={loading}>
               <span>Save</span>
             </button>
           </Form>

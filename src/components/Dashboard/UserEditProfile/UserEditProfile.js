@@ -5,7 +5,7 @@ import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import EditProfileForm from "./EditProfileForm/EditProfileForm";
 import Footer from "../../UI/Footer/Footer";
 
-export default function UserEditProfile() {
+export default function UserEditProfile({ userInfo }) {
   return (
     <>
       <Helmet>
@@ -13,7 +13,7 @@ export default function UserEditProfile() {
       </Helmet>
       <UserHeader />
       <UserNavigation />
-      <EditProfileForm />
+      <EditProfileForm userInfo={userInfo} />
       <Footer />
     </>
   );
