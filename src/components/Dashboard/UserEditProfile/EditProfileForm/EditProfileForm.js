@@ -149,7 +149,6 @@ export default function EditProfileForm({ userInfo }) {
           setLoading(false);
         } else {
           setLoading(false);
-          //localStorage.setItem("chopbarh-id", response.data.userId);
         }
       })
       .catch(err => {
@@ -188,7 +187,7 @@ export default function EditProfileForm({ userInfo }) {
               <label>Email</label>
               <input {...email("Email")} required />
             </FormItem>
-            <button type="submit" className="mr-2" disablrd={loading}>
+            <button type="submit" className="mr-2" disabled={loading}>
               <span>Save</span>
             </button>
           </Form>
