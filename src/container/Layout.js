@@ -6,6 +6,7 @@ import GamesPage from "../Pages/GamesPage";
 import LoginPage from "../Pages/LoginPage";
 import SignUpPage from "../Pages/SignUpPage";
 import CompleteProfilePage from "../Pages/CompleteProfilePage";
+import EditProfilePage from "../Pages/EditProfilePage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import Logout from "../components/auth/Logout/Logout";
 import OTP from "../components/auth/OTP/OTP";
@@ -14,7 +15,6 @@ import UserProfile from "../components/Dashboard/UserProfile/UserProfile";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
-import UserEditProfile from "../components/Dashboard/UserEditProfile/UserEditProfile";
 
 /*
 
@@ -37,7 +37,7 @@ export default function Layout() {
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHome} />
               <Route path="/profile" component={UserProfile} />
-              <Route path="/edit-profile" component={UserEditProfile} />
+              <Route path="/edit-profile" component={EditProfilePage} />
               <Route path="/deposit" component={UserDeposit} />
               <Route path="/withdraw" component={UserWithdraw} />
               <Route path="/transaction" component={UserTransaction} />
