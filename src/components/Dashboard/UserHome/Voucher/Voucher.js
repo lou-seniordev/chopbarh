@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useFormState } from "react-use-form-state";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import TopEarners from "../TopEarners/TopEarners";
@@ -70,20 +71,51 @@ const FormItem = styled.div`
 `;
 
 export default function Voucher() {
+  const [loading, setLoading] = useState(false);
+  const [formState, { text }] = useFormState();
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setLoading(true);
+
+    formState.values["by"] = localStorage.getItem("chopbarh-id")
+      ? localStorage.getItem("chopbarh-id")
+      : null;
+    const formValue = JSON.stringify(formState.values);
+    try {
+      const response = await fetch(
+        "https://partners.chopbarh.com/api/voucher/use",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apiKey: "C213-E3C9-C7"
+          },
+          body: formValue
+        }
+      );
+      const data = await response.json();
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
   return (
     <VoucherWrapper className="container">
       <div className="row">
         <div className="col-md-6">
-          <FormWrapper>
+          <FormWrapper onSubmit={handleSubmit}>
             <form>
               <FormItem>
                 <label>Load Voucher</label>
               </FormItem>
               <FormItem>
-                <input type="text" placeholder="Voucher Code" />
+                <input {...text("pin")} placeholder="Voucher Code" />
               </FormItem>
-              <button type="submit" className="ml-2 mr-2">
-                <span>Load</span>
+              <button type="submit" className="ml-2 mr-2" disabled={loading}>
+                <span>{loading ? "Loading..." : "Load"}</span>
               </button>
             </form>
           </FormWrapper>
