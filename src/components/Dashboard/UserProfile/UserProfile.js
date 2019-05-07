@@ -5,7 +5,7 @@ import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import UserProfileContent from "./UserProfileContent/UserProfileContent";
 import Footer from "../../UI/Footer/Footer";
 
-export default function UserProfile() {
+export default function UserProfile({ userInfo }) {
   return (
     <>
       <Helmet>
@@ -13,7 +13,7 @@ export default function UserProfile() {
       </Helmet>
       <UserHeader />
       <UserNavigation />
-      <UserProfileContent />
+      <UserProfileContent userInfo={userInfo} />
       <Footer />
     </>
   );
