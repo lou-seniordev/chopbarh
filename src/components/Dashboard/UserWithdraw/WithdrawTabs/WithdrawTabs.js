@@ -14,22 +14,22 @@ const HeadingTwo = styled.h2`
   font-size: 1.7rem;
 `;
 
-export default function DepositTabs() {
+export default function WithdrawTabs() {
   return (
     <WithdrawTabsWrapper className="container">
       <div className="col-md-6">
         <Tabs>
           <TabList>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>Phone Number</HeadingTwo>
-            </Tab>
+            </Tab> */}
             <Tab>
               <HeadingTwo>Paga</HeadingTwo>
             </Tab>
           </TabList>
-          <TabPanel>
+          {/* <TabPanel>
             <PhoneNumber />
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel>
             <Paga />
           </TabPanel>
