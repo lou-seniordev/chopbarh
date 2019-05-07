@@ -30,7 +30,6 @@ function SignUp(props) {
     setLoading(true);
     formState.values["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState.values);
-    setUserInfo(JSON.parse(formValue));
     axios(
       "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
       {
@@ -51,7 +50,7 @@ function SignUp(props) {
           localStorage.setItem("chopbarh-id", response.data.userId);
           setUserInfo(JSON.parse(formValue));
           setLoading(false);
-          props.history.push("/user");
+          props.history.push("/otp");
         }
       })
       .catch(err => {
