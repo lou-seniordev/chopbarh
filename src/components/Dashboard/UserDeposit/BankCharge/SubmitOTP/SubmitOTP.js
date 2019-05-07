@@ -41,11 +41,12 @@ export default function SubmitOTP({ reference }) {
 
       const data = await response.json();
       console.log(data);
-      setCoinValue(+data.data.amount / 100);
+      const value = +data.data.amount;
       increaseCoinBalance(+data.data.amount / 100)
         .then(response => response.json())
         .then(data => {
           console.log(data);
+          setCoinValue(value / 100);
           setLoading(false);
         })
         .catch(err => {
