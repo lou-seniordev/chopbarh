@@ -76,7 +76,17 @@ export default class ContextProvider extends Component {
   };
 
   setCoinValue = coinValue => {
-    this.setState({ coinValue });
+    fetchData().then(response => {
+      if (response.data.error) {
+        this.setState({ dataLoading: false });
+      } else {
+        this.setState({
+          userGameData: response.data.scriptData.PlayerData,
+          dataLoading: false,
+          coinValue
+        });
+      }
+    });
   };
 
   render() {
