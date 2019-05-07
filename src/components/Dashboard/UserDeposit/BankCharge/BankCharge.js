@@ -3,7 +3,6 @@ import { useFormState } from "react-use-form-state";
 import { Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
-import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
 export default function BankCharge() {
   const [loading, setLoading] = useState(false);
