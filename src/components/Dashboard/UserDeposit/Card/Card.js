@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
-import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 
 export default function Card() {

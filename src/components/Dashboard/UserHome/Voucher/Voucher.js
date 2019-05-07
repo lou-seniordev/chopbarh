@@ -95,6 +95,7 @@ export default function Voucher() {
         }
       );
       const data = await response.json();
+      console.log(data);
       setLoading(false);
     } catch (err) {
       setLoading(false);
