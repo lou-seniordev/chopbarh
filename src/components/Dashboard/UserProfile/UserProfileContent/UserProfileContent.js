@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Ludo from "../../../assets/img/Ludo@2x.png";
 
 const UserProfileContentWrapper = styled.div`
   min-height: 40vh;
@@ -23,16 +22,23 @@ const ImageContainer = styled.div`
   padding: 1rem;
 `;
 
-export default function UserProfileContent() {
+export default function UserProfileContent({ userInfo }) {
   return (
     <UserProfileContentWrapper className="container my-5 pt-5 pb-5">
       <div className="row text-center">
         <div className="col-md-12">
-          <Image src={Ludo} alt="Profile" class="img-thumbnail mx-auto" />
+          {userInfo.ImageID ? (
+            <Image
+              src={userInfo.imageId}
+              alt="Profile"
+              class="img-thumbnail mx-auto"
+            />
+          ) : (
+            <ImageContainer className="mx-auto" />
+          )}
         </div>
         <div className="col-md-12 mt-5">
-          <h3>Name: Ola Ade</h3>
-          <ImageContainer className="mx-auto" />
+          <h3>Name: {userInfo.DisplayName}</h3>
         </div>
       </div>
     </UserProfileContentWrapper>
