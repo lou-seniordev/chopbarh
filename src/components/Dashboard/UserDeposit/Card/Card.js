@@ -39,7 +39,7 @@ export default function Card() {
     setSuccessModal(!successModal);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     console.log("Fetch...");
     setLoading(true);
@@ -66,7 +66,7 @@ export default function Card() {
     };
 
     console.log(postData);
-    fetch("https://api.paystack.co/charge", {
+    const response  = await fetch("https://api.paystack.co/charge", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -75,23 +75,18 @@ export default function Card() {
       },
       body: JSON.stringify(postData)
     })
-      .then(response => response.json())
+    const data = await response.json()
+    increaseCoinBalance(+data.data.amount/100)
       .then(data => {
         console.log(data);
-        increaseCoinBalance(2)
-          .then(data => {
-            console.log(data);
-            setLoading(false);
-          })
-          .catch(err => {
-            console.log(err);
-            setLoading(false);
-          });
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
         setLoading(false);
       });
+
+      
   };
 
   return (
