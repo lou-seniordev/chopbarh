@@ -30,12 +30,11 @@ function OTP(props) {
     setModalIsOpen(!isOpen);
   };
 
-  const handleSubmit = (event, setUserInfo) => {
+  const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
     formState.values["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState.values);
-    setUserInfo(JSON.parse(formValue));
     axios(
       "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
       {
@@ -52,11 +51,10 @@ function OTP(props) {
           setLoading(false);
           setModalIsOpen(true);
         } else {
-          localStorage.setItem("chopbarh-token", response.data.authToken);
-          localStorage.setItem("chopbarh-id", response.data.userId);
-          setUserInfo(JSON.parse(formValue));
+          // localStorage.setItem("chopbarh-token", response.data.authToken);
+          // localStorage.setItem("chopbarh-id", response.data.userId);
           setLoading(false);
-          props.history.push("/user");
+          props.history.push("/set-nickname");
         }
       })
       .catch(err => {
@@ -80,8 +78,8 @@ function OTP(props) {
         </Modal>
         <OTPContainer>
           <AppContext.Consumer>
-            {({ setUserInfo }) => (
-              <Form onSubmit={event => handleSubmit(event, setUserInfo)}>
+            {() => (
+              <Form onSubmit={handleSubmit}>
                 <HeadingTwo className="mb-4">Phone Verification</HeadingTwo>
 
                 <FormItem>
