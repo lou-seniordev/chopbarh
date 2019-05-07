@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useFormState } from "react-use-form-state";
+import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import TopEarners from "../TopEarners/TopEarners";
+import { AppContext } from "../../../../hoc/AppContext";
+import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
 const VoucherWrapper = styled.div`
   margin-top: 6rem;
@@ -72,9 +75,14 @@ const FormItem = styled.div`
 
 export default function Voucher() {
   const [loading, setLoading] = useState(false);
+  const [voucherUsedModal, setVoucherUsedModal] = useState(false);
   const [formState, { text }] = useFormState();
 
-  const handleSubmit = async event => {
+  const voucherUsedModalToggle = () => {
+    setVoucherUsedModal(!voucherUsedModal);
+  };
+
+  const handleSubmit = async (event, setCoinValue) => {
     event.preventDefault();
     setLoading(true);
 
@@ -84,9 +92,10 @@ export default function Voucher() {
     const formValue = JSON.stringify(formState.values);
     try {
       const response = await fetch(
-        "https://partners.chopbarh.com/api/voucher/use",
+        "https://private-anon-9955ca6aaa-chopbarhapi.apiary-mock.com/api/voucher/use",
         {
           method: "POST",
+          mode: "cors",
           headers: {
             "Content-Type": "application/json",
             apiKey: "C213-E3C9-C7"
@@ -95,7 +104,23 @@ export default function Voucher() {
         }
       );
       const data = await response.json();
-      console.log(data);
+      console.log(data, response.status);
+      if (response.status === 200) {
+        const value = data.data.value;
+        increaseCoinBalance(data.data.value)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            setCoinValue(value);
+            setLoading(false);
+          })
+          .catch(err => {
+            console.log(err);
+            setLoading(false);
+          });
+      } else if (response.status === 422) {
+        setVoucherUsedModal(true);
+      }
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -104,27 +129,46 @@ export default function Voucher() {
   };
 
   return (
-    <VoucherWrapper className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <FormWrapper onSubmit={handleSubmit}>
-            <form>
-              <FormItem>
-                <label>Load Voucher</label>
-              </FormItem>
-              <FormItem>
-                <input {...text("pin")} placeholder="Voucher Code" />
-              </FormItem>
-              <button type="submit" className="ml-2 mr-2" disabled={loading}>
-                <span>{loading ? "Loading..." : "Load"}</span>
-              </button>
-            </form>
-          </FormWrapper>
-        </div>
-        <div className="col-md-6">
-          <TopEarners />
-        </div>
-      </div>
-    </VoucherWrapper>
+    <AppContext.Consumer>
+      {({ setCoinValue }) => (
+        <VoucherWrapper className="container">
+          <Modal
+            isOpen={voucherUsedModal}
+            toggle={voucherUsedModalToggle}
+            className="pt-5 mt-4"
+          >
+            <ModalBody className="text-center">
+              <p>This Voucher has already been used</p>
+            </ModalBody>
+          </Modal>
+          <div className="row">
+            <div className="col-md-6">
+              <FormWrapper
+                onSubmit={event => handleSubmit(event, setCoinValue)}
+              >
+                <form>
+                  <FormItem>
+                    <label>Load Voucher</label>
+                  </FormItem>
+                  <FormItem>
+                    <input {...text("pin")} placeholder="Voucher Code" />
+                  </FormItem>
+                  <button
+                    type="submit"
+                    className="ml-2 mr-2"
+                    disabled={loading}
+                  >
+                    <span>{loading ? "Loading..." : "Load"}</span>
+                  </button>
+                </form>
+              </FormWrapper>
+            </div>
+            <div className="col-md-6">
+              <TopEarners />
+            </div>
+          </div>
+        </VoucherWrapper>
+      )}
+    </AppContext.Consumer>
   );
 }
