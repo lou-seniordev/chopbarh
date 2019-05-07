@@ -11,6 +11,7 @@ import ProfilePage from "../Pages/ProfilePage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import Logout from "../components/auth/Logout/Logout";
 import OTP from "../components/auth/OTP/OTP";
+import SetNickname from "../components/auth/SetNickname/SetNickname";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
@@ -52,6 +53,7 @@ export default function Layout() {
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignUpPage} />
             <Route path="/otp" component={OTP} />
+            <Route path="/set-nickname" component={SetNickname} />
             <Route path="/complete_profile" component={CompleteProfilePage} />
             <Redirect to="/" />
           </Switch>
