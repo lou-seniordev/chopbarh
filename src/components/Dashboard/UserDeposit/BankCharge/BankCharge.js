@@ -3,6 +3,7 @@ import { useFormState } from "react-use-form-state";
 import { Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
+import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
 export default function BankCharge() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ export default function BankCharge() {
     bank: "044"
   });
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     setLoading(true);
 
@@ -32,7 +33,7 @@ export default function BankCharge() {
     };
 
     console.log(postData);
-    fetch("https://api.paystack.co/charge", {
+    const response = await fetch("https://api.paystack.co/charge", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -40,11 +41,13 @@ export default function BankCharge() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(postData)
-    })
+    });
+    const data = await response.json();
+    setReferenceValue(data.data.reference);
+    increaseCoinBalance(+data.data.amount / 100)
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        setReferenceValue(data.data.reference);
         setLoading(false);
       })
       .catch(err => {

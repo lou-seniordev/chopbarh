@@ -47,6 +47,10 @@ export default class ContextProvider extends Component {
     // Handle possible error case here
   };
 
+  componentDidUpdate = () => {
+    console.log("Props Changed...");
+  };
+
   authUpdate = () => {
     this.setState({ auth: localStorage.getItem("chopbarh-token") !== null });
   };
