@@ -9,7 +9,7 @@ export default function Card() {
   const [loading, setLoading] = useState(false);
   const [formErrorModal, setFormErrorModal] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
-  const [formState, { text, email, number, password }] = useFormState();
+  const [formState, { text, email, password }] = useFormState();
 
   const formErrorModalToggle = () => {
     setFormErrorModal(!formErrorModal);
@@ -21,7 +21,6 @@ export default function Card() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log("Fetch...");
     setLoading(true);
 
     console.log(formState);
@@ -95,7 +94,8 @@ export default function Card() {
           style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            minHeight: "30rem"
           }}
           className="mt-5"
         >
@@ -159,11 +159,15 @@ export default function Card() {
             <FormItem className="mr-3">
               <label>CVV</label>
               <input
-                {...number({
-                  name: "cvv"
+                {...text({
+                  name: "cvv",
+                  validate: value => {
+                    if (!isNaN(value) !== true) {
+                      return "Must be a number";
+                    }
+                  }
                 })}
                 required
-                min="0"
                 placeholder="720"
               />
             </FormItem>

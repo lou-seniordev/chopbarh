@@ -24,7 +24,7 @@ export default function BankCharge() {
 
     const postData = {
       email: formState.values.email,
-      amount: formState.values.amount,
+      amount: formState.values.amount * 100,
       bank: {
         code: formState.values.bank,
         account_number: formState.values.account_number
@@ -44,16 +44,6 @@ export default function BankCharge() {
     });
     const data = await response.json();
     setReferenceValue(data.data.reference);
-    increaseCoinBalance(+data.data.amount / 100)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-        setLoading(false);
-      });
   };
 
   return (
