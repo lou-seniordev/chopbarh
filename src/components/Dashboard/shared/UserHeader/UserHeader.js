@@ -96,7 +96,7 @@ export default function UserHeader() {
                     <li className="nav-item">
                       <Link className="nav-link text-uppercase mr-5">
                         <Icon icon={CoinSymbol} height="15" />
-                        {userGameData.CBCoins}
+                        {new Intl.NumberFormat().format(userGameData.CBCoins)}
                         <Icon icon={VisibilityButton} height="10" />
                       </Link>
                     </li>
