@@ -7,9 +7,7 @@ import breakPoints from "../../../styles/breakpoints";
 import { AppContext } from "../../../../hoc/AppContext";
 import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
-const VoucherWrapper = styled.div`
-  margin-top: 6rem;
-`;
+const VoucherWrapper = styled.div``;
 
 const FormWrapper = styled.div`
   display: flex;

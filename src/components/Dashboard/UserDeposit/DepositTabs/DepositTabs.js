@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import Quickteller from "../Quickteller/Quickteller";
 //import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 import BankCharge from "../BankCharge/BankCharge";
+import Voucher from "../../UserHome/Voucher/Voucher";
 
 const DepositTabsWrapper = styled.div`
   display: flex;
@@ -46,7 +47,9 @@ export default function DepositTabs() {
         <TabPanel>
           <BankCharge />
         </TabPanel>
-        <TabPanel>Voucher</TabPanel>
+        <TabPanel>
+          <Voucher />
+        </TabPanel>
         {/* <TabPanel>
           <PayWithAccountNumber />
         </TabPanel> */}
