@@ -4,7 +4,6 @@ import { useFormState } from "react-use-form-state";
 import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import TopEarners from "../TopEarners/TopEarners";
 import { AppContext } from "../../../../hoc/AppContext";
 import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
@@ -141,32 +140,19 @@ export default function Voucher() {
               <p>This Voucher has already been used</p>
             </ModalBody>
           </Modal>
-          <div className="row">
-            <div className="col-md-6">
-              <FormWrapper
-                onSubmit={event => handleSubmit(event, setCoinValue)}
-              >
-                <form>
-                  <FormItem>
-                    <label>Load Voucher</label>
-                  </FormItem>
-                  <FormItem>
-                    <input {...text("pin")} placeholder="Voucher Code" />
-                  </FormItem>
-                  <button
-                    type="submit"
-                    className="ml-2 mr-2"
-                    disabled={loading}
-                  >
-                    <span>{loading ? "Loading..." : "Load"}</span>
-                  </button>
-                </form>
-              </FormWrapper>
-            </div>
-            <div className="col-md-6">
-              <TopEarners />
-            </div>
-          </div>
+          <FormWrapper onSubmit={event => handleSubmit(event, setCoinValue)}>
+            <form>
+              <FormItem>
+                <label>Load Voucher</label>
+              </FormItem>
+              <FormItem>
+                <input {...text("pin")} placeholder="Voucher Code" />
+              </FormItem>
+              <button type="submit" className="ml-2 mr-2" disabled={loading}>
+                <span>{loading ? "Loading..." : "Load"}</span>
+              </button>
+            </form>
+          </FormWrapper>
         </VoucherWrapper>
       )}
     </AppContext.Consumer>
