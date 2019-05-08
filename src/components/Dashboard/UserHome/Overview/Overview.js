@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
-import { AppContext } from "../../../../hoc/AppContext";
 
 const OverviewWrapper = styled.div`
   background: #c5c7c5;
@@ -37,56 +37,53 @@ const OverviewContentDescription = styled.p`
   }
 `;
 
-export default function Overview() {
-  return (
-    <OverviewWrapper className="container">
-      <AppContext.Consumer>
-        {({ userGameData }) => {
-          if (userGameData !== null) {
-            return (
-              <>
-                <HeadingFour className="mb-5">Overview</HeadingFour>
-                <OverviewContainer className="row text-center">
-                  <OverviewContent className="col-lg-4">
-                    <OverviewContentHeader>
-                      {new Intl.NumberFormat().format(userGameData.CBCoins)}
-                    </OverviewContentHeader>
-                    <OverviewContentDescription>
-                      Coin Balance
-                    </OverviewContentDescription>
-                  </OverviewContent>
-                  <OverviewContent className="col-lg-4">
-                    <OverviewContentHeader>
-                      &#8358;
-                      {new Intl.NumberFormat().format(userGameData.RealCoins)}
-                    </OverviewContentHeader>
-                    <OverviewContentDescription>
-                      Cash Balance
-                    </OverviewContentDescription>
-                  </OverviewContent>
-                  <OverviewContent className="col-lg-4">
-                    <OverviewContentHeader>
-                      &#8358;
-                      {new Intl.NumberFormat().format(userGameData.RealCoins)}
-                    </OverviewContentHeader>
-                    <OverviewContentDescription>
-                      Earnings
-                    </OverviewContentDescription>
-                  </OverviewContent>
-                </OverviewContainer>
-              </>
-            );
-          }
+class Overview extends Component {
+  render() {
+    return (
+      <OverviewWrapper className="container">
+        <>
+          <HeadingFour className="mb-5">Overview</HeadingFour>
+          <OverviewContainer className="row text-center">
+            <OverviewContent className="col-lg-4">
+              <OverviewContentHeader>
+                {new Intl.NumberFormat().format(1000)}
+              </OverviewContentHeader>
+              <OverviewContentDescription>
+                Coin Balance
+              </OverviewContentDescription>
+            </OverviewContent>
+            <OverviewContent className="col-lg-4">
+              <OverviewContentHeader>
+                &#8358;
+                {new Intl.NumberFormat().format(1000)}
+              </OverviewContentHeader>
+              <OverviewContentDescription>
+                Cash Balance
+              </OverviewContentDescription>
+            </OverviewContent>
+            <OverviewContent className="col-lg-4">
+              <OverviewContentHeader>
+                &#8358;
+                {new Intl.NumberFormat().format(1000)}
+              </OverviewContentHeader>
+              <OverviewContentDescription>Earnings</OverviewContentDescription>
+            </OverviewContent>
+          </OverviewContainer>
+        </>
+      </OverviewWrapper>
+    );
+  }
+}
 
-          return (
-            <OverviewContainer className="row text-center">
+const mapDispatchToProps = {};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Overview);
+
+/* <OverviewContainer className="row text-center">
               <div className="text-center mx-auto">
                 <Spinner />
               </div>
-            </OverviewContainer>
-          );
-        }}
-      </AppContext.Consumer>
-    </OverviewWrapper>
-  );
-}
+            </OverviewContainer> */
