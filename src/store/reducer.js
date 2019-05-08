@@ -1,19 +1,19 @@
 import * as actionType from "./actionTypes/actions";
 
 const initialState = {
-  authenticated: false
+  authenticated: false,
+  count: 0
 };
 
-export default function(state = initialState, action) {
-  switch (action.types) {
+export default (state = initialState, action) => {
+  switch (action.type) {
     case actionType.SET_AUTH:
       return {
         ...state,
-        authenticated: true
+        authenticated: true,
+        count: state.count + 1
       };
     default:
-      return {
-        ...state
-      };
+      return state;
   }
-}
+};

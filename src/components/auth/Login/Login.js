@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
+import { connect } from "react-redux";
 import {
   AuthWrapper,
   HeadingTwo,
@@ -14,6 +15,7 @@ import {
   SignUpSignal,
   ErrorText
 } from "../../styles/LoginStyles";
+import { authStart } from "./actions/LoginActions";
 
 class Login extends Component {
   state = {
@@ -58,31 +60,32 @@ class Login extends Component {
     formState["@class"] = ".AuthenticationRequest";
     console.log(formState);
     const formValue = JSON.stringify(formState.values);
+    this.props.authStart();
 
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          // Error Handling here
-        } else {
-          this.setState({ loading: false });
-          localStorage.setItem("chopbarh-token", response.data.authToken);
-          localStorage.setItem("chopbarh-id", response.data.userId);
-          this.props.history.push("/user");
-        }
-      })
-      .catch(err => {
-        this.setState({ loading: false });
-      });
+    // axios(
+    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: formValue
+    //   }
+    // )
+    //   .then(response => {
+    //     if (response.data.error) {
+    //       // Error Handling here
+    //     } else {
+    //       this.setState({ loading: false });
+    //       localStorage.setItem("chopbarh-token", response.data.authToken);
+    //       localStorage.setItem("chopbarh-id", response.data.userId);
+    //       this.props.history.push("/user");
+    //     }
+    //   })
+    //   .catch(err => {
+    //     this.setState({ loading: false });
+    //   });
   };
 
   render() {
@@ -153,4 +156,13 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+const mapDispatchToProps = {
+  authStart
+};
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Login)
+);
