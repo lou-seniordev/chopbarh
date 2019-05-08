@@ -4,12 +4,12 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createStore, applyMiddleware, compose, combinerReducers } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
 
-const rootReducer = combinerReducers({
+const rootReducer = combineReducers({
   auth: authReducer
 });
 
