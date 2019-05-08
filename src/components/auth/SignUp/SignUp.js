@@ -60,9 +60,11 @@ class SignUp extends Component {
 
     const newState = { ...this.state };
     const formState = {
-      userName: newState.userName,
-      password: newState.password
+      userName: newState.phone,
+      password: newState.password,
+      displayName: newState.name
     };
+
     formState["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState);
     fetch(
@@ -79,15 +81,17 @@ class SignUp extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // if (.data.error) {
-        // } else {
-        //   // localStorage.setItem("chopbarh-token", response.data.authToken);
-        //   // localStorage.setItem("chopbarh-id", response.data.userId);
-        //   this.props.history.push("/otp");
-        // }
+        if (data.error) {
+          this.props.authFail();
+        } else {
+          localStorage.setItem("chopbarh-token", data.authToken);
+          localStorage.setItem("chopbarh-id", data.userId);
+          this.props.authSuccess(data.authToken, data.userId);
+          this.props.history.push("/otp");
+        }
       })
       .catch(err => {
-        console.log(err);
+        this.props.authFail();
       });
   };
   render() {
