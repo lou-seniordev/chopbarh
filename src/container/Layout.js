@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authSuccess } from "../components/auth/Login/actions/LoginActions";
+import { fetchPlayerData } from "../components/Dashboard/shared/actions/playerDataActions";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
 import LoginPage from "../Pages/LoginPage";
@@ -33,6 +34,7 @@ class Layout extends Component {
         localStorage.getItem("chopbarh-token"),
         localStorage.getItem("chopbarh-id")
       );
+      this.props.fetchPlayerData();
     }
   };
 
@@ -106,7 +108,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  authSuccess
+  authSuccess,
+  fetchPlayerData
 };
 
 export default connect(
