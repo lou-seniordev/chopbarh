@@ -9,10 +9,12 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
 import playerDataReducer from "./store/reducers/playerDataReducer";
+import topEarnersReducer from "./store/reducers/topEarnersReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  player: playerDataReducer
+  player: playerDataReducer,
+  topEarners: topEarnersReducer
 });
 
 const composeEnhancers =
