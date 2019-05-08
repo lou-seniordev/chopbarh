@@ -26,7 +26,7 @@ const HeaderWrapper = styled.div`
 
 class UserHeader extends Component {
   componentDidMount = () => {
-    if (!this.props.playerData) {
+    if (!this.props.isPlayerDataAvailable) {
       this.props.fetchPlayerData();
     }
   };
@@ -126,7 +126,8 @@ class UserHeader extends Component {
 }
 
 const mapStateToProps = state => ({
-  playerData: state.player.playerData !== null,
+  isPlayerDataAvailable: state.player.playerData !== null,
+  playerData: state.player.playerData,
   loading: state.player.loading
 });
 
