@@ -27,6 +27,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: false
       };
+    case actionType.AUTH_LOGOUT:
+      return {
+        ...state,
+        token: null,
+        id: null
+      };
     default:
       return state;
   }

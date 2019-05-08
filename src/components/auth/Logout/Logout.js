@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { authLogout } from "./actions/LogoutActions";
 
-export default class Logout extends Component {
+class Logout extends Component {
   componentDidMount = () => {
-    localStorage.removeItem("chopbarh-token");
-    localStorage.removeItem("chopbarh-id");
+    this.props.authLogout();
   };
 
   render() {
     return <Redirect to="/" />;
   }
 }
+
+const mapDispatchToProps = {
+  authLogout
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Logout);
