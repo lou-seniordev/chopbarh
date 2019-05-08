@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
-import axios from "axios";
+//import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -12,8 +12,7 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
-  SignUpSignal,
-  ErrorText
+  SignUpSignal
 } from "../../styles/LoginStyles";
 import { authStart, authSuccess, authFail } from "./actions/LoginActions";
 
@@ -81,8 +80,7 @@ class Login extends Component {
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
-          //this.props.history.push("/user");
-          console.log(this.props);
+          this.props.history.push("/user");
         } else {
           this.props.authFail();
         }
