@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
-import { useFormState } from "react-use-form-state";
 import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
 import {
@@ -15,22 +14,49 @@ import {
   SignUpSignal,
   ErrorText
 } from "../../styles/LoginStyles";
-import { AppContext } from "../../../hoc/AppContext";
 
-function Login(props) {
-  const [formState, { tel, password }] = useFormState();
-  const [loading, setLoading] = useState(false);
-  const [isOpen, setModalIsOpen] = useState(false);
-
-  const toggle = () => {
-    setModalIsOpen(!isOpen);
+class Login extends Component {
+  state = {
+    isOpen: false,
+    userName: "",
+    password: "",
+    loading: false
   };
 
-  const handleSubmit = (event, authUpdate) => {
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  formIsValid = ({ userName, password }) => {
+    if (
+      userName.length !== 11 ||
+      !isNaN(userName) !== true ||
+      password.length !== 4
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = event => {
     event.preventDefault();
-    setLoading(true);
-    formState.values["@class"] = ".AuthenticationRequest";
-    // console.log(formState.values);
+    this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ isOpen: true });
+      return;
+    }
+    const newState = { ...this.state };
+    const formState = {
+      userName: newState.userName,
+      password: newState.password
+    };
+    formState["@class"] = ".AuthenticationRequest";
+    console.log(formState);
     const formValue = JSON.stringify(formState.values);
 
     axios(
@@ -46,106 +72,85 @@ function Login(props) {
     )
       .then(response => {
         if (response.data.error) {
-          setLoading(false);
-          setModalIsOpen(true);
           // Error Handling here
         } else {
+          this.setState({ loading: false });
           localStorage.setItem("chopbarh-token", response.data.authToken);
           localStorage.setItem("chopbarh-id", response.data.userId);
-          authUpdate();
-          setLoading(false);
-          props.history.push("/user");
+          this.props.history.push("/user");
         }
       })
       .catch(err => {
-        setModalIsOpen(true);
-        setLoading(false);
+        this.setState({ loading: false });
       });
   };
 
-  return (
-    <AuthWrapper>
-      <Helmet>
-        <title>Chopbarh &rarr; Login</title>
-      </Helmet>
-      <ImageContainer />
-      <FormWrapper>
-        <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
-          <ModalBody className="text-center">
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
-          </ModalBody>
-        </Modal>
-        <AppContext.Consumer>
-          {({ authUpdate }) => (
-            <form onSubmit={event => handleSubmit(event, authUpdate)}>
-              <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
-              <FormItem>
-                <label>Phone Number</label>
-                <input
-                  {...tel({
-                    name: "userName",
-                    validate: (value, values, e) => {
-                      if (value.length !== 11) {
-                        return "Phone Number length must be 11";
-                      }
-                    }
-                  })}
-                  required
-                  minLength="11"
-                  maxLength="11"
-                />
-                {formState.errors.userName && (
-                  <ErrorText className="mt-n4 mb-2">
-                    Phone Number should be 11
-                  </ErrorText>
-                )}
-              </FormItem>
-              <FormItem>
-                <label>Enter Pin</label>
-                <input
-                  {...password({
-                    name: "password",
-                    validate: (value, values, e) => {
-                      if (value.length !== 4) {
-                        return "Password length must be 4";
-                      }
-                    }
-                  })}
-                  required
-                  minLength="4"
-                  maxLength="4"
-                />
-                {formState.errors.userName && (
-                  <ErrorText className="mt-n4 mb-3">
-                    Password should be 4 characters long
-                  </ErrorText>
-                )}
-              </FormItem>
-              <FormAction>
-                <FormCheckBox>
-                  <label>Remember Me</label>
-                  <input type="checkbox" />
-                </FormCheckBox>
-                <button type="submit" disabled={loading} className="mr-2">
-                  <span>{loading ? "Please wait..." : "Login"}</span>
-                </button>
-                {/* <Link to="user">
-              <button className="mr-2">
-                <span>Login</span>
-                </button>
-            </Link> */}
-              </FormAction>
-              <SignUpSignal>
-                <span>No Account? </span>
-                <Link to="signup">Sign Up</Link>
-              </SignUpSignal>
-            </form>
-          )}
-        </AppContext.Consumer>
-      </FormWrapper>
-    </AuthWrapper>
-  );
+  render() {
+    return (
+      <AuthWrapper>
+        <Helmet>
+          <title>Chopbarh &rarr; Login</title>
+        </Helmet>
+        <ImageContainer />
+        <FormWrapper>
+          <Modal
+            isOpen={this.state.isOpen}
+            toggle={this.toggle}
+            className="pt-5 mt-4"
+          >
+            <ModalBody className="text-center">
+              <h2>Ooops!</h2>
+              <p>There was an error in the form!</p>
+            </ModalBody>
+          </Modal>
+          <form onSubmit={this.handleSubmit}>
+            <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
+            <FormItem>
+              <label>Phone Number</label>
+              <input
+                type="text"
+                name="userName"
+                onChange={this.handleInputChange}
+                value={this.state.userName}
+                required
+                minLength="11"
+                maxLength="11"
+              />
+            </FormItem>
+            <FormItem>
+              <label>Enter Pin</label>
+              <input
+                type="password"
+                name="password"
+                onChange={this.handleInputChange}
+                value={this.state.password}
+                required
+                minLength="4"
+                maxLength="4"
+              />
+            </FormItem>
+            <FormAction>
+              <FormCheckBox>
+                <label>Remember Me</label>
+                <input type="checkbox" />
+              </FormCheckBox>
+              <button
+                type="submit"
+                disabled={this.state.loading}
+                className="mr-2"
+              >
+                <span>{this.state.loading ? "Please wait..." : "Login"}</span>
+              </button>
+            </FormAction>
+            <SignUpSignal>
+              <span>No Account? </span>
+              <Link to="signup">Sign Up</Link>
+            </SignUpSignal>
+          </form>
+        </FormWrapper>
+      </AuthWrapper>
+    );
+  }
 }
 
 export default withRouter(Login);
