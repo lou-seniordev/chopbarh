@@ -8,9 +8,11 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
+import playerDataReducer from "./store/reducers/playerDataReducer";
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  player: playerDataReducer
 });
 
 const composeEnhancers =
