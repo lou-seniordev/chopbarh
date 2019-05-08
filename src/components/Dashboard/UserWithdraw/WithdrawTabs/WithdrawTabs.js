@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import PhoneNumber from "../PhoneNumber/PhoneNumber";
+//import PhoneNumber from "../PhoneNumber/PhoneNumber";
 import Paga from "../Paga/Paga";
 
 const WithdrawTabsWrapper = styled.div`

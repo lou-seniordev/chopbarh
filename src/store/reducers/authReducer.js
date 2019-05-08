@@ -1,8 +1,8 @@
-import * as actionType from "../actionTypes/actionTypesypes";
+import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   authenticated: false,
-  loading: true,
+  loading: false,
   token: null,
   id: null
 };

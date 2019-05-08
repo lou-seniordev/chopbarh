@@ -1,5 +1,7 @@
-export const authStart = () => ({ type: "SET_AUTH" });
+import * as actionType from "../../../../store/actionTypes/actionTypes";
 
-// export const changeAuth = dispatch => () => {
-//   dispatch({ type: "CHANGE_AUTH" });
-// };
+export const authStart = () => ({ type: actionType.AUTH_START });
+
+export const authSuccess = () => ({ type: actionType.AUTH_SUCCESS });
+
+export const authFail = () => ({ type: actionType.AUTH_FAILURE });
