@@ -81,6 +81,7 @@ class Layout extends Component {
             <Route path="/user" component={UserHome} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/edit-profile" component={EditProfilePage} />
+            <Route path="/signup" component={SignUpPage} />
             <Route path="/deposit" component={UserDeposit} />
             <Route path="/withdraw" component={UserWithdraw} />
             <Route path="/transaction" component={UserTransaction} />
