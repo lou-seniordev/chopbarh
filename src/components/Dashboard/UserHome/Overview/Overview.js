@@ -75,6 +75,10 @@ class Overview extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  playerData: state.player.playerData
+});
+
 const mapDispatchToProps = {};
 
 export default connect(
