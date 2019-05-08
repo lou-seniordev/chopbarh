@@ -41,35 +41,51 @@ class Overview extends Component {
   render() {
     return (
       <OverviewWrapper className="container">
-        <>
-          <HeadingFour className="mb-5">Overview</HeadingFour>
+        {this.props.playerData ? (
+          <>
+            <HeadingFour className="mb-5">Overview</HeadingFour>
+            <OverviewContainer className="row text-center">
+              <OverviewContent className="col-lg-4">
+                <OverviewContentHeader>
+                  {new Intl.NumberFormat().format(
+                    this.props.playerData.CBCoins
+                  )}
+                </OverviewContentHeader>
+                <OverviewContentDescription>
+                  Coin Balance
+                </OverviewContentDescription>
+              </OverviewContent>
+              <OverviewContent className="col-lg-4">
+                <OverviewContentHeader>
+                  &#8358;
+                  {new Intl.NumberFormat().format(
+                    this.props.playerData.RealCoins
+                  )}
+                </OverviewContentHeader>
+                <OverviewContentDescription>
+                  Cash Balance
+                </OverviewContentDescription>
+              </OverviewContent>
+              <OverviewContent className="col-lg-4">
+                <OverviewContentHeader>
+                  &#8358;
+                  {new Intl.NumberFormat().format(
+                    this.props.playerData.RealCoins
+                  )}
+                </OverviewContentHeader>
+                <OverviewContentDescription>
+                  Earnings
+                </OverviewContentDescription>
+              </OverviewContent>
+            </OverviewContainer>
+          </>
+        ) : (
           <OverviewContainer className="row text-center">
-            <OverviewContent className="col-lg-4">
-              <OverviewContentHeader>
-                {new Intl.NumberFormat().format(1000)}
-              </OverviewContentHeader>
-              <OverviewContentDescription>
-                Coin Balance
-              </OverviewContentDescription>
-            </OverviewContent>
-            <OverviewContent className="col-lg-4">
-              <OverviewContentHeader>
-                &#8358;
-                {new Intl.NumberFormat().format(1000)}
-              </OverviewContentHeader>
-              <OverviewContentDescription>
-                Cash Balance
-              </OverviewContentDescription>
-            </OverviewContent>
-            <OverviewContent className="col-lg-4">
-              <OverviewContentHeader>
-                &#8358;
-                {new Intl.NumberFormat().format(1000)}
-              </OverviewContentHeader>
-              <OverviewContentDescription>Earnings</OverviewContentDescription>
-            </OverviewContent>
+            <div className="text-center mx-auto">
+              <Spinner />
+            </div>
           </OverviewContainer>
-        </>
+        )}
       </OverviewWrapper>
     );
   }
@@ -82,12 +98,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {};
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Overview);
-
-/* <OverviewContainer className="row text-center">
-              <div className="text-center mx-auto">
-                <Spinner />
-              </div>
-            </OverviewContainer> */
