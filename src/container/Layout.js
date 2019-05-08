@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { authSuccess } from "../components/auth/Login/actions/LoginActions";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
 import LoginPage from "../Pages/LoginPage";
@@ -26,8 +27,16 @@ initialising in constructor and using componentWillMount
 */
 
 class Layout extends Component {
-  render() {
+  UNSAFE_componentWillMount = () => {
+    if (this.props.isAuthenticated) {
+      this.props.authSuccess(
+        localStorage.getItem("chopbarh-token"),
+        localStorage.getItem("chopbarh-id")
+      );
+    }
+  };
 
+  render() {
     // if (this.props.isAuthenticated) {
     //   routes = (
     //     <Switch>
@@ -93,7 +102,14 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.token !== null
+  isAuthenticated: localStorage.getItem("chopbarh-token") !== null
 });
 
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = {
+  authSuccess
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Layout);

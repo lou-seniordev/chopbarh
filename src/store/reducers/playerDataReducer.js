@@ -16,9 +16,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         playerData: {
-          ...action.data,
-          loading: false
-        }
+          ...action.data
+        },
+        loading: false
       };
     case actionType.FETCH_PLAYER_DATA_FAIL:
       return {
