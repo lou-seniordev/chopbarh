@@ -38,9 +38,9 @@ export default class TopEarners extends Component {
 
   render() {
     return (
-      <table className="table table-striped">
+      <>
         {this.state.results ? (
-          <>
+          <table className="table table-striped">
             <thead style={{ background: "#8C1936", color: "#fff" }}>
               <tr>
                 <th scope="col">Top Earners</th>
@@ -59,13 +59,13 @@ export default class TopEarners extends Component {
                 </tr>
               ))}
             </tbody>
-          </>
+          </table>
         ) : (
           <div className="text-center mt-2">
             <Spinner />
           </div>
         )}
-      </table>
+      </>
     );
   }
 }
