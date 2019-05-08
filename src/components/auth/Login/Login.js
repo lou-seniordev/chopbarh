@@ -15,7 +15,7 @@ import {
   SignUpSignal,
   ErrorText
 } from "../../styles/LoginStyles";
-import { authStart } from "./actions/LoginActions";
+import { authStart, authSuccess, authFail } from "./actions/LoginActions";
 
 class Login extends Component {
   state = {
@@ -52,40 +52,44 @@ class Login extends Component {
       this.setState({ isOpen: true });
       return;
     }
+    this.props.authStart();
+
     const newState = { ...this.state };
     const formState = {
       userName: newState.userName,
       password: newState.password
     };
     formState["@class"] = ".AuthenticationRequest";
-    console.log(formState);
-    const formValue = JSON.stringify(formState.values);
-    this.props.authStart();
+    const formValue = JSON.stringify(formState);
+    console.log(formState, formValue);
 
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       // Error Handling here
-    //     } else {
-    //       this.setState({ loading: false });
-    //       localStorage.setItem("chopbarh-token", response.data.authToken);
-    //       localStorage.setItem("chopbarh-id", response.data.userId);
-    //       this.props.history.push("/user");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     this.setState({ loading: false });
-    //   });
+    fetch(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: formValue
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.authToken) {
+          localStorage.setItem("chopbarh-token", data.authToken);
+          localStorage.setItem("chopbarh-id", data.userId);
+          this.props.authSuccess(data.authToken, data.userId);
+          //this.props.history.push("/user");
+          console.log(this.props);
+        } else {
+          this.props.authFail();
+        }
+      })
+      .catch(err => {
+        this.props.authFail();
+      });
   };
 
   render() {
@@ -139,10 +143,10 @@ class Login extends Component {
               </FormCheckBox>
               <button
                 type="submit"
-                disabled={this.state.loading}
+                disabled={this.props.loading}
                 className="mr-2"
               >
-                <span>{this.state.loading ? "Please wait..." : "Login"}</span>
+                <span>{this.props.loading ? "Please wait..." : "Login"}</span>
               </button>
             </FormAction>
             <SignUpSignal>
@@ -156,13 +160,19 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loading: state.auth.loading
+});
+
 const mapDispatchToProps = {
-  authStart
+  authStart,
+  authSuccess,
+  authFail
 };
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Login)
 );
