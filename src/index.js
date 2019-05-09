@@ -10,11 +10,13 @@ import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
 import playerDataReducer from "./store/reducers/playerDataReducer";
 import topEarnersReducer from "./store/reducers/topEarnersReducer";
+import chargeReducer from "./store/reducers/chargeReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   player: playerDataReducer,
-  topEarners: topEarnersReducer
+  topEarners: topEarnersReducer,
+  charge: chargeReducer
 });
 
 const composeEnhancers =
