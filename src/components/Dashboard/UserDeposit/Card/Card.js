@@ -4,6 +4,7 @@ import { Modal, ModalBody } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
+import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
 import { setChargeReference } from "../actions/chargeActions";
 
 class Card extends Component {
@@ -11,6 +12,7 @@ class Card extends Component {
     loading: false,
     formErrorModal: false,
     submitOTPModal: false,
+    submitPinModal: false,
     amount: "",
     card: "",
     expiry: "",
@@ -26,8 +28,16 @@ class Card extends Component {
     this.setState({ submitOTPModal: !this.state.submitOTPModal });
   };
 
+  submitPinModalToggle = () => {
+    this.setState({ submitPinModal: !this.state.submitOTPModal });
+  };
+
   closeOTPModal = () => {
     this.setState({ submitOTPModal: false });
+  };
+
+  closeOTPModal = () => {
+    this.setState({ submitPinModal: false });
   };
 
   handleInputChange = ({ target }) => {
@@ -89,7 +99,9 @@ class Card extends Component {
       this.setState({ loading: false });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
-        this.setState({ successModal: true });
+        this.setState({ submitOTPModal: true });
+      } else if (data.data.status === "send_pin") {
+        this.setState({ submitPinModal: true });
       } else {
         this.setState({ formErrorModal: true });
       }
@@ -123,6 +135,17 @@ class Card extends Component {
           <ModalBody className="text-center" style={{ height: "20vh" }}>
             <h2>Ooops!</h2>
             <p>Something went wrong. Please try again</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.state.submitPinModal}
+          toggle={this.submitPinModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitPin closeModal={this.closePinModal} />
           </ModalBody>
         </Modal>
         <Modal
