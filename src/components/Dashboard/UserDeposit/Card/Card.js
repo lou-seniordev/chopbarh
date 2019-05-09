@@ -16,8 +16,7 @@ class Card extends Component {
     amount: "",
     card: "",
     expiry: "",
-    cvv: "",
-    pin: ""
+    cvv: ""
   };
 
   formErrorModalToggle = () => {
@@ -44,7 +43,7 @@ class Card extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  formIsValid = ({ amount, card, expiry, cvv, pin }) => {
+  formIsValid = ({ amount, card, expiry, cvv }) => {
     if (
       !isNaN(amount) !== true ||
       !isNaN(card) !== true ||
@@ -52,8 +51,7 @@ class Card extends Component {
       expiry.split("/").length !== 2 ||
       expiry.split("/")[1].length !== 2 ||
       card.length < 16 ||
-      cvv.length !== 3 ||
-      pin.length !== 4
+      cvv.length !== 3
     ) {
       return false;
     }
@@ -81,8 +79,7 @@ class Card extends Component {
         cvv: this.state.cvv,
         expiry_month: cardExpirationData[0],
         expiry_year: year
-      },
-      pin: this.state.pin
+      }
     };
 
     try {
@@ -101,6 +98,7 @@ class Card extends Component {
         this.props.setChargeReference(data.data.reference);
         this.setState({ submitOTPModal: true });
       } else if (data.data.status === "send_pin") {
+        this.props.setChargeReference(data.data.reference);
         this.setState({ submitPinModal: true });
       } else {
         this.setState({ formErrorModal: true });
@@ -182,20 +180,20 @@ class Card extends Component {
               placeholder="Amount"
             />
           </FormItem>
+          <FormItem>
+            <label>Card Number</label>
+            <input
+              type="text"
+              onChange={this.handleInputChange}
+              name="card"
+              value={this.state.card}
+              minLength="16"
+              required
+              placeholder="Account Number"
+            />
+          </FormItem>
           <HalfColumn>
             <FormItem className="mr-3">
-              <label>Card Number</label>
-              <input
-                type="text"
-                onChange={this.handleInputChange}
-                name="card"
-                value={this.state.card}
-                minLength="16"
-                required
-                placeholder="Account Number"
-              />
-            </FormItem>
-            <FormItem>
               <label>Expiry</label>
               <input
                 type="text"
@@ -206,9 +204,7 @@ class Card extends Component {
                 placeholder="MM/YY"
               />
             </FormItem>
-          </HalfColumn>
-          <HalfColumn>
-            <FormItem className="mr-3">
+            <FormItem>
               <label>CVV</label>
               <input
                 type="text"
@@ -219,6 +215,10 @@ class Card extends Component {
                 placeholder="***"
               />
             </FormItem>
+          </HalfColumn>
+          {/* 
+          <HalfColumn>
+  
             <FormItem>
               <label>Pin</label>
               <input
@@ -233,6 +233,7 @@ class Card extends Component {
               />
             </FormItem>
           </HalfColumn>
+            */}
           <button type="submit" className="mr-2" disabled={this.state.loading}>
             <span>{this.state.loading ? "Please wait..." : "Load"}</span>
           </button>

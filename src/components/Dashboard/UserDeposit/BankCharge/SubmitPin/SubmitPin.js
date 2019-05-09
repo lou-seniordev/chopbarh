@@ -31,60 +31,61 @@ class SubmitPin extends Component {
       return;
     }
 
-    closeModal();
+    // closeModal();
 
-    // const postData = {
-    //   otp: this.state.otp,
-    //   reference: this.props.reference
-    // };
+    const postData = {
+      pin: this.state.pin,
+      reference: this.props.reference
+    };
 
-    // try {
-    //   const response = await fetch(
-    //     "https://api.paystack.co/charge/submit_pin",
-    //     {
-    //       method: "POST",
-    //       mode: "cors",
-    //       headers: {
-    //         Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(postData)
-    //     }
-    //   );
+    try {
+      const response = await fetch(
+        "https://api.paystack.co/charge/submit_pin",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
 
-    //   const data = await response.json();
-    //   if (data.data) {
-    //     const value = +data.data.amount / 100;
-    //     this.props.setCoinBalance(value);
-    //     // this.props.history.push({
-    //     //   pathname: "/deposit/charge",
-    //     //   search: "?status=true"
-    //     // });
-    //   } else {
-    //     //Error here
-    //     // this.props.history.push({
-    //     //   pathname: "/deposit/charge",
-    //     //   search: "?status=false"
-    //     // });
-    //   }
-    //   console.log(data);
-    //   this.setState({ loading: false });
-    //   //const value = +data.data.amount / 100;
-    //   //   increaseCoinBalance(+data.data.amount / 100)
-    //   //     .then(response => response.json())
-    //   //     .then(data => {
-    //   //       console.log(data);
-    //   //       setCoinValue(value / 100);
-    //   //       setLoading(false);
-    //   //     })
-    //   //     .catch(err => {
-    //   //       console.log(err);
-    //   //       setLoading(false);
-    //   //     });
-    // } catch (err) {
-    //   console.log(err);
-    //   this.setState({ loading: false });
-    // }
+      const data = await response.json();
+      console.log(data);
+      //  if (data.data) {
+      //     const value = +data.data.amount / 100;
+      //     this.props.setCoinBalance(value);
+      //     // this.props.history.push({
+      //     //   pathname: "/deposit/charge",
+      //     //   search: "?status=true"
+      //     // });
+      //   } else {
+      //     //Error here
+      //     // this.props.history.push({
+      //     //   pathname: "/deposit/charge",
+      //     //   search: "?status=false"
+      //     // });
+      //   }
+      //   console.log(data);
+      //   this.setState({ loading: false });
+      //   //const value = +data.data.amount / 100;
+      //   //   increaseCoinBalance(+data.data.amount / 100)
+      //   //     .then(response => response.json())
+      //   //     .then(data => {
+      //   //       console.log(data);
+      //   //       setCoinValue(value / 100);
+      //   //       setLoading(false);
+      //   //     })
+      //   //     .catch(err => {
+      //   //       console.log(err);
+      //   //       setLoading(false);
+      //   //     });
+    } catch (err) {
+      console.log(err);
+      this.setState({ loading: false });
+    }
   };
   render() {
     return (
@@ -106,7 +107,7 @@ class SubmitPin extends Component {
               <label>Enter Pin</label>
               <input
                 type="text"
-                name="otp"
+                name="pin"
                 value={this.state.pin}
                 onChange={this.handleInputChange}
                 required
