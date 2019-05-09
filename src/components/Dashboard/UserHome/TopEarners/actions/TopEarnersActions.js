@@ -4,8 +4,9 @@ export const fetchTopEarnersStart = () => ({
   type: actionType.FETCH_TOP_EARNERS_INIT
 });
 
-export const fetchTopEarnersSuccess = () => ({
-  type: actionType.FETCH_TOP_EARNERS_SUCCESS
+export const fetchTopEarnersSuccess = data => ({
+  type: actionType.FETCH_TOP_EARNERS_SUCCESS,
+  data
 });
 
 export const fetchTopEarnersFail = () => ({
@@ -27,15 +28,16 @@ export const fetchTopEarners = () => (dispatch, getState) => {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      data: JSON.stringify(postRequestData)
+      body: JSON.stringify(postRequestData)
     }
   )
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       if (data.error) {
         dispatch(fetchTopEarnersFail());
       } else {
-        dispatch(fetchTopEarnersSuccess());
+        dispatch(fetchTopEarnersSuccess(data.scriptData.RESULTS));
       }
     })
     .catch(err => {

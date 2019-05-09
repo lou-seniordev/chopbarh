@@ -1,45 +1,46 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Spinner } from "reactstrap";
+import { connect } from "react-redux";
+import { fetchTopEarners } from "./actions/TopEarnersActions";
 
-export default class TopEarners extends Component {
-  state = {
-    results: null
-  };
-
+class TopEarners extends Component {
   componentDidMount = () => {
-    const postRequestData = {
-      "@class": ".LogEventRequest",
-      eventKey: "ANALYTICS_TOP_EARNERS",
-      playerId: localStorage.getItem("chopbarh-id")
-        ? localStorage.getItem("chopbarh-id")
-        : null
-    };
+    if (!this.props.results) {
+      this.props.fetchTopEarners();
+    }
+    // const postRequestData = {
+    //   "@class": ".LogEventRequest",
+    //   eventKey: "ANALYTICS_TOP_EARNERS",
+    //   playerId: localStorage.getItem("chopbarh-id")
+    //     ? localStorage.getItem("chopbarh-id")
+    //     : null
+    // };
 
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: postRequestData
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-        } else {
-          this.setState({ results: response.data.scriptData.RESULTS });
-        }
-      })
-      .catch(err => console.log(err));
+    // axios(
+    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: postRequestData
+    //   }
+    // )
+    //   .then(response => {
+    //     if (response.data.error) {
+    //     } else {
+    //       this.setState({ results: response.data.scriptData.RESULTS });
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
     return (
       <>
-        {this.state.results ? (
+        {this.props.results ? (
           <table className="table table-striped">
             <thead style={{ background: "#8C1936", color: "#fff" }}>
               <tr>
@@ -49,7 +50,7 @@ export default class TopEarners extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.results.slice(0, 4).map(player => (
+              {/* {this.state.results.slice(0, 4).map(player => (
                 <tr key={player.PlayerID}>
                   <td>{player.FullName}</td>
                   <td>{player.Email}</td>
@@ -57,7 +58,7 @@ export default class TopEarners extends Component {
                     &#8358;{new Intl.NumberFormat().format(player.TotalWinning)}
                   </td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
         ) : (
@@ -69,3 +70,17 @@ export default class TopEarners extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  loading: state.topEarners.loading,
+  results: state.topEarners.results
+});
+
+const mapDispatchToProps = {
+  fetchTopEarners
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopEarners);
