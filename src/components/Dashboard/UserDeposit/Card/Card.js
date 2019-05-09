@@ -29,9 +29,29 @@ class Card extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  formIsValid = ({ amount, card, expiry, cvv, pin }) => {
+    if (
+      !isNaN(amount) !== true ||
+      !isNaN(card) !== true ||
+      card.length < 16 ||
+      cvv.length !== 3 ||
+      pin.length !== 4
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ loading: false });
+      return;
+    }
+
+    console.log(this.state);
 
     // console.log(formState);
     // if (Object.keys(formState.errors).length > 0) {
@@ -100,86 +120,73 @@ class Card extends Component {
             <p>We'll confirm your payment shortly</p>
           </ModalBody>
         </Modal>
-        {this.state.loading ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "30rem"
-            }}
-            className="mt-5"
-          >
-            <Spinner />
-          </div>
-        ) : (
-          <Form onSubmit={this.handleSubmit}>
-            <FormItem>
-              <label>Amount</label>
+        <Form onSubmit={this.handleSubmit}>
+          <FormItem>
+            <label>Amount</label>
+            <input
+              type="text"
+              onChange={this.handleInputChange}
+              name="amount"
+              value={this.state.amount}
+              required
+              placeholder="100"
+            />
+          </FormItem>
+          <HalfColumn>
+            <FormItem className="mr-3">
+              <label>Card Number</label>
               <input
                 type="text"
                 onChange={this.handleInputChange}
-                name="amount"
-                value={this.state.amount}
+                name="card"
+                value={this.state.card}
+                minLength="16"
                 required
-                placeholder="100"
+                placeholder="5078982018301145"
               />
             </FormItem>
-            <HalfColumn>
-              <FormItem className="mr-3">
-                <label>Card Number</label>
-                <input
-                  type="text"
-                  onChange={this.handleInputChange}
-                  name="card"
-                  value={this.state.card}
-                  required
-                  placeholder="5078982018301145"
-                />
-              </FormItem>
-              <FormItem>
-                <label>Expiry</label>
-                <input
-                  type="text"
-                  onChange={this.handleInputChange}
-                  name="expiry"
-                  value={this.state.expiry}
-                  required
-                  placeholder="MM/YY"
-                />
-              </FormItem>
-            </HalfColumn>
-            <HalfColumn>
-              <FormItem className="mr-3">
-                <label>CVV</label>
-                <input
-                  type="text"
-                  onChange={this.handleInputChange}
-                  name="cvv"
-                  value={this.state.cvv}
-                  required
-                  placeholder="***"
-                />
-              </FormItem>
-              <FormItem>
-                <label>Pin</label>
-                <input
-                  type="text"
-                  onChange={this.handleInputChange}
-                  name="pin"
-                  value={this.state.pin}
-                  required
-                  placeholder="****"
-                  minLength="4"
-                  maxLength="4"
-                />
-              </FormItem>
-            </HalfColumn>
-            <button type="submit" className="mr-2">
-              <span>Load</span>
-            </button>
-          </Form>
-        )}
+            <FormItem>
+              <label>Expiry</label>
+              <input
+                type="text"
+                onChange={this.handleInputChange}
+                name="expiry"
+                value={this.state.expiry}
+                required
+                placeholder="MM/YY"
+              />
+            </FormItem>
+          </HalfColumn>
+          <HalfColumn>
+            <FormItem className="mr-3">
+              <label>CVV</label>
+              <input
+                type="text"
+                onChange={this.handleInputChange}
+                name="cvv"
+                value={this.state.cvv}
+                required
+                placeholder="***"
+              />
+            </FormItem>
+            <FormItem>
+              <label>Pin</label>
+              <input
+                type="password"
+                onChange={this.handleInputChange}
+                name="pin"
+                value={this.state.pin}
+                required
+                placeholder="****"
+                minLength="4"
+                maxLength="4"
+              />
+            </FormItem>
+          </HalfColumn>
+          <button type="submit" className="mr-2" disabled={this.state.loading}>
+            <span>{this.state.loading ? "Please wait..." : "Load"}</span>
+          </button>
+        </Form>
       </>
     );
   }
@@ -191,3 +198,17 @@ export default connect(
   null,
   mapDispatchToProps
 )(Card);
+
+// {this.state.loading ? (
+//   <div
+//     style={{
+//       display: "flex",
+//       justifyContent: "center",
+//       alignItems: "center",
+//       minHeight: "36rem"
+//     }}
+//     className="mt-5"
+//   >
+//     <Spinner />
+//   </div>
+// ) : (
