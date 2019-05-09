@@ -190,7 +190,7 @@ class EditProfileForm extends Component {
                 <Spinner />
               </div>
             ) : (
-              <Form onSumit={this.handleSubmit}>
+              <Form onSubmit={this.handleSubmit}>
                 <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
                 <FormItem>
                   <label>Full Name</label>
