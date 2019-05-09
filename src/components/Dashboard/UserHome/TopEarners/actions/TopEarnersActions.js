@@ -33,7 +33,6 @@ export const fetchTopEarners = () => (dispatch, getState) => {
   )
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       if (data.error) {
         dispatch(fetchTopEarnersFail());
       } else {

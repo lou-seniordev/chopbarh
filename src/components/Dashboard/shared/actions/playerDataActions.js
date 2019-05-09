@@ -14,7 +14,6 @@ export const fetchPlayerFail = () => ({
 });
 
 export const fetchPlayerData = () => (dispatch, getState) => {
-  console.log(getState());
   const postRequestData = {
     "@class": ".LogEventRequest",
     eventKey: "LOAD_DATA_PLAYER",
