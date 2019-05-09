@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
-import { useFormState } from "react-use-form-state";
 import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
@@ -118,81 +118,138 @@ const HalfColumn = styled.div`
   }
 `;
 
-export default function EditProfileForm({ userInfo }) {
-  const [loading, setLoading] = useState(false);
-  const [formState, { text, tel, select, date, email }] = useFormState({
-    FULL_NAME: userInfo.DisplayName,
-    SEX: "M"
-  });
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    formState.values["@class"] = ".LogEventRequest";
-    formState.values["eventKey"] = "REGISTER_PLAYER";
-    formState.values["playerId"] = userInfo.PlayerID;
-    const formValue = JSON.stringify(formState.values);
-
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          setLoading(false);
-        } else {
-          setLoading(false);
-        }
-      })
-      .catch(err => {
-        setLoading(false);
-      });
+class EditProfileForm extends Component {
+  state = {
+    loading: false,
+    name: "",
+    phone: "",
+    dob: "",
+    sex: "",
+    email: ""
   };
 
-  return (
-    <>
-      <EditProfileWrapper>
-        <Container>
-          <Form onSumit={handleSubmit}>
-            <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
-            <FormItem>
-              <label>Full Name</label>
-              <input {...text("FULL_NAME")} />
-            </FormItem>
-            <FormItem>
-              <label>Phone Number</label>
-              <input {...tel("PHONE_NUM")} required />
-            </FormItem>
-            <HalfColumn>
-              <FormItem className="mr-3">
-                <label>Date of Birth</label>
-                <input {...date("DOB")} required />
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const postData = {
+      FULL_NAME: null,
+      PHONE_NUM: null,
+      DOB: null,
+      SEX: null,
+      Email: null
+    };
+
+    postData["@class"] = ".LogEventRequest";
+    postData["eventKey"] = "REGISTER_PLAYER";
+    //postData["playerId"] = userInfo.PlayerID;
+    const formValue = JSON.stringify(postData);
+
+    // axios(
+    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: formValue
+    //   }
+    // )
+    //   .then(response => {
+    //     if (response.data.error) {
+    //       setLoading(false);
+    //     } else {
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     setLoading(false);
+    //   });
+  };
+
+  render() {
+    return (
+      <>
+        <EditProfileWrapper>
+          <Container>
+            <Form onSumit={this.handleSubmit}>
+              <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
+              <FormItem>
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  value={this.state.name}
+                  name="name"
+                  onChange={this.handleInputChange}
+                  required
+                />
               </FormItem>
               <FormItem>
-                <label>Sex</label>
-                <select {...select("SEX")} required>
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
-                </select>
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  value={this.state.phone}
+                  name="phone"
+                  onChange={this.handleInputChange}
+                  required
+                />
               </FormItem>
-            </HalfColumn>
-            <FormItem>
-              <label>Email</label>
-              <input {...email("Email")} required />
-            </FormItem>
-            <button type="submit" className="mr-2" disabled={loading}>
-              <span>Save</span>
-            </button>
-          </Form>
-        </Container>
-      </EditProfileWrapper>
-    </>
-  );
+              <HalfColumn>
+                <FormItem className="mr-3">
+                  <label>Date of Birth</label>
+                  <input
+                    type="date"
+                    value={this.state.dob}
+                    name="dob"
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <FormItem>
+                  <label>Sex</label>
+                  <select
+                    value={this.state.sex}
+                    name="sex"
+                    onChange={this.handleInputChange}
+                    required
+                  >
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </FormItem>
+              </HalfColumn>
+              <FormItem>
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={this.state.email}
+                  name="email"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </FormItem>
+              <button
+                type="submit"
+                className="mr-2"
+                disabled={this.state.loading}
+              >
+                <span>{this.state.loading ? "Saving..." : "Save"}</span>
+              </button>
+            </Form>
+          </Container>
+        </EditProfileWrapper>
+      </>
+    );
+  }
 }
+
+const mapDispatchToProps = {};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(EditProfileForm);

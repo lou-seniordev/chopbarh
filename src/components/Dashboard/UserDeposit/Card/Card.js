@@ -10,7 +10,7 @@ class Card extends Component {
   state = {
     loading: false,
     formErrorModal: false,
-    successModal: false,
+    submitOTPModal: false,
     amount: "",
     card: "",
     expiry: "",
@@ -22,8 +22,12 @@ class Card extends Component {
     this.setState({ formErrorModal: !this.state.formErrorModal });
   };
 
-  successModalToggle = () => {
-    this.setState({ successModal: !this.state.successModal });
+  submitOTPModalToggle = () => {
+    this.setState({ submitOTPModal: !this.state.submitOTPModal });
+  };
+
+  closeOTPModal = () => {
+    this.setState({ submitOTPModal: false });
   };
 
   handleInputChange = ({ target }) => {
@@ -122,17 +126,17 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.successModal}
-          toggle={this.successModalToggle}
+          isOpen={this.state.submitOTPModal}
+          toggle={this.submitOTPModalToggle}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitOTP />
+            <SubmitOTP closeModal={this.closeOTPModal} />
           </ModalBody>
         </Modal>
-        <button
+        {/* <button
           onClick={() => {
             this.props.history.push({
               pathname: "/deposit/charge",
@@ -142,7 +146,7 @@ class Card extends Component {
           className="mr-2"
         >
           <span>Press the Button</span>
-        </button>
+        </button> */}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
@@ -152,7 +156,7 @@ class Card extends Component {
               name="amount"
               value={this.state.amount}
               required
-              placeholder="100"
+              placeholder="Amount"
             />
           </FormItem>
           <HalfColumn>
@@ -165,7 +169,7 @@ class Card extends Component {
                 value={this.state.card}
                 minLength="16"
                 required
-                placeholder="5078982018301145"
+                placeholder="Account Number"
               />
             </FormItem>
             <FormItem>

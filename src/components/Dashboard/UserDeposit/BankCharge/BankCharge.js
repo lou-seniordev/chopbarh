@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../actions/chargeActions";
