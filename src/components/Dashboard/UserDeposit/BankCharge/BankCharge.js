@@ -22,13 +22,13 @@ export default function BankCharge() {
     console.log(formState);
 
     const postData = {
-      email: formState.values.email,
+      email: "somebody@mail.com",
       amount: formState.values.amount * 100,
       bank: {
         code: formState.values.bank,
         account_number: formState.values.account_number
       },
-      birthday: formState.values.birthday
+      birthday: "1995-03-29"
     };
 
     console.log(postData);
@@ -80,32 +80,6 @@ export default function BankCharge() {
                     <option value="057">Zenith Bank</option>
                   </select>
                 </FormItem>
-                <FormItem>
-                  <label>Email</label>
-                  <input
-                    {...email({
-                      name: "email"
-                    })}
-                    required
-                    placeholder="johndoe@gmail.com"
-                  />
-                </FormItem>
-                <FormItem>
-                  <label>Amount</label>
-                  <input
-                    {...text({
-                      name: "amount",
-                      validate: value => {
-                        if (!isNaN(value) !== true) {
-                          return "This should be a number";
-                        }
-                      }
-                    })}
-                    min="0"
-                    required
-                    placeholder="100"
-                  />
-                </FormItem>
                 <HalfColumn>
                   <FormItem className="mr-3">
                     <label>Account Number</label>
@@ -123,13 +97,19 @@ export default function BankCharge() {
                     />
                   </FormItem>
                   <FormItem>
-                    <label>Birthday</label>
+                    <label>Amount</label>
                     <input
-                      {...date({
-                        name: "birthday"
+                      {...text({
+                        name: "amount",
+                        validate: value => {
+                          if (!isNaN(value) !== true) {
+                            return "This should be a number";
+                          }
+                        }
                       })}
+                      min="0"
                       required
-                      placeholder="Birthday"
+                      placeholder="100"
                     />
                   </FormItem>
                 </HalfColumn>
