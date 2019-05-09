@@ -196,6 +196,7 @@ class EditProfileForm extends Component {
                   <label>Full Name</label>
                   <input
                     type="text"
+                    // value={this.props.playerData.FullName}
                     value={this.state.name}
                     name="name"
                     onChange={this.handleInputChange}
