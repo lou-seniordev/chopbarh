@@ -5,8 +5,9 @@ export const setCoinBalanceInit = () => ({
   type: actionType.SET_COIN_BALANCE_INIT
 });
 
-export const setCoinBalanceSuccess = () => ({
-  type: actionType.SET_COIN_BALANCE_SUCCESS
+export const setCoinBalanceSuccess = coinValue => ({
+  type: actionType.SET_COIN_BALANCE_SUCCESS,
+  coinValue
 });
 
 export const setCoinBalanceFail = () => ({
@@ -35,7 +36,7 @@ export const setCoinBalance = amount => (dispatch, getState) => {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      dispatch(setCoinBalanceSuccess());
+      dispatch(setCoinBalanceSuccess(amount));
       dispatch(fetchPlayerData());
     })
     .catch(err => {

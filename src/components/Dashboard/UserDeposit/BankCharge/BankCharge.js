@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
+import { setChargeReference } from "../actions/chargeActions";
 
 const Banks = [
   { name: "Access Bank", value: "044" },
@@ -69,17 +70,30 @@ class BankCharge extends Component {
     };
 
     console.log(postData);
-    // const response = await fetch("https://api.paystack.co/charge", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(postData)
-    // });
-    // const data = await response.json();
+    try {
+      const response = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+      console.log(data);
+      this.setState({ loading: false });
+      if (data.data.status === "send_otp") {
+        this.props.setChargeReference(data.data.reference);
+        this.setState({ successModal: true });
+      } else {
+        this.setState({ formErrorModal: true });
+      }
+    } catch (err) {
+      this.setState({ loading: false });
+    }
   };
+
   render() {
     return (
       <>
@@ -107,75 +121,60 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Form onSubmit={this.handleSubmit}>
-          {this.state.loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-              className="mt-5"
+          <FormItem>
+            <label>Bank</label>
+            <select
+              name="bank"
+              value={this.state.bank}
+              onChange={this.handleInputChange}
+              required
+              placeholder="johndoe@gmail.com"
             >
-              <Spinner />
-            </div>
-          ) : (
-            <>
-              <FormItem>
-                <label>Bank</label>
-                <select
-                  name="bank"
-                  value={this.state.bank}
-                  onChange={this.handleInputChange}
-                  required
-                  placeholder="johndoe@gmail.com"
-                >
-                  {Banks.map(bank => (
-                    <option key={bank.name} value={bank.value}>
-                      {bank.name}
-                    </option>
-                  ))}
-                </select>
-              </FormItem>
-              <HalfColumn>
-                <FormItem className="mr-3">
-                  <label>Account Number</label>
-                  <input
-                    type="text"
-                    value={this.state.account_number}
-                    onChange={this.handleInputChange}
-                    name="account_number"
-                    required
-                    placeholder="5078982018"
-                  />
-                </FormItem>
-                <FormItem>
-                  <label>Amount</label>
-                  <input
-                    type="text"
-                    value={this.state.amount}
-                    onChange={this.handleInputChange}
-                    name="amount"
-                    required
-                    placeholder="100"
-                  />
-                </FormItem>
-              </HalfColumn>
-              <button
-                type="submit"
-                className="mr-2"
-                disabled={this.state.loading}
-              >
-                <span>{this.state.loading ? "Processing" : "Load"}</span>
-              </button>
-            </>
-          )}
+              {Banks.map(bank => (
+                <option key={bank.name} value={bank.value}>
+                  {bank.name}
+                </option>
+              ))}
+            </select>
+          </FormItem>
+          <HalfColumn>
+            <FormItem className="mr-3">
+              <label>Account Number</label>
+              <input
+                type="text"
+                value={this.state.account_number}
+                onChange={this.handleInputChange}
+                name="account_number"
+                required
+                placeholder="5078982018"
+              />
+            </FormItem>
+            <FormItem>
+              <label>Amount</label>
+              <input
+                type="text"
+                value={this.state.amount}
+                onChange={this.handleInputChange}
+                name="amount"
+                required
+                placeholder="100"
+              />
+            </FormItem>
+          </HalfColumn>
+          <button type="submit" className="mr-2" disabled={this.state.loading}>
+            <span>{this.state.loading ? "Processing" : "Load"}</span>
+          </button>
         </Form>
       </>
     );
   }
 }
 
+const mapDispatchToProps = {
+  setChargeReference
+};
+
 export default connect(
   null,
-  null
+  mapDispatchToProps
 )(BankCharge);
