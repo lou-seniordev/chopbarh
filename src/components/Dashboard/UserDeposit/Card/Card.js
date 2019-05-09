@@ -34,6 +34,8 @@ class Card extends Component {
       !isNaN(amount) !== true ||
       !isNaN(card) !== true ||
       expiry.length !== 5 ||
+      expiry.split("/").length !== 2 ||
+      expiry.split("/")[1].length !== 2 ||
       card.length < 16 ||
       cvv.length !== 3 ||
       pin.length !== 4
