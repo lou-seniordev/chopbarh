@@ -1,29 +1,37 @@
-import React, { useState } from "react";
-import { useFormState } from "react-use-form-state";
+import React, { Component } from "react";
 import { Spinner } from "reactstrap";
+import { connect } from "react-redux";
 import { Form, FormItem } from "../../../../styles/CardCharge";
-import { increaseCoinBalance } from "../../../lib/increaseCoinBalance";
+//import { increaseCoinBalance } from "../../../lib/increaseCoinBalance";
 
-export default function SubmitOTP({ reference }) {
-  const [loading, setLoading] = useState(false);
-  const [formState, { text }] = useFormState();
+class SubmitOTP extends Component {
+  state = {
+    otp: "",
+    loading: false
+  };
 
-  const handleSubmit = async (event, setCoinValue) => {
+  formIsValid = ({ otp }) => {
+    if (!isNaN(otp) !== true || otp.length !== 6) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = async event => {
     event.preventDefault();
-    setLoading(true);
+    this.setState({ loading: true });
 
-    if (Object.keys(formState.errors).length > 0) {
+    if (!this.formIsValid(this.state)) {
+      this.setState({ loading: true });
+      // Handle Error
       return;
     }
 
-    console.log(formState);
-
     const postData = {
-      reference: reference,
-      otp: formState.values.otp
+      otp: this.state.otp,
+      reference: this.props.reference
     };
 
-    console.log(postData);
     try {
       const response = await fetch(
         "https://api.paystack.co/charge/submit_otp",
@@ -40,60 +48,68 @@ export default function SubmitOTP({ reference }) {
 
       const data = await response.json();
       console.log(data);
-      const value = +data.data.amount;
-      increaseCoinBalance(+data.data.amount / 100)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          setCoinValue(value / 100);
-          setLoading(false);
-        })
-        .catch(err => {
-          console.log(err);
-          setLoading(false);
-        });
+      const value = +data.data.amount / 100;
+      //   increaseCoinBalance(+data.data.amount / 100)
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       console.log(data);
+      //       setCoinValue(value / 100);
+      //       setLoading(false);
+      //     })
+      //     .catch(err => {
+      //       console.log(err);
+      //       setLoading(false);
+      //     });
     } catch (err) {
       console.log(err);
       setLoading(false);
     }
   };
-
-  return (
-    <Form onSubmit={handleSubmit}>
-      {loading ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-          className="mt-5"
-        >
-          <Spinner />
-        </div>
-      ) : (
-        <>
-          <FormItem>
-            <label>Enter OTP</label>
-            <input
-              {...text({
-                name: "otp",
-                validate: value => {
-                  if (!isNaN(value) !== true) {
-                    return "This should be a number";
-                  }
-                }
-              })}
-              min="0"
-              required
-              placeholder="OTP"
-            />
-          </FormItem>
-          <button type="submit" className="mr-2">
-            <span>Submit</span>
-          </button>
-        </>
-      )}
-    </Form>
-  );
+  render() {
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        {this.state.loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+            className="mt-5"
+          >
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            <FormItem>
+              <label>Enter OTP</label>
+              <input
+                type="text"
+                name="otp"
+                value={this.state.otp}
+                onChange={this.handleInputChange}
+                min="0"
+                required
+                placeholder="OTP"
+              />
+            </FormItem>
+            <button type="submit" className="mr-2">
+              <span>Submit</span>
+            </button>
+          </>
+        )}
+      </Form>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  reference: state.charge.reference
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubmitOTP);
