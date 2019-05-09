@@ -18,6 +18,7 @@ import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
 import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
 import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
+import DepositOutcome from "../components/Dashboard/UserDeposit/DepositOutcome/DepositOutcome";
 
 /*
 
@@ -82,6 +83,7 @@ class Layout extends Component {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/edit-profile" component={EditProfilePage} />
             <Route path="/signup" component={SignUpPage} />
+            <Route path="/deposit/charge" component={DepositOutcome} />
             <Route path="/deposit" component={UserDeposit} />
             <Route path="/withdraw" component={UserWithdraw} />
             <Route path="/transaction" component={UserTransaction} />
