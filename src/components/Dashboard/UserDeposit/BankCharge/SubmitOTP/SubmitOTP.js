@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useFormState } from "react-use-form-state";
 import { Spinner } from "reactstrap";
 import { Form, FormItem } from "../../../../styles/CardCharge";
-import { AppContext } from "../../../../../hoc/AppContext";
 import { increaseCoinBalance } from "../../../lib/increaseCoinBalance";
 
 export default function SubmitOTP({ reference }) {
@@ -60,45 +59,41 @@ export default function SubmitOTP({ reference }) {
   };
 
   return (
-    <AppContext.Consumer>
-      {({ setCoinValue }) => (
-        <Form onSubmit={event => handleSubmit(event, setCoinValue)}>
-          {loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-              className="mt-5"
-            >
-              <Spinner />
-            </div>
-          ) : (
-            <>
-              <FormItem>
-                <label>Enter OTP</label>
-                <input
-                  {...text({
-                    name: "otp",
-                    validate: value => {
-                      if (!isNaN(value) !== true) {
-                        return "This should be a number";
-                      }
-                    }
-                  })}
-                  min="0"
-                  required
-                  placeholder="OTP"
-                />
-              </FormItem>
-              <button type="submit" className="mr-2">
-                <span>Submit</span>
-              </button>
-            </>
-          )}
-        </Form>
+    <Form onSubmit={handleSubmit}>
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+          className="mt-5"
+        >
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          <FormItem>
+            <label>Enter OTP</label>
+            <input
+              {...text({
+                name: "otp",
+                validate: value => {
+                  if (!isNaN(value) !== true) {
+                    return "This should be a number";
+                  }
+                }
+              })}
+              min="0"
+              required
+              placeholder="OTP"
+            />
+          </FormItem>
+          <button type="submit" className="mr-2">
+            <span>Submit</span>
+          </button>
+        </>
       )}
-    </AppContext.Consumer>
+    </Form>
   );
 }

@@ -8,7 +8,7 @@ class Card extends Component {
   state = {
     loading: false,
     formErrorModal: false,
-    successModal: true,
+    successModal: false,
     referenceValue: null,
     amount: "",
     card: "",
