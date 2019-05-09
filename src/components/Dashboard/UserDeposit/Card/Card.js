@@ -9,7 +9,7 @@ export default function Card() {
   const [formErrorModal, setFormErrorModal] = useState(false);
   const [referenceValue, setReferenceValue] = useState(null);
   const [successModal, setSuccessModal] = useState(false);
-  const [formState, { text, email, password }] = useFormState();
+  const [formState, { text, password }] = useFormState();
 
   const formErrorModalToggle = () => {
     setFormErrorModal(!formErrorModal);

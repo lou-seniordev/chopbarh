@@ -49,7 +49,9 @@ export default function DepositTabs() {
             <BankCharge />
           </TabPanel>
           <TabPanel>
-            <Voucher />
+            <div style={{ minHeight: "36rem" }}>
+              <Voucher />
+            </div>
           </TabPanel>
           {/* <TabPanel>
           <PayWithAccountNumber />
