@@ -6,6 +6,12 @@ import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
 import { setChargeReference } from "../actions/chargeActions";
+import {
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal
+} from "../actions/modalActions";
 
 class Card extends Component {
   state = {
@@ -96,10 +102,10 @@ class Card extends Component {
       this.setState({ loading: false });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
-        this.setState({ submitOTPModal: true });
+        this.props.openOTPModal();
       } else if (data.data.status === "send_pin") {
         this.props.setChargeReference(data.data.reference);
-        this.setState({ submitPinModal: true });
+        this.props.openPinModal();
       } else {
         this.setState({ formErrorModal: true });
       }
@@ -136,25 +142,25 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.submitPinModal}
-          toggle={this.submitPinModalToggle}
+          isOpen={this.props.pinModal}
+          toggle={this.closePinModal}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitPin closeModal={this.closePinModal} />
+            <SubmitPin />
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.submitOTPModal}
-          toggle={this.submitOTPModalToggle}
+          isOpen={this.props.otpModal}
+          toggle={this.closeOTPModal}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitOTP closeModal={this.closeOTPModal} />
+            <SubmitOTP />
           </ModalBody>
         </Modal>
         {/* <button
@@ -243,13 +249,22 @@ class Card extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  otpModal: state.modal.submitOTPModal,
+  pinModal: state.modal.submitPinModal
+});
+
 const mapDispatchToProps = {
-  setChargeReference
+  setChargeReference,
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal
 };
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Card)
 );

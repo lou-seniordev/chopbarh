@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
     case actionType.OPEN_SUBMIT_OTP_MODAL:
       return {
         ...state,
-        submitOTPModal: false
+        submitOTPModal: true
       };
     case actionType.CLOSE_SUBMIT_OTP_MODAL:
       return {

@@ -3,6 +3,12 @@ import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { Form, FormItem } from "../../../../styles/CardCharge";
+import {
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal
+} from "../../actions/modalActions";
 
 class SubmitPin extends Component {
   state = {
@@ -54,34 +60,13 @@ class SubmitPin extends Component {
 
       const data = await response.json();
       console.log(data);
-      //  if (data.data) {
-      //     const value = +data.data.amount / 100;
-      //     this.props.setCoinBalance(value);
-      //     // this.props.history.push({
-      //     //   pathname: "/deposit/charge",
-      //     //   search: "?status=true"
-      //     // });
-      //   } else {
-      //     //Error here
-      //     // this.props.history.push({
-      //     //   pathname: "/deposit/charge",
-      //     //   search: "?status=false"
-      //     // });
-      //   }
-      //   console.log(data);
-      //   this.setState({ loading: false });
-      //   //const value = +data.data.amount / 100;
-      //   //   increaseCoinBalance(+data.data.amount / 100)
-      //   //     .then(response => response.json())
-      //   //     .then(data => {
-      //   //       console.log(data);
-      //   //       setCoinValue(value / 100);
-      //   //       setLoading(false);
-      //   //     })
-      //   //     .catch(err => {
-      //   //       console.log(err);
-      //   //       setLoading(false);
-      //   //     });
+      this.setState({ loading: false });
+      if (data.data.status === "send_otp") {
+        this.props.closePinModal();
+        this.props.openOTPModal();
+      } else {
+        this.props.closePinModal();
+      }
     } catch (err) {
       console.log(err);
       this.setState({ loading: false });
@@ -133,4 +118,16 @@ const mapStateToProps = state => ({
   loading: state.coinBalance.loading
 });
 
-export default withRouter(connect(mapStateToProps)(SubmitPin));
+const mapDispatchToProps = {
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SubmitPin)
+);
