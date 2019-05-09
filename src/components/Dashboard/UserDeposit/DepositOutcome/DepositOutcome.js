@@ -4,6 +4,10 @@ import Footer from "../../../UI/Footer/Footer";
 import UserNavigation from "../../shared/UserNavigation/UserNavigation";
 
 export default class DepositOutcome extends Component {
+  componentDidMount = () => {
+    console.log(this.props)
+  }
+
   render() {
     return (
       <>

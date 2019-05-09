@@ -1,128 +1,181 @@
-import React, { useState } from "react";
-import { useFormState } from "react-use-form-state";
-import { Spinner } from "reactstrap";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 
-export default function BankCharge() {
-  const [loading, setLoading] = useState(false);
-  const [referenceValue, setReferenceValue] = useState(null);
-  const [formState, { text, select }] = useFormState({
-    bank: "044"
-  });
+const Banks = [
+  { name: "Access Bank", value: "044" },
+  { name: "ALAT by Wema", value: "035A" },
+  { name: "Fidelity Bank", value: "070" },
+  { name: "First City Monument Bank", value: "214" },
+  { name: "Sterling Bank", value: "232" },
+  { name: "Union Bank of Nigeria", value: "032" },
+  { name: "Unity Bank", value: "215" },
+  { name: "Zenith Bank", value: "057" }
+];
 
-  const handleSubmit = async event => {
+class BankCharge extends Component {
+  state = {
+    loading: false,
+    formErrorModal: false,
+    successModal: false,
+    amount: "",
+    bank: "",
+    account_number: ""
+  };
+
+  formErrorModalToggle = () => {
+    this.setState({ formErrorModal: !this.state.formErrorModal });
+  };
+
+  successModalToggle = () => {
+    this.setState({ successModal: !this.state.successModal });
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  formIsValid = ({ amount, bank, account_number }) => {
+    if (
+      !isNaN(amount) !== true ||
+      !isNaN(account_number) !== true ||
+      account_number.length < 10
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = async event => {
     event.preventDefault();
-    setLoading(true);
+    this.setState({ loading: true });
 
-    if (Object.keys(formState.errors).length > 0) {
+    if (!this.formIsValid(this.state)) {
+      this.setState({ formErrorModal: true });
+      this.setState({ loading: false });
       return;
     }
 
-    console.log(formState);
-
     const postData = {
       email: "somebody@mail.com",
-      amount: formState.values.amount * 100,
+      amount: this.state.amount * 100,
       bank: {
-        code: formState.values.bank,
-        account_number: formState.values.account_number
+        code: this.state.bank,
+        account_number: this.state.account_number
       },
       birthday: "1995-03-29"
     };
 
     console.log(postData);
-    const response = await fetch("https://api.paystack.co/charge", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(postData)
-    });
-    const data = await response.json();
-    setReferenceValue(data.data.reference);
+    // const response = await fetch("https://api.paystack.co/charge", {
+    //   method: "POST",
+    //   mode: "cors",
+    //   headers: {
+    //     Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(postData)
+    // });
+    // const data = await response.json();
   };
-
-  return (
-    <>
-      {!referenceValue ? (
-        <>
-          <Form onSubmit={handleSubmit}>
-            {loading ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-                className="mt-5"
-              >
-                <Spinner />
-              </div>
-            ) : (
-              <>
-                <FormItem>
-                  <label>Bank</label>
-                  <select
-                    {...select("bank")}
+  render() {
+    return (
+      <>
+        <Modal
+          isOpen={this.state.formErrorModal}
+          toggle={this.formErrorModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <h2>Ooops!</h2>
+            <p>Something went wrong. Please try again</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.state.successModal}
+          toggle={this.successModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitOTP />
+          </ModalBody>
+        </Modal>
+        <Form onSubmit={this.handleSubmit}>
+          {this.state.loading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+              className="mt-5"
+            >
+              <Spinner />
+            </div>
+          ) : (
+            <>
+              <FormItem>
+                <label>Bank</label>
+                <select
+                  name="bank"
+                  value={this.state.bank}
+                  onChange={this.handleInputChange}
+                  required
+                  placeholder="johndoe@gmail.com"
+                >
+                  {Banks.map(bank => (
+                    <option key={bank.name} value={bank.value}>
+                      {bank.name}
+                    </option>
+                  ))}
+                </select>
+              </FormItem>
+              <HalfColumn>
+                <FormItem className="mr-3">
+                  <label>Account Number</label>
+                  <input
+                    type="text"
+                    value={this.state.account_number}
+                    onChange={this.handleInputChange}
+                    name="account_number"
                     required
-                    placeholder="johndoe@gmail.com"
-                  >
-                    <option value="044">Access Bank</option>
-                    <option value="035A">ALAT by Wema</option>
-                    <option value="070">Fidelity Bank</option>
-                    <option value="214">First City Monument Bank</option>
-                    <option value="232">Sterling Bank</option>
-                    <option value="032">Union Bank of Nigeria</option>
-                    <option value="215">Unity Bank</option>
-                    <option value="057">Zenith Bank</option>
-                  </select>
+                    placeholder="5078982018"
+                  />
                 </FormItem>
-                <HalfColumn>
-                  <FormItem className="mr-3">
-                    <label>Account Number</label>
-                    <input
-                      {...text({
-                        name: "account_number",
-                        validate: value => {
-                          if (!isNaN(value) !== true) {
-                            return "This should be a number";
-                          }
-                        }
-                      })}
-                      required
-                      placeholder="5078982018"
-                    />
-                  </FormItem>
-                  <FormItem>
-                    <label>Amount</label>
-                    <input
-                      {...text({
-                        name: "amount",
-                        validate: value => {
-                          if (!isNaN(value) !== true) {
-                            return "This should be a number";
-                          }
-                        }
-                      })}
-                      min="0"
-                      required
-                      placeholder="100"
-                    />
-                  </FormItem>
-                </HalfColumn>
-                <button type="submit" className="mr-2">
-                  <span>Load</span>
-                </button>
-              </>
-            )}
-          </Form>
-        </>
-      ) : (
-        <SubmitOTP reference={referenceValue} />
-      )}
-    </>
-  );
+                <FormItem>
+                  <label>Amount</label>
+                  <input
+                    type="text"
+                    value={this.state.amount}
+                    onChange={this.handleInputChange}
+                    name="amount"
+                    required
+                    placeholder="100"
+                  />
+                </FormItem>
+              </HalfColumn>
+              <button
+                type="submit"
+                className="mr-2"
+                disabled={this.state.loading}
+              >
+                <span>{this.state.loading ? "Processing" : "Load"}</span>
+              </button>
+            </>
+          )}
+        </Form>
+      </>
+    );
+  }
 }
+
+export default connect(
+  null,
+  null
+)(BankCharge);

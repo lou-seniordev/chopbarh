@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
+import { withRouter } from "react-router-dom";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../actions/chargeActions";
@@ -131,6 +132,17 @@ class Card extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
+        <button
+          onClick={() => {
+            this.props.history.push({
+              pathname: "/deposit/charge",
+              search: "?status=false"
+            });
+          }}
+          className="mr-2"
+        >
+          <span>Press the Button</span>
+        </button>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
@@ -207,10 +219,12 @@ const mapDispatchToProps = {
   setChargeReference
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Card);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Card)
+);
 
 // {this.state.loading ? (
 //   <div
