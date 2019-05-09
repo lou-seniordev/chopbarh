@@ -50,36 +50,42 @@ class Card extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
+      this.setState({formErrorModal: true})
       this.setState({ loading: false });
       return;
     }
 
-    console.log(this.state);
+    const cardExpirationData = this.state.expiry.split("/");
+    const year = `20${cardExpirationData[1]}`;
 
-    // const cardExpirationData = formState.values.card_expiry.split("/");
+    const postData = {
+      email: "somebody@nice.com",
+      amount: this.state.amount * 100,
+      card: {
+        number: this.state.card,
+        cvv: this.state.cvv,
+        expiry_month: cardExpirationData[0],
+        expiry_year: year
+      },
+      pin: this.state.pin
+    };
 
-    // const postData = {
-    //   email: "somebody@nice.com",
-    //   amount: formState.values.amount * 100,
-    //   card: {
-    //     number: formState.values.card_number,
-    //     cvv: formState.values.cvv,
-    //     expiry_month: cardExpirationData[0],
-    //     expiry_year: cardExpirationData[1]
-    //   },
-    //   pin: formState.values.pin
-    // };
-
-    // const response = await fetch("https://api.paystack.co/charge", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(postData)
-    // });
-    // const data = await response.json();
+    try {
+      const response = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+      this.setState({ loading: false });
+      console.log(data);
+    } catch (err) {
+      this.setState({ loading: false });
+    }
     // setReferenceValue(data.data.reference);
     // increaseCoinBalance(+data.data.amount / 100)
     //   .then(response => response.json())
