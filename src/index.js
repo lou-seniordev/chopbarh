@@ -12,13 +12,15 @@ import playerDataReducer from "./store/reducers/playerDataReducer";
 import topEarnersReducer from "./store/reducers/topEarnersReducer";
 import chargeReducer from "./store/reducers/chargeReducer";
 import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
+import modalReducer from "./store/reducers/modalReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   player: playerDataReducer,
   topEarners: topEarnersReducer,
   charge: chargeReducer,
-  coinBalance: coinBalanceReducer
+  coinBalance: coinBalanceReducer,
+  modal: modalReducer
 });
 
 const composeEnhancers =
