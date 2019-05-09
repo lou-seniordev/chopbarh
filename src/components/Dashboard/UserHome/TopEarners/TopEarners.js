@@ -50,7 +50,7 @@ class TopEarners extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* {this.state.results.slice(0, 4).map(player => (
+              {this.props.results.slice(0, 4).map(player => (
                 <tr key={player.PlayerID}>
                   <td>{player.FullName}</td>
                   <td>{player.Email}</td>
@@ -58,7 +58,7 @@ class TopEarners extends Component {
                     &#8358;{new Intl.NumberFormat().format(player.TotalWinning)}
                   </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         ) : (

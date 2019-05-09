@@ -15,9 +15,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_TOP_EARNERS_SUCCESS:
       return {
         ...state,
-        results: {
-          ...action.data
-        },
+        results: [...action.data],
         loading: false
       };
     case actionType.FETCH_TOP_EARNERS_FAIL:
