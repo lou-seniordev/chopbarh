@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Spinner } from "reactstrap";
 import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
@@ -24,6 +25,7 @@ const Container = styled.div`
   background: #fff;
   padding: 4rem 10rem;
   box-shadow: 0px 18px 31px 0px rgba(214, 207, 214, 0.83);
+  min-height: 40rem;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     padding: 4rem 5rem;
@@ -176,70 +178,83 @@ class EditProfileForm extends Component {
       <>
         <EditProfileWrapper>
           <Container>
-            <Form onSumit={this.handleSubmit}>
-              <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
-              <FormItem>
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  value={this.state.name}
-                  name="name"
-                  onChange={this.handleInputChange}
-                  required
-                />
-              </FormItem>
-              <FormItem>
-                <label>Phone Number</label>
-                <input
-                  type="text"
-                  value={this.state.phone}
-                  name="phone"
-                  onChange={this.handleInputChange}
-                  required
-                />
-              </FormItem>
-              <HalfColumn>
-                <FormItem className="mr-3">
-                  <label>Date of Birth</label>
+            {this.props.loading ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: "5rem"
+                }}
+              >
+                <Spinner />
+              </div>
+            ) : (
+              <Form onSumit={this.handleSubmit}>
+                <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
+                <FormItem>
+                  <label>Full Name</label>
                   <input
-                    type="date"
-                    value={this.state.dob}
-                    name="dob"
+                    type="text"
+                    value={this.state.name}
+                    name="name"
                     onChange={this.handleInputChange}
                     required
                   />
                 </FormItem>
                 <FormItem>
-                  <label>Sex</label>
-                  <select
-                    value={this.state.sex}
-                    name="sex"
+                  <label>Phone Number</label>
+                  <input
+                    type="text"
+                    value={this.state.phone}
+                    name="phone"
                     onChange={this.handleInputChange}
                     required
-                  >
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                  </select>
+                  />
                 </FormItem>
-              </HalfColumn>
-              <FormItem>
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={this.state.email}
-                  name="email"
-                  onChange={this.handleInputChange}
-                  required
-                />
-              </FormItem>
-              <button
-                type="submit"
-                className="mr-2"
-                disabled={this.state.loading}
-              >
-                <span>{this.state.loading ? "Saving..." : "Save"}</span>
-              </button>
-            </Form>
+                <HalfColumn>
+                  <FormItem className="mr-3">
+                    <label>Date of Birth</label>
+                    <input
+                      type="date"
+                      value={this.state.dob}
+                      name="dob"
+                      onChange={this.handleInputChange}
+                      required
+                    />
+                  </FormItem>
+                  <FormItem>
+                    <label>Sex</label>
+                    <select
+                      value={this.state.sex}
+                      name="sex"
+                      onChange={this.handleInputChange}
+                      required
+                    >
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                    </select>
+                  </FormItem>
+                </HalfColumn>
+                <FormItem>
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    value={this.state.email}
+                    name="email"
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+                <button
+                  type="submit"
+                  className="mr-2"
+                  disabled={this.state.loading}
+                >
+                  <span>{this.state.loading ? "Saving..." : "Save"}</span>
+                </button>
+              </Form>
+            )}
           </Container>
         </EditProfileWrapper>
       </>
@@ -247,9 +262,14 @@ class EditProfileForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loading: state.player.loading,
+  playerData: state.player.playerData
+});
+
 const mapDispatchToProps = {};
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(EditProfileForm);
