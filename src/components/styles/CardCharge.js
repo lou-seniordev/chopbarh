@@ -4,7 +4,7 @@ import breakPoints from "./breakpoints";
 
 export const Form = styled.form`
   position: relative;
-  min-height: 30rem;
+  min-height: 36rem;
 
   button {
     all: unset;

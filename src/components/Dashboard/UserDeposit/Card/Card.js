@@ -33,7 +33,7 @@ export default function Card() {
     const cardExpirationData = formState.values.card_expiry.split("/");
 
     const postData = {
-      email: formState.values.email,
+      email: "somebody@nice.com",
       amount: formState.values.amount * 100,
       card: {
         number: formState.values.card_number,
@@ -106,16 +106,6 @@ export default function Card() {
             </div>
           ) : (
             <Form onSubmit={handleSubmit}>
-              <FormItem>
-                <label>Email</label>
-                <input
-                  {...email({
-                    name: "email"
-                  })}
-                  required
-                  placeholder="johndoe@gmail.com"
-                />
-              </FormItem>
               <FormItem>
                 <label>Amount</label>
                 <input
