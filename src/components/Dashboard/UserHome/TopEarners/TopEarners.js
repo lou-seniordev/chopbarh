@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchTopEarners } from "./actions/TopEarnersActions";
