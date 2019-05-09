@@ -7,7 +7,7 @@ import SubmitOTP from "./SubmitOTP/SubmitOTP";
 export default function BankCharge() {
   const [loading, setLoading] = useState(false);
   const [referenceValue, setReferenceValue] = useState(null);
-  const [formState, { text, email, date, select }] = useFormState({
+  const [formState, { text, select }] = useFormState({
     bank: "044"
   });
 

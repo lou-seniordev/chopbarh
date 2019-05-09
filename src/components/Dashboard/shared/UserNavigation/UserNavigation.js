@@ -6,7 +6,7 @@ import Icon from "../Icon/Icon";
 import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
 import Withdrawal from "../../../assets/svg/Withdrawal.svg";
-//import Play from "../../../assets/svg/Play.svg";
+import Play from "../../../assets/svg/Play.svg";
 import Transaction from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
@@ -63,12 +63,12 @@ export default function UserNavigation() {
           Withdraw
         </Link>
       </NavItem>
-      {/* <NavItem>
+      <NavItem>
         <Icon icon={Play} height="18" />
         <Link to="play" className="ml-2">
           Play
         </Link>
-      </NavItem> */}
+      </NavItem>
       <NavItem>
         <Icon icon={Transaction} height="18" />
         <Link to="transaction" className="ml-2">
