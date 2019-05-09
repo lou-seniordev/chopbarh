@@ -35,37 +35,9 @@ export default class ContextProvider extends Component {
     coinValue: null
   };
 
-  componentDidMount = () => {
-    if (localStorage.getItem("chopbarh-id")) {
-      fetchData().then(response => {
-        if (response.data.error) {
-          this.setState({ dataLoading: false });
-        } else {
-          this.setState({
-            userGameData: response.data.scriptData.PlayerData,
-            dataLoading: false
-          });
-        }
-      });
-    }
-    // Handle possible error case here
-  };
+  componentDidMount = () => {};
 
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log("Props Changed...");
-    if (prevProps !== this.props) {
-      fetchData().then(response => {
-        if (response.data.error) {
-          this.setState({ dataLoading: false });
-        } else {
-          this.setState({
-            userGameData: response.data.scriptData.PlayerData,
-            dataLoading: false
-          });
-        }
-      });
-    }
-  };
+  componentDidUpdate = (prevProps, prevState) => {};
 
   authUpdate = () => {
     this.setState({ auth: localStorage.getItem("chopbarh-token") !== null });
