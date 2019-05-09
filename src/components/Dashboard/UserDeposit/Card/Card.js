@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
+import { setChargeReference } from "../actions/chargeActions";
 
 class Card extends Component {
   state = {
     loading: false,
     formErrorModal: false,
     successModal: false,
-    referenceValue: null,
     amount: "",
     card: "",
     expiry: "",
@@ -83,6 +83,7 @@ class Card extends Component {
       const data = await response.json();
       this.setState({ loading: false });
       if (data.data.status === "send_otp") {
+        this.props.setChargeReference(data.data.reference);
         this.setState({ successModal: true });
       } else {
         this.setState({ formErrorModal: true });
@@ -202,7 +203,9 @@ class Card extends Component {
   }
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setChargeReference
+};
 
 export default connect(
   null,
