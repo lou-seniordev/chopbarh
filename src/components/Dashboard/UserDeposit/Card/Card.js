@@ -144,7 +144,7 @@ export default function Card() {
                       name: "card_expiry"
                     })}
                     required
-                    placeholder="12/2020"
+                    placeholder="MM/YY"
                   />
                 </FormItem>
               </HalfColumn>
@@ -161,7 +161,7 @@ export default function Card() {
                       }
                     })}
                     required
-                    placeholder="720"
+                    placeholder="***"
                   />
                 </FormItem>
                 <FormItem>
@@ -176,6 +176,7 @@ export default function Card() {
                       }
                     })}
                     required
+                    placeholder="****"
                     minLength="4"
                     maxLength="4"
                   />
