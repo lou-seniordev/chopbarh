@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
-//import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
+import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 
 class Card extends Component {
   state = {
     loading: false,
     formErrorModal: false,
-    successModal: false,
+    successModal: true,
     referenceValue: null,
     amount: "",
     card: "",
@@ -50,7 +50,7 @@ class Card extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({formErrorModal: true})
+      this.setState({ formErrorModal: true });
       this.setState({ loading: false });
       return;
     }
@@ -82,6 +82,11 @@ class Card extends Component {
       });
       const data = await response.json();
       this.setState({ loading: false });
+      if (data.data.status === "send_otp") {
+        this.setState({ successModal: true });
+      } else {
+        this.setState({ formErrorModal: true });
+      }
       console.log(data);
     } catch (err) {
       this.setState({ loading: false });
@@ -105,9 +110,11 @@ class Card extends Component {
         <Modal
           isOpen={this.state.formErrorModal}
           toggle={this.formErrorModalToggle}
-          className="pt-5 mt-4"
+          style={{
+            marginTop: "22rem"
+          }}
         >
-          <ModalBody className="text-center">
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
             <h2>Ooops!</h2>
             <p>Something went wrong. Please try again</p>
           </ModalBody>
@@ -115,11 +122,12 @@ class Card extends Component {
         <Modal
           isOpen={this.state.successModal}
           toggle={this.successModalToggle}
-          className="pt-5 mt-4"
+          style={{
+            marginTop: "22rem"
+          }}
         >
-          <ModalBody className="text-center">
-            <h2>Transaction Successful</h2>
-            <p>We'll confirm your payment shortly</p>
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitOTP />
           </ModalBody>
         </Modal>
         <Form onSubmit={this.handleSubmit}>

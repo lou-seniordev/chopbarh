@@ -77,7 +77,7 @@ export default function SubmitOTP({ reference }) {
           ) : (
             <>
               <FormItem>
-                <label>OTP</label>
+                <label>Enter OTP</label>
                 <input
                   {...text({
                     name: "otp",
@@ -89,7 +89,7 @@ export default function SubmitOTP({ reference }) {
                   })}
                   min="0"
                   required
-                  placeholder="100"
+                  placeholder="OTP"
                 />
               </FormItem>
               <button type="submit" className="mr-2">
