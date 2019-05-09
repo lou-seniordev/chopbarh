@@ -11,12 +11,14 @@ import authReducer from "./store/reducers/authReducer";
 import playerDataReducer from "./store/reducers/playerDataReducer";
 import topEarnersReducer from "./store/reducers/topEarnersReducer";
 import chargeReducer from "./store/reducers/chargeReducer";
+import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   player: playerDataReducer,
   topEarners: topEarnersReducer,
-  charge: chargeReducer
+  charge: chargeReducer,
+  coinBalance: coinBalanceReducer
 });
 
 const composeEnhancers =
