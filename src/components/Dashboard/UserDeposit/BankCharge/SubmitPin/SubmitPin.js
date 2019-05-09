@@ -91,7 +91,7 @@ class SubmitPin extends Component {
             <FormItem>
               <label>Enter Pin</label>
               <input
-                type="text"
+                type="password"
                 name="pin"
                 value={this.state.pin}
                 onChange={this.handleInputChange}
