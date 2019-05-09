@@ -33,6 +33,7 @@ class Card extends Component {
     if (
       !isNaN(amount) !== true ||
       !isNaN(card) !== true ||
+      expiry.length !== 5 ||
       card.length < 16 ||
       cvv.length !== 3 ||
       pin.length !== 4
@@ -52,13 +53,6 @@ class Card extends Component {
     }
 
     console.log(this.state);
-
-    // console.log(formState);
-    // if (Object.keys(formState.errors).length > 0) {
-    //   setLoading(false);
-    //   setFormErrorModal(true);
-    //   return;
-    // }
 
     // const cardExpirationData = formState.values.card_expiry.split("/");
 
