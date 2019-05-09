@@ -1,4 +1,5 @@
 import * as actionType from "../../../../store/actionTypes/actionTypes";
+import { fetchPlayerData } from "./playerDataActions";
 
 export const setCoinBalanceInit = () => ({
   type: actionType.SET_COIN_BALANCE_INIT
@@ -35,6 +36,7 @@ export const setCoinBalance = amount => (dispatch, getState) => {
     .then(data => {
       console.log(data);
       dispatch(setCoinBalanceSuccess());
+      dispatch(fetchPlayerData());
     })
     .catch(err => {
       dispatch(setCoinBalanceFail());

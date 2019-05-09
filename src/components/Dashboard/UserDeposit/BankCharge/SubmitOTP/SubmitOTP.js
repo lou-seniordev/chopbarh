@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { Form, FormItem } from "../../../../styles/CardCharge";
+import { setCoinBalance } from "../../../shared/actions/coinBalanceActions";
 //import { increaseCoinBalance } from "../../../lib/increaseCoinBalance";
 
 class SubmitOTP extends Component {
@@ -17,12 +19,16 @@ class SubmitOTP extends Component {
     return true;
   };
 
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ loading: true });
+      this.setState({ loading: false });
       // Handle Error
       return;
     }
@@ -47,8 +53,16 @@ class SubmitOTP extends Component {
       );
 
       const data = await response.json();
+      if (data.data) {
+        const value = +data.data.amount / 100;
+        this.props.setCoinBalance(value);
+        this.props.history.push("/user");
+      } else {
+        //Error here
+      }
       console.log(data);
-      const value = +data.data.amount / 100;
+      this.setState({ loading: false });
+      //const value = +data.data.amount / 100;
       //   increaseCoinBalance(+data.data.amount / 100)
       //     .then(response => response.json())
       //     .then(data => {
@@ -62,7 +76,7 @@ class SubmitOTP extends Component {
       //     });
     } catch (err) {
       console.log(err);
-      setLoading(false);
+      this.setState({ loading: false });
     }
   };
   render() {
@@ -93,8 +107,12 @@ class SubmitOTP extends Component {
                 placeholder="OTP"
               />
             </FormItem>
-            <button type="submit" className="mr-2">
-              <span>Submit</span>
+            <button
+              type="submit"
+              className="mr-2"
+              disabled={this.state.loading}
+            >
+              <span>{this.state.loading ? "Processing..." : "Submit"}</span>
             </button>
           </>
         )}
@@ -104,12 +122,17 @@ class SubmitOTP extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference
+  reference: state.charge.reference,
+  loading: state.coinBalance.loading
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setCoinBalance
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SubmitOTP);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SubmitOTP)
+);
