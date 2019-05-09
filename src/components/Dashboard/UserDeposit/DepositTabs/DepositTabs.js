@@ -20,40 +20,42 @@ const HeadingTwo = styled.h2`
 export default function DepositTabs() {
   return (
     <DepositTabsWrapper className="container">
-      <Tabs>
-        <TabList>
-          <Tab>
-            <HeadingTwo>Card</HeadingTwo>
-          </Tab>
-          <Tab>
-            <HeadingTwo>Quickteller</HeadingTwo>
-          </Tab>
-          <Tab>
-            <HeadingTwo>Banks</HeadingTwo>
-          </Tab>
-          <Tab>
-            <HeadingTwo>Voucher</HeadingTwo>
-          </Tab>
-          {/* <Tab>
+      <div className="col-md-6">
+        <Tabs>
+          <TabList>
+            <Tab>
+              <HeadingTwo>Card</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Quickteller</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Banks</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Voucher</HeadingTwo>
+            </Tab>
+            {/* <Tab>
             <HeadingTwo>Pay with Account Number</HeadingTwo>
           </Tab> */}
-        </TabList>
-        <TabPanel>
-          <Card />
-        </TabPanel>
-        <TabPanel>
-          <Quickteller />
-        </TabPanel>
-        <TabPanel>
-          <BankCharge />
-        </TabPanel>
-        <TabPanel>
-          <Voucher />
-        </TabPanel>
-        {/* <TabPanel>
+          </TabList>
+          <TabPanel>
+            <Card />
+          </TabPanel>
+          <TabPanel>
+            <Quickteller />
+          </TabPanel>
+          <TabPanel>
+            <BankCharge />
+          </TabPanel>
+          <TabPanel>
+            <Voucher />
+          </TabPanel>
+          {/* <TabPanel>
           <PayWithAccountNumber />
         </TabPanel> */}
-      </Tabs>
+        </Tabs>
+      </div>
     </DepositTabsWrapper>
   );
 }
