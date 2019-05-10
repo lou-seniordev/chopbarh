@@ -99,7 +99,13 @@ class Card extends Component {
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-      this.setState({ loading: false });
+      this.setState({
+        loading: false,
+        amount: "",
+        card: "",
+        expiry: "",
+        cvv: ""
+      });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
         this.props.openOTPModal();
