@@ -4,6 +4,14 @@ import { Modal, ModalBody } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../actions/chargeActions";
+import {
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal,
+  closeTransactionFailModal,
+  closeTransactionSuccessModal
+} from "../actions/modalActions";
 
 const Banks = [
   { name: "Access Bank", value: "044" },
@@ -85,7 +93,7 @@ class BankCharge extends Component {
       this.setState({ loading: false });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
-        this.setState({ successModal: true });
+        this.props.openOTPModal();
       } else {
         this.setState({ formErrorModal: true });
       }
@@ -171,7 +179,13 @@ class BankCharge extends Component {
 }
 
 const mapDispatchToProps = {
-  setChargeReference
+  setChargeReference,
+  openOTPModal,
+  closeOTPModal,
+  openPinModal,
+  closePinModal,
+  closeTransactionFailModal,
+  closeTransactionSuccessModal
 };
 
 export default connect(
