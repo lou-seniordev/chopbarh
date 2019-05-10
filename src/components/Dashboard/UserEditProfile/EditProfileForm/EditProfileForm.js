@@ -147,30 +147,30 @@ class EditProfileForm extends Component {
 
     postData["@class"] = ".LogEventRequest";
     postData["eventKey"] = "REGISTER_PLAYER";
-    //postData["playerId"] = userInfo.PlayerID;
+    postData["playerId"] = this.props.id;
     const formValue = JSON.stringify(postData);
 
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       setLoading(false);
-    //     } else {
-    //       setLoading(false);
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setLoading(false);
-    //   });
+    axios(
+      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: formValue
+      }
+    )
+      .then(response => {
+        if (response.data.error) {
+          this.setState({ loading: false });
+        } else {
+          this.setState({ loading: false });
+        }
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+      });
   };
 
   render() {
@@ -264,6 +264,7 @@ class EditProfileForm extends Component {
 }
 
 const mapStateToProps = state => ({
+  id: state.auth.id,
   loading: state.player.loading,
   playerData: state.player.playerData
 });
