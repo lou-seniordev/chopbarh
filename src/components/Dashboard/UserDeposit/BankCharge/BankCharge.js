@@ -7,8 +7,6 @@ import { setChargeReference } from "../actions/chargeActions";
 import {
   openOTPModal,
   closeOTPModal,
-  openPinModal,
-  closePinModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
 } from "../actions/modalActions";
