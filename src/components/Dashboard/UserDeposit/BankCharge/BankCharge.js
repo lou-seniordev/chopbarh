@@ -90,7 +90,12 @@ class BankCharge extends Component {
       });
       const data = await response.json();
       console.log(data);
-      this.setState({ loading: false });
+      this.setState({
+        loading: false,
+        amount: "",
+        bank: "",
+        account_number: ""
+      });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
         this.props.openOTPModal();
@@ -118,14 +123,44 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.successModal}
-          toggle={this.successModalToggle}
+          isOpen={this.props.otpModal}
+          toggle={this.props.closeOTPModal}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
             <SubmitOTP />
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.props.transactionSuccessModal}
+          toggle={this.props.closeTransactionSuccessModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Success!</h2>
+            <p>The Transaction was successful</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.props.transactionFailModal}
+          toggle={this.props.closeTransactionFailModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Failed!</h2>
+            <p>The transaction was not successful. Please try again</p>
           </ModalBody>
         </Modal>
         <Form onSubmit={this.handleSubmit}>
@@ -154,7 +189,7 @@ class BankCharge extends Component {
                 onChange={this.handleInputChange}
                 name="account_number"
                 required
-                placeholder="5078982018"
+                placeholder="Account Number"
               />
             </FormItem>
             <FormItem>
@@ -165,7 +200,7 @@ class BankCharge extends Component {
                 onChange={this.handleInputChange}
                 name="amount"
                 required
-                placeholder="100"
+                placeholder="Amount"
               />
             </FormItem>
           </HalfColumn>
@@ -178,17 +213,21 @@ class BankCharge extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  otpModal: state.modal.submitOTPModal,
+  transactionSuccessModal: state.modal.transactionSuccessModal,
+  transactionFailModal: state.modal.transactionFailModal
+});
+
 const mapDispatchToProps = {
   setChargeReference,
   openOTPModal,
   closeOTPModal,
-  openPinModal,
-  closePinModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(BankCharge);
