@@ -37,53 +37,43 @@ class SubmitPin extends Component {
       return;
     }
 
-    this.props.closePinModal();
-    this.props.openOTPModal();
-    // this.props.closePinModal();
+    const postData = {
+      pin: this.state.pin,
+      reference: this.props.reference
+    };
 
-    // closeModal();
+    try {
+      const response = await fetch(
+        "https://api.paystack.co/charge/submit_pin",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
 
-    // const postData = {
-    //   pin: this.state.pin,
-    //   reference: this.props.reference
-    // };
-
-    // try {
-    //   const response = await fetch(
-    //     "https://api.paystack.co/charge/submit_pin",
-    //     {
-    //       method: "POST",
-    //       mode: "cors",
-    //       headers: {
-    //         Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(postData)
-    //     }
-    //   );
-
-    //   const data = await response.json();
-    //   console.log(data);
-    //   this.setState({ loading: false });
-    //   if (data.data.status === "send_otp") {
-    //     this.props.closePinModal();
-    //     //this.props.openOTPModal();
-    //   } else {
-    //     this.props.closePinModal();
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   this.setState({ loading: false });
-    // }
+      const data = await response.json();
+      console.log(data);
+      this.setState({ loading: false });
+      if (data.data.status === "send_otp") {
+        this.props.closePinModal();
+        this.props.openOTPModal();
+      } else {
+        this.props.closePinModal();
+      }
+    } catch (err) {
+      console.log(err);
+      this.setState({ loading: false });
+    }
   };
 
   render() {
     return (
-      <Form
-        onSubmit={ev =>
-          this.handleSubmit(ev, this.props.open, this.props.close)
-        }
-      >
+      <Form onSubmit={this.handleSubmit}>
         {this.state.loading ? (
           <div
             style={{
