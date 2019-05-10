@@ -64,6 +64,10 @@ class Card extends Component {
     return true;
   };
 
+  componentDidMount = () => {
+    this.props.openPinModal();
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
@@ -143,13 +147,16 @@ class Card extends Component {
         </Modal>
         <Modal
           isOpen={this.props.pinModal}
-          toggle={this.closePinModal}
+          toggle={this.props.closePinModal}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitPin />
+            <SubmitPin
+              open={this.props.openOTPModal}
+              close={this.props.closePinModal}
+            />
           </ModalBody>
         </Modal>
         <Modal

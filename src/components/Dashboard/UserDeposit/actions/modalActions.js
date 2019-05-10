@@ -13,5 +13,5 @@ export const openPinModal = () => ({
 });
 
 export const closePinModal = () => ({
-  type: actionType.CLOSE_SUBMIT_OTP_MODAL
+  type: actionType.CLOSE_SUBMIT_PIN_MODAL
 });
