@@ -64,10 +64,6 @@ class Card extends Component {
     return true;
   };
 
-  componentDidMount = () => {
-    this.props.openPinModal();
-  };
-
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
