@@ -149,15 +149,12 @@ class Card extends Component {
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitPin
-              open={this.props.openOTPModal}
-              close={this.props.closePinModal}
-            />
+            <SubmitPin />
           </ModalBody>
         </Modal>
         <Modal
           isOpen={this.props.otpModal}
-          toggle={this.closeOTPModal}
+          toggle={this.props.closeOTPModal}
           style={{
             marginTop: "22rem"
           }}

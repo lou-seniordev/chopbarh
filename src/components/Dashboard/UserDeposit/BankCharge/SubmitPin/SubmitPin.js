@@ -27,7 +27,7 @@ class SubmitPin extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = async (event, open, close) => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -37,8 +37,8 @@ class SubmitPin extends Component {
       return;
     }
 
-    close();
-    open();
+    this.props.closePinModal();
+    this.props.openOTPModal();
     // this.props.closePinModal();
 
     // closeModal();
