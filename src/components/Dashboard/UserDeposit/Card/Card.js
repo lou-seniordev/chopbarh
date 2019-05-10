@@ -29,22 +29,6 @@ class Card extends Component {
     this.setState({ formErrorModal: !this.state.formErrorModal });
   };
 
-  submitOTPModalToggle = () => {
-    this.setState({ submitOTPModal: !this.state.submitOTPModal });
-  };
-
-  submitPinModalToggle = () => {
-    this.setState({ submitPinModal: !this.state.submitOTPModal });
-  };
-
-  closeOTPModal = () => {
-    this.setState({ submitOTPModal: false });
-  };
-
-  closeOTPModal = () => {
-    this.setState({ submitPinModal: false });
-  };
-
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
@@ -169,6 +153,18 @@ class Card extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
+        <Modal
+          isOpen={this.state.formErrorModal}
+          toggle={this.formErrorModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <h2>Ooops!</h2>
+            <p>Something went wrong. Please try again</p>
+          </ModalBody>
+        </Modal>
         {/* <button
           onClick={() => {
             this.props.history.push({
@@ -274,17 +270,3 @@ export default withRouter(
     mapDispatchToProps
   )(Card)
 );
-
-// {this.state.loading ? (
-//   <div
-//     style={{
-//       display: "flex",
-//       justifyContent: "center",
-//       alignItems: "center",
-//       minHeight: "36rem"
-//     }}
-//     className="mt-5"
-//   >
-//     <Spinner />
-//   </div>
-// ) : (
