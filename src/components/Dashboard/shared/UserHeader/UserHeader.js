@@ -91,7 +91,7 @@ class UserHeader extends Component {
                     {this.props.playerData.DisplayName}
                   </a>
                   <div
-                    className="dropdown-menu"
+                    className="dropdown-menu dropdown-menu-right"
                     aria-labelledby="navbarDropdown"
                   >
                     <Link className="dropdown-item" to="edit-profile">
