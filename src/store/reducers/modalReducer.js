@@ -3,7 +3,7 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   submitOTPModal: false,
   submitPinModal: false,
-  transactionSuccessModal: false,
+  transactionSuccessModal: true,
   transactionFailModal: false
 };
 

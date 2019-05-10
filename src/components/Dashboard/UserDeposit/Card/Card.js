@@ -10,7 +10,9 @@ import {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+  closeTransactionFailModal,
+  closeTransactionSuccessModal
 } from "../actions/modalActions";
 
 class Card extends Component {
@@ -154,28 +156,35 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
+          isOpen={this.props.transactionSuccessModal}
+          toggle={this.props.closeTransactionSuccessModal}
           style={{
             marginTop: "22rem"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Success!</h2>
+            <p>The Transaction was successful</p>
           </ModalBody>
         </Modal>
-        {/* <button
-          onClick={() => {
-            this.props.history.push({
-              pathname: "/deposit/charge",
-              search: "?status=false"
-            });
+        <Modal
+          isOpen={this.props.transactionFailModal}
+          toggle={this.props.closeTransactionFailModal}
+          style={{
+            marginTop: "22rem"
           }}
-          className="mr-2"
         >
-          <span>Press the Button</span>
-        </button> */}
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Failed!</h2>
+            <p>The transaction was not successful. Please try again</p>
+          </ModalBody>
+        </Modal>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
@@ -253,7 +262,9 @@ class Card extends Component {
 
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
-  pinModal: state.modal.submitPinModal
+  pinModal: state.modal.submitPinModal,
+  transactionSuccessModal: state.modal.transactionSuccessModal,
+  transactionFailModal: state.modal.transactionFailModal
 });
 
 const mapDispatchToProps = {
@@ -261,7 +272,9 @@ const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+  closeTransactionSuccessModal,
+  closeTransactionFailModal
 };
 
 export default withRouter(

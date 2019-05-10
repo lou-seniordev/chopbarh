@@ -4,7 +4,12 @@ import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { Form, FormItem } from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../shared/actions/coinBalanceActions";
-import { openOTPModal, closeOTPModal } from "../../actions/modalActions";
+import {
+  openOTPModal,
+  closeOTPModal,
+  openTransactionSuccessModal,
+  openTransactionFailModal
+} from "../../actions/modalActions";
 
 class SubmitOTP extends Component {
   state = {
@@ -23,7 +28,7 @@ class SubmitOTP extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = async (event, closeModal) => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -54,7 +59,10 @@ class SubmitOTP extends Component {
 
       const data = await response.json();
       console.log(data);
-      if (data.data) {
+      if (data.data.status === "success") {
+        this.props.closeOTPModal();
+        this.props.openTransactionSuccessModal();
+        // Do Success Message here
         // const value = +data.data.amount / 100;
         // this.props.setCoinBalance(value);
         // this.props.history.push({
@@ -87,9 +95,10 @@ class SubmitOTP extends Component {
       this.setState({ loading: false });
     }
   };
+
   render() {
     return (
-      <Form onSubmit={ev => this.handleSubmit(ev, this.props.closeModal)}>
+      <Form onSubmit={this.handleSubmit}>
         {this.state.loading ? (
           <div
             style={{
@@ -137,7 +146,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setCoinBalance,
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+  openTransactionSuccessModal,
+  openTransactionFailModal
 };
 
 export default withRouter(
