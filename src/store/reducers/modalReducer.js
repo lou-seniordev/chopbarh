@@ -2,7 +2,9 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   submitOTPModal: false,
-  submitPinModal: false
+  submitPinModal: false,
+  transactionSuccessModal: false,
+  transactionFailModal: false
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +28,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         submitOTPModal: false
+      };
+    case actionType.OPEN_TRANSACTION_SUCCESS_MODAL:
+      return {
+        ...state,
+        transactionSuccessModal: true
+      };
+    case actionType.CLOSE_TRANSACTION_SUCCESS_MODAL:
+      return {
+        ...state,
+        transactionSuccessModal: false
+      };
+    case actionType.OPEN_TRANSACTION_FAIL_MODAL:
+      return {
+        ...state,
+        transactionFailModal: true
+      };
+    case actionType.CLOSE_TRANSACTION_FAIL_MODAL:
+      return {
+        ...state,
+        transactionFailModal: false
       };
     default:
       return state;
