@@ -198,7 +198,7 @@ class BankCharge extends Component {
                 onChange={this.handleInputChange}
                 name="amount"
                 required
-                placeholder="Amount"
+                placeholder="Amount(NGN)"
               />
             </FormItem>
           </HalfColumn>
