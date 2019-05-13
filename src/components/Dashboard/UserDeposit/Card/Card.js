@@ -194,7 +194,7 @@ class Card extends Component {
               name="amount"
               value={this.state.amount}
               required
-              placeholder="Amount"
+              placeholder="Amount(NGN)"
             />
           </FormItem>
           <FormItem>
@@ -206,7 +206,7 @@ class Card extends Component {
               value={this.state.card}
               minLength="16"
               required
-              placeholder="Account Number"
+              placeholder="Enter Card Number"
             />
           </FormItem>
           <HalfColumn>
@@ -229,7 +229,7 @@ class Card extends Component {
                 name="cvv"
                 value={this.state.cvv}
                 required
-                placeholder="***"
+                placeholder="3 Digits behind Card"
               />
             </FormItem>
           </HalfColumn>
