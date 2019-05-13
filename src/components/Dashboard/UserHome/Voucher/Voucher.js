@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
+import { setVoucherValue } from "./actions/VoucherActions";
 //import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
 const VoucherWrapper = styled.div``;
@@ -118,6 +119,8 @@ class Voucher extends Component {
       const data = await response.json();
       console.log(data, response.status);
       if (response.status === 200) {
+        this.props.setVoucherValue(data.data.value);
+        // Open the modal here
         // const value = data.data.value;
         // increaseCoinBalance(data.data.value)
         //   .then(response => response.json())
@@ -131,8 +134,10 @@ class Voucher extends Component {
         //   });
       } else if (response.status === 422) {
         // setVoucherUsedModal(true);
+        this.setState({ loading: false });
+      } else {
+        this.setState({ loading: false });
       }
-      this.setState({ loading: false });
     } catch (err) {
       this.setState({ loading: false });
       console.log(err);
@@ -179,7 +184,11 @@ class Voucher extends Component {
   }
 }
 
+const mapDispatchToProps = {
+  setVoucherValue
+};
+
 export default connect(
   null,
-  null
+  mapDispatchToProps
 )(Voucher);

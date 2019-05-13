@@ -13,6 +13,7 @@ import topEarnersReducer from "./store/reducers/topEarnersReducer";
 import chargeReducer from "./store/reducers/chargeReducer";
 import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
 import modalReducer from "./store/reducers/modalReducer";
+import voucherReducer from "./store/reducers/voucherReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   topEarners: topEarnersReducer,
   charge: chargeReducer,
   coinBalance: coinBalanceReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  voucher: voucherReducer
 });
 
 const composeEnhancers =
