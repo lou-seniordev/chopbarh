@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
-import { useFormState } from "react-use-form-state";
+import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
-import { AppContext } from "../../../../hoc/AppContext";
 import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
 const VoucherWrapper = styled.div``;
@@ -62,23 +61,47 @@ const FormItem = styled.div`
   }
 `;
 
-export default function Voucher() {
-  const [loading, setLoading] = useState(false);
-  const [voucherUsedModal, setVoucherUsedModal] = useState(false);
-  const [formState, { text }] = useFormState();
-
-  const voucherUsedModalToggle = () => {
-    setVoucherUsedModal(!voucherUsedModal);
+class Voucher extends Component {
+  state = {
+    loading: false,
+    voucherModal: false,
+    voucher: ""
   };
 
-  const handleSubmit = async (event, setCoinValue) => {
-    event.preventDefault();
-    setLoading(true);
+  voucherUsedModalToggle = () => {
+    this.setState({ voucherModal: !this.state.voucherModal });
+  };
 
-    formState.values["by"] = localStorage.getItem("chopbarh-id")
-      ? localStorage.getItem("chopbarh-id")
-      : null;
-    const formValue = JSON.stringify(formState.values);
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  formIsValid = ({ voucher }) => {
+    if (!isNaN(voucher) !== true || voucher.length !== 10) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    this.setState({ loading: false });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ loading: false });
+      return;
+    }
+
+    const postData = {
+      pin: this.state.pin,
+      reference: this.props.reference
+    };
+
+    // formState.values["by"] = localStorage.getItem("chopbarh-id")
+    //   ? localStorage.getItem("chopbarh-id")
+    //   : null;
+    const formValue = JSON.stringify(postData);
+
     try {
       const response = await fetch(
         "https://private-anon-9955ca6aaa-chopbarhapi.apiary-mock.com/api/voucher/use",
@@ -100,51 +123,63 @@ export default function Voucher() {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            setCoinValue(value);
-            setLoading(false);
+            this.setState({ loading: false });
           })
           .catch(err => {
             console.log(err);
-            setLoading(false);
+            this.setState({ loading: false });
           });
       } else if (response.status === 422) {
-        setVoucherUsedModal(true);
+        // setVoucherUsedModal(true);
       }
-      setLoading(false);
+      this.setState({ loading: false });
     } catch (err) {
-      setLoading(false);
+      this.setState({ loading: false });
       console.log(err);
     }
   };
 
-  return (
-    <AppContext.Consumer>
-      {({ setCoinValue }) => (
-        <VoucherWrapper className="container">
-          <Modal
-            isOpen={voucherUsedModal}
-            toggle={voucherUsedModalToggle}
-            className="pt-5 mt-4"
-          >
-            <ModalBody className="text-center">
-              <p>This Voucher has already been used</p>
-            </ModalBody>
-          </Modal>
-          <FormWrapper onSubmit={event => handleSubmit(event, setCoinValue)}>
-            <form>
-              <FormItem>
-                <label>Load Voucher</label>
-              </FormItem>
-              <FormItem>
-                <input {...text("pin")} placeholder="Voucher Code" />
-              </FormItem>
-              <button type="submit" className="ml-2 mr-2" disabled={loading}>
-                <span>{loading ? "Loading..." : "Load"}</span>
-              </button>
-            </form>
-          </FormWrapper>
-        </VoucherWrapper>
-      )}
-    </AppContext.Consumer>
-  );
+  render() {
+    return (
+      <VoucherWrapper className="container">
+        <Modal
+          isOpen={this.state.voucherModal}
+          toggle={this.voucherUsedModalToggle}
+          className="pt-5 mt-4"
+        >
+          <ModalBody className="text-center">
+            <p>This Voucher has already been used</p>
+          </ModalBody>
+        </Modal>
+        <FormWrapper onSubmit={this.handleSubmit}>
+          <form>
+            <FormItem>
+              <label>Load Voucher</label>
+            </FormItem>
+            <FormItem>
+              <input
+                type="text"
+                name="voucher"
+                value={this.state.voucer}
+                onChange={this.handleInputChange}
+                placeholder="Voucher Code"
+              />
+            </FormItem>
+            <button
+              type="submit"
+              className="ml-2 mr-2"
+              disabled={this.state.loading}
+            >
+              <span>{this.state.loading ? "Loading..." : "Load"}</span>
+            </button>
+          </form>
+        </FormWrapper>
+      </VoucherWrapper>
+    );
+  }
 }
+
+export default connect(
+  null,
+  null
+)(Voucher);
