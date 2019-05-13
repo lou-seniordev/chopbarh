@@ -24,13 +24,6 @@ const FormWrapper = styled.div`
     font-size: 1.3rem;
     z-index: 200;
 
-    /* @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      align-self: flex-start;
-      padding: 0.5rem 1.7rem;
-      margin-bottom: 0.5rem;
-      margin-top: 0.5rem;
-    } */
-
     span {
       display: inline-block;
       transform: skew(20deg);
