@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useFormState } from "react-use-form-state";
 import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
-import breakPoints from "../../../styles/breakpoints";
 import { AppContext } from "../../../../hoc/AppContext";
 import { increaseCoinBalance } from "../../lib/increaseCoinBalance";
 
