@@ -167,9 +167,10 @@ class AccountNumber extends Component {
     if (!this.formIsValid(this.state)) {
       this.setState({ formErrorModal: true });
       this.setState({ loading: false });
-      console.log("Form Error");
       return;
     }
+
+    // Add Validation to check amount before withdrawing
 
     const postData = {
       account_bank: this.state.bank,
