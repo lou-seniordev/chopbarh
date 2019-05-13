@@ -14,7 +14,10 @@ export const setCoinBalanceFail = () => ({
   type: actionType.SET_COIN_BALANCE_FAIL
 });
 
-export const setCoinBalance = amount => (dispatch, getState) => {
+export const setCoinBalance = (amount, condition = 1) => (
+  dispatch,
+  getState
+) => {
   dispatch(setCoinBalanceInit());
   fetch(
     "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
@@ -29,7 +32,7 @@ export const setCoinBalance = amount => (dispatch, getState) => {
         eventKey: "PLAYER_COINS_UPDATE",
         playerId: getState().auth.id,
         Coins: amount,
-        Condition: 1
+        Condition: condition
       })
     }
   )
