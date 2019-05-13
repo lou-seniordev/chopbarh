@@ -177,6 +177,7 @@ class AccountNumber extends Component {
 
     if (this.state.amount > this.props.playerData.RealCoins) {
       this.setState({ overdraftModal: true });
+      return;
     }
 
     // Add Validation to check amount before withdrawing
