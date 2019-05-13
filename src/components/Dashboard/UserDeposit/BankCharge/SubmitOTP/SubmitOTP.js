@@ -65,16 +65,8 @@ class SubmitOTP extends Component {
         // Do Success Message here
         // const value = +data.data.amount / 100;
         // this.props.setCoinBalance(value);
-        // this.props.history.push({
-        //   pathname: "/deposit/charge",
-        //   search: "?status=true"
-        // });
       } else {
         //Error here
-        // this.props.history.push({
-        //   pathname: "/deposit/charge",
-        //   search: "?status=false"
-        // });
       }
       console.log(data);
       this.setState({ loading: false });
