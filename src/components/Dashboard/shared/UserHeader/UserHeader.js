@@ -52,7 +52,21 @@ class UserHeader extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          {!this.props.loading ? (
+          {this.props.loading ? (
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto" />
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <Link className="nav-link text-uppercase mr-5">
+                    <Spinner />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -101,20 +115,6 @@ class UserHeader extends Component {
                       Logout
                     </Link>
                   </div>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto" />
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link className="nav-link text-uppercase mr-5">
-                    <Spinner />
-                  </Link>
                 </li>
               </ul>
             </div>

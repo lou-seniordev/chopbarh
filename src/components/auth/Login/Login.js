@@ -60,7 +60,6 @@ class Login extends Component {
     };
     formState["@class"] = ".AuthenticationRequest";
     const formValue = JSON.stringify(formState);
-    console.log(formState, formValue);
 
     fetch(
       "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
@@ -75,7 +74,6 @@ class Login extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         if (data.authToken) {
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
