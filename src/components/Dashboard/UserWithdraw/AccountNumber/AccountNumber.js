@@ -1,100 +1,215 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Modal, ModalBody } from "reactstrap";
 import styled from "styled-components";
-import color from "../../../styles/colors";
-import breakPoints from "../../../styles/breakpoints";
+import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+import {
+  closeTransactionFailModal,
+  closeTransactionSuccessModal
+} from "../../UserDeposit/actions/modalActions";
 
-const Form = styled.form`
-  position: relative;
-
-  button {
-    all: unset;
-    padding: 0.5rem 1.3rem;
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    transform: skew(-20deg) translateX(-50%);
-    transition: all 0.2s;
-    color: ${color.colorWhite};
-    background: ${color.colorPrimary};
-    font-size: 1.3rem;
-    z-index: 200;
-
-    @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      font-size: 1.1rem;
-    }
-
-    span {
-      display: inline-block;
-      transform: skew(20deg);
-      color: #fff;
-    }
-
-    &:hover {
-      transform: translateY(-3px) skew(-20deg) translateX(-50%);
-      background: ${color.colorPrimaryHover};
-      color: ${color.colorWhite};
-    }
-  }
+const FormWrapper = styled(Form)`
+  min-height: 20rem;
 `;
 
-const FormItem = styled.div`
-  label {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #737773;
-    margin-bottom: 1rem;
-  }
+const Banks = [
+  { name: "Access Bank", value: "044" },
+  { name: "ALAT by Wema", value: "035A" },
+  { name: "Fidelity Bank", value: "070" },
+  { name: "First City Monument Bank", value: "214" },
+  { name: "Sterling Bank", value: "232" },
+  { name: "Union Bank of Nigeria", value: "032" },
+  { name: "Unity Bank", value: "215" },
+  { name: "Zenith Bank", value: "057" }
+];
 
-  input,
-  select {
-    color: #8d8e8d;
-    width: 100%;
-    height: 3.4rem;
-    margin-bottom: 2rem;
-    border: 0;
-    background: #f6f6f6;
-    outline: none;
-    padding: 3px 5px;
-  }
+class AccountNumber extends Component {
+  state = {
+    loading: false,
+    formErrorModal: false,
+    successModal: false,
+    amount: "",
+    bank: "",
+    account_number: ""
+  };
 
-  & > * {
-    display: block;
-    font-family: inherit;
-  }
-`;
+  formErrorModalToggle = () => {
+    this.setState({ formErrorModal: !this.state.formErrorModal });
+  };
 
-const HalfColumn = styled.div`
-  display: flex;
+  successModalToggle = () => {
+    this.setState({ successModal: !this.state.successModal });
+  };
 
-  @media only screen and (max-width: ${breakPoints.large}) {
-    flex-direction: column;
-  }
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
 
-  div {
-    width: 50%;
-
-    @media only screen and (max-width: ${breakPoints.large}) {
-      width: 100%;
+  formIsValid = ({ amount, bank, account_number }) => {
+    if (
+      !isNaN(amount) !== true ||
+      !isNaN(account_number) !== true ||
+      account_number.length < 10
+    ) {
+      return false;
     }
-  }
-`;
+    return true;
+  };
 
-export default function PhoneNumber() {
-  return (
-    <Form>
-      <HalfColumn>
-        <FormItem className="mr-3">
-          <label>Amount </label>
-          <input type="number" required />
-        </FormItem>
-        <FormItem>
-          <label>Account Number</label>
-          <input type="number" required />
-        </FormItem>
-      </HalfColumn>
-      <button type="submit" className="mr-2">
-        <span>Withdraw</span>
-      </button>
-    </Form>
-  );
+  handleSubmit = async event => {
+    event.preventDefault();
+    this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ formErrorModal: true });
+      this.setState({ loading: false });
+      return;
+    }
+
+    const postData = {
+      email: "somebody@mail.com",
+      amount: this.state.amount * 100,
+      bank: {
+        code: this.state.bank,
+        account_number: this.state.account_number
+      },
+      birthday: "1995-03-29"
+    };
+
+    console.log(postData);
+    try {
+      const response = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+      this.setState({
+        loading: false,
+        amount: "",
+        bank: "",
+        account_number: ""
+      });
+      if (data.data.status === "send_otp") {
+        this.props.openOTPModal();
+      } else {
+        this.setState({ formErrorModal: true });
+      }
+    } catch (err) {
+      this.setState({ loading: false });
+    }
+  };
+
+  render() {
+    return (
+      <>
+        <Modal
+          isOpen={this.state.formErrorModal}
+          toggle={this.formErrorModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <h2>Ooops!</h2>
+            <p>Something went wrong. Please try again</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.props.transactionSuccessModal}
+          toggle={this.props.closeTransactionSuccessModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Success!</h2>
+            <p>The Transaction was successful</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.props.transactionFailModal}
+          toggle={this.props.closeTransactionFailModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Failed!</h2>
+            <p>The transaction was not successful. Please try again</p>
+          </ModalBody>
+        </Modal>
+        <FormWrapper onSubmit={this.handleSubmit}>
+          <FormItem>
+            <label>Bank</label>
+            <select
+              name="bank"
+              value={this.state.bank}
+              onChange={this.handleInputChange}
+              required
+              placeholder="johndoe@gmail.com"
+            >
+              {Banks.map(bank => (
+                <option key={bank.name} value={bank.value}>
+                  {bank.name}
+                </option>
+              ))}
+            </select>
+          </FormItem>
+          <HalfColumn>
+            <FormItem className="mr-3">
+              <label>Account Number</label>
+              <input
+                type="text"
+                value={this.state.account_number}
+                onChange={this.handleInputChange}
+                name="account_number"
+                required
+                placeholder="Account Number"
+              />
+            </FormItem>
+            <FormItem>
+              <label>Amount</label>
+              <input
+                type="text"
+                value={this.state.amount}
+                onChange={this.handleInputChange}
+                name="amount"
+                required
+                placeholder="Amount(NGN)"
+              />
+            </FormItem>
+          </HalfColumn>
+          <button type="submit" className="mr-2" disabled={this.state.loading}>
+            <span>{this.state.loading ? "Processing" : "Load"}</span>
+          </button>
+        </FormWrapper>
+      </>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  transactionSuccessModal: state.modal.transactionSuccessModal,
+  transactionFailModal: state.modal.transactionFailModal
+});
+
+const mapDispatchToProps = {
+  closeTransactionFailModal,
+  closeTransactionSuccessModal
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountNumber);

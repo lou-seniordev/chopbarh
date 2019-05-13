@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-//import PhoneNumber from "../PhoneNumber/PhoneNumber";
+import AccountNumber from "../AccountNumber/AccountNumber";
 import Paga from "../Paga/Paga";
 
 const WithdrawTabsWrapper = styled.div`
@@ -20,16 +20,16 @@ export default function WithdrawTabs() {
       <div className="col-md-6">
         <Tabs>
           <TabList>
-            {/* <Tab>
-              <HeadingTwo>Phone Number</HeadingTwo>
-            </Tab> */}
+            <Tab>
+              <HeadingTwo>Account Number</HeadingTwo>
+            </Tab>
             <Tab>
               <HeadingTwo>Paga</HeadingTwo>
             </Tab>
           </TabList>
-          {/* <TabPanel>
-            <PhoneNumber />
-          </TabPanel> */}
+          <TabPanel>
+            <AccountNumber />
+          </TabPanel>
           <TabPanel>
             <Paga />
           </TabPanel>
