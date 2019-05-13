@@ -40,7 +40,6 @@ const Container = styled.div`
 const HeadingTwo = styled.h2`
   font-size: 2.5rem;
   color: ${color.colorPrimary};
-  /* color: #c5c7c5; */
   font-weight: bold;
 `;
 
@@ -129,6 +128,12 @@ class EditProfileForm extends Component {
     sex: "",
     email: ""
   };
+
+  // componentDidMount = () => {
+  //   if (!this.state.name) {
+  //     this.setState({ name: this.props.playerData.FullName });
+  //   }
+  // };
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
