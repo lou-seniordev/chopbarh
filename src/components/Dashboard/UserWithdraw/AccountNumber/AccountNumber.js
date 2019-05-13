@@ -9,7 +9,7 @@ import {
   closeTransactionFailModal,
   closeTransactionSuccessModal
 } from "../../UserDeposit/actions/modalActions";
-import { setCoinBalance } from "../../shared/actions/coinBalanceActions";
+import { setCashBalance } from "../../shared/actions/cashBalanceActions";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
@@ -131,6 +131,7 @@ class AccountNumber extends Component {
   state = {
     loading: false,
     formErrorModal: false,
+    overdraftModal: false,
     successModal: false,
     amount: "",
     bank: "",
@@ -143,6 +144,10 @@ class AccountNumber extends Component {
 
   successModalToggle = () => {
     this.setState({ successModal: !this.state.successModal });
+  };
+
+  overdraftModalToggle = () => {
+    this.setState({ overdraftModal: !this.state.overdraftModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -168,6 +173,10 @@ class AccountNumber extends Component {
       this.setState({ formErrorModal: true });
       this.setState({ loading: false });
       return;
+    }
+
+    if (this.state.amount > this.props.playerData.RealCoins) {
+      this.setState({ overdraftModal: true });
     }
 
     // Add Validation to check amount before withdrawing
@@ -203,7 +212,7 @@ class AccountNumber extends Component {
       });
       if (response.status === 200) {
         this.props.openTransactionSuccessModal();
-        // this.props.setCoinBalance(data.data.amount, 2);
+        // this.props.setCashBalance(data.data.amount, 2);
       } else {
         this.props.openTransactionFailModal();
       }
@@ -258,6 +267,21 @@ class AccountNumber extends Component {
             <p>The transaction was not successful. Please try again</p>
           </ModalBody>
         </Modal>
+        <Modal
+          isOpen={this.state.overdraftModal}
+          toggle={this.overdraftModalToggle}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center"
+            style={{ height: "20vh", paddingTop: "4rem" }}
+          >
+            <h2>Oh Snap!</h2>
+            <p>The amount is above your winnings</p>
+          </ModalBody>
+        </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Bank</label>
@@ -309,7 +333,8 @@ class AccountNumber extends Component {
 
 const mapStateToProps = state => ({
   transactionSuccessModal: state.modal.transactionSuccessModal,
-  transactionFailModal: state.modal.transactionFailModal
+  transactionFailModal: state.modal.transactionFailModal,
+  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {
@@ -317,7 +342,7 @@ const mapDispatchToProps = {
   openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal,
-  setCoinBalance
+  setCashBalance
 };
 
 export default connect(
