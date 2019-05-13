@@ -62,27 +62,13 @@ class SubmitOTP extends Component {
       if (data.data.status === "success") {
         this.props.closeOTPModal();
         this.props.openTransactionSuccessModal();
-        // Do Success Message here
-        // const value = +data.data.amount / 100;
-        // this.props.setCoinBalance(value);
+        const value = +data.data.amount / 100;
+        this.props.setCoinBalance(value);
       } else {
         //Error here
       }
       console.log(data);
       this.setState({ loading: false });
-      // We can safely remove this part
-      //const value = +data.data.amount / 100;
-      //   increaseCoinBalance(+data.data.amount / 100)
-      //     .then(response => response.json())
-      //     .then(data => {
-      //       console.log(data);
-      //       setCoinValue(value / 100);
-      //       setLoading(false);
-      //     })
-      //     .catch(err => {
-      //       console.log(err);
-      //       setLoading(false);
-      //     });
     } catch (err) {
       console.log(err);
       this.setState({ loading: false });
