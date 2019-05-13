@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
         ...state,
         voucherValue: action.value
       };
+    case actionType.AUTH_LOGOUT:
+      return {
+        ...state,
+        voucherValue: null
+      };
     default:
       return state;
   }

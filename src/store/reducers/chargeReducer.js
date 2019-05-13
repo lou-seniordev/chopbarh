@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
         ...state,
         reference: action.reference
       };
+    case actionType.AUTH_LOGOUT:
+      return {
+        ...state,
+        reference: null
+      };
     default:
       return state;
   }
