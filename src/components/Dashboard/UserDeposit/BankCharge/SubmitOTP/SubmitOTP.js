@@ -78,6 +78,7 @@ class SubmitOTP extends Component {
       }
       console.log(data);
       this.setState({ loading: false });
+      // We can safely remove this part
       //const value = +data.data.amount / 100;
       //   increaseCoinBalance(+data.data.amount / 100)
       //     .then(response => response.json())

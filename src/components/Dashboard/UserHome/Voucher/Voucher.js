@@ -118,7 +118,7 @@ class Voucher extends Component {
       const data = await response.json();
       console.log(data, response.status);
       if (response.status === 200) {
-        const value = data.data.value;
+        // const value = data.data.value;
         increaseCoinBalance(data.data.value)
           .then(response => response.json())
           .then(data => {
