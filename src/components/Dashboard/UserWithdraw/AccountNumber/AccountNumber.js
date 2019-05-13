@@ -182,7 +182,6 @@ class AccountNumber extends Component {
       reference: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-jk`
     };
 
-    console.log(postData);
     try {
       const response = await fetch(
         "https://ravesandboxapi.flutterwave.com/v2/gpx/transfers/create",
@@ -202,10 +201,9 @@ class AccountNumber extends Component {
         bank: "",
         account_number: ""
       });
-      console.log(data, response);
       if (response.status === 200) {
         this.props.openTransactionSuccessModal();
-        this.props.setCoinBalance(data.data.amount, 2);
+        // this.props.setCoinBalance(data.data.amount, 2);
       } else {
         this.props.openTransactionFailModal();
       }
