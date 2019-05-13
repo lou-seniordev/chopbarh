@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
-        loading: false,
+        loading: true,
         playerData: null
       };
     default:
