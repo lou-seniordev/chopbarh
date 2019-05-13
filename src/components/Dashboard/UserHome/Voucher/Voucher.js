@@ -120,18 +120,9 @@ class Voucher extends Component {
       console.log(data, response.status);
       if (response.status === 200) {
         this.props.setVoucherValue(data.data.value);
+        this.setState({ loading: false });
         // Open the modal here
         // const value = data.data.value;
-        // increaseCoinBalance(data.data.value)
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     console.log(data);
-        //     this.setState({ loading: false });
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //     this.setState({ loading: false });
-        //   });
       } else if (response.status === 422) {
         // setVoucherUsedModal(true);
         this.setState({ loading: false });
