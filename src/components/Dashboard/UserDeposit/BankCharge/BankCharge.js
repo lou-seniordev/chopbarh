@@ -169,7 +169,6 @@ class BankCharge extends Component {
               value={this.state.bank}
               onChange={this.handleInputChange}
               required
-              placeholder="johndoe@gmail.com"
             >
               {Banks.map(bank => (
                 <option key={bank.name} value={bank.value}>

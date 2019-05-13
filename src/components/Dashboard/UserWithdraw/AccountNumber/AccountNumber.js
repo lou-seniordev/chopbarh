@@ -4,24 +4,128 @@ import { Modal, ModalBody } from "reactstrap";
 import styled from "styled-components";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import {
+  openTransactionSuccessModal,
+  openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
 } from "../../UserDeposit/actions/modalActions";
+import { setCoinBalance } from "../../shared/actions/coinBalanceActions";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
 `;
 
 const Banks = [
-  { name: "Access Bank", value: "044" },
-  { name: "ALAT by Wema", value: "035A" },
-  { name: "Fidelity Bank", value: "070" },
-  { name: "First City Monument Bank", value: "214" },
-  { name: "Sterling Bank", value: "232" },
-  { name: "Union Bank of Nigeria", value: "032" },
-  { name: "Unity Bank", value: "215" },
-  { name: "Zenith Bank", value: "057" }
+  {
+    Id: 137,
+    Code: "011",
+    Name: "First Bank of Nigeria"
+  },
+  {
+    Id: 141,
+    Code: "057",
+    Name: "Zenith Bank"
+  },
+  {
+    Id: 142,
+    Code: "068",
+    Name: "Standard Chartered Bank"
+  },
+  {
+    Id: 144,
+    Code: "070",
+    Name: "Fidelity Bank"
+  },
+  {
+    Id: 145,
+    Code: "023",
+    Name: "CitiBank"
+  },
+  {
+    Id: 146,
+    Code: "215",
+    Name: "Unity Bank"
+  },
+  {
+    Id: 151,
+    Code: "301",
+    Name: "JAIZ Bank"
+  },
+  {
+    Id: 152,
+    Code: "050",
+    Name: "Ecobank Plc"
+  },
+  {
+    Id: 158,
+    Code: "221",
+    Name: "Stanbic IBTC Bank"
+  },
+  {
+    Id: 159,
+    Code: "501",
+    Name: "Fortis Microfinance Bank"
+  },
+  {
+    Id: 168,
+    Code: "035",
+    Name: "Wema Bank"
+  },
+  {
+    Id: 170,
+    Code: "063",
+    Name: "Diamond Bank"
+  },
+  {
+    Id: 172,
+    Code: "100",
+    Name: "SunTrust Bank"
+  },
+  {
+    Id: 177,
+    Code: "058",
+    Name: "GTBank Plc"
+  },
+  {
+    Id: 178,
+    Code: "032",
+    Name: "Union Bank"
+  },
+  {
+    Id: 179,
+    Code: "232",
+    Name: "Sterling Bank"
+  },
+  {
+    Id: 180,
+    Code: "076",
+    Name: "Skye Bank"
+  },
+  {
+    Id: 181,
+    Code: "082",
+    Name: "Keystone Bank"
+  },
+  {
+    Id: 186,
+    Code: "214",
+    Name: "First City Monument Bank"
+  },
+  {
+    Id: 190,
+    Code: "033",
+    Name: "United Bank for Africa"
+  },
+  {
+    Id: 191,
+    Code: "044",
+    Name: "Access Bank"
+  }
 ];
+
+// export default {
+//   secretKey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X"
+// };
 
 class AccountNumber extends Component {
   state = {
@@ -45,7 +149,7 @@ class AccountNumber extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  formIsValid = ({ amount, bank, account_number }) => {
+  formIsValid = ({ amount, account_number }) => {
     if (
       !isNaN(amount) !== true ||
       !isNaN(account_number) !== true ||
@@ -63,30 +167,33 @@ class AccountNumber extends Component {
     if (!this.formIsValid(this.state)) {
       this.setState({ formErrorModal: true });
       this.setState({ loading: false });
+      console.log("Form Error");
       return;
     }
 
     const postData = {
-      email: "somebody@mail.com",
-      amount: this.state.amount * 100,
-      bank: {
-        code: this.state.bank,
-        account_number: this.state.account_number
-      },
-      birthday: "1995-03-29"
+      account_bank: this.state.bank,
+      account_number: this.state.account_number,
+      amount: this.state.amount,
+      seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
+      narration: "Chopbarh Transfer",
+      currency: "NGN",
+      reference: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-jk`
     };
 
     console.log(postData);
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
+      const response = await fetch(
+        "https://ravesandboxapi.flutterwave.com/v2/gpx/transfers/create",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
       const data = await response.json();
       this.setState({
         loading: false,
@@ -94,13 +201,16 @@ class AccountNumber extends Component {
         bank: "",
         account_number: ""
       });
-      if (data.data.status === "send_otp") {
-        this.props.openOTPModal();
+      console.log(data, response);
+      if (response.status === 200) {
+        this.props.openTransactionSuccessModal();
+        this.props.setCoinBalance(data.data.amount, 2);
       } else {
-        this.setState({ formErrorModal: true });
+        this.props.openTransactionFailModal();
       }
     } catch (err) {
       this.setState({ loading: false });
+      this.setState({ formErrorModal: true });
     }
   };
 
@@ -157,11 +267,10 @@ class AccountNumber extends Component {
               value={this.state.bank}
               onChange={this.handleInputChange}
               required
-              placeholder="johndoe@gmail.com"
             >
               {Banks.map(bank => (
-                <option key={bank.name} value={bank.value}>
-                  {bank.name}
+                <option key={bank.Id} value={bank.Code}>
+                  {bank.Name}
                 </option>
               ))}
             </select>
@@ -191,7 +300,7 @@ class AccountNumber extends Component {
             </FormItem>
           </HalfColumn>
           <button type="submit" className="mr-2" disabled={this.state.loading}>
-            <span>{this.state.loading ? "Processing" : "Load"}</span>
+            <span>{this.state.loading ? "Processing..." : "Load"}</span>
           </button>
         </FormWrapper>
       </>
@@ -205,8 +314,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  openTransactionSuccessModal,
+  openTransactionFailModal,
   closeTransactionFailModal,
-  closeTransactionSuccessModal
+  closeTransactionSuccessModal,
+  setCoinBalance
 };
 
 export default connect(
