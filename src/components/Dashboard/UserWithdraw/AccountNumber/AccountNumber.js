@@ -166,6 +166,25 @@ class AccountNumber extends Component {
     return true;
   };
 
+  verifyAccount = (account, bank) => {
+    const postData = {
+      recipientaccount: account,
+      destbankcode: bank,
+      PBFPubKey: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X"
+    };
+
+    return fetch(
+      "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/resolve_account",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      }
+    ).then(response => response.json());
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
@@ -285,6 +304,7 @@ class AccountNumber extends Component {
           </ModalBody>
         </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
+          <h4>Account Name</h4>
           <FormItem>
             <label>Bank</label>
             <select
