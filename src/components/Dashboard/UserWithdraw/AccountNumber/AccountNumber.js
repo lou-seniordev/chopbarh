@@ -136,7 +136,9 @@ class AccountNumber extends Component {
     successModal: false,
     amount: "",
     bank: "",
-    account_number: ""
+    account_number: "",
+    account_confirmed: false,
+    account_name: ""
   };
 
   formErrorModalToggle = () => {
@@ -201,6 +203,23 @@ class AccountNumber extends Component {
     }
 
     // Verify the account here and return the account Name in the UI
+    // this.verifyAccount(this.state.account_number, this.state.bank)
+    //   .then(data => {
+    //     console.log(data);
+    //     if (data.data.data.accountname) {
+    //       this.setState({
+    //         account_confirmed: true,
+    //         account_name: data.data.data.accountname
+    //       });
+    //       console.log("Confirmed");
+    //     } else {
+    //       this.setState({ loading: false });
+    //       console.log("Not Confirmed");
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
 
     const postData = {
       account_bank: this.state.bank,
@@ -304,7 +323,12 @@ class AccountNumber extends Component {
           </ModalBody>
         </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
-          <h4>Account Name</h4>
+          {this.state.account_confirmed && (
+            <hgroup>
+              <h4>Account Name</h4>
+              <h5>{this.state.account_name}</h5>
+            </hgroup>
+          )}
           <FormItem>
             <label>Bank</label>
             <select
