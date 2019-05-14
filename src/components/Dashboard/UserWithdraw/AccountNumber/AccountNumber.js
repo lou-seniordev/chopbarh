@@ -181,6 +181,8 @@ class AccountNumber extends Component {
       return;
     }
 
+    // Verify the account here and return the account Name in the UI
+
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
