@@ -26,7 +26,7 @@ const HeaderWrapper = styled.div`
   }
 
   @media only screen and (max-width: ${breakpoint.small}) {
-    padding: 2rem 5rem;
+    padding: 2rem 3rem;
   }
 
   a {
