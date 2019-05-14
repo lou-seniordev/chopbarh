@@ -127,7 +127,7 @@ class Paga extends Component {
     return true;
   };
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -170,6 +170,37 @@ class Paga extends Component {
     let hash = CryptoJS.SHA512(hashParameter);
     hash = hash.toString(CryptoJS.enc.Hex);
     console.log(hash);
+
+    fetch(
+      "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Principal: "98F32858-CC3B-42D4-95A3-742110A8D405",
+          Credentials: "rR9@f8u@bBES",
+          Hash: hash
+        },
+        body: JSON.stringify(body)
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.responseCode === 0) {
+          this.setState({ loading: false, phone: "", amount: "" });
+          this.props.openTransactionSuccessModal();
+          // this.props.setCashBalance(data.amount, 2)
+        } else {
+          this.setState({ loading: false });
+          this.props.openTransactionFailModal();
+        }
+      })
+      .catch(err => {
+        console.log("Error", err);
+        this.setState({ formErrorModal: true });
+      });
 
     // fetch(
     //   "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
