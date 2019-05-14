@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import styled from "styled-components";
-import scuid from "scuid";
+//import scuid from 'scuid'
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import {
   openTransactionSuccessModal,
@@ -188,7 +188,7 @@ class AccountNumber extends Component {
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
       narration: "Chopbarh Transfer",
       currency: "NGN",
-      reference: `chopbarh-${scuid()}`
+      reference: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-jk`
     };
 
     try {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Modal, ModalBody } from "reactstrap";
 import CryptoJS from "crypto-js";
-import scuid from "scuid";
+//import scuid from "scuid";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import {
@@ -142,14 +142,20 @@ class Paga extends Component {
     //   return;
     // }
 
+    const newState = { ...this.state };
+    let sliced_phone_number = `234${newState.phone
+      .split("")
+      .slice(1)
+      .join("")}`;
+
     var hashParameter = "referenceNumber,amount,destinationAccount";
 
     var params = ("" + hashParameter).split(",");
     var body = {
-      referenceNumber: scuid(),
+      referenceNumber: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-ref`,
       amount: this.state.amount,
       minRecipientKYCLevel: "KYC2",
-      destinationAccount: "2348063645616",
+      destinationAccount: sliced_phone_number,
       alternateSenderName: "BitPesa"
     };
 
@@ -274,31 +280,33 @@ class Paga extends Component {
             <p>The amount is above your winnings</p>
           </ModalBody>
         </Modal>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Amount</label>
               <input
-                type="number"
+                type="text"
                 name="amount"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
+                placeholder="Amount(NGN)"
                 required
               />
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
               <input
-                type="number"
+                type="text"
                 name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
+                placeholder="Phone Number"
                 required
               />
             </FormItem>
           </HalfColumn>
-          <button type="submit" className="mr-2">
-            <span>Withdraw</span>
+          <button type="submit" className="mr-2" disabled={this.state.loading}>
+            <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </button>
         </Form>
       </>
