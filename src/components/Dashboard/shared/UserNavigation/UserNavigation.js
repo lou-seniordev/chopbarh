@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import color from "../../../styles/colors";
+import breakpoint from "../../../styles/breakpoints";
 import Icon from "../Icon/Icon";
 import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
@@ -19,6 +20,14 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+
+  @media only screen and (max-width: ${breakpoint.mediumLite}) {
+    padding: 2rem 8rem;
+  }
+
+  @media only screen and (max-width: ${breakpoint.small}) {
+    padding: 2rem 5rem;
+  }
 
   a {
     font-size: 1.34rem;
