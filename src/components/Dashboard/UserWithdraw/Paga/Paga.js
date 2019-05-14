@@ -138,7 +138,7 @@ class Paga extends Component {
     }
 
     if (this.state.amount > this.props.playerData.RealCoins) {
-      this.setState({ overdraftModal: true });
+      this.setState({ overdraftModal: true, loading: false });
       return;
     }
 
@@ -161,7 +161,6 @@ class Paga extends Component {
 
     hashParameter = "";
     for (let i in params) {
-      console.log(body[params[i]]);
       hashParameter += body[params[i]] || "";
     }
     hashParameter =
@@ -169,7 +168,6 @@ class Paga extends Component {
       "d98076e2d14c4045970edc466faa2ec8cc47c9b89b654001b5e4db27179a0b9559bee92b78034c558a9d24aca2fa4135db8938a3f4a74b7da1157dee68e15213";
     let hash = CryptoJS.SHA512(hashParameter);
     hash = hash.toString(CryptoJS.enc.Hex);
-    console.log(hash);
 
     fetch(
       "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
@@ -187,7 +185,6 @@ class Paga extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         if (data.responseCode === 0) {
           this.setState({ loading: false, phone: "", amount: "" });
           this.props.openTransactionSuccessModal();
