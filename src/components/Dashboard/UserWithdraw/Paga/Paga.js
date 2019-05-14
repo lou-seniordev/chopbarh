@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Modal, ModalBody } from "reactstrap";
 import CryptoJS from "crypto-js";
+import scuid from "scuid";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import {
@@ -145,7 +146,7 @@ class Paga extends Component {
 
     var params = ("" + hashParameter).split(",");
     var body = {
-      referenceNumber: "refe_135676",
+      referenceNumber: scuid(),
       amount: this.state.amount,
       minRecipientKYCLevel: "KYC2",
       destinationAccount: "2348063645616",
