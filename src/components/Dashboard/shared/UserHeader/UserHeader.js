@@ -74,23 +74,23 @@ class UserHeader extends Component {
               <ul className="navbar-nav mr-auto" />
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link className="nav-link text-uppercase mr-5">
+                  <span className="nav-link text-uppercase mr-5">
                     <Icon icon={CoinSymbol} height="15" />
                     {new Intl.NumberFormat().format(
                       this.props.playerData.CBCoins
                     )}
                     <Icon icon={VisibilityButton} height="10" />
-                  </Link>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link text-uppercase mr-5">
+                  <span className="nav-link text-uppercase mr-5">
                     <Icon icon={CashIcon} height="18" />
                     &#8358;
                     {new Intl.NumberFormat().format(
                       this.props.playerData.RealCoins
                     )}
                     <Icon icon={VisibilityButton} height="10" />
-                  </Link>
+                  </span>
                 </li>
                 <li className="nav-item dropdown">
                   <a
