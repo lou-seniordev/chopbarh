@@ -137,10 +137,10 @@ class Paga extends Component {
       return;
     }
 
-    // if (this.state.amount > this.props.playerData.RealCoins) {
-    //   this.setState({ overdraftModal: true });
-    //   return;
-    // }
+    if (this.state.amount > this.props.playerData.RealCoins) {
+      this.setState({ overdraftModal: true });
+      return;
+    }
 
     const newState = { ...this.state };
     let sliced_phone_number = `234${newState.phone
@@ -148,10 +148,10 @@ class Paga extends Component {
       .slice(1)
       .join("")}`;
 
-    var hashParameter = "referenceNumber,amount,destinationAccount";
+    let hashParameter = "referenceNumber,amount,destinationAccount";
 
-    var params = ("" + hashParameter).split(",");
-    var body = {
+    let params = ("" + hashParameter).split(",");
+    const body = {
       referenceNumber: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-ref`,
       amount: this.state.amount,
       minRecipientKYCLevel: "KYC2",
@@ -160,7 +160,7 @@ class Paga extends Component {
     };
 
     hashParameter = "";
-    for (var i in params) {
+    for (let i in params) {
       console.log(body[params[i]]);
       hashParameter += body[params[i]] || "";
     }
@@ -191,7 +191,7 @@ class Paga extends Component {
         if (data.responseCode === 0) {
           this.setState({ loading: false, phone: "", amount: "" });
           this.props.openTransactionSuccessModal();
-          // this.props.setCashBalance(data.amount, 2)
+          this.props.setCashBalance(body.amount, 2);
         } else {
           this.setState({ loading: false });
           this.props.openTransactionFailModal();
@@ -201,54 +201,6 @@ class Paga extends Component {
         console.log("Error", err);
         this.setState({ formErrorModal: true });
       });
-
-    // fetch(
-    //   "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
-    //   {
-    //     method: "POST",
-    //     mode: "cors",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Principal: "98F32858-CC3B-42D4-95A3-742110A8D405",
-    //       Credentials: "rR9@f8u@bBES",
-    //       Hash: hash
-    //     },
-    //     body: JSON.stringify(body)
-    //   }
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(err => console.log('Error', err));
-
-    // try {
-    //   const response = await fetch(
-    //     "https://ravesandboxapi.flutterwave.com/v2/gpx/transfers/create",
-    //     {
-    //       method: "POST",
-    //       mode: "cors",
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(postData)
-    //     }
-    //   );
-    //   const data = await response.json();
-    //   this.setState({
-    //     loading: false,
-    //     amount: "",
-    //     bank: "",
-    //     account_number: ""
-    //   });
-    //   if (response.status === 200) {
-    //     this.props.openTransactionSuccessModal();
-    //     // this.props.setCashBalance(data.data.amount, 2);
-    //   } else {
-    //     this.props.openTransactionFailModal();
-    //   }
-    // } catch (err) {
-    //   this.setState({ loading: false });
-    //   this.setState({ formErrorModal: true });
-    // }
   };
 
   render() {
