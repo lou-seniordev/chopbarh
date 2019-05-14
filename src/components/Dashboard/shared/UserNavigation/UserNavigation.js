@@ -7,7 +7,7 @@ import Home from "../../../assets/svg/home.svg";
 import Deposit from "../../../assets/svg/Deposit.svg";
 import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 import Play from "../../../assets/svg/Play.svg";
-import Transaction from "../../../assets/svg/Transaction.svg";
+import Transactions from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
   background: #dfebdf;
@@ -35,12 +35,6 @@ const NavItem = styled.div`
   display: flex;
   align-items: center;
 `;
-
-/*
-
-Should that be Transaction or Transactions?
-
-*/
 
 export default function UserNavigation() {
   return (
@@ -70,9 +64,9 @@ export default function UserNavigation() {
         </Link>
       </NavItem>
       <NavItem>
-        <Icon icon={Transaction} height="18" />
+        <Icon icon={Transactions} height="18" />
         <Link to="transaction" className="ml-2">
-          Transaction
+          Transactions
         </Link>
       </NavItem>
     </HeaderWrapper>
