@@ -180,8 +180,6 @@ class AccountNumber extends Component {
       return;
     }
 
-    // Add Validation to check amount before withdrawing
-
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
@@ -213,7 +211,7 @@ class AccountNumber extends Component {
       });
       if (response.status === 200) {
         this.props.openTransactionSuccessModal();
-        // this.props.setCashBalance(data.data.amount, 2);
+        this.props.setCashBalance(data.data.amount, 2);
       } else {
         this.props.openTransactionFailModal();
       }
