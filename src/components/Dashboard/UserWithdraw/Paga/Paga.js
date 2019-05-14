@@ -156,7 +156,7 @@ class Paga extends Component {
       amount: this.state.amount,
       minRecipientKYCLevel: "KYC2",
       destinationAccount: sliced_phone_number,
-      alternateSenderName: "BitPesa"
+      alternateSenderName: "Chopbarh"
     };
 
     hashParameter = "";
