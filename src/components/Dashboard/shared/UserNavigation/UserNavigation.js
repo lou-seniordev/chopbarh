@@ -34,6 +34,7 @@ const HeaderWrapper = styled.div`
 const NavItem = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 0.3rem;
 `;
 
 export default function UserNavigation() {
