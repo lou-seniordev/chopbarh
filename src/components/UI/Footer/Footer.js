@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 
@@ -49,7 +49,8 @@ const FooterLinkContainer = styled.div`
     color: ${color.colorWhite};
   }
 
-  a {
+  a,
+  span {
     color: #dddddd;
     text-decoration: none;
     transition: all 0.2s;
@@ -75,19 +76,19 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>
-              <Link>About Us</Link>
+              <span>About Us</span>
             </p>
             <p>
-              <Link>Terms and Conditions</Link>
+              <span>Terms and Conditions</span>
             </p>
             <p>
-              <Link>Privacy Policy</Link>
+              <span>Privacy Policy</span>
             </p>
             <p>
-              <Link>Responsible Gambling</Link>
+              <span>Responsible Gambling</span>
             </p>
             <p>
-              <Link>Become a Partner</Link>
+              <span>Become a Partner</span>
             </p>
           </FooterLinkContainer>
         </div>
@@ -97,19 +98,19 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>
-              <Link>How to Play</Link>
+              <span>How to Play</span>
             </p>
             <p>
-              <Link>Games</Link>
+              <span>Games</span>
             </p>
             <p>
-              <Link>Betting</Link>
+              <span>Betting</span>
             </p>
             <p>
-              <Link>Download</Link>
+              <span>Download</span>
             </p>
             <p>
-              <Link>Talk to us</Link>
+              <span>Talk to us</span>
             </p>
           </FooterLinkContainer>
         </div>
