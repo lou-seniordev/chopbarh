@@ -38,7 +38,6 @@ export const setCashBalance = (amount, condition = 1) => (
   )
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       dispatch(setCashBalanceSuccess(amount));
       dispatch(fetchPlayerData());
     })
