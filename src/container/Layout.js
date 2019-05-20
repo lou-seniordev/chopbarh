@@ -32,8 +32,8 @@ class Layout extends Component {
   UNSAFE_componentWillMount = () => {
     if (this.props.isAuthenticated) {
       this.props.authSuccess(
-        localStorage.getItem("chopbarh-token"),
-        localStorage.getItem("chopbarh-id")
+        localStorage.getItem("chopbarh-token:live"),
+        localStorage.getItem("chopbarh-id:live")
       );
       //this.props.fetchPlayerData();
     }
