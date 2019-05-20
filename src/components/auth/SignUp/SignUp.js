@@ -17,7 +17,8 @@ import keys from "../../../config/keys";
 import {
   authStart,
   authSuccess,
-  authFail
+  authFail,
+  authOTPGenerator
 } from "../Login/actions/LoginActions";
 
 class SignUp extends Component {
@@ -28,7 +29,9 @@ class SignUp extends Component {
     phone: "",
     password: "",
     confirmPassword: "",
-    otp: ""
+    otp: "",
+    generatedOTP: null,
+    loading: false
   };
 
   toggle = () => {
@@ -96,18 +99,51 @@ class SignUp extends Component {
     //   });
   };
 
+  generateOTP = () => {
+    return Math.floor(111111 + Math.random() * 999999);
+  };
+
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
       this.setState({ isOpen: true });
       return;
     }
 
-    // Open Modal
-    this.setState({ otpModal: true });
-
     // Generate six digits OTP
+    const otp = this.generateOTP();
+
+    const postData = {
+      to: this.state.phone,
+      message: `Your OTP for ChopBarh is ${otp}`,
+      channel: "1001"
+    };
+
+    // Send the message
+    fetch(
+      "https://cors-anywhere.herokuapp.com/https://v2.sling.com.ng/api/v1/send-sms",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer sling_yf0sdglyznon7vzinojcjf7qy1oqw6xsz6x1mh5wbibjoer0dfpyiy"
+        },
+        body: JSON.stringify(postData)
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.credit_used === 1) {
+          this.setState({ loading: false, otpModal: true, generatedOTP: otp });
+        } else {
+          this.setState({ loading: false });
+        }
+      });
 
     // Check if the OTP input matches the generated OTP
 
@@ -218,10 +254,10 @@ class SignUp extends Component {
               <button
                 type="submit"
                 className="mr-2"
-                disabled={this.props.loading}
+                disabled={this.state.loading}
               >
                 <span>
-                  {this.props.loading ? "Please wait..." : "Create Account"}
+                  {this.state.loading ? "Please wait..." : "Create Account"}
                 </span>
               </button>
               <LoginSignal>
@@ -239,13 +275,15 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.auth.loading
+  loading: state.auth.loading,
+  otp: state.auth.otp
 });
 
 const mapDispatchToProps = {
   authStart,
   authSuccess,
-  authFail
+  authFail,
+  authOTPGenerator
 };
 
 export default withRouter(
