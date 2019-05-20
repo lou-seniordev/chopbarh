@@ -14,6 +14,7 @@ import {
   FormAction,
   SignUpSignal
 } from "../../styles/LoginStyles";
+import keys from "../../../config/keys";
 import { authStart, authSuccess, authFail } from "./actions/LoginActions";
 
 class Login extends Component {
@@ -62,7 +63,9 @@ class Login extends Component {
     const formValue = JSON.stringify(formState);
 
     fetch(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/AuthenticationRequest",
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+        keys.apiKeySuffix
+      }/AuthenticationRequest`,
       {
         method: "POST",
         headers: {
