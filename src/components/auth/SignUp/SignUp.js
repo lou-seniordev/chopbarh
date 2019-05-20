@@ -58,47 +58,6 @@ class SignUp extends Component {
     return true;
   };
 
-  createUser = () => {
-    console.log("Creating User...");
-    // const newState = { ...this.state };
-    // const formState = {
-    //   userName: newState.phone,
-    //   password: newState.password,
-    //   displayName: newState.name
-    // };
-
-    // formState["@class"] = ".RegistrationRequest";
-    // const formValue = JSON.stringify(formState);
-    // fetch(
-    //   `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-    //     keys.apiKeySuffix
-    //   }/RegistrationRequest`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: formValue
-    //   }
-    // )
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.authToken) {
-    //       localStorage.setItem("chopbarh-token:live", data.authToken);
-    //       localStorage.setItem("chopbarh-id:live", data.userId);
-    //       this.props.authSuccess(data.authToken, data.userId);
-    //       // this.props.history.push("/otp");
-    //       this.props.history.push("/user");
-    //     } else {
-    //       this.props.authFail();
-    //     }
-    //   })
-    //   .catch(err => {
-    //     this.props.authFail();
-    //   });
-  };
-
   generateOTP = () => {
     return Math.floor(111111 + Math.random() * 999999);
   };
