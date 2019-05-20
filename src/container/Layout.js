@@ -43,12 +43,13 @@ class Layout extends Component {
     }
   };
 
-  // componentDidMount = () => {
-  //   if (localStorage.getItem("chopbarh-token")) {
-  //     localStorage.getItem("chopbarh-token");
-  //     localStorage.getItem("chopbarh-id");
-  //   }
-  // };
+  componentDidMount = () => {
+    console.log(this.props.isAuthenticated);
+    // if (localStorage.getItem("chopbarh-token")) {
+    //   localStorage.getItem("chopbarh-token");
+    //   localStorage.getItem("chopbarh-id");
+    // }
+  };
 
   render() {
     return (
