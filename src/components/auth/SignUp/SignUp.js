@@ -83,8 +83,8 @@ class SignUp extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.authToken) {
-          localStorage.setItem("chopbarh-token", data.authToken);
-          localStorage.setItem("chopbarh-id", data.userId);
+          localStorage.setItem("chopbarh-token:live", data.authToken);
+          localStorage.setItem("chopbarh-id:live", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
           this.props.history.push("/otp");
         } else {
