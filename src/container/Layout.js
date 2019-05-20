@@ -35,12 +35,9 @@ class Layout extends Component {
         localStorage.getItem("chopbarh-token:live"),
         localStorage.getItem("chopbarh-id:live")
       );
-
       //this.props.fetchPlayerData();
-      if (localStorage.getItem("chopbarh-token")) {
-        localStorage.removeItem("chopbarh-token");
-        localStorage.removeItem("chopbarh-id");
-      }
+      localStorage.removeItem("chopbarh-token");
+      localStorage.removeItem("chopbarh-id");
     }
   };
 
