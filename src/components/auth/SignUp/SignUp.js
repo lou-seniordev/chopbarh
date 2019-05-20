@@ -27,7 +27,8 @@ class SignUp extends Component {
     name: "",
     phone: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    otp: ""
   };
 
   toggle = () => {
@@ -129,18 +130,27 @@ class SignUp extends Component {
               marginTop: "22rem"
             }}
           >
-            <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <ModalBody className="text-center my-5 mx-3">
               <h2>Please enter the pin sent to your phone</h2>
               <Form>
                 <FormItem>
                   <input
                     type="text"
-                    name="name"
-                    value={this.state.name}
+                    name="otp"
+                    value={this.state.otp}
                     onChange={this.handleInputChange}
                     required
                   />
                 </FormItem>
+                <button
+                  type="submit"
+                  className="mr-2"
+                  disabled={this.props.loading}
+                >
+                  <span>
+                    {this.props.loading ? "Please wait..." : "Submit"}
+                  </span>
+                </button>
               </Form>
             </ModalBody>
           </Modal>
