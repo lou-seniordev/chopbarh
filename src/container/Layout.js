@@ -76,7 +76,7 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: localStorage.getItem("chopbarh-token") !== null
+  isAuthenticated: localStorage.getItem("chopbarh-token:live") !== null
 });
 
 const mapDispatchToProps = {
