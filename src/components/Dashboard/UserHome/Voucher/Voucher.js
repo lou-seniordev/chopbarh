@@ -114,7 +114,7 @@ class Voucher extends Component {
 
     try {
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://private-anon-f26b43aaeb-chopbarhapi.apiary-mock.com/api/voucher/use",
+        "https://partners.chopbarh.com/api/voucher/use",
         {
           method: "POST",
           mode: "cors",
@@ -126,7 +126,6 @@ class Voucher extends Component {
         }
       );
       const data = await response.json();
-      console.log(data, response.status);
       if (response.status === 200) {
         this.props.setVoucherValue(data.data.value);
         this.props.setCoinBalance(data.data.value);
