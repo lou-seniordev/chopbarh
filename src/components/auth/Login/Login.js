@@ -47,10 +47,10 @@ class Login extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    // if (!this.formIsValid(this.state)) {
-    //   this.setState({ isOpen: true });
-    //   return;
-    // }
+    if (!this.formIsValid(this.state)) {
+      this.setState({ isOpen: true });
+      return;
+    }
     this.props.authStart();
 
     const newState = { ...this.state };
