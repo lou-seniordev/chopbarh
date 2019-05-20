@@ -13,6 +13,7 @@ import {
   HalfColumn,
   LoginSignal
 } from "../../styles/SignUpStyles";
+import keys from "../../../config/keys";
 import {
   authStart,
   authSuccess,
@@ -56,7 +57,6 @@ class SignUp extends Component {
       return;
     }
     this.props.authStart();
-    console.log(this.state);
 
     const newState = { ...this.state };
     const formState = {
@@ -68,7 +68,9 @@ class SignUp extends Component {
     formState["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState);
     fetch(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      `https://${keys.apiKeyPrefix}.preview.gamesparks.net/rs/debug/${
+        keys.apiKeySuffix
+      }/RegistrationRequest`,
       {
         method: "POST",
         headers: {
@@ -80,14 +82,13 @@ class SignUp extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        if (data.error) {
-          this.props.authFail();
-        } else {
+        if (data.authToken) {
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
           this.props.history.push("/otp");
+        } else {
+          this.props.authFail();
         }
       })
       .catch(err => {
