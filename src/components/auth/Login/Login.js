@@ -19,14 +19,19 @@ import { authStart, authSuccess, authFail } from "./actions/LoginActions";
 
 class Login extends Component {
   state = {
-    isOpen: false,
+    formErrorModal: false,
+    accountErrorModal: false,
     userName: "",
     password: "",
     loading: false
   };
 
-  toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+  toggleformErrorModal = () => {
+    this.setState({ formErrorModal: !this.state.formErrorModal });
+  };
+
+  toggleAccountErrorModal = () => {
+    this.setState({ accountErrorModal: !this.state.accountErrorModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -49,7 +54,7 @@ class Login extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ isOpen: true });
+      this.setState({ formErrorModal: true });
       return;
     }
     this.props.authStart();
@@ -83,6 +88,7 @@ class Login extends Component {
           this.props.authSuccess(data.authToken, data.userId);
           this.props.history.push("/user");
         } else {
+          this.setState({ accountErrorModal: true });
           this.props.authFail();
         }
       })
@@ -98,17 +104,28 @@ class Login extends Component {
           <title>Chopbarh &rarr; Login</title>
         </Helmet>
         <ImageContainer />
+
+        <Modal
+          isOpen={this.state.formErrorModal}
+          toggle={this.toggleformErrorModal}
+          className="pt-5 mt-4"
+        >
+          <ModalBody className="text-center">
+            <h2>Ooops!</h2>
+            <p>There was an error in the form!</p>
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.state.accountErrorModal}
+          toggle={this.toggleAccountErrorModal}
+          className="pt-5 mt-4"
+        >
+          <ModalBody className="text-center">
+            <h2>Ooops!</h2>
+            <p>Account not found</p>
+          </ModalBody>
+        </Modal>
         <FormWrapper>
-          <Modal
-            isOpen={this.state.isOpen}
-            toggle={this.toggle}
-            className="pt-5 mt-4"
-          >
-            <ModalBody className="text-center">
-              <h2>Ooops!</h2>
-              <p>There was an error in the form!</p>
-            </ModalBody>
-          </Modal>
           <form onSubmit={this.handleSubmit}>
             <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
             <FormItem>
