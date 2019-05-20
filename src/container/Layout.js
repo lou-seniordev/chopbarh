@@ -36,15 +36,19 @@ class Layout extends Component {
         localStorage.getItem("chopbarh-id:live")
       );
       //this.props.fetchPlayerData();
+      if (localStorage.getItem("chopbarh-token")) {
+        localStorage.getItem("chopbarh-token");
+        localStorage.getItem("chopbarh-id");
+      }
     }
   };
 
-  componentDidMount = () => {
-    if (localStorage.getItem("chopbarh-token")) {
-      localStorage.getItem("chopbarh-token");
-      localStorage.getItem("chopbarh-id");
-    }
-  };
+  // componentDidMount = () => {
+  //   if (localStorage.getItem("chopbarh-token")) {
+  //     localStorage.getItem("chopbarh-token");
+  //     localStorage.getItem("chopbarh-id");
+  //   }
+  // };
 
   render() {
     return (

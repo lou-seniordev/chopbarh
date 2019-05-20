@@ -30,8 +30,8 @@ class SignUp extends Component {
     password: "",
     confirmPassword: "",
     otp: "",
-    generatedOTP: null,
-    loading: false
+    loading: false,
+    otpLoading: false
   };
 
   toggle = () => {
@@ -103,6 +103,69 @@ class SignUp extends Component {
     return Math.floor(111111 + Math.random() * 999999);
   };
 
+  isOTPValid = otp => {
+    if (otp.trim() === "" || !isNaN(otp) !== true || otp.length !== 6) {
+      return false;
+    }
+    return true;
+  };
+
+  handleOTPSubmit = event => {
+    event.preventDefault();
+    this.setState({ otpLoading: true });
+
+    if (!this.isOTPValid(this.state.otp)) {
+      this.setState({ otpModal: false, isOpen: true });
+      return;
+    }
+
+    if (+this.state.otp !== this.props.otp) {
+      this.setState({ otpModal: false, isOpen: true });
+      return;
+    }
+
+    const newState = { ...this.state };
+    const formState = {
+      userName: newState.phone,
+      password: newState.password,
+      displayName: newState.name
+    };
+
+    formState["@class"] = ".RegistrationRequest";
+    const formValue = JSON.stringify(formState);
+
+    // console.log(formValue, formState);
+    fetch(
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+        keys.apiKeySuffix
+      }/RegistrationRequest`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: formValue
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.authToken) {
+          localStorage.setItem("chopbarh-token:live", data.authToken);
+          localStorage.setItem("chopbarh-id:live", data.userId);
+          this.props.authSuccess(data.authToken, data.userId);
+          this.setState({ otpModal: false });
+          this.props.history.push("/user");
+        } else {
+          this.setState({ isOpen: true, otpModal: false });
+          this.props.authFail();
+        }
+      })
+      .catch(err => {
+        this.props.authFail();
+      });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     this.setState({ loading: true });
@@ -139,15 +202,12 @@ class SignUp extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.credit_used === 1) {
-          this.setState({ loading: false, otpModal: true, generatedOTP: otp });
+          this.props.authOTPGenerator(otp);
+          this.setState({ loading: false, otpModal: true });
         } else {
           this.setState({ loading: false });
         }
       });
-
-    // Check if the OTP input matches the generated OTP
-
-    // Submit else don't submit
 
     // this.props.authStart();
   };
@@ -168,23 +228,26 @@ class SignUp extends Component {
           >
             <ModalBody className="text-center my-5 mx-3">
               <h2>Please enter the pin sent to your phone</h2>
-              <Form>
+              <Form onSubmit={this.handleOTPSubmit}>
                 <FormItem>
                   <input
                     type="text"
                     name="otp"
+                    placeholder="Enter OTP"
                     value={this.state.otp}
                     onChange={this.handleInputChange}
                     required
+                    minLength="6"
+                    maxLength="6"
                   />
                 </FormItem>
                 <button
                   type="submit"
                   className="mr-2"
-                  disabled={this.props.loading}
+                  disabled={this.state.otpLoading}
                 >
                   <span>
-                    {this.props.loading ? "Please wait..." : "Submit"}
+                    {this.state.otpLoading ? "Please wait..." : "Submit"}
                   </span>
                 </button>
               </Form>
