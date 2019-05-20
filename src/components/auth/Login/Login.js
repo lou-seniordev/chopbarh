@@ -132,7 +132,7 @@ class Login extends Component {
                 value={this.state.password}
                 required
                 minLength="4"
-                maxLength="6"
+                maxLength="4"
               />
             </FormItem>
             <FormAction>

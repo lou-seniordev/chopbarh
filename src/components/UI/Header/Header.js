@@ -101,14 +101,14 @@ export default function Header({ transparent }) {
                 About Us
               </Link>
             </li>
-            {localStorage.getItem("chopbarh-token") && (
+            {localStorage.getItem("chopbarh-token:live") && (
               <li className="nav-item">
                 <Link to="user" className="nav-link text-uppercase mr-5">
                   Dashboard
                 </Link>
               </li>
             )}
-            {!localStorage.getItem("chopbarh-token") && (
+            {!localStorage.getItem("chopbarh-token:live") && (
               <div>
                 <button className="mr-2">
                   <Link to="login">
