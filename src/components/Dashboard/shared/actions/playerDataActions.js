@@ -1,4 +1,5 @@
 import * as actionType from "../../../../store/actionTypes/actionTypes";
+import apiService from "../../../../config/apiService";
 
 export const fetchPlayerInit = () => ({
   type: actionType.FETCH_PLAYER_DATA_INIT
@@ -22,17 +23,14 @@ export const fetchPlayerData = () => (dispatch, getState) => {
   };
 
   dispatch(fetchPlayerInit());
-  fetch(
-    "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(postRequestData)
-    }
-  )
+  fetch(`${apiService.apiService}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postRequestData)
+  })
     .then(response => response.json())
     .then(data => {
       dispatch(fetchPlayerSuccess(data.scriptData.PlayerData));
