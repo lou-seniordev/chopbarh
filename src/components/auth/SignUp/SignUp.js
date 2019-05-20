@@ -68,7 +68,7 @@ class SignUp extends Component {
     formState["@class"] = ".RegistrationRequest";
     const formValue = JSON.stringify(formState);
     fetch(
-      `https://${keys.apiKeyPrefix}.preview.gamesparks.net/rs/debug/${
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
         keys.apiKeySuffix
       }/RegistrationRequest`,
       {
@@ -86,7 +86,8 @@ class SignUp extends Component {
           localStorage.setItem("chopbarh-token:live", data.authToken);
           localStorage.setItem("chopbarh-id:live", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
-          this.props.history.push("/otp");
+          // this.props.history.push("/otp");
+          this.props.history.push("/user");
         } else {
           this.props.authFail();
         }

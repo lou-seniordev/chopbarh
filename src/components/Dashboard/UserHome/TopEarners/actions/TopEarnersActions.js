@@ -1,4 +1,5 @@
 import * as actionType from "../../../../../store/actionTypes/actionTypes";
+import apiService from "../../../../../config/apiService";
 
 export const fetchTopEarnersStart = () => ({
   type: actionType.FETCH_TOP_EARNERS_INIT
@@ -20,17 +21,14 @@ export const fetchTopEarners = () => (dispatch, getState) => {
     playerId: getState().auth.id
   };
 
-  fetch(
-    "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(postRequestData)
-    }
-  )
+  fetch(`${apiService.apiService}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postRequestData)
+  })
     .then(response => response.json())
     .then(data => {
       if (data.error) {
