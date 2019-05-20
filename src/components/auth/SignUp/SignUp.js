@@ -185,8 +185,9 @@ class SignUp extends Component {
     };
 
     // Send the message
+    // https://cors-anywhere.herokuapp.com/
     fetch(
-      "https://cors-anywhere.herokuapp.com/https://v2.sling.com.ng/api/v1/send-sms",
+      "https://v2.sling.com.ng/api/v1/send-sms",
       {
         method: "POST",
         mode: "cors",

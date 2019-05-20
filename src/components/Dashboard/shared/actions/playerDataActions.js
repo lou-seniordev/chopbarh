@@ -33,7 +33,6 @@ export const fetchPlayerData = () => (dispatch, getState) => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       dispatch(fetchPlayerSuccess(data.scriptData.PlayerData));
     })
     .catch(err => {
