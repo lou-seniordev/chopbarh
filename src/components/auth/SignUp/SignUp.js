@@ -23,6 +23,7 @@ import {
 class SignUp extends Component {
   state = {
     isOpen: false,
+    otpModal: false,
     name: "",
     phone: "",
     password: "",
@@ -31,6 +32,10 @@ class SignUp extends Component {
 
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  toggleOTPModal = () => {
+    this.setState({ otpModal: !this.state.otpModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -49,6 +54,47 @@ class SignUp extends Component {
     return true;
   };
 
+  createUser = () => {
+    console.log("Creating User...");
+    // const newState = { ...this.state };
+    // const formState = {
+    //   userName: newState.phone,
+    //   password: newState.password,
+    //   displayName: newState.name
+    // };
+
+    // formState["@class"] = ".RegistrationRequest";
+    // const formValue = JSON.stringify(formState);
+    // fetch(
+    //   `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+    //     keys.apiKeySuffix
+    //   }/RegistrationRequest`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: formValue
+    //   }
+    // )
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.authToken) {
+    //       localStorage.setItem("chopbarh-token:live", data.authToken);
+    //       localStorage.setItem("chopbarh-id:live", data.userId);
+    //       this.props.authSuccess(data.authToken, data.userId);
+    //       // this.props.history.push("/otp");
+    //       this.props.history.push("/user");
+    //     } else {
+    //       this.props.authFail();
+    //     }
+    //   })
+    //   .catch(err => {
+    //     this.props.authFail();
+    //   });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -56,45 +102,17 @@ class SignUp extends Component {
       this.setState({ isOpen: true });
       return;
     }
-    this.props.authStart();
 
-    const newState = { ...this.state };
-    const formState = {
-      userName: newState.phone,
-      password: newState.password,
-      displayName: newState.name
-    };
+    // Open Modal
+    this.setState({ otpModal: true });
 
-    formState["@class"] = ".RegistrationRequest";
-    const formValue = JSON.stringify(formState);
-    fetch(
-      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-        keys.apiKeySuffix
-      }/RegistrationRequest`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: formValue
-      }
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (data.authToken) {
-          localStorage.setItem("chopbarh-token:live", data.authToken);
-          localStorage.setItem("chopbarh-id:live", data.userId);
-          this.props.authSuccess(data.authToken, data.userId);
-          // this.props.history.push("/otp");
-          this.props.history.push("/user");
-        } else {
-          this.props.authFail();
-        }
-      })
-      .catch(err => {
-        this.props.authFail();
-      });
+    // Generate six digits OTP
+
+    // Check if the OTP input matches the generated OTP
+
+    // Submit else don't submit
+
+    // this.props.authStart();
   };
   render() {
     return (
@@ -104,6 +122,28 @@ class SignUp extends Component {
         </Helmet>
         <Header />
         <SignUpWrapper>
+          <Modal
+            isOpen={this.state.otpModal}
+            toggle={this.toggleOTPModal}
+            style={{
+              marginTop: "22rem"
+            }}
+          >
+            <ModalBody className="text-center" style={{ height: "20vh" }}>
+              <h2>Please enter the pin sent to your phone</h2>
+              <Form>
+                <FormItem>
+                  <input
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                    required
+                  />
+                </FormItem>
+              </Form>
+            </ModalBody>
+          </Modal>
           <Modal
             isOpen={this.state.isOpen}
             toggle={this.toggle}
