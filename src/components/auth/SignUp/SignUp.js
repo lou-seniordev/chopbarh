@@ -24,7 +24,6 @@ import {
 
 class SignUp extends Component {
   state = {
-    isOpen: false,
     otpModal: false,
     name: "",
     phone: "",
@@ -33,14 +32,6 @@ class SignUp extends Component {
     otp: "",
     loading: false,
     otpLoading: false
-  };
-
-  componentDidMount = () => {
-    toast.error("Something didnt go right");
-  };
-
-  toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen });
   };
 
   toggleOTPModal = () => {
@@ -218,16 +209,6 @@ class SignUp extends Component {
                   </span>
                 </button>
               </Form>
-            </ModalBody>
-          </Modal>
-          <Modal
-            isOpen={this.state.isOpen}
-            toggle={this.toggle}
-            className="pt-5 mt-4"
-          >
-            <ModalBody className="text-center">
-              <h2>Ooops!</h2>
-              <p>Something went wrong</p>
             </ModalBody>
           </Modal>
           <Container>
