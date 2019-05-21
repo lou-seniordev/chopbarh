@@ -140,7 +140,7 @@ class SignUp extends Component {
     const postData = {
       to: this.state.phone,
       message: `Your OTP for ChopBarh is ${otp}`,
-      channel: "1001"
+      channel: "0001"
     };
 
     // Send the message
