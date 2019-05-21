@@ -12,8 +12,8 @@ import {
   openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
-} from "../../UserDeposit/actions/modalActions";
-import { setCashBalance } from "../../shared/actions/cashBalanceActions";
+} from "../../../../store/actions/modalActions";
+import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 const Form = styled.form`
   position: relative;

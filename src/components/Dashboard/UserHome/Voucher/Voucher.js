@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import color from "../../../styles/colors";
-import { setVoucherValue } from "./actions/VoucherActions";
-import { setCoinBalance } from "../../shared/actions/coinBalanceActions";
+import { setVoucherValue } from "../../../../store/actions/voucherActions";
+import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 
 const VoucherWrapper = styled.div``;
 

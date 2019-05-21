@@ -20,7 +20,7 @@ import {
   authSuccess,
   authFail,
   authOTPGenerator
-} from "../Login/actions/LoginActions";
+} from "../../../store/actions/authActions";
 
 class SignUp extends Component {
   state = {

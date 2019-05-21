@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
-import { setChargeReference } from "../actions/chargeActions";
+import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
   closeOTPModal,
@@ -14,7 +14,7 @@ import {
   closePinModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
-} from "../actions/modalActions";
+} from "../../../../store/actions/modalActions";
 
 class Card extends Component {
   state = {

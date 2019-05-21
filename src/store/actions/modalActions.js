@@ -1,4 +1,4 @@
-import * as actionType from "../../../../store/actionTypes/actionTypes";
+import * as actionType from "../actionTypes/actionTypes";
 
 export const openPinModal = () => ({
   type: actionType.OPEN_SUBMIT_PIN_MODAL

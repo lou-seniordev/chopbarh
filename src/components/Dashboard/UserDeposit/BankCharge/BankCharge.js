@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
-import { setChargeReference } from "../actions/chargeActions";
+import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
   closeOTPModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
-} from "../actions/modalActions";
+} from "../../../../store/actions/modalActions";
 
 const Banks = [
   { name: "Access Bank", value: "044" },

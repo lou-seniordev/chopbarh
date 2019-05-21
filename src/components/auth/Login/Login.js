@@ -15,7 +15,11 @@ import {
   SignUpSignal
 } from "../../styles/LoginStyles";
 import keys from "../../../config/keys";
-import { authStart, authSuccess, authFail } from "./actions/LoginActions";
+import {
+  authStart,
+  authSuccess,
+  authFail
+} from "../../../store/actions/authActions";
 
 class Login extends Component {
   state = {

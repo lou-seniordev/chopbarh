@@ -1,6 +1,6 @@
-import * as actionType from "../../../../store/actionTypes/actionTypes";
+import * as actionType from "../actionTypes/actionTypes";
 import { fetchPlayerData } from "./playerDataActions";
-import apiService from "../../../../config/apiService";
+import apiService from "../../config/apiService";
 
 export const setCashBalanceInit = () => ({
   type: actionType.SET_CASH_BALANCE_INIT

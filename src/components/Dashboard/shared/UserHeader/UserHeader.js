@@ -9,7 +9,7 @@ import Icon from "../Icon/Icon";
 import CoinSymbol from "../../../assets/svg/CoinSymbol.svg";
 import VisibilityButton from "../../../assets/svg/VisibilityButton.svg";
 import CashIcon from "../../../assets/svg/CashIcon.svg";
-import { fetchPlayerData } from "../actions/playerDataActions";
+import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};

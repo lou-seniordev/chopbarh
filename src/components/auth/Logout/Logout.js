@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { authLogout } from "./actions/LogoutActions";
+import { authLogout } from "../../../store/actions/authActions";
 
 class Logout extends Component {
   componentDidMount = () => {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { authSuccess } from "../components/auth/Login/actions/LoginActions";
-import { fetchPlayerData } from "../components/Dashboard/shared/actions/playerDataActions";
+import { authSuccess } from "../store/actions/authActions";
+import { fetchPlayerData } from "../store/actions/playerDataActions";
 import LandingPage from "../Pages/LandingPage";
 import GamesPage from "../Pages/GamesPage";
 import LoginPage from "../Pages/LoginPage";

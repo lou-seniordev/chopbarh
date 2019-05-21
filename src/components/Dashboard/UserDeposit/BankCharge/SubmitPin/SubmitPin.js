@@ -9,7 +9,7 @@ import {
   closeOTPModal,
   openPinModal,
   closePinModal
-} from "../../actions/modalActions";
+} from "../../../../../store/actions/modalActions";
 
 class SubmitPin extends Component {
   state = {

@@ -9,8 +9,8 @@ import {
   openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal
-} from "../../UserDeposit/actions/modalActions";
-import { setCashBalance } from "../../shared/actions/cashBalanceActions";
+} from "../../../../store/actions/modalActions";
+import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;

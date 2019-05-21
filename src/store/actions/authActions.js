@@ -1,4 +1,4 @@
-import * as actionType from "../../../../store/actionTypes/actionTypes";
+import * as actionType from "../actionTypes/actionTypes";
 
 export const authStart = () => ({
   type: actionType.AUTH_START
@@ -16,3 +16,12 @@ export const authSuccess = (token, id) => ({
 });
 
 export const authFail = () => ({ type: actionType.AUTH_FAILURE });
+
+export const authLogout = () => {
+  localStorage.removeItem("chopbarh-token:live");
+  localStorage.removeItem("chopbarh-id:live");
+
+  return {
+    type: actionType.AUTH_LOGOUT
+  };
+};

@@ -4,13 +4,13 @@ import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { Form, FormItem } from "../../../../styles/CardCharge";
-import { setCoinBalance } from "../../../shared/actions/coinBalanceActions";
+import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
   closeOTPModal,
   openTransactionSuccessModal,
   openTransactionFailModal
-} from "../../actions/modalActions";
+} from "../../../../../store/actions/modalActions";
 
 class SubmitOTP extends Component {
   state = {
