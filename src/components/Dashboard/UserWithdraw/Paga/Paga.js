@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Modal, ModalBody } from "reactstrap";
+import {toast } from 'react-toastify'
 import CryptoJS from "crypto-js";
 //import scuid from "scuid";
 import color from "../../../styles/colors";
@@ -133,12 +134,13 @@ class Paga extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ formErrorModal: true });
-      this.setState({ loading: false });
+      toast.error(`Form field not valid`)
       return;
     }
 
     if (this.state.amount > this.props.playerData.RealCoins) {
-      this.setState({ overdraftModal: true, loading: false });
+      this.setState({ loading: false });
+      toast.error(`You can't withdraw more than you've earned`)
       return;
     }
 
@@ -187,16 +189,19 @@ class Paga extends Component {
       .then(data => {
         if (data.responseCode === 0) {
           this.setState({ loading: false, phone: "", amount: "" });
-          this.props.openTransactionSuccessModal();
+          // this.props.openTransactionSuccessModal();
+          toast.success(`Transaction was successful`)
           this.props.setCashBalance(body.amount, 2);
         } else {
           this.setState({ loading: false });
-          this.props.openTransactionFailModal();
+          // this.props.openTransactionFailModal();
+          toast.error(`Transaction was not successful`)
         }
       })
       .catch(err => {
         console.log("Error", err);
-        this.setState({ formErrorModal: true });
+        // this.setState({ formErrorModal: true });
+        toast.error(`Something went wrong`)
       });
   };
 
