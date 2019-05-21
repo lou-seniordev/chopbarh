@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
 import { toast } from "react-toastify";
 import color from "../../../styles/colors";
 import { setVoucherValue } from "./actions/VoucherActions";
@@ -135,7 +134,6 @@ class Voucher extends Component {
         });
         toast.success(`Voucher was successfully loaded`);
       } else if (response.status === 404) {
-        // setVoucherUsedModal(true);
         this.setState({ voucher: "", loading: false });
         toast.error(`Voucher has already been used`);
       } else {
