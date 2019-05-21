@@ -105,17 +105,6 @@ class Card extends Component {
     } catch (err) {
       this.setState({ loading: false });
     }
-    // setReferenceValue(data.data.reference);
-    // increaseCoinBalance(+data.data.amount / 100)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //     setLoading(false);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     setLoading(false);
-    //   });
   };
 
   render() {
@@ -189,7 +178,7 @@ class Card extends Component {
           <FormItem>
             <label>Amount</label>
             <input
-              type="text"
+              type="number"
               onChange={this.handleInputChange}
               name="amount"
               value={this.state.amount}
@@ -200,7 +189,7 @@ class Card extends Component {
           <FormItem>
             <label>Card Number</label>
             <input
-              type="text"
+              type="number"
               onChange={this.handleInputChange}
               name="card"
               value={this.state.card}
@@ -224,33 +213,17 @@ class Card extends Component {
             <FormItem>
               <label>CVV</label>
               <input
-                type="text"
+                type="number"
                 onChange={this.handleInputChange}
                 name="cvv"
                 value={this.state.cvv}
                 required
+                minLength="3"
+                maxLength="3"
                 placeholder="3 Digits behind Card"
               />
             </FormItem>
           </HalfColumn>
-          {/* 
-          <HalfColumn>
-  
-            <FormItem>
-              <label>Pin</label>
-              <input
-                type="password"
-                onChange={this.handleInputChange}
-                name="pin"
-                value={this.state.pin}
-                required
-                placeholder="****"
-                minLength="4"
-                maxLength="4"
-              />
-            </FormItem>
-          </HalfColumn>
-            */}
           <button type="submit" className="mr-2" disabled={this.state.loading}>
             <span>{this.state.loading ? "Please wait..." : "Load"}</span>
           </button>
