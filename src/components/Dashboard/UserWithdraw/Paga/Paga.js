@@ -270,7 +270,7 @@ class Paga extends Component {
             <FormItem className="mr-3">
               <label>Amount</label>
               <input
-                type="text"
+                type="number"
                 name="amount"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
@@ -281,7 +281,7 @@ class Paga extends Component {
             <FormItem>
               <label>Phone Number</label>
               <input
-                type="text"
+                type="tel"
                 name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
