@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
+import { toast } from "react-toastify";
 import Header from "../../UI/Header/Header";
 import {
   SignUpWrapper,
@@ -32,6 +33,10 @@ class SignUp extends Component {
     otp: "",
     loading: false,
     otpLoading: false
+  };
+
+  componentDidMount = () => {
+    toast.error("Something didnt go right");
   };
 
   toggle = () => {
@@ -74,12 +79,14 @@ class SignUp extends Component {
     this.setState({ otpLoading: true });
 
     if (!this.isOTPValid(this.state.otp)) {
-      this.setState({ otpModal: false, isOpen: true });
+      this.setState({ otpModal: false });
+      toast.error(`Form field is not valid`);
       return;
     }
 
     if (+this.state.otp !== this.props.otp) {
-      this.setState({ otpModal: false, isOpen: true });
+      this.setState({ otpModal: false });
+      toast.error(`OTP did not match`);
       return;
     }
 
@@ -116,7 +123,8 @@ class SignUp extends Component {
           this.setState({ otpModal: false });
           this.props.history.push("/user");
         } else {
-          this.setState({ isOpen: true, otpModal: false });
+          this.setState({ otpModal: false });
+          toast.error(`Something went wrong. Please try again!`);
           this.props.authFail();
         }
       })
@@ -130,7 +138,7 @@ class SignUp extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ isOpen: true });
+      toast.error(`There was an error in the form field`);
       return;
     }
 
