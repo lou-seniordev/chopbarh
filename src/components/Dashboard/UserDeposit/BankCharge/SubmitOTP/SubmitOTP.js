@@ -68,7 +68,6 @@ class SubmitOTP extends Component {
         const value = +data.data.amount / 100;
         this.props.setCoinBalance(value);
       } else {
-        //Error here
         toast.error(`Please try again`);
         this.setState({ loading: false });
       }
