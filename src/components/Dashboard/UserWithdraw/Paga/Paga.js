@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Modal, ModalBody } from "reactstrap";
-import {toast } from 'react-toastify'
+// import { Modal, ModalBody } from "reactstrap";
+import { toast } from "react-toastify";
 import CryptoJS from "crypto-js";
 //import scuid from "scuid";
 import color from "../../../styles/colors";
@@ -134,13 +134,13 @@ class Paga extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ formErrorModal: true });
-      toast.error(`Form field not valid`)
+      toast.error(`Form field not valid`);
       return;
     }
 
     if (this.state.amount > this.props.playerData.RealCoins) {
       this.setState({ loading: false });
-      toast.error(`You can't withdraw more than you've earned`)
+      toast.error(`You can't withdraw more than you've earned`);
       return;
     }
 
@@ -190,25 +190,25 @@ class Paga extends Component {
         if (data.responseCode === 0) {
           this.setState({ loading: false, phone: "", amount: "" });
           // this.props.openTransactionSuccessModal();
-          toast.success(`Transaction was successful`)
+          toast.success(`Transaction was successful`);
           this.props.setCashBalance(body.amount, 2);
         } else {
           this.setState({ loading: false });
           // this.props.openTransactionFailModal();
-          toast.error(`Transaction was not successful`)
+          toast.error(`Transaction was not successful`);
         }
       })
       .catch(err => {
         console.log("Error", err);
         // this.setState({ formErrorModal: true });
-        toast.error(`Something went wrong`)
+        toast.error(`Something went wrong`);
       });
   };
 
   render() {
     return (
       <>
-        <Modal
+        {/* <Modal
           isOpen={this.state.formErrorModal}
           toggle={this.formErrorModalToggle}
           style={{
@@ -264,7 +264,7 @@ class Paga extends Component {
             <h2>Oh Snap!</h2>
             <p>The amount is above your winnings</p>
           </ModalBody>
-        </Modal>
+        </Modal> */}
         <Form onSubmit={this.handleSubmit}>
           <HalfColumn>
             <FormItem className="mr-3">
