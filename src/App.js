@@ -1,16 +1,17 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import Layout from "./container/Layout";
 import ErrorBoundary from "./hoc/ErrorBoundary";
 import { GlobalStyles } from "./components/styles/GlobalStyles";
-import ContextProvider from "./hoc/ContextProvider";
+import "react-toastify/dist/ReactToastify.css";
+// import ContextProvider from "./hoc/ContextProvider";
 
 export default function App() {
   return (
     <ErrorBoundary>
-      <ContextProvider>
-        <GlobalStyles />
-        <Layout />
-      </ContextProvider>
+      <ToastContainer />
+      <GlobalStyles />
+      <Layout />
     </ErrorBoundary>
   );
 }
