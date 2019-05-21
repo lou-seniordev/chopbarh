@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import { Form, FormItem } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
@@ -64,10 +65,11 @@ class SubmitPin extends Component {
         this.props.openOTPModal();
       } else {
         this.props.closePinModal();
+        toast.error(`Please try again`);
       }
     } catch (err) {
-      console.log(err);
       this.setState({ loading: false });
+      toast.error(`Something went wrong`);
     }
   };
 
