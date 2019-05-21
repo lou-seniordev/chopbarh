@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
+import {toast} from 'react-toastify'
 import color from "../../../styles/colors";
 import { setVoucherValue } from "./actions/VoucherActions";
 import { setCoinBalance } from "../../shared/actions/coinBalanceActions";
@@ -71,17 +72,17 @@ class Voucher extends Component {
     formErrorModal: false
   };
 
-  voucherUsedModalToggle = () => {
-    this.setState({ voucherModal: !this.state.voucherModal });
-  };
+  // voucherUsedModalToggle = () => {
+  //   this.setState({ voucherModal: !this.state.voucherModal });
+  // };
 
-  formErrorModalToggle = () => {
-    this.setState({ formErrorModal: !this.state.formErrorModal });
-  };
+  // formErrorModalToggle = () => {
+  //   this.setState({ formErrorModal: !this.state.formErrorModal });
+  // };
 
-  voucherSuccessModalToggle = () => {
-    this.setState({ voucherSuccessModal: !this.state.voucherSuccessModal });
-  };
+  // voucherSuccessModalToggle = () => {
+  //   this.setState({ voucherSuccessModal: !this.state.voucherSuccessModal });
+  // };
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -99,7 +100,8 @@ class Voucher extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ loading: false, formErrorModal: true });
+      this.setState({ loading: false });
+      toast.error(`Voucher is not valid`)
       return;
     }
 
@@ -109,8 +111,6 @@ class Voucher extends Component {
     };
 
     const formValue = JSON.stringify(postData);
-
-    console.log(formValue);
 
     try {
       const response = await fetch(
@@ -131,58 +131,25 @@ class Voucher extends Component {
         this.props.setCoinBalance(data.data.value);
         this.setState({
           loading: false,
-          voucherSuccessModal: true,
           voucher: ""
         });
-        this.setState({});
+        toast.success(`Voucher was successfully loaded`)
       } else if (response.status === 404) {
         // setVoucherUsedModal(true);
-        this.setState({ voucherModal: true, voucher: "", loading: false });
+        this.setState({ voucher: "", loading: false });
+        toast.error(`Voucher has already been used`)
       } else {
         this.setState({ loading: false });
       }
     } catch (err) {
       this.setState({ loading: false });
-      console.log(err);
+      toast.error(`Something went wrong`)
     }
   };
 
   render() {
     return (
       <VoucherWrapper className="container">
-        <Modal
-          isOpen={this.state.voucherModal}
-          toggle={this.voucherUsedModalToggle}
-          className="pt-5 mt-4"
-        >
-          <ModalBody className="text-center">
-            <p>This Voucher has already been used</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
-          className="pt-5 mt-4"
-        >
-          <ModalBody className="text-center">
-            <p>There was an error in the form</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.state.voucherSuccessModal}
-          toggle={this.voucherSuccessModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Success!</h2>
-            <p>The Voucher was successfully loaded</p>
-          </ModalBody>
-        </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
           <form>
             <FormItem>
