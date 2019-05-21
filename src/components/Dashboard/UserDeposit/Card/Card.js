@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import { withRouter } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
@@ -55,8 +56,8 @@ class Card extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ formErrorModal: true });
       this.setState({ loading: false });
+      toast.error(`Form field is not valid`);
       return;
     }
 
@@ -99,11 +100,12 @@ class Card extends Component {
         this.props.setChargeReference(data.data.reference);
         this.props.openPinModal();
       } else {
-        this.setState({ formErrorModal: true });
+        // this.setState({ formErrorModal: true });
+        toast.error(`Please try again`);
       }
-      console.log(data);
     } catch (err) {
       this.setState({ loading: false });
+      toast.error(`Something went wrong`);
     }
   };
 
