@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import color from "../../../styles/colors";
 import { setVoucherValue } from "./actions/VoucherActions";
 import { setCoinBalance } from "../../shared/actions/coinBalanceActions";
@@ -101,7 +101,7 @@ class Voucher extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
-      toast.error(`Voucher is not valid`)
+      toast.error(`Voucher is not valid`);
       return;
     }
 
@@ -133,17 +133,17 @@ class Voucher extends Component {
           loading: false,
           voucher: ""
         });
-        toast.success(`Voucher was successfully loaded`)
+        toast.success(`Voucher was successfully loaded`);
       } else if (response.status === 404) {
         // setVoucherUsedModal(true);
         this.setState({ voucher: "", loading: false });
-        toast.error(`Voucher has already been used`)
+        toast.error(`Voucher has already been used`);
       } else {
         this.setState({ loading: false });
       }
     } catch (err) {
       this.setState({ loading: false });
-      toast.error(`Something went wrong`)
+      toast.error(`Something went wrong`);
     }
   };
 
@@ -159,7 +159,7 @@ class Voucher extends Component {
               <input
                 type="text"
                 name="voucher"
-                value={this.state.voucer}
+                value={this.state.voucher}
                 onChange={this.handleInputChange}
                 placeholder="Voucher Code"
               />
