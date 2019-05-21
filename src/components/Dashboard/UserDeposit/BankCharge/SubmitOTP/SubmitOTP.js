@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import { Form, FormItem } from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../shared/actions/coinBalanceActions";
 import {
@@ -61,17 +62,19 @@ class SubmitOTP extends Component {
       console.log(data);
       if (data.data.status === "success") {
         this.props.closeOTPModal();
+        this.setState({ loading: false });
+        toast.success(`Transaction was successful`);
         this.props.openTransactionSuccessModal();
         const value = +data.data.amount / 100;
         this.props.setCoinBalance(value);
       } else {
         //Error here
+        toast.error(`Please try again`);
+        this.setState({ loading: false });
       }
-      console.log(data);
-      this.setState({ loading: false });
     } catch (err) {
-      console.log(err);
       this.setState({ loading: false });
+      toast.error(`Something went wrong`);
     }
   };
 
