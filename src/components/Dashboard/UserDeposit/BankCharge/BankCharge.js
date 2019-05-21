@@ -75,7 +75,6 @@ class BankCharge extends Component {
       birthday: "1995-03-29"
     };
 
-    console.log(postData);
     try {
       const response = await fetch("https://api.paystack.co/charge", {
         method: "POST",
@@ -181,7 +180,7 @@ class BankCharge extends Component {
             <FormItem className="mr-3">
               <label>Account Number</label>
               <input
-                type="text"
+                type="number"
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
                 name="account_number"
@@ -192,7 +191,7 @@ class BankCharge extends Component {
             <FormItem>
               <label>Amount</label>
               <input
-                type="text"
+                type="number"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 name="amount"
