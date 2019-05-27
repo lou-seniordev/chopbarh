@@ -7,6 +7,7 @@ import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
+import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
   closeOTPModal,
@@ -94,6 +95,8 @@ class Card extends Component {
         this.props.openPinModal();
       } else if (data.data.status === "sucess") {
         toast.success("Transaction was successful");
+        const value = +data.data.amount / 100;
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -196,6 +199,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setChargeReference,
+  setCoinBalance,
   openOTPModal,
   closeOTPModal,
   openPinModal,
