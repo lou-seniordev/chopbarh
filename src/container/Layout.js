@@ -18,9 +18,7 @@ const SetNickname = lazy(() =>
   import("../components/auth/SetNickname/SetNickname")
 );
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
-const UserEditProfilePage = lazy(() =>
-  import("../Pages/UserEditProfilePagefilePage")
-);
+const UserEditProfilePage = lazy(() => import("../Pages/UserEditProfilePage"));
 const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
