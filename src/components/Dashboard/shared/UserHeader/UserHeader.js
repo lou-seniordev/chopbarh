@@ -67,57 +67,75 @@ class UserHeader extends Component {
               </ul>
             </div>
           ) : (
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto" />
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <span className="nav-link text-uppercase mr-5">
-                    <Icon icon={CoinSymbol} height="15" />
-                    {new Intl.NumberFormat().format(
-                      this.props.playerData.CBCoins
-                    )}
-                    <Icon icon={VisibilityButton} height="10" />
-                  </span>
-                </li>
-                <li className="nav-item">
-                  <span className="nav-link text-uppercase mr-5">
-                    <Icon icon={CashIcon} height="18" />
-                    &#8358;
-                    {new Intl.NumberFormat().format(
-                      this.props.playerData.RealCoins
-                    )}
-                    <Icon icon={VisibilityButton} height="10" />
-                  </span>
-                </li>
-                <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle text-uppercase"
-                    href="drop"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {this.props.playerData.DisplayName}
-                  </a>
-                  <div
-                    className="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <Link className="dropdown-item" to="edit-profile">
-                      Edit Profile
-                    </Link>
-                    <Link className="dropdown-item" to="logout">
-                      Logout
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <>
+              {!this.props.error ? (
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul className="navbar-nav mr-auto" />
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <span className="nav-link text-uppercase mr-5">
+                        <Icon icon={CoinSymbol} height="15" />
+                        {new Intl.NumberFormat().format(
+                          this.props.playerData.CBCoins
+                        )}
+                        <Icon icon={VisibilityButton} height="10" />
+                      </span>
+                    </li>
+                    <li className="nav-item">
+                      <span className="nav-link text-uppercase mr-5">
+                        <Icon icon={CashIcon} height="18" />
+                        &#8358;
+                        {new Intl.NumberFormat().format(
+                          this.props.playerData.RealCoins
+                        )}
+                        <Icon icon={VisibilityButton} height="10" />
+                      </span>
+                    </li>
+                    <li className="nav-item dropdown">
+                      <a
+                        className="nav-link dropdown-toggle text-uppercase"
+                        href="drop"
+                        id="navbarDropdown"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        {this.props.playerData.DisplayName}
+                      </a>
+                      <div
+                        className="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="navbarDropdown"
+                      >
+                        <Link className="dropdown-item" to="edit-profile">
+                          Edit Profile
+                        </Link>
+                        <Link className="dropdown-item" to="logout">
+                          Logout
+                        </Link>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul className="navbar-nav mr-auto" />
+                  <ul className="navbar-nav">
+                    <li className="nav-item">
+                      <span className="nav-link text-uppercase mr-5">
+                        Not Available
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </>
           )}
         </nav>
       </HeaderWrapper>
@@ -128,7 +146,8 @@ class UserHeader extends Component {
 const mapStateToProps = state => ({
   isPlayerDataAvailable: state.player.playerData !== null,
   playerData: state.player.playerData,
-  loading: state.player.loading
+  loading: state.player.loading,
+  error: state.player.error
 });
 
 const mapDispatchToProps = {

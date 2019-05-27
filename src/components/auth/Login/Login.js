@@ -126,7 +126,7 @@ class Login extends Component {
         >
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
-            <p>Account not found</p>
+            <p>Account not found. Please, Sign Up first</p>
           </ModalBody>
         </Modal>
         <FormWrapper>
