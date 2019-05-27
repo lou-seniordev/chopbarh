@@ -136,7 +136,7 @@ class SignUp extends Component {
     // Generate six digits OTP
     const otp = this.generateOTP();
 
-    console.log(otp);
+    // console.log(otp);
 
     const postData = {
       to: this.state.phone,
@@ -146,23 +146,27 @@ class SignUp extends Component {
 
     // Send the message
     // https://cors-anywhere.herokuapp.com/
-    fetch("https://v2.sling.com.ng/api/v1/send-sms", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer sling_yf0sdglyznon7vzinojcjf7qy1oqw6xsz6x1mh5wbibjoer0dfpyiy"
-      },
-      body: JSON.stringify(postData)
-    })
+    fetch(
+      "https://cors-anywhere.herokuapp.com/https://v2.sling.com.ng/api/v1/send-sms",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer sling_yf0sdglyznon7vzinojcjf7qy1oqw6xsz6x1mh5wbibjoer0dfpyiy"
+        },
+        body: JSON.stringify(postData)
+      }
+    )
       .then(response => response.json())
       .then(data => {
         if (data.credit_used === 1) {
           this.props.authOTPGenerator(otp);
           this.setState({ loading: false, otpModal: true });
         } else {
+          toast.error(`OTP was not sent. Please try again later`);
           this.setState({ loading: false });
         }
       });
