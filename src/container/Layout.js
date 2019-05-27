@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
 import { fetchPlayerData } from "../store/actions/playerDataActions";
+import { Spinner } from "reactstrap";
 
 const LandingPage = lazy(() => import("../Pages/LandingPage"));
 const GamesPage = lazy(() => import("../Pages/GamesPage"));
@@ -23,13 +24,11 @@ const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
 
-/*
-
-This component implements routing. We should add React Suspense here.
-Add auth logic here to change routes dynamically. Consider approach between 
-initialising in constructor and using componentWillMount
-
-*/
+const Loading = () => (
+  <div>
+    <Spinner type="grow" style={{ color: "#6D0A23" }} />
+  </div>
+);
 
 class Layout extends Component {
   UNSAFE_componentWillMount = () => {
