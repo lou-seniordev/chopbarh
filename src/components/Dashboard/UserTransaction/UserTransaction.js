@@ -5,7 +5,7 @@ import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import QuickPlayTransaction from "./QuickPlayTransaction/QuickPlayTransaction";
 import VoucherTransaction from "./VoucherTransaction/VoucherTransaction";
-import TransactionTabs from "./TransactionTabs/TransactionTabs";
+import TransactionTable from "./TransactionTable/TransactionTable";
 
 export default function UserTransaction() {
   return (
@@ -15,7 +15,13 @@ export default function UserTransaction() {
       </Helmet>
       <UserHeader />
       <UserNavigation />
-      <TransactionTabs />
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            <TransactionTable />
+          </div>
+        </div>
+      </div>
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
