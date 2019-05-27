@@ -10,8 +10,6 @@ const GamesPage = lazy(() => import("../Pages/GamesPage"));
 const LoginPage = lazy(() => import("../Pages/LoginPage"));
 const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
 const CompleteProfilePage = lazy(() => import("../Pages/CompleteProfilePage"));
-const EditProfilePage = lazy(() => import("../Pages/EditProfilePage"));
-const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const ForgotPassword = lazy(() =>
   import("../components/auth/ForgotPassword/ForgotPassword")
 );
@@ -20,6 +18,10 @@ const SetNickname = lazy(() =>
   import("../components/auth/SetNickname/SetNickname")
 );
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
+const UserEditProfilePage = lazy(() =>
+  import("../Pages/UserEditProfilePagefilePage")
+);
+const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
@@ -64,7 +66,7 @@ class Layout extends Component {
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHomePage} />
               <Route path="/profile" component={UserProfilePage} />
-              <Route path="/edit-profile" component={EditProfilePage} />
+              <Route path="/edit-profile" component={UserEditProfilePage} />
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/transaction" component={UserTransactionPage} />
