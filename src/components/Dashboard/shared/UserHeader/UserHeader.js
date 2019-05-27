@@ -104,7 +104,8 @@ class UserHeader extends Component {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        {this.props.playerData.DisplayName}
+                        {this.props.playerData.DisplayName ||
+                          this.props.playerData.FullName}
                       </a>
                       <div
                         className="dropdown-menu dropdown-menu-right"
