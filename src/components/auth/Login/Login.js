@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 //import axios from "axios";
@@ -194,5 +194,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Login)
+  )(memo(Login))
 );
