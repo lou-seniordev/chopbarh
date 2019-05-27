@@ -135,6 +135,10 @@ class EditProfileForm extends Component {
   //   }
   // };
 
+  componentDidUpdate = () => {
+    console.log("Updated...");
+  };
+
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
