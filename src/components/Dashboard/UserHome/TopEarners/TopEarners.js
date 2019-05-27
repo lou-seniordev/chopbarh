@@ -1,7 +1,7 @@
 import React, { Component, memo } from "react";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
-import { fetchTopEarners } from "./actions/TopEarnersActions";
+import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions";
 
 class TopEarners extends Component {
   componentDidMount = () => {

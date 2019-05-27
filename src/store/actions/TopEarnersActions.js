@@ -1,5 +1,5 @@
-import * as actionType from "../../../../../store/actionTypes/actionTypes";
-import apiService from "../../../../../config/apiService";
+import * as actionType from "../actionTypes/actionTypes";
+import apiService from "../../config/apiService";
 
 export const fetchTopEarnersStart = () => ({
   type: actionType.FETCH_TOP_EARNERS_INIT
