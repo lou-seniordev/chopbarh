@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
@@ -74,7 +74,7 @@ const Button = styled.button`
   }
 `;
 
-export default function QuickPlay() {
+function QuickPlay() {
   return (
     <GameItemsWrapper>
       <div className="container">
@@ -135,3 +135,5 @@ export default function QuickPlay() {
     </GameItemsWrapper>
   );
 }
+
+export default memo(QuickPlay);
