@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
@@ -188,4 +188,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Voucher);
+)(memo(Voucher));
