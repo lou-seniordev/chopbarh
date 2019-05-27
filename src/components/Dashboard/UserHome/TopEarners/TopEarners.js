@@ -8,32 +8,6 @@ class TopEarners extends Component {
     if (!this.props.results) {
       this.props.fetchTopEarners();
     }
-    // const postRequestData = {
-    //   "@class": ".LogEventRequest",
-    //   eventKey: "ANALYTICS_TOP_EARNERS",
-    //   playerId: localStorage.getItem("chopbarh-id")
-    //     ? localStorage.getItem("chopbarh-id")
-    //     : null
-    // };
-
-    // axios(
-    //   "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/LogEventRequest",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: postRequestData
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //     } else {
-    //       this.setState({ results: response.data.scriptData.RESULTS });
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
   };
 
   render() {
