@@ -35,9 +35,17 @@ class TopEarners extends Component {
             </tbody>
           </table>
         ) : (
-          <div className="text-center mt-2">
-            <Spinner />
-          </div>
+          <>
+            {!this.props.error ? (
+              <div className="text-center mt-2">
+                <Spinner />
+              </div>
+            ) : (
+              <div className="text-center mt-2">
+                <p>Data not Available</p>
+              </div>
+            )}
+          </>
         )}
       </>
     );
@@ -46,7 +54,8 @@ class TopEarners extends Component {
 
 const mapStateToProps = state => ({
   loading: state.topEarners.loading,
-  results: state.topEarners.results
+  results: state.topEarners.results,
+  error: state.topEarners.error
 });
 
 const mapDispatchToProps = {
