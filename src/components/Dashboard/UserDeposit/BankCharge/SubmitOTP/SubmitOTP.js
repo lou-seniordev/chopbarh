@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
@@ -131,5 +131,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(SubmitOTP)
+  )(memo(SubmitOTP))
 );
