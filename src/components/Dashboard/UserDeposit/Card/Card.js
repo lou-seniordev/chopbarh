@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import { withRouter } from "react-router-dom";
@@ -256,5 +256,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Card)
+  )(memo(Card))
 );
