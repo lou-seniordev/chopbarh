@@ -84,7 +84,6 @@ class Layout extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/set-nickname" component={SetNickname} />
-              <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/complete_profile" component={CompleteProfilePage} />
               <Redirect to="/" />
             </Switch>
