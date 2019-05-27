@@ -135,8 +135,10 @@ class EditProfileForm extends Component {
   //   }
   // };
 
-  componentDidUpdate = () => {
-    console.log("Updated...");
+  componentDidUpdate = prevProps => {
+    if (this.props !== prevProps) {
+      // this.setState({ name: "Nutod" });
+    }
   };
 
   handleInputChange = ({ target }) => {
