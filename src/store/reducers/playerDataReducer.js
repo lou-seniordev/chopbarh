@@ -2,7 +2,8 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  playerData: null
+  playerData: null,
+  error: false
 };
 
 export default (state = initialState, action) => {
@@ -23,7 +24,8 @@ export default (state = initialState, action) => {
     case actionType.FETCH_PLAYER_DATA_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: true
       };
     case actionType.AUTH_LOGOUT:
       return {
