@@ -12,7 +12,6 @@ import EditProfilePage from "../Pages/EditProfilePage";
 import ProfilePage from "../Pages/ProfilePage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import Logout from "../components/auth/Logout/Logout";
-import OTP from "../components/auth/OTP/OTP";
 import SetNickname from "../components/auth/SetNickname/SetNickname";
 import UserHome from "../components/Dashboard/UserHome/UserHome";
 import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
@@ -55,7 +54,6 @@ class Layout extends Component {
             <Route path="/user" component={UserHome} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/edit-profile" component={EditProfilePage} />
-            <Route path="/signup" component={SignUpPage} />
             <Route path="/deposit/charge" component={DepositOutcome} />
             <Route path="/deposit" component={UserDeposit} />
             <Route path="/withdraw" component={UserWithdraw} />
@@ -68,7 +66,6 @@ class Layout extends Component {
             <Route path="/games" component={GamesPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignUpPage} />
-            <Route path="/otp" component={OTP} />
             <Route path="/set-nickname" component={SetNickname} />
             <Route path="/complete_profile" component={CompleteProfilePage} />
             <Redirect to="/" />
