@@ -43,14 +43,6 @@ class Layout extends Component {
     }
   };
 
-  componentDidMount = () => {
-    console.log(this.props.isAuthenticated);
-    // if (localStorage.getItem("chopbarh-token")) {
-    //   localStorage.getItem("chopbarh-token");
-    //   localStorage.getItem("chopbarh-id");
-    // }
-  };
-
   render() {
     return (
       <>
