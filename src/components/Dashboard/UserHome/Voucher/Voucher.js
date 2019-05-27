@@ -65,23 +65,8 @@ const FormItem = styled.div`
 class Voucher extends Component {
   state = {
     loading: false,
-    voucherModal: false,
-    voucherSuccessModal: false,
-    voucher: "",
-    formErrorModal: false
+    voucher: ""
   };
-
-  // voucherUsedModalToggle = () => {
-  //   this.setState({ voucherModal: !this.state.voucherModal });
-  // };
-
-  // formErrorModalToggle = () => {
-  //   this.setState({ formErrorModal: !this.state.formErrorModal });
-  // };
-
-  // voucherSuccessModalToggle = () => {
-  //   this.setState({ voucherSuccessModal: !this.state.voucherSuccessModal });
-  // };
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
