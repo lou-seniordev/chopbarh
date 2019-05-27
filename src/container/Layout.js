@@ -25,7 +25,14 @@ const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
 
 const Loading = () => (
-  <div>
+  <div
+    style={{
+      height: "98vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
+  >
     <Spinner type="grow" style={{ color: "#6D0A23" }} />
   </div>
 );
@@ -49,7 +56,7 @@ class Layout extends Component {
     return (
       <>
         {this.props.isAuthenticated ? (
-          <Suspense>
+          <Suspense fallback={Loading()}>
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/games" component={GamesPage} />
@@ -65,7 +72,7 @@ class Layout extends Component {
             </Switch>
           </Suspense>
         ) : (
-          <Suspense>
+          <Suspense fallback={Loading()}>
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/games" component={GamesPage} />
