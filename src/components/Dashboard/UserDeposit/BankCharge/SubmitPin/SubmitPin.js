@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import {
   openPinModal,
   closePinModal
 } from "../../../../../store/actions/modalActions";
+import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 
 class SubmitPin extends Component {
   state = {
@@ -63,6 +64,10 @@ class SubmitPin extends Component {
       if (data.data.status === "send_otp") {
         this.props.closePinModal();
         this.props.openOTPModal();
+      } else if (data.data.status === "success") {
+        toast.success("Transaction was successful");
+        const value = +data.data.amount / 100;
+        this.props.setCoinBalance(value);
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);
@@ -123,12 +128,13 @@ const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+  setCoinBalance
 };
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(SubmitPin)
+  )(memo(SubmitPin))
 );
