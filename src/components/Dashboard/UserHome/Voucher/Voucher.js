@@ -122,10 +122,10 @@ class Voucher extends Component {
         this.setState({ voucher: "", loading: false });
         toast.error(`Voucher has already been used`);
       } else {
-        this.setState({ loading: false });
+        this.setState({ loading: false, voucher: "" });
       }
     } catch (err) {
-      this.setState({ loading: false });
+      this.setState({ loading: false, voucher: "" });
       toast.error(`Something went wrong`);
     }
   };
