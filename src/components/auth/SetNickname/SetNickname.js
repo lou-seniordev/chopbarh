@@ -12,7 +12,6 @@ import {
   Form,
   FormItem
 } from "../../styles/SignUpStyles";
-import { AppContext } from "../../../hoc/AppContext";
 
 function SetNickname(props) {
   const [formState, { text }] = useFormState();
@@ -73,20 +72,16 @@ function SetNickname(props) {
           </ModalBody>
         </Modal>
         <Container>
-          <AppContext.Consumer>
-            {({ setUserInfo }) => (
-              <Form onSubmit={handleSubmit}>
-                <HeadingTwo className="mb-4">Set Nickname</HeadingTwo>
-                <FormItem>
-                  <label>Nickname</label>
-                  <input {...text("NickName")} required />
-                </FormItem>
-                <button type="submit" className="mr-2" disabled={loading}>
-                  <span>{loading ? "Please wait..." : "Submit"}</span>
-                </button>
-              </Form>
-            )}
-          </AppContext.Consumer>
+          <Form onSubmit={handleSubmit}>
+            <HeadingTwo className="mb-4">Set Nickname</HeadingTwo>
+            <FormItem>
+              <label>Nickname</label>
+              <input {...text("NickName")} required />
+            </FormItem>
+            <button type="submit" className="mr-2" disabled={loading}>
+              <span>{loading ? "Please wait..." : "Submit"}</span>
+            </button>
+          </Form>
         </Container>
       </SignUpWrapper>
     </>

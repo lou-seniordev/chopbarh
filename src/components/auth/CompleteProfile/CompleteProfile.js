@@ -13,7 +13,6 @@ import {
   FormItem,
   HalfColumn
 } from "../../styles/SignUpStyles";
-import { AppContext } from "../../../hoc/AppContext";
 
 function CompleteProfile({ getUserInfo, history }) {
   const [formState, { text, tel, date, select, email }] = useFormState({
@@ -68,7 +67,7 @@ function CompleteProfile({ getUserInfo, history }) {
         <title>Chopbarh &rarr; Complete Profile</title>
       </Helmet>
       <Header />
-      <SignUpWrapper>
+      {/* <SignUpWrapper>
         <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
@@ -76,8 +75,6 @@ function CompleteProfile({ getUserInfo, history }) {
           </ModalBody>
         </Modal>
         <Container>
-          <AppContext.Consumer>
-            {({ getUserInfo }) => (
               <Form onSubmit={handleSubmit}>
                 <HeadingTwo className="mb-4">Complete Profile</HeadingTwo>
                 <FormItem>
@@ -115,10 +112,8 @@ function CompleteProfile({ getUserInfo, history }) {
                   <span>{loading ? "Saving..." : "Save Profile"}</span>
                 </button>
               </Form>
-            )}
-          </AppContext.Consumer>
         </Container>
-      </SignUpWrapper>
+      </SignUpWrapper> */}
     </>
   );
 }
