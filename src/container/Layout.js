@@ -13,10 +13,10 @@ import ProfilePage from "../Pages/ProfilePage";
 import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
 import Logout from "../components/auth/Logout/Logout";
 import SetNickname from "../components/auth/SetNickname/SetNickname";
-import UserHome from "../components/Dashboard/UserHome/UserHome";
-import UserDeposit from "../components/Dashboard/UserDeposit/UserDeposit";
-import UserWithdraw from "../components/Dashboard/UserWithdraw/UserWithdraw";
-import UserTransaction from "../components/Dashboard/UserTransaction/UserTransaction";
+import UserHomePage from "../Pages/UserHomePage";
+import UserDepositPage from "../Pages/UserDepositPage";
+import UserWithdrawPage from "../Pages/UserWithdrawPage";
+import UserTransactionPage from "../Pages/UserTransactionPage";
 
 /*
 
@@ -50,12 +50,12 @@ class Layout extends Component {
             <Route path="/games" component={GamesPage} />
             <Route path="/reset" component={ForgotPassword} />
             <Route path="/logout" component={Logout} />
-            <Route path="/user" component={UserHome} />
+            <Route path="/user" component={UserHomePage} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/edit-profile" component={EditProfilePage} />
-            <Route path="/deposit" component={UserDeposit} />
-            <Route path="/withdraw" component={UserWithdraw} />
-            <Route path="/transaction" component={UserTransaction} />
+            <Route path="/deposit" component={UserDepositPage} />
+            <Route path="/withdraw" component={UserWithdrawPage} />
+            <Route path="/transaction" component={UserTransactionPage} />
             <Redirect to="/" />
           </Switch>
         ) : (
