@@ -80,11 +80,21 @@ class Overview extends Component {
             </OverviewContainer>
           </>
         ) : (
-          <OverviewContainer className="row text-center">
-            <div className="text-center mx-auto">
-              <Spinner />
-            </div>
-          </OverviewContainer>
+          <>
+            {!this.props.error ? (
+              <OverviewContainer className="row text-center">
+                <div className="text-center mx-auto">
+                  <Spinner />
+                </div>
+              </OverviewContainer>
+            ) : (
+              <OverviewContainer className="row text-center">
+                <div className="text-center mx-auto">
+                  <p>DATA NOT AVAILABLE</p>
+                </div>
+              </OverviewContainer>
+            )}
+          </>
         )}
       </OverviewWrapper>
     );
@@ -92,7 +102,8 @@ class Overview extends Component {
 }
 
 const mapStateToProps = state => ({
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
+  error: state.player.error
 });
 
 const mapDispatchToProps = {};
