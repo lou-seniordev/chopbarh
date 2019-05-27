@@ -14,26 +14,11 @@ const FormWrapper = styled(Form)`
 class AccountNumber extends Component {
   state = {
     loading: false,
-    formErrorModal: false,
-    overdraftModal: false,
-    successModal: false,
     amount: "",
     bank: "",
     account_number: "",
     account_confirmed: false,
     account_name: ""
-  };
-
-  formErrorModalToggle = () => {
-    this.setState({ formErrorModal: !this.state.formErrorModal });
-  };
-
-  successModalToggle = () => {
-    this.setState({ successModal: !this.state.successModal });
-  };
-
-  overdraftModalToggle = () => {
-    this.setState({ overdraftModal: !this.state.overdraftModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -75,13 +60,13 @@ class AccountNumber extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ formErrorModal: true });
+      toast.error("Form is not valid");
       this.setState({ loading: false });
       return;
     }
 
     if (this.state.amount > this.props.playerData.RealCoins) {
-      this.setState({ overdraftModal: true });
+      toast.error("You cannot withdraw more than you have won");
       return;
     }
 
@@ -134,77 +119,20 @@ class AccountNumber extends Component {
         account_number: ""
       });
       if (response.status === 200) {
-        this.props.openTransactionSuccessModal();
+        toast.success("Transaction was Successful");
         this.props.setCashBalance(data.data.amount, 2);
       } else {
-        this.props.openTransactionFailModal();
+        toast.error("Transaction was not successful");
       }
     } catch (err) {
       this.setState({ loading: false });
-      this.setState({ formErrorModal: true });
+      toast.error("Something went wrong");
     }
   };
 
   render() {
     return (
       <>
-        <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionSuccessModal}
-          toggle={this.props.closeTransactionSuccessModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Success!</h2>
-            <p>The Transaction was successful</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionFailModal}
-          toggle={this.props.closeTransactionFailModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Failed!</h2>
-            <p>The transaction was not successful. Please try again</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.state.overdraftModal}
-          toggle={this.overdraftModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Oh Snap!</h2>
-            <p>The amount is above your winnings</p>
-          </ModalBody>
-        </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
           {this.state.account_confirmed && (
             <hgroup>
@@ -267,10 +195,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  openTransactionSuccessModal,
-  openTransactionFailModal,
-  closeTransactionFailModal,
-  closeTransactionSuccessModal,
   setCashBalance
 };
 
