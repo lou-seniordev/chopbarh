@@ -38,24 +38,30 @@ const Loading = () => (
 );
 
 class Layout extends Component {
-  UNSAFE_componentWillMount = () => {
-    // if (this.props.isAuthenticated) {
-    //   this.props.authSuccess(
-    //     localStorage.getItem("chopbarh-token:live"),
-    //     localStorage.getItem("chopbarh-id:live")
-    //   );
-    //   //this.props.fetchPlayerData();
-    //   if (localStorage.getItem("chopbarh-token")) {
-    //     localStorage.removeItem("chopbarh-token");
-    //     localStorage.removeItem("chopbarh-id");
-    //   }
-    // }
-    if (localStorage.getItem("chopbarh-token:live")) {
-      localStorage.removeItem("chopbarh-token:live");
-      localStorage.removeItem("chopbarh-id:live");
-      this.props.history.replace("/");
-    }
-  };
+  constructor(props) {
+    super(props);
+
+    this.props.isAuthenticated &&
+      this.props.authSuccess(
+        localStorage.getItem("chopbarh-token:live"),
+        localStorage.getItem("chopbarh-id:live")
+      );
+  }
+
+  // UNSAFE_componentWillMount = () => {
+  //   if (this.props.isAuthenticated) {
+  //     this.props.authSuccess(
+  //       localStorage.getItem("chopbarh-token:live"),
+  //       localStorage.getItem("chopbarh-id:live")
+  //     );
+  //     //this.props.fetchPlayerData();
+  //   }
+  //   // if (localStorage.getItem("chopbarh-token:live")) {
+  //   //   localStorage.removeItem("chopbarh-token:live");
+  //   //   localStorage.removeItem("chopbarh-id:live");
+  //   //   this.props.history.replace("/");
+  //   // }
+  // };
 
   render() {
     return (
