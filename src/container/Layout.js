@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
 import { fetchPlayerData } from "../store/actions/playerDataActions";
@@ -55,7 +55,7 @@ class Layout extends Component {
       localStorage.removeItem("chopbarh-id:live");
     }
 
-    window.location = "/";
+    this.props.history.replace("/");
   };
 
   render() {
@@ -104,7 +104,9 @@ const mapDispatchToProps = {
   fetchPlayerData
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Layout);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Layout)
+);
