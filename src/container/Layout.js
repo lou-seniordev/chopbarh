@@ -53,9 +53,8 @@ class Layout extends Component {
     if (localStorage.getItem("chopbarh-token:live")) {
       localStorage.removeItem("chopbarh-token:live");
       localStorage.removeItem("chopbarh-id:live");
+      this.props.history.replace("/");
     }
-
-    this.props.history.replace("/");
   };
 
   render() {
@@ -85,6 +84,7 @@ class Layout extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/set-nickname" component={SetNickname} />
+              <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/complete_profile" component={CompleteProfilePage} />
               <Redirect to="/" />
             </Switch>
