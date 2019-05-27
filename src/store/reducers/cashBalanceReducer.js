@@ -2,6 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: false,
+  error: false,
   cashValue: null
 };
 
@@ -21,7 +22,8 @@ export default (state = initialState, action) => {
     case actionType.SET_CASH_BALANCE_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: true
       };
     case actionType.AUTH_LOGOUT:
       return {

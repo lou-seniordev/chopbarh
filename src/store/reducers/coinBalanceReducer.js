@@ -2,6 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: false,
+  error: false,
   coinValue: null
 };
 
@@ -21,7 +22,8 @@ export default (state = initialState, action) => {
     case actionType.SET_COIN_BALANCE_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: true
       };
     case actionType.AUTH_LOGOUT:
       return {

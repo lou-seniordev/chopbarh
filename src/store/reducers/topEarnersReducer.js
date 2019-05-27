@@ -2,6 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
+  error: false,
   results: null
 };
 
@@ -21,7 +22,8 @@ export default (state = initialState, action) => {
     case actionType.FETCH_TOP_EARNERS_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: true
       };
     case actionType.AUTH_LOGOUT:
       return {
