@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchTopEarners } from "./actions/TopEarnersActions";
@@ -82,4 +82,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopEarners);
+)(memo(TopEarners));
