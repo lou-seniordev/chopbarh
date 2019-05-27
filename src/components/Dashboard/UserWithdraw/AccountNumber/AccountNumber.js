@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
 import styled from "styled-components";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
@@ -201,4 +200,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AccountNumber);
+)(memo(AccountNumber));
