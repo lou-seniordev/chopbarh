@@ -129,12 +129,6 @@ class EditProfileForm extends Component {
     email: ""
   };
 
-  // componentDidMount = () => {
-  //   if (!this.state.name) {
-  //     this.setState({ name: this.props.playerData.FullName });
-  //   }
-  // };
-
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       // this.setState({ name: "Nutod" });
