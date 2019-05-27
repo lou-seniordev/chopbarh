@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
+import { toast } from "react-toastify";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
-  closeOTPModal,
-  closeTransactionFailModal,
-  closeTransactionSuccessModal
+  closeOTPModal
 } from "../../../../store/actions/modalActions";
 
 const Banks = [
@@ -25,15 +24,10 @@ const Banks = [
 class BankCharge extends Component {
   state = {
     loading: false,
-    formErrorModal: false,
     successModal: false,
     amount: "",
     bank: "",
     account_number: ""
-  };
-
-  formErrorModalToggle = () => {
-    this.setState({ formErrorModal: !this.state.formErrorModal });
   };
 
   successModalToggle = () => {
@@ -60,7 +54,7 @@ class BankCharge extends Component {
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
-      this.setState({ formErrorModal: true });
+      toast.error(`Form is not valid`);
       this.setState({ loading: false });
       return;
     }
@@ -86,7 +80,6 @@ class BankCharge extends Component {
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-      console.log(data);
       this.setState({
         loading: false,
         amount: "",
@@ -97,9 +90,10 @@ class BankCharge extends Component {
         this.props.setChargeReference(data.data.reference);
         this.props.openOTPModal();
       } else {
-        this.setState({ formErrorModal: true });
+        toast.error(`Transaction not successful`);
       }
     } catch (err) {
+      toast.error(`Something went wrong`);
       this.setState({ loading: false });
     }
   };
@@ -107,18 +101,6 @@ class BankCharge extends Component {
   render() {
     return (
       <>
-        <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
-          </ModalBody>
-        </Modal>
         <Modal
           isOpen={this.props.otpModal}
           toggle={this.props.closeOTPModal}
@@ -130,7 +112,7 @@ class BankCharge extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
-        <Modal
+        {/* <Modal
           isOpen={this.props.transactionSuccessModal}
           toggle={this.props.closeTransactionSuccessModal}
           style={{
@@ -159,7 +141,7 @@ class BankCharge extends Component {
             <h2>Failed!</h2>
             <p>The transaction was not successful. Please try again</p>
           </ModalBody>
-        </Modal>
+        </Modal> */}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Bank</label>
@@ -210,20 +192,16 @@ class BankCharge extends Component {
 }
 
 const mapStateToProps = state => ({
-  otpModal: state.modal.submitOTPModal,
-  transactionSuccessModal: state.modal.transactionSuccessModal,
-  transactionFailModal: state.modal.transactionFailModal
+  otpModal: state.modal.submitOTPModal
 });
 
 const mapDispatchToProps = {
   setChargeReference,
   openOTPModal,
-  closeOTPModal,
-  closeTransactionFailModal,
-  closeTransactionSuccessModal
+  closeOTPModal
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BankCharge);
+)(memo(BankCharge));
