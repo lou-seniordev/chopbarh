@@ -11,25 +11,18 @@ import {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal,
-  closeTransactionFailModal,
-  closeTransactionSuccessModal
+  closePinModal
 } from "../../../../store/actions/modalActions";
 
 class Card extends Component {
   state = {
     loading: false,
-    formErrorModal: false,
     submitOTPModal: false,
     submitPinModal: false,
     amount: "",
     card: "",
     expiry: "",
     cvv: ""
-  };
-
-  formErrorModalToggle = () => {
-    this.setState({ formErrorModal: !this.state.formErrorModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -100,7 +93,6 @@ class Card extends Component {
         this.props.setChargeReference(data.data.reference);
         this.props.openPinModal();
       } else {
-        // this.setState({ formErrorModal: true });
         toast.error(`Please try again`);
       }
     } catch (err) {
@@ -112,18 +104,6 @@ class Card extends Component {
   render() {
     return (
       <>
-        <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
-          </ModalBody>
-        </Modal>
         <Modal
           isOpen={this.props.pinModal}
           toggle={this.props.closePinModal}
@@ -144,36 +124,6 @@ class Card extends Component {
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
             <SubmitOTP />
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionSuccessModal}
-          toggle={this.props.closeTransactionSuccessModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Success!</h2>
-            <p>The Transaction was successful</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionFailModal}
-          toggle={this.props.closeTransactionFailModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Failed!</h2>
-            <p>The transaction was not successful. Please try again</p>
           </ModalBody>
         </Modal>
         <Form onSubmit={this.handleSubmit}>
@@ -237,9 +187,7 @@ class Card extends Component {
 
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
-  pinModal: state.modal.submitPinModal,
-  transactionSuccessModal: state.modal.transactionSuccessModal,
-  transactionFailModal: state.modal.transactionFailModal
+  pinModal: state.modal.submitPinModal
 });
 
 const mapDispatchToProps = {
@@ -247,9 +195,7 @@ const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal,
-  closeTransactionSuccessModal,
-  closeTransactionFailModal
+  closePinModal
 };
 
 export default withRouter(
