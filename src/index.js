@@ -14,6 +14,7 @@ import chargeReducer from "./store/reducers/chargeReducer";
 import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
 import modalReducer from "./store/reducers/modalReducer";
 import voucherReducer from "./store/reducers/voucherReducer";
+import transactionHistoryReducer from "./store/reducers/transactionHistoryReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   charge: chargeReducer,
   coinBalance: coinBalanceReducer,
   modal: modalReducer,
-  voucher: voucherReducer
+  voucher: voucherReducer,
+  transaction: transactionHistoryReducer
 });
 
 const composeEnhancers =
