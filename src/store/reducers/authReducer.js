@@ -3,6 +3,7 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   authenticated: false,
   loading: false,
+  error: false,
   token: null,
   id: null,
   otp: null
@@ -31,7 +32,8 @@ export default (state = initialState, action) => {
     case actionType.AUTH_FAILURE:
       return {
         ...state,
-        loading: false
+        loading: false,
+        error: true
       };
     case actionType.AUTH_LOGOUT:
       return {
