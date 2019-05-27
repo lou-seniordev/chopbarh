@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalBody } from "reactstrap";
 
-/*
-
-This component renders whenever something goes wrong in production. Consider 
-using a component that renders a more appealing message 
-
-*/
 export default class ErrorBoundary extends Component {
   state = {
     error: null,
@@ -14,7 +8,6 @@ export default class ErrorBoundary extends Component {
   };
 
   componentDidCatch = error => {
-    console.log(error);
     this.setState({ error, errorModal: true });
   };
 
