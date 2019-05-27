@@ -188,8 +188,6 @@ class AccountNumber extends Component {
 }
 
 const mapStateToProps = state => ({
-  transactionSuccessModal: state.modal.transactionSuccessModal,
-  transactionFailModal: state.modal.transactionFailModal,
   playerData: state.player.playerData
 });
 

@@ -7,9 +7,7 @@ import { Form, FormItem } from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
-  closeOTPModal,
-  openTransactionSuccessModal,
-  openTransactionFailModal
+  closeOTPModal
 } from "../../../../../store/actions/modalActions";
 
 class SubmitOTP extends Component {
@@ -64,7 +62,6 @@ class SubmitOTP extends Component {
         this.props.closeOTPModal();
         this.setState({ loading: false });
         toast.success(`Transaction was successful`);
-        this.props.openTransactionSuccessModal();
         const value = +data.data.amount / 100;
         this.props.setCoinBalance(value);
       } else {
@@ -127,9 +124,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setCoinBalance,
   openOTPModal,
-  closeOTPModal,
-  openTransactionSuccessModal,
-  openTransactionFailModal
+  closeOTPModal
 };
 
 export default withRouter(

@@ -50,7 +50,7 @@ class Card extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
-      toast.error(`Form field is not valid`);
+      toast.error(`Form is not valid`);
       return;
     }
 
@@ -92,6 +92,8 @@ class Card extends Component {
       } else if (data.data.status === "send_pin") {
         this.props.setChargeReference(data.data.reference);
         this.props.openPinModal();
+      } else if (data.data.status === "sucess") {
+        toast.success("Transaction was successful");
       } else {
         toast.error(`Please try again`);
       }
@@ -135,6 +137,8 @@ class Card extends Component {
               name="amount"
               value={this.state.amount}
               required
+              min={1}
+              minLength="1"
               placeholder="Amount(NGN)"
             />
           </FormItem>
