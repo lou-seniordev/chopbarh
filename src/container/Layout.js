@@ -1,22 +1,27 @@
-import React, { Component } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
 import { fetchPlayerData } from "../store/actions/playerDataActions";
-import LandingPage from "../Pages/LandingPage";
-import GamesPage from "../Pages/GamesPage";
-import LoginPage from "../Pages/LoginPage";
-import SignUpPage from "../Pages/SignUpPage";
-import CompleteProfilePage from "../Pages/CompleteProfilePage";
-import EditProfilePage from "../Pages/EditProfilePage";
-import ProfilePage from "../Pages/ProfilePage";
-import ForgotPassword from "../components/auth/ForgotPassword/ForgotPassword";
-import Logout from "../components/auth/Logout/Logout";
-import SetNickname from "../components/auth/SetNickname/SetNickname";
-import UserHomePage from "../Pages/UserHomePage";
-import UserDepositPage from "../Pages/UserDepositPage";
-import UserWithdrawPage from "../Pages/UserWithdrawPage";
-import UserTransactionPage from "../Pages/UserTransactionPage";
+
+const LandingPage = lazy(() => import("../Pages/LandingPage"));
+const GamesPage = lazy(() => import("../Pages/GamesPage"));
+const LoginPage = lazy(() => import("../Pages/LoginPage"));
+const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
+const CompleteProfilePage = lazy(() => import("../Pages/CompleteProfilePage"));
+const EditProfilePage = lazy(() => import("../Pages/EditProfilePage"));
+const ProfilePage = lazy(() => import("../Pages/ProfilePage"));
+const ForgotPassword = lazy(() =>
+  import("../components/auth/ForgotPassword/ForgotPassword")
+);
+const Logout = lazy(() => import("../components/auth/Logout/Logout"));
+const SetNickname = lazy(() =>
+  import("../components/auth/SetNickname/SetNickname")
+);
+const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
+const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
+const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
+const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
 
 /*
 
@@ -45,29 +50,33 @@ class Layout extends Component {
     return (
       <>
         {this.props.isAuthenticated ? (
-          <Switch>
-            <Route path="/" exact component={LandingPage} />
-            <Route path="/games" component={GamesPage} />
-            <Route path="/reset" component={ForgotPassword} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/user" component={UserHomePage} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/edit-profile" component={EditProfilePage} />
-            <Route path="/deposit" component={UserDepositPage} />
-            <Route path="/withdraw" component={UserWithdrawPage} />
-            <Route path="/transaction" component={UserTransactionPage} />
-            <Redirect to="/" />
-          </Switch>
+          <Suspense>
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/games" component={GamesPage} />
+              <Route path="/reset" component={ForgotPassword} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/user" component={UserHomePage} />
+              <Route path="/profile" component={ProfilePage} />
+              <Route path="/edit-profile" component={EditProfilePage} />
+              <Route path="/deposit" component={UserDepositPage} />
+              <Route path="/withdraw" component={UserWithdrawPage} />
+              <Route path="/transaction" component={UserTransactionPage} />
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
         ) : (
-          <Switch>
-            <Route path="/" exact component={LandingPage} />
-            <Route path="/games" component={GamesPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signup" component={SignUpPage} />
-            <Route path="/set-nickname" component={SetNickname} />
-            <Route path="/complete_profile" component={CompleteProfilePage} />
-            <Redirect to="/" />
-          </Switch>
+          <Suspense>
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/games" component={GamesPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignUpPage} />
+              <Route path="/set-nickname" component={SetNickname} />
+              <Route path="/complete_profile" component={CompleteProfilePage} />
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
         )}
       </>
     );
