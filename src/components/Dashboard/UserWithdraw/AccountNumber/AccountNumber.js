@@ -2,23 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import styled from "styled-components";
-//import scuid from 'scuid'
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
-import {
-  openTransactionSuccessModal,
-  openTransactionFailModal,
-  closeTransactionFailModal,
-  closeTransactionSuccessModal
-} from "../../../../store/actions/modalActions";
+import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
+import Banks from "./Banks";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
 `;
-
-// export default {
-//   secretKey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X"
-// };
 
 class AccountNumber extends Component {
   state = {
