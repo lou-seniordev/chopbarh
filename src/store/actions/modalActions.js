@@ -16,6 +16,14 @@ export const closeOTPModal = () => ({
   type: actionType.CLOSE_SUBMIT_OTP_MODAL
 });
 
+export const openPhoneModal = () => ({
+  type: actionType.OPEN_SUBMIT_PHONE_MODAL
+});
+
+export const closePhoneModal = () => ({
+  type: actionType.CLOSE_SUBMIT_PHONE_MODAL
+});
+
 export const openTransactionSuccessModal = () => ({
   type: actionType.OPEN_TRANSACTION_SUCCESS_MODAL
 });
