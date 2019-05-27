@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import color from "../../../styles/colors";
@@ -46,7 +46,7 @@ const NavItem = styled.div`
   margin-bottom: 0.3rem;
 `;
 
-export default function UserNavigation() {
+function UserNavigation() {
   return (
     <HeaderWrapper>
       <NavItem>
@@ -82,3 +82,5 @@ export default function UserNavigation() {
     </HeaderWrapper>
   );
 }
+
+export default memo(UserNavigation);
