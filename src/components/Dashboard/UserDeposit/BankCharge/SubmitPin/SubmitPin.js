@@ -65,6 +65,7 @@ class SubmitPin extends Component {
         this.props.closePinModal();
         this.props.openOTPModal();
       } else if (data.data.status === "success") {
+        this.props.closePinModal();
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
         this.props.setCoinBalance(value);
