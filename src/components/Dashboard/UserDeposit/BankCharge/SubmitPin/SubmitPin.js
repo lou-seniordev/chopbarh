@@ -8,7 +8,9 @@ import {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+  openPhoneModal,
+  closePhoneModal
 } from "../../../../../store/actions/modalActions";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 
@@ -64,6 +66,9 @@ class SubmitPin extends Component {
       if (data.data.status === "send_otp") {
         this.props.closePinModal();
         this.props.openOTPModal();
+      } else if (data.data.status === "send_phone") {
+        this.props.closePinModal();
+        this.props.openPhoneModal();
       } else if (data.data.status === "success") {
         this.props.closePinModal();
         toast.success("Transaction was successful");
@@ -130,6 +135,8 @@ const mapDispatchToProps = {
   closeOTPModal,
   openPinModal,
   closePinModal,
+  openPhoneModal,
+  closePhoneModal,
   setCoinBalance
 };
 
