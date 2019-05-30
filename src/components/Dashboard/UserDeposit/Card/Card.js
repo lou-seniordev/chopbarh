@@ -135,8 +135,18 @@ class Card extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
-            <input
+            {/* <input
               type="number"
+              onChange={this.handleInputChange}
+              name="amount"
+              value={this.state.amount}
+              required
+              min={1}
+              minLength="1"
+              placeholder="Amount(NGN)"
+            /> */}
+            <NumberFormat
+              thousandSeparator
               onChange={this.handleInputChange}
               name="amount"
               value={this.state.amount}
@@ -148,8 +158,17 @@ class Card extends Component {
           </FormItem>
           <FormItem>
             <label>Card Number</label>
-            <input
+            {/* <input
               type="number"
+              onChange={this.handleInputChange}
+              name="card"
+              value={this.state.card}
+              minLength="16"
+              required
+              placeholder="Enter Card Number"
+            /> */}
+            <NumberFormat
+              format="#### #### #### #### ####"
               onChange={this.handleInputChange}
               name="card"
               value={this.state.card}
