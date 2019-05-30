@@ -200,7 +200,7 @@ class Card extends Component {
             </FormItem>
             <FormItem>
               <label>CVV</label>
-              <input
+              {/* <input
                 type="number"
                 onChange={this.handleInputChange}
                 name="cvv"
@@ -208,6 +208,14 @@ class Card extends Component {
                 required
                 minLength="3"
                 maxLength="3"
+                placeholder="3 Digits behind Card"
+              /> */}
+              <NumberFormat
+                format="###"
+                onChange={this.handleInputChange}
+                name="cvv"
+                value={this.state.cvv}
+                required
                 placeholder="3 Digits behind Card"
               />
             </FormItem>
