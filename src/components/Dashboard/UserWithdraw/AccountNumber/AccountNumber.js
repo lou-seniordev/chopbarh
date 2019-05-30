@@ -1,5 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
+import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
@@ -157,8 +158,15 @@ class AccountNumber extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Account Number</label>
-              <input
+              {/* <input
                 type="text"
+                value={this.state.account_number}
+                onChange={this.handleInputChange}
+                name="account_number"
+                required
+                placeholder="Account Number"
+              /> */}
+              <NumberFormat
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
                 name="account_number"
@@ -168,8 +176,16 @@ class AccountNumber extends Component {
             </FormItem>
             <FormItem>
               <label>Amount</label>
-              <input
+              {/* <input
                 type="text"
+                value={this.state.amount}
+                onChange={this.handleInputChange}
+                name="amount"
+                required
+                placeholder="Amount(NGN)"
+              /> */}
+              <NumberFormat
+                thousandSeparator
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 name="amount"
