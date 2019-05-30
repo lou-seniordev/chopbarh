@@ -132,8 +132,18 @@ class EditProfileForm extends Component {
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       // SetState here to initialize
-      const { FullName } = this.props.playerData;
-      // this.setState({ name: "Nutod" });
+      // PlayerID(pin): "5ceab8bada4bd40515df67a0"
+      // Email(pin): ""
+      // SEX(pin): "M"
+      // NickName(pin): "Gooodnesskay"
+      // PhoneNum(pin): "08188469520"
+      // DOB(pin): "26/05/1992"
+      // FullName(pin): "Goodness Kayode"
+      // ImageID(pin): "888b9a6dd7a540688ca5e87a3234240d"
+      // TotalWinning(pin): 0
+      console.log("Updating...");
+      // const { FullName, PhoneNum, Sex } = this.props.playerData;
+      // this.setState({ name: FullName });
     }
   };
 
@@ -203,7 +213,6 @@ class EditProfileForm extends Component {
                   <label>Full Name</label>
                   <input
                     type="text"
-                    // value={this.props.playerData.FullName}
                     value={this.state.name}
                     name="name"
                     onChange={this.handleInputChange}
