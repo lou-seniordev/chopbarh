@@ -129,6 +129,19 @@ class EditProfileForm extends Component {
     email: ""
   };
 
+  componentDidMount = () => {
+    if (this.props.playerData !== null) {
+      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      this.setState({
+        name: FullName,
+        phone: PhoneNum,
+        dob: DOB,
+        sex: Sex,
+        email: Email
+      });
+    }
+  };
+
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
