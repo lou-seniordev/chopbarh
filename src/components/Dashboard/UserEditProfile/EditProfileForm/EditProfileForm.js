@@ -131,6 +131,8 @@ class EditProfileForm extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
+      // SetState here to initialize
+      // const { FullName, } = this.props.playerData
       // this.setState({ name: "Nutod" });
     }
   };
