@@ -35,6 +35,10 @@ class UserHeader extends Component {
     }
   };
 
+  toggleBalanceVisibility = () => {
+    this.setState({ showBalance: !this.state.showBalance });
+  };
+
   render() {
     return (
       <HeaderWrapper>
