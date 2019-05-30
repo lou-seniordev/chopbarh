@@ -209,63 +209,6 @@ class Paga extends Component {
   render() {
     return (
       <>
-        {/* <Modal
-          isOpen={this.state.formErrorModal}
-          toggle={this.formErrorModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <h2>Ooops!</h2>
-            <p>Something went wrong. Please try again</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionSuccessModal}
-          toggle={this.props.closeTransactionSuccessModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Success!</h2>
-            <p>The Transaction was successful</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionFailModal}
-          toggle={this.props.closeTransactionFailModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Failed!</h2>
-            <p>The transaction was not successful. Please try again</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.state.overdraftModal}
-          toggle={this.overdraftModalToggle}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Oh Snap!</h2>
-            <p>The amount is above your winnings</p>
-          </ModalBody>
-        </Modal> */}
         <Form onSubmit={this.handleSubmit}>
           <HalfColumn>
             <FormItem className="mr-3">
