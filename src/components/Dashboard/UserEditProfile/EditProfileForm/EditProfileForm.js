@@ -131,16 +131,6 @@ class EditProfileForm extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      // SetState here to initialize
-      // PlayerID(pin): "5ceab8bada4bd40515df67a0"
-      // Email(pin): ""
-      // SEX(pin): "M"
-      // NickName(pin): "Gooodnesskay"
-      // PhoneNum(pin): "08188469520"
-      // DOB(pin): "26/05/1992"
-      // FullName(pin): "Goodness Kayode"
-      // ImageID(pin): "888b9a6dd7a540688ca5e87a3234240d"
-      // TotalWinning(pin): 0
       const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
       this.setState({
         name: FullName,
@@ -243,6 +233,7 @@ class EditProfileForm extends Component {
                       name="dob"
                       onChange={this.handleInputChange}
                       required
+                      max="2010-01-01"
                     />
                   </FormItem>
                   <FormItem>
