@@ -180,8 +180,16 @@ class BankCharge extends Component {
             </FormItem>
             <FormItem>
               <label>Amount</label>
-              <input
+              {/* <input
                 type="number"
+                value={this.state.amount}
+                onChange={this.handleInputChange}
+                name="amount"
+                required
+                placeholder="Amount(NGN)"
+              /> */}
+              <NumberFormat
+                thousandSeparator
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 name="amount"
