@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import NumberFormat from "react-number-format";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
 import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
@@ -160,13 +161,22 @@ class Card extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Expiry</label>
-              <input
+              {/* <input
                 type="text"
                 onChange={this.handleInputChange}
                 name="expiry"
                 value={this.state.expiry}
                 required
                 placeholder="MM/YY"
+              /> */}
+              <NumberFormat
+                format="##/##"
+                name="expiry"
+                onChange={this.handleInputChange}
+                value={this.state.expiry}
+                required
+                placeholder="MM/YY"
+                mask={["M", "M", "Y", "Y"]}
               />
             </FormItem>
             <FormItem>
