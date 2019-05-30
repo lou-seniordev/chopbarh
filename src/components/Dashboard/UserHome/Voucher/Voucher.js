@@ -74,7 +74,10 @@ class Voucher extends Component {
   };
 
   formIsValid = ({ voucher }) => {
-    if (!isNaN(voucher) !== true || voucher.length !== 12) {
+    if (
+      !isNaN(voucher.split(" ").join("")) !== true ||
+      voucher.split(" ").join("").length !== 12
+    ) {
       return false;
     }
     return true;
@@ -86,7 +89,7 @@ class Voucher extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
-      toast.error(`Voucher is not valid`);
+      // toast.error(`Voucher is not valid`);
       return;
     }
 
