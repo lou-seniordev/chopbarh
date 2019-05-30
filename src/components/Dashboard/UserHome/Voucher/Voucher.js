@@ -2,6 +2,7 @@ import React, { Component, memo } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import NumberFormat from "react-number-format";
 import color from "../../../styles/colors";
 import { setVoucherValue } from "../../../../store/actions/voucherActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
@@ -139,8 +140,15 @@ class Voucher extends Component {
               <label>Load Voucher</label>
             </FormItem>
             <FormItem>
-              <input
+              {/* <input
                 type="text"
+                name="voucher"
+                value={this.state.voucher}
+                onChange={this.handleInputChange}
+                placeholder="Voucher Code"
+              /> */}
+              <NumberFormat
+                format="#### #### ####"
                 name="voucher"
                 value={this.state.voucher}
                 onChange={this.handleInputChange}
