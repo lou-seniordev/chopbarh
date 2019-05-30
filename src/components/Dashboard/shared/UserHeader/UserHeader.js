@@ -25,6 +25,10 @@ const HeaderWrapper = styled.div`
 `;
 
 class UserHeader extends Component {
+  state = {
+    showBalance: true
+  };
+
   componentDidMount = () => {
     if (!this.props.isPlayerDataAvailable) {
       this.props.fetchPlayerData();
