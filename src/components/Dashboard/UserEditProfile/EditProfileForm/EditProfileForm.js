@@ -141,9 +141,14 @@ class EditProfileForm extends Component {
       // FullName(pin): "Goodness Kayode"
       // ImageID(pin): "888b9a6dd7a540688ca5e87a3234240d"
       // TotalWinning(pin): 0
-      console.log("Updating...");
-      // const { FullName, PhoneNum, Sex } = this.props.playerData;
-      // this.setState({ name: FullName });
+      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      this.setState({
+        name: FullName,
+        phone: PhoneNum,
+        dob: DOB,
+        sex: Sex,
+        email: Email
+      });
     }
   };
 
