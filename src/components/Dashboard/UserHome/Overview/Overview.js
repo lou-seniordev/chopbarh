@@ -70,7 +70,7 @@ class Overview extends Component {
                 <OverviewContentHeader>
                   &#8358;
                   {new Intl.NumberFormat().format(
-                    this.props.playerData.RealCoins
+                    this.props.playerData.TotalWinning
                   )}
                 </OverviewContentHeader>
                 <OverviewContentDescription>
