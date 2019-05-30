@@ -2,6 +2,7 @@ import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
 import { toast } from "react-toastify";
+import NumberFormat from "react-number-format";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
@@ -161,8 +162,15 @@ class BankCharge extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Account Number</label>
-              <input
+              {/* <input
                 type="number"
+                value={this.state.account_number}
+                onChange={this.handleInputChange}
+                name="account_number"
+                required
+                placeholder="Account Number"
+              /> */}
+              <NumberFormat
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
                 name="account_number"
