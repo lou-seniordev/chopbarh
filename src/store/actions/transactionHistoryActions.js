@@ -15,27 +15,20 @@ export const fetchTransactionHistoryFail = () => ({
 });
 
 export const fetchTransactionHistoryData = () => (dispatch, getState) => {
-  const postRequestData = {
-    "@class": ".LogEventRequest",
-    eventKey: "LOAD_TRANSACTION",
-    playerId: getState().auth.id,
-    PLAYER_ID: getState().auth.id
-  };
-
-  dispatch(fetchTransactionHistoryInit());
-  fetch(`${apiService.apiService}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(postRequestData)
-  })
-    .then(response => response.json())
-    .then(data => {
-      dispatch(fetchTransactionHistorySuccess(data.scriptData.RESULTS));
-    })
-    .catch(err => {
-      dispatch(fetchTransactionHistoryFail());
-    });
+  // dispatch(fetchTransactionHistoryInit());
+  // fetch(`${apiService.apiService}`, {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify(postRequestData)
+  // })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     dispatch(fetchTransactionHistorySuccess(data.scriptData.RESULTS));
+  //   })
+  //   .catch(err => {
+  //     dispatch(fetchTransactionHistoryFail());
+  //   });
 };
