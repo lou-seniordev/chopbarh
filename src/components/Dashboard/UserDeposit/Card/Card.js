@@ -135,16 +135,7 @@ class Card extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
-            {/* <input
-              type="number"
-              onChange={this.handleInputChange}
-              name="amount"
-              value={this.state.amount}
-              required
-              min={1}
-              minLength="1"
-              placeholder="Amount(NGN)"
-            /> */}
+
             <NumberFormat
               thousandSeparator
               onChange={this.handleInputChange}
@@ -158,15 +149,7 @@ class Card extends Component {
           </FormItem>
           <FormItem>
             <label>Card Number</label>
-            {/* <input
-              type="number"
-              onChange={this.handleInputChange}
-              name="card"
-              value={this.state.card}
-              minLength="16"
-              required
-              placeholder="Enter Card Number"
-            /> */}
+
             <NumberFormat
               format="#### #### #### #### ####"
               onChange={this.handleInputChange}
@@ -180,14 +163,7 @@ class Card extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Expiry</label>
-              {/* <input
-                type="text"
-                onChange={this.handleInputChange}
-                name="expiry"
-                value={this.state.expiry}
-                required
-                placeholder="MM/YY"
-              /> */}
+
               <NumberFormat
                 format="##/##"
                 name="expiry"
@@ -200,16 +176,6 @@ class Card extends Component {
             </FormItem>
             <FormItem>
               <label>CVV</label>
-              {/* <input
-                type="number"
-                onChange={this.handleInputChange}
-                name="cvv"
-                value={this.state.cvv}
-                required
-                minLength="3"
-                maxLength="3"
-                placeholder="3 Digits behind Card"
-              /> */}
               <NumberFormat
                 format="###"
                 onChange={this.handleInputChange}
