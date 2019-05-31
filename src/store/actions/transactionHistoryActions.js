@@ -1,5 +1,5 @@
 import * as actionType from "../actionTypes/actionTypes";
-import apiService from "../../config/apiService";
+import { firestore } from "./firebase";
 
 export const fetchTransactionHistoryInit = () => ({
   type: actionType.FETCH_TRANSACTION_HISTORY_INIT
