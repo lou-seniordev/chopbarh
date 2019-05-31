@@ -113,36 +113,6 @@ class BankCharge extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
-        {/* <Modal
-          isOpen={this.props.transactionSuccessModal}
-          toggle={this.props.closeTransactionSuccessModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Success!</h2>
-            <p>The Transaction was successful</p>
-          </ModalBody>
-        </Modal>
-        <Modal
-          isOpen={this.props.transactionFailModal}
-          toggle={this.props.closeTransactionFailModal}
-          style={{
-            marginTop: "22rem"
-          }}
-        >
-          <ModalBody
-            className="text-center"
-            style={{ height: "20vh", paddingTop: "4rem" }}
-          >
-            <h2>Failed!</h2>
-            <p>The transaction was not successful. Please try again</p>
-          </ModalBody>
-        </Modal> */}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Bank</label>
@@ -162,14 +132,7 @@ class BankCharge extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Account Number</label>
-              {/* <input
-                type="number"
-                value={this.state.account_number}
-                onChange={this.handleInputChange}
-                name="account_number"
-                required
-                placeholder="Account Number"
-              /> */}
+
               <NumberFormat
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
@@ -180,14 +143,6 @@ class BankCharge extends Component {
             </FormItem>
             <FormItem>
               <label>Amount</label>
-              {/* <input
-                type="number"
-                value={this.state.amount}
-                onChange={this.handleInputChange}
-                name="amount"
-                required
-                placeholder="Amount(NGN)"
-              /> */}
               <NumberFormat
                 thousandSeparator
                 value={this.state.amount}
