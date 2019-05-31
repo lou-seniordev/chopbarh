@@ -14,7 +14,12 @@ export const fetchTransactionHistoryFail = () => ({
   type: actionType.FETCH_TRANSACTION_HISTORY_FAIL
 });
 
-export const fetchTransactionHistoryData = () => (dispatch, getState) => {
+export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
+  // Default Get
+  const snapshot = await firestore.collection("transactions").get();
+
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  // console.log(data);
   // dispatch(fetchTransactionHistoryInit());
   // fetch(`${apiService.apiService}`, {
   //   method: "POST",
