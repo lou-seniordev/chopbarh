@@ -88,61 +88,7 @@ class TransactionTable extends Component {
     return (
       <TransactionTableWrapper>
         <div>
-          {this.props.transactionData ? (
-            <table className="table table-striped">
-              <thead
-                style={{
-                  background: "#8C1936",
-                  color: "#fff",
-                  textAlign: "center"
-                }}
-              >
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Trade Number</th>
-                  <th scope="col">Amount</th>
-                  {/* <th scope="col">Status</th>
-                <th scope="col">Balance</th>
-                <th scope="col">Action</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {this.props.transactionData.map((transaction, index) => (
-                  <tr key={index} style={{ textAlign: "center" }}>
-                    <td>{`${new Date(
-                      transaction.TimeStamp
-                    ).getDate()}-${new Date(
-                      transaction.TimeStamp
-                    ).getMonth()}-${new Date(
-                      transaction.TimeStamp
-                    ).getFullYear()}`}</td>
-                    <td>{transaction.FROM}</td>
-                    <td>{transaction.TO}</td>
-                    <td>
-                      &#8358;
-                      {new Intl.NumberFormat().format(transaction.AMOUNT)}
-                    </td>
-                    {/* <td>Status</td>
-                  <td>Balance</td>
-                  <td>Action</td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <>
-              {!this.props.error ? (
-                <div className="text-center mx-auto">
-                  <Spinner />
-                </div>
-              ) : (
-                <div className="text-center mx-auto">
-                  <p>Data not Available</p>
-                </div>
-              )}
-            </>
-          )}
+          <p>Table</p>
         </div>
       </TransactionTableWrapper>
     );
@@ -163,3 +109,59 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(memo(TransactionTable));
+
+// {this.props.transactionData ? (
+//             <table className="table table-striped">
+//               <thead
+//                 style={{
+//                   background: "#8C1936",
+//                   color: "#fff",
+//                   textAlign: "center"
+//                 }}
+//               >
+//                 <tr>
+//                   <th scope="col">Date</th>
+//                   <th scope="col">Type</th>
+//                   <th scope="col">Trade Number</th>
+//                   <th scope="col">Amount</th>
+//                   {/* <th scope="col">Status</th>
+//                 <th scope="col">Balance</th>
+//                 <th scope="col">Action</th> */}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {this.props.transactionData.map((transaction, index) => (
+//                   <tr key={index} style={{ textAlign: "center" }}>
+//                     <td>{`${new Date(
+//                       transaction.TimeStamp
+//                     ).getDate()}-${new Date(
+//                       transaction.TimeStamp
+//                     ).getMonth()}-${new Date(
+//                       transaction.TimeStamp
+//                     ).getFullYear()}`}</td>
+//                     <td>{transaction.FROM}</td>
+//                     <td>{transaction.TO}</td>
+//                     <td>
+//                       &#8358;
+//                       {new Intl.NumberFormat().format(transaction.AMOUNT)}
+//                     </td>
+//                     {/* <td>Status</td>
+//                   <td>Balance</td>
+//                   <td>Action</td> */}
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           ) : (
+//             <>
+//               {!this.props.error ? (
+//                 <div className="text-center mx-auto">
+//                   <Spinner />
+//                 </div>
+//               ) : (
+//                 <div className="text-center mx-auto">
+//                   <p>Data not Available</p>
+//                 </div>
+//               )}
+//             </>
+//           )}

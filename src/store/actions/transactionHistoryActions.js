@@ -1,5 +1,5 @@
 import * as actionType from "../actionTypes/actionTypes";
-import { firestore } from "./firebase";
+import { firestore } from "../../firebase";
 
 export const fetchTransactionHistoryInit = () => ({
   type: actionType.FETCH_TRANSACTION_HISTORY_INIT
@@ -16,10 +16,12 @@ export const fetchTransactionHistoryFail = () => ({
 
 export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
   // Default Get
-  const snapshot = await firestore.collection("transactions").get();
+  try {
+    const snapshot = await firestore.collection("transactions").where("id", "==", "alsjvnijnasfdv").get();
 
-  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  // console.log(data);
+    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(data);
+  } catch (err) {}
   // dispatch(fetchTransactionHistoryInit());
   // fetch(`${apiService.apiService}`, {
   //   method: "POST",
