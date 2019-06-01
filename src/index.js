@@ -15,6 +15,8 @@ import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
 import modalReducer from "./store/reducers/modalReducer";
 import voucherReducer from "./store/reducers/voucherReducer";
 import transactionHistoryReducer from "./store/reducers/transactionHistoryReducer";
+import bankAccountReducer from "./store/reducers/bankAccountReducer";
+import creditCardReducer from "./store/reducers/creditCardReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
   coinBalance: coinBalanceReducer,
   modal: modalReducer,
   voucher: voucherReducer,
-  transaction: transactionHistoryReducer
+  transaction: transactionHistoryReducer,
+  bankAccount: bankAccountReducer,
+  creditCard: creditCardReducer
 });
 
 // const composeEnhancers =
