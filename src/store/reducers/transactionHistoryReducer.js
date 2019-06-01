@@ -16,9 +16,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_TRANSACTION_HISTORY_SUCCESS:
       return {
         ...state,
-        transactionHistory: {
-          ...action.data
-        },
+        transactionHistory: [...action.data],
         loading: false
       };
     case actionType.FETCH_TRANSACTION_HISTORY_FAIL:
