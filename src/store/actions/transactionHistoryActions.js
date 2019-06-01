@@ -15,13 +15,12 @@ export const fetchTransactionHistoryFail = () => ({
 });
 
 export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
-  // Default Get
   dispatch(fetchTransactionHistoryInit());
 
   try {
     const snapshot = await firestore
       .collection("transactions")
-      .where("id", "==", "5ceab8bada4bd40515df67a0")
+      .where("id", "==", getState().auth.id)
       .get();
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
