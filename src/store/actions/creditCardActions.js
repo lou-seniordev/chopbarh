@@ -25,7 +25,11 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    // dispatch(fetchCreditCardSuccess(data[0].data));
+    if (data) {
+      dispatch(fetchCreditCardSuccess(data[0].data));
+    } else {
+      dispatch(fetchCreditCardFail());
+    }
   } catch (err) {
     console.log("Error...", err);
     dispatch(fetchCreditCardFail());
