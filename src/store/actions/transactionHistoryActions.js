@@ -25,7 +25,11 @@ export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    dispatch(fetchTransactionHistorySuccess(data[0].data));
+    if (data) {
+      dispatch(fetchTransactionHistorySuccess(data[0].data));
+    } else {
+      dispatch(fetchTransactionHistoryFail());
+    }
   } catch (err) {
     console.log("Error...", err);
     dispatch(fetchTransactionHistoryFail());
