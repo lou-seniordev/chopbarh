@@ -16,6 +16,7 @@ import {
   openPinModal,
   closePinModal
 } from "../../../../store/actions/modalActions";
+import { fetchCreditCardData } from "../../../../store/actions/creditCardActions";
 
 class Card extends Component {
   state = {
@@ -26,6 +27,10 @@ class Card extends Component {
     card: "",
     expiry: "",
     cvv: ""
+  };
+
+  componentDidMount = () => {
+    this.props.fetchCreditCardData();
   };
 
   handleInputChange = ({ target }) => {
@@ -221,6 +226,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setChargeReference,
+  fetchCreditCardData,
   setTransactionHistory,
   setCoinBalance,
   openOTPModal,
