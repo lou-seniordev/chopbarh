@@ -44,3 +44,21 @@ export const setCreditCardSuccess = data => ({
 export const setCreditCardFail = () => ({
   type: actionType.SET_CREDIT_CARD_FAIL
 });
+
+export const setCreditCardData = () => async (dispatch, getState) => {
+  dispatch(setCreditCardInit());
+
+  try {
+    const snapshot = await firestore
+      .collection("card_charge")
+      .where("id", "==", getState().auth.id)
+      .get();
+
+    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(data);
+    // dispatch(setCreditCardSuccess(data[0].data));
+  } catch (err) {
+    console.log("Error...", err);
+    dispatch(setCreditCardFail());
+  }
+};
