@@ -30,19 +30,4 @@ export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
     console.log("Error...", err);
     dispatch(fetchTransactionHistoryFail());
   }
-  // fetch(`${apiService.apiService}`, {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify(postRequestData)
-  // })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     dispatch(fetchTransactionHistorySuccess(data.scriptData.RESULTS));
-  //   })
-  //   .catch(err => {
-  //     dispatch(fetchTransactionHistoryFail());
-  //   });
 };
