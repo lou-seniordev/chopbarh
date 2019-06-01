@@ -100,7 +100,7 @@ class TransactionTable extends Component {
                 <th scope="col">Transaction Date</th>
                 <th scope="col">Type</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Bank</th>
+                <th scope="col">Channel</th>
                 {/*<th scope="col">Balance</th>
                 <th scope="col">Action</th> */}
               </tr>
@@ -120,7 +120,7 @@ class TransactionTable extends Component {
                     &#8358;
                     {new Intl.NumberFormat().format(transaction.amount)}
                   </td>
-                  <td>{transaction.bank}</td>
+                  <td>{transaction.channel}</td>
                   {/*<td>Balance</td>
                   <td>Action</td> */}
                 </tr>

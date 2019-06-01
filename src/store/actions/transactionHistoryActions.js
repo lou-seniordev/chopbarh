@@ -45,51 +45,49 @@ export const setTransactionHistoryFail = () => ({
   type: actionType.SET_TRANSACTION_HISTORY_FAIL
 });
 
-export const setTransactionHistory = data => async (dispatch, getState) => {
+export const setTransactionHistory = payload => async (dispatch, getState) => {
   dispatch(setTransactionHistoryInit());
-  console.log(data);
-  // const snapshot = await firestore
-  //     .collection("transactions")
-  //     .where("id", "==", "ghbrtfjvnijnijdngjd")
-  //     .get();
-
-  //   const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-  //   if (data) {
-  //     const docRef = await firestore
-  //       .collection("transactions")
-  //       .doc("this_is_the_id")
-  //       .update({
-  //         data: firebase.firestore.FieldValue.arrayUnion({
-  //           amount: "Nutod",
-  //           paid_at: 20
-  //         })
-  //       });
-
-  //     console.log(docRef);
-  //   } else {
-  //     console.log("Yay---");
-  //   }
-  // const docRef = await firestore
-  //   .collection("transactions")
-  //   .doc("this_is_the_id")
-  //   .set({
-  //     id: "ghbrtfjvnijnijdngjd",
-  //     reference: "iafbviuabiu39",
-  //     data: [{}, {}]
-  //   });
-
   try {
     const snapshot = await firestore
       .collection("transactions")
       .where("id", "==", getState().auth.id)
       .get();
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data);
-    dispatch(setTransactionHistorySuccess(data[0].data));
+    const transactions = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log(transactions);
+
+    if (transactions) {
+      const docRef = await firestore
+        .collection("transactions")
+        .doc(getState().auth.id)
+        .update({
+          data: firebase.firestore.FieldValue.arrayUnion({
+            amount: payload.amount,
+            channel: payload.channel,
+            transaction_date: payload.transaction_date,
+            paid_at: payload.paid_at
+          })
+        });
+    } else {
+      const docRef = await firestore
+        .collection("transactions")
+        .doc(getState().auth.id)
+        .set({
+          id: getState().auth.id,
+          data: [
+            {
+              amount: payload.amount,
+              channel: payload.channel,
+              transaction_date: payload.transaction_date,
+              paid_at: payload.paid_at
+            }
+          ]
+        });
+    }
   } catch (err) {
-    console.log("Error...", err);
-    dispatch(setTransactionHistoryFail());
+    console.log("Error", err);
   }
 };
