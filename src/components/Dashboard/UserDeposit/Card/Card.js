@@ -5,8 +5,8 @@ import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
-import SubmitOTP from "../BankCharge/SubmitOTP/SubmitOTP";
-import SubmitPin from "../BankCharge/SubmitPin/SubmitPin";
+import SubmitOTP from "./SubmitOTP/SubmitOTP";
+import SubmitPin from "./SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import {
