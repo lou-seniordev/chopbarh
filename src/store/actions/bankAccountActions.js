@@ -25,7 +25,11 @@ export const fetchBankAccountData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    // dispatch(fetchBankAccountSuccess(data[0].data));
+    if (data) {
+      dispatch(fetchBankAccountSuccess(data[0].data));
+    } else {
+      dispatch(fetchBankAccountFail());
+    }
   } catch (err) {
     console.log("Error...", err);
     dispatch(fetchBankAccountFail());
