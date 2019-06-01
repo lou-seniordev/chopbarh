@@ -9,6 +9,7 @@ import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
+import { setTransactionHistory } from "../../../../store/actions/transactionHistoryActions";
 import {
   openOTPModal,
   closeOTPModal,
@@ -94,12 +95,13 @@ class Card extends Component {
       } else if (data.data.status === "send_pin") {
         this.props.setChargeReference(data.data.reference);
         this.props.openPinModal();
-      } else if (data.data.status === "sucess") {
+      } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
         // Add props to set Charge Success details
         // Grab auth code and store the value
-        this.props.setCoinBalance(value);
+        this.props.setTransactionHistory(data.data);
+        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -137,8 +139,16 @@ class Card extends Component {
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
+            <input
+              onChange={this.handleInputChange}
+              name="amount"
+              value={this.state.amount}
+              required
+              minLength="1"
+              placeholder="Amount(NGN)"
+            />
 
-            <NumberFormat
+            {/* <NumberFormat
               thousandSeparator
               onChange={this.handleInputChange}
               name="amount"
@@ -147,13 +157,11 @@ class Card extends Component {
               min={1}
               minLength="1"
               placeholder="Amount(NGN)"
-            />
+            /> */}
           </FormItem>
           <FormItem>
             <label>Card Number</label>
-
-            <NumberFormat
-              format="#### #### #### #### ####"
+            <input
               onChange={this.handleInputChange}
               name="card"
               value={this.state.card}
@@ -161,6 +169,15 @@ class Card extends Component {
               required
               placeholder="Enter Card Number"
             />
+            {/* <NumberFormat
+              format="#### #### #### #### ####"
+              onChange={this.handleInputChange}
+              name="card"
+              value={this.state.card}
+              minLength="16"
+              required
+              placeholder="Enter Card Number"
+            /> */}
           </FormItem>
           <HalfColumn>
             <FormItem className="mr-3">
@@ -204,6 +221,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setChargeReference,
+  setTransactionHistory,
   setCoinBalance,
   openOTPModal,
   closeOTPModal,
