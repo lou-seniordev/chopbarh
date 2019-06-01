@@ -100,8 +100,8 @@ class Card extends Component {
         const value = +data.data.amount / 100;
         // Add props to set Charge Success details
         // Grab auth code and store the value
-        this.props.setTransactionHistory(data.data);
-        this.props.setCoinBalance(value);
+        // this.props.setTransactionHistory(data.data);
+        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
