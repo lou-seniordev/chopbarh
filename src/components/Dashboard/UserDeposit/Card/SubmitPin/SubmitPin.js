@@ -13,7 +13,7 @@ import {
   closePhoneModal
 } from "../../../../../store/actions/modalActions";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
-import { setTransactionHistory } from "../../../../store/actions/transactionHistoryActions";
+import { setTransactionHistory } from "../../../../../store/actions/transactionHistoryActions";
 
 class SubmitPin extends Component {
   state = {

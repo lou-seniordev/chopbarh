@@ -9,7 +9,7 @@ import {
   openOTPModal,
   closeOTPModal
 } from "../../../../../store/actions/modalActions";
-import { setTransactionHistory } from "../../../../store/actions/transactionHistoryActions";
+import { setTransactionHistory } from "../../../../../store/actions/transactionHistoryActions";
 
 class SubmitOTP extends Component {
   state = {
