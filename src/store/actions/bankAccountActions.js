@@ -25,7 +25,7 @@ export const fetchBankAccountData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    if (data) {
+    if (data.length) {
       dispatch(fetchBankAccountSuccess(data[0].data));
     } else {
       dispatch(fetchBankAccountFail());
@@ -64,7 +64,7 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
     }));
     console.log(bankAccounts);
 
-    if (bankAccounts) {
+    if (bankAccounts.length) {
       const docRef = await firestore
         .collection("bank_charge")
         .doc(getState().auth.id)
