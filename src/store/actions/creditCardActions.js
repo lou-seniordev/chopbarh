@@ -40,9 +40,8 @@ export const setCreditCardInit = () => ({
   type: actionType.SET_CREDIT_CARD_INIT
 });
 
-export const setCreditCardSuccess = data => ({
-  type: actionType.SET_CREDIT_CARD_SUCCESS,
-  data
+export const setCreditCardSuccess = () => ({
+  type: actionType.SET_CREDIT_CARD_SUCCESS
 });
 
 export const setCreditCardFail = () => ({
@@ -58,11 +57,46 @@ export const setCreditCardData = () => async (dispatch, getState) => {
       .where("id", "==", getState().auth.id)
       .get();
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data);
-    // dispatch(setCreditCardSuccess(data[0].data));
+    const creditCards = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log(creditCards);
+
+    if (creditCards) {
+      const docRef = await firestore
+        .collection("card_charge")
+        .doc(getState().auth.id)
+        .update({
+          data: firebase.firestore.FieldValue.arrayUnion({
+            auth_code: payload.authorization_code,
+            card_type: payload.card_type,
+            exp_month: payload.exp_month,
+            exp_year: payload.exp_year,
+            last_digits: payload.last4
+          })
+        });
+    } else {
+      const docRef = await firestore
+        .collection("card_charge")
+        .doc(getState().auth.id)
+        .set({
+          id: getState().auth.id,
+          data: [
+            {
+              auth_code: payload.authorization_code,
+              card_type: payload.card_type,
+              exp_month: payload.exp_month,
+              exp_year: payload.exp_year,
+              last_digits: payload.last4
+            }
+          ]
+        });
+    }
+
+    dispatch(setCreditCardSuccess());
   } catch (err) {
-    console.log("Error...", err);
+    console.log("Error", err);
     dispatch(setCreditCardFail());
   }
 };
