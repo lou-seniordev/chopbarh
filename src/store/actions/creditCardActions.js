@@ -51,8 +51,6 @@ export const setCreditCardFail = () => ({
 export const setCreditCardData = payload => async (dispatch, getState) => {
   dispatch(setCreditCardInit());
 
-  console.log("Setting Card...");
-
   try {
     const snapshot = await firestore
       .collection("card_charge")
