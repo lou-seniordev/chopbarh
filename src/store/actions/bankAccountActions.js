@@ -49,20 +49,51 @@ export const setBankAccountFail = () => ({
   type: actionType.SET_BANK_ACCOUNT_FAIL
 });
 
-export const setBankAccountData = () => async (dispatch, getState) => {
+export const setBankAccountData = payload => async (dispatch, getState) => {
   dispatch(setBankAccountInit());
 
   try {
     const snapshot = await firestore
-      .collection("card_charge")
+      .collection("bank_charge")
       .where("id", "==", getState().auth.id)
       .get();
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data);
-    // dispatch(setBankAccountSuccess(data[0].data));
+    const bankAccounts = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    console.log(bankAccounts);
+
+    if (bankAccounts) {
+      const docRef = await firestore
+        .collection("bank_charge")
+        .doc(getState().auth.id)
+        .update({
+          data: firebase.firestore.FieldValue.arrayUnion({
+            auth_code: payload.authorization_code,
+            bank: payload.bank,
+            last_digits: payload.last4
+          })
+        });
+    } else {
+      const docRef = await firestore
+        .collection("bank_charge")
+        .doc(getState().auth.id)
+        .set({
+          id: getState().auth.id,
+          data: [
+            {
+              auth_code: payload.authorization_code,
+              bank: payload.bank,
+              last_digits: payload.last4
+            }
+          ]
+        });
+    }
+
+    dispatch(setBankAccountSuccess());
   } catch (err) {
-    console.log("Error...", err);
+    console.log("Error", err);
     dispatch(setBankAccountFail());
   }
 };

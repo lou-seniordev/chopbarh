@@ -48,7 +48,7 @@ export const setCreditCardFail = () => ({
   type: actionType.SET_CREDIT_CARD_FAIL
 });
 
-export const setCreditCardData = () => async (dispatch, getState) => {
+export const setCreditCardData = payload => async (dispatch, getState) => {
   dispatch(setCreditCardInit());
 
   try {
