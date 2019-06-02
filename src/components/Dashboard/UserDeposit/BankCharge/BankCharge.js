@@ -32,7 +32,9 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchBankAccountData();
+    if (!this.props.bankAccount) {
+      this.props.fetchBankAccountData();
+    }
   };
 
   handleInputChange = ({ target }) => {
@@ -163,7 +165,8 @@ class BankCharge extends Component {
 }
 
 const mapStateToProps = state => ({
-  otpModal: state.modal.submitOTPModal
+  otpModal: state.modal.submitOTPModal,
+  bankAccount: state.bankAccount.bankAccount
 });
 
 const mapDispatchToProps = {
