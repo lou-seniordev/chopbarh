@@ -65,6 +65,11 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
     console.log(bankAccounts);
 
     if (bankAccounts.length) {
+      // const accountExists = getState().bankAccount.bankAccount.filter(
+      //   account => account.last_digits === payload.last4
+      // );
+      // console.log(accountExists);
+
       const docRef = await firestore
         .collection("bank_charge")
         .doc(getState().auth.id)

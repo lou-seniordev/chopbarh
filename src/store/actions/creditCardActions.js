@@ -64,6 +64,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
     console.log(creditCards);
 
     if (creditCards.length) {
+      // Check if it exists already
+      // const cardExists = getState().creditCard.creditCard.filter(card => card.last_digits === payload.last4)
       const docRef = await firestore
         .collection("card_charge")
         .doc(getState().auth.id)
