@@ -16,7 +16,10 @@ import {
   openPinModal,
   closePinModal
 } from "../../../../store/actions/modalActions";
-import { fetchCreditCardData } from "../../../../store/actions/creditCardActions";
+import {
+  fetchCreditCardData,
+  setCreditCardData
+} from "../../../../store/actions/creditCardActions";
 
 class Card extends Component {
   state = {
@@ -104,6 +107,7 @@ class Card extends Component {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
         // Add props to set Charge Success details
+        this.props.setCreditCardData(data.data.authorization);
         // Grab auth code and store the value
         // this.props.setTransactionHistory(data.data);
         // this.props.setCoinBalance(value);
@@ -228,6 +232,7 @@ const mapDispatchToProps = {
   setChargeReference,
   fetchCreditCardData,
   setTransactionHistory,
+  setCreditCardData,
   setCoinBalance,
   openOTPModal,
   closeOTPModal,
