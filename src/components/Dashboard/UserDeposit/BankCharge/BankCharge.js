@@ -26,7 +26,6 @@ const Banks = [
 class BankCharge extends Component {
   state = {
     loading: false,
-    successModal: false,
     amount: "",
     bank: "",
     account_number: ""
@@ -34,10 +33,6 @@ class BankCharge extends Component {
 
   componentDidMount = () => {
     this.props.fetchBankAccountData();
-  };
-
-  successModalToggle = () => {
-    this.setState({ successModal: !this.state.successModal });
   };
 
   handleInputChange = ({ target }) => {
