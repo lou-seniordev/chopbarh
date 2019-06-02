@@ -10,6 +10,7 @@ import {
   openOTPModal,
   closeOTPModal
 } from "../../../../store/actions/modalActions";
+import { fetchBankAccountData } from "../../../../store/actions/bankAccountActions";
 
 const Banks = [
   { name: "Access Bank", value: "044" },
@@ -29,6 +30,10 @@ class BankCharge extends Component {
     amount: "",
     bank: "",
     account_number: ""
+  };
+
+  componentDidMount = () => {
+    this.props.fetchBankAccountData();
   };
 
   successModalToggle = () => {
@@ -168,6 +173,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setChargeReference,
+  fetchBankAccountData,
   openOTPModal,
   closeOTPModal
 };
