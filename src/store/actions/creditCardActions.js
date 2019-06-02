@@ -25,7 +25,7 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    if (data) {
+    if (data.length) {
       dispatch(fetchCreditCardSuccess(data[0].data));
     } else {
       dispatch(fetchCreditCardFail());
@@ -63,7 +63,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
     }));
     console.log(creditCards);
 
-    if (creditCards) {
+    if (creditCards.length) {
       const docRef = await firestore
         .collection("card_charge")
         .doc(getState().auth.id)

@@ -25,7 +25,7 @@ export const fetchTransactionHistoryData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     console.log(data);
-    if (data) {
+    if (data.length) {
       dispatch(fetchTransactionHistorySuccess(data[0].data));
     } else {
       dispatch(fetchTransactionHistoryFail());
@@ -63,7 +63,7 @@ export const setTransactionHistory = payload => async (dispatch, getState) => {
     }));
     console.log(transactions);
 
-    if (transactions) {
+    if (transactions.length) {
       const docRef = await firestore
         .collection("transactions")
         .doc(getState().auth.id)
