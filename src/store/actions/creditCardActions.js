@@ -51,6 +51,8 @@ export const setCreditCardFail = () => ({
 export const setCreditCardData = payload => async (dispatch, getState) => {
   dispatch(setCreditCardInit());
 
+  console.log("Setting Card...");
+
   try {
     const snapshot = await firestore
       .collection("card_charge")
@@ -70,7 +72,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
         .update({
           data: firebase.firestore.FieldValue.arrayUnion({
             auth_code: payload.authorization_code,
-            card_type: payload.card_type,
+            card_type: payload.brand,
             exp_month: payload.exp_month,
             exp_year: payload.exp_year,
             last_digits: payload.last4

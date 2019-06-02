@@ -10,6 +10,7 @@ import {
   closeOTPModal
 } from "../../../../../store/actions/modalActions";
 import { setTransactionHistory } from "../../../../../store/actions/transactionHistoryActions";
+import { setBankAccountData } from "../../../../../store/actions/bankAccountActions";
 
 class SubmitOTP extends Component {
   state = {
@@ -64,8 +65,9 @@ class SubmitOTP extends Component {
         this.setState({ loading: false });
         toast.success(`Transaction was successful`);
         const value = +data.data.amount / 100;
-        this.props.setTransactionHistory(data.data);
-        this.props.setCoinBalance(value);
+        this.props.setBankAccountData(data.data.authorization);
+        // this.props.setTransactionHistory(data.data);
+        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
@@ -127,6 +129,7 @@ const mapDispatchToProps = {
   setCoinBalance,
   openOTPModal,
   setTransactionHistory,
+  setBankAccountData,
   closeOTPModal
 };
 
