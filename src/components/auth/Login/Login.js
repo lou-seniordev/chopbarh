@@ -1,7 +1,6 @@
 import React, { Component, memo } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
-//import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
 import {

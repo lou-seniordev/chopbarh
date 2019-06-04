@@ -79,6 +79,8 @@ class Layout extends Component {
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/transaction" component={UserTransactionPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignUpPage} />
               <Redirect to="/" />
             </Switch>
           </Suspense>
