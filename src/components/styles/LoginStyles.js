@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import color from "./colors";
 import breakPoints from "./breakpoints";
+import userBG from "../assets/img/user.png";
 
 export const AuthWrapper = styled.div`
   display: grid;
@@ -13,7 +14,13 @@ export const AuthWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background: ${color.colorPrimary};
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(252, 84, 38, 0.5),
+      rgba(252, 84, 38, 0.8)
+    ),
+    url(${userBG});
+  background-size: cover;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     display: none;
