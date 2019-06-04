@@ -15,9 +15,9 @@ export const AuthWrapper = styled.div`
 
 export const ImageContainer = styled.div`
   background-image: linear-gradient(
-      to bottom right,
-      rgba(252, 84, 38, 0.5),
-      rgba(252, 84, 38, 0.8)
+      to bottom,
+      rgba(177, 32, 68, 0.7),
+      rgba(177, 32, 68, 0.9)
     ),
     url(${userBG});
   background-size: cover;
