@@ -4,6 +4,7 @@ import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import slider2BG from "../../assets/img/slider_2_BG.png";
+import slider3BG from "../../assets/img/slider_3_BG.png";
 
 const HeroWrapper = styled.div`
   height: 85vh;
@@ -133,7 +134,7 @@ export default function Hero() {
             <div style={{ position: "relative" }}>
               <Image
                 className="d-block w-100"
-                src={slider2BG}
+                src={Background}
                 alt="First slide"
               />
               <div
@@ -185,7 +186,7 @@ export default function Hero() {
             <div style={{ position: "relative" }}>
               <Image
                 className="d-block w-100"
-                src={slider2BG}
+                src={slider3BG}
                 alt="First slide"
               />
               <div
