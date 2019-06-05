@@ -128,13 +128,6 @@ class UserHeader extends Component {
                         <Link className="dropdown-item" to="edit-profile">
                           Edit Profile
                         </Link>
-                        <span
-                          className="dropdown-item"
-                          onClick={this.toggleBalanceVisibility}
-                          style={{ fontSize: "1.35rem", cursor: "pointer" }}
-                        >
-                          {this.state.showBalance ? "Hide" : "Show"} Balance
-                        </span>
                         <Link className="dropdown-item" to="logout">
                           Logout
                         </Link>

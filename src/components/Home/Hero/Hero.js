@@ -6,9 +6,11 @@ import Background from "../../assets/svg/WavyHeader.svg";
 
 const HeroWrapper = styled.div`
   height: 85vh;
-  padding: 3rem 1rem;
+  width: 98.7vw;
+  padding: 3rem 0rem;
   position: relative;
   background: ${color.colorPrimary} url(${Background});
+  /* background: crimson; */
   color: ${color.colorWhite};
 `;
 
@@ -109,7 +111,8 @@ export default function Hero() {
         id="carouselExampleIndicators"
         class="carousel slide"
         data-ride="carousel"
-        style={{ marginTop: "-7rem" }}
+        data-interval="2000"
+        style={{ marginTop: "-9rem", width: "100%" }}
       >
         <ol class="carousel-indicators">
           <li
@@ -131,6 +134,24 @@ export default function Hero() {
             <img class="d-block w-100" src={Background} alt="Third slide" />
           </div>
         </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true" />
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true" />
+          <span class="sr-only">Next</span>
+        </a>
       </div> */}
     </HeroWrapper>
   );
