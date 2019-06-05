@@ -7,12 +7,13 @@ import slider2BG from "../../assets/img/slider_2_BG.png";
 import slider3BG from "../../assets/img/slider_3_BG.png";
 
 const HeroWrapper = styled.div`
-  height: 85vh;
+  height: 87vh;
   /* width: 98.7vw; */
   padding: 3rem 0rem;
   position: relative;
   background: ${color.colorPrimary};
   /* background: crimson; url(${Background}); */
+  overflow: hidden;
   color: ${color.colorWhite};
 `;
 
@@ -60,7 +61,9 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
-  height: 94.4vh;
+  /* height: 94.4vh; */
+  width: 100%;
+  object-fit: contain;
 `;
 
 const Button = styled.button`
@@ -160,7 +163,8 @@ export default function Hero() {
               <Image
                 className="d-block w-100"
                 src={slider2BG}
-                alt="First slide"
+                alt="Second slide"
+                style={{ marginTop: "-19.5rem" }}
               />
               <div
                 className="text-center"
@@ -169,7 +173,7 @@ export default function Hero() {
                   top: "50%",
                   left: "50%",
                   zIndex: "2000",
-                  transform: `translate(-50%, -50%)`
+                  transform: `translate(-50%, 0%)`
                 }}
               >
                 <HeadingTwo className="hero__title">
@@ -187,7 +191,8 @@ export default function Hero() {
               <Image
                 className="d-block w-100"
                 src={slider3BG}
-                alt="First slide"
+                alt="Third slide"
+                style={{ marginTop: "-25rem" }}
               />
               <div
                 className="text-center"
@@ -196,7 +201,7 @@ export default function Hero() {
                   top: "50%",
                   left: "50%",
                   zIndex: "2000",
-                  transform: `translate(-50%, -50%)`
+                  transform: `translate(-50%, 0%)`
                 }}
               >
                 <HeadingTwo className="hero__title">
