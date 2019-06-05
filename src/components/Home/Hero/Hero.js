@@ -3,14 +3,15 @@ import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
+import slider2BG from "../../assets/img/slider_2_BG.png";
 
 const HeroWrapper = styled.div`
   height: 85vh;
   /* width: 98.7vw; */
   padding: 3rem 0rem;
   position: relative;
-  /* background: ${color.colorPrimary} url(${Background}); */
-  /* background: crimson; */
+  background: ${color.colorPrimary};
+  /* background: crimson; url(${Background}); */
   color: ${color.colorWhite};
 `;
 
@@ -55,6 +56,10 @@ const ParagraphOne = styled.p`
     margin-top: 1rem;
     font-size: 1.2rem;
   }
+`;
+
+const Image = styled.img`
+  height: 94.4vh;
 `;
 
 const Button = styled.button`
@@ -107,7 +112,7 @@ export default function Hero() {
           </Button>
         </div>
       </HeroContentWrapper> */}
-      {/* <div
+      <div
         id="carouselExampleIndicators"
         className="carousel slide"
         data-ride="carousel"
@@ -126,8 +131,13 @@ export default function Hero() {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div style={{ position: "relative" }}>
-              <img className="d-block w-100" src={Background} alt="First slide" />
+              <Image
+                className="d-block w-100"
+                src={slider2BG}
+                alt="First slide"
+              />
               <div
+                className="text-center"
                 style={{
                   position: "absolute",
                   top: "50%",
@@ -145,10 +155,55 @@ export default function Hero() {
             </div>
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src={Background} alt="Second slide" />
+            <div style={{ position: "relative" }}>
+              <Image
+                className="d-block w-100"
+                src={slider2BG}
+                alt="First slide"
+              />
+              <div
+                className="text-center"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: "2000",
+                  transform: `translate(-50%, -50%)`
+                }}
+              >
+                <HeadingTwo className="hero__title">
+                  No Bank Account?
+                </HeadingTwo>
+                <ParagraphOne>
+                  No problem, we will send your money to your phone number, then
+                  you can transfer to any account or withdraw from an ATM
+                </ParagraphOne>
+              </div>
+            </div>
           </div>
           <div className="carousel-item">
-            <img className="d-block w-100" src={Background} alt="Third slide" />
+            <div style={{ position: "relative" }}>
+              <Image
+                className="d-block w-100"
+                src={slider2BG}
+                alt="First slide"
+              />
+              <div
+                className="text-center"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: "2000",
+                  transform: `translate(-50%, -50%)`
+                }}
+              >
+                <HeadingTwo className="hero__title">
+                  No be come lick stew
+                </HeadingTwo>
+                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+              </div>
+            </div>
           </div>
         </div>
         <a
@@ -169,7 +224,15 @@ export default function Hero() {
           <span className="carousel-control-next-icon" aria-hidden="true" />
           <span className="sr-only">Next</span>
         </a>
-      </div> */}
+      </div>
     </HeroWrapper>
   );
 }
+
+// No Bank Account?
+// No problem, we will send your money to your phone number, then you can transfer to any account or withdraw from an ATM
+
+// No be come lick stew
+// You go lick stew chop rice
+
+//
