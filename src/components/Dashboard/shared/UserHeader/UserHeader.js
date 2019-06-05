@@ -83,31 +83,27 @@ class UserHeader extends Component {
                 >
                   <ul className="navbar-nav mr-auto" />
                   <ul className="navbar-nav">
-                    {this.state.showBalance ? (
-                      <>
-                        <li className="nav-item">
-                          <span className="nav-link text-uppercase mr-5">
-                            <Icon icon={CoinSymbol} height="15" />
-                            {new Intl.NumberFormat().format(
-                              this.props.playerData.CBCoins
-                            )}
-                            <Icon icon={VisibilityButton} height="10" />
-                          </span>
-                        </li>
-                        <li className="nav-item">
-                          <span className="nav-link text-uppercase mr-5">
-                            <Icon icon={CashIcon} height="18" />
-                            &#8358;
-                            {new Intl.NumberFormat().format(
-                              this.props.playerData.RealCoins
-                            )}
-                            <Icon icon={VisibilityButton} height="10" />
-                          </span>
-                        </li>
-                      </>
-                    ) : (
-                      <>{null}</>
-                    )}
+                    <>
+                      <li className="nav-item">
+                        <span className="nav-link text-uppercase mr-5">
+                          <Icon icon={CoinSymbol} height="15" />
+                          {new Intl.NumberFormat().format(
+                            this.props.playerData.CBCoins
+                          )}
+                          <Icon icon={VisibilityButton} height="10" />
+                        </span>
+                      </li>
+                      <li className="nav-item">
+                        <span className="nav-link text-uppercase mr-5">
+                          <Icon icon={CashIcon} height="18" />
+                          &#8358;
+                          {new Intl.NumberFormat().format(
+                            this.props.playerData.RealCoins
+                          )}
+                          <Icon icon={VisibilityButton} height="10" />
+                        </span>
+                      </li>
+                    </>
                     <li className="nav-item dropdown">
                       <a
                         className="nav-link dropdown-toggle text-uppercase"
