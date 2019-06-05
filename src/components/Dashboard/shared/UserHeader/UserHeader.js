@@ -36,8 +36,12 @@ class UserHeader extends Component {
     }
   };
 
-  toggleBalanceVisibility = () => {
-    this.setState({ showBalance: !this.state.showBalance });
+  togglecashBalanceVisibility = () => {
+    this.setState({ cashBalance: !this.state.cashBalance });
+  };
+
+  togglecoinBalanceVisibility = () => {
+    this.setState({ coinBalance: !this.state.coinBalance });
   };
 
   render() {
