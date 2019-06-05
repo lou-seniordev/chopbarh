@@ -26,7 +26,8 @@ const HeaderWrapper = styled.div`
 
 class UserHeader extends Component {
   state = {
-    showBalance: true
+    cashBalance: true,
+    coinBalance: true
   };
 
   componentDidMount = () => {
@@ -100,7 +101,7 @@ class UserHeader extends Component {
                           {new Intl.NumberFormat().format(
                             this.props.playerData.RealCoins
                           )}
-                          <Icon icon={VisibilityButton} height="10" />
+                          <Icon onC icon={VisibilityButton} height="10" />
                         </span>
                       </li>
                     </>
