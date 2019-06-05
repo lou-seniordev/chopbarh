@@ -92,10 +92,20 @@ class UserHeader extends Component {
                       <li className="nav-item">
                         <span className="nav-link text-uppercase mr-5">
                           <Icon icon={CoinSymbol} height="15" />
-                          {new Intl.NumberFormat().format(
-                            this.props.playerData.CBCoins
+                          {this.state.coinBalance ? (
+                            <>
+                              {new Intl.NumberFormat().format(
+                                this.props.playerData.CBCoins
+                              )}
+                            </>
+                          ) : (
+                            <>{null}</>
                           )}
-                          <Icon icon={VisibilityButton} height="10" />
+                          <Icon
+                            clicked={this.togglecoinBalanceVisibility}
+                            icon={VisibilityButton}
+                            height="10"
+                          />
                         </span>
                       </li>
                       <li className="nav-item">
