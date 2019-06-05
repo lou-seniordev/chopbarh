@@ -99,7 +99,17 @@ class UserHeader extends Component {
                               )}
                             </>
                           ) : (
-                            <>{null}</>
+                            <>
+                              {[
+                                ...new Array(
+                                  Number(this.props.playerData.CBCoins)
+                                    .toString()
+                                    .split("").length
+                                )
+                              ].map((item, id) => (
+                                <span key={id}>*</span>
+                              ))}
+                            </>
                           )}
                           <Icon
                             clicked={this.togglecoinBalanceVisibility}
