@@ -6,10 +6,10 @@ import Background from "../../assets/svg/WavyHeader.svg";
 
 const HeroWrapper = styled.div`
   height: 85vh;
-  width: 98.7vw;
+  /* width: 98.7vw; */
   padding: 3rem 0rem;
   position: relative;
-  background: ${color.colorPrimary} url(${Background});
+  /* background: ${color.colorPrimary} url(${Background}); */
   /* background: crimson; */
   color: ${color.colorWhite};
 `;
@@ -90,7 +90,7 @@ const Button = styled.button`
 export default function Hero() {
   return (
     <HeroWrapper>
-      <HeroContentWrapper>
+      {/* <HeroContentWrapper>
         <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
         <div className="mt-n4 ml-lg-1 ml-md-1">
           <ParagraphOne>
@@ -106,51 +106,68 @@ export default function Hero() {
             <span>Download</span>
           </Button>
         </div>
-      </HeroContentWrapper>
+      </HeroContentWrapper> */}
       {/* <div
         id="carouselExampleIndicators"
-        class="carousel slide"
+        className="carousel slide"
         data-ride="carousel"
         data-interval="2000"
         style={{ marginTop: "-9rem", width: "100%" }}
       >
-        <ol class="carousel-indicators">
+        <ol className="carousel-indicators">
           <li
             data-target="#carouselExampleIndicators"
             data-slide-to="0"
-            class="active"
+            className="active"
           />
           <li data-target="#carouselExampleIndicators" data-slide-to="1" />
           <li data-target="#carouselExampleIndicators" data-slide-to="2" />
         </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src={Background} alt="First slide" />
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <div style={{ position: "relative" }}>
+              <img className="d-block w-100" src={Background} alt="First slide" />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  zIndex: "2000",
+                  transform: `translate(-50%, -50%)`
+                }}
+              >
+                <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
+                <ParagraphOne>
+                  Play and win from collection of childhood games that live up
+                  to the moment
+                </ParagraphOne>
+              </div>
+            </div>
           </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src={Background} alt="Second slide" />
+          <div className="carousel-item">
+            <img className="d-block w-100" src={Background} alt="Second slide" />
           </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src={Background} alt="Third slide" />
+          <div className="carousel-item">
+            <img className="d-block w-100" src={Background} alt="Third slide" />
           </div>
         </div>
         <a
-          class="carousel-control-prev"
+          className="carousel-control-prev"
           href="#carouselExampleIndicators"
           role="button"
           data-slide="prev"
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true" />
-          <span class="sr-only">Previous</span>
+          <span className="carousel-control-prev-icon" aria-hidden="true" />
+          <span className="sr-only">Previous</span>
         </a>
         <a
-          class="carousel-control-next"
+          className="carousel-control-next"
           href="#carouselExampleIndicators"
           role="button"
           data-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true" />
-          <span class="sr-only">Next</span>
+          <span className="carousel-control-next-icon" aria-hidden="true" />
+          <span className="sr-only">Next</span>
         </a>
       </div> */}
     </HeroWrapper>
