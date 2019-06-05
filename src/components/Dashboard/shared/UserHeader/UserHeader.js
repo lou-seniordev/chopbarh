@@ -121,11 +121,31 @@ class UserHeader extends Component {
                       <li className="nav-item">
                         <span className="nav-link text-uppercase mr-5">
                           <Icon icon={CashIcon} height="18" />
-                          &#8358;
-                          {new Intl.NumberFormat().format(
-                            this.props.playerData.RealCoins
+                          {this.state.cashBalance ? (
+                            <>
+                              &#8358;
+                              {new Intl.NumberFormat().format(
+                                this.props.playerData.RealCoins
+                              )}
+                            </>
+                          ) : (
+                            <>
+                              {[
+                                ...new Array(
+                                  Number(this.props.playerData.RealCoins)
+                                    .toString()
+                                    .split("").length
+                                )
+                              ].map((item, id) => (
+                                <span key={id}>*</span>
+                              ))}
+                            </>
                           )}
-                          <Icon onC icon={VisibilityButton} height="10" />
+                          <Icon
+                            clicked={this.togglecashBalanceVisibility}
+                            icon={VisibilityButton}
+                            height="10"
+                          />
                         </span>
                       </li>
                     </>
