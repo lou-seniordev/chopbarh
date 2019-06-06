@@ -192,7 +192,9 @@ class Paga extends Component {
           this.setState({ loading: false, phone: "", amount: "" });
           // this.props.openTransactionSuccessModal();
           toast.success(`Transaction was successful`);
-          this.props.setCashBalance(body.amount, 2);
+          this.props.setCashBalance(data.amount, 2);
+
+          // Send mail here
         } else {
           this.setState({ loading: false });
           // this.props.openTransactionFailModal();
@@ -213,40 +215,40 @@ class Paga extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Amount</label>
-              {/* <input
+              <input
                 type="number"
                 name="amount"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 placeholder="Amount(NGN)"
                 required
-              /> */}
-              <NumberFormat
+              />
+              {/* <NumberFormat
                 thousandSeparator
                 name="amount"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 placeholder="Amount(NGN)"
                 required
-              />
+              /> */}
             </FormItem>
             <FormItem>
               <label>Phone Number</label>
-              {/* <input
+              <input
                 type="tel"
                 name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 placeholder="Phone Number"
                 required
-              /> */}
-              <NumberFormat
+              />
+              {/* <NumberFormat
                 name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 placeholder="Phone Number"
                 required
-              />
+              /> */}
             </FormItem>
           </HalfColumn>
           <button type="submit" className="mr-2" disabled={this.state.loading}>
