@@ -37,21 +37,19 @@ class TransactionTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.depositData.map((transaction, index) => (
+              {this.props.depositData.map((deposit, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
-                  <td>{`${new Date(
-                    transaction.transaction_date
-                  ).getDate()}-${new Date(
-                    transaction.transaction_date
+                  <td>{`${new Date(deposit.deposit_date).getDate()}-${new Date(
+                    deposit.deposit_date
                   ).getMonth()}-${new Date(
-                    transaction.transaction_date
+                    deposit.deposit_date
                   ).getFullYear()}`}</td>
                   <td>Deposit</td>
                   <td>
                     &#8358;
-                    {new Intl.NumberFormat().format(transaction.amount)}
+                    {new Intl.NumberFormat().format(deposit.amount)}
                   </td>
-                  <td>{transaction.channel}</td>
+                  <td>{deposit.channel}</td>
                   {/*<td>Balance</td>
                   <td>Action</td> */}
                 </tr>
