@@ -179,6 +179,7 @@ class Card extends Component {
                     padding: "5px 12px",
                     borderRadius: "5px",
                     margin: "5px",
+                    marginLeft: "0",
                     cursor: "pointer"
                   }}
                   onClick={() =>
@@ -194,6 +195,7 @@ class Card extends Component {
                 </div>
               ))}
             </div>
+            <hr />
           </>
         ) : (
           <>{null}</>
