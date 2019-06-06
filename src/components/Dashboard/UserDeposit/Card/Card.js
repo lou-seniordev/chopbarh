@@ -31,7 +31,8 @@ class Card extends Component {
     amount: "",
     card: "",
     expiry: "",
-    cvv: ""
+    cvv: "",
+    auth_code: ""
   };
 
   componentDidMount = () => {
