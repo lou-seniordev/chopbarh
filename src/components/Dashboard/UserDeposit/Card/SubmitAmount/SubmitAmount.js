@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { Form, FormItem } from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
-import {
-  openOTPModal,
-  closeOTPModal
-} from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
 
 class SubmitAmount extends Component {
@@ -56,19 +52,17 @@ class SubmitAmount extends Component {
       });
 
       const data = await response.json();
-      console.log(data);
-      // if (data.data.status === "success") {
-      //   // Verify payment before adding
-      //   this.props.closeOTPModal();
-      //   this.setState({ loading: false });
-      //   toast.success(`Transaction was successful`);
-      //   const value = +data.data.amount / 100;
-      //   this.props.setDepositHistory(data.data);
-      //   this.props.setCoinBalance(value);
-      // } else {
-      //   toast.error(`Please try again`);
-      //   this.setState({ loading: false });
-      // }
+      if (data.data.status === "success") {
+        this.setState({ loading: false });
+        this.props.close();
+        toast.success(`Transaction was successful`);
+        const value = +data.data.amount / 100;
+        this.props.setDepositHistory(data.data);
+        this.props.setCoinBalance(value);
+      } else {
+        toast.error(`Please try again`);
+        this.setState({ loading: false });
+      }
     } catch (err) {
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
@@ -123,9 +117,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setCoinBalance,
-  setDepositHistory,
-  openOTPModal,
-  closeOTPModal
+  setDepositHistory
 };
 
 export default withRouter(
