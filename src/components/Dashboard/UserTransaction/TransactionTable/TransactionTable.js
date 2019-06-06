@@ -2,92 +2,23 @@ import React, { Component, memo } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
-import { fetchTransactionHistoryData } from "../../../../store/actions/transactionHistoryActions";
+import { fetchDepositHistoryData } from "../../../../store/actions/depositActions";
 
 const TransactionTableWrapper = styled.div`
   margin-top: 6rem;
 `;
 
 class TransactionTable extends Component {
-  state = {
-    results: [
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245334757,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245324379,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245247160,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245153164,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245136794,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 500,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557245101754,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 100,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557234436564,
-        FromName: "Deposit",
-        ToName: null
-      },
-      {
-        AMOUNT: 1,
-        FROM: "Deposit",
-        TO: "5cc6c6fa1f0e8c04de431b95",
-        TimeStamp: 1557221803777,
-        FromName: "Deposit",
-        ToName: null
-      }
-    ]
-  };
-
   componentDidMount = () => {
-    if (!this.props.transactionData) {
-      this.props.fetchTransactionHistoryData();
+    if (!this.props.depositData) {
+      this.props.fetchDepositHistoryData();
     }
   };
 
   render() {
     return (
       <TransactionTableWrapper>
-        {this.props.transactionData ? (
+        {this.props.depositData ? (
           <table className="table table-striped">
             <thead
               style={{
@@ -106,7 +37,7 @@ class TransactionTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.transactionData.map((transaction, index) => (
+              {this.props.depositData.map((transaction, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
                   <td>{`${new Date(
                     transaction.transaction_date
@@ -135,7 +66,7 @@ class TransactionTable extends Component {
               </div>
             ) : (
               <div className="text-center mx-auto">
-                <p>Transaction History not Available</p>
+                <p>Deposit History not Available</p>
               </div>
             )}
           </>
@@ -146,13 +77,13 @@ class TransactionTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.transaction.loading,
-  error: state.transaction.error,
-  transactionData: state.transaction.transactionHistory
+  loading: state.deposit.loading,
+  error: state.deposit.error,
+  depositData: state.deposit.depositHistory
 });
 
 const mapDispatchToProps = {
-  fetchTransactionHistoryData
+  fetchDepositHistoryData
 };
 
 export default connect(
