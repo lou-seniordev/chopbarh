@@ -117,7 +117,7 @@ class Card extends Component {
         const value = +data.data.amount / 100;
         this.props.setCreditCardData(data.data.authorization);
         this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
