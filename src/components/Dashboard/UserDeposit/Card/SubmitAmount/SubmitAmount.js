@@ -13,12 +13,12 @@ import { setDepositHistory } from "../../../../../store/actions/depositActions";
 
 class SubmitAmount extends Component {
   state = {
-    otp: "",
+    amount: "",
     loading: false
   };
 
-  formIsValid = ({ otp }) => {
-    if (!isNaN(otp) !== true || otp.length !== 6) {
+  formIsValid = ({ amount }) => {
+    if (!isNaN(amount) !== true) {
       return false;
     }
     return true;
@@ -39,37 +39,36 @@ class SubmitAmount extends Component {
     }
 
     const postData = {
-      otp: this.state.otp,
-      reference: this.props.reference
+      email: "somebody@nice.com",
+      amount: this.state.amount * 100,
+      authorization_code: this.props.auth_code
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_otp",
-        {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(postData)
-        }
-      );
+      const response = await fetch("https://api.paystack.co/charge/", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
 
       const data = await response.json();
-      if (data.data.status === "success") {
-        // Verify payment before adding
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.success(`Transaction was successful`);
-        const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
-        this.props.setCoinBalance(value);
-      } else {
-        toast.error(`Please try again`);
-        this.setState({ loading: false });
-      }
+      console.log(data);
+      // if (data.data.status === "success") {
+      //   // Verify payment before adding
+      //   this.props.closeOTPModal();
+      //   this.setState({ loading: false });
+      //   toast.success(`Transaction was successful`);
+      //   const value = +data.data.amount / 100;
+      //   this.props.setDepositHistory(data.data);
+      //   this.props.setCoinBalance(value);
+      // } else {
+      //   toast.error(`Please try again`);
+      //   this.setState({ loading: false });
+      // }
     } catch (err) {
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
@@ -93,15 +92,15 @@ class SubmitAmount extends Component {
         ) : (
           <>
             <FormItem>
-              <label>Enter OTP</label>
+              <label>Enter Amount</label>
               <input
                 type="text"
-                name="otp"
-                value={this.state.otp}
+                name="amount"
+                value={this.state.amount}
                 onChange={this.handleInputChange}
                 min="0"
                 required
-                placeholder="OTP"
+                placeholder="Amount"
               />
             </FormItem>
             <button
@@ -119,8 +118,7 @@ class SubmitAmount extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference,
-  loading: state.coinBalance.loading
+  reference: state.charge.reference
 });
 
 const mapDispatchToProps = {
