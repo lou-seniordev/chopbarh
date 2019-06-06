@@ -167,13 +167,13 @@ export default function Hero() {
                   to the moment
                 </ParagraphOne>
                 <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-          <Button className="mr-4">
-            <span>Start Playing</span>
-          </Button>
-          <Button className="ml-4">
-            <span>Download</span>
-          </Button>
-        </div>
+                  <Button className="mr-4">
+                    <span>Start Playing</span>
+                  </Button>
+                  <Button className="ml-4">
+                    <span>Download</span>
+                  </Button>
+                </div>
               </SliderContent>
               <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
@@ -182,7 +182,6 @@ export default function Hero() {
             <div style={{ position: "relative", height: "87vh" }}>
               <Image
                 className="d-block"
-                style={{ width: "100%" }}
                 src={slider2BG}
                 alt="Second slide"
               />
