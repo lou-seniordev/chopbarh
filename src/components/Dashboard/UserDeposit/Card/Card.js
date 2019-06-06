@@ -26,6 +26,7 @@ class Card extends Component {
     loading: false,
     submitOTPModal: false,
     submitPinModal: false,
+    submitAmountModal: false,
     amount: "",
     card: "",
     expiry: "",
