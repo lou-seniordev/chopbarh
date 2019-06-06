@@ -11,7 +11,7 @@ import {
 } from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
 
-class SubmitOTP extends Component {
+class SubmitAmount extends Component {
   state = {
     otp: "",
     loading: false
@@ -134,5 +134,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(memo(SubmitOTP))
+  )(memo(SubmitAmount))
 );

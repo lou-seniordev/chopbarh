@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import { fetchDepositHistoryData } from "../../../../store/actions/depositActions";
 
-const TransactionTableWrapper = styled.div`
+const DepositTableWrapper = styled.div`
   margin-top: 6rem;
 `;
 
-class TransactionTable extends Component {
+class DepositTable extends Component {
   componentDidMount = () => {
     if (!this.props.depositData) {
       this.props.fetchDepositHistoryData();
@@ -17,7 +17,7 @@ class TransactionTable extends Component {
 
   render() {
     return (
-      <TransactionTableWrapper>
+      <DepositTableWrapper>
         {this.props.depositData ? (
           <table className="table table-striped">
             <thead
@@ -69,7 +69,7 @@ class TransactionTable extends Component {
             )}
           </>
         )}
-      </TransactionTableWrapper>
+      </DepositTableWrapper>
     );
   }
 }
@@ -87,4 +87,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(memo(TransactionTable));
+)(memo(DepositTable));
