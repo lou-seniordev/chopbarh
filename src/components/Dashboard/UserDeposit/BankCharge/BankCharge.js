@@ -138,32 +138,30 @@ class BankCharge extends Component {
         </Modal>
         {this.props.bankAccount ? (
           <>
-            <h4>Pay with Card</h4>
-            <p>Click on a card to pay with it</p>
-            <div style={{ display: "flex" }} className="mb-4">
-              {this.props.bankAccount.map((card, index) => (
-                <div
-                  key={index}
-                  style={{
-                    background: "#ccc",
-                    padding: "5px 12px",
-                    borderRadius: "5px",
-                    margin: "5px",
-                    cursor: "pointer"
-                  }}
-                  onClick={() =>
-                    this.setState({
-                      submitAmountModal: true,
-                      auth_code: card.auth_code
-                    })
-                  }
-                >
-                  <p>{card.card_type.split(" ")[0]}</p>
-                  <p>{`**** **** **** ${card.last_digits}`}</p>
-                  <p>{`${card.exp_month}/${card.exp_year}`}</p>
-                </div>
-              ))}
-            </div>
+            <h4>Pay with Bank</h4>
+            <p>Click on a bank detail to pay with it</p>
+            {this.props.bankAccount.map((bank, index) => (
+              <div
+                key={index}
+                style={{
+                  background: "#eee",
+                  padding: "5px 12px 3px 12px",
+                  borderRadius: "5px",
+                  margin: "5px",
+                  cursor: "pointer",
+                  width: "100%"
+                }}
+                onClick={() =>
+                  this.setState({
+                    submitAmountModal: true,
+                    auth_code: bank.auth_code
+                  })
+                }
+              >
+                <p>{bank.bank}</p>
+                <p>{`XXXXXX${bank.last_digits}`}</p>
+              </div>
+            ))}
           </>
         ) : (
           <>{null}</>

@@ -115,9 +115,9 @@ class Card extends Component {
       } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
-        // this.props.setCreditCardData(data.data.authorization);
+        this.props.setCreditCardData(data.data.authorization);
         this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -175,7 +175,7 @@ class Card extends Component {
                 <div
                   key={index}
                   style={{
-                    background: "#ccc",
+                    background: "#eee",
                     padding: "5px 12px",
                     borderRadius: "5px",
                     margin: "5px",

@@ -59,7 +59,6 @@ class SubmitOTP extends Component {
 
       const data = await response.json();
       if (data.data.status === "success") {
-        // Verify payment before adding
         this.props.closeOTPModal();
         this.setState({ loading: false });
         toast.success(`Transaction was successful`);
