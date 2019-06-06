@@ -135,7 +135,11 @@ class EditProfileForm extends Component {
       this.setState({
         name: FullName,
         phone: PhoneNum,
-        dob: DOB,
+        dob: new Date(
+          DOB.split("/")
+            .reverse()
+            .join("/")
+        ),
         sex: Sex,
         email: Email
       });
@@ -148,7 +152,19 @@ class EditProfileForm extends Component {
       this.setState({
         name: FullName,
         phone: PhoneNum,
-        dob: DOB,
+        dob: `${new Date(
+          DOB.split("/")
+            .reverse()
+            .join("/")
+        ).getFullYear()}-0${new Date(
+          DOB.split("/")
+            .reverse()
+            .join("/")
+        ).getMonth()}-${new Date(
+          DOB.split("/")
+            .reverse()
+            .join("/")
+        ).getDate()}`,
         sex: Sex,
         email: Email
       });
