@@ -25,7 +25,7 @@ export const fetchWithdrawalHistoryData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     if (data.length) {
-      dispatch(fetchWithdrawalHistorySuccess(data[0].data));
+      dispatch(fetchWithdrawalHistorySuccess(data[0].data.reverse()));
     } else {
       dispatch(fetchWithdrawalHistoryFail());
     }
