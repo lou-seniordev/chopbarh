@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import Voucher from "../../../Dashboard/UserHome/Voucher/Voucher";
 
 /*
 
@@ -86,7 +87,7 @@ export default function VoucherTransaction() {
   return (
     <VoucherTransactionWrapper>
       <div>
-        <div>
+        {/* <div>
           <FormWrapper>
             <form>
               <FormItem>
@@ -106,22 +107,8 @@ export default function VoucherTransaction() {
               </button>
             </form>
           </FormWrapper>
-        </div>
-        <div className="mt-5">
-          <FormWrapper>
-            <form>
-              <FormItem>
-                <label>Load Voucher</label>
-              </FormItem>
-              <FormItem>
-                <input type="text" placeholder="Voucher Code" />
-              </FormItem>
-              <button type="submit" className="ml-2 mr-2">
-                <span>Load</span>
-              </button>
-            </form>
-          </FormWrapper>
-        </div>
+        </div> */}
+        <Voucher />
       </div>
     </VoucherTransactionWrapper>
   );
