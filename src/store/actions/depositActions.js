@@ -68,7 +68,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
         .doc(getState().auth.id)
         .update({
           data: firebase.firestore.FieldValue.arrayUnion({
-            amount: payload.amount,
+            amount: payload.amount / 100,
             channel: payload.channel,
             deposit_date: payload.transaction_date,
             paid_at: payload.paid_at
