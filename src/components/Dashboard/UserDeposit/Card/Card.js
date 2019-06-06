@@ -155,7 +155,7 @@ class Card extends Component {
                   key={index}
                   style={{
                     background: "#ccc",
-                    padding: "5px 9px",
+                    padding: "5px 12px",
                     borderRadius: "5px",
                     margin: "5px",
                     cursor: "pointer"
