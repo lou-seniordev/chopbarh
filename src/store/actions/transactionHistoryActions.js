@@ -61,7 +61,6 @@ export const setTransactionHistory = payload => async (dispatch, getState) => {
       id: doc.id,
       ...doc.data()
     }));
-    console.log(transactions);
 
     if (transactions.length) {
       const docRef = await firestore
@@ -75,6 +74,7 @@ export const setTransactionHistory = payload => async (dispatch, getState) => {
             paid_at: payload.paid_at
           })
         });
+      dispatch(setTransactionHistorySuccess(docRef));
     } else {
       const docRef = await firestore
         .collection("transactions")
@@ -90,8 +90,9 @@ export const setTransactionHistory = payload => async (dispatch, getState) => {
             }
           ]
         });
+      dispatch(setTransactionHistorySuccess(docRef));
     }
   } catch (err) {
-    console.log("Error", err);
+    dispatch(setTransactionHistoryFail());
   }
 };
