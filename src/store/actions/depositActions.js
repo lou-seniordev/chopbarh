@@ -25,7 +25,7 @@ export const fetchDepositHistoryData = () => async (dispatch, getState) => {
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     if (data.length) {
-      dispatch(fetchDepositHistorySuccess(data[0].data));
+      dispatch(fetchDepositHistorySuccess(data[0].data.reverse()));
     } else {
       dispatch(fetchDepositHistoryFail());
     }
