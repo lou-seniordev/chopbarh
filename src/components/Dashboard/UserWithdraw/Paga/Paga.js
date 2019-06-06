@@ -193,14 +193,14 @@ class Paga extends Component {
         if (data.responseCode === 0) {
           const historyObject = {
             amount: this.state.amount,
-            channel: 'Paga',
+            channel: "Paga",
             withdrawal_date: new Date(),
             paid_at: new Date()
-          }
+          };
           this.props.setCashBalance(this.state.amount, 2);
           this.setState({ loading: false, phone: "", amount: "" });
           toast.success(`Transaction was successful`);
-          this.props.setWithdrawalHistory(historyObject)
+          this.props.setWithdrawalHistory(historyObject);
           // Send mail here
         } else {
           this.setState({ loading: false });
