@@ -108,7 +108,6 @@ class Card extends Component {
       } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
-        // Add props to set Charge Success details
         // this.props.setCreditCardData(data.data.authorization);
         this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
@@ -147,7 +146,10 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         {this.props.creditCard ? (
-          <p>Render Card Component here</p>
+          <>
+            <h4>Render Card Component here</h4>
+            <p>Click on a card to pay with it</p>
+          </>
         ) : (
           <>{null}</>
         )}
