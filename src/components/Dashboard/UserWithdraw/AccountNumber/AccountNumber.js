@@ -65,10 +65,10 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (this.state.amount > this.props.playerData.RealCoins) {
-      toast.error("You cannot withdraw more than you have won");
-      return;
-    }
+    // if (this.state.amount > this.props.playerData.RealCoins) {
+    //   toast.error("You cannot withdraw more than you have won");
+    //   return;
+    // }
 
     // Verify the account here and return the account Name in the UI
     // this.verifyAccount(this.state.account_number, this.state.bank)
@@ -112,14 +112,16 @@ class AccountNumber extends Component {
         }
       );
       const data = await response.json();
-      this.setState({
-        loading: false,
-        amount: "",
-        bank: "",
-        account_number: ""
-      });
+      console.log(data);
+
       if (response.status === 200) {
         toast.success("Transaction was Successful");
+        this.setState({
+          loading: false,
+          amount: "",
+          bank: "",
+          account_number: ""
+        });
         this.props.setCashBalance(data.data.amount, 2);
       } else {
         toast.error("Transaction was not successful");
@@ -158,40 +160,40 @@ class AccountNumber extends Component {
           <HalfColumn>
             <FormItem className="mr-3">
               <label>Account Number</label>
-              {/* <input
+              <input
                 type="text"
-                value={this.state.account_number}
-                onChange={this.handleInputChange}
-                name="account_number"
-                required
-                placeholder="Account Number"
-              /> */}
-              <NumberFormat
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
                 name="account_number"
                 required
                 placeholder="Account Number"
               />
+              {/* <NumberFormat
+                value={this.state.account_number}
+                onChange={this.handleInputChange}
+                name="account_number"
+                required
+                placeholder="Account Number"
+              /> */}
             </FormItem>
             <FormItem>
               <label>Amount</label>
-              {/* <input
+              <input
                 type="text"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 name="amount"
                 required
                 placeholder="Amount(NGN)"
-              /> */}
-              <NumberFormat
+              />
+              {/* <NumberFormat
                 thousandSeparator
                 value={this.state.amount}
                 onChange={this.handleInputChange}
                 name="amount"
                 required
                 placeholder="Amount(NGN)"
-              />
+              /> */}
             </FormItem>
           </HalfColumn>
           <button type="submit" className="mr-2" disabled={this.state.loading}>
