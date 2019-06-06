@@ -11,6 +11,7 @@ import {
   closeOTPModal
 } from "../../../../store/actions/modalActions";
 import { fetchBankAccountData } from "../../../../store/actions/bankAccountActions";
+import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
 const Banks = [
   { name: "Access Bank", value: "044" },
@@ -28,7 +29,8 @@ class BankCharge extends Component {
     loading: false,
     amount: "",
     bank: "",
-    account_number: ""
+    account_number: "",
+    auth_code: ""
   };
 
   componentDidMount = () => {
@@ -115,6 +117,52 @@ class BankCharge extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
+        <Modal
+          isOpen={this.state.submitAmountModal}
+          toggle={this.toggleSubmitAmountModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitAmount
+              auth_code={this.state.auth_code}
+              close={this.toggleSubmitAmountModal}
+            />
+          </ModalBody>
+        </Modal>
+        {this.props.bankAccount ? (
+          <>
+            <h4>Pay with Card</h4>
+            <p>Click on a card to pay with it</p>
+            <div style={{ display: "flex" }} className="mb-4">
+              {this.props.bankAccount.map((card, index) => (
+                <div
+                  key={index}
+                  style={{
+                    background: "#ccc",
+                    padding: "5px 12px",
+                    borderRadius: "5px",
+                    margin: "5px",
+                    cursor: "pointer"
+                  }}
+                  onClick={() =>
+                    this.setState({
+                      submitAmountModal: true,
+                      auth_code: card.auth_code
+                    })
+                  }
+                >
+                  <p>{card.card_type.split(" ")[0]}</p>
+                  <p>{`**** **** **** ${card.last_digits}`}</p>
+                  <p>{`${card.exp_month}/${card.exp_year}`}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>{null}</>
+        )}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Bank</label>
