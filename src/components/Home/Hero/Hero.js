@@ -166,6 +166,14 @@ export default function Hero() {
                   Play and win from collection of childhood games that live up
                   to the moment
                 </ParagraphOne>
+                <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+          <Button className="mr-4">
+            <span>Start Playing</span>
+          </Button>
+          <Button className="ml-4">
+            <span>Download</span>
+          </Button>
+        </div>
               </SliderContent>
               <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
