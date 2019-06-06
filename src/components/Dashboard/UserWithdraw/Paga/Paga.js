@@ -188,11 +188,12 @@ class Paga extends Component {
     )
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         if (data.responseCode === 0) {
+          this.props.setCashBalance(this.state.amount, 2);
           this.setState({ loading: false, phone: "", amount: "" });
           // this.props.openTransactionSuccessModal();
           toast.success(`Transaction was successful`);
-          this.props.setCashBalance(data.amount, 2);
 
           // Send mail here
         } else {
