@@ -61,7 +61,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       id: doc.id,
       ...doc.data()
     }));
-    console.log(creditCards);
 
     if (creditCards.length) {
       // Check if it exists already
@@ -78,6 +77,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             last_digits: payload.last4
           })
         });
+      dispatch(setCreditCardSuccess(docRef));
     } else {
       const docRef = await firestore
         .collection("card_charge")
@@ -94,11 +94,9 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             }
           ]
         });
+      dispatch(setCreditCardSuccess(docRef));
     }
-
-    dispatch(setCreditCardSuccess());
   } catch (err) {
-    console.log("Error", err);
     dispatch(setCreditCardFail());
   }
 };
