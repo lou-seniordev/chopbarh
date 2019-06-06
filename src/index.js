@@ -17,6 +17,8 @@ import voucherReducer from "./store/reducers/voucherReducer";
 import transactionHistoryReducer from "./store/reducers/transactionHistoryReducer";
 import bankAccountReducer from "./store/reducers/bankAccountReducer";
 import creditCardReducer from "./store/reducers/creditCardReducer";
+import depositReducer from "./store/reducers/depositReducer";
+import withdrawalReducer from "./store/reducers/withdrawalReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -28,7 +30,9 @@ const rootReducer = combineReducers({
   voucher: voucherReducer,
   transaction: transactionHistoryReducer,
   bankAccount: bankAccountReducer,
-  creditCard: creditCardReducer
+  creditCard: creditCardReducer,
+  deposit: depositReducer,
+  withdrawal: withdrawalReducer
 });
 
 // const composeEnhancers =
