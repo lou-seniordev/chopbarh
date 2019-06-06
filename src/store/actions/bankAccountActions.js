@@ -80,6 +80,7 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
             last_digits: payload.last4
           })
         });
+      dispatch(setBankAccountSuccess(docRef));
     } else {
       const docRef = await firestore
         .collection("bank_charge")
@@ -94,11 +95,9 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
             }
           ]
         });
+      dispatch(setBankAccountSuccess(docRef));
     }
-
-    dispatch(setBankAccountSuccess());
   } catch (err) {
-    console.log("Error", err);
     dispatch(setBankAccountFail());
   }
 };
