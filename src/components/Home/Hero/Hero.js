@@ -10,9 +10,8 @@ import slider3BG from "../../assets/img/slider_3_BG_1.png";
 const HeroWrapper = styled.div`
   height: 87vh;
   /* width: 98.7vw; */
-  padding: 3rem 0rem;
   position: relative;
-  background: ${color.colorPrimary};
+  /* background: ${color.colorPrimary}; */
   /* background: crimson; url(${Background}); */
   overflow: hidden;
   color: ${color.colorWhite};
@@ -63,8 +62,7 @@ const ParagraphOne = styled.p`
 
 const Image = styled.img`
   /* height: 94.4vh; */
-  width: 100%;
-  object-fit: contain;
+  height: 100%;
 `;
 
 const SliderImage = styled.img`
@@ -130,7 +128,6 @@ export default function Hero() {
         className="carousel slide"
         data-ride="carousel"
         data-interval="2000"
-        style={{ marginTop: "-9rem", width: "100%" }}
       >
         <ol className="carousel-indicators">
           <li

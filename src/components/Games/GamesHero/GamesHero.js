@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
-import Background from "../../assets/svg/WavyHeader.svg";
+import Background from "../../assets/img/games_BG.png";
 
 const GamesHeroWrapper = styled.div`
   height: 100vh;
   position: relative;
-  margin-top: -255px;
+  margin-top: -155px;
   background: ${color.colorPrimary};
   color: ${color.colorWhite};
+  overflow: hidden;
   text-align: center;
   z-index: 200;
 `;
