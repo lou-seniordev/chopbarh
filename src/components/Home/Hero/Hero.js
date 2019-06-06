@@ -11,7 +11,7 @@ const HeroWrapper = styled.div`
   height: 87vh;
   /* width: 98.7vw; */
   position: relative;
-  /* background: ${color.colorPrimary}; */
+  background: ${color.colorPrimary};
   /* background: crimson; url(${Background}); */
   overflow: hidden;
   color: ${color.colorWhite};
@@ -62,15 +62,33 @@ const ParagraphOne = styled.p`
 
 const Image = styled.img`
   /* height: 94.4vh; */
-  height: 100%;
+  /* height: 100%; */
 `;
 
 const SliderImage = styled.img`
   position: absolute;
-  top: 10%;
-  left: 50%;
+  top: 15vh;
+  left: 50vw;
 
   width: 50%;
+
+  @media only screen and (max-width: 1140px) {
+    top: 23vh !important;
+  }
+
+  @media only screen and (max-width: ${breakPoints.large}) {
+    display: none !important;
+  }
+`;
+
+const SliderContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: ${props => (props.first ? "32%" : "50%")};
+  z-index: 2000;
+  transform: translate(-50%, -50%);
+
+  margin-left: ${props => (props.first ? "2rem" : "0")};
 `;
 
 const Button = styled.button`
@@ -124,64 +142,43 @@ export default function Hero() {
         </div>
       </HeroContentWrapper> */}
       <div
-        id="carouselExampleIndicators"
+        id="carouselIndicators"
         className="carousel slide"
         data-ride="carousel"
         data-interval="2000"
       >
         <ol className="carousel-indicators">
           <li
-            data-target="#carouselExampleIndicators"
+            data-target="#carouselIndicators"
             data-slide-to="0"
             className="active"
           />
-          <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-          <li data-target="#carouselExampleIndicators" data-slide-to="2" />
+          <li data-target="#carouselIndicators" data-slide-to="1" />
+          <li data-target="#carouselIndicators" data-slide-to="2" />
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <div style={{ position: "relative" }}>
-              <Image
-                className="d-block w-100"
-                src={Background}
-                alt="First slide"
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "32%",
-                  zIndex: "2000",
-                  transform: `translate(-50%, -50%)`
-                }}
-              >
+            <div style={{ position: "relative", height: "87vh" }}>
+              <Image className="d-block" src={Background} alt="First slide" />
+              <SliderContent first>
                 <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
                   to the moment
                 </ParagraphOne>
-              </div>
+              </SliderContent>
               <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
           </div>
-          {/* <div className="carousel-item">
-            <div style={{ position: "relative" }}>
+          <div className="carousel-item">
+            <div style={{ position: "relative", height: "87vh" }}>
               <Image
                 className="d-block"
                 style={{ width: "100%" }}
                 src={slider2BG}
                 alt="Second slide"
               />
-              <div
-                className="text-center"
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: "2000",
-                  transform: `translate(-50%, -50%)`
-                }}
-              >
+              <SliderContent className="text-center">
                 <HeadingTwo className="hero__title">
                   No Bank Account?
                 </HeadingTwo>
@@ -189,33 +186,24 @@ export default function Hero() {
                   No problem, we will send your money to your phone number, then
                   you can transfer to any account or withdraw from an ATM
                 </ParagraphOne>
-              </div>
+              </SliderContent>
             </div>
           </div>
           <div className="carousel-item">
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative", height: "87vh" }}>
               <Image className="d-block" src={slider3BG} alt="Third slide" />
-              <div
-                className="text-center"
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  zIndex: "2000",
-                  transform: `translate(-50%, -50%)`
-                }}
-              >
+              <SliderContent className="text-center">
                 <HeadingTwo className="hero__title">
                   No be come lick stew
                 </HeadingTwo>
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              </div>
+              </SliderContent>
             </div>
-          </div> */}
+          </div>
         </div>
         <a
           className="carousel-control-prev"
-          href="#carouselExampleIndicators"
+          href="#carouselIndicators"
           role="button"
           data-slide="prev"
         >
@@ -224,7 +212,7 @@ export default function Hero() {
         </a>
         <a
           className="carousel-control-next"
-          href="#carouselExampleIndicators"
+          href="#carouselIndicators"
           role="button"
           data-slide="next"
         >
