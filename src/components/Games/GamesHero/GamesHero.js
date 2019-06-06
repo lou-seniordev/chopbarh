@@ -17,6 +17,7 @@ const GamesHeroWrapper = styled.div`
 
 const GamesHeroContentWrapper = styled.div`
   background: url(${Background});
+  background-position: center;
   height: 110vh;
   padding: 3rem 1rem;
 `;
