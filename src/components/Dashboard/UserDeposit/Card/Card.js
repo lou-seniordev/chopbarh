@@ -20,6 +20,7 @@ import {
   fetchCreditCardData,
   setCreditCardData
 } from "../../../../store/actions/creditCardActions";
+import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
 class Card extends Component {
   state = {
@@ -37,6 +38,10 @@ class Card extends Component {
     if (!this.props.creditCard) {
       this.props.fetchCreditCardData();
     }
+  };
+
+  toggleSubmitAmountModal = () => {
+    this.setState({ submitAmountModal: !this.state.submitAmountModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -144,6 +149,17 @@ class Card extends Component {
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
             <SubmitOTP />
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.state.submitAmountModal}
+          toggle={this.toggleSubmitAmountModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitAmount />
           </ModalBody>
         </Modal>
         {this.props.creditCard ? (
