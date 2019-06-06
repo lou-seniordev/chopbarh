@@ -8,7 +8,7 @@ const WithdrawalTableWrapper = styled.div`
   margin-top: 6rem;
 `;
 
-class DepositTable extends Component {
+class WithdrawalTable extends Component {
   componentDidMount = () => {
     if (!this.props.withdrawalData) {
       this.props.fetchWithdrawalHistoryData();
@@ -89,4 +89,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(memo(DepositTable));
+)(memo(WithdrawalTable));

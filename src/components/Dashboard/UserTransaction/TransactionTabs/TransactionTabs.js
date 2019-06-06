@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import TransactionTable from "../TransactionTable/TransactionTable";
+import WithdrawalTable from "../WithdrawalTable/WithdrawalTable";
+import DepositTable from "../DepositTable/DepositTable";
 
 const TransactionTabsWrapper = styled.div`
   display: block;
@@ -18,37 +19,37 @@ export default function TransactionTabs() {
     <TransactionTabsWrapper className="col-md-8">
       <Tabs>
         <TabList>
-          <Tab>
+          {/* <Tab>
             <HeadingTwo>All</HeadingTwo>
-          </Tab>
+          </Tab> */}
           <Tab>
             <HeadingTwo>Deposit</HeadingTwo>
           </Tab>
           <Tab>
             <HeadingTwo>Withdrawal</HeadingTwo>
           </Tab>
-          <Tab>
+          {/* <Tab>
             <HeadingTwo>Winnings</HeadingTwo>
           </Tab>
           <Tab>
             <HeadingTwo>Refunds</HeadingTwo>
-          </Tab>
+          </Tab> */}
         </TabList>
+        {/* <TabPanel>
+          <TransactionTable />
+        </TabPanel> */}
         <TabPanel>
+          <DepositTable />
+        </TabPanel>
+        <TabPanel>
+          <WithdrawalTable />
+        </TabPanel>
+        {/* <TabPanel>
           <TransactionTable />
         </TabPanel>
         <TabPanel>
           <TransactionTable />
-        </TabPanel>
-        <TabPanel>
-          <TransactionTable />
-        </TabPanel>
-        <TabPanel>
-          <TransactionTable />
-        </TabPanel>
-        <TabPanel>
-          <TransactionTable />
-        </TabPanel>
+        </TabPanel> */}
       </Tabs>
     </TransactionTabsWrapper>
   );
