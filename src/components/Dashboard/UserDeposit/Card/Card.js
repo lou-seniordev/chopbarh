@@ -9,7 +9,7 @@ import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
-import { setTransactionHistory } from "../../../../store/actions/transactionHistoryActions";
+import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   openOTPModal,
   closeOTPModal,
@@ -110,8 +110,7 @@ class Card extends Component {
         const value = +data.data.amount / 100;
         // Add props to set Charge Success details
         this.props.setCreditCardData(data.data.authorization);
-        // Grab auth code and store the value
-        // this.props.setTransactionHistory(data.data);
+        // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
@@ -147,6 +146,11 @@ class Card extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
+        {this.props.creditCard ? (
+          <p>Render Card Component here</p>
+        ) : (
+          <>{null}</>
+        )}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
@@ -234,7 +238,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setChargeReference,
   fetchCreditCardData,
-  setTransactionHistory,
+  setDepositHistory,
   setCreditCardData,
   setCoinBalance,
   openOTPModal,
