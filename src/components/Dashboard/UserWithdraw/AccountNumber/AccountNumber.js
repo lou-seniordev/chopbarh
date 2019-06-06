@@ -6,6 +6,7 @@ import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import Banks from "./Banks";
+import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
@@ -114,7 +115,7 @@ class AccountNumber extends Component {
       const data = await response.json();
       console.log(data);
 
-      if (response.status === 200) {
+      if (data.status === "success") {
         toast.success("Transaction was Successful");
         this.setState({
           loading: false,
@@ -123,6 +124,7 @@ class AccountNumber extends Component {
           account_number: ""
         });
         this.props.setCashBalance(data.data.amount, 2);
+        this.props.setWithdrawalHistory(data.data);
       } else {
         toast.error("Transaction was not successful");
       }
@@ -210,7 +212,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCashBalance
+  setCashBalance,
+  setWithdrawalHistory
 };
 
 export default connect(
