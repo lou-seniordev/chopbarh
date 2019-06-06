@@ -49,6 +49,7 @@ export const setDepositHistoryFail = () => ({
 
 export const setDepositHistory = payload => async (dispatch, getState) => {
   dispatch(setDepositHistoryInit());
+
   try {
     const snapshot = await firestore
       .collection("deposits")
@@ -59,6 +60,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       id: doc.id,
       ...doc.data()
     }));
+    console.log(deposits);
 
     if (deposits.length) {
       const docRef = await firestore
@@ -81,9 +83,9 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
           id: getState().auth.id,
           data: [
             {
-              amount: payload.amount,
+              amount: payload.amount / 100,
               channel: payload.channel,
-              deposit_date: payload.deposit_date,
+              deposit_date: payload.transaction_date,
               paid_at: payload.paid_at
             }
           ]
@@ -91,6 +93,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       dispatch(setDepositHistorySuccess(docRef));
     }
   } catch (err) {
+    console.log(err);
     dispatch(setDepositHistoryFail());
   }
 };

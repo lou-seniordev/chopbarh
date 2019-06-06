@@ -109,8 +109,8 @@ class Card extends Component {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
         // Add props to set Charge Success details
-        this.props.setCreditCardData(data.data.authorization);
-        // this.props.setDepositHistory(data.data);
+        // this.props.setCreditCardData(data.data.authorization);
+        this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
