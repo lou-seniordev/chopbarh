@@ -178,7 +178,12 @@ class Card extends Component {
                     margin: "5px",
                     cursor: "pointer"
                   }}
-                  onClick={() => console.log(card.auth_code)}
+                  onClick={() =>
+                    this.setState({
+                      submitAmountModal: true,
+                      auth_code: card.auth_code
+                    })
+                  }
                 >
                   <p>{card.card_type.split(" ")[0]}</p>
                   <p>{`**** **** **** ${card.last_digits}`}</p>
