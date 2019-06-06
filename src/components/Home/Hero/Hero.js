@@ -32,7 +32,7 @@ const HeroContentWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 7rem;
+  font-size: 6.5rem;
   text-transform: uppercase;
   font-style: italic;
   font-weight: bold;
@@ -89,6 +89,11 @@ const SliderContent = styled.div`
   transform: translate(-50%, -50%);
 
   margin-left: ${props => (props.first ? "2rem" : "0")};
+
+  @media only screen and (max-width: ${breakPoints.large}) {
+    left: 50%;
+    text-align: center;
+  }
 `;
 
 const Button = styled.button`
@@ -180,11 +185,7 @@ export default function Hero() {
           </div>
           <div className="carousel-item">
             <div style={{ position: "relative", height: "87vh" }}>
-              <Image
-                className="d-block"
-                src={slider2BG}
-                alt="Second slide"
-              />
+              <Image className="d-block" src={slider2BG} alt="Second slide" />
               <SliderContent className="text-center">
                 <HeadingTwo className="hero__title">
                   No Bank Account?
