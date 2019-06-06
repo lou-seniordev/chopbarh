@@ -84,7 +84,7 @@ const SliderImage = styled.img`
 const SliderContent = styled.div`
   position: absolute;
   top: 50%;
-  left: ${props => (props.first ? "32%" : "50%")};
+  left: ${props => (props.first ? "35%" : "50%")};
   z-index: 2000;
   transform: translate(-50%, -50%);
 
