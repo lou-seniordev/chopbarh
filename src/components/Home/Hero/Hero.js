@@ -3,8 +3,9 @@ import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
-import slider2BG from "../../assets/img/slider_2_BG.png";
-import slider3BG from "../../assets/img/slider_3_BG.png";
+import slider1 from "../../assets/img/slider_1.png";
+import slider2BG from "../../assets/img/slider_2_BG_1.png";
+import slider3BG from "../../assets/img/slider_3_BG_1.png";
 
 const HeroWrapper = styled.div`
   height: 87vh;
@@ -64,6 +65,14 @@ const Image = styled.img`
   /* height: 94.4vh; */
   width: 100%;
   object-fit: contain;
+`;
+
+const SliderImage = styled.img`
+  position: absolute;
+  top: 10%;
+  left: 50%;
+
+  width: 50%;
 `;
 
 const Button = styled.button`
@@ -141,11 +150,10 @@ export default function Hero() {
                 alt="First slide"
               />
               <div
-                className="text-center"
                 style={{
                   position: "absolute",
                   top: "50%",
-                  left: "50%",
+                  left: "32%",
                   zIndex: "2000",
                   transform: `translate(-50%, -50%)`
                 }}
@@ -156,15 +164,16 @@ export default function Hero() {
                   to the moment
                 </ParagraphOne>
               </div>
+              <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
           </div>
-          <div className="carousel-item">
+          {/* <div className="carousel-item">
             <div style={{ position: "relative" }}>
               <Image
-                className="d-block w-100"
+                className="d-block"
+                style={{ width: "100%" }}
                 src={slider2BG}
                 alt="Second slide"
-                style={{ marginTop: "-19.5rem" }}
               />
               <div
                 className="text-center"
@@ -173,7 +182,7 @@ export default function Hero() {
                   top: "50%",
                   left: "50%",
                   zIndex: "2000",
-                  transform: `translate(-50%, 0%)`
+                  transform: `translate(-50%, -50%)`
                 }}
               >
                 <HeadingTwo className="hero__title">
@@ -188,12 +197,7 @@ export default function Hero() {
           </div>
           <div className="carousel-item">
             <div style={{ position: "relative" }}>
-              <Image
-                className="d-block w-100"
-                src={slider3BG}
-                alt="Third slide"
-                style={{ marginTop: "-25rem" }}
-              />
+              <Image className="d-block" src={slider3BG} alt="Third slide" />
               <div
                 className="text-center"
                 style={{
@@ -201,7 +205,7 @@ export default function Hero() {
                   top: "50%",
                   left: "50%",
                   zIndex: "2000",
-                  transform: `translate(-50%, 0%)`
+                  transform: `translate(-50%, -50%)`
                 }}
               >
                 <HeadingTwo className="hero__title">
@@ -210,7 +214,7 @@ export default function Hero() {
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <a
           className="carousel-control-prev"
