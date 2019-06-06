@@ -30,13 +30,18 @@ class BankCharge extends Component {
     amount: "",
     bank: "",
     account_number: "",
-    auth_code: ""
+    auth_code: "",
+    submitAmountModal: false
   };
 
   componentDidMount = () => {
     if (!this.props.bankAccount) {
       this.props.fetchBankAccountData();
     }
+  };
+
+  toggleSubmitAmountModal = () => {
+    this.setState({ submitAmountModal: !this.state.submitAmountModal });
   };
 
   handleInputChange = ({ target }) => {
