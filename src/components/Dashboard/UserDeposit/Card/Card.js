@@ -160,7 +160,7 @@ class Card extends Component {
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitAmount />
+            <SubmitAmount auth_code={this.state.auth_code} />
           </ModalBody>
         </Modal>
         {this.props.creditCard ? (
