@@ -15,6 +15,7 @@ import {
   closeTransactionSuccessModal
 } from "../../../../store/actions/modalActions";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
+import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 
 const Form = styled.form`
   position: relative;
@@ -190,21 +191,24 @@ class Paga extends Component {
       .then(data => {
         console.log(data);
         if (data.responseCode === 0) {
+          const historyObject = {
+            amount: this.state.amount,
+            channel: 'Paga',
+            withdrawal_date: new Date(),
+            paid_at: new Date()
+          }
           this.props.setCashBalance(this.state.amount, 2);
           this.setState({ loading: false, phone: "", amount: "" });
-          // this.props.openTransactionSuccessModal();
           toast.success(`Transaction was successful`);
-
+          this.props.setWithdrawalHistory(historyObject)
           // Send mail here
         } else {
           this.setState({ loading: false });
-          // this.props.openTransactionFailModal();
           toast.error(`Transaction was not successful`);
         }
       })
       .catch(err => {
         console.log("Error", err);
-        // this.setState({ formErrorModal: true });
         toast.error(`Something went wrong`);
       });
   };
@@ -272,6 +276,7 @@ const mapDispatchToProps = {
   openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal,
+  setWithdrawalHistory,
   setCashBalance
 };
 
