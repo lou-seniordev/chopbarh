@@ -162,6 +162,7 @@ class BankCharge extends Component {
                 <p>{`XXXXXX${bank.last_digits}`}</p>
               </div>
             ))}
+            <hr />
           </>
         ) : (
           <>{null}</>
