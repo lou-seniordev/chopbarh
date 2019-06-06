@@ -5,7 +5,7 @@ import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import QuickPlayTransaction from "./QuickPlayTransaction/QuickPlayTransaction";
 import VoucherTransaction from "./VoucherTransaction/VoucherTransaction";
-import DepositTable from "./DepositTable/TransactionTable";
+import DepositTable from "./DepositTable/DepositTable";
 
 export default function UserTransaction() {
   return (
