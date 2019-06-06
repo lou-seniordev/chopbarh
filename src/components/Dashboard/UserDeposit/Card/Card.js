@@ -147,8 +147,27 @@ class Card extends Component {
         </Modal>
         {this.props.creditCard ? (
           <>
-            <h4>Render Card Component here</h4>
+            <h4>Pay with Card</h4>
             <p>Click on a card to pay with it</p>
+            <div style={{ display: "flex" }} className="mb-4">
+              {this.props.creditCard.map((card, index) => (
+                <div
+                  key={index}
+                  style={{
+                    background: "#ccc",
+                    padding: "5px 9px",
+                    borderRadius: "5px",
+                    margin: "5px",
+                    cursor: "pointer"
+                  }}
+                  onClick={() => console.log(card.auth_code)}
+                >
+                  <p>{card.card_type.split(" ")[0]}</p>
+                  <p>{`**** **** **** ${card.last_digits}`}</p>
+                  <p>{`${card.exp_month}/${card.exp_year}`}</p>
+                </div>
+              ))}
+            </div>
           </>
         ) : (
           <>{null}</>
