@@ -48,6 +48,22 @@ const HeadingTwo = styled.h2`
   @media only screen and (max-width: ${breakPoints.smaller}) {
     font-size: 3.5rem;
   }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    font-size: 3rem;
+  }
+
+  @media only screen and (max-width: 350px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const HeadingTwoFirst = styled(HeadingTwo)`
+  @media only screen and (max-width: 350px) {
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const ParagraphOne = styled.p`
@@ -98,6 +114,10 @@ const SliderContent = styled.div`
     left: 50%;
     text-align: center;
   }
+
+  @media only screen and (max-width: 350px) {
+    margin-left: 0;
+  }
 `;
 
 const Button = styled.button`
@@ -130,7 +150,11 @@ const Button = styled.button`
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    padding: 0.5rem 0.8rem;
   }
 `;
 
@@ -174,7 +198,9 @@ export default function Hero() {
             <div style={{ position: "relative", height: "87vh" }}>
               <Image className="d-block" src={Background} alt="First slide" />
               <SliderContent first>
-                <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
+                <HeadingTwoFirst className="hero__title">
+                  Play and Chop
+                </HeadingTwoFirst>
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
                   to the moment
@@ -191,7 +217,7 @@ export default function Hero() {
               <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
           </div>
-          <div className="carousel-item">
+          {/* <div className="carousel-item">
             <div style={{ position: "relative", height: "87vh" }}>
               <Image className="d-block" src={slider2BG} alt="Second slide" />
               <SliderContent className="text-center">
@@ -215,7 +241,7 @@ export default function Hero() {
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
               </SliderContent>
             </div>
-          </div>
+          </div> */}
         </div>
         <a
           className="carousel-control-prev"
