@@ -122,7 +122,7 @@ const Button = styled.button`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 
