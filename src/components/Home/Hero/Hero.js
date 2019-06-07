@@ -115,7 +115,7 @@ const SliderContent = styled.div`
     text-align: center;
   }
 
-  @media only screen and (max-width: 350px) {
+  @media only screen and (max-width: ${breakPoints.smallest}) {
     margin-left: 0;
   }
 `;
@@ -206,10 +206,10 @@ export default function Hero() {
                   to the moment
                 </ParagraphOne>
                 <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-                  <Button className="mr-4">
+                  <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                     <span>Start Playing</span>
                   </Button>
-                  <Button className="ml-4">
+                  <Button className="mr-lg-4 mr-md-4">
                     <span>Download</span>
                   </Button>
                 </div>
