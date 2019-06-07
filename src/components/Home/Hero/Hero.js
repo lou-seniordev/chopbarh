@@ -44,6 +44,10 @@ const HeadingTwo = styled.h2`
   @media only screen and (max-width: ${breakPoints.small}) {
     font-size: 4.5rem;
   }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    font-size: 3.5rem;
+  }
 `;
 
 const ParagraphOne = styled.p`
@@ -122,7 +126,11 @@ const Button = styled.button`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    font-size: 0.7rem;
   }
 `;
 
