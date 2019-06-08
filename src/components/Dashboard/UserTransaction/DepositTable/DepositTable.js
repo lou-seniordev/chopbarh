@@ -5,7 +5,7 @@ import { Spinner } from "reactstrap";
 import { fetchDepositHistoryData } from "../../../../store/actions/depositActions";
 
 const DepositTableWrapper = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 class DepositTable extends Component {
