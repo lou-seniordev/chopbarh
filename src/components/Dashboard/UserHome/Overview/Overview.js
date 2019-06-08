@@ -5,7 +5,8 @@ import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
 
 const OverviewWrapper = styled.div`
-  background: #c5c7c5;
+  background: #8c1936;
+  color: #ddd;
   padding: 3rem 2rem;
   border-radius: 5px;
   margin: 4rem auto;
@@ -20,11 +21,11 @@ const OverviewContent = styled.div`
 const OverviewContentHeader = styled.h3`
   font-weight: 600;
   font-size: 3.5rem;
-  color: #444;
+  color: #fff;
 
-  ${OverviewContent}:hover & {
+  /* ${OverviewContent}:hover & {
     color: ${color.colorPrimary};
-  }
+  } */
 `;
 
 const HeadingFour = styled.h4``;
@@ -33,7 +34,7 @@ const OverviewContentDescription = styled.p`
   font-size: 1.5rem;
 
   ${OverviewContent}:hover & {
-    color: ${color.colorPrimary};
+    color: ${color.colorWhite};
   }
 `;
 

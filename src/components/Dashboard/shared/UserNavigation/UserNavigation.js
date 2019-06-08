@@ -11,7 +11,7 @@ import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
-  background: ${color.colorPrimary};
+  background: #8c1936;
   color: ${color.colorWhite};
   min-height: 6rem;
   padding: 2rem 18rem;
@@ -51,7 +51,7 @@ function UserNavigation() {
   return (
     <HeaderWrapper>
       <NavItem>
-        <Icon icon={Home} height="18" />
+        <Icon icon={Home} height="18" color="#fff" />
         <NavLink activeClassName="active" to="user" className="ml-2">
           Home
         </NavLink>

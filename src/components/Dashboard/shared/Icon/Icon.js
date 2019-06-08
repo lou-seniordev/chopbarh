@@ -8,7 +8,7 @@ export default function Icon({ icon, height, clicked, color }) {
       className="mx-3"
       alt="Icon"
       height={height}
-      style={{ cursor: "pointer", color }}
+      style={{ cursor: "pointer", fill: color }}
     />
   );
 }
