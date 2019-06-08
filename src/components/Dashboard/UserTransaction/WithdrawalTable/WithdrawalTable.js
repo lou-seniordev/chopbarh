@@ -5,7 +5,7 @@ import { Spinner } from "reactstrap";
 import { fetchWithdrawalHistoryData } from "../../../../store/actions/withdrawalActions";
 
 const WithdrawalTableWrapper = styled.div`
-  margin-top: 6rem;
+  margin-top: 2rem;
 `;
 
 class WithdrawalTable extends Component {
