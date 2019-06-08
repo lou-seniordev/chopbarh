@@ -38,10 +38,20 @@ export default function TransactionTabs() {
         {/* <TabPanel>
           <TransactionTable />
         </TabPanel> */}
-        <TabPanel>
+        <TabPanel
+          style={{
+            maxHeight: "600px",
+            overflow: "auto"
+          }}
+        >
           <DepositTable />
         </TabPanel>
-        <TabPanel>
+        <TabPanel
+          style={{
+            maxHeight: "600px",
+            overflow: "auto"
+          }}
+        >
           <WithdrawalTable />
         </TabPanel>
         {/* <TabPanel>
