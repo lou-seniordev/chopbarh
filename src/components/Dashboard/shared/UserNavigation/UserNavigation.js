@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import color from "../../../styles/colors";
 import breakpoint from "../../../styles/breakpoints";
 import Icon from "../Icon/Icon";
@@ -11,7 +11,8 @@ import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
-  background: #dfebdf;
+  background: ${color.colorPrimary};
+  color: ${color.colorWhite};
   min-height: 6rem;
   padding: 2rem 18rem;
   position: relative;
@@ -31,11 +32,11 @@ const HeaderWrapper = styled.div`
 
   a {
     font-size: 1.34rem;
-    color: #737773;
+    color: #eeeeee;
 
     &:hover {
       text-decoration: none;
-      color: ${color.colorPrimary};
+      color: ${color.colorWhite};
     }
   }
 `;
@@ -51,21 +52,21 @@ function UserNavigation() {
     <HeaderWrapper>
       <NavItem>
         <Icon icon={Home} height="18" />
-        <Link to="user" className="ml-2">
+        <NavLink activeClassName="active" to="user" className="ml-2">
           Home
-        </Link>
+        </NavLink>
       </NavItem>
       <NavItem>
         <Icon icon={Deposit} height="18" />
-        <Link to="deposit" className="ml-2">
+        <NavLink to="deposit" className="ml-2">
           Deposit
-        </Link>
+        </NavLink>
       </NavItem>
       <NavItem>
         <Icon icon={Withdrawal} height="18" />
-        <Link to="withdraw" className="ml-2">
+        <NavLink to="withdraw" className="ml-2">
           Withdraw
-        </Link>
+        </NavLink>
       </NavItem>
       <NavItem>
         <Icon icon={Play} height="18" />
