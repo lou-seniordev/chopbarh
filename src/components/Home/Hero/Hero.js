@@ -217,7 +217,7 @@ export default function Hero() {
               <SliderImage className="d-block" src={slider1} alt="User" />
             </div>
           </div>
-          {/* <div className="carousel-item">
+          <div className="carousel-item">
             <div style={{ position: "relative", height: "87vh" }}>
               <Image className="d-block" src={slider2BG} alt="Second slide" />
               <SliderContent className="text-center">
@@ -241,7 +241,7 @@ export default function Hero() {
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
               </SliderContent>
             </div>
-          </div> */}
+          </div>
         </div>
         <a
           className="carousel-control-prev"
