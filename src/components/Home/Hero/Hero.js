@@ -115,7 +115,7 @@ const SliderContent = styled.div`
     text-align: center;
   }
 
-  @media only screen and (max-width: ${breakPoints.smallest}) {
+  @media only screen and (max-width: ${breakPoints.smaller}) {
     margin-left: 0;
   }
 `;

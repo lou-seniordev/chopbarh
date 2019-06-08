@@ -7,7 +7,7 @@ import DepositTable from "../DepositTable/DepositTable";
 const TransactionTabsWrapper = styled.div`
   display: block;
   margin: 0 auto;
-  padding: 5rem 0rem;
+  padding: 1rem 0rem;
 `;
 
 const HeadingTwo = styled.h2`
