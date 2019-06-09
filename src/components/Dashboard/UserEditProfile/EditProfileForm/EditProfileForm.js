@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Spinner } from "reactstrap";
+import {toast} from 'react-toastify'
 import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import keys from "../../../../config/keys";
+
 
 const EditProfileWrapper = styled.div`
   z-index: 2000;
@@ -184,13 +187,14 @@ class EditProfileForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({loading: true})
 
     const postData = {
-      FULL_NAME: null,
-      PHONE_NUM: null,
-      DOB: null,
-      SEX: null,
-      Email: null
+      FULL_NAME: this.state.name,
+      PHONE_NUM: this.state.phone,
+      DOB: this.state.dob,
+      SEX: this.state.sex,
+      Email: this.state.email
     };
 
     postData["@class"] = ".LogEventRequest";
@@ -199,7 +203,7 @@ class EditProfileForm extends Component {
     const formValue = JSON.stringify(postData);
 
     axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${keys.apiKeySuffix}/RegistrationRequest`,
       {
         method: "POST",
         headers: {
@@ -212,8 +216,10 @@ class EditProfileForm extends Component {
       .then(response => {
         if (response.data.error) {
           this.setState({ loading: false });
+          toast.error('Profile was not updated. Please, try again')
         } else {
           this.setState({ loading: false });
+          toast.success('Profile was successfully updated.')
         }
       })
       .catch(err => {
@@ -239,7 +245,7 @@ class EditProfileForm extends Component {
               </div>
             ) : (
               <Form onSubmit={this.handleSubmit}>
-                <HeadingTwo className="mb-4">Edit Profile</HeadingTwo>
+                <HeadingTwo className="mb-4">Profile</HeadingTwo>
                 <FormItem>
                   <label>Full Name</label>
                   <input
@@ -257,7 +263,7 @@ class EditProfileForm extends Component {
                     type="text"
                     value={this.state.phone}
                     name="phone"
-                      disabled
+                    disabled
                     onChange={this.handleInputChange}
                     required
                   />
@@ -269,7 +275,7 @@ class EditProfileForm extends Component {
                       type="date"
                       value={this.state.dob}
                       name="dob"
-                        disabled
+                      disabled
                       onChange={this.handleInputChange}
                       required
                       max="2010-01-01"
@@ -280,7 +286,7 @@ class EditProfileForm extends Component {
                     <select
                       value={this.state.sex}
                       name="sex"
-                        disabled
+                      disabled
                       onChange={this.handleInputChange}
                       required
                     >

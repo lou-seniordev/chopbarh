@@ -77,6 +77,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             last_digits: payload.last4
           })
         });
+      console.log(docRef);
       dispatch(setCreditCardSuccess(docRef));
     } else {
       const docRef = await firestore
@@ -94,6 +95,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             }
           ]
         });
+      console.log(docRef);
       dispatch(setCreditCardSuccess(docRef));
     }
   } catch (err) {
