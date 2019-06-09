@@ -9,7 +9,7 @@ export default function UserEditProfile({ userInfo }) {
   return (
     <>
       <Helmet>
-        <title>Chopbarh &rarr; Edit Profile</title>
+        <title>Chopbarh &rarr; Profile</title>
       </Helmet>
       <UserHeader />
       <UserNavigation />
