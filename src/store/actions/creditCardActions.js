@@ -24,7 +24,7 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
       .get();
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data);
+    // console.log(data);
     if (data.length) {
       dispatch(fetchCreditCardSuccess(data[0].data));
     } else {
@@ -64,7 +64,12 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 
     if (creditCards.length) {
       // Check if it exists already
-      // const cardExists = getState().creditCard.creditCard.filter(card => card.last_digits === payload.last4)
+      const cardExists = getState().creditCard.creditCard.filter(
+        card => card.last_digits === payload.last4
+      );
+
+      console.log(cardExists);
+
       const docRef = await firestore
         .collection("card_charge")
         .doc(getState().auth.id)

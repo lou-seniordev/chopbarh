@@ -1,6 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
@@ -115,9 +115,9 @@ class Card extends Component {
       } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
-        this.props.setCreditCardData(data.data.authorization);
-        this.props.setDepositHistory(data.data);
-        this.props.setCoinBalance(value);
+        // this.props.setCreditCardData(data.data.authorization);
+        // this.props.setDepositHistory(data.data);
+        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -166,53 +166,57 @@ class Card extends Component {
             />
           </ModalBody>
         </Modal>
-        {this.props.creditCard ? (
-          <>
-            <h4>Pay with Card</h4>
-            <p>Click on a card to pay with it</p>
-            <div style={{ display: "flex" }} className="mb-4">
-              {this.props.creditCard.map((card, index) => (
-                <div
-                  key={index}
-                  style={{
-                    background: "#eee",
-                    padding: "5px 12px",
-                    borderRadius: "5px",
-                    margin: "5px",
-                    marginLeft: "0",
-                    cursor: "pointer"
-                  }}
-                  onClick={() =>
-                    this.setState({
-                      submitAmountModal: true,
-                      auth_code: card.auth_code
-                    })
-                  }
-                >
-                  <p>{card.card_type.split(" ")[0]}</p>
-                  <p>{`**** **** **** ${card.last_digits}`}</p>
-                  <p>{`${card.exp_month}/${card.exp_year}`}</p>
-                </div>
-              ))}
-            </div>
-            <hr />
-          </>
+        {this.props.loading ? (
+          <div className="mt-5 text-center">
+            <Spinner />
+          </div>
         ) : (
-          <>{null}</>
-        )}
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem>
-            <label>Amount</label>
-            <input
-              onChange={this.handleInputChange}
-              name="amount"
-              value={this.state.amount}
-              required
-              minLength="1"
-              placeholder="Amount(NGN)"
-            />
+          <>
+            {this.props.creditCard ? (
+              <>
+                {/* <h4>Pay with Card</h4>
+                <p>Click on a card to pay with it</p>
+                <div style={{ display: "flex" }} className="mb-4">
+                  {this.props.creditCard.map((card, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: "#eee",
+                        padding: "5px 12px",
+                        borderRadius: "5px",
+                        margin: "5px",
+                        marginLeft: "0",
+                        cursor: "pointer"
+                      }}
+                      onClick={() =>
+                        this.setState({
+                          submitAmountModal: true,
+                          auth_code: card.auth_code
+                        })
+                      }
+                    >
+                      <p>{card.card_type.split(" ")[0]}</p>
+                      <p>{`**** **** **** ${card.last_digits}`}</p>
+                      <p>{`${card.exp_month}/${card.exp_year}`}</p>
+                    </div>
+                  ))}
+                </div>
+                <hr /> */}
+              </>
+            ) : (
+              <Form onSubmit={this.handleSubmit}>
+                <FormItem>
+                  <label>Amount</label>
+                  <input
+                    onChange={this.handleInputChange}
+                    name="amount"
+                    value={this.state.amount}
+                    required
+                    minLength="1"
+                    placeholder="Amount(NGN)"
+                  />
 
-            {/* <NumberFormat
+                  {/* <NumberFormat
               thousandSeparator
               onChange={this.handleInputChange}
               name="amount"
@@ -222,18 +226,18 @@ class Card extends Component {
               minLength="1"
               placeholder="Amount(NGN)"
             /> */}
-          </FormItem>
-          <FormItem>
-            <label>Card Number</label>
-            <input
-              onChange={this.handleInputChange}
-              name="card"
-              value={this.state.card}
-              minLength="16"
-              required
-              placeholder="Enter Card Number"
-            />
-            {/* <NumberFormat
+                </FormItem>
+                <FormItem>
+                  <label>Card Number</label>
+                  <input
+                    onChange={this.handleInputChange}
+                    name="card"
+                    value={this.state.card}
+                    minLength="16"
+                    required
+                    placeholder="Enter Card Number"
+                  />
+                  {/* <NumberFormat
               format="#### #### #### #### ####"
               onChange={this.handleInputChange}
               name="card"
@@ -242,37 +246,44 @@ class Card extends Component {
               required
               placeholder="Enter Card Number"
             /> */}
-          </FormItem>
-          <HalfColumn>
-            <FormItem className="mr-3">
-              <label>Expiry</label>
+                </FormItem>
+                <HalfColumn>
+                  <FormItem className="mr-3">
+                    <label>Expiry</label>
 
-              <NumberFormat
-                format="##/##"
-                name="expiry"
-                onChange={this.handleInputChange}
-                value={this.state.expiry}
-                required
-                placeholder="MM/YY"
-                mask={["M", "M", "Y", "Y"]}
-              />
-            </FormItem>
-            <FormItem>
-              <label>CVV</label>
-              <NumberFormat
-                format="###"
-                onChange={this.handleInputChange}
-                name="cvv"
-                value={this.state.cvv}
-                required
-                placeholder="3 Digits behind Card"
-              />
-            </FormItem>
-          </HalfColumn>
-          <button type="submit" className="mr-2" disabled={this.state.loading}>
-            <span>{this.state.loading ? "Please wait..." : "Load"}</span>
-          </button>
-        </Form>
+                    <NumberFormat
+                      format="##/##"
+                      name="expiry"
+                      onChange={this.handleInputChange}
+                      value={this.state.expiry}
+                      required
+                      placeholder="MM/YY"
+                      mask={["M", "M", "Y", "Y"]}
+                    />
+                  </FormItem>
+                  <FormItem>
+                    <label>CVV</label>
+                    <NumberFormat
+                      format="###"
+                      onChange={this.handleInputChange}
+                      name="cvv"
+                      value={this.state.cvv}
+                      required
+                      placeholder="3 Digits behind Card"
+                    />
+                  </FormItem>
+                </HalfColumn>
+                <button
+                  type="submit"
+                  className="mr-2"
+                  disabled={this.state.loading}
+                >
+                  <span>{this.state.loading ? "Please wait..." : "Load"}</span>
+                </button>
+              </Form>
+            )}
+          </>
+        )}
       </>
     );
   }
@@ -281,7 +292,8 @@ class Card extends Component {
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
-  creditCard: state.creditCard.creditCard
+  creditCard: state.creditCard.creditCard,
+  loading: state.creditCard.loading
 });
 
 const mapDispatchToProps = {
@@ -302,3 +314,38 @@ export default withRouter(
     mapDispatchToProps
   )(memo(Card))
 );
+
+// {this.props.creditCard ? (
+//           <>
+//             <h4>Pay with Card</h4>
+//             <p>Click on a card to pay with it</p>
+//             <div style={{ display: "flex" }} className="mb-4">
+//               {this.props.creditCard.map((card, index) => (
+//                 <div
+//                   key={index}
+//                   style={{
+//                     background: "#eee",
+//                     padding: "5px 12px",
+//                     borderRadius: "5px",
+//                     margin: "5px",
+//                     marginLeft: "0",
+//                     cursor: "pointer"
+//                   }}
+//                   onClick={() =>
+//                     this.setState({
+//                       submitAmountModal: true,
+//                       auth_code: card.auth_code
+//                     })
+//                   }
+//                 >
+//                   <p>{card.card_type.split(" ")[0]}</p>
+//                   <p>{`**** **** **** ${card.last_digits}`}</p>
+//                   <p>{`${card.exp_month}/${card.exp_year}`}</p>
+//                 </div>
+//               ))}
+//             </div>
+//             <hr />
+//           </>
+//         ) : (
+//           <>{null}</>
+//         )}
