@@ -246,6 +246,7 @@ class EditProfileForm extends Component {
                     type="text"
                     value={this.state.name}
                     name="name"
+                    disabled
                     onChange={this.handleInputChange}
                     required
                   />
@@ -256,6 +257,7 @@ class EditProfileForm extends Component {
                     type="text"
                     value={this.state.phone}
                     name="phone"
+                      disabled
                     onChange={this.handleInputChange}
                     required
                   />
@@ -267,6 +269,7 @@ class EditProfileForm extends Component {
                       type="date"
                       value={this.state.dob}
                       name="dob"
+                        disabled
                       onChange={this.handleInputChange}
                       required
                       max="2010-01-01"
@@ -277,6 +280,7 @@ class EditProfileForm extends Component {
                     <select
                       value={this.state.sex}
                       name="sex"
+                        disabled
                       onChange={this.handleInputChange}
                       required
                     >
