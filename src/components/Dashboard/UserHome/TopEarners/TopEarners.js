@@ -4,6 +4,14 @@ import { connect } from "react-redux";
 import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions";
 
 class TopEarners extends Component {
+  // constructor(props) {
+  //   super(props);
+
+  //   let eventSource = new EventSource(
+  //     `https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest`
+  //   );
+  // }
+
   componentDidMount = () => {
     if (!this.props.results) {
       this.props.fetchTopEarners();
