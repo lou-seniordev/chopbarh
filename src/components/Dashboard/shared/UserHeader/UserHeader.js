@@ -167,7 +167,7 @@ class UserHeader extends Component {
                         aria-labelledby="navbarDropdown"
                       >
                         <Link className="dropdown-item" to="edit-profile">
-                          Edit Profile
+                          Profile
                         </Link>
                         <Link className="dropdown-item" to="logout">
                           Logout
