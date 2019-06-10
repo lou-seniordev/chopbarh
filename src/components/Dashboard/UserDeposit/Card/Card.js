@@ -172,9 +172,9 @@ class Card extends Component {
           </div>
         ) : (
           <>
-            {this.props.creditCard ? (
+            {this.props.creditCard.length > 0 ? (
               <>
-                {/* <h4>Pay with Card</h4>
+                <h4>Pay with Card</h4>
                 <p>Click on a card to pay with it</p>
                 <div style={{ display: "flex" }} className="mb-4">
                   {this.props.creditCard.map((card, index) => (
@@ -201,7 +201,7 @@ class Card extends Component {
                     </div>
                   ))}
                 </div>
-                <hr /> */}
+                <hr />
               </>
             ) : (
               <Form onSubmit={this.handleSubmit}>
