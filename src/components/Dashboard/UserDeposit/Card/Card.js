@@ -174,7 +174,13 @@ class Card extends Component {
           <>
             {this.props.creditCard.length > 0 ? (
               <>
-                <h4>Pay with Card</h4>
+                {/* 
+                1. Add Accordion here
+                2. Two accordion items with title - Pay with Card, Pay with new Card
+                3. Pay with new Card uses the default Form logic
+                4. Pay with existing Card uses an array of radio inputs with a surrounding Form field and an amount input 
+              */}
+                {/* <h4>Pay with Card</h4>
                 <p>Click on a card to pay with it</p>
                 <div style={{ display: "flex" }} className="mb-4">
                   {this.props.creditCard.map((card, index) => (
@@ -201,7 +207,7 @@ class Card extends Component {
                     </div>
                   ))}
                 </div>
-                <hr />
+                <hr /> */}
               </>
             ) : (
               <Form onSubmit={this.handleSubmit}>
@@ -217,15 +223,15 @@ class Card extends Component {
                   />
 
                   {/* <NumberFormat
-              thousandSeparator
-              onChange={this.handleInputChange}
-              name="amount"
-              value={this.state.amount}
-              required
-              min={1}
-              minLength="1"
-              placeholder="Amount(NGN)"
-            /> */}
+                    thousandSeparator
+                    onChange={this.handleInputChange}
+                    name="amount"
+                    value={this.state.amount}
+                    required
+                    min={1}
+                    minLength="1"
+                    placeholder="Amount(NGN)"
+                  /> */}
                 </FormItem>
                 <FormItem>
                   <label>Card Number</label>
@@ -238,14 +244,14 @@ class Card extends Component {
                     placeholder="Enter Card Number"
                   />
                   {/* <NumberFormat
-              format="#### #### #### #### ####"
-              onChange={this.handleInputChange}
-              name="card"
-              value={this.state.card}
-              minLength="16"
-              required
-              placeholder="Enter Card Number"
-            /> */}
+                    format="#### #### #### #### ####"
+                    onChange={this.handleInputChange}
+                    name="card"
+                    value={this.state.card}
+                    minLength="16"
+                    required
+                    placeholder="Enter Card Number"
+                  /> */}
                 </FormItem>
                 <HalfColumn>
                   <FormItem className="mr-3">
