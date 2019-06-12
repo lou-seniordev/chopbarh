@@ -4,6 +4,13 @@ import { Modal, ModalBody, Spinner } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel
+} from "react-accessible-accordion";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -21,6 +28,8 @@ import {
   setCreditCardData
 } from "../../../../store/actions/creditCardActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
+
+import "react-accessible-accordion/dist/fancy-example.css";
 
 class Card extends Component {
   state = {
@@ -171,7 +180,7 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         {this.props.loading ? (
-          <div className="mt-5 text-center">
+          <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
         ) : (
@@ -184,6 +193,111 @@ class Card extends Component {
                 3. Pay with new Card uses the default Form logic
                 4. Pay with existing Card uses an array of radio inputs with a surrounding Form field and an amount input 
               */}
+                <Accordion>
+                  <AccordionItem>
+                    <AccordionItemHeading>
+                      <AccordionItemButton>
+                        Pay with existing Card
+                      </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                      <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                      </p>
+                    </AccordionItemPanel>
+                  </AccordionItem>
+                  <AccordionItem>
+                    <AccordionItemHeading>
+                      <AccordionItemButton>
+                        Pay with new Card
+                      </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                      <Form onSubmit={this.handleSubmit}>
+                        <FormItem>
+                          <label>Amount</label>
+                          <input
+                            onChange={this.handleInputChange}
+                            name="amount"
+                            value={this.state.amount}
+                            required
+                            minLength="1"
+                            placeholder="Amount(NGN)"
+                          />
+
+                          {/* <NumberFormat
+                    thousandSeparator
+                    onChange={this.handleInputChange}
+                    name="amount"
+                    value={this.state.amount}
+                    required
+                    min={1}
+                    minLength="1"
+                    placeholder="Amount(NGN)"
+                  /> */}
+                        </FormItem>
+                        <FormItem>
+                          <label>Card Number</label>
+                          <input
+                            onChange={this.handleInputChange}
+                            name="card"
+                            value={this.state.card}
+                            minLength="16"
+                            required
+                            placeholder="Enter Card Number"
+                          />
+                          {/* <NumberFormat
+                    format="#### #### #### #### ####"
+                    onChange={this.handleInputChange}
+                    name="card"
+                    value={this.state.card}
+                    minLength="16"
+                    required
+                    placeholder="Enter Card Number"
+                  /> */}
+                        </FormItem>
+                        <HalfColumn>
+                          <FormItem className="mr-3">
+                            <label>Expiry</label>
+
+                            <NumberFormat
+                              format="##/##"
+                              name="expiry"
+                              onChange={this.handleInputChange}
+                              value={this.state.expiry}
+                              required
+                              placeholder="MM/YY"
+                              mask={["M", "M", "Y", "Y"]}
+                            />
+                          </FormItem>
+                          <FormItem>
+                            <label>CVV</label>
+                            <NumberFormat
+                              format="###"
+                              onChange={this.handleInputChange}
+                              name="cvv"
+                              value={this.state.cvv}
+                              required
+                              placeholder="3 Digits behind Card"
+                            />
+                          </FormItem>
+                        </HalfColumn>
+                        <button
+                          type="submit"
+                          className="mr-2"
+                          disabled={this.state.loading}
+                        >
+                          <span>
+                            {this.state.loading ? "Please wait..." : "Load"}
+                          </span>
+                        </button>
+                      </Form>
+                    </AccordionItemPanel>
+                  </AccordionItem>
+                </Accordion>
                 {/* <h4>Pay with Card</h4>
                 <p>Click on a card to pay with it</p>
                 <div style={{ display: "flex" }} className="mb-4">
