@@ -106,6 +106,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       dispatch(setCreditCardSuccess(docRef));
     }
   } catch (err) {
+    console.log("Error Setting new Card", err);
     dispatch(setCreditCardFail());
   }
 };
