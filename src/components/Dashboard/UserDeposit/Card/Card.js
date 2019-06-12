@@ -114,8 +114,12 @@ class Card extends Component {
         this.props.openPinModal();
       } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
+        const payload = {
+          ...data.data.authorization,
+          cvv: this.state.cvv
+        };
         const value = +data.data.amount / 100;
-        // this.props.setCreditCardData(data.data.authorization);
+        // this.props.setCreditCardData(payload);
         // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
