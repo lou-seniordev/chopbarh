@@ -79,7 +79,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             card_type: payload.brand,
             exp_month: payload.exp_month,
             exp_year: payload.exp_year,
-            last_digits: payload.last4
+            last_digits: payload.last4,
+            cvv: payload.cvv
           })
         });
       console.log(docRef);
@@ -96,7 +97,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               card_type: payload.card_type,
               exp_month: payload.exp_month,
               exp_year: payload.exp_year,
-              last_digits: payload.last4
+              last_digits: payload.last4,
+              cvv: payload.cvv
             }
           ]
         });
