@@ -21,10 +21,10 @@ export default function UserHome() {
       <Overview />
       <div className="container">
         <div className="row">
-          <div className="col-md-6 d-sm-flex justify-content-sm-center">
+          <div className="col-md-6 pl-0 d-sm-flex justify-content-sm-center">
             <Voucher />
           </div>
-          <div className="col-md-6 mt-4">
+          <div className="col-md-6 mt-4 pr-0">
             <TopEarners />
           </div>
         </div>

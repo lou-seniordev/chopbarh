@@ -136,7 +136,7 @@ class Voucher extends Component {
 
   render() {
     return (
-      <VoucherWrapper className="container">
+      <VoucherWrapper className="container pl-0">
         <FormWrapper onSubmit={this.handleSubmit}>
           <form>
             <FormItem>
