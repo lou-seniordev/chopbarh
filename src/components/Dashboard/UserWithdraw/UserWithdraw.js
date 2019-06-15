@@ -14,7 +14,7 @@ export default function UserDeposit() {
       <UserHeader />
       <UserNavigation />
       <WithdrawTabs />
-      <div className="container">
+      {/* <div className="container">
         <p>
           Note: No. We are not sending you airtime! You can withdraw by dialing
           *242# on your phone number Lorem ipsum dolor sit amet, consectetur
@@ -26,7 +26,7 @@ export default function UserDeposit() {
           quisque egestas diam in. Nec nam aliquam sem et tortor consequat id
           porta nibh. Montes nascetur ridiculus mus mauris vitae.
         </p>
-      </div>
+      </div> */}
       <Footer />
     </>
   );
