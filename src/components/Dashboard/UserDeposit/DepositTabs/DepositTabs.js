@@ -36,9 +36,15 @@ export default function DepositTabs() {
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
-            {/* <Tab>
-            <HeadingTwo>Pay with Account Number</HeadingTwo>
-          </Tab> */}
+            <Tab>
+              <HeadingTwo>Banks</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>GT Banks</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>ATM</HeadingTwo>
+            </Tab>
           </TabList>
           <TabPanel>
             <Card />
@@ -54,9 +60,15 @@ export default function DepositTabs() {
               <Voucher />
             </div>
           </TabPanel>
-          {/* <TabPanel>
-          <PayWithAccountNumber />
-        </TabPanel> */}
+          <TabPanel>
+            <div style={{ minHeight: "36rem" }} />
+          </TabPanel>
+          <TabPanel>
+            <div style={{ minHeight: "36rem" }} />
+          </TabPanel>
+          <TabPanel>
+            <div style={{ minHeight: "36rem" }} />
+          </TabPanel>
         </Tabs>
       </div>
     </DepositTabsWrapper>
