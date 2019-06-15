@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import UserHeader from "../../Dashboard/shared/UserHeader/UserHeader";
 import UserNavigation from "../../Dashboard/shared/UserNavigation/UserNavigation";
-// import EditProfileForm from "./EditProfileForm/EditProfileForm";
+import ChangePinForm from "./ChangePinForm/ChangePinForm";
 import Footer from "../../UI/Footer/Footer";
 
 export default function ChangePin() {
@@ -13,6 +13,7 @@ export default function ChangePin() {
       </Helmet>
       <UserHeader />
       <UserNavigation />
+      <ChangePinForm />
       <Footer />
     </>
   );
