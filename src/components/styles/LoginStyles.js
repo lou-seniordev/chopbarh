@@ -14,17 +14,21 @@ export const AuthWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background: rgb(109, 10, 35);
+  background: rgb(109, 10, 35) url(${userBG});
   background-size: cover;
-  position: relative;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     display: none;
   }
-`;
 
-export const ImageItem = styled.div`
-  position: absolute;
+  /* &::before {
+    background: rgb(109, 10, 35);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+  } */
 `;
 
 export const FormWrapper = styled.div`
