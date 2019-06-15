@@ -161,7 +161,10 @@ class Voucher extends Component {
             <button
               type="submit"
               className="ml-2 mr-2"
-              disabled={this.state.loading}
+              disabled={
+                this.state.loading ||
+                this.state.voucher.split(" ").join("").length !== 16
+              }
             >
               <span>{this.state.loading ? "Loading..." : "Load"}</span>
             </button>
