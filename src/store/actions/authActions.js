@@ -9,11 +9,13 @@ export const authOTPGenerator = otp => ({
   otp
 });
 
-export const authSuccess = (token, id) => ({
-  type: actionType.AUTH_SUCCESS,
-  token,
-  id
-});
+export const authSuccess = (token, id) => {
+  return {
+    type: actionType.AUTH_SUCCESS,
+    token,
+    id
+  };
+};
 
 export const authFail = () => ({ type: actionType.AUTH_FAILURE });
 
@@ -24,4 +26,10 @@ export const authLogout = () => {
   return {
     type: actionType.AUTH_LOGOUT
   };
+};
+
+export const expirationTimer = () => {
+  setTimeout(() => {
+    authLogout();
+  }, 10000);
 };

@@ -128,7 +128,8 @@ class Card extends Component {
           cvv: this.state.cvv
         };
         const value = +data.data.amount / 100;
-        // this.props.setCreditCardData(payload);
+        // TODO: Fix this down the line
+        this.props.setCreditCardData(payload);
         // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
