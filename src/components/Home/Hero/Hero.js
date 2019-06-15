@@ -183,6 +183,7 @@ export default function Hero() {
         className="carousel slide"
         data-ride="carousel"
         data-interval="5000"
+        data-pause="false"
       >
         <ol className="carousel-indicators">
           <li

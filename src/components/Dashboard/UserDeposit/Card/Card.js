@@ -202,12 +202,12 @@ class Card extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <p>
+                      {/* <p>
                         Exercitation in fugiat est ut ad ea cupidatat ut in
                         cupidatat occaecat ut occaecat consequat est minim minim
                         esse tempor laborum consequat esse adipisicing eu
                         reprehenderit enim.
-                      </p>
+                      </p> */}
                     </AccordionItemPanel>
                   </AccordionItem>
                   <AccordionItem>
