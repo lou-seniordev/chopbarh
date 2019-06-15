@@ -155,6 +155,7 @@ class ChangePinForm extends Component {
                     value={this.state.name}
                     name="name"
                     disabled
+                    className="mr-2"
                     onChange={this.handleInputChange}
                     required
                   />
@@ -166,6 +167,7 @@ class ChangePinForm extends Component {
                     value={this.state.phone}
                     name="phone"
                     disabled
+                    className="ml-lg-2"
                     onChange={this.handleInputChange}
                     required
                   />
@@ -176,10 +178,9 @@ class ChangePinForm extends Component {
                 className="mr-2"
                 disabled={this.state.loading}
               >
-                <span>{this.state.loading ? "Saving..." : "Save"}</span>
+                <span>{this.state.loading ? "Plaese wait..." : "Change"}</span>
               </button>
             </Form>
-            )}
           </Container>
         </ChangePinWrapper>
       </>
