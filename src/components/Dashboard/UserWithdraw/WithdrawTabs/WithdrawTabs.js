@@ -15,8 +15,6 @@ const HeadingTwo = styled.h2`
 `;
 
 export default function WithdrawTabs(props) {
-  console.log(props);
-
   return (
     <WithdrawTabsWrapper className="container">
       <div className="col-md-6">

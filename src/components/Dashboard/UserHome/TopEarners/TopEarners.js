@@ -22,26 +22,34 @@ class TopEarners extends Component {
     return (
       <>
         {this.props.results ? (
-          <table className="table table-striped">
-            <thead style={{ background: "#8C1936", color: "#fff" }}>
-              <tr>
-                <th scope="col">Top Earners</th>
-                <th scope="col" />
-                <th scope="col" />
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.results.slice(0, 4).map(player => (
-                <tr key={player.PlayerID}>
-                  <td>{player.FullName}</td>
-                  <td>{player.Email}</td>
-                  <td>
-                    &#8358;{new Intl.NumberFormat().format(player.TotalWinning)}
-                  </td>
+          <div className="card">
+            <table className="table table-striped table-bordered">
+              <thead
+                style={{
+                  background: "#8C1936",
+                  color: "#fff"
+                }}
+              >
+                <tr>
+                  <th scope="col">Top Earners</th>
+                  <th scope="col" />
+                  <th scope="col" />
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.props.results.slice(0, 4).map(player => (
+                  <tr key={player.PlayerID}>
+                    <td>{player.FullName}</td>
+                    <td>{player.Email}</td>
+                    <td>
+                      &#8358;
+                      {new Intl.NumberFormat().format(player.TotalWinning)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <>
             {!this.props.error ? (

@@ -169,6 +169,9 @@ class UserHeader extends Component {
                         <Link className="dropdown-item" to="edit-profile">
                           Profile
                         </Link>
+                        <Link className="dropdown-item" to="change-pin">
+                          Change Pin
+                        </Link>
                         <Link className="dropdown-item" to="logout">
                           Logout
                         </Link>
