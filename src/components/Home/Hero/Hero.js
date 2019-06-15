@@ -11,7 +11,7 @@ const HeroWrapper = styled.div`
   height: 87vh;
   /* width: 98.7vw; */
   position: relative;
-  background: ${color.colorPrimary};
+  /* background: ${color.colorPrimary}; */
   /* background: crimson; url(${Background}); */
   overflow: hidden;
   color: ${color.colorWhite};
