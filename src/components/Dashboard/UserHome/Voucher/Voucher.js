@@ -76,7 +76,7 @@ class Voucher extends Component {
   formIsValid = ({ voucher }) => {
     if (
       !isNaN(voucher.split(" ").join("")) !== true ||
-      voucher.split(" ").join("").length !== 12
+      voucher.split(" ").join("").length !== 16
     ) {
       return false;
     }
@@ -151,7 +151,7 @@ class Voucher extends Component {
                 placeholder="Voucher Code"
               /> */}
               <NumberFormat
-                format="#### #### ####"
+                format="#### #### #### ####"
                 name="voucher"
                 value={this.state.voucher}
                 onChange={this.handleInputChange}
