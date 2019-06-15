@@ -93,7 +93,7 @@ function QuickPlay() {
                 </p>
                 <div className="mt-2">
                   <Button>
-                    <span>Place Bet</span>
+                    <span>Web Version</span>
                   </Button>
                   <Button>
                     <span>Google Play</span>
@@ -118,7 +118,7 @@ function QuickPlay() {
                 </p>
                 <div className="mt-2">
                   <Button>
-                    <span>Place Bet</span>
+                    <span>Web Version</span>
                   </Button>
                   <Button>
                     <span>Google Play</span>

@@ -32,6 +32,6 @@ export const authLogout = () => {
 
 export const expirationTimer = () => {
   setTimeout(() => {
-    authLogout();
+    // authLogout();
   }, 10000);
 };
