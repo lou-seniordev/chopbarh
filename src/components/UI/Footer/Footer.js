@@ -103,9 +103,9 @@ export default function Footer() {
             <p>
               <span>Games</span>
             </p>
-            <p>
+            {/* <p>
               <span>Betting</span>
-            </p>
+            </p> */}
             <p>
               <span>Download</span>
             </p>

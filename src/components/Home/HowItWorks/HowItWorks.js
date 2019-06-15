@@ -67,7 +67,7 @@ export default function HowItWorks() {
               <div>
                 <img src={BetAway} className="mb-3 mt-n1" alt="" />
                 <h4 className="text-uppercase">Play Away!</h4>
-                <p className="p--2">Put in the amount you want to bet</p>
+                <p className="p--2">Put in the amount you want to game with</p>
               </div>
             </ContentBlock>
           </div>
