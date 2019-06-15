@@ -7,6 +7,7 @@ import {
   AuthWrapper,
   HeadingTwo,
   ImageContainer,
+  ImageItem,
   FormWrapper,
   FormItem,
   FormCheckBox,
@@ -106,7 +107,9 @@ class Login extends Component {
         <Helmet>
           <title>Chopbarh &rarr; Login</title>
         </Helmet>
-        <ImageContainer />
+        <ImageContainer>
+          <ImageItem />
+        </ImageContainer>
 
         <Modal
           isOpen={this.state.formErrorModal}
