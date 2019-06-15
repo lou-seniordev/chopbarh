@@ -85,7 +85,7 @@ export default function Footer() {
               <span>Privacy Policy</span>
             </p>
             <p>
-              <span>Responsible Gambling</span>
+              <span>Responsible Gaming</span>
             </p>
             <p>
               <span>Become a Recaharge Distributor</span>

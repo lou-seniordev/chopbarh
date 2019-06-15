@@ -10,7 +10,7 @@ export const authOTPGenerator = otp => ({
 });
 
 export const authSuccess = (token, id) => {
-  expirationTimer();
+  // expirationTimer();
 
   return {
     type: actionType.AUTH_SUCCESS,
