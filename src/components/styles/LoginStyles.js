@@ -14,17 +14,17 @@ export const AuthWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background-image: linear-gradient(
-      to bottom,
-      rgba(177, 32, 68, 0.7),
-      rgba(177, 32, 68, 0.9)
-    ),
-    url(${userBG});
+  background: rgb(109, 10, 35);
   background-size: cover;
+  position: relative;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     display: none;
   }
+`;
+
+export const ImageItem = styled.div`
+  position: absolute;
 `;
 
 export const FormWrapper = styled.div`
