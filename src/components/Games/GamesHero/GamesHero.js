@@ -8,7 +8,7 @@ const GamesHeroWrapper = styled.div`
   height: 100vh;
   position: relative;
   margin-top: -155px;
-  background: ${color.colorPrimary};
+  /* background: ${color.colorPrimary}; */
   color: ${color.colorWhite};
   overflow: hidden;
   text-align: center;
