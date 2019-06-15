@@ -11,7 +11,7 @@ const WithdrawTabsWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 `;
 
 export default function WithdrawTabs(props) {

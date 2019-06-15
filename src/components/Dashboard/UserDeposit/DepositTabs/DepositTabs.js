@@ -14,13 +14,13 @@ const DepositTabsWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 `;
 
 export default function DepositTabs() {
   return (
     <DepositTabsWrapper className="container">
-      <div className="col-md-6">
+      <div className="col-md-8">
         <Tabs>
           <TabList>
             <Tab>
@@ -31,7 +31,7 @@ export default function DepositTabs() {
             </Tab>
             {/* This is the Banks component */}
             <Tab>
-              <HeadingTwo>Pay with Account Number</HeadingTwo>
+              <HeadingTwo>Account Number</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
@@ -40,7 +40,7 @@ export default function DepositTabs() {
               <HeadingTwo>Banks</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>GT Banks</HeadingTwo>
+              <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>ATM</HeadingTwo>
