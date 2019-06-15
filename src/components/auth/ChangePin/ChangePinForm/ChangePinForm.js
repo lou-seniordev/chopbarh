@@ -27,7 +27,7 @@ const Container = styled.div`
   background: #fff;
   padding: 4rem 10rem;
   box-shadow: 0px 18px 31px 0px rgba(214, 207, 214, 0.83);
-  min-height: 40rem;
+  min-height: 25rem;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     padding: 4rem 5rem;
