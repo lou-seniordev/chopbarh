@@ -34,7 +34,7 @@ const QuicktellerWrapper = styled.div`
 
 const StepText = styled.p`
   font-size: 1.5rem;
-  color: #c5c7c5;
+  color: #4c4c4c;
   font-weight: 500;
 `;
 

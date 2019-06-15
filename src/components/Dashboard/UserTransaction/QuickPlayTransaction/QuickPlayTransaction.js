@@ -16,7 +16,7 @@ const Image = styled.img`
 const HeadingTwo = styled.h3`
   font-size: 2rem;
   font-weight: bold;
-  color: #c5c7c5;
+  color: #4c4c4c;
   margin-left: -15px;
 `;
 
@@ -34,7 +34,7 @@ const Column = styled.div`
 
   p {
     text-align: left;
-    color: #c5c7c5;
+    color: #4c4c4c;
     font-size: 1.3rem;
   }
 `;
@@ -53,7 +53,7 @@ const Button = styled.button`
   transform: skew(-20deg);
   display: inline-block;
   transition: all 0.2s;
-  color: #c5c7c5;
+  color: #4c4c4c;
 
   span {
     display: inline-block;

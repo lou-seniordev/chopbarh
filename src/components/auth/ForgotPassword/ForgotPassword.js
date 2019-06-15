@@ -93,7 +93,7 @@ const FormAction = styled.div`
 
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
-  color: #c5c7c5;
+  color: #4c4c4c;
   font-weight: bold;
 
   span {
@@ -111,21 +111,21 @@ const Divider = styled.div`
   margin: 5rem 0;
 
   p {
-    color: #c5c7c5;
+    color: #4c4c4c;
     font-size: 1.5rem;
     margin: 0 0.5rem;
   }
 
   &:before {
     content: "";
-    background: #c5c7c5;
+    background: #4c4c4c;
     height: 1px;
     width: 40%;
   }
 
   &:after {
     content: "";
-    background: #c5c7c5;
+    background: #4c4c4c;
     height: 1px;
     width: 40%;
   }

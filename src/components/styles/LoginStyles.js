@@ -121,7 +121,7 @@ export const SignUpSignal = styled.div`
 
 export const HeadingTwo = styled.h2`
   font-size: 3.5rem;
-  color: #c5c7c5;
+  color: #4c4c4c;
   font-weight: bold;
 `;
 

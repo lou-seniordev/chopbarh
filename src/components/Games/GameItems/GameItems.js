@@ -36,7 +36,7 @@ const Column = styled.div`
   position: relative;
 
   p {
-    color: #c5c7c5;
+    color: #4c4c4c;
     font-size: 1.5rem;
     width: 75%;
     margin: 0 auto;
@@ -64,7 +64,7 @@ const Button = styled.button`
   transform: skew(-20deg);
   display: inline-block;
   transition: all 0.2s;
-  color: #c5c7c5;
+  color: #4c4c4c;
 
   span {
     display: inline-block;

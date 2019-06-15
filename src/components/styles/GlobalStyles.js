@@ -22,6 +22,6 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
-    color: #737773;
+    color: #4c4c4c;
   }
 `;
