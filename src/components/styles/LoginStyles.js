@@ -14,7 +14,7 @@ export const AuthWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background: rgb(109, 10, 35) url(${userBG});
+  background: url(${userBG});
   background-size: cover;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {

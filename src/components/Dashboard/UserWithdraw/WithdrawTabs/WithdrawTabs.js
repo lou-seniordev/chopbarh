@@ -21,7 +21,7 @@ export default function WithdrawTabs() {
         <Tabs>
           <TabList>
             <Tab>
-              <HeadingTwo>Account Number</HeadingTwo>
+              <HeadingTwo>AZA</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Paga</HeadingTwo>
