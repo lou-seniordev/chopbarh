@@ -88,7 +88,7 @@ export default function Footer() {
               <span>Responsible Gambling</span>
             </p>
             <p>
-              <span>Become a Partner</span>
+              <span>Become a Recaharge Distributor</span>
             </p>
           </FooterLinkContainer>
         </div>
