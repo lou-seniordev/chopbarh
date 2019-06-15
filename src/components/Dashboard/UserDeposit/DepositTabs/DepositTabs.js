@@ -29,8 +29,9 @@ export default function DepositTabs() {
             <Tab>
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
+            {/* This is the Banks component */}
             <Tab>
-              <HeadingTwo>Banks</HeadingTwo>
+              <HeadingTwo>Pay with Account Number</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
