@@ -7,6 +7,7 @@ export default class CreditCard extends Component {
     switch (this.props.type) {
       case "visa":
         Logo = <p>Visa Logo</p>;
+        break;
 
       default:
         break;
