@@ -30,6 +30,17 @@ export const authLogout = () => {
   };
 };
 
+export const expirationLogout = () => {
+  localStorage.removeItem("chopbarh-token:live");
+  localStorage.removeItem("chopbarh-id:live");
+
+  window.location = "/";
+
+  return {
+    type: actionType.AUTH_LOGOUT
+  };
+};
+
 export const expirationTimer = () => {
   let time;
   window.onload = resetTimer;
@@ -39,7 +50,7 @@ export const expirationTimer = () => {
 
   function resetTimer() {
     clearTimeout(time);
-    time = setTimeout(authLogout, 15000);
+    time = setTimeout(expirationLogout, 15000);
     // 1000 milliseconds = 1 second
   }
 };
