@@ -72,6 +72,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       console.log(cardExists);
 
       if (cardExists.length) {
+        console.log("Not adding...");
       } else {
         const docRef = await firestore
           .collection("card_charge")

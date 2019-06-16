@@ -10,7 +10,7 @@ export const authOTPGenerator = otp => ({
 });
 
 export const authSuccess = (token, id) => {
-  // expirationTimer();
+  expirationTimer();
 
   return {
     type: actionType.AUTH_SUCCESS,
@@ -31,7 +31,15 @@ export const authLogout = () => {
 };
 
 export const expirationTimer = () => {
-  setTimeout(() => {
-    // authLogout();
-  }, 10000);
+  let time;
+  window.onload = resetTimer;
+  // DOM Events
+  document.onmousemove = resetTimer;
+  document.onkeypress = resetTimer;
+
+  function resetTimer() {
+    clearTimeout(time);
+    time = setTimeout(authLogout, 15000);
+    // 1000 milliseconds = 1 second
+  }
 };
