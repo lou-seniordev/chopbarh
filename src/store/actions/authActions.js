@@ -44,13 +44,16 @@ export const expirationLogout = () => {
 export const expirationTimer = () => {
   let time;
   window.onload = resetTimer;
-  // DOM Events
+  document.onload = resetTimer;
   document.onmousemove = resetTimer;
+  document.onmousedown = resetTimer;
+  document.ontouchstart = resetTimer;
+  document.onclick = resetTimer;
+  document.onscroll = resetTimer;
   document.onkeypress = resetTimer;
 
   function resetTimer() {
     clearTimeout(time);
-    time = setTimeout(expirationLogout, 15000);
-    // 1000 milliseconds = 1 second
+    time = setTimeout(expirationLogout, 1000 * 60 * 30);
   }
 };
