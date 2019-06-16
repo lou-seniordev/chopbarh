@@ -439,38 +439,3 @@ export default withRouter(
     mapDispatchToProps
   )(memo(Card))
 );
-
-// {this.props.creditCard ? (
-//           <>
-//             <h4>Pay with Card</h4>
-//             <p>Click on a card to pay with it</p>
-//             <div style={{ display: "flex" }} className="mb-4">
-//               {this.props.creditCard.map((card, index) => (
-//                 <div
-//                   key={index}
-//                   style={{
-//                     background: "#eee",
-//                     padding: "5px 12px",
-//                     borderRadius: "5px",
-//                     margin: "5px",
-//                     marginLeft: "0",
-//                     cursor: "pointer"
-//                   }}
-//                   onClick={() =>
-//                     this.setState({
-//                       submitAmountModal: true,
-//                       auth_code: card.auth_code
-//                     })
-//                   }
-//                 >
-//                   <p>{card.card_type.split(" ")[0]}</p>
-//                   <p>{`**** **** **** ${card.last_digits}`}</p>
-//                   <p>{`${card.exp_month}/${card.exp_year}`}</p>
-//                 </div>
-//               ))}
-//             </div>
-//             <hr />
-//           </>
-//         ) : (
-//           <>{null}</>
-//         )}

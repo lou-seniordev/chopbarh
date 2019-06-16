@@ -2,6 +2,16 @@ import React, { Component } from "react";
 
 export default class CreditCard extends Component {
   render() {
+    let Logo = null;
+
+    switch (this.props.type) {
+      case "visa":
+        Logo = <p>Visa Logo</p>;
+
+      default:
+        break;
+    }
+
     return (
       <div
         style={{
@@ -14,7 +24,7 @@ export default class CreditCard extends Component {
           display: "flex"
         }}
       >
-        <p>Logo</p>
+        <Logo />
         <div>
           <p>Card Number</p>
           <p>*************</p>
