@@ -169,7 +169,8 @@ class Login extends Component {
               </button>
             </FormAction>
             <SignUpSignal>
-              <span>No Account? </span>
+              <span>No Account?</span>
+              <br />
               <Link to="signup">Sign Up</Link>
             </SignUpSignal>
           </form>
