@@ -40,8 +40,9 @@ export const setCreditCardInit = () => ({
   type: actionType.SET_CREDIT_CARD_INIT
 });
 
-export const setCreditCardSuccess = () => ({
-  type: actionType.SET_CREDIT_CARD_SUCCESS
+export const setCreditCardSuccess = data => ({
+  type: actionType.SET_CREDIT_CARD_SUCCESS,
+  data
 });
 
 export const setCreditCardFail = () => ({
@@ -70,11 +71,24 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 
       console.log(cardExists);
 
-      const docRef = await firestore
-        .collection("card_charge")
-        .doc(getState().auth.id)
-        .update({
-          data: firebase.firestore.FieldValue.arrayUnion({
+      if (cardExists.length) {
+      } else {
+        const docRef = await firestore
+          .collection("card_charge")
+          .doc(getState().auth.id)
+          .update({
+            data: firebase.firestore.FieldValue.arrayUnion({
+              auth_code: payload.authorization_code,
+              card_type: payload.brand,
+              exp_month: payload.exp_month,
+              exp_year: payload.exp_year,
+              last_digits: payload.last4,
+              cvv: payload.cvv
+            })
+          });
+        console.log(docRef);
+        dispatch(
+          setCreditCardSuccess({
             auth_code: payload.authorization_code,
             card_type: payload.brand,
             exp_month: payload.exp_month,
@@ -82,9 +96,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             last_digits: payload.last4,
             cvv: payload.cvv
           })
-        });
-      console.log(docRef);
-      dispatch(setCreditCardSuccess(docRef));
+        );
+      }
     } else {
       const docRef = await firestore
         .collection("card_charge")
@@ -103,7 +116,16 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
           ]
         });
       console.log(docRef);
-      dispatch(setCreditCardSuccess(docRef));
+      dispatch(
+        setCreditCardSuccess({
+          auth_code: payload.authorization_code,
+          card_type: payload.brand,
+          exp_month: payload.exp_month,
+          exp_year: payload.exp_year,
+          last_digits: payload.last4,
+          cvv: payload.cvv
+        })
+      );
     }
   } catch (err) {
     console.log("Error Setting new Card", err);

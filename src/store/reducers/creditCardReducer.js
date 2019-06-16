@@ -2,7 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  creditCard: null,
+  creditCard: [],
   error: false
 };
 
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_CREDIT_CARD_SUCCESS:
       return {
         ...state,
-        creditCard: [...action.data],
+        creditCard: state.creditCard.concat(action.data),
         loading: false
       };
     case actionType.FETCH_CREDIT_CARD_FAIL:
@@ -24,6 +24,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: true
+      };
+    case actionType.SET_CREDIT_CARD_SUCCESS:
+      return {
+        ...state,
+        creditCard: state.creditCard.concat(action.data),
+        loading: false
       };
     case actionType.AUTH_LOGOUT:
       return {

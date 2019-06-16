@@ -45,7 +45,7 @@ class Card extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.creditCard) {
+    if (!this.props.creditCard.length) {
       this.props.fetchCreditCardData();
     }
   };
@@ -125,7 +125,7 @@ class Card extends Component {
         toast.success("Transaction was successful");
         const payload = {
           ...data.data.authorization,
-          cvv: this.state.cvv
+          cvv: postData.card.cvv
         };
         const value = +data.data.amount / 100;
         // TODO: Fix this down the line
