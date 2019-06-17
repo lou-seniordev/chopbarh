@@ -10,6 +10,7 @@ import {
   closeOTPModal
 } from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
+import { setCreditCardData } from "../../../../../store/actions/creditCardActions";
 
 class SubmitOTP extends Component {
   state = {
@@ -62,7 +63,13 @@ class SubmitOTP extends Component {
         this.props.closeOTPModal();
         this.setState({ loading: false });
         toast.success(`Transaction was successful`);
+        const payload = {
+          ...data.data.authorization,
+          cvv: postData.card.cvv
+        };
         const value = +data.data.amount / 100;
+        // TODO: Fix this down the line
+        this.props.setCreditCardData(payload);
         // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
@@ -125,6 +132,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setCoinBalance,
   setDepositHistory,
+  setCreditCardData,
   openOTPModal,
   closeOTPModal
 };

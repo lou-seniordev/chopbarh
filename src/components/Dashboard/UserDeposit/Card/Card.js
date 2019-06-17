@@ -292,7 +292,7 @@ class Card extends Component {
                             >
                               <Radio value={card.auth_code} />
                               <CreditCard
-                                type="verve"
+                                type={card.card_type.split(" ")[0]}
                                 number={card.last_digits}
                                 month={card.exp_month}
                                 year={card.exp_year}
