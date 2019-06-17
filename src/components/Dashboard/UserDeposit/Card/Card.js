@@ -204,12 +204,6 @@ class Card extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      {/* <p>
-                        Exercitation in fugiat est ut ad ea cupidatat ut in
-                        cupidatat occaecat ut occaecat consequat est minim minim
-                        esse tempor laborum consequat esse adipisicing eu
-                        reprehenderit enim.
-                      </p> */}
                       <Form style={{ minHeight: "5rem" }}>
                         <RadioGroup
                           name="fruit"

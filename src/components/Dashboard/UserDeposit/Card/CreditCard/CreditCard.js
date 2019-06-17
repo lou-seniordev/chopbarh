@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import VisaLogo from "../../../../assets/img/visa-logo.png";
+import MasterCardLogo from "../../../assets/img/mastercard-logo.png";
 
 const Image = styled.img`
   height: 4rem;
@@ -11,12 +12,12 @@ const Container = styled.div`
   padding: 3px 10px;
   border-radius: 5px;
   min-width: 24rem;
-  margin: 5px;
+  margin: 10px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 25px;
+  height: 26px;
 `;
 
 const CardComponent = styled.div`
@@ -25,8 +26,8 @@ const CardComponent = styled.div`
 
 const CardComponentHeader = styled.p`
   position: absolute;
-  top: -35px;
-  width: auto;
+  top: -26px;
+  width: 9rem;
 `;
 
 export default class CreditCard extends Component {
@@ -35,22 +36,24 @@ export default class CreditCard extends Component {
 
     switch (this.props.type) {
       case "visa":
-        Logo = <p>Visa Logo</p>;
-        break;
-
-      default:
         Logo = <Image src={VisaLogo} alt="Logo" />;
+        break;
+      case "mastercard":
+        Logo = <Image src={MasterCardLogo} alt="Logo" />;
+        break;
+      default:
+        Logo = <p>Visa Logo</p>;
         break;
     }
 
     return (
       <Container>
         {Logo}
-        <CardComponent>
+        <CardComponent className="mt-3 ml-n4">
           <CardComponentHeader>Card Number</CardComponentHeader>
           <p>*************</p>
         </CardComponent>
-        <CardComponent>
+        <CardComponent className="mt-3 ml-n4">
           <CardComponentHeader>Card Expiry</CardComponentHeader>
           <p>****</p>
         </CardComponent>
