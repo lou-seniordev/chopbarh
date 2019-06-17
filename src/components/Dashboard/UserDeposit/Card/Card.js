@@ -86,13 +86,18 @@ class Card extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    const { authAmount, auth_code } = this.state;
+    const { authAmount, auth_code, authCVV, selectedValue } = this.state;
 
-    const creditCardObject = this.props.creditCard.find(
+    if (selectedValue === "") {
+      toast.error(`No Card was selected`);
+      return;
+    }
+
+    const creditCardObject = this.props.creditCard.filter(
       card => card.auth_code === auth_code
     );
 
-    console.log(creditCardObject);
+    console.log(creditCardObject, this.props.creditCard);
 
     // if (!isNaN(authAmount) !== true) {
     //   this.setState({ loading: true })
@@ -232,8 +237,11 @@ class Card extends Component {
                           selectedValue={this.state.selectedValue}
                           onChange={this.handleRadioChange}
                         >
-                          {this.props.creditCard.map(card => (
-                            <div className="d-flex align-items-center">
+                          {this.props.creditCard.map((card, index) => (
+                            <div
+                              className="d-flex align-items-center"
+                              key={index}
+                            >
                               <Radio value={card.auth_code} />
                               <CreditCard
                                 type={card.card_type.split(" ")[0]}
@@ -246,7 +254,6 @@ class Card extends Component {
                                   onChange={this.handleInputChange}
                                   name="authCVV"
                                   value={this.state.authCVV}
-                                  required
                                   minLength="1"
                                   placeholder="CVV"
                                 />
@@ -260,7 +267,6 @@ class Card extends Component {
                             onChange={this.handleInputChange}
                             name="authAmount"
                             value={this.state.authAmount}
-                            required
                             minLength="1"
                             placeholder="Amount(NGN)"
                           />

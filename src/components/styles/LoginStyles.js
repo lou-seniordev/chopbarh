@@ -53,7 +53,7 @@ export const FormItem = styled.div`
     border: 0;
     background: #f6f6f6;
     outline: none;
-    padding: 3px 5px;
+    padding: 3px 7px;
   }
 
   & > * {
