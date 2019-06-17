@@ -148,7 +148,6 @@ class Card extends Component {
         toast.error(`Please try again`);
       }
     } catch (err) {
-      console.log(err)
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
     }
