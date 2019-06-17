@@ -36,6 +36,11 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
   }
 };
 
+export const setCreditCardCVV = cvv => ({
+  type: actionType.SET_CREDIT_CARD_CVV,
+  cvv
+})
+
 export const setCreditCardInit = () => ({
   type: actionType.SET_CREDIT_CARD_INIT
 });
