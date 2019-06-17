@@ -14,6 +14,7 @@ import {
 } from "../../../../../store/actions/modalActions";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
+import { setCreditCardData } from "../../../../../store/actions/creditCardActions";
 
 class SubmitPin extends Component {
   state = {
@@ -73,7 +74,13 @@ class SubmitPin extends Component {
       } else if (data.data.status === "success") {
         this.props.closePinModal();
         toast.success("Transaction was successful");
+        const payload = {
+          ...data.data.authorization,
+          cvv: postData.card.cvv
+        };
         const value = +data.data.amount / 100;
+        // TODO: Fix this down the line
+        this.props.setCreditCardData(payload);
         // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else {
@@ -140,7 +147,8 @@ const mapDispatchToProps = {
   openPhoneModal,
   closePhoneModal,
   setCoinBalance,
-  setDepositHistory
+  setDepositHistory,
+  setCreditCardData
 };
 
 export default withRouter(
