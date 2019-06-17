@@ -75,7 +75,7 @@ class SubmitPin extends Component {
         toast.success("Transaction was successful");
         const payload = {
           ...data.data.authorization,
-          cvv: postData.card.cvv
+          cvv: this.props.cvv
         };
         const value = +data.data.amount / 100;
         // TODO: Fix this down the line
@@ -136,7 +136,8 @@ class SubmitPin extends Component {
 
 const mapStateToProps = state => ({
   reference: state.charge.reference,
-  loading: state.coinBalance.loading
+  loading: state.coinBalance.loading,
+  cvv: state.creditCard.cvv
 });
 
 const mapDispatchToProps = {

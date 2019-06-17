@@ -26,7 +26,7 @@ import {
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
-  setCreditCardData
+  setCreditCardData, setCreditCardCVV
 } from "../../../../store/actions/creditCardActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
@@ -176,6 +176,8 @@ class Card extends Component {
         expiry_year: year
       }
     };
+
+    this.props.setCreditCardCVV(this.state.cvv)
 
     try {
       const response = await fetch("https://api.paystack.co/charge", {
@@ -520,6 +522,7 @@ const mapDispatchToProps = {
   fetchCreditCardData,
   setDepositHistory,
   setCreditCardData,
+  setCreditCardCVV,
   setCoinBalance,
   openOTPModal,
   closeOTPModal,
