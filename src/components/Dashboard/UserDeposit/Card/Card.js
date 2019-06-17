@@ -26,7 +26,8 @@ import {
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
-  setCreditCardData, setCreditCardCVV
+  setCreditCardData,
+  setCreditCardCVV
 } from "../../../../store/actions/creditCardActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
@@ -45,7 +46,7 @@ class Card extends Component {
     expiry: "",
     cvv: "",
     auth_code: "",
-    authCVV: "",
+    authCVV: null,
     authAmount: ""
   };
 
@@ -54,6 +55,14 @@ class Card extends Component {
       this.props.fetchCreditCardData();
     }
   };
+
+  // componentDidUpdate = prevProps => {
+  //   // if (this.props !== prevProps) {
+  //   //   if (this.props.creditCard.length) {
+  //   //     this.cardStates();
+  //   //   }
+  //   // }
+  // };
 
   toggleSubmitAmountModal = () => {
     this.setState({ submitAmountModal: !this.state.submitAmountModal });
@@ -80,6 +89,24 @@ class Card extends Component {
       return false;
     }
     return true;
+  };
+
+  cardStates = () => {
+    const cardStateObject = {};
+
+    this.props.creditCard.forEach(item => {
+      console.log(item);
+      if (cardStateObject[`auth-${item.auth_code}`]) {
+      } else {
+        cardStateObject[`auth-${item.auth_code}`] = "";
+      }
+    });
+
+    this.setState({
+      authCVV: cardStateObject
+    });
+
+    console.log(cardStateObject, this.props.creditCard);
   };
 
   handleAuthSubmit = async event => {
@@ -177,7 +204,7 @@ class Card extends Component {
       }
     };
 
-    this.props.setCreditCardCVV(this.state.cvv)
+    this.props.setCreditCardCVV(this.state.cvv);
 
     try {
       const response = await fetch("https://api.paystack.co/charge", {
@@ -303,7 +330,7 @@ class Card extends Component {
                                 <input
                                   onChange={this.handleInputChange}
                                   name="authCVV"
-                                  value={this.state.authCVV}
+                                  value=""
                                   minLength="1"
                                   placeholder="CVV"
                                 />
