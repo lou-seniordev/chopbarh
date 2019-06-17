@@ -276,6 +276,7 @@ class Card extends Component {
                             name="authAmount"
                             value={this.state.authAmount}
                             minLength="1"
+                            required
                             placeholder="Amount(NGN)"
                           />
                         </FormItem>
