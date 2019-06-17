@@ -63,7 +63,6 @@ class SubmitPin extends Component {
       );
 
       const data = await response.json();
-      console.log(data);
       this.setState({ loading: false });
       if (data.data.status === "send_otp") {
         this.props.closePinModal();
@@ -88,6 +87,7 @@ class SubmitPin extends Component {
         toast.error(`Please try again`);
       }
     } catch (err) {
+      console.log(err)
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
     }

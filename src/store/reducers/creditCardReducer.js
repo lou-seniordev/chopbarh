@@ -3,6 +3,7 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   loading: true,
   creditCard: [],
+  cvv: null,
   error: false
 };
 
@@ -30,6 +31,11 @@ export default (state = initialState, action) => {
         ...state,
         creditCard: state.creditCard.concat(action.data),
         loading: false
+      };
+    case actionType.SET_CVV:
+      return {
+        ...state,
+        cvv: data.cvv
       };
     case actionType.AUTH_LOGOUT:
       return {
