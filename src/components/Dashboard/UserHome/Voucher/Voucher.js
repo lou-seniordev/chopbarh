@@ -94,7 +94,7 @@ class Voucher extends Component {
     }
 
     const postData = {
-      pin: this.state.voucher.split(" ").join(""),
+      pin: +this.state.voucher.split(" ").join(""),
       reference: this.props.reference
     };
 
@@ -102,7 +102,7 @@ class Voucher extends Component {
 
     try {
       const response = await fetch(
-        "https://partners.chopbarh.com/ng/api/voucher/use",
+        "https://cors-anywhere.herokuapp.com/https://partners.chopbarh.com/ng/api/voucher/use",
         {
           method: "POST",
           mode: "cors",

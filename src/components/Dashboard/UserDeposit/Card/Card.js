@@ -46,7 +46,7 @@ class Card extends Component {
     expiry: "",
     cvv: "",
     auth_code: "",
-    authCVV: null,
+    authCVV: "",
     authAmount: ""
   };
 
@@ -330,7 +330,14 @@ class Card extends Component {
                                 <input
                                   onChange={this.handleInputChange}
                                   name="authCVV"
-                                  value=""
+                                  value={
+                                    this.state.selectedValue === card.auth_code
+                                      ? this.state.authCVV
+                                      : ""
+                                  }
+                                  disabled={
+                                    this.state.selectedValue !== card.auth_code
+                                  }
                                   minLength="1"
                                   placeholder="CVV"
                                 />

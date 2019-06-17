@@ -22,7 +22,7 @@ class TopEarners extends Component {
     return (
       <>
         {this.props.results ? (
-          <table className="table table-striped table-bordered">
+          <table className="table table-striped">
             <thead
               style={{
                 background: "#8C1936",
