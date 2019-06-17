@@ -94,7 +94,7 @@ class Voucher extends Component {
     }
 
     const postData = {
-      pin: this.state.voucher,
+      pin: this.state.voucher.split(" ").join(""),
       reference: this.props.reference
     };
 
@@ -102,7 +102,7 @@ class Voucher extends Component {
 
     try {
       const response = await fetch(
-        "https://partners.chopbarh.com/api/voucher/use",
+        "https://partners.chopbarh.com/ng/api/voucher/use",
         {
           method: "POST",
           mode: "cors",
@@ -116,12 +116,12 @@ class Voucher extends Component {
       const data = await response.json();
       if (response.status === 200) {
         toast.success(`Voucher was successfully loaded`);
-        this.props.setVoucherValue(data.data.value);
-        this.props.setCoinBalance(data.data.value);
-        this.setState({
-          loading: false,
-          voucher: ""
-        });
+        // this.props.setVoucherValue(data.data.value);
+        // this.props.setCoinBalance(data.data.value);
+        // this.setState({
+        //   loading: false,
+        //   voucher: ""
+        // });
       } else if (response.status === 404) {
         this.setState({ voucher: "", loading: false });
         toast.error(`Voucher has already been used`);
