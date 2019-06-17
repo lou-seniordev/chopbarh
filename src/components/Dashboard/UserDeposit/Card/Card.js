@@ -91,23 +91,23 @@ class Card extends Component {
     return true;
   };
 
-  cardStates = () => {
-    const cardStateObject = {};
+  // cardStates = () => {
+  //   const cardStateObject = {};
 
-    this.props.creditCard.forEach(item => {
-      console.log(item);
-      if (cardStateObject[`auth-${item.auth_code}`]) {
-      } else {
-        cardStateObject[`auth-${item.auth_code}`] = "";
-      }
-    });
+  //   this.props.creditCard.forEach(item => {
+  //     console.log(item);
+  //     if (cardStateObject[`auth-${item.auth_code}`]) {
+  //     } else {
+  //       cardStateObject[`auth-${item.auth_code}`] = "";
+  //     }
+  //   });
 
-    this.setState({
-      authCVV: cardStateObject
-    });
+  //   this.setState({
+  //     authCVV: cardStateObject
+  //   });
 
-    console.log(cardStateObject, this.props.creditCard);
-  };
+  //   console.log(cardStateObject, this.props.creditCard);
+  // };
 
   handleAuthSubmit = async event => {
     event.preventDefault();

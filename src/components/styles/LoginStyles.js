@@ -7,6 +7,7 @@ export const AuthWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 100vh;
+  position: relative;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     grid-template-columns: 1fr;
@@ -14,8 +15,9 @@ export const AuthWrapper = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  background: url(${userBG});
+  background: rgb(109, 10, 35);
   background-size: cover;
+  position: relative;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     display: none;
@@ -30,6 +32,16 @@ export const ImageContainer = styled.div`
     width: 100%;
   } */
 `;
+
+// export const Image = styled.div`
+//   position: absolute;
+//   background-image: url(${userBG});
+//   background-size: cover;
+//   top: 0;
+//   left: 0;
+//   height: 100vh;
+//   width: 50vw;
+// `;
 
 export const FormWrapper = styled.div`
   display: flex;
