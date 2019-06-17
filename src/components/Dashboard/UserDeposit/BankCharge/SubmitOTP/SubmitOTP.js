@@ -66,8 +66,8 @@ class SubmitOTP extends Component {
         toast.success(`Transaction was successful`);
         const value = +data.data.amount / 100;
         this.props.setBankAccountData(data.data.authorization);
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setDepositHistory(data.data);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });

@@ -270,7 +270,7 @@ class Card extends Component {
         ) : (
           <>
             {this.props.creditCard.length > 0 ? (
-              <>
+              <div style={{minHeight: '20rem'}}>
                 <Accordion>
                   <AccordionItem>
                     <AccordionItemHeading>
@@ -431,7 +431,7 @@ class Card extends Component {
                     </AccordionItemPanel>
                   </AccordionItem>
                 </Accordion>
-              </>
+              </div>
             ) : (
               <Form onSubmit={this.handleSubmit}>
                 <FormItem>

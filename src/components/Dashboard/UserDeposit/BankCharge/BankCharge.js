@@ -136,7 +136,7 @@ class BankCharge extends Component {
             />
           </ModalBody>
         </Modal>
-        {this.props.bankAccount ? (
+        {/* {this.props.bankAccount ? (
           <>
             <h4>Pay with Bank</h4>
             <p>Click on a bank detail to pay with it</p>
@@ -166,7 +166,7 @@ class BankCharge extends Component {
           </>
         ) : (
           <>{null}</>
-        )}
+        )} */}
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Bank</label>

@@ -116,8 +116,8 @@ class Voucher extends Component {
       const data = await response.json();
       if (response.status === 200) {
         toast.success(`Voucher was successfully loaded`);
-        // this.props.setVoucherValue(data.data.value);
-        // this.props.setCoinBalance(data.data.value);
+        this.props.setVoucherValue(data.data.value);
+        this.props.setCoinBalance(data.data.value);
         this.setState({
           loading: false,
           voucher: ""

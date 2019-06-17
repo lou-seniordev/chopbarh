@@ -68,10 +68,9 @@ class SubmitOTP extends Component {
           cvv: this.props.cvv
         };
         const value = +data.data.amount / 100;
-        // TODO: Fix this down the line
         this.props.setCreditCardData(payload);
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setDepositHistory(data.data);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
