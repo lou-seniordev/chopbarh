@@ -110,7 +110,48 @@ class Card extends Component {
       return;
     }
 
-    console.log("Can submit...");
+    const postData = {
+      email: "somebody@nice.com",
+      amount: authAmount * 100,
+      authorization_code: creditCardObject[0].auth_code
+    };
+
+    try {
+      const response = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+      this.setState({
+        loading: false,
+        authAmount: "",
+        authCVV: ""
+      });
+      if (data.data.status === "send_otp") {
+        this.props.setChargeReference(data.data.reference);
+        this.props.openOTPModal();
+      } else if (data.data.status === "send_pin") {
+        this.props.setChargeReference(data.data.reference);
+        this.props.openPinModal();
+      } else if (data.data.status === "success") {
+        toast.success("Transaction was successful");
+        const value = +data.data.amount / 100;
+        // TODO: Fix this down the line
+        // this.props.setDepositHistory(data.data);
+        // this.props.setCoinBalance(value);
+      } else {
+        toast.error(`Please try again`);
+      }
+    } catch (err) {
+      console.log(err)
+      this.setState({ loading: false });
+      toast.error(`Something went wrong`);
+    }
   };
 
   handleSubmit = async event => {
