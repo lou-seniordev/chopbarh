@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import VisaLogo from "../../../../assets/img/visa-logo.png";
-import MasterCardLogo from "../../../assets/img/mastercard-logo.png";
+import MasterCardLogo from "../../../../assets/img/mastercard-logo.png";
 
 const Image = styled.img`
   height: 4rem;
@@ -9,25 +9,31 @@ const Image = styled.img`
 
 const Container = styled.div`
   background: #eee;
-  padding: 3px 10px;
+  padding: 0px 10px;
   border-radius: 5px;
   min-width: 24rem;
-  margin: 10px;
+  margin: 14px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 26px;
+  height: 37px;
+
+  p {
+    margin-bottom: 0;
+  }
 `;
 
 const CardComponent = styled.div`
   position: relative;
+  margin-right: 2rem;
 `;
 
 const CardComponentHeader = styled.p`
   position: absolute;
-  top: -26px;
+  top: -29px;
   width: 9rem;
+  left: -10px;
 `;
 
 export default class CreditCard extends Component {
@@ -49,12 +55,12 @@ export default class CreditCard extends Component {
     return (
       <Container>
         {Logo}
-        <CardComponent className="mt-3 ml-n4">
+        <CardComponent>
           <CardComponentHeader>Card Number</CardComponentHeader>
           <p>*************</p>
         </CardComponent>
-        <CardComponent className="mt-3 ml-n4">
-          <CardComponentHeader>Card Expiry</CardComponentHeader>
+        <CardComponent>
+          <CardComponentHeader>Expiry</CardComponentHeader>
           <p>****</p>
         </CardComponent>
       </Container>

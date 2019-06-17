@@ -212,18 +212,17 @@ class Card extends Component {
                         >
                           <div className="d-flex align-items-center">
                             <Radio value="apple" />
-                            <CreditCard />
-                              <FormItem>
-                                <label>CVV</label>
-                                <input
-                                  onChange={this.handleInputChange}
-                                  name="amount"
-                                  value={this.state.amount}
-                                  required
-                                  minLength="1"
-                                  placeholder="Amount(NGN)"
-                                />
-                              </FormItem>
+                            <CreditCard type="mastercard" />
+                            <FormItem className="mt-4">
+                              <input
+                                onChange={this.handleInputChange}
+                                name="amount"
+                                value={this.state.amount}
+                                required
+                                minLength="1"
+                                placeholder="CVC"
+                              />
+                            </FormItem>
                           </div>
                           <div className="d-flex align-items-center">
                             <Radio value="other" />
