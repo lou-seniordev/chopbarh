@@ -5,7 +5,7 @@ import MasterCardLogo from "../../../../assets/img/mastercard-logo.png";
 import VerveLogo from "../../../../assets/img/verve-logo.png";
 
 const Image = styled.img`
-  height: 4rem;
+  height: ${props => (props.verve ? "2rem" : "4rem")};
 `;
 
 const Container = styled.div`
@@ -48,7 +48,7 @@ export default class CreditCard extends Component {
         Logo = <Image src={MasterCardLogo} alt="Logo" />;
         break;
       case "verve":
-        Logo = <Image src={VerveLogo} alt="Logo" />;
+        Logo = <Image src={VerveLogo} verve alt="Logo" />;
         break;
       default:
         Logo = <p>Visa Logo</p>;
