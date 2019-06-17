@@ -81,8 +81,7 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
-  /* height: 94.4vh; */
-  /* height: 100%; */
+  width: 100%;
 `;
 
 const SliderImage = styled.img`
