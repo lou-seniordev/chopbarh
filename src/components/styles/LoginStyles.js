@@ -33,15 +33,15 @@ export const ImageContainer = styled.div`
   } */
 `;
 
-// export const Image = styled.div`
-//   position: absolute;
-//   background-image: url(${userBG});
-//   background-size: cover;
-//   top: 0;
-//   left: 0;
-//   height: 100vh;
-//   width: 50vw;
-// `;
+export const Image = styled.div`
+  position: absolute;
+  background-image: url(${userBG});
+  background-size: cover;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 50vw;
+`;
 
 export const FormWrapper = styled.div`
   display: flex;

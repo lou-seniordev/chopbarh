@@ -222,9 +222,9 @@ export default function Hero() {
             <div style={{ position: "relative", height: "87vh" }}>
               <Image className="d-block" src={slider2BG} alt="Second slide" />
               <SliderContent className="text-center">
-                <HeadingTwo className="hero__title">
+                {/* <HeadingTwo className="hero__title">
                   No Bank Account?
-                </HeadingTwo>
+                </HeadingTwo> */}
                 <ParagraphOne>
                   No problem, we will send your money to your phone number, then
                   you can transfer to any account or withdraw from an ATM
