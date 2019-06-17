@@ -86,7 +86,7 @@ class Card extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    const { authAmount, auth_code, authCVV, selectedValue } = this.state;
+    const { authAmount, authCVV, selectedValue } = this.state;
 
     if (selectedValue === null) {
       this.setState({ loading: false });
@@ -94,17 +94,23 @@ class Card extends Component {
       return;
     }
 
-    // if (!isNaN(authAmount) !== true) {
-    //   this.setState({ loading: false })
-    //   toast.error(`Amount is not valid`)
-    // return
-    // }
+    if (!isNaN(authAmount) !== true) {
+      this.setState({ loading: false });
+      toast.error(`Amount is not valid`);
+      return;
+    }
 
     const creditCardObject = this.props.creditCard.filter(
       card => card.auth_code === selectedValue
     );
 
-    console.log(creditCardObject, this.props.creditCard);
+    if (creditCardObject[0].cvv !== authCVV) {
+      this.setState({ loading: false });
+      toast.error(`CVV is not correct`);
+      return;
+    }
+
+    console.log("Can submit...");
   };
 
   handleSubmit = async event => {
