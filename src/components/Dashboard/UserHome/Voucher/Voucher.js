@@ -94,8 +94,8 @@ class Voucher extends Component {
     }
 
     const postData = {
-      pin: +this.state.voucher.split(" ").join(""),
-      reference: this.props.reference
+      pin: this.state.voucher.split(" ").join(""),
+      by: this.props.reference
     };
 
     const formValue = JSON.stringify(postData);
@@ -118,15 +118,16 @@ class Voucher extends Component {
         toast.success(`Voucher was successfully loaded`);
         // this.props.setVoucherValue(data.data.value);
         // this.props.setCoinBalance(data.data.value);
-        // this.setState({
-        //   loading: false,
-        //   voucher: ""
-        // });
+        this.setState({
+          loading: false,
+          voucher: ""
+        });
       } else if (response.status === 404) {
         this.setState({ voucher: "", loading: false });
-        toast.error(`Voucher has already been used`);
+        toast.error(data.message);
       } else {
         this.setState({ loading: false, voucher: "" });
+        toast.error(data.message);
       }
     } catch (err) {
       this.setState({ loading: false, voucher: "" });
