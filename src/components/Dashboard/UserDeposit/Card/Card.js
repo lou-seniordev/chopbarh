@@ -82,7 +82,10 @@ class Card extends Component {
     return true;
   };
 
-  handleAuthSubmit = () => {}
+  handleAuthSubmit = async event => {
+    event.preventDefault();
+    this.setState({ loading: true })
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
