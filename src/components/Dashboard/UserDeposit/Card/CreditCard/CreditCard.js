@@ -1,4 +1,33 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import VisaLogo from "../../../../assets/img/visa-logo.png";
+
+const Image = styled.img`
+  height: 4rem;
+`;
+
+const Container = styled.div`
+  background: #eee;
+  padding: 3px 10px;
+  border-radius: 5px;
+  min-width: 24rem;
+  margin: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+`;
+
+const CardComponent = styled.div`
+  position: relative;
+`;
+
+const CardComponentHeader = styled.p`
+  position: absolute;
+  top: -35px;
+  width: auto;
+`;
 
 export default class CreditCard extends Component {
   render() {
@@ -10,31 +39,22 @@ export default class CreditCard extends Component {
         break;
 
       default:
+        Logo = <Image src={VisaLogo} alt="Logo" />;
         break;
     }
 
     return (
-      <div
-        style={{
-          background: "#eee",
-          padding: "5px",
-          borderRadius: "5px",
-          margin: "5px",
-          marginLeft: "0",
-          cursor: "pointer",
-          display: "flex"
-        }}
-      >
-        <Logo />
-        <div>
-          <p>Card Number</p>
+      <Container>
+        {Logo}
+        <CardComponent>
+          <CardComponentHeader>Card Number</CardComponentHeader>
           <p>*************</p>
-        </div>
-        <div>
-          <p>Card Expiry</p>
-          <p>*************</p>
-        </div>
-      </div>
+        </CardComponent>
+        <CardComponent>
+          <CardComponentHeader>Card Expiry</CardComponentHeader>
+          <p>****</p>
+        </CardComponent>
+      </Container>
     );
   }
 }

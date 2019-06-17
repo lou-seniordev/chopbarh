@@ -11,6 +11,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel
 } from "react-accessible-accordion";
+import { RadioGroup, Radio } from "react-radio-group";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -30,6 +31,7 @@ import {
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
 import "react-accessible-accordion/dist/fancy-example.css";
+import CreditCard from "./CreditCard/CreditCard";
 
 class Card extends Component {
   state = {
@@ -208,6 +210,37 @@ class Card extends Component {
                         esse tempor laborum consequat esse adipisicing eu
                         reprehenderit enim.
                       </p> */}
+                      <Form style={{ minHeight: "5rem" }}>
+                        <RadioGroup
+                          name="fruit"
+                          selectedValue={this.state.selectedValue}
+                          onChange={this.handleChange}
+                        >
+                          <div className="d-flex align-items-center">
+                            <Radio value="apple" />
+                            <CreditCard />
+                              <FormItem>
+                                <label>CVV</label>
+                                <input
+                                  onChange={this.handleInputChange}
+                                  name="amount"
+                                  value={this.state.amount}
+                                  required
+                                  minLength="1"
+                                  placeholder="Amount(NGN)"
+                                />
+                              </FormItem>
+                          </div>
+                          <div className="d-flex align-items-center">
+                            <Radio value="other" />
+                            <CreditCard type="visa" />
+                          </div>
+                          {/* <Radio value="orange" />
+                          Orange
+                          <Radio value="watermelon" />
+                          Watermelon */}
+                        </RadioGroup>
+                      </Form>
                     </AccordionItemPanel>
                   </AccordionItem>
                   <AccordionItem>
