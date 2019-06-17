@@ -39,11 +39,9 @@ class DepositTable extends Component {
             <tbody>
               {this.props.depositData.map((deposit, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
-                  <td>{`${new Date(deposit.deposit_date).getDate()}-${new Date(
-                    deposit.deposit_date
-                  ).getMonth()}-${new Date(
-                    deposit.deposit_date
-                  ).getFullYear()}`}</td>
+                  <td>{`${new Date(deposit.deposit_date).getDate()}-${Number(
+                    new Date(deposit.deposit_date).getMonth()
+                  ) + 1}-${new Date(deposit.deposit_date).getFullYear()}`}</td>
                   <td>Deposit</td>
                   <td>
                     &#8358;
