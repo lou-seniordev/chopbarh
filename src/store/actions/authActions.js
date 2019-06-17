@@ -54,6 +54,6 @@ export const expirationTimer = () => {
 
   function resetTimer() {
     clearTimeout(time);
-    time = setTimeout(expirationLogout, 1000 * 60 * 30);
+    time = setTimeout(expirationLogout, 1000 * 60 * 15);
   }
 };
