@@ -65,6 +65,8 @@ const Button = styled.button`
   display: inline-block;
   transition: all 0.2s;
   color: #4c4c4c;
+  color: ${color.colorWhite};
+  background: ${color.colorPrimaryHover};
 
   span {
     display: inline-block;
@@ -73,8 +75,6 @@ const Button = styled.button`
 
   &:hover {
     transform: translateY(-3px) skew(-20deg);
-    color: ${color.colorWhite};
-    background: ${color.colorPrimaryHover};
   }
 
   @media only screen and (max-width: ${breakPoints.medium}) {

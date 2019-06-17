@@ -91,6 +91,10 @@ const SliderImage = styled.img`
 
   width: 50%;
 
+  @media only screen and (max-width: 1199px) {
+    top: 20vh !important;
+  }
+
   @media only screen and (max-width: 1140px) {
     top: 23vh !important;
   }
@@ -196,7 +200,7 @@ export default function Hero() {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={Background} alt="First slide" />
+              <img className="d-block" src={Background} alt="First slide" />
               <SliderContent first>
                 <HeadingTwoFirst className="hero__title">
                   Play and Chop
