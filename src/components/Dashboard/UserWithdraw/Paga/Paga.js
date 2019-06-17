@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 // import { Modal, ModalBody } from "reactstrap";
 import { toast } from "react-toastify";
 import CryptoJS from "crypto-js";

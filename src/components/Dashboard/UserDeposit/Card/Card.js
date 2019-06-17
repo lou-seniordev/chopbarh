@@ -142,9 +142,8 @@ class Card extends Component {
       } else if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
-        // TODO: Fix this down the line
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setDepositHistory(data.data);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -211,10 +210,9 @@ class Card extends Component {
           cvv: postData.card.cvv
         };
         const value = +data.data.amount / 100;
-        // TODO: Fix this down the line
         this.props.setCreditCardData(payload);
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
+        this.props.setDepositHistory(data.data);
+        this.props.setCoinBalance(value);
       } else {
         toast.error(`Please try again`);
       }
@@ -270,7 +268,7 @@ class Card extends Component {
         ) : (
           <>
             {this.props.creditCard.length > 0 ? (
-              <div style={{minHeight: '20rem'}}>
+              <div style={{ minHeight: "20rem" }}>
                 <Accordion>
                   <AccordionItem>
                     <AccordionItemHeading>

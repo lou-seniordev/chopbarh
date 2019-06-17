@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Spinner } from "reactstrap";
-import { toast } from "react-toastify";
-import axios from "axios";
+// import { Spinner } from "reactstrap";
+// import { toast } from "react-toastify";
+// import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import keys from "../../../../config/keys";
+// import keys from "../../../../config/keys";
 
 const ChangePinWrapper = styled.div`
   z-index: 2000;

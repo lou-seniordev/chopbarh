@@ -1,6 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";

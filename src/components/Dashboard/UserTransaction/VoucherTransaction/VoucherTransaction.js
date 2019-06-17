@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import color from "../../../styles/colors";
+// import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import Voucher from "../../../Dashboard/UserHome/Voucher/Voucher";
 

@@ -17,19 +17,19 @@ const HeroWrapper = styled.div`
   color: ${color.colorWhite};
 `;
 
-const HeroContentWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
+// const HeroContentWrapper = styled.div`
+//   position: absolute;
+//   top: 50%;
+//   left: 10%;
+//   transform: translateY(-50%);
 
-  @media only screen and (max-width: ${breakPoints.medium}) {
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
-`;
+//   @media only screen and (max-width: ${breakPoints.medium}) {
+//     top: 30%;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     text-align: center;
+//   }
+// `;
 
 const HeadingTwo = styled.h2`
   font-size: 6.5rem;
