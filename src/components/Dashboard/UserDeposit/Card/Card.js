@@ -88,21 +88,23 @@ class Card extends Component {
 
     const { authAmount, auth_code, authCVV, selectedValue } = this.state;
 
-    if (selectedValue === "") {
+    if (selectedValue === null) {
+      this.setState({ loading: false });
       toast.error(`No Card was selected`);
       return;
     }
 
+    // if (!isNaN(authAmount) !== true) {
+    //   this.setState({ loading: false })
+    //   toast.error(`Amount is not valid`)
+    // return
+    // }
+
     const creditCardObject = this.props.creditCard.filter(
-      card => card.auth_code === auth_code
+      card => card.auth_code === selectedValue
     );
 
     console.log(creditCardObject, this.props.creditCard);
-
-    // if (!isNaN(authAmount) !== true) {
-    //   this.setState({ loading: true })
-    //   toast.error(`Amount is not valid`)
-    // }
   };
 
   handleSubmit = async event => {
