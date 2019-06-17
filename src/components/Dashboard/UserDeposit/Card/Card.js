@@ -56,14 +56,6 @@ class Card extends Component {
     }
   };
 
-  // componentDidUpdate = prevProps => {
-  //   // if (this.props !== prevProps) {
-  //   //   if (this.props.creditCard.length) {
-  //   //     this.cardStates();
-  //   //   }
-  //   // }
-  // };
-
   toggleSubmitAmountModal = () => {
     this.setState({ submitAmountModal: !this.state.submitAmountModal });
   };
@@ -73,7 +65,7 @@ class Card extends Component {
   };
 
   handleRadioChange = value => {
-    this.setState({ selectedValue: value });
+    this.setState({ selectedValue: value, authCVV: "" });
   };
 
   formIsValid = ({ amount, card, expiry, cvv }) => {
@@ -90,24 +82,6 @@ class Card extends Component {
     }
     return true;
   };
-
-  // cardStates = () => {
-  //   const cardStateObject = {};
-
-  //   this.props.creditCard.forEach(item => {
-  //     console.log(item);
-  //     if (cardStateObject[`auth-${item.auth_code}`]) {
-  //     } else {
-  //       cardStateObject[`auth-${item.auth_code}`] = "";
-  //     }
-  //   });
-
-  //   this.setState({
-  //     authCVV: cardStateObject
-  //   });
-
-  //   console.log(cardStateObject, this.props.creditCard);
-  // };
 
   handleAuthSubmit = async event => {
     event.preventDefault();
