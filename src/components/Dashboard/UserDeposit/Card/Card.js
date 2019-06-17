@@ -39,11 +39,14 @@ class Card extends Component {
     submitOTPModal: false,
     submitPinModal: false,
     submitAmountModal: false,
+    selectedValue: null,
     amount: "",
     card: "",
     expiry: "",
     cvv: "",
-    auth_code: ""
+    auth_code: "",
+    authCVV: '',
+    authAmount: ''
   };
 
   componentDidMount = () => {
@@ -60,6 +63,10 @@ class Card extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  handleRadioChange = value => {
+    this.setState({ selectedValue: value });
+  };
+
   formIsValid = ({ amount, card, expiry, cvv }) => {
     if (
       !isNaN(amount) !== true ||
@@ -74,6 +81,8 @@ class Card extends Component {
     }
     return true;
   };
+
+  handleAuthSubmit = () => {}
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -190,12 +199,6 @@ class Card extends Component {
           <>
             {this.props.creditCard.length > 0 ? (
               <>
-                {/* 
-                1. Add Accordion here
-                2. Two accordion items with title - Pay with Card, Pay with new Card
-                3. Pay with new Card uses the default Form logic
-                4. Pay with existing Card uses an array of radio inputs with a surrounding Form field and an amount input 
-              */}
                 <Accordion>
                   <AccordionItem>
                     <AccordionItemHeading>
@@ -204,35 +207,50 @@ class Card extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <Form style={{ minHeight: "5rem" }}>
+                      <Form style={{ minHeight: "5rem" }} onSubmit={this.handleAuthSubmit}>
                         <RadioGroup
-                          name="fruit"
+                          name="creditCard"
                           selectedValue={this.state.selectedValue}
-                          onChange={this.handleChange}
+                          onChange={this.handleRadioChange}
                         >
-                          <div className="d-flex align-items-center">
-                            <Radio value="apple" />
-                            <CreditCard type="mastercard" />
+                          {this.props.creditCard.map(card => (
+
+                            <div className="d-flex align-items-center">
+                            <Radio value={card.auth_code} />
+                            <CreditCard type={card.card_type.split(' ')[0]} number={card.last_digits} month={card.exp_month} year={card.exp_year} />
                             <FormItem className="mt-4">
                               <input
                                 onChange={this.handleInputChange}
-                                name="amount"
-                                value={this.state.amount}
+                                name="authCVV"
+                                value={this.state.authCVV}
                                 required
                                 minLength="1"
-                                placeholder="CVC"
+                                placeholder="CVV"
                               />
                             </FormItem>
                           </div>
-                          <div className="d-flex align-items-center">
-                            <Radio value="other" />
-                            <CreditCard type="visa" />
-                          </div>
-                          {/* <Radio value="orange" />
-                          Orange
-                          <Radio value="watermelon" />
-                          Watermelon */}
+                          ))}
                         </RadioGroup>
+                        <FormItem>
+                          <label>Amount</label>
+                          <input
+                            onChange={this.handleInputChange}
+                            name="authAmount"
+                            value={this.state.authAmount}
+                            required
+                            minLength="1"
+                            placeholder="Amount(NGN)"
+                            />
+                        </FormItem>
+                        <button
+                          type="submit"
+                          className="mr-2 mt-n4"
+                          disabled={this.state.loading}
+                        >
+                          <span>
+                            {this.state.loading ? "Please wait..." : "Load"}
+                          </span>
+                        </button>
                       </Form>
                     </AccordionItemPanel>
                   </AccordionItem>
@@ -325,34 +343,6 @@ class Card extends Component {
                     </AccordionItemPanel>
                   </AccordionItem>
                 </Accordion>
-                {/* <h4>Pay with Card</h4>
-                <p>Click on a card to pay with it</p>
-                <div style={{ display: "flex" }} className="mb-4">
-                  {this.props.creditCard.map((card, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        background: "#eee",
-                        padding: "5px 12px",
-                        borderRadius: "5px",
-                        margin: "5px",
-                        marginLeft: "0",
-                        cursor: "pointer"
-                      }}
-                      onClick={() =>
-                        this.setState({
-                          submitAmountModal: true,
-                          auth_code: card.auth_code
-                        })
-                      }
-                    >
-                      <p>{card.card_type.split(" ")[0]}</p>
-                      <p>{`**** **** **** ${card.last_digits}`}</p>
-                      <p>{`${card.exp_month}/${card.exp_year}`}</p>
-                    </div>
-                  ))}
-                </div>
-                <hr /> */}
               </>
             ) : (
               <Form onSubmit={this.handleSubmit}>
