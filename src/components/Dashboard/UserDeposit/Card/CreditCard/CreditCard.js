@@ -61,7 +61,8 @@ export default class CreditCard extends Component {
         <CardComponent>
           <CardComponentHeader>Expiry</CardComponentHeader>
           <p>
-            {this.props.month}/{this.props.year}
+            {this.props.month}/`${this.props.year.split("")[2]}$
+            {this.props.year.split("")[3]}`
           </p>
         </CardComponent>
       </Container>
