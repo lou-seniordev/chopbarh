@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import VisaLogo from "../../../../assets/img/visa-logo.png";
 import MasterCardLogo from "../../../../assets/img/mastercard-logo.png";
+import VerveLogo from "../../../../assets/img/verve-logo.png";
 
 const Image = styled.img`
   height: 4rem;
@@ -45,6 +46,9 @@ export default class CreditCard extends Component {
         break;
       case "mastercard":
         Logo = <Image src={MasterCardLogo} alt="Logo" />;
+        break;
+      case "verve":
+        Logo = <Image src={VerveLogo} alt="Logo" />;
         break;
       default:
         Logo = <p>Visa Logo</p>;
