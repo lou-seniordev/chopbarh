@@ -45,8 +45,8 @@ class Card extends Component {
     expiry: "",
     cvv: "",
     auth_code: "",
-    authCVV: '',
-    authAmount: ''
+    authCVV: "",
+    authAmount: ""
   };
 
   componentDidMount = () => {
@@ -84,8 +84,21 @@ class Card extends Component {
 
   handleAuthSubmit = async event => {
     event.preventDefault();
-    this.setState({ loading: true })
-  }
+    this.setState({ loading: true });
+
+    const { authAmount, auth_code } = this.state;
+
+    const creditCardObject = this.props.creditCard.find(
+      card => card.auth_code === auth_code
+    );
+
+    console.log(creditCardObject);
+
+    // if (!isNaN(authAmount) !== true) {
+    //   this.setState({ loading: true })
+    //   toast.error(`Amount is not valid`)
+    // }
+  };
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -210,31 +223,38 @@ class Card extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <Form style={{ minHeight: "5rem" }} onSubmit={this.handleAuthSubmit}>
+                      <Form
+                        style={{ minHeight: "5rem" }}
+                        onSubmit={this.handleAuthSubmit}
+                      >
                         <RadioGroup
                           name="creditCard"
                           selectedValue={this.state.selectedValue}
                           onChange={this.handleRadioChange}
                         >
                           {this.props.creditCard.map(card => (
-
                             <div className="d-flex align-items-center">
-                            <Radio value={card.auth_code} />
-                            <CreditCard type={card.card_type.split(' ')[0]} number={card.last_digits} month={card.exp_month} year={card.exp_year} />
-                            <FormItem className="mt-4">
-                              <input
-                                onChange={this.handleInputChange}
-                                name="authCVV"
-                                value={this.state.authCVV}
-                                required
-                                minLength="1"
-                                placeholder="CVV"
+                              <Radio value={card.auth_code} />
+                              <CreditCard
+                                type={card.card_type.split(" ")[0]}
+                                number={card.last_digits}
+                                month={card.exp_month}
+                                year={card.exp_year}
                               />
-                            </FormItem>
-                          </div>
+                              <FormItem className="mt-4">
+                                <input
+                                  onChange={this.handleInputChange}
+                                  name="authCVV"
+                                  value={this.state.authCVV}
+                                  required
+                                  minLength="1"
+                                  placeholder="CVV"
+                                />
+                              </FormItem>
+                            </div>
                           ))}
                         </RadioGroup>
-                        <FormItem>
+                        <FormItem className="ml-5">
                           <label>Amount</label>
                           <input
                             onChange={this.handleInputChange}
@@ -243,7 +263,7 @@ class Card extends Component {
                             required
                             minLength="1"
                             placeholder="Amount(NGN)"
-                            />
+                          />
                         </FormItem>
                         <button
                           type="submit"
