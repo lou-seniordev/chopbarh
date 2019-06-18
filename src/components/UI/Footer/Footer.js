@@ -94,7 +94,7 @@ export default function Footer() {
         </div>
         <div>
           <FooterLinkHeader>
-            <p>Gaming</p>
+            <p>Help</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>

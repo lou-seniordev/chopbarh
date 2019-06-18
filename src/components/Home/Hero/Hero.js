@@ -228,10 +228,10 @@ export default function Hero() {
                 {/* <HeadingTwo className="hero__title">
                   No Bank Account?
                 </HeadingTwo> */}
-                <ParagraphOne>
+                {/* <ParagraphOne>
                   No problem, we will send your money to your phone number, then
                   you can transfer to any account or withdraw from an ATM
-                </ParagraphOne>
+                </ParagraphOne> */}
               </SliderContent>
             </div>
           </div>
