@@ -51,7 +51,7 @@ class Card extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.creditCard.length) {
+    if (!this.props.creditCard.length && !this.props.isDataFetched) {
       this.props.fetchCreditCardData();
     }
   };
@@ -520,7 +520,8 @@ const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
   creditCard: state.creditCard.creditCard,
-  loading: state.creditCard.loading
+  loading: state.creditCard.loading,
+  isDataFetched: state.creditCard.fetched
 });
 
 const mapDispatchToProps = {

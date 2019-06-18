@@ -19,7 +19,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         creditCard: state.creditCard.concat(action.data),
-        loading: false, fetched: true
+        loading: false,
+        fetched: true
       };
     case actionType.FETCH_CREDIT_CARD_FAIL:
       return {
