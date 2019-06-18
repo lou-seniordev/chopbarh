@@ -4,6 +4,7 @@ const initialState = {
   loading: true,
   creditCard: [],
   cvv: null,
+  fetched: false,
   error: false
 };
 
@@ -18,7 +19,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         creditCard: state.creditCard.concat(action.data),
-        loading: false
+        loading: false, fetched: true
       };
     case actionType.FETCH_CREDIT_CARD_FAIL:
       return {
