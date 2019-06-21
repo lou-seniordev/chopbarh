@@ -71,6 +71,8 @@ class Login extends Component {
     formState["@class"] = ".AuthenticationRequest";
     const formValue = JSON.stringify(formState);
 
+    const context = this;
+
     fetch(
       `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
         keys.apiKeySuffix
@@ -89,15 +91,15 @@ class Login extends Component {
         if (data.authToken) {
           localStorage.setItem("chopbarh-token:live", data.authToken);
           localStorage.setItem("chopbarh-id:live", data.userId);
-          this.props.authSuccess(data.authToken, data.userId);
-          this.props.history.push("/user");
+          context.props.authSuccess(data.authToken, data.userId);
+          context.props.history.push("/user");
         } else {
-          this.setState({ accountErrorModal: true });
-          this.props.authFail();
+          context.setState({ accountErrorModal: true });
+          context.props.authFail();
         }
       })
       .catch(err => {
-        this.props.authFail();
+        context.props.authFail();
       });
   };
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 //import { Link } from "react-router-dom";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
+import breakpoint from "../../styles/breakpoints";
 
 /* 
 
@@ -19,15 +20,15 @@ const FooterWrapper = styled.footer`
 `;
 
 const FooterContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
 
-  /* @media screen and (max-width: $bp-medium-lite) {
-      justify-content: space-between;
-      align-items: flex-start;
-    } */
+  @media screen and (max-width: ${breakpoint.mediumLite}) {
+    grid-template-columns: 1fr;
+  }
 
   & > * {
     margin-right: 0.8rem;

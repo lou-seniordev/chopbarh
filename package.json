@@ -13,7 +13,7 @@
     "react-accessible-accordion": "^3.0.0",
     "react-credit-cards": "^0.7.0",
     "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.0",
+    "react-helmet": "^6.0.0-beta",
     "react-infinite-scroller": "^1.2.4",
     "react-number-format": "^4.0.8",
     "react-radio-group": "^3.0.3",
