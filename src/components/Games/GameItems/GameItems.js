@@ -13,6 +13,10 @@ const GameItemsWrapper = styled.div``;
 
 const Image = styled.img`
   height: 20rem;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    height: 15rem;
+  }
 `;
 
 const ImageContainer = styled.div`
