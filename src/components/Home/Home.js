@@ -19,7 +19,7 @@ reason about in the end
 export default function Home() {
   return (
     <>
-      <Helmet title={`Chopbarh \u{2192} Home`} />
+      {/* <Helmet title={`Chopbarh \u{2192} Home`} /> */}
       <Header />
       <Hero />
       <HowItWorks />

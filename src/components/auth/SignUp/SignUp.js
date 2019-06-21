@@ -176,7 +176,7 @@ class SignUp extends Component {
   render() {
     return (
       <>
-        <Helmet title={`Chopbarh \u{2192} Sign Up`} />
+        {/* <Helmet title={`Chopbarh \u{2192} Sign Up`} /> */}
         <Header />
         <SignUpWrapper>
           <Modal

@@ -8,7 +8,7 @@ import GameItems from "./GameItems/GameItems";
 export default function Games() {
   return (
     <>
-      <Helmet title={`Chopbarh \u{2192} Games`} />
+      {/* <Helmet title={`Chopbarh \u{2192} Games`} /> */}
       <Header />
       <GamesHero />
       <GameItems />

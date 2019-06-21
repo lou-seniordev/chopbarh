@@ -104,7 +104,7 @@ class Login extends Component {
   render() {
     return (
       <AuthWrapper>
-        <Helmet title={`Chopbarh \u{2192} Login`} />
+        {/* <Helmet title={`Chopbarh \u{2192} Login`} /> */}
         <ImageContainer />
         <Image />
 

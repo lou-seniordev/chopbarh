@@ -8,7 +8,7 @@ import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
 export default function UserDeposit() {
   return (
     <>
-      <Helmet title={`Chopbarh \u{2192} Withdraw`} />
+      {/* <Helmet title={`Chopbarh \u{2192} Withdraw`} /> */}
       <UserHeader />
       <UserNavigation />
       <WithdrawTabs />
