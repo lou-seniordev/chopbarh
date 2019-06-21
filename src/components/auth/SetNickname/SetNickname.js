@@ -60,9 +60,8 @@ function SetNickname(props) {
 
   return (
     <>
-      <Helmet>
-        <title>Chopbarh &rarr; Set Nickname</title>
-      </Helmet>
+      <Helmet title={`Chopbarh \u{2192} Set Nickname`} />
+
       <Header />
       <SignUpWrapper>
         <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">

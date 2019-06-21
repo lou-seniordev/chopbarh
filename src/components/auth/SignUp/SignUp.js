@@ -176,9 +176,7 @@ class SignUp extends Component {
   render() {
     return (
       <>
-        <Helmet>
-          <title>Chopbarh &rarr; Sign Up</title>
-        </Helmet>
+        <Helmet title={`Chopbarh \u{2192} Sign Up`} />
         <Header />
         <SignUpWrapper>
           <Modal

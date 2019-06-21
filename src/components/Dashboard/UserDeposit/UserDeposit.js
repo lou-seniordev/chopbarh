@@ -8,9 +8,7 @@ import DepositTabs from "./DepositTabs/DepositTabs";
 export default function UserDeposit() {
   return (
     <>
-      <Helmet>
-        <title>Chopbarh &rarr; Deposit</title>
-      </Helmet>
+      <Helmet title={`Chopbarh \u{2192} Deposit`} />
       <UserHeader />
       <UserNavigation />
       <DepositTabs />

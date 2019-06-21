@@ -8,9 +8,7 @@ import Footer from "../../UI/Footer/Footer";
 export default function ChangePin() {
   return (
     <>
-      <Helmet>
-        <title>Chopbarh &rarr; Change Pin</title>
-      </Helmet>
+      <Helmet title={`Chopbarh \u{2192} Change Pin`} />
       <UserHeader />
       <UserNavigation />
       <ChangePinForm />

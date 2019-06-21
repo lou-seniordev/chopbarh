@@ -10,9 +10,7 @@ import TransactionTabs from "./TransactionTabs/TransactionTabs";
 export default function UserTransaction() {
   return (
     <>
-      <Helmet>
-        <title>Chopbarh &rarr; Transactions</title>
-      </Helmet>
+      <Helmet title={`Chopbarh \u{2192} Transactions`} />
       <UserHeader />
       <UserNavigation />
       <div className="container">

@@ -13,9 +13,7 @@ import QuickPlay from "./QuickPlay/QuickPlay";
 export default function UserHome() {
   return (
     <>
-      <Helmet>
-        <title>Chopbarh &rarr; Dashboard</title>
-      </Helmet>
+      <Helmet title={`Chopbarh \u{2192} Dashboard`} />
       <UserHeader />
       <UserNavigation />
       <Overview />
