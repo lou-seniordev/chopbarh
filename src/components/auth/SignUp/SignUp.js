@@ -28,6 +28,9 @@ class SignUp extends Component {
     name: "",
     phone: "",
     password: "",
+    email: "",
+    sex: "",
+    dob: "",
     confirmPassword: "",
     otp: "",
     loading: false,
@@ -240,6 +243,43 @@ class SignUp extends Component {
               </FormItem>
               <HalfColumn>
                 <FormItem className="mr-3">
+                  <label>Date of Birth</label>
+                  <input
+                    type="date"
+                    value={this.state.dob}
+                    name="dob"
+                    disabled
+                    onChange={this.handleInputChange}
+                    required
+                    max="2010-01-01"
+                  />
+                </FormItem>
+                <FormItem>
+                  <label>Sex</label>
+                  <select
+                    value={this.state.sex}
+                    name="sex"
+                    disabled
+                    onChange={this.handleInputChange}
+                    required
+                  >
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </FormItem>
+              </HalfColumn>
+              <FormItem>
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={this.state.email}
+                  name="email"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </FormItem>
+              <HalfColumn>
+                <FormItem className="mr-3">
                   <label>Enter Password Pin (4 digits)</label>
                   <input
                     type="password"
@@ -252,7 +292,7 @@ class SignUp extends Component {
                   />
                 </FormItem>
                 <FormItem>
-                  <label>Re-enter Password Pin</label>
+                  <label>Re-enter Password Pin (4 digits)</label>
                   <input
                     type="password"
                     name="confirmPassword"
