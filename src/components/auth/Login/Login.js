@@ -20,6 +20,7 @@ import {
   authSuccess,
   authFail
 } from "../../../store/actions/authActions";
+import Logo from "../../UI/Logo/Logo";
 
 class Login extends Component {
   state = {
@@ -130,9 +131,11 @@ class Login extends Component {
             <p>Account not found. Please, Sign Up first</p>
           </ModalBody>
         </Modal>
+
         <FormWrapper>
-          <form onSubmit={this.handleSubmit}>
-            <HeadingTwo className="mb-5 mt-n5">Login</HeadingTwo>
+          <Logo />
+          <form onSubmit={this.handleSubmit} className="mt-2">
+            <HeadingTwo className="mb-4">Login</HeadingTwo>
             <FormItem>
               <label>Phone Number</label>
               <input

@@ -17,6 +17,10 @@ const Image = styled.img`
   @media only screen and (max-width: ${breakPoints.medium}) {
     height: 15rem;
   }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    height: 11rem;
+  }
 `;
 
 const ImageContainer = styled.div`

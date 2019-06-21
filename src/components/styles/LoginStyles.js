@@ -41,12 +41,18 @@ export const Image = styled.div`
   left: 0;
   height: 100vh;
   width: 50vw;
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    display: none;
+  }
 `;
 
 export const FormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
 export const FormItem = styled.div`
@@ -154,7 +160,7 @@ export const Button = styled.a`
 `;
 
 export const SignUpSignal = styled.div`
-  margin-top: 12rem;
+  margin-top: 7rem;
   text-align: center;
 
   a {
