@@ -23,6 +23,10 @@ const ImageContainer = styled.div`
   height: auto;
   padding: 20rem 0 5rem 0;
   max-width: 99.2vw;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    padding: 10rem 0 5rem 0;
+  }
 `;
 
 const HeadingThree = styled.h3`
