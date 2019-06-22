@@ -11,7 +11,7 @@ export default function UserDeposit() {
       {/* <Helmet title={`Chopbarh \u{2192} Deposit`} /> */}
       <UserHeader />
       <UserNavigation />
-      <div style={{ minHeight: "65vh" }}>
+      <div style={{ minHeight: "80vh" }}>
         <DepositTabs />
       </div>
       <Footer />
