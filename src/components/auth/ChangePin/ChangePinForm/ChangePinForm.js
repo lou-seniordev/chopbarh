@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 // import { Spinner } from "reactstrap";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 // import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-// import keys from "../../../../config/keys";
+import keys from "../../../../config/keys";
 
 const ChangePinWrapper = styled.div`
   z-index: 2000;
@@ -124,20 +124,66 @@ const HalfColumn = styled.div`
 class ChangePinForm extends Component {
   state = {
     loading: false,
-    name: ""
+    oldPin: "", newPin: ''
   };
-
-  componentDidMount = () => {};
-
-  componentDidUpdate = prevProps => {};
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
 
+  formIsValid = ({ oldPin, newPin }) => {
+    if (
+      oldPin.length !== 4 ||
+      !isNaN(oldPin) !== true ||
+      newPin.length !== 4 || !isNaN(newPin) !== true
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ loading: false });
+      toast.error('Pleae fill form fields correctly')
+      return;
+    }
+
+    const newState = { ...this.state };
+    const formState = {
+      OLD: newState.oldPin,
+      NEW: newState.newPin,
+      playerId: this.props.id
+    };
+    formState["@class"] = ".LogEventRequest";
+    formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
+    const formValue = JSON.stringify(formState);
+
+
+    fetch(
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+      keys.apiKeySuffix
+      }/LogEventRequest`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: formValue
+      }
+    ).then(response => response.json())
+    .then(data => {
+      if (!data.error || !data.scriptData) {
+        toast.success('Password was reset successfully')
+        this.setState({oldPin: '', newPin: ''})
+      }
+    }).catch(err => {
+      toast.error('Something went wrong.')
+    })
   };
 
   render() {
@@ -152,8 +198,8 @@ class ChangePinForm extends Component {
                   <label>Old Pin</label>
                   <input
                     type="password"
-                    value={this.state.name}
-                    name="name"
+                    value={this.state.oldPin}
+                    name="oldPin"
                     disabled
                     className="mr-2"
                     onChange={this.handleInputChange}
@@ -164,8 +210,8 @@ class ChangePinForm extends Component {
                   <label>New Pin</label>
                   <input
                     type="password"
-                    value={this.state.phone}
-                    name="phone"
+                    value={this.state.newPin}
+                    name="newPin"
                     disabled
                     className="ml-lg-2"
                     onChange={this.handleInputChange}
@@ -191,7 +237,6 @@ class ChangePinForm extends Component {
 const mapStateToProps = state => ({
   id: state.auth.id,
   loading: state.player.loading,
-  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {};
