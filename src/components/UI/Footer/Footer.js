@@ -13,10 +13,13 @@ Add the Link required to to the Links below
 
 const FooterWrapper = styled.footer`
   background: #353434;
-  min-height: auto;
   padding: 5rem 2rem;
   position: relative;
   text-align: left !important;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const FooterContainer = styled.div`
