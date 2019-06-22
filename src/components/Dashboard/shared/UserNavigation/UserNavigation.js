@@ -14,7 +14,7 @@ const HeaderWrapper = styled.div`
   background: #8c1936;
   color: ${color.colorWhite};
   min-height: 6rem;
-  padding: 2rem 18rem;
+  padding: 2rem 12rem;
   position: relative;
   text-align: left !important;
   display: flex;
@@ -23,11 +23,12 @@ const HeaderWrapper = styled.div`
   flex-wrap: wrap;
 
   @media only screen and (max-width: ${breakpoint.mediumLite}) {
-    padding: 2rem 8rem;
+    padding: 2rem 6rem;
   }
 
   @media only screen and (max-width: ${breakpoint.small}) {
     padding: 2rem 3rem;
+    display: none;
   }
 
   a {
