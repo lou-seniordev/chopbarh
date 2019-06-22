@@ -11,6 +11,7 @@ const DepositTabsWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 5rem 2rem;
+  /* background: yellow; */
 `;
 
 const HeadingTwo = styled.h2`
@@ -56,18 +57,18 @@ export default function DepositTabs() {
             <BankCharge />
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "36rem" }}>
+            <div style={{ minHeight: "80vh" }}>
               <Voucher />
             </div>
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "36rem" }} />
+            <div style={{ minHeight: "80vh" }} />
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "36rem" }} />
+            <div style={{ minHeight: "80vh" }} />
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "36rem" }} />
+            <div style={{ minHeight: "80vh" }} />
           </TabPanel>
         </Tabs>
       </div>
