@@ -90,13 +90,13 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.authToken) {
-          debugger
           localStorage.setItem("chopbarh-token:live", data.authToken);
           localStorage.setItem("chopbarh-id:live", data.userId);
           context.props.authSuccess(data.authToken, data.userId);
-          console.log('Auth Success')
+          console.log("Auth Success");
           context.props.history.push("/user");
         } else {
+          console.log("Catch else..");
           context.setState({ accountErrorModal: true });
           context.props.authFail();
         }
