@@ -9,6 +9,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "firebase": "^6.1.0",
+    "grommet-icons": "^4.2.0",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",
     "react-credit-cards": "^0.7.0",
