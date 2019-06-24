@@ -67,16 +67,16 @@ const HeadingTwoFirst = styled(HeadingTwo)`
 `;
 
 const ParagraphOne = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 400;
 
   @media only screen and (max-width: ${breakPoints.medium}) {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
     margin-top: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 `;
 
