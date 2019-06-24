@@ -31,6 +31,7 @@ const FooterContainer = styled.div`
 
   @media screen and (max-width: ${breakpoint.small}) {
     grid-template-columns: 1fr;
+    text-align: center;
   }
 
   & > * {

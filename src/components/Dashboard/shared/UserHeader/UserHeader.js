@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
+// import { Update } from "grommet-icons";
 import colors from "../../../styles/colors";
 import Logo from "../../../UI/Logo/Logo";
 import Icon from "../Icon/Icon";
@@ -116,6 +117,7 @@ class UserHeader extends Component {
                             icon={VisibilityButton}
                             height="10"
                           />
+                          {/* <Update /> */}
                         </span>
                       </li>
                       <li className="nav-item">
