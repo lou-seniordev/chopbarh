@@ -136,7 +136,7 @@ class Login extends Component {
 
         <FormWrapper>
           <Logo />
-          <form onSubmit={this.handleSubmit} className="mt-2">
+          <form onSubmit={this.handleSubmit} className="mt-5">
             <HeadingTwo className="mb-4">Login</HeadingTwo>
             <FormItem>
               <label>Phone Number</label>
