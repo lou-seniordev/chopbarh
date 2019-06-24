@@ -19,6 +19,7 @@ const SetNickname = lazy(() =>
   import("../components/auth/SetNickname/SetNickname")
 );
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
+const UserPlayPage = lazy(() => import("../Pages/UserPlayPage"));
 const UserEditProfilePage = lazy(() => import("../Pages/UserEditProfilePage"));
 const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
@@ -80,6 +81,7 @@ class Layout extends Component {
               <Route path="/change-pin" component={ChangePinPage} />
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
+              <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
