@@ -16,7 +16,9 @@ export default function UserHome() {
       <Helmet title={`Chopbarh \u{2192} Dashboard`} />
       <UserHeader />
       <UserNavigation />
-      <Overview />
+      <div className="m-2">
+        <Overview />
+      </div>
       <div className="container">
         <div className="row">
           <div className="col-md-6 pl-0 d-sm-flex justify-content-sm-center">
