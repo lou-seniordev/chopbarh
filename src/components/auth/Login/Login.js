@@ -109,7 +109,7 @@ class Login extends Component {
   render() {
     return (
       <AuthWrapper>
-        {/* <Helmet title={`Chopbarh \u{2192} Login`} /> */}
+        <Helmet title={`Chopbarh \u{2192} Login`} />
         <ImageContainer />
         <Image />
 
@@ -135,7 +135,9 @@ class Login extends Component {
         </Modal>
 
         <FormWrapper>
-          <Logo width="110px" />
+          <Link to="/">
+            <Logo width="110px" />
+          </Link>
           <form onSubmit={this.handleSubmit} className="mt-5">
             <HeadingTwo className="mb-4">Login</HeadingTwo>
             <FormItem>
