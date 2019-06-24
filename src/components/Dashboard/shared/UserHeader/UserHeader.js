@@ -112,13 +112,18 @@ class UserHeader extends Component {
                               ))}
                             </>
                           )}
-                          <Update size="small" />
+
                           <Icon
                             clicked={this.togglecoinBalanceVisibility}
                             icon={VisibilityButton}
                             height="10"
                           />
-                          {/* <Update /> */}
+                          <span
+                            style={{ cursor: "pointer" }}
+                            onClick={this.props.fetchPlayerData}
+                          >
+                            <Update size="small" color="white" />
+                          </span>
                         </span>
                       </li>
                       <li className="nav-item">
@@ -149,6 +154,12 @@ class UserHeader extends Component {
                             icon={VisibilityButton}
                             height="10"
                           />
+                          <span
+                            style={{ cursor: "pointer" }}
+                            onClick={this.props.fetchPlayerData}
+                          >
+                            <Update size="small" color="white" />
+                          </span>
                         </span>
                       </li>
                     </>
