@@ -214,7 +214,10 @@ export default function Hero() {
                     <span>Start Playing</span>
                   </Button>
                   <Button className="mr-lg-4 mr-md-4">
-                    <span>Download</span>
+                    <span>Get it on iOS</span>
+                  </Button>
+                  <Button className="mr-lg-4 mr-md-4 mt-md-2">
+                    <span>Get it on Android</span>
                   </Button>
                 </div>
               </SliderContent>

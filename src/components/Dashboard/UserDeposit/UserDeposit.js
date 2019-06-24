@@ -8,7 +8,7 @@ import DepositTabs from "./DepositTabs/DepositTabs";
 export default function UserDeposit() {
   return (
     <>
-      {/* <Helmet title={`Chopbarh \u{2192} Deposit`} /> */}
+      <Helmet title={`Chopbarh \u{2192} Deposit`} />
       <UserHeader />
       <UserNavigation />
       <div style={{ minHeight: "80vh" }}>

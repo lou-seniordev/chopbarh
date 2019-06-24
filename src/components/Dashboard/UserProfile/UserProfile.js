@@ -8,7 +8,7 @@ import Footer from "../../UI/Footer/Footer";
 export default function UserProfile({ userInfo }) {
   return (
     <>
-      {/* <Helmet title={`Chopbarh \u{2192} Profile`} /> */}
+      <Helmet title={`Chopbarh \u{2192} Profile`} />
       <UserHeader />
       <UserNavigation />
       <UserProfileContent userInfo={userInfo} />
