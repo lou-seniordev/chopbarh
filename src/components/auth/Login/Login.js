@@ -135,7 +135,7 @@ class Login extends Component {
         </Modal>
 
         <FormWrapper>
-          <Logo />
+          <Logo width="110px" />
           <form onSubmit={this.handleSubmit} className="mt-5">
             <HeadingTwo className="mb-4">Login</HeadingTwo>
             <FormItem>
