@@ -6,10 +6,10 @@ const Image = styled.img`
   object-fit: contain;
 `;
 
-export default function Logo({ width }) {
+export default function Logo({ width = "70px" }) {
   return (
     <div>
-      <Image src={LogoImage} width="70px" alt="Logo" />
+      <Image src={LogoImage} width={width} alt="Logo" />
     </div>
   );
 }
