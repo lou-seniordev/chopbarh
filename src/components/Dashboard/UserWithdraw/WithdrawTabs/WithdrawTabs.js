@@ -28,10 +28,14 @@ export default function WithdrawTabs(props) {
             </Tab>
           </TabList>
           <TabPanel>
-            <AccountNumber />
+            <div style={{ minHeight: "80vh" }}>
+              <AccountNumber />
+            </div>
           </TabPanel>
           <TabPanel>
-            <Paga />
+            <div style={{ minHeight: "80vh" }}>
+              <Paga />
+            </div>
           </TabPanel>
         </Tabs>
       </div>
