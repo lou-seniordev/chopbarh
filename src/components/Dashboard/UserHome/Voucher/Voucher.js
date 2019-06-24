@@ -9,9 +9,10 @@ import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 
 const VoucherWrapper = styled.div``;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: ${props => (props.center ? "center" : "flex-start")};
 
   button {
     all: unset;
@@ -23,6 +24,7 @@ const FormWrapper = styled.div`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
+    align-self: flex-start;
 
     span {
       display: inline-block;
@@ -48,7 +50,7 @@ const FormItem = styled.div`
 
   input {
     color: #8d8e8d;
-    width: 30rem;
+    width: ${props => (props.fullWidth ? "100%" : "30rem")};
     height: 3.4rem;
     margin-bottom: 2rem;
     border: 0;
@@ -139,37 +141,28 @@ class Voucher extends Component {
     return (
       <VoucherWrapper className="container pl-0">
         <FormWrapper onSubmit={this.handleSubmit}>
-          <form>
-            <FormItem>
-              <label>Load Voucher</label>
-            </FormItem>
-            <FormItem>
-              {/* <input
-                type="text"
-                name="voucher"
-                value={this.state.voucher}
-                onChange={this.handleInputChange}
-                placeholder="Voucher Code"
-              /> */}
-              <NumberFormat
-                format="#### #### #### ####"
-                name="voucher"
-                value={this.state.voucher}
-                onChange={this.handleInputChange}
-                placeholder="Voucher Code"
-              />
-            </FormItem>
-            <button
-              type="submit"
-              className="ml-2 mr-2"
-              disabled={
-                this.state.loading ||
-                this.state.voucher.split(" ").join("").length !== 16
-              }
-            >
-              <span>{this.state.loading ? "Loading..." : "Load"}</span>
-            </button>
-          </form>
+          <FormItem>
+            <label>Load Voucher</label>
+          </FormItem>
+          <FormItem>
+            <NumberFormat
+              format="#### #### #### ####"
+              name="voucher"
+              value={this.state.voucher}
+              onChange={this.handleInputChange}
+              placeholder="Voucher Code"
+            />
+          </FormItem>
+          <button
+            type="submit"
+            className="ml-2 mr-2"
+            disabled={
+              this.state.loading ||
+              this.state.voucher.split(" ").join("").length !== 16
+            }
+          >
+            <span>{this.state.loading ? "Loading..." : "Load"}</span>
+          </button>
         </FormWrapper>
       </VoucherWrapper>
     );
