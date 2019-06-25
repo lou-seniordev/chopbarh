@@ -11,7 +11,7 @@ const TransactionTabsWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 `;
 
 export default function TransactionTabs() {
@@ -28,9 +28,10 @@ export default function TransactionTabs() {
           <Tab>
             <HeadingTwo>Withdrawal</HeadingTwo>
           </Tab>
-          {/* <Tab>
-            <HeadingTwo>Winnings</HeadingTwo>
+          <Tab>
+            <HeadingTwo>Transfers</HeadingTwo>
           </Tab>
+          {/* 
           <Tab>
             <HeadingTwo>Refunds</HeadingTwo>
           </Tab> */}
@@ -54,6 +55,12 @@ export default function TransactionTabs() {
         >
           <WithdrawalTable />
         </TabPanel>
+        <TabPanel
+          style={{
+            maxHeight: "600px",
+            overflow: "auto"
+          }}
+        />
         {/* <TabPanel>
           <TransactionTable />
         </TabPanel>

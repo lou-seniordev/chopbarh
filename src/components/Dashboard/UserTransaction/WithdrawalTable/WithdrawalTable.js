@@ -19,7 +19,7 @@ class WithdrawalTable extends Component {
     return (
       <WithdrawalTableWrapper>
         {this.props.withdrawalData ? (
-          <table className="table table-striped">
+          <table className="table table-striped table-responsive">
             <thead
               style={{
                 background: "#8C1936",
