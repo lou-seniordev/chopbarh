@@ -13,11 +13,11 @@ const EditProfileWrapper = styled.div`
   padding: 2rem 10rem;
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    padding: 20rem 5rem;
+    padding: 2rem 5rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
-    padding: 20rem 0rem;
+    padding: 2rem 0rem;
   }
 `;
 
