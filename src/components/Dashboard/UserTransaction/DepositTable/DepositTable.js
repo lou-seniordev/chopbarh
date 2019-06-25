@@ -19,7 +19,7 @@ class DepositTable extends Component {
     return (
       <DepositTableWrapper>
         {this.props.depositData ? (
-          <table className="table table-striped">
+          <table className="table table-striped table-responsive">
             <thead
               style={{
                 background: "#8C1936",
@@ -28,21 +28,26 @@ class DepositTable extends Component {
               }}
             >
               <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Reference</th>
                 <th scope="col">Transaction Date</th>
-                <th scope="col">Type</th>
+                <th scope="col">Transaction Time</th>
+                <th scope="col">Transaction Fees</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Channel</th>
-                {/*<th scope="col">Balance</th>
-                <th scope="col">Action</th> */}
               </tr>
             </thead>
             <tbody>
               {this.props.depositData.map((deposit, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
-                  <td>{`${new Date(deposit.deposit_date).getDate()}-${Number(
-                    new Date(deposit.deposit_date).getMonth()
-                  ) + 1}-${new Date(deposit.deposit_date).getFullYear()}`}</td>
-                  <td>Deposit</td>
+                  <td />
+                  <td />
+                  <td>{`${new Date(
+                    deposit.deposit_date
+                  ).toLocaleDateString()}`}</td>
+                  <td>{`${new Date(
+                    deposit.deposit_date
+                  ).toLocaleTimeString()}`}</td>
                   <td>
                     &#8358;
                     {new Intl.NumberFormat().format(deposit.amount)}

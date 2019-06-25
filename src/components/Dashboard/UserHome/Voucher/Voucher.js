@@ -46,6 +46,7 @@ const FormItem = styled.div`
     font-weight: 600;
     color: #737773;
     margin-bottom: 1rem;
+    display: ${props => (props.noHeader ? "none" : "block")};
   }
 
   input {
@@ -141,7 +142,7 @@ class Voucher extends Component {
     return (
       <VoucherWrapper className="container pl-0">
         <FormWrapper onSubmit={this.handleSubmit} center={this.props.center}>
-          <FormItem>
+          <FormItem noHeader={this.props.noHeader}>
             <label>Load Voucher</label>
           </FormItem>
           <FormItem fullWidth={this.props.fullWidth}>
