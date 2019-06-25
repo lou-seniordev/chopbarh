@@ -20,7 +20,7 @@ class TopEarners extends Component {
 
   render() {
     return (
-      <>
+      <div>
         {this.props.results ? (
           <table className="table table-striped">
             <thead
@@ -63,7 +63,7 @@ class TopEarners extends Component {
             )}
           </>
         )}
-      </>
+      </div>
     );
   }
 }

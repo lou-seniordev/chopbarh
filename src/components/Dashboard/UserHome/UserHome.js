@@ -7,7 +7,7 @@ import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import Overview from "./Overview/Overview";
 import Voucher from "./Voucher/Voucher";
 import TopEarners from "./TopEarners/TopEarners";
-import QuickPlay from "./QuickPlay/QuickPlay";
+import QuickPlayTransaction from "../UserTransaction/QuickPlayTransaction/QuickPlayTransaction";
 
 // Add redirect logic to Complete Registration when it isn't complete
 
@@ -35,7 +35,11 @@ export default function UserHome() {
           </div>
         </div>
       </div>
-      <QuickPlay />
+      <div className="container">
+        <div className="row">
+          <QuickPlayTransaction />
+        </div>
+      </div>
       <Footer />
     </>
   );
