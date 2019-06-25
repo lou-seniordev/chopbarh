@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import Voucher from "../../../Dashboard/UserHome/Voucher/Voucher";
 
 const VoucherTransactionWrapper = styled.div`
   margin-top: 8rem;
@@ -12,13 +11,13 @@ const VoucherTransactionWrapper = styled.div`
 
   @media only screen and (max-width: ${breakPoints.large}) {
     padding-left: 0;
-    justify-content: flex-start;
+    text-align: center;
   }
 `;
 
-const FormWrapper = styled.div`
-  display: flex;
-  align-items: center;
+const FormWrapper = styled.form`
+  /* display: flex;
+  align-items: center; */
 
   button {
     all: unset;
@@ -31,8 +30,8 @@ const FormWrapper = styled.div`
     font-size: 1.3rem;
     z-index: 200;
 
-    /* @media only screen and (max-width: ${breakPoints.mediumLite}) {
-      align-self: flex-start;
+    /* @media only screen and (max-width: ${breakPoints.medium}) {
+      justify-self: center;
       padding: 0.5rem 1.7rem;
       margin-bottom: 0.5rem;
       margin-top: 0.5rem;
@@ -82,20 +81,18 @@ export default function VoucherTransaction() {
     <VoucherTransactionWrapper>
       <div>
         <FormWrapper>
-          <form>
-            <FormItem>
-              <label>Transfer Credit to Friends</label>
-            </FormItem>
-            <FormItem>
-              <input type="text" placeholder="Phone Number" />
-            </FormItem>
-            <FormItem>
-              <input type="password" placeholder="Pin" />
-            </FormItem>
-            <button type="submit" className="ml-2 mr-2">
-              <span>Transfer</span>
-            </button>
-          </form>
+          <FormItem>
+            <label>Transfer Credit to Friends</label>
+          </FormItem>
+          <FormItem>
+            <input type="text" placeholder="Phone Number" />
+          </FormItem>
+          <FormItem>
+            <input type="password" placeholder="Pin" />
+          </FormItem>
+          <button type="submit" className="ml-2 mr-2">
+            <span>Transfer</span>
+          </button>
         </FormWrapper>
       </div>
     </VoucherTransactionWrapper>

@@ -93,7 +93,7 @@ export default function QuickPlayTransaction() {
       <div className="row">
         <Column>
           <Content>
-            <Image alt="Ludo" className="mr-lg-5" src={Image1} />
+            <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image1} />
             <div>
               <HeadingThree className="mt-4 mb-3">Table Soccer</HeadingThree>
               <p>
@@ -118,7 +118,7 @@ export default function QuickPlayTransaction() {
         </Column>
         <Column>
           <Content>
-            <Image alt="Ludo" className="mr-5" src={Image2} />
+            <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image2} />
             <div>
               <HeadingThree className="mt-4 mb-3">Dice</HeadingThree>
               <p>
