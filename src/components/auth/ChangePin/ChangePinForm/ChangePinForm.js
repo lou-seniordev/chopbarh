@@ -13,11 +13,11 @@ const ChangePinWrapper = styled.div`
   padding: 2rem 10rem;
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    padding: 20rem 5rem;
+    padding: 2rem 5rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
-    padding: 20rem 0rem;
+    padding: 2rem 0rem;
   }
 `;
 
@@ -124,7 +124,8 @@ const HalfColumn = styled.div`
 class ChangePinForm extends Component {
   state = {
     loading: false,
-    oldPin: "", newPin: ''
+    oldPin: "",
+    newPin: ""
   };
 
   handleInputChange = ({ target }) => {
@@ -135,7 +136,8 @@ class ChangePinForm extends Component {
     if (
       oldPin.length !== 4 ||
       !isNaN(oldPin) !== true ||
-      newPin.length !== 4 || !isNaN(newPin) !== true
+      newPin.length !== 4 ||
+      !isNaN(newPin) !== true
     ) {
       return false;
     }
@@ -148,7 +150,7 @@ class ChangePinForm extends Component {
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
-      toast.error('Pleae fill form fields correctly')
+      toast.error("Pleae fill form fields correctly");
       return;
     }
 
@@ -162,10 +164,9 @@ class ChangePinForm extends Component {
     formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
     const formValue = JSON.stringify(formState);
 
-
     fetch(
       `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-      keys.apiKeySuffix
+        keys.apiKeySuffix
       }/LogEventRequest`,
       {
         method: "POST",
@@ -175,15 +176,24 @@ class ChangePinForm extends Component {
         },
         body: formValue
       }
-    ).then(response => response.json())
-    .then(data => {
-      if (!data.error || !data.scriptData) {
-        toast.success('Password was reset successfully')
-        this.setState({oldPin: '', newPin: ''})
-      }
-    }).catch(err => {
-      toast.error('Something went wrong.')
-    })
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ loading: false });
+        // if (
+        //   !Object.values(data.error).length ||
+        //   !Object.values(data.scriptData).length
+        // ) {
+        //   toast.success("Password was reset successfully");
+        //   this.setState({ oldPin: "", newPin: "", loading: false });
+        // } else {
+        //   toast.success("Password was not reset");
+        // }
+      })
+      .catch(err => {
+        toast.error("Something went wrong.");
+      });
   };
 
   render() {
@@ -200,7 +210,6 @@ class ChangePinForm extends Component {
                     type="password"
                     value={this.state.oldPin}
                     name="oldPin"
-                    disabled
                     className="mr-2"
                     onChange={this.handleInputChange}
                     required
@@ -212,7 +221,6 @@ class ChangePinForm extends Component {
                     type="password"
                     value={this.state.newPin}
                     name="newPin"
-                    disabled
                     className="ml-lg-2"
                     onChange={this.handleInputChange}
                     required
@@ -236,7 +244,7 @@ class ChangePinForm extends Component {
 
 const mapStateToProps = state => ({
   id: state.auth.id,
-  loading: state.player.loading,
+  loading: state.player.loading
 });
 
 const mapDispatchToProps = {};
