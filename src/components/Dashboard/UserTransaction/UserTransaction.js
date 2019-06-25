@@ -24,15 +24,12 @@ export default function UserTransaction() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-lg-6">
-            <QuickPlayTransaction />
-          </div>
-          <div className="col-lg-6">
+          <div className="col-lg-12">
             <VoucherTransaction />
           </div>
         </div>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <div className="row mb-5">
           <div className="col-lg-6">
             <MediaQuery minDeviceWidth={992}>
@@ -43,7 +40,7 @@ export default function UserTransaction() {
             </MediaQuery>
           </div>
         </div>
-      </div>
+      </div> */}
       <Footer />
     </>
   );

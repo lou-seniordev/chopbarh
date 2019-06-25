@@ -8,10 +8,10 @@ const VoucherTransactionWrapper = styled.div`
   margin-bottom: 5rem;
   display: flex;
   justify-content: center;
+  text-align: center;
 
   @media only screen and (max-width: ${breakPoints.large}) {
     padding-left: 0;
-    text-align: center;
   }
 `;
 
