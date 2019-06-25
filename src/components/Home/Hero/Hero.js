@@ -103,7 +103,7 @@ const SliderImage = styled.img`
   }
 
   @media only screen and (max-width: 1140px) {
-    top: 23vh !important;
+    top: 26vh !important;
   }
 
   @media only screen and (max-width: ${breakPoints.large}) {
@@ -170,37 +170,61 @@ const Button = styled.button`
 
 export default function Hero() {
   return (
-    <Slider
-      autoplay={3000}
-      classNames={{
-        nextButton: {
+    <Slider autoplay={3000}>
+      <div
+        style={{
+          background: `url('${Background}') no-repeat center center`,
+          backgroundSize: "cover",
           color: "#fff"
-        }
-      }}
-    >
+        }}
+      >
+        <SliderContent first>
+          <HeadingTwoFirst className="hero__title">
+            Play and Chop
+          </HeadingTwoFirst>
+          <ParagraphOne>
+            Play and win from collection of childhood games that live up to the
+            moment
+          </ParagraphOne>
+          <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+            <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+              <span>Start Playing</span>{" "}
+            </Button>
+            <Button className="mr-lg-4 mr-md-4">
+              <span>Get it on iOS</span>
+            </Button>
+            <Button className="mr-lg-4 mr-md-4 mt-md-2">
+              <span>Get it on Android</span>
+            </Button>
+          </div>
+        </SliderContent>
+        <SliderImage className="d-block" src={slider1} alt="User" />
+      </div>
       <div
         style={{
           background: `url('${sliderImage1}') no-repeat center center`,
           backgroundSize: "cover"
         }}
       >
-        <div className="center">
+        {/* <div className="center">
           <h1>title</h1>
           <p>description</p>
           <button>button</button>
-        </div>
+        </div> */}
       </div>
       <div
         style={{
           background: `url('${sliderImage2}') no-repeat center center`,
-          backgroundSize: "cover"
+          backgroundSize: "cover",
+          color: "#fff"
         }}
       >
-        <div className="center">
-          <h1>title</h1>
-          <p>description</p>
-          <button>button</button>
-        </div>
+        <SliderContent className="text-center">
+          <HeadingTwo className="hero__title">
+            No be say come lick stew
+          </HeadingTwo>
+          <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+        </SliderContent>
       </div>
       <div
         style={{
@@ -209,11 +233,24 @@ export default function Hero() {
           backgroundSize: "cover"
         }}
       >
-        <div className="center">
+        {/* <div className="center">
           <h1>title</h1>
           <p>description</p>
           <button>button</button>
-        </div>
+        </div> */}
+      </div>
+      <div
+        style={{
+          background: `url('${sliderImage4}') no-repeat center center`,
+          height: "100vh",
+          backgroundSize: "cover"
+        }}
+      >
+        {/* <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div> */}
       </div>
     </Slider>
   );
