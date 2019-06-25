@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
 import color from "../../../styles/colors";
-import { setVoucherValue } from "../../../../store/actions/voucherActions";
+import {
+  setVoucherValue,
+  setVoucherHistory
+} from "../../../../store/actions/voucherActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 
 const VoucherWrapper = styled.div``;
@@ -119,8 +122,14 @@ class Voucher extends Component {
       const data = await response.json();
       if (response.status === 200) {
         toast.success(`Voucher was successfully loaded`);
+        const payload = {
+          ...data.data,
+          transaction_date: new Date(),
+          paid_at: new Date()
+        };
         this.props.setVoucherValue(data.data.value);
         this.props.setCoinBalance(data.data.value);
+        this.props.setVoucherHistory(payload);
         this.setState({
           loading: false,
           voucher: ""
@@ -177,7 +186,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setVoucherValue,
-  setCoinBalance
+  setCoinBalance,
+  setVoucherHistory
 };
 
 export default connect(
