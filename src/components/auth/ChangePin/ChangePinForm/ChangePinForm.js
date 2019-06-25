@@ -157,12 +157,12 @@ class ChangePinForm extends Component {
 
     const newState = { ...this.state };
     const formState = {
-      NEW: newState.newPin,
       OLD: newState.oldPin,
+      NEW: newState.newPin,
       playerId: this.props.id
     };
     formState["@class"] = ".LogEventRequest";
-    // formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
+    formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
     const formValue = JSON.stringify(formState);
 
     fetch(

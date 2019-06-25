@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Spinner } from "reactstrap";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import keys from "../../../../config/keys";
-
 
 const EditProfileWrapper = styled.div`
   z-index: 2000;
@@ -187,7 +186,7 @@ class EditProfileForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({loading: true})
+    this.setState({ loading: true });
 
     const postData = {
       FULL_NAME: this.state.name,
@@ -203,7 +202,9 @@ class EditProfileForm extends Component {
     const formValue = JSON.stringify(postData);
 
     axios(
-      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${keys.apiKeySuffix}/RegistrationRequest`,
+      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+        keys.apiKeySuffix
+      }/LogEventRequest`,
       {
         method: "POST",
         headers: {
@@ -216,10 +217,10 @@ class EditProfileForm extends Component {
       .then(response => {
         if (response.data.error) {
           this.setState({ loading: false });
-          toast.error('Profile was not updated. Please, try again')
+          toast.error("Profile was not updated. Please, try again");
         } else {
           this.setState({ loading: false });
-          toast.success('Profile was successfully updated.')
+          toast.success("Profile was successfully updated.");
         }
       })
       .catch(err => {
