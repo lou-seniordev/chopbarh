@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import { Update } from "grommet-icons";
+import MediaQuery from "react-responsive";
 import colors from "../../../styles/colors";
 import Logo from "../../../UI/Logo/Logo";
 import Icon from "../Icon/Icon";
@@ -66,150 +67,152 @@ class UserHeader extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          {this.props.loading ? (
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto" />
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <span className="nav-link text-uppercase mr-5">
-                    <Spinner />
-                  </span>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <>
-              {!this.props.error ? (
-                <div
-                  className="collapse navbar-collapse"
-                  id="navbarSupportedContent"
-                >
-                  <ul className="navbar-nav mr-auto" />
-                  <ul className="navbar-nav">
-                    <>
-                      <li className="nav-item">
-                        <span className="nav-link text-uppercase mr-5">
-                          <Icon icon={CoinSymbol} height="15" />
-                          {this.state.coinBalance ? (
-                            <>
-                              {new Intl.NumberFormat().format(
-                                this.props.playerData.CBCoins
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              {[
-                                ...new Array(
-                                  Number(this.props.playerData.CBCoins)
-                                    .toString()
-                                    .split("").length
-                                )
-                              ].map((item, id) => (
-                                <span key={id}>*</span>
-                              ))}
-                            </>
-                          )}
+          <MediaQuery minDeviceWidth={576}>
+            {this.props.loading ? (
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav mr-auto" />
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <span className="nav-link text-uppercase mr-5">
+                      <Spinner />
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <>
+                {!this.props.error ? (
+                  <div
+                    className="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                  >
+                    <ul className="navbar-nav mr-auto" />
+                    <ul className="navbar-nav">
+                      <>
+                        <li className="nav-item">
+                          <span className="nav-link text-uppercase mr-5">
+                            <Icon icon={CoinSymbol} height="15" />
+                            {this.state.coinBalance ? (
+                              <>
+                                {new Intl.NumberFormat().format(
+                                  this.props.playerData.CBCoins
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                {[
+                                  ...new Array(
+                                    Number(this.props.playerData.CBCoins)
+                                      .toString()
+                                      .split("").length
+                                  )
+                                ].map((item, id) => (
+                                  <span key={id}>*</span>
+                                ))}
+                              </>
+                            )}
 
-                          <Icon
-                            clicked={this.togglecoinBalanceVisibility}
-                            icon={VisibilityButton}
-                            height="10"
-                          />
-                          <span
-                            style={{ cursor: "pointer" }}
-                            onClick={this.props.fetchPlayerData}
-                          >
-                            <Update size="small" color="white" />
+                            <Icon
+                              clicked={this.togglecoinBalanceVisibility}
+                              icon={VisibilityButton}
+                              height="10"
+                            />
+                            <span
+                              style={{ cursor: "pointer" }}
+                              onClick={this.props.fetchPlayerData}
+                            >
+                              <Update size="small" color="white" />
+                            </span>
                           </span>
-                        </span>
+                        </li>
+                        <li className="nav-item">
+                          <span className="nav-link text-uppercase mr-5">
+                            <Icon icon={CashIcon} height="18" />
+                            {this.state.cashBalance ? (
+                              <>
+                                &#8358;
+                                {new Intl.NumberFormat().format(
+                                  this.props.playerData.RealCoins
+                                )}
+                              </>
+                            ) : (
+                              <>
+                                {[
+                                  ...new Array(
+                                    Number(this.props.playerData.RealCoins)
+                                      .toString()
+                                      .split("").length
+                                  )
+                                ].map((item, id) => (
+                                  <span key={id}>*</span>
+                                ))}
+                              </>
+                            )}
+                            <Icon
+                              clicked={this.togglecashBalanceVisibility}
+                              icon={VisibilityButton}
+                              height="10"
+                            />
+                            <span
+                              style={{ cursor: "pointer" }}
+                              onClick={this.props.fetchPlayerData}
+                            >
+                              <Update size="small" color="white" />
+                            </span>
+                          </span>
+                        </li>
+                      </>
+                      <li className="nav-item dropdown">
+                        <a
+                          className="nav-link dropdown-toggle text-uppercase"
+                          href="drop"
+                          id="navbarDropdown"
+                          role="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          {this.props.playerData.DisplayName ||
+                            this.props.playerData.FullName}
+                        </a>
+                        <div
+                          className="dropdown-menu dropdown-menu-right"
+                          aria-labelledby="navbarDropdown"
+                        >
+                          <Link className="dropdown-item" to="edit-profile">
+                            Profile
+                          </Link>
+                          <Link className="dropdown-item" to="change-pin">
+                            Change Pin
+                          </Link>
+                          <Link className="dropdown-item" to="logout">
+                            Logout
+                          </Link>
+                        </div>
                       </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <div
+                    className="collapse navbar-collapse"
+                    id="navbarSupportedContent"
+                  >
+                    <ul className="navbar-nav mr-auto" />
+                    <ul className="navbar-nav">
                       <li className="nav-item">
                         <span className="nav-link text-uppercase mr-5">
-                          <Icon icon={CashIcon} height="18" />
-                          {this.state.cashBalance ? (
-                            <>
-                              &#8358;
-                              {new Intl.NumberFormat().format(
-                                this.props.playerData.RealCoins
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              {[
-                                ...new Array(
-                                  Number(this.props.playerData.RealCoins)
-                                    .toString()
-                                    .split("").length
-                                )
-                              ].map((item, id) => (
-                                <span key={id}>*</span>
-                              ))}
-                            </>
-                          )}
-                          <Icon
-                            clicked={this.togglecashBalanceVisibility}
-                            icon={VisibilityButton}
-                            height="10"
-                          />
-                          <span
-                            style={{ cursor: "pointer" }}
-                            onClick={this.props.fetchPlayerData}
-                          >
-                            <Update size="small" color="white" />
-                          </span>
+                          Not Available
                         </span>
                       </li>
-                    </>
-                    <li className="nav-item dropdown">
-                      <a
-                        className="nav-link dropdown-toggle text-uppercase"
-                        href="drop"
-                        id="navbarDropdown"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        {this.props.playerData.DisplayName ||
-                          this.props.playerData.FullName}
-                      </a>
-                      <div
-                        className="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="navbarDropdown"
-                      >
-                        <Link className="dropdown-item" to="edit-profile">
-                          Profile
-                        </Link>
-                        <Link className="dropdown-item" to="change-pin">
-                          Change Pin
-                        </Link>
-                        <Link className="dropdown-item" to="logout">
-                          Logout
-                        </Link>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                <div
-                  className="collapse navbar-collapse"
-                  id="navbarSupportedContent"
-                >
-                  <ul className="navbar-nav mr-auto" />
-                  <ul className="navbar-nav">
-                    <li className="nav-item">
-                      <span className="nav-link text-uppercase mr-5">
-                        Not Available
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </>
-          )}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
+          </MediaQuery>
         </nav>
       </HeaderWrapper>
     );

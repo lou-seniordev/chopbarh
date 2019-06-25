@@ -23,11 +23,10 @@ const HeaderWrapper = styled.div`
   flex-wrap: wrap;
 
   @media only screen and (max-width: ${breakpoint.mediumLite}) {
-    padding: 2rem 6rem;
+    padding: 2rem 3rem;
   }
 
   @media only screen and (max-width: ${breakpoint.small}) {
-    padding: 2rem 3rem;
     display: none;
   }
 

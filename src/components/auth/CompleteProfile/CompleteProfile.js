@@ -63,7 +63,7 @@ function CompleteProfile({ getUserInfo, history }) {
 
   return (
     <>
-      {/* <Helmet title={`Chopbarh \u{2192} Complete Profile`} /> */}
+      <Helmet title={`Chopbarh \u{2192} Complete Profile`} />
       <Header />
       {/* <SignUpWrapper>
         <Modal isOpen={isOpen} toggle={toggle} className="pt-5 mt-4">

@@ -243,7 +243,7 @@ export default function Hero() {
               <Image className="d-block" src={slider3BG} alt="Third slide" />
               <SliderContent className="text-center">
                 <HeadingTwo className="hero__title">
-                  No be come lick stew
+                  No be say come lick stew
                 </HeadingTwo>
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
               </SliderContent>

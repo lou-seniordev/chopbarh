@@ -60,7 +60,7 @@ function SetNickname(props) {
 
   return (
     <>
-      {/* <Helmet title={`Chopbarh \u{2192} Set Nickname`} /> */}
+      <Helmet title={`Chopbarh \u{2192} Set Nickname`} />
 
       <Header />
       <SignUpWrapper>
