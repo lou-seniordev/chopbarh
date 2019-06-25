@@ -22,7 +22,7 @@ export default function UserHome() {
       <div className="container">
         <div className="row">
           <div className="col-md-6 pl-0 d-sm-flex justify-content-sm-center">
-            <Voucher />
+            <Voucher fullWidth />
           </div>
           <div className="col-md-6 mt-4 pr-0">
             <TopEarners />

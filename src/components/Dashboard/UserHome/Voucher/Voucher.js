@@ -24,7 +24,7 @@ const FormWrapper = styled.form`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
-    align-self: flex-start;
+    align-self: ${props => (props.center ? "center" : "flex-start")};
 
     span {
       display: inline-block;
@@ -140,11 +140,11 @@ class Voucher extends Component {
   render() {
     return (
       <VoucherWrapper className="container pl-0">
-        <FormWrapper onSubmit={this.handleSubmit}>
+        <FormWrapper onSubmit={this.handleSubmit} center={this.props.center}>
           <FormItem>
             <label>Load Voucher</label>
           </FormItem>
-          <FormItem>
+          <FormItem fullWidth={this.props.fullWidth}>
             <NumberFormat
               format="#### #### #### ####"
               name="voucher"
@@ -156,6 +156,7 @@ class Voucher extends Component {
           <button
             type="submit"
             className="ml-2 mr-2"
+            center={this.props.center}
             disabled={
               this.state.loading ||
               this.state.voucher.split(" ").join("").length !== 16
