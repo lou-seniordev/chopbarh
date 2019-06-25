@@ -18,6 +18,10 @@ const HeadingTwo = styled.h3`
   font-weight: bold;
   color: #4c4c4c;
   margin-left: -15px;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    text-align: center;
+  }
 `;
 
 const HeadingThree = styled.h3`
@@ -42,6 +46,13 @@ const Column = styled.div`
 const Content = styled.div`
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+  }
 `;
 
 const Button = styled.button`
@@ -82,7 +93,7 @@ export default function QuickPlayTransaction() {
       <div className="row">
         <Column>
           <Content>
-            <Image alt="Ludo" className="mr-5" src={Image1} />
+            <Image alt="Ludo" className="mr-lg-5" src={Image1} />
             <div>
               <HeadingThree className="mt-4 mb-3">Table Soccer</HeadingThree>
               <p>
