@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Slider from "react-animated-slider";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
@@ -8,6 +9,8 @@ import sliderImage1 from "../../assets/img/SliderImage1.jpg";
 import sliderImage2 from "../../assets/img/SliderImage2.jpg";
 import sliderImage3 from "../../assets/img/SliderImage3.jpg";
 import sliderImage4 from "../../assets/img/SliderImage4.jpg";
+
+import "react-animated-slider/build/horizontal.css";
 
 const HeroWrapper = styled.div`
   height: 87vh;
@@ -167,142 +170,181 @@ const Button = styled.button`
 
 export default function Hero() {
   return (
-    <HeroWrapper>
+    <Slider
+      autoplay={3000}
+      classNames={{
+        nextButton: {
+          color: "#fff"
+        }
+      }}
+    >
       <div
-        id="carouselIndicators"
-        className="carousel slide"
-        data-ride="carousel"
-        data-interval="5000"
-        data-pause="false"
+        style={{
+          background: `url('${sliderImage1}') no-repeat center center`,
+          backgroundSize: "cover"
+        }}
       >
-        <ol className="carousel-indicators">
-          <li
-            data-target="#carouselIndicators"
-            data-slide-to="0"
-            className="active"
-          />
-          <li data-target="#carouselIndicators" data-slide-to="1" />
-          <li data-target="#carouselIndicators" data-slide-to="2" />
-          <li data-target="#carouselIndicators" data-slide-to="3" />
-          <li data-target="#carouselIndicators" data-slide-to="4" />
-        </ol>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <img className="d-block" src={Background} alt="First slide" />
-              <SliderContent first>
-                <HeadingTwoFirst className="hero__title">
-                  Play and Chop
-                </HeadingTwoFirst>
-                <ParagraphOne>
-                  Play and win from collection of childhood games that live up
-                  to the moment
-                </ParagraphOne>
-                <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-                  <Button className="mr-lg-4 mr-md-4 mr-sm-2">
-                    <span>Start Playing</span>
-                  </Button>
-                  <Button className="mr-lg-4 mr-md-4">
-                    <span>Get it on iOS</span>
-                  </Button>
-                  <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                    <span>Get it on Android</span>
-                  </Button>
-                </div>
-              </SliderContent>
-              <SliderImage className="d-block" src={slider1} alt="User" />
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div
-              style={{
-                position: "relative",
-                height: "87vh"
-              }}
-            >
-              <Image
-                className="d-block"
-                src={sliderImage1}
-                alt="Second slide"
-              />
-              <SliderContent className="text-center">
-                {/* <HeadingTwo className="hero__title">
-                  No Bank Account?
-                </HeadingTwo> */}
-                {/* <ParagraphOne>
-                  No problem, we will send your money to your phone number, then
-                  you can transfer to any account or withdraw from an ATM
-                </ParagraphOne> */}
-              </SliderContent>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={sliderImage2} alt="Third slide" />
-              <SliderContent className="text-center">
-                <HeadingTwo className="hero__title">
-                  No be say come lick stew
-                </HeadingTwo>
-                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              </SliderContent>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={sliderImage3} alt="Third slide" />
-              {/* <SliderContent className="text-center">
-                <HeadingTwo className="hero__title">
-                  No be say come lick stew
-                </HeadingTwo>
-                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              </SliderContent> */}
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div
-              style={{
-                position: "relative",
-                height: "87vh",
-                background: `${sliderImage4}`
-              }}
-            >
-              <Image className="d-block" src={sliderImage4} alt="Third slide" />
-              {/* <SliderContent className="text-center">
-                <HeadingTwo className="hero__title">
-                  No be say come lick stew
-                </HeadingTwo>
-                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              </SliderContent> */}
-            </div>
-          </div>
+        <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
         </div>
-        <a
-          className="carousel-control-prev"
-          href="#carouselIndicators"
-          role="button"
-          data-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselIndicators"
-          role="button"
-          data-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="sr-only">Next</span>
-        </a>
       </div>
-    </HeroWrapper>
+      <div
+        style={{
+          background: `url('${sliderImage2}') no-repeat center center`,
+          backgroundSize: "cover"
+        }}
+      >
+        <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div>
+      </div>
+      <div
+        style={{
+          background: `url('${sliderImage3}') no-repeat center center`,
+          height: "100vh",
+          backgroundSize: "cover"
+        }}
+      >
+        <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div>
+      </div>
+    </Slider>
   );
 }
 
-// No Bank Account?
-// No problem, we will send your money to your phone number, then you can transfer to any account or withdraw from an ATM
-
-// No be come lick stew
-// You go lick stew chop rice
-
-//
+// <HeroWrapper>
+//   <div
+//     id="carouselIndicators"
+//     className="carousel slide"
+//     data-ride="carousel"
+//     data-interval="5000"
+//     data-pause="false"
+//   >
+//     <ol className="carousel-indicators">
+//       <li
+//         data-target="#carouselIndicators"
+//         data-slide-to="0"
+//         className="active"
+//       />
+//       <li data-target="#carouselIndicators" data-slide-to="1" />
+//       <li data-target="#carouselIndicators" data-slide-to="2" />
+//       <li data-target="#carouselIndicators" data-slide-to="3" />
+//       <li data-target="#carouselIndicators" data-slide-to="4" />
+//     </ol>
+//     <div className="carousel-inner">
+//       <div className="carousel-item active">
+//         <div style={{ position: "relative", height: "87vh" }}>
+//           <img className="d-block" src={Background} alt="First slide" />
+//           <SliderContent first>
+//             <HeadingTwoFirst className="hero__title">
+//               Play and Chop
+//             </HeadingTwoFirst>
+//             <ParagraphOne>
+//               Play and win from collection of childhood games that live up
+//               to the moment
+//             </ParagraphOne>
+//             <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+//               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+//                 <span>Start Playing</span>
+//               </Button>
+//               <Button className="mr-lg-4 mr-md-4">
+//                 <span>Get it on iOS</span>
+//               </Button>
+//               <Button className="mr-lg-4 mr-md-4 mt-md-2">
+//                 <span>Get it on Android</span>
+//               </Button>
+//             </div>
+//           </SliderContent>
+//           <SliderImage className="d-block" src={slider1} alt="User" />
+//         </div>
+//       </div>
+//       <div className="carousel-item">
+//         <div
+//           style={{
+//             position: "relative",
+//             height: "87vh"
+//           }}
+//         >
+//           <Image
+//             className="d-block"
+//             src={sliderImage1}
+//             alt="Second slide"
+//           />
+//           <SliderContent className="text-center">
+//             {/* <HeadingTwo className="hero__title">
+//               No Bank Account?
+//             </HeadingTwo> */}
+//             {/* <ParagraphOne>
+//               No problem, we will send your money to your phone number, then
+//               you can transfer to any account or withdraw from an ATM
+//             </ParagraphOne> */}
+//           </SliderContent>
+//         </div>
+//       </div>
+//       <div className="carousel-item">
+//         <div style={{ position: "relative", height: "87vh" }}>
+//           <Image className="d-block" src={sliderImage2} alt="Third slide" />
+//           <SliderContent className="text-center">
+//             <HeadingTwo className="hero__title">
+//               No be say come lick stew
+//             </HeadingTwo>
+//             <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+//           </SliderContent>
+//         </div>
+//       </div>
+//       <div className="carousel-item">
+//         <div style={{ position: "relative", height: "87vh" }}>
+//           <Image className="d-block" src={sliderImage3} alt="Third slide" />
+//           {/* <SliderContent className="text-center">
+//             <HeadingTwo className="hero__title">
+//               No be say come lick stew
+//             </HeadingTwo>
+//             <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+//           </SliderContent> */}
+//         </div>
+//       </div>
+//       <div className="carousel-item">
+//         <div
+//           style={{
+//             position: "relative",
+//             height: "87vh",
+//             background: `${sliderImage4}`
+//           }}
+//         >
+//           <Image className="d-block" src={sliderImage4} alt="Third slide" />
+//           {/* <SliderContent className="text-center">
+//             <HeadingTwo className="hero__title">
+//               No be say come lick stew
+//             </HeadingTwo>
+//             <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+//           </SliderContent> */}
+//         </div>
+//       </div>
+//     </div>
+//     <a
+//       className="carousel-control-prev"
+//       href="#carouselIndicators"
+//       role="button"
+//       data-slide="prev"
+//     >
+//       <span className="carousel-control-prev-icon" aria-hidden="true" />
+//       <span className="sr-only">Previous</span>
+//     </a>
+//     <a
+//       className="carousel-control-next"
+//       href="#carouselIndicators"
+//       role="button"
+//       data-slide="next"
+//     >
+//       <span className="carousel-control-next-icon" aria-hidden="true" />
+//       <span className="sr-only">Next</span>
+//     </a>
+//   </div>
+// </HeroWrapper>

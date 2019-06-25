@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import NumberFormat from "react-number-format";
 // import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 // import axios from "axios";
@@ -156,12 +157,12 @@ class ChangePinForm extends Component {
 
     const newState = { ...this.state };
     const formState = {
-      OLD: newState.oldPin,
       NEW: newState.newPin,
+      OLD: newState.oldPin,
       playerId: this.props.id
     };
     formState["@class"] = ".LogEventRequest";
-    formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
+    // formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
     const formValue = JSON.stringify(formState);
 
     fetch(
@@ -179,16 +180,15 @@ class ChangePinForm extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        this.setState({ loading: false });
+        console.log(data, Object.values(data.error));
         // if (
-        //   !Object.values(data.error).length ||
-        //   !Object.values(data.scriptData).length
+        //   Object.values(data.error).length ||
+        //   Object.values(data.scriptData).length
         // ) {
-        //   toast.success("Password was reset successfully");
+        //   toast.error("Password was not reset successfully");
         //   this.setState({ oldPin: "", newPin: "", loading: false });
         // } else {
-        //   toast.success("Password was not reset");
+        //   toast.success("Password was reset successfully");
         // }
       })
       .catch(err => {
@@ -207,6 +207,8 @@ class ChangePinForm extends Component {
                 <FormItem>
                   <label>Old Pin</label>
                   <input
+                    minLength="4"
+                    maxLength="4"
                     type="password"
                     value={this.state.oldPin}
                     name="oldPin"
@@ -218,6 +220,8 @@ class ChangePinForm extends Component {
                 <FormItem>
                   <label>New Pin</label>
                   <input
+                    minLength="4"
+                    maxLength="4"
                     type="password"
                     value={this.state.newPin}
                     name="newPin"

@@ -87,6 +87,11 @@ const Button = styled.button`
 `;
 
 export default function QuickPlayTransaction() {
+  const settings = {
+    dots: true,
+    speed: 500
+  };
+
   return (
     <GameItemsWrapper>
       <HeadingTwo className="mt-4 mb-5">Quick Play</HeadingTwo>
