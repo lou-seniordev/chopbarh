@@ -4,8 +4,10 @@ import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import slider1 from "../../assets/img/slider_1.png";
-import slider2BG from "../../assets/img/slider_2_BG_1.png";
-import slider3BG from "../../assets/img/slider_3_BG_1.png";
+import sliderImage1 from "../../assets/img/SliderImage1.jpg";
+import sliderImage2 from "../../assets/img/SliderImage2.jpg";
+import sliderImage3 from "../../assets/img/SliderImage3.jpg";
+import sliderImage4 from "../../assets/img/SliderImage4.jpg";
 
 const HeroWrapper = styled.div`
   height: 87vh;
@@ -81,7 +83,9 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
+  /* object-position: center top; */
   width: 100%;
+  height: 100vh;
 `;
 
 const SliderImage = styled.img`
@@ -164,23 +168,6 @@ const Button = styled.button`
 export default function Hero() {
   return (
     <HeroWrapper>
-      {/* <HeroContentWrapper>
-        <HeadingTwo className="hero__title">Play and Chop</HeadingTwo>
-        <div className="mt-n4 ml-lg-1 ml-md-1">
-          <ParagraphOne>
-            Play and win from collection of childhood games that live up to the
-            moment
-          </ParagraphOne>
-        </div>
-        <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-          <Button className="mr-4">
-            <span>Start Playing</span>
-          </Button>
-          <Button className="ml-4">
-            <span>Download</span>
-          </Button>
-        </div>
-      </HeroContentWrapper> */}
       <div
         id="carouselIndicators"
         className="carousel slide"
@@ -196,6 +183,8 @@ export default function Hero() {
           />
           <li data-target="#carouselIndicators" data-slide-to="1" />
           <li data-target="#carouselIndicators" data-slide-to="2" />
+          <li data-target="#carouselIndicators" data-slide-to="3" />
+          <li data-target="#carouselIndicators" data-slide-to="4" />
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -225,8 +214,17 @@ export default function Hero() {
             </div>
           </div>
           <div className="carousel-item">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={slider2BG} alt="Second slide" />
+            <div
+              style={{
+                position: "relative",
+                height: "87vh"
+              }}
+            >
+              <Image
+                className="d-block"
+                src={sliderImage1}
+                alt="Second slide"
+              />
               <SliderContent className="text-center">
                 {/* <HeadingTwo className="hero__title">
                   No Bank Account?
@@ -240,13 +238,41 @@ export default function Hero() {
           </div>
           <div className="carousel-item">
             <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={slider3BG} alt="Third slide" />
+              <Image className="d-block" src={sliderImage2} alt="Third slide" />
               <SliderContent className="text-center">
                 <HeadingTwo className="hero__title">
                   No be say come lick stew
                 </HeadingTwo>
                 <ParagraphOne>You go lick stew chop rice</ParagraphOne>
               </SliderContent>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <div style={{ position: "relative", height: "87vh" }}>
+              <Image className="d-block" src={sliderImage3} alt="Third slide" />
+              {/* <SliderContent className="text-center">
+                <HeadingTwo className="hero__title">
+                  No be say come lick stew
+                </HeadingTwo>
+                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+              </SliderContent> */}
+            </div>
+          </div>
+          <div className="carousel-item">
+            <div
+              style={{
+                position: "relative",
+                height: "87vh",
+                background: `${sliderImage4}`
+              }}
+            >
+              <Image className="d-block" src={sliderImage4} alt="Third slide" />
+              {/* <SliderContent className="text-center">
+                <HeadingTwo className="hero__title">
+                  No be say come lick stew
+                </HeadingTwo>
+                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+              </SliderContent> */}
             </div>
           </div>
         </div>
