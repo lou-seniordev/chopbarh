@@ -347,7 +347,7 @@ class UserHeader extends Component {
                           </span>
                         </li>
                       </>
-                      <li className="nav-item dropdown">
+                      {/* <li className="nav-item dropdown">
                         <a
                           className="nav-link dropdown-toggle text-uppercase"
                           href="drop"
@@ -374,7 +374,7 @@ class UserHeader extends Component {
                             Logout
                           </Link>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 ) : (
