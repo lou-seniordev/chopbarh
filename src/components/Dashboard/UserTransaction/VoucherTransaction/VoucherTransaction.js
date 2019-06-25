@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import MediaQuery from "react-responsive";
 // import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import Voucher from "../../../Dashboard/UserHome/Voucher/Voucher";
@@ -86,8 +87,7 @@ const VoucherTransactionWrapper = styled.div`
 export default function VoucherTransaction() {
   return (
     <VoucherTransactionWrapper>
-      <div>
-        {/* <div>
+      {/* <div>
           <FormWrapper>
             <form>
               <FormItem>
@@ -108,8 +108,12 @@ export default function VoucherTransaction() {
             </form>
           </FormWrapper>
         </div> */}
+      <MediaQuery maxDeviceWidth={992}>
+        <Voucher center />
+      </MediaQuery>
+      <MediaQuery minDeviceWidth={992}>
         <Voucher />
-      </div>
+      </MediaQuery>
     </VoucherTransactionWrapper>
   );
 }
