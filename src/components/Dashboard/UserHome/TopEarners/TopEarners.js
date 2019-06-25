@@ -31,15 +31,17 @@ class TopEarners extends Component {
             >
               <tr>
                 <th scope="col">Top Earners</th>
-                <th scope="col" />
-                <th scope="col" />
+                <th scope="col">Game</th>
+                <th scope="col">Time</th>
+                <th scope="col">Winning</th>
               </tr>
             </thead>
             <tbody>
               {this.props.results.slice(0, 4).map(player => (
                 <tr key={player.PlayerID}>
                   <td>{player.FullName}</td>
-                  <td>{player.Email}</td>
+                  <td>{player.Game}</td>
+                  <td>{player.Time}</td>
                   <td>
                     &#8358;
                     {new Intl.NumberFormat().format(player.TotalWinning)}
