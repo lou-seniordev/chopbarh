@@ -11,7 +11,9 @@ export default function ChangePin() {
       <Helmet title={`Chopbarh \u{2192} Change Pin`} />
       <UserHeader />
       <UserNavigation />
-      <ChangePinForm />
+      <div style={{ minHeight: "80vh" }}>
+        <ChangePinForm />
+      </div>
       <Footer />
     </>
   );
