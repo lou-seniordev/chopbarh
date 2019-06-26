@@ -22,34 +22,36 @@ class TopEarners extends Component {
     return (
       <div>
         {this.props.results ? (
-          <table className="table table-striped">
-            <thead
-              style={{
-                background: "#8C1936",
-                color: "#fff"
-              }}
-            >
-              <tr>
-                <th scope="col">Top Earners</th>
-                <th scope="col">Game</th>
-                <th scope="col">Time</th>
-                <th scope="col">Winning</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.results.slice(0, 4).map(player => (
-                <tr key={player.PlayerID}>
-                  <td>{player.FullName}</td>
-                  <td>{player.Game}</td>
-                  <td>{player.Time}</td>
-                  <td>
-                    &#8358;
-                    {new Intl.NumberFormat().format(player.TotalWinning)}
-                  </td>
+          <div className="table responsive">
+            <table className="table table-striped">
+              <thead
+                style={{
+                  background: "#8C1936",
+                  color: "#fff"
+                }}
+              >
+                <tr>
+                  <th scope="col">Top Earners</th>
+                  <th scope="col">Game</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Winning</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.props.results.slice(0, 4).map(player => (
+                  <tr key={player.PlayerID}>
+                    <td>{player.FullName}</td>
+                    <td>{player.Game}</td>
+                    <td>{player.Time}</td>
+                    <td>
+                      &#8358;
+                      {new Intl.NumberFormat().format(player.TotalWinning)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <>
             {!this.props.error ? (

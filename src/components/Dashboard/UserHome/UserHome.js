@@ -23,14 +23,14 @@ export default function UserHome() {
       <div className="container">
         <div className="row">
           <div className="col-md-6 pl-0 d-sm-flex justify-content-sm-center">
-            <MediaQuery minDeviceWidth={768}>
+            <MediaQuery minDeviceWidth={767}>
               <Voucher />
             </MediaQuery>
-            <MediaQuery maxDeviceWidth={768}>
+            <MediaQuery maxDeviceWidth={767}>
               <Voucher center="true" />
             </MediaQuery>
           </div>
-          <div className="col-md-6 mt-4 pr-0">
+          <div className="col-md-6 mt-4 p-0">
             <TopEarners />
           </div>
         </div>
