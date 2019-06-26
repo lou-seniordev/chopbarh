@@ -97,23 +97,25 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.medium}) {
-    height: 5rem;
+    height: 4rem;
     width: 15rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    height: 5rem;
-    width: 15rem;
+    height: 3.2rem;
+    width: 10rem;
+    margin-top: 0.26rem;
+    margin-right: 0.3rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
-    height: 5rem;
-    width: 15rem;
+    height: 3rem;
+    width: 10rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smallest}) {
-    height: 5rem;
-    width: 15rem;
+    height: 3rem;
+    width: 10rem;
   }
 `;
 
@@ -179,10 +181,13 @@ const Button = styled.button`
 
   @media only screen and (max-width: ${breakPoints.medium}) {
     font-size: 1.3rem;
+    padding: 0.7rem 1.3rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
     font-size: 0.9rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
@@ -204,7 +209,7 @@ export default function Hero() {
           color: "#fff"
         }}
       >
-        <SliderContent first>
+        <SliderContent>
           <HeadingTwoFirst className="hero__title">
             Play and Chop
           </HeadingTwoFirst>
@@ -219,7 +224,7 @@ export default function Hero() {
             <span style={{ cursor: "pointer" }}>
               <Image
                 src={AppStoreButton}
-                className="mr-lg-4 mr-md-4 mr-sm-2"
+                className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
                 alt="App Store"
               />
             </span>
