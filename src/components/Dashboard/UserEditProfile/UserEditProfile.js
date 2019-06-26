@@ -11,7 +11,9 @@ export default function UserEditProfile() {
       <Helmet title={`Chopbarh \u{2192} Profile`} />
       <UserHeader />
       <UserNavigation />
-      <EditProfileForm />
+      <div style={{ minHeight: "80vh" }}>
+        <EditProfileForm />
+      </div>
       <Footer />
     </>
   );
