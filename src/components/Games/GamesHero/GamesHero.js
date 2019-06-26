@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
-import Background from "../../assets/img/games_BG.png";
+import Background from "../../assets/img/SliderImage5.jpg";
 
 const GamesHeroWrapper = styled.div`
   height: 100vh;

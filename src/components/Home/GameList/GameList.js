@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
-import Image1 from "../../assets/img/ChopBarhPairs2.png";
-import Image2 from "../../assets/img/ChopBarhPairs3.png";
-import Image3 from "../../assets/img/ChopBarhPairs4.png";
-import Image4 from "../../assets/img/ChopBarhPairs5.png";
-import Image5 from "../../assets/img/ChopBarhPairs6.png";
+import Image1 from "../../assets/img/ChopBarhPairs1.png";
+import Image2 from "../../assets/img/ChopBarhPairs2.png";
+import Image3 from "../../assets/img/ChopBarhPairs3.png";
+import Image4 from "../../assets/img/ChopBarhPairs4.png";
+import Image5 from "../../assets/img/ChopBarhPairs5.png";
+import Image6 from "../../assets/img/ChopBarhPairs6.png";
 
 const GamesWrapper = styled.div`
   text-align: center;
@@ -79,11 +80,12 @@ export default function GameList() {
           fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat.
         </ParagraphOne>
         <ImageContainer>
-          <Image src={Image1} alt="Game" />
+          {/* <Image src={Image1} alt="Game" />
           <Image src={Image2} alt="Game" />
-          <Image src={Image3} alt="Game" />
+          <Image src={Image3} alt="Game" /> */}
           <Image src={Image4} alt="Game" />
           <Image src={Image5} alt="Game" />
+          <Image src={Image6} alt="Game" />
         </ImageContainer>
         <Button className="mt-3">
           <span>Explore</span>

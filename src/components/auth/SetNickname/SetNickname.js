@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
-import { useFormState } from "react-use-form-state";
-import axios from "axios";
+// import axios from "axios";
 import { Modal, ModalBody } from "reactstrap";
 import Header from "../../UI/Header/Header";
 import {
@@ -14,7 +13,6 @@ import {
 } from "../../styles/SignUpStyles";
 
 function SetNickname(props) {
-  const [formState, { text }] = useFormState();
   const [loading, setLoading] = useState(false);
   const [isOpen, setModalIsOpen] = useState(false);
 
@@ -25,37 +23,6 @@ function SetNickname(props) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    formState.values["@class"] = ".LogEventRequest";
-    formState.values["eventKey"] = ".LogEventRequest";
-    formState.values["playerId"] = localStorage.getItem("chopbarh-id")
-      ? localStorage.getItem("chopbarh-id")
-      : null;
-
-    const formValue = JSON.stringify(formState.values);
-    axios(
-      "https://c373328ysyuR.preview.gamesparks.net/rs/debug/AtfFvlREyWLhhmtWKbG13ASCyTCLLlm5/RegistrationRequest",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          setLoading(false);
-          setModalIsOpen(true);
-        } else {
-          setLoading(false);
-          props.history.push("/user");
-        }
-      })
-      .catch(err => {
-        setModalIsOpen(true);
-        setLoading(false);
-      });
   };
 
   return (
@@ -75,7 +42,7 @@ function SetNickname(props) {
             <HeadingTwo className="mb-4">Set Nickname</HeadingTwo>
             <FormItem>
               <label>Nickname</label>
-              <input {...text("NickName")} required />
+              {/* <input {...text("NickName")} required /> */}
             </FormItem>
             <button type="submit" className="mr-2" disabled={loading}>
               <span>{loading ? "Please wait..." : "Submit"}</span>
