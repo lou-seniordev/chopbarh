@@ -37,7 +37,9 @@ export default function UserHome() {
       </div>
       <div className="container">
         <div className="row">
-          <QuickPlayTransaction />
+          <div className="col-md-12">
+            <QuickPlayTransaction />
+          </div>
         </div>
       </div>
       <Footer />

@@ -1,9 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+// import {
+//   CarouselProvider,
+//   Slider,
+//   Slide,
+//   ButtonBack,
+//   ButtonNext
+// } from "pure-react-carousel";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 import Image1 from "../../../assets/img/ChopBarhPairs6.png";
 import Image2 from "../../../assets/img/ChopBarhPairs2.png";
+
+import Slider from "react-animated-slider";
+
+import "react-animated-slider/build/horizontal.css";
+
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const HeadingTwo = styled.h2`
   font-size: 3.5rem;
@@ -56,8 +69,10 @@ const ParagraphOne = styled.p`
 
 const Image = styled.img`
   /* object-position: center top; */
-  width: 100%;
-  height: 100vh;
+  /* width: 100%;
+  height: 100vh; */
+  height: 20rem;
+  background: crimson;
 `;
 
 const SliderImage = styled.img`
@@ -108,6 +123,8 @@ const Button = styled.button`
   transform: skew(-20deg);
   display: inline-block;
   transition: all 0.2s;
+  background: ${color.colorPrimaryHover};
+  color: ${color.colorWhite};
 
   span {
     display: inline-block;
@@ -116,8 +133,6 @@ const Button = styled.button`
 
   &:hover {
     transform: translateY(-3px) skew(-20deg);
-    color: ${color.colorWhite};
-    background: ${color.colorPrimaryHover};
   }
 
   @media only screen and (max-width: ${breakPoints.medium}) {
@@ -138,7 +153,8 @@ const Button = styled.button`
 `;
 
 const GameItemsWrapper = styled.div`
-  margin-top: 7rem;
+  margin: 7rem 0;
+  text-align: center;
 `;
 
 // const Image = styled.img`
@@ -222,139 +238,148 @@ export default function QuickPlayTransaction() {
   return (
     <GameItemsWrapper>
       <HeadingTwo className="mt-4 mb-5">Quick Play</HeadingTwo>
-      <div
-        id="carouselIndicators"
-        className="carousel slide"
-        data-ride="carousel"
-        data-interval="5000"
-        data-pause="false"
-      >
-        <ol className="carousel-indicators">
-          <li
-            data-target="#carouselIndicators"
-            data-slide-to="0"
-            className="active"
-          />
-          <li data-target="#carouselIndicators" data-slide-to="1" />
-          <li data-target="#carouselIndicators" data-slide-to="2" />
-          <li data-target="#carouselIndicators" data-slide-to="3" />
-          <li data-target="#carouselIndicators" data-slide-to="4" />
-        </ol>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <div
-              style={{
-                position: "relative",
-                height: "87vh"
-              }}
-            >
-              <SliderContent className="text-center">
-                <Image className="d-block" src={Image1} alt="Second slide" />
-                <HeadingTwo className="hero__title">
-                  No Bank Account?
-                </HeadingTwo>
-                <ParagraphOne>
-                  No problem, we will send your money to your phone number, then
-                  you can transfer to any account or withdraw from an ATM
-                </ParagraphOne>
-              </SliderContent>
+      <Slider autoplay={3000}>
+        <div>
+          <SliderContent>
+            <Image src={Image1} alt="The Image" />
+            <HeadingTwoFirst className="hero__title mt-5">
+              Play and Chop
+            </HeadingTwoFirst>
+            <ParagraphOne>
+              Play and win from collection of childhood games that live up to
+              the moment
+            </ParagraphOne>
+            <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
+              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+                <span>Start Playing</span>{" "}
+              </Button>
+              <Button className="mr-lg-4 mr-md-4">
+                <span>Get it on iOS</span>
+              </Button>
+              <Button className="mr-lg-4 mr-md-4 mt-md-2">
+                <span>Get it on Android</span>
+              </Button>
             </div>
-          </div>
-          <div className="carousel-item">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={Image2} alt="Third slide" />
-              <SliderContent className="text-center">
-                <HeadingTwo className="hero__title">
-                  No be say come lick stew
-                </HeadingTwo>
-                <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              </SliderContent>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div style={{ position: "relative", height: "87vh" }}>
-              <Image className="d-block" src={Image1} alt="Third slide" />
-              {/* <SliderContent className="text-center">
+          </SliderContent>
+          {/* <SliderImage className="d-block" src={slider1} alt="User" /> */}
+        </div>
+        <div
+          style={{
+            background: `url('${Image1}') no-repeat center center`,
+            backgroundSize: "cover"
+          }}
+        >
+          {/* <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div> */}
+        </div>
+        <div
+          style={{
+            background: `url('${Image2}') no-repeat center center`,
+            backgroundSize: "cover",
+            color: "#fff"
+          }}
+        >
+          <SliderContent className="text-center">
             <HeadingTwo className="hero__title">
               No be say come lick stew
             </HeadingTwo>
             <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-          </SliderContent> */}
-            </div>
-          </div>
+          </SliderContent>
         </div>
-        <a
-          className="carousel-control-prev"
-          href="#carouselIndicators"
-          role="button"
-          data-slide="prev"
+        <div
+          style={{
+            background: `url('${Image1}') no-repeat center center`,
+            height: "100vh",
+            backgroundSize: "cover"
+          }}
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          className="carousel-control-next"
-          href="#carouselIndicators"
-          role="button"
-          data-slide="next"
+          {/* <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div> */}
+        </div>
+        <div
+          style={{
+            background: `url('${Image2}') no-repeat center center`,
+            height: "100vh",
+            backgroundSize: "cover"
+          }}
         >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="sr-only">Next</span>
-        </a>
-      </div>
+          {/* <div className="center">
+          <h1>title</h1>
+          <p>description</p>
+          <button>button</button>
+        </div> */}
+        </div>
+      </Slider>
+      {/* <CarouselProvider
+        naturalSlideWidth={50}
+        naturalSlideHeight={50}
+        totalSlides={3}
+      >
+        <Slider>
+          <Slide index={0}>I am the first</Slide>
+          <Slide index={1}>I am the second</Slide>
+          <Slide index={2}>I am the third</Slide>
+        </Slider>
+        <ButtonBack>Back</ButtonBack>
+        <ButtonNext>Next</ButtonNext>
+      </CarouselProvider> */}
       {/* <div className="row">
-      
-          <Column>
-            <Content>
-              <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image1} />
-              <div>
-                <HeadingThree className="mt-4 mb-3">Table Soccer</HeadingThree>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-                  mollitia fugiat veritatis omnis, iste, itaque cupiditate
-                  facilis reiciendis ex repellat accusamus sint, nostrum non
-                  blanditiis at pariatur distinctio beatae magni.
-                </p>
-                <div className="mt-2">
-                  <Button>
-                    <span>Web Version</span>
-                  </Button>
-                  <Button>
-                    <span>Google Play</span>
-                  </Button>
-                  <Button>
-                    <span>iOS Store</span>
-                  </Button>
-                </div>
+        <Column>
+          <Content>
+            <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image1} />
+            <div>
+              <HeadingThree className="mt-4 mb-3">Table Soccer</HeadingThree>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+                mollitia fugiat veritatis omnis, iste, itaque cupiditate facilis
+                reiciendis ex repellat accusamus sint, nostrum non blanditiis at
+                pariatur distinctio beatae magni.
+              </p>
+              <div className="mt-2">
+                <Button>
+                  <span>Web Version</span>
+                </Button>
+                <Button>
+                  <span>Google Play</span>
+                </Button>
+                <Button>
+                  <span>iOS Store</span>
+                </Button>
               </div>
-            </Content>
-          </Column>
-          <Column>
-            <Content>
-              <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image2} />
-              <div>
-                <HeadingThree className="mt-4 mb-3">Dice</HeadingThree>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-                  mollitia fugiat veritatis omnis, iste, itaque cupiditate
-                  facilis reiciendis ex repellat accusamus sint, nostrum non
-                  blanditiis at pariatur distinctio beatae magni.
-                </p>
-                <div className="mt-2">
-                  <Button>
-                    <span>Web Version</span>
-                  </Button>
-                  <Button>
-                    <span>Google Play</span>
-                  </Button>
-                  <Button>
-                    <span>iOS Store</span>
-                  </Button>
-                </div>
+            </div>
+          </Content>
+        </Column>
+        <Column>
+          <Content>
+            <Image alt="Ludo" className="mr-lg-5 mr-md-3" src={Image2} />
+            <div>
+              <HeadingThree className="mt-4 mb-3">Dice</HeadingThree>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+                mollitia fugiat veritatis omnis, iste, itaque cupiditate facilis
+                reiciendis ex repellat accusamus sint, nostrum non blanditiis at
+                pariatur distinctio beatae magni.
+              </p>
+              <div className="mt-2">
+                <Button>
+                  <span>Web Version</span>
+                </Button>
+                <Button>
+                  <span>Google Play</span>
+                </Button>
+                <Button>
+                  <span>iOS Store</span>
+                </Button>
               </div>
-            </Content>
-          </Column>
-    
+            </div>
+          </Content>
+        </Column>
       </div> */}
     </GameItemsWrapper>
   );
