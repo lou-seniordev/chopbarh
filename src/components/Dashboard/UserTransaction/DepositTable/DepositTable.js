@@ -19,7 +19,8 @@ class DepositTable extends Component {
     return (
       <DepositTableWrapper>
         {this.props.depositData ? (
-          <table className="table table-striped table-responsive">
+          <div className="table-responsive">
+          <table className="table table-striped">
             <thead
               style={{
                 background: "#8C1936",
@@ -61,6 +62,7 @@ class DepositTable extends Component {
               ))}
             </tbody>
           </table>
+          </div>
         ) : (
           <>
             {!this.props.error ? (

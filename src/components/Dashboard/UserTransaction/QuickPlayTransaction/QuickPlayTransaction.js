@@ -16,26 +16,6 @@ const HeadingTwo = styled.h2`
   text-transform: uppercase;
   font-style: italic;
   font-weight: bold;
-
-  @media only screen and (max-width: ${breakPoints.medium}) {
-    font-size: 6rem;
-  }
-
-  @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 4.5rem;
-  }
-
-  @media only screen and (max-width: ${breakPoints.smaller}) {
-    font-size: 3.5rem;
-  }
-
-  @media only screen and (max-width: ${breakPoints.smallest}) {
-    font-size: 3rem;
-  }
-
-  @media only screen and (max-width: 350px) {
-    font-size: 2.5rem;
-  }
 `;
 
 const HeadingTwoFirst = styled(HeadingTwo)`
