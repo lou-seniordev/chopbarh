@@ -10,6 +10,7 @@ import sliderImage2 from "../../assets/img/SliderImage2.jpg";
 import sliderImage3 from "../../assets/img/SliderImage3.jpg";
 import sliderImage4 from "../../assets/img/SliderImage4.jpg";
 import AppStoreButton from "../../assets/img/AppStore.png";
+import PlayStoreButton from "../../assets/img/PlayStore.png";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -88,6 +89,32 @@ const ParagraphOne = styled.p`
 
 const Image = styled.img`
   height: 5rem;
+  width: 15rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    height: 5rem;
+    width: 15rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    height: 5rem;
+    width: 15rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    height: 5rem;
+    width: 15rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    height: 5rem;
+    width: 15rem;
+  }
 `;
 
 const SliderImage = styled.img`
@@ -189,10 +216,20 @@ export default function Hero() {
             <Button className="mr-lg-4 mr-md-4 mr-sm-2">
               <span>Start Playing</span>{" "}
             </Button>
-            <Image src={AppStoreButton} alt="App Store" />
-            <Button className="mr-lg-4 mr-md-4 mt-md-2">
-              <span>Get it on Android</span>
-            </Button>
+            <span style={{ cursor: "pointer" }}>
+              <Image
+                src={AppStoreButton}
+                className="mr-lg-4 mr-md-4 mr-sm-2"
+                alt="App Store"
+              />
+            </span>
+            <span style={{ cursor: "pointer" }}>
+              <Image
+                src={PlayStoreButton}
+                className="mr-lg-4 mr-md-4 mr-sm-2"
+                alt="Play Store"
+              />
+            </span>
           </div>
         </SliderContent>
         <SliderImage className="d-block" src={slider1} alt="User" />
