@@ -72,10 +72,10 @@ export default function Footer() {
   return (
     <FooterWrapper className="footer">
       <FooterContainer className="footer__container">
-        <div>
+        <div className="mb-3">
           <img src={Logo} alt="Logo" />
         </div>
-        <div>
+        <div className="mb-3">
           <FooterLinkHeader>
             <p>Chopbarh</p>
           </FooterLinkHeader>
@@ -97,7 +97,7 @@ export default function Footer() {
             </p>
           </FooterLinkContainer>
         </div>
-        <div>
+        <div className="mb-3">
           <FooterLinkHeader>
             <p>Help</p>
           </FooterLinkHeader>
@@ -119,7 +119,7 @@ export default function Footer() {
             </p>
           </FooterLinkContainer>
         </div>
-        <div className="align-self-start">
+        <div className="align-self-start mb-3">
           <FooterLinkHeader>
             <p>Contact Us</p>
           </FooterLinkHeader>
