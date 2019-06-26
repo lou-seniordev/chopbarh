@@ -3,8 +3,11 @@ import styled from "styled-components";
 import Slider from "react-animated-slider";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import Image1 from "../../../assets/img/ChopBarhPairs6.png";
 import Image2 from "../../../assets/img/ChopBarhPairs2.png";
+import Image3 from "../../../assets/img/ChopBarhPairs3.png";
+import Image4 from "../../../assets/img/ChopBarhPairs4.png";
+import Image5 from "../../../assets/img/ChopBarhPairs5.png";
+import Image6 from "../../../assets/img/ChopBarhPairs6.png";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -119,7 +122,7 @@ const Button = styled.button`
 `;
 
 const GameItemsWrapper = styled.div`
-  margin: 7rem 0;
+  margin: 7rem 0 2rem 0;
   text-align: center;
 `;
 
@@ -130,7 +133,7 @@ export default function QuickPlayTransaction() {
       <Slider autoplay={3000} infinite="true">
         <div>
           <SliderContent>
-            <Image src={Image1} alt="The Image" />
+            <Image src={Image2} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
             </HeadingTwoFirst>
@@ -153,7 +156,76 @@ export default function QuickPlayTransaction() {
         </div>
         <div>
           <SliderContent>
-            <Image src={Image2} alt="The Image" />
+            <Image src={Image3} alt="The Image" />
+            <HeadingTwoFirst className="hero__title mt-5">
+              Play and Chop
+            </HeadingTwoFirst>
+            <ParagraphOne>
+              Play and win from collection of childhood games that live up to
+              the moment
+            </ParagraphOne>
+            <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
+              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+                <span>Start Playing</span>{" "}
+              </Button>
+              <Button className="mr-lg-4 mr-md-4">
+                <span>Get it on iOS</span>
+              </Button>
+              <Button className="mr-lg-4 mr-md-4 mt-md-2">
+                <span>Get it on Android</span>
+              </Button>
+            </div>
+          </SliderContent>
+        </div>
+        <div>
+          <SliderContent>
+            <Image src={Image4} alt="The Image" />
+            <HeadingTwoFirst className="hero__title mt-5">
+              Play and Chop
+            </HeadingTwoFirst>
+            <ParagraphOne>
+              Play and win from collection of childhood games that live up to
+              the moment
+            </ParagraphOne>
+            <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
+              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+                <span>Start Playing</span>{" "}
+              </Button>
+              <Button className="mr-lg-4 mr-md-4">
+                <span>Get it on iOS</span>
+              </Button>
+              <Button className="mr-lg-4 mr-md-4 mt-md-2">
+                <span>Get it on Android</span>
+              </Button>
+            </div>
+          </SliderContent>
+        </div>
+        <div>
+          <SliderContent>
+            <Image src={Image5} alt="The Image" />
+            <HeadingTwoFirst className="hero__title mt-5">
+              Play and Chop
+            </HeadingTwoFirst>
+            <ParagraphOne>
+              Play and win from collection of childhood games that live up to
+              the moment
+            </ParagraphOne>
+            <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
+              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+                <span>Start Playing</span>{" "}
+              </Button>
+              <Button className="mr-lg-4 mr-md-4">
+                <span>Get it on iOS</span>
+              </Button>
+              <Button className="mr-lg-4 mr-md-4 mt-md-2">
+                <span>Get it on Android</span>
+              </Button>
+            </div>
+          </SliderContent>
+        </div>
+        <div>
+          <SliderContent>
+            <Image src={Image6} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
             </HeadingTwoFirst>
