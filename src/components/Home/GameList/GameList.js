@@ -80,9 +80,9 @@ export default function GameList() {
           fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat.
         </ParagraphOne>
         <ImageContainer>
-          {/* <Image src={Image1} alt="Game" />
+          <Image src={Image1} alt="Game" />
           <Image src={Image2} alt="Game" />
-          <Image src={Image3} alt="Game" /> */}
+          <Image src={Image3} alt="Game" />
           <Image src={Image4} alt="Game" />
           <Image src={Image5} alt="Game" />
           <Image src={Image6} alt="Game" />
