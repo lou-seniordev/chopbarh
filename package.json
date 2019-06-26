@@ -10,6 +10,7 @@
     "enzyme-adapter-react-16": "^1.13.2",
     "firebase": "^6.1.0",
     "grommet-icons": "^4.2.0",
+    "pure-react-carousel": "^1.21.1",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",
     "react-animated-slider": "^1.1.4",
