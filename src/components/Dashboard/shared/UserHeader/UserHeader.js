@@ -39,9 +39,9 @@ class UserHeader extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.isPlayerDataAvailable) {
-      this.props.fetchPlayerData();
-    }
+    this.props.fetchPlayerData();
+    // if (!this.props.isPlayerDataAvailable) {
+    // }
   };
 
   togglecashBalanceVisibility = () => {
@@ -100,12 +100,12 @@ class UserHeader extends Component {
                       <>
                         <li className="nav-item">
                           <span className="nav-link text-uppercase mr-5">
-                              <span
-                                style={{ cursor: "pointer" }}
-                                onClick={this.props.fetchPlayerData}
-                              >
-                                <Update size="small" color="white" />
-                              </span>
+                            <span
+                              style={{ cursor: "pointer" }}
+                              onClick={this.props.fetchPlayerData}
+                            >
+                              <Update size="small" color="white" />
+                            </span>
                             <Icon icon={CoinSymbol} height="15" />
                             {this.state.coinBalance ? (
                               <>
@@ -132,7 +132,6 @@ class UserHeader extends Component {
                               icon={VisibilityButton}
                               height="10"
                             />
-                            
                           </span>
                         </li>
                         <li className="nav-item">
@@ -163,7 +162,6 @@ class UserHeader extends Component {
                               icon={VisibilityButton}
                               height="10"
                             />
-                            
                           </span>
                         </li>
                       </>
@@ -266,15 +264,15 @@ class UserHeader extends Component {
                             Transactions
                           </span>
                         </Link>
-            
+
                         <li className="nav-item">
                           <span className="nav-link text-uppercase mr-5">
-                              <span
-                                style={{ cursor: "pointer" }}
-                                onClick={this.props.fetchPlayerData}
-                              >
-                                <Update size="small" color="white" />
-                              </span>
+                            <span
+                              style={{ cursor: "pointer" }}
+                              onClick={this.props.fetchPlayerData}
+                            >
+                              <Update size="small" color="white" />
+                            </span>
                             <Icon icon={CoinSymbol} height="15" />
                             {this.state.coinBalance ? (
                               <>
@@ -301,7 +299,6 @@ class UserHeader extends Component {
                               icon={VisibilityButton}
                               height="10"
                             />
-                            
                           </span>
                         </li>
                         <li className="nav-item">
@@ -332,7 +329,6 @@ class UserHeader extends Component {
                               icon={VisibilityButton}
                               height="10"
                             />
-                            
                           </span>
                         </li>
                       </>
