@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-animated-slider";
+import { ScrollTo } from "react-scroll-to";
+import MediaQuery from "react-responsive";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
@@ -199,98 +201,133 @@ const Button = styled.button`
   }
 `;
 
+const Container = styled.div`
+  position: relative;
+`;
+
+const ScrollContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+`;
+
 export default function Hero() {
   return (
-    <Slider autoplay={3000}>
-      <div
-        style={{
-          background: `url('${Background}') no-repeat center center`,
-          backgroundSize: "cover",
-          color: "#fff"
-        }}
-      >
-        <SliderContent>
-          <HeadingTwoFirst className="hero__title">
-            Play and Chop
-          </HeadingTwoFirst>
-          <ParagraphOne>
-            Play and win from collection of childhood games that live up to the
-            moment
-          </ParagraphOne>
-          <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-            <Button className="mr-lg-4 mr-md-4 mr-sm-2">
-              <span>Start Playing</span>{" "}
-            </Button>
-            <span style={{ cursor: "pointer" }}>
-              <Image
-                src={AppStoreButton}
-                className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
-                alt="App Store"
-              />
-            </span>
-            <span style={{ cursor: "pointer" }}>
-              <Image
-                src={PlayStoreButton}
-                className="mr-lg-4 mr-md-4 mr-sm-2"
-                alt="Play Store"
-              />
-            </span>
-          </div>
-        </SliderContent>
-        <SliderImage className="d-block" src={slider1} alt="User" />
-      </div>
-      <div
-        style={{
-          background: `url('${sliderImage1}') no-repeat center center`,
-          backgroundSize: "cover"
-        }}
-      >
-        {/* <div className="center">
+    <Container>
+      <MediaQuery minDeviceWidth={767}>
+        <ScrollTo>
+          {({ scrollTo }) => (
+            <ScrollContainer style={{ zIndex: "20000", background: "green" }}>
+              <button onClick={() => scrollTo({ x: 0, y: 700, smooth: true })}>
+                Scroll
+              </button>
+            </ScrollContainer>
+          )}
+        </ScrollTo>
+      </MediaQuery>
+      <MediaQuery maxDeviceWidth={767}>
+        <ScrollTo>
+          {({ scrollTo }) => (
+            <ScrollContainer style={{ zIndex: "20000", background: "green" }}>
+              <button onClick={() => scrollTo({ x: 0, y: 530, smooth: true })}>
+                Scroll
+              </button>
+            </ScrollContainer>
+          )}
+        </ScrollTo>
+      </MediaQuery>
+      <Slider autoplay={3000}>
+        <div
+          style={{
+            background: `url('${Background}') no-repeat center center`,
+            backgroundSize: "cover",
+            color: "#fff"
+          }}
+        >
+          <SliderContent>
+            <HeadingTwoFirst className="hero__title">
+              Play and Chop
+            </HeadingTwoFirst>
+            <ParagraphOne>
+              Play and win from collection of childhood games that live up to
+              the moment
+            </ParagraphOne>
+            <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+                <span>Start Playing</span>{" "}
+              </Button>
+              <span style={{ cursor: "pointer" }}>
+                <Image
+                  src={AppStoreButton}
+                  className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+                  alt="App Store"
+                />
+              </span>
+              <span style={{ cursor: "pointer" }}>
+                <Image
+                  src={PlayStoreButton}
+                  className="mr-lg-4 mr-md-4 mr-sm-2"
+                  alt="Play Store"
+                />
+              </span>
+            </div>
+          </SliderContent>
+          <SliderImage className="d-block" src={slider1} alt="User" />
+        </div>
+        <div
+          style={{
+            background: `url('${sliderImage1}') no-repeat center center`,
+            backgroundSize: "cover"
+          }}
+        >
+          {/* <div className="center">
           <h1>title</h1>
           <p>description</p>
           <button>button</button>
         </div> */}
-      </div>
-      <div
-        style={{
-          background: `url('${sliderImage2}') no-repeat center center`,
-          backgroundSize: "cover",
-          color: "#fff"
-        }}
-      >
-        <SliderContent className="text-center">
-          <HeadingTwo className="hero__title">
-            No be say come lick stew
-          </HeadingTwo>
-          <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-        </SliderContent>
-      </div>
-      <div
-        style={{
-          background: `url('${sliderImage3}') no-repeat center center`,
-          height: "100vh",
-          backgroundSize: "cover"
-        }}
-      >
-        {/* <div className="center">
+        </div>
+        <div
+          style={{
+            background: `url('${sliderImage2}') no-repeat center center`,
+            backgroundSize: "cover",
+            color: "#fff"
+          }}
+        >
+          <SliderContent className="text-center">
+            <HeadingTwo className="hero__title">
+              No be say come lick stew
+            </HeadingTwo>
+            <ParagraphOne>You go lick stew chop rice</ParagraphOne>
+          </SliderContent>
+        </div>
+        <div
+          style={{
+            background: `url('${sliderImage3}') no-repeat center center`,
+            height: "100vh",
+            backgroundSize: "cover"
+          }}
+        >
+          {/* <div className="center">
           <h1>title</h1>
           <p>description</p>
           <button>button</button>
         </div> */}
-      </div>
-      <div
-        style={{
-          background: `url('${sliderImage4}') no-repeat center center`,
-          height: "100vh",
-          backgroundSize: "cover"
-        }}
-      >
-        {/* <div className="center">
+        </div>
+        <div
+          style={{
+            background: `url('${sliderImage4}') no-repeat center center`,
+            height: "100vh",
+            backgroundSize: "cover"
+          }}
+        >
+          {/* <div className="center">
           <h1>title</h1>
           <p>description</p>
           <button>button</button>
         </div> */}
-      </div>
-    </Slider>
+        </div>
+      </Slider>
+    </Container>
   );
 }
