@@ -3037,7 +3037,7 @@ create-react-context@<=0.2.2:
     fbjs "^0.8.0"
     gud "^1.0.0"
 
-create-react-context@^0.2.2:
+create-react-context@^0.2.2, create-react-context@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.3.tgz#9ec140a6914a22ef04b8b09b7771de89567cb6f3"
   integrity sha512-CQBmD0+QGgTaxDL3OX1IDXYqjkp2It4RIbcb99jS6AEg27Ga+a9G3JtK6SIu0HBwPLZlmwt9F7UwWA4Bn92Rag==
@@ -9100,6 +9100,13 @@ react-scripts@2.1.8:
     workbox-webpack-plugin "3.6.3"
   optionalDependencies:
     fsevents "1.2.4"
+
+react-scroll-to@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/react-scroll-to/-/react-scroll-to-2.0.9.tgz#2e846eccb8ed043da4da6a075044b2e80780d250"
+  integrity sha512-kz5Wz7SZgrKOf28RIjPpkJOwIYpiuZz4yFHBGQ6d7CVjVyut/Uxtzy4Wmc0MUh9B2XgI5L7FYaGKU6EurPe0pA==
+  dependencies:
+    create-react-context "^0.2.3"
 
 react-side-effect@^1.1.0:
   version "1.1.5"
