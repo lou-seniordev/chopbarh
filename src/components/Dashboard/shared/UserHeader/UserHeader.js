@@ -377,7 +377,7 @@ class UserHeader extends Component {
                     <ul className="navbar-nav mr-auto" />
                     <ul className="navbar-nav">
                       <li className="nav-item">
-                        <span className="nav-link text-uppercase mr-5">
+                        <span className="nav-link text-center text-uppercase mr-5">
                           Not Available
                         </span>
                       </li>
