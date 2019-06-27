@@ -244,32 +244,29 @@ class UserHeader extends Component {
                           <Icon icon={Home} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">Home</span>
                         </Link>
-                        <Link className="" to="user">
+                        <Link className="" to="deposit">
                           <Icon icon={Deposit} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">
                             Deposit
                           </span>
                         </Link>
-                        <Link className="" to="user">
+                        <Link className="" to="withdraw">
                           <Icon icon={Withdrawal} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">
                             Withdraw
                           </span>
                         </Link>
-                        <Link className="" to="user">
+                        <Link className="" to="play">
                           <Icon icon={Play} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">Play</span>
                         </Link>
-                        <Link className="" to="user">
+                        <Link className="" to="transaction">
                           <Icon icon={Transactions} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">
                             Transactions
                           </span>
                         </Link>
-                        <Link className="" to="user">
-                          <Icon icon={Home} height="15" color="#fff" />
-                          <span className="nav-link text-uppercase">Home</span>
-                        </Link>
+            
                         <li className="nav-item">
                           <span className="nav-link text-uppercase mr-5">
                               <span
