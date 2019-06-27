@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Slider from "react-animated-slider";
 import { ScrollTo } from "react-scroll-to";
 import MediaQuery from "react-responsive";
+import { Down } from "grommet-icons";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
@@ -210,6 +211,12 @@ const ScrollContainer = styled.div`
   left: 50%;
   top: 90%;
   transform: translate(-50%, -50%);
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(-50%, -60%);
+  }
 `;
 
 export default function Hero() {
@@ -218,10 +225,11 @@ export default function Hero() {
       <MediaQuery minDeviceWidth={767}>
         <ScrollTo>
           {({ scrollTo }) => (
-            <ScrollContainer style={{ zIndex: "20000", background: "green" }}>
-              <button onClick={() => scrollTo({ x: 0, y: 700, smooth: true })}>
-                Scroll
-              </button>
+            <ScrollContainer style={{ zIndex: "2000" }}>
+              <Down
+                color="white"
+                onClick={() => scrollTo({ x: 0, y: 580, smooth: true })}
+              />
             </ScrollContainer>
           )}
         </ScrollTo>
@@ -229,10 +237,11 @@ export default function Hero() {
       <MediaQuery maxDeviceWidth={767}>
         <ScrollTo>
           {({ scrollTo }) => (
-            <ScrollContainer style={{ zIndex: "20000", background: "green" }}>
-              <button onClick={() => scrollTo({ x: 0, y: 530, smooth: true })}>
-                Scroll
-              </button>
+            <ScrollContainer style={{ zIndex: "2000" }}>
+              <Down
+                color="white"
+                onClick={() => scrollTo({ x: 0, y: 540, smooth: true })}
+              />
             </ScrollContainer>
           )}
         </ScrollTo>
