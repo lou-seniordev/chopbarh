@@ -222,7 +222,7 @@ const ScrollContainer = styled.div`
 export default function Hero() {
   return (
     <Container>
-      <MediaQuery minDeviceWidth={767}>
+      {/* <MediaQuery minDeviceWidth={767}>
         <ScrollTo>
           {({ scrollTo }) => (
             <ScrollContainer style={{ zIndex: "2000" }}>
@@ -233,7 +233,7 @@ export default function Hero() {
             </ScrollContainer>
           )}
         </ScrollTo>
-      </MediaQuery>
+      </MediaQuery> */}
       <MediaQuery maxDeviceWidth={767}>
         <ScrollTo>
           {({ scrollTo }) => (
