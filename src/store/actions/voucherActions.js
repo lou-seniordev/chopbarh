@@ -1,5 +1,6 @@
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
+import { getReference } from "../../lib/getReference";
 
 export const setVoucherValue = value => ({
   type: actionType.SET_VOUCHER_VALUE,
@@ -44,7 +45,7 @@ export const setVoucherHistory = payload => async (dispatch, getState) => {
             deposit_date: payload.transaction_date,
             paid_at: payload.paid_at,
             transaction_fees: "None",
-            transaction_reference: "Chopbarh",
+            transaction_reference: getReference(),
             status: payload.status
           })
         });
@@ -62,7 +63,7 @@ export const setVoucherHistory = payload => async (dispatch, getState) => {
               deposit_date: payload.transaction_date,
               paid_at: payload.paid_at,
               transaction_fees: "None",
-              transaction_reference: "Chopbarh",
+              transaction_reference: getReference(),
               status: payload.status
             }
           ]
@@ -70,7 +71,6 @@ export const setVoucherHistory = payload => async (dispatch, getState) => {
       dispatch(setVoucherHistorySuccess(docRef));
     }
   } catch (err) {
-    console.log(err);
     dispatch(setVoucherHistoryFail());
   }
 };
