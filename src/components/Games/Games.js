@@ -15,7 +15,7 @@ export default function Games() {
       <div className="container" style={{ minHeight: "70vh" }}>
         <div className="row">
           <div className="col-md-12">
-            <QuickPlayTransaction />
+            <QuickPlayTransaction noHeader />
           </div>
         </div>
       </div>

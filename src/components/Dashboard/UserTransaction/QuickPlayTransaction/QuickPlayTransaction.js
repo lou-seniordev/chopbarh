@@ -107,10 +107,15 @@ const GameItemsWrapper = styled.div`
   text-align: center;
 `;
 
-export default function QuickPlayTransaction() {
+export default function QuickPlayTransaction(props) {
   return (
     <GameItemsWrapper>
-      <HeadingTwo className="mt-4 mb-5">Quick Play</HeadingTwo>
+      <HeadingTwo
+        className="mt-4 mb-5"
+        style={{ display: props.noHeader ? "none" : "block" }}
+      >
+        Quick Play
+      </HeadingTwo>
       <Slider autoplay={3000} infinite="true">
         <div>
           <SliderContent>
