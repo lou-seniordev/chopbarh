@@ -118,7 +118,7 @@ export default function QuickPlayTransaction(props) {
       </HeadingTwo>
       <Slider autoplay={3000} infinite="true">
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image1} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
@@ -141,7 +141,7 @@ export default function QuickPlayTransaction(props) {
           </SliderContent>
         </div>
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image2} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
@@ -164,7 +164,7 @@ export default function QuickPlayTransaction(props) {
           </SliderContent>
         </div>
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image3} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
@@ -187,7 +187,7 @@ export default function QuickPlayTransaction(props) {
           </SliderContent>
         </div>
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image4} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
@@ -210,7 +210,7 @@ export default function QuickPlayTransaction(props) {
           </SliderContent>
         </div>
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image5} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
@@ -233,7 +233,7 @@ export default function QuickPlayTransaction(props) {
           </SliderContent>
         </div>
         <div>
-          <SliderContent>
+          <SliderContent style={{ top: props.noHeader ? "45%" : "35%" }}>
             <Image src={Image6} alt="The Image" />
             <HeadingTwoFirst className="hero__title mt-5">
               Play and Chop
