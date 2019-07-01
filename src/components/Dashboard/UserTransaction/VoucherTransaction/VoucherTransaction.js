@@ -61,7 +61,7 @@ const FormItem = styled.div`
 
   input {
     color: #8d8e8d;
-    width: 28rem;
+    width: 30rem;
     height: 3.4rem;
     margin-bottom: 2rem;
     border: 0;

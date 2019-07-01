@@ -260,6 +260,12 @@ class Paga extends Component {
             <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </button>
         </Form>
+        <div className="container">
+          <p className="text-center">
+            Note: No. We are not sending you airtime! You can withdraw by
+            dialing *242# on your phone number.
+          </p>
+        </div>
       </>
     );
   }

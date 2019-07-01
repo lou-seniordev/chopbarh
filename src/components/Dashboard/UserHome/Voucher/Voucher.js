@@ -149,7 +149,7 @@ class Voucher extends Component {
 
   render() {
     return (
-      <VoucherWrapper className="container pl-0">
+      <VoucherWrapper className="container p-0">
         <FormWrapper onSubmit={this.handleSubmit} center={this.props.center}>
           <FormItem noHeader={this.props.noHeader}>
             <label>Load Voucher</label>

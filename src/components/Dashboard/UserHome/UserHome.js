@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
@@ -23,18 +22,13 @@ export default function UserHome() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-4 pl-0 d-sm-flex justify-content-sm-center">
-            <MediaQuery minDeviceWidth={767}>
-              <Voucher />
-            </MediaQuery>
-            <MediaQuery maxDeviceWidth={767}>
-              <Voucher center="true" />
-            </MediaQuery>
+          <div className="col-lg-4 p-0 d-sm-flex justify-content-sm-center">
+            <Voucher center="true" />
           </div>
-          <div className="col-md-4 mt-4 p-0">
+          <div className="col-lg-4 mt-4 mt-md-5 p-0">
             <VoucherTransaction />
           </div>
-          <div className="col-md-4 mt-4 p-0">
+          <div className="col-lg-4 mt-4 p-0">
             <TopEarners />
           </div>
         </div>
