@@ -17,15 +17,15 @@ import PlayStoreButton from "../../assets/img/PlayStore.png";
 
 import "react-animated-slider/build/horizontal.css";
 
-const HeroWrapper = styled.div`
-  height: 87vh;
-  /* width: 98.7vw; */
-  position: relative;
-  /* background: ${color.colorPrimary}; */
-  /* background: crimson; url(${Background}); */
-  overflow: hidden;
-  color: ${color.colorWhite};
-`;
+// const HeroWrapper = styled.div`
+//   height: 87vh;
+//   /* width: 98.7vw; */
+//   position: relative;
+//   /* background: ${color.colorPrimary}; */
+//   /* background: crimson; url(${Background}); */
+//   overflow: hidden;
+//   color: ${color.colorWhite};
+// `;
 
 // const HeroContentWrapper = styled.div`
 //   position: absolute;
@@ -249,7 +249,9 @@ export default function Hero() {
       <Slider autoplay={3000}>
         <div
           style={{
-            background: `url('${Background}') no-repeat center center`,
+            background: `url('${Background}') ${
+              color.colorPrimary
+            } no-repeat center center`,
             backgroundSize: "cover",
             color: "#fff"
           }}
@@ -286,7 +288,9 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage1}') no-repeat center center`,
+            background: `url('${sliderImage1}') ${
+              color.colorPrimary
+            } no-repeat center center`,
             backgroundSize: "cover"
           }}
         >
@@ -298,7 +302,9 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage2}') no-repeat center center`,
+            background: `url('${sliderImage2}') ${
+              color.colorPrimary
+            } no-repeat center center`,
             backgroundSize: "cover",
             color: "#fff"
           }}
@@ -312,7 +318,9 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage3}') no-repeat center center`,
+            background: `url('${sliderImage3}') ${
+              color.colorPrimary
+            } no-repeat center center`,
             height: "100vh",
             backgroundSize: "cover"
           }}

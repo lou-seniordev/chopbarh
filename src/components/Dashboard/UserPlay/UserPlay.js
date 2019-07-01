@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
-import GameItems from "./GameItems/GameItems";
+import QuickPlayTransaction from "../UserTransaction/QuickPlayTransaction/QuickPlayTransaction";
 
 export default function UserPlay() {
   return (
@@ -11,7 +11,13 @@ export default function UserPlay() {
       <Helmet title={`Chopbarh \u{2192} Play`} />
       <UserHeader />
       <UserNavigation />
-      <GameItems />
+      <div className="container" style={{ minHeight: "70vh" }}>
+        <div className="row">
+          <div className="col-md-12">
+            <QuickPlayTransaction noHeader />
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );
