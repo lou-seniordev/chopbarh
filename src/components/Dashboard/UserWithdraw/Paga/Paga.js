@@ -261,7 +261,7 @@ class Paga extends Component {
           </button>
         </Form>
         <div className="container">
-          <p className="text-center">
+          <p className="text-center" style={{ marginTop: "6rem" }}>
             Note: No. We are not sending you airtime! You can withdraw by
             dialing *242# on your phone number.
           </p>

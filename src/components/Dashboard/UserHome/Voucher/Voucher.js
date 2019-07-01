@@ -122,10 +122,11 @@ class Voucher extends Component {
       const data = await response.json();
       if (response.status === 200) {
         toast.success(`Voucher was successfully loaded`);
+        const datePaid = +new Date();
         const payload = {
           ...data.data,
-          transaction_date: new Date(),
-          paid_at: new Date()
+          transaction_date: datePaid,
+          paid_at: datePaid
         };
         this.props.setVoucherValue(data.data.value);
         this.props.setCoinBalance(data.data.value);
