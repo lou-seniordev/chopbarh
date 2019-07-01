@@ -8,6 +8,7 @@ import Overview from "./Overview/Overview";
 import Voucher from "./Voucher/Voucher";
 import TopEarners from "./TopEarners/TopEarners";
 import QuickPlayTransaction from "../UserTransaction/QuickPlayTransaction/QuickPlayTransaction";
+import VoucherTransaction from "../UserTransaction/VoucherTransaction/VoucherTransaction";
 
 // Add redirect logic to Complete Registration when it isn't complete
 
@@ -22,7 +23,7 @@ export default function UserHome() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-6 pl-0 d-sm-flex justify-content-sm-center">
+          <div className="col-md-4 pl-0 d-sm-flex justify-content-sm-center">
             <MediaQuery minDeviceWidth={767}>
               <Voucher />
             </MediaQuery>
@@ -30,7 +31,10 @@ export default function UserHome() {
               <Voucher center="true" />
             </MediaQuery>
           </div>
-          <div className="col-md-6 mt-4 p-0">
+          <div className="col-md-4 mt-4 p-0">
+            <VoucherTransaction />
+          </div>
+          <div className="col-md-4 mt-4 p-0">
             <TopEarners />
           </div>
         </div>

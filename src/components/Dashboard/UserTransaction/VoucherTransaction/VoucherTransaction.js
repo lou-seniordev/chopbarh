@@ -4,7 +4,7 @@ import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
 const VoucherTransactionWrapper = styled.div`
-  margin-top: 8rem;
+  /* margin-top: 8rem; */
   margin-bottom: 5rem;
   display: flex;
   justify-content: center;
@@ -89,6 +89,9 @@ export default function VoucherTransaction() {
           </FormItem>
           <FormItem>
             <input type="password" placeholder="Pin" />
+          </FormItem>
+          <FormItem>
+            <input type="text" placeholder="Amount" />
           </FormItem>
           <button type="submit" className="ml-2 mr-2">
             <span>Transfer</span>

@@ -22,13 +22,13 @@ export default function UserTransaction() {
           </div>
         </div>
       </div>
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <VoucherTransaction />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <div className="container">
         <div className="row mb-5">
           <div className="col-lg-6">
