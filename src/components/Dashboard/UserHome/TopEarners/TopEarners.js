@@ -21,6 +21,52 @@ class TopEarners extends Component {
   render() {
     return (
       <div>
+        <div className="table responsive">
+          <table className="table table-striped">
+            <thead
+              style={{
+                background: "#8C1936",
+                color: "#fff"
+              }}
+            >
+              <tr>
+                <th scope="col">Top Earners</th>
+                <th scope="col">Game</th>
+                <th scope="col">Time</th>
+                <th scope="col">Winning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  loading: state.topEarners.loading,
+  results: state.topEarners.results,
+  error: state.topEarners.error
+});
+
+const mapDispatchToProps = {
+  fetchTopEarners
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(TopEarners));
+
+/* <div>
         {this.props.results ? (
           <div className="table responsive">
             <table className="table table-striped">
@@ -65,22 +111,4 @@ class TopEarners extends Component {
             )}
           </>
         )}
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  loading: state.topEarners.loading,
-  results: state.topEarners.results,
-  error: state.topEarners.error
-});
-
-const mapDispatchToProps = {
-  fetchTopEarners
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(TopEarners));
+      </div> */

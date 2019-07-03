@@ -269,8 +269,8 @@ class Card extends Component {
           <>
             {this.props.creditCard.length > 0 ? (
               <div style={{ minHeight: "20rem" }}>
-                <Accordion>
-                  <AccordionItem>
+                <Accordion preExpanded={["1"]}>
+                  <AccordionItem uuid="1">
                     <AccordionItemHeading>
                       <AccordionItemButton>
                         Pay with existing Card
@@ -340,7 +340,7 @@ class Card extends Component {
                       </Form>
                     </AccordionItemPanel>
                   </AccordionItem>
-                  <AccordionItem>
+                  <AccordionItem uuid="2">
                     <AccordionItemHeading>
                       <AccordionItemButton>
                         Pay with new Card
