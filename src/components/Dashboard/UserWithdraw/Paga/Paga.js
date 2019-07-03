@@ -261,10 +261,10 @@ class Paga extends Component {
           </button>
         </Form>
         <div className="container">
-          <p className="text-center" style={{ marginTop: "6rem" }}>
-            Note: No. We are not sending you airtime! You can withdraw by
-            dialing *242# on your phone number.
-          </p>
+          <ul className="text-center" style={{ marginTop: "5rem" }}>
+            <li>Dial *242# to claim your cash</li>
+            <li>Dial *242*2*4# to transfer to bank account</li>
+          </ul>
         </div>
       </>
     );
