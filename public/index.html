@@ -62,5 +62,27 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        pageScroll();
+        $("#contain")
+          .mouseover(function () {
+            clearTimeout(my_time);
+          })
+          .mouseout(function () {
+            pageScroll();
+          });
+      });
+
+      let my_time;
+      function pageScroll() {
+        let objDiv = document.getElementById("contain");
+        objDiv.scrollTop = objDiv.scrollTop + 1;
+        if (objDiv.scrollTop + 100 == objDiv.scrollHeight) {
+          objDiv.scrollTop = 0;
+        }
+        my_time = setTimeout("pageScroll()", 150);
+      }
+    </script>
   </body>
 </html>
