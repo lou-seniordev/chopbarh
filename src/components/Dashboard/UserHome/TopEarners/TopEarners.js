@@ -1,7 +1,9 @@
 import React, { Component, memo } from "react";
-import { Spinner } from "reactstrap";
+// import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions";
+
+import './TopEarners.css'
 
 class TopEarners extends Component {
   // constructor(props) {
@@ -58,14 +60,7 @@ class TopEarners extends Component {
               </tr>
             </thead>
 
-            <tbody
-              style={{
-                height: "180px",
-                display: "block",
-                overflowY: "scroll"
-              }}
-              id="contain"
-            >
+            <tbody className="tableScroller" id="contain">
               <tr
                 style={{
                   display: "table",

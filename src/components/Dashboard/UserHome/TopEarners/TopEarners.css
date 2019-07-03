@@ -1,0 +1,10 @@
+.tableScroller {
+  height: 180px;
+  display: block;
+  overflow-y: scroll;             
+}
+
+.tableScroller::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+} 
