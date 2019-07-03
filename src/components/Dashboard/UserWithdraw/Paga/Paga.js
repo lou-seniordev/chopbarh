@@ -261,10 +261,10 @@ class Paga extends Component {
           </button>
         </Form>
         <div className="container">
-          <ul className="text-center" style={{ marginTop: "5rem" }}>
-            <li>Dial *242# to claim your cash</li>
-            <li>Dial *242*2*4# to transfer to bank account</li>
-          </ul>
+          <div className="text-center" style={{ marginTop: "5rem" }}>
+            <p>&rarr; Dial *242# to claim your cash</p>
+            <p>&rarr; Dial *242*2*4# to transfer to bank account</p>
+          </div>
         </div>
       </>
     );

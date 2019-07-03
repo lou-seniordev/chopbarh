@@ -248,7 +248,7 @@ class SignUp extends Component {
                     type="date"
                     value={this.state.dob}
                     name="dob"
-                    disabled
+                    
                     onChange={this.handleInputChange}
                     required
                     max="2010-01-01"
@@ -259,7 +259,7 @@ class SignUp extends Component {
                   <select
                     value={this.state.sex}
                     name="sex"
-                    disabled
+                    
                     onChange={this.handleInputChange}
                     required
                   >
