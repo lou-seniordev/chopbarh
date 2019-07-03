@@ -13,15 +13,16 @@ class TopEarners extends Component {
   // }
 
   componentDidMount = () => {
-    if (!this.props.results) {
-      this.props.fetchTopEarners();
-    }
+    // if (!this.props.results) {
+    //   this.props.fetchTopEarners();
+    // }
+    window.pageScroll();
   };
 
   render() {
     return (
       <div>
-        <div className="table responsive">
+        {/* <div className="table responsive text-center">
           <table className="table table-striped">
             <thead
               style={{
@@ -36,8 +37,114 @@ class TopEarners extends Component {
                 <th scope="col">Winning</th>
               </tr>
             </thead>
-            <tbody>
+          </table>
+        </div> */}
+        <div className="table responsive text-center">
+          <table className="table table-striped">
+            <thead
+              style={{
+                background: "#8C1936",
+                color: "#fff",
+                display: "table",
+                width: "100%",
+                tableLayout: "fixed"
+              }}
+            >
               <tr>
+                <th scope="col">Top Earners</th>
+                <th scope="col">Game</th>
+                <th scope="col">Time</th>
+                <th scope="col">Winning</th>
+              </tr>
+            </thead>
+
+            <tbody
+              style={{
+                height: "180px",
+                display: "block",
+                overflowY: "scroll"
+              }}
+              id="contain"
+            >
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>Some Value</td>
+                <td>&#8358; 200</td>
+              </tr>
+              <tr
+                style={{
+                  display: "table",
+                  width: "100%",
+                  tableLayout: "fixed"
+                }}
+              >
                 <td>Some Value</td>
                 <td>Some Value</td>
                 <td>Some Value</td>

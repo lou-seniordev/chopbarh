@@ -25,7 +25,7 @@ export default function UserHome() {
           <div className="col-lg-4 p-0 mt-4 d-sm-flex justify-content-sm-center">
             <Voucher center="true" />
           </div>
-          <div className="col-lg-4 mt-4 mt-md-5 p-0">
+          <div className="col-lg-4 mt-4 p-0">
             <VoucherTransaction />
           </div>
           <div className="col-lg-4 mt-4 p-0">
