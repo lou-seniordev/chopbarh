@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { Modal, ModalBody } from "reactstrap";
 import { connect } from "react-redux";
+import { withLastLocation } from "react-router-last-location";
 import {
   AuthWrapper,
   HeadingTwo,
@@ -207,5 +208,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(memo(Login))
+  )(memo(withLastLocation(Login)))
 );

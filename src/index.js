@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { LastLocationProvider } from "react-router-last-location";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -50,7 +51,9 @@ const store = createStore(
 const app = (
   <Provider store={store}>
     <Router>
-      <App />
+      <LastLocationProvider>
+        <App />
+      </LastLocationProvider>
     </Router>
   </Provider>
 );

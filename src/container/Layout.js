@@ -95,7 +95,7 @@ class Layout extends Component {
               <Route path="/signup" component={SignUpPage} />
               <Route path="/set-nickname" component={SetNickname} />
               <Route path="/complete_profile" component={CompleteProfilePage} />
-              <Redirect to="/login" />
+              <Redirect push to="/login" />
             </Switch>
           </Suspense>
         )}
