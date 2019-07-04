@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import color from "../../../styles/colors";
 import {
   setVoucherValue,
@@ -197,13 +197,11 @@ class Voucher extends Component {
             marginTop: "22rem"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "20vh" }}>
+            <ModalHeader toggle={this.toggleVoucherModal} />
             <p>Load Voucher of 100 naira?</p>
             <Button>
               <span>Load</span>
-            </Button>
-            <Button>
-              <span>Decline</span>
             </Button>
           </ModalBody>
         </Modal>

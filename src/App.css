@@ -21,3 +21,12 @@
 .accordion__button:hover {
   background-color: rgba(177, 32, 68, 1) !important;
 }
+
+.close {
+  font-size: 2.4rem !important;
+}
+
+.modal-header {
+  padding: 0;
+  border-bottom: none;
+}
