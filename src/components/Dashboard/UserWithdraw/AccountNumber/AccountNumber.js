@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import Banks from "./Banks";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
+import getReference from "../../../../lib/getReference";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
+  margin-bottom: 3.2rem;
 `;
 
 class AccountNumber extends Component {
@@ -60,11 +62,11 @@ class AccountNumber extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    if (!this.formIsValid(this.state)) {
-      toast.error("Form is not valid");
-      this.setState({ loading: false });
-      return;
-    }
+    // if (!this.formIsValid(this.state)) {
+    //   toast.error("Form is not valid");
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
     // if (this.state.amount > this.props.playerData.RealCoins) {
     //   toast.error("You cannot withdraw more than you have won");
@@ -90,14 +92,16 @@ class AccountNumber extends Component {
     //     console.log(err);
     //   });
 
+    // Add logic to filter amount based on the value to factor in fees to be paid
+
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
       amount: this.state.amount,
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
-      narration: "Chopbarh Transfer",
+      narration: "Chopbarh Withdrawal",
       currency: "NGN",
-      reference: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-jk`
+      reference: getReference()
     };
 
     try {
@@ -115,7 +119,15 @@ class AccountNumber extends Component {
       const data = await response.json();
       console.log(data);
 
+      // Confirm withdrawal actually goes through here
       if (data.status === "success") {
+        const payload = {
+          status: "Success",
+          amount: data.data.amount,
+          date: data.data.date_created,
+          reference: data.data.reference,
+          fee: data.data.fee
+        };
         toast.success("Transaction was Successful");
         this.setState({
           loading: false,
@@ -124,7 +136,7 @@ class AccountNumber extends Component {
           account_number: ""
         });
         this.props.setCashBalance(data.data.amount, 2);
-        this.props.setWithdrawalHistory(data.data);
+        this.props.setWithdrawalHistory(payload);
       } else {
         toast.error("Transaction was not successful");
       }
