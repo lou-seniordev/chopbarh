@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
@@ -12,7 +13,9 @@ export default function UserDeposit() {
       <UserHeader />
       <UserNavigation />
       <div style={{ minHeight: "80vh" }}>
-        <DepositTabs />
+        <MediaQuery minDeviceWidth={767}>
+          <DepositTabs />
+        </MediaQuery>
       </div>
       <Footer />
     </>
