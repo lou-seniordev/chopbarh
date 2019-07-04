@@ -11,7 +11,7 @@ import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 
 const HeaderWrapper = styled.div`
-  background: #8c1936;
+  background: #6d0a23;
   color: ${color.colorWhite};
   min-height: 6rem;
   padding: 2rem 12rem;
