@@ -58,7 +58,8 @@ class Card extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      this.setState({ selectedValue: this.props.creditCard[0].auth_code });
+      this.props.creditCard.length &&
+        this.setState({ selectedValue: this.props.creditCard[0].auth_code });
     }
   };
 
