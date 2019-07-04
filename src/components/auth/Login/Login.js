@@ -31,6 +31,10 @@ class Login extends Component {
     loading: false
   };
 
+  componentDidMount = () => {
+    console.log(this.props);
+  };
+
   toggleformErrorModal = () => {
     this.setState({ formErrorModal: !this.state.formErrorModal });
   };
