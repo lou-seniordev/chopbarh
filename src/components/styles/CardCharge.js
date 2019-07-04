@@ -37,6 +37,8 @@ export const Form = styled.form`
   }
 `;
 
+export const ExistingCardForm = styled(Form)``;
+
 export const FormItem = styled.div`
   label {
     font-size: 1.4rem;

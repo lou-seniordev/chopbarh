@@ -12,7 +12,12 @@ import {
   AccordionItemPanel
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
-import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  HalfColumn,
+  ExistingCardForm
+} from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
@@ -284,10 +289,7 @@ class Card extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <Form
-                        style={{ minHeight: "5rem" }}
-                        onSubmit={this.handleAuthSubmit}
-                      >
+                      <ExistingCardForm onSubmit={this.handleAuthSubmit}>
                         <RadioGroup
                           name="creditCard"
                           selectedValue={this.state.selectedValue}
@@ -344,7 +346,7 @@ class Card extends Component {
                             {this.state.loading ? "Please wait..." : "Load"}
                           </span>
                         </button>
-                      </Form>
+                      </ExistingCardForm>
                     </AccordionItemPanel>
                   </AccordionItem>
                   <AccordionItem uuid="2">
