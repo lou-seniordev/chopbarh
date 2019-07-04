@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
+import { Modal, ModalBody } from "reactstrap";
 import color from "../../../styles/colors";
 import {
   setVoucherValue,
@@ -72,7 +73,12 @@ const FormItem = styled.div`
 class Voucher extends Component {
   state = {
     loading: false,
-    voucher: ""
+    voucher: "",
+    voucherModal: true
+  };
+
+  toggleVoucherModal = () => {
+    this.setState({ voucherModal: !this.state.voucherModal });
   };
 
   handleInputChange = ({ target }) => {
@@ -121,7 +127,11 @@ class Voucher extends Component {
       );
       const data = await response.json();
       console.log(data);
-      this.setState({ loading: false });
+      if (data.data) {
+      } else {
+        this.setState({ loading: false, voucher: "" });
+        toast.error(data.message);
+      }
       // if (response.status === 200) {
       //   toast.success(`Voucher was successfully loaded`);
       //   const datePaid = new Date().toISOString();
@@ -153,33 +163,46 @@ class Voucher extends Component {
 
   render() {
     return (
-      <VoucherWrapper className="container p-0">
-        <FormWrapper onSubmit={this.handleSubmit} center={this.props.center}>
-          <FormItem noHeader={this.props.noHeader}>
-            <label>Load Voucher</label>
-          </FormItem>
-          <FormItem fullWidth={this.props.fullWidth}>
-            <NumberFormat
-              format="#### #### #### ####"
-              name="voucher"
-              value={this.state.voucher}
-              onChange={this.handleInputChange}
-              placeholder="Voucher Code"
-            />
-          </FormItem>
-          <button
-            type="submit"
-            className="ml-2 mr-2"
-            center={this.props.center}
-            disabled={
-              this.state.loading ||
-              this.state.voucher.split(" ").join("").length !== 16
-            }
-          >
-            <span>{this.state.loading ? "Loading..." : "Load"}</span>
-          </button>
-        </FormWrapper>
-      </VoucherWrapper>
+      <>
+        <Modal
+          isOpen={this.state.voucherModal}
+          toggle={this.toggleVoucherModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <p>Load Voucher of 100 naira?</p>
+          </ModalBody>
+        </Modal>
+        <VoucherWrapper className="container p-0">
+          <FormWrapper onSubmit={this.handleSubmit} center={this.props.center}>
+            <FormItem noHeader={this.props.noHeader}>
+              <label>Load Voucher</label>
+            </FormItem>
+            <FormItem fullWidth={this.props.fullWidth}>
+              <NumberFormat
+                format="#### #### #### ####"
+                name="voucher"
+                value={this.state.voucher}
+                onChange={this.handleInputChange}
+                placeholder="Voucher Code"
+              />
+            </FormItem>
+            <button
+              type="submit"
+              className="ml-2 mr-2"
+              center={this.props.center}
+              disabled={
+                this.state.loading ||
+                this.state.voucher.split(" ").join("").length !== 16
+              }
+            >
+              <span>{this.state.loading ? "Loading..." : "Load"}</span>
+            </button>
+          </FormWrapper>
+        </VoucherWrapper>
+      </>
     );
   }
 }

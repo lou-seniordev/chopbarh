@@ -37,7 +37,13 @@ export const Form = styled.form`
   }
 `;
 
-export const ExistingCardForm = styled(Form)``;
+export const ExistingCardForm = styled(Form)`
+  min-height: 5rem;
+
+  input {
+    margin-bottom: 1rem;
+  }
+`;
 
 export const FormItem = styled.div`
   label {
@@ -64,6 +70,8 @@ export const FormItem = styled.div`
     font-family: inherit;
   }
 `;
+
+export const ExistingCardFormItem = styled(FormItem)``;
 
 export const HalfColumn = styled.div`
   display: flex;

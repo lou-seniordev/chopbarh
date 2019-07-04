@@ -59,7 +59,7 @@ export default function DepositTabs() {
 
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
-              <Voucher />
+              <Voucher center="true" noHeader />
             </div>
           </TabPanel>
           <TabPanel>

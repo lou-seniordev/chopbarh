@@ -16,7 +16,8 @@ import {
   Form,
   FormItem,
   HalfColumn,
-  ExistingCardForm
+  ExistingCardForm,
+  ExistingCardFormItem
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -297,7 +298,7 @@ class Card extends Component {
                         >
                           {this.props.creditCard.map((card, index) => (
                             <div
-                              className="d-flex align-items-center"
+                              className="d-flex align-items-center justify-content-center flex-wrap"
                               key={index}
                             >
                               <Radio value={card.auth_code} />
@@ -307,7 +308,7 @@ class Card extends Component {
                                 month={card.exp_month}
                                 year={card.exp_year}
                               />
-                              <FormItem className="mt-4">
+                              <ExistingCardFormItem className="mt-lg-4 mt-md-4 mb-0 mb-sm-2">
                                 <input
                                   onChange={this.handleInputChange}
                                   name="authCVV"
@@ -322,12 +323,11 @@ class Card extends Component {
                                   minLength="1"
                                   placeholder="CVV"
                                 />
-                              </FormItem>
+                              </ExistingCardFormItem>
                             </div>
                           ))}
                         </RadioGroup>
-                        <FormItem className="ml-5">
-                          <label>Amount</label>
+                        <ExistingCardFormItem className="ml-5">
                           <input
                             onChange={this.handleInputChange}
                             name="authAmount"
@@ -336,7 +336,7 @@ class Card extends Component {
                             required
                             placeholder="Amount(NGN)"
                           />
-                        </FormItem>
+                        </ExistingCardFormItem>
                         <button
                           type="submit"
                           className="mr-2 mt-n4"
