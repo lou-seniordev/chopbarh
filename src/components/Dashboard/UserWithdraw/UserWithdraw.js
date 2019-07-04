@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
@@ -11,7 +12,11 @@ export default function UserDeposit() {
       <Helmet title={`Chopbarh \u{2192} Withdraw`} />
       <UserHeader />
       <UserNavigation />
-      <WithdrawTabs />
+      <div style={{ minHeight: "80vh" }}>
+        <MediaQuery minDeviceWidth={767}>
+          <WithdrawTabs />
+        </MediaQuery>
+      </div>
       {/* <div className="container">
         <p>
           Note: No. We are not sending you airtime! You can withdraw by dialing
