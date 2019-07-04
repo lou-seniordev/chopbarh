@@ -56,6 +56,12 @@ class Card extends Component {
     }
   };
 
+  componentDidUpdate = prevProps => {
+    if (this.props !== prevProps) {
+      this.setState({ selectedValue: this.props.creditCard[0].auth_code });
+    }
+  };
+
   toggleSubmitAmountModal = () => {
     this.setState({ submitAmountModal: !this.state.submitAmountModal });
   };
