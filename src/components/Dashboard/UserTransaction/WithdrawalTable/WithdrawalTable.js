@@ -28,32 +28,32 @@ class WithdrawalTable extends Component {
               }}
             >
               <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Reference</th>
                 <th scope="col">Transaction Date</th>
-                <th scope="col">Type</th>
+                <th scope="col">Transaction Time</th>
+                <th scope="col">Transaction Fees</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Channel</th>
-                {/*<th scope="col">Balance</th>
-                <th scope="col">Action</th> */}
               </tr>
             </thead>
             <tbody>
               {this.props.withdrawalData.map((withdrawal, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
+                  <td>{withdrawal.status}</td>
+                  <td>{withdrawal.reference}</td>
                   <td>{`${new Date(
                     withdrawal.withdrawal_date
-                  ).getDate()}-${new Date(
+                  ).toLocaleDateString()}`}</td>
+                  <td>{`${new Date(
                     withdrawal.withdrawal_date
-                  ).getMonth()}-${new Date(
-                    withdrawal.withdrawal_date
-                  ).getFullYear()}`}</td>
-                  <td>Withdrawal</td>
+                  ).toLocaleTimeString()}`}</td>
+                  <td>{withdrawal.fees}</td>
                   <td>
                     &#8358;
                     {new Intl.NumberFormat().format(withdrawal.amount)}
                   </td>
                   <td>{withdrawal.channel}</td>
-                  {/*<td>Balance</td>
-                  <td>Action</td> */}
                 </tr>
               ))}
             </tbody>

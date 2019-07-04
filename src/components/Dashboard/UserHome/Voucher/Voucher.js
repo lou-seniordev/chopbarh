@@ -100,15 +100,15 @@ class Voucher extends Component {
     }
 
     const postData = {
-      pin: this.state.voucher.split(" ").join(""),
-      by: this.props.reference
+      pin: this.state.voucher.split(" ").join("")
+      // by: this.props.reference
     };
 
     const formValue = JSON.stringify(postData);
 
     try {
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://partners.chopbarh.com/ng/api/voucher/use",
+        "https://partners.chopbarh.com/ng/api/voucher/query",
         {
           method: "POST",
           mode: "cors",
@@ -120,29 +120,32 @@ class Voucher extends Component {
         }
       );
       const data = await response.json();
-      if (response.status === 200) {
-        toast.success(`Voucher was successfully loaded`);
-        const datePaid = new Date().toISOString();
-        const payload = {
-          ...data.data,
-          transaction_date: datePaid,
-          paid_at: datePaid
-        };
-        this.props.setVoucherValue(data.data.value);
-        this.props.setCoinBalance(data.data.value);
-        this.props.setVoucherHistory(payload);
-        this.setState({
-          loading: false,
-          voucher: ""
-        });
-      } else if (response.status === 404) {
-        this.setState({ voucher: "", loading: false });
-        toast.error(data.message);
-      } else {
-        this.setState({ loading: false, voucher: "" });
-        toast.error(data.message);
-      }
+      console.log(data);
+      this.setState({ loading: false });
+      // if (response.status === 200) {
+      //   toast.success(`Voucher was successfully loaded`);
+      //   const datePaid = new Date().toISOString();
+      //   const payload = {
+      //     ...data.data,
+      //     transaction_date: datePaid,
+      //     paid_at: datePaid
+      //   };
+      //   this.props.setVoucherValue(data.data.value);
+      //   this.props.setCoinBalance(data.data.value);
+      //   this.props.setVoucherHistory(payload);
+      //   this.setState({
+      //     loading: false,
+      //     voucher: ""
+      //   });
+      // } else if (response.status === 404) {
+      //   this.setState({ voucher: "", loading: false });
+      //   toast.error(data.message);
+      // } else {
+      //   this.setState({ loading: false, voucher: "" });
+      //   toast.error(data.message);
+      // }
     } catch (err) {
+      console.log(err);
       this.setState({ loading: false, voucher: "" });
       toast.error(`Something went wrong`);
     }
