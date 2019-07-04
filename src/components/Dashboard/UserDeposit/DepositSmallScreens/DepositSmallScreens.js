@@ -45,7 +45,7 @@ export default function DepositSmallScreens() {
               <AccordionItemButton>Voucher</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <Voucher />
+              <Voucher center="true" noHeader />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
