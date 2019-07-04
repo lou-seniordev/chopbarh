@@ -7,3 +7,17 @@
   color: '#fff' !important;
   background: rgba(109, 10, 35, 0.39);
 }
+
+.accordion__button {
+  background-color: #8c1936 !important;
+  color: #f9f9f9 !important;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+}
+
+.accordion__button:hover {
+  background-color: rgba(177, 32, 68, 1) !important;
+}
