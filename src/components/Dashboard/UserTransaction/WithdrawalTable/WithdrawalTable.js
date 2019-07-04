@@ -41,14 +41,14 @@ class WithdrawalTable extends Component {
               {this.props.withdrawalData.map((withdrawal, index) => (
                 <tr key={index} style={{ textAlign: "center" }}>
                   <td>{withdrawal.status}</td>
-                  <td>{withdrawal.reference}</td>
+                  <td>{withdrawal.transaction_reference}</td>
                   <td>{`${new Date(
                     withdrawal.withdrawal_date
                   ).toLocaleDateString()}`}</td>
                   <td>{`${new Date(
                     withdrawal.withdrawal_date
                   ).toLocaleTimeString()}`}</td>
-                  <td>{withdrawal.fees}</td>
+                  <td>{withdrawal.transaction_fee}</td>
                   <td>
                     &#8358;
                     {new Intl.NumberFormat().format(withdrawal.amount)}

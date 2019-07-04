@@ -67,9 +67,12 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
         .update({
           data: firebase.firestore.FieldValue.arrayUnion({
             amount: payload.amount,
-            channel: payload.bank_name,
-            withdrawal_date: payload.date_created,
-            paid_at: payload.date_created
+            status: payload.status,
+            transaction_fee: payload.fee,
+            transaction_reference: payload.reference,
+            channel: payload.channel,
+            withdrawal_date: payload.date,
+            paid_at: payload.date
           })
         });
       dispatch(setWithdrawalHistorySuccess(docRef));
@@ -82,9 +85,12 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
           data: [
             {
               amount: payload.amount,
-              channel: payload.bank_name,
-              withdrawal_date: payload.date_created,
-              paid_at: payload.date_created
+              status: payload.status,
+              transaction_fee: payload.fee,
+              transaction_reference: payload.reference,
+              channel: payload.channel,
+              withdrawal_date: payload.date,
+              paid_at: payload.date
             }
           ]
         });

@@ -62,16 +62,16 @@ class AccountNumber extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    // if (!this.formIsValid(this.state)) {
-    //   toast.error("Form is not valid");
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (!this.formIsValid(this.state)) {
+      toast.error("Form is not valid");
+      this.setState({ loading: false });
+      return;
+    }
 
-    // if (this.state.amount > this.props.playerData.RealCoins) {
-    //   toast.error("You cannot withdraw more than you have won");
-    //   return;
-    // }
+    if (this.state.amount > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
+      return;
+    }
 
     // Verify the account here and return the account Name in the UI
     // this.verifyAccount(this.state.account_number, this.state.bank)
