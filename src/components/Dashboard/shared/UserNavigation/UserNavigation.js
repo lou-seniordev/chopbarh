@@ -31,7 +31,7 @@ const HeaderWrapper = styled.div`
   }
 
   a {
-    font-size: 1.34rem;
+    font-size: 1.3rem;
     color: #eeeeee;
 
     &:hover {
