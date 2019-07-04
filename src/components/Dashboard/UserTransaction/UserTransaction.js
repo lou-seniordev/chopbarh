@@ -1,13 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
-import QuickPlayTransaction from "./QuickPlayTransaction/QuickPlayTransaction";
-import VoucherTransaction from "./VoucherTransaction/VoucherTransaction";
 import TransactionTabs from "./TransactionTabs/TransactionTabs";
-import Voucher from "../UserHome/Voucher/Voucher";
 
 export default function UserTransaction() {
   return (

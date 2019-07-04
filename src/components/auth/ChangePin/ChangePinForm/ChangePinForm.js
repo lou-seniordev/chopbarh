@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 // import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 // import axios from "axios";
@@ -106,21 +106,21 @@ const FormItem = styled.div`
   }
 `;
 
-const HalfColumn = styled.div`
-  display: flex;
+// const HalfColumn = styled.div`
+//   display: flex;
 
-  @media only screen and (max-width: ${breakPoints.large}) {
-    flex-direction: column;
-  }
+//   @media only screen and (max-width: ${breakPoints.large}) {
+//     flex-direction: column;
+//   }
 
-  div {
-    width: 50%;
+//   div {
+//     width: 50%;
 
-    @media only screen and (max-width: ${breakPoints.large}) {
-      width: 100%;
-    }
-  }
-`;
+//     @media only screen and (max-width: ${breakPoints.large}) {
+//       width: 100%;
+//     }
+//   }
+// `;
 
 class ChangePinForm extends Component {
   state = {
