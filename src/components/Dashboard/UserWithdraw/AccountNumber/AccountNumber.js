@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import Banks from "./Banks";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
-import getReference from "../../../../lib/getReference";
+import { getReference } from "../../../../lib/getReference";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
@@ -126,7 +126,8 @@ class AccountNumber extends Component {
           amount: data.data.amount,
           date: data.data.date_created,
           reference: data.data.reference,
-          fee: data.data.fee
+          fee: data.data.fee,
+          channel: "AZA"
         };
         toast.success("Transaction was Successful");
         this.setState({

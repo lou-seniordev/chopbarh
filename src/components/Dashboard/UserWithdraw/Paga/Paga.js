@@ -16,6 +16,7 @@ import {
 } from "../../../../store/actions/modalActions";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
+import { getReference } from "../../../../lib/getReference";
 
 const Form = styled.form`
   position: relative;
@@ -154,9 +155,11 @@ class Paga extends Component {
 
     let hashParameter = "referenceNumber,amount,destinationAccount";
 
+    let transactionReference = getReference();
+
     let params = ("" + hashParameter).split(",");
     const body = {
-      referenceNumber: `chopbarh-${new Date().getDate()}-${new Date().getDate()}-${new Date().getSeconds()}-ref`,
+      referenceNumber: transactionReference,
       amount: this.state.amount,
       minRecipientKYCLevel: "KYC2",
       destinationAccount: sliced_phone_number,
@@ -189,18 +192,20 @@ class Paga extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.responseCode === 0) {
-          const historyObject = {
+          const payload = {
+            status: "Success",
             amount: this.state.amount,
+            fee: 10,
+            reference: transactionReference,
             channel: "Paga",
-            withdrawal_date: new Date(),
-            paid_at: new Date()
+            date: new Date().toISOString()
           };
           this.props.setCashBalance(this.state.amount, 2);
           this.setState({ loading: false, phone: "", amount: "" });
           toast.success(`Transaction was successful`);
-          this.props.setWithdrawalHistory(historyObject);
+          this.props.setWithdrawalHistory(payload);
           // Send mail here
         } else {
           this.setState({ loading: false });
