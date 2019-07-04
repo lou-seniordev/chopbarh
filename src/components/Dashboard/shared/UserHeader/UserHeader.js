@@ -17,6 +17,7 @@ import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
+import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions.js";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -40,6 +41,7 @@ class UserHeader extends Component {
 
   componentDidMount = () => {
     this.props.fetchPlayerData();
+    this.props.fetchTopEarners();
     // if (!this.props.isPlayerDataAvailable) {
     // }
   };
@@ -394,7 +396,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchPlayerData
+  fetchPlayerData,
+  fetchTopEarners
 };
 
 export default connect(
