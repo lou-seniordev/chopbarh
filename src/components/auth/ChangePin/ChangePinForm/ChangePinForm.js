@@ -126,7 +126,8 @@ class ChangePinForm extends Component {
   state = {
     loading: false,
     oldPin: "",
-    newPin: ""
+    newPin: "",
+    confirmPin: ''
   };
 
   handleInputChange = ({ target }) => {
@@ -203,7 +204,7 @@ class ChangePinForm extends Component {
           <Container>
             <Form onSubmit={this.handleSubmit}>
               <HeadingTwo className="mb-4">Change Pin</HeadingTwo>
-              <HalfColumn>
+              
                 <FormItem>
                   <label>Old Pin</label>
                   <input
@@ -230,7 +231,19 @@ class ChangePinForm extends Component {
                     required
                   />
                 </FormItem>
-              </HalfColumn>
+              <FormItem>
+                <label>Confirm Pin</label>
+                <input
+                  minLength="4"
+                  maxLength="4"
+                  type="password"
+                  value={this.state.confirmPin}
+                  name="confirmPin"
+                  className="ml-lg-2"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </FormItem>
               <button
                 type="submit"
                 className="mr-2"
