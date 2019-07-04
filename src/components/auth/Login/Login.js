@@ -32,10 +32,6 @@ class Login extends Component {
     loading: false
   };
 
-  componentDidMount = () => {
-    console.log(this.props);
-  };
-
   toggleformErrorModal = () => {
     this.setState({ formErrorModal: !this.state.formErrorModal });
   };
@@ -99,7 +95,7 @@ class Login extends Component {
           localStorage.setItem("chopbarh-id:live", data.userId);
           context.props.authSuccess(data.authToken, data.userId);
           console.log("Auth Success");
-          context.props.history.push("/user");
+          context.props.history.push(this.props.lastLocation.pathname);
         } else {
           console.log("Catch else..");
           context.setState({ accountErrorModal: true });
