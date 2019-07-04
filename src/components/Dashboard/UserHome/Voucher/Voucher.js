@@ -100,7 +100,9 @@ class Voucher extends Component {
   state = {
     loading: false,
     voucher: "",
-    voucherModal: true
+    voucherModal: false,
+    voucherValue: "",
+    voucherLoading: false
   };
 
   toggleVoucherModal = () => {
@@ -121,6 +123,58 @@ class Voucher extends Component {
     return true;
   };
 
+  handleLoadVoucher = async () => {
+    this.setState({ voucherLoading: true });
+    const payload = {
+      pin: this.state.voucher.split(" ").join(""),
+      by: this.props.reference
+    };
+    try {
+      const response = await fetch(
+        "https://partners.chopbarh.com/ng/api/voucher/use",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "6DB6-5936-88"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
+      const data = await response.json();
+
+      if (data.data) {
+        toast.success(`Voucher was successfully loaded`);
+        const datePaid = new Date().toISOString();
+        const payload = {
+          ...data.data,
+          transaction_date: datePaid,
+          paid_at: datePaid
+        };
+        this.props.setVoucherValue(data.data.value);
+        this.props.setCoinBalance(data.data.value);
+        this.props.setVoucherHistory(payload);
+        this.setState({
+          loading: false,
+          voucherLoading: false,
+          voucherModal: false,
+          voucher: ""
+        });
+      } else {
+        this.setState({
+          voucher: "",
+          loading: false,
+          voucherLoading: false,
+          voucherModal: false
+        });
+        toast.error(data.message);
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Please try again");
+    }
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
@@ -133,7 +187,6 @@ class Voucher extends Component {
 
     const postData = {
       pin: this.state.voucher.split(" ").join("")
-      // by: this.props.reference
     };
 
     const formValue = JSON.stringify(postData);
@@ -152,36 +205,18 @@ class Voucher extends Component {
         }
       );
       const data = await response.json();
-      console.log(data);
+
       if (data.data) {
+        this.setState({
+          loading: false,
+          voucherModal: true,
+          voucherValue: data.data.value
+        });
       } else {
         this.setState({ loading: false, voucher: "" });
         toast.error(data.message);
       }
-      // if (response.status === 200) {
-      //   toast.success(`Voucher was successfully loaded`);
-      //   const datePaid = new Date().toISOString();
-      //   const payload = {
-      //     ...data.data,
-      //     transaction_date: datePaid,
-      //     paid_at: datePaid
-      //   };
-      //   this.props.setVoucherValue(data.data.value);
-      //   this.props.setCoinBalance(data.data.value);
-      //   this.props.setVoucherHistory(payload);
-      //   this.setState({
-      //     loading: false,
-      //     voucher: ""
-      //   });
-      // } else if (response.status === 404) {
-      //   this.setState({ voucher: "", loading: false });
-      //   toast.error(data.message);
-      // } else {
-      //   this.setState({ loading: false, voucher: "" });
-      //   toast.error(data.message);
-      // }
     } catch (err) {
-      console.log(err);
       this.setState({ loading: false, voucher: "" });
       toast.error(`Something went wrong`);
     }
@@ -199,9 +234,12 @@ class Voucher extends Component {
         >
           <ModalBody className="text-center" style={{ minHeight: "20vh" }}>
             <ModalHeader toggle={this.toggleVoucherModal} />
-            <p>Load Voucher of 100 naira?</p>
-            <Button>
-              <span>Load</span>
+            <p>Load &#8358;{this.state.voucherValue} Voucher?</p>
+            <Button
+              onClick={this.handleLoadVoucher}
+              disabled={this.state.voucherLoading}
+            >
+              <span>{this.state.voucherLoading ? "Loading..." : "Load"}</span>
             </Button>
           </ModalBody>
         </Modal>
