@@ -5,6 +5,7 @@ import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
+import WithdrawSmallScreens from "./WithdrawSmallScreens/WithdrawSmallScreens";
 
 export default function UserDeposit() {
   return (
@@ -15,6 +16,9 @@ export default function UserDeposit() {
       <div style={{ minHeight: "80vh" }}>
         <MediaQuery minDeviceWidth={767}>
           <WithdrawTabs />
+        </MediaQuery>
+        <MediaQuery maxDeviceWidth={767}>
+          <WithdrawSmallScreens />
         </MediaQuery>
       </div>
       {/* <div className="container">
