@@ -122,7 +122,7 @@ class Voucher extends Component {
       const data = await response.json();
       if (response.status === 200) {
         toast.success(`Voucher was successfully loaded`);
-        const datePaid = +new Date();
+        const datePaid = new Date().toISOString();
         const payload = {
           ...data.data,
           transaction_date: datePaid,
