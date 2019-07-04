@@ -28,12 +28,12 @@ export default function DepositTabs() {
               <HeadingTwo>Card</HeadingTwo>
             </Tab>
             <Tab>
+              <HeadingTwo>Account Number</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
             {/* This is the Banks component */}
-            <Tab>
-              <HeadingTwo>Account Number</HeadingTwo>
-            </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
@@ -51,11 +51,12 @@ export default function DepositTabs() {
             <Card />
           </TabPanel>
           <TabPanel>
-            <Quickteller />
-          </TabPanel>
-          <TabPanel>
             <BankCharge />
           </TabPanel>
+          <TabPanel>
+            <Quickteller />
+          </TabPanel>
+
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Voucher />
