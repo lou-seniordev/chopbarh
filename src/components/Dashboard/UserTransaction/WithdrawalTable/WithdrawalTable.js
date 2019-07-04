@@ -10,9 +10,9 @@ const WithdrawalTableWrapper = styled.div`
 
 class WithdrawalTable extends Component {
   componentDidMount = () => {
-    if (!this.props.withdrawalData) {
-      this.props.fetchWithdrawalHistoryData();
-    }
+    // if (!this.props.withdrawalData) {
+    // }
+    this.props.fetchWithdrawalHistoryData();
   };
 
   render() {

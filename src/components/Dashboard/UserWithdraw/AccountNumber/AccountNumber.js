@@ -137,6 +137,7 @@ class AccountNumber extends Component {
         });
         this.props.setCashBalance(data.data.amount, 2);
         this.props.setWithdrawalHistory(payload);
+        // Set the update value here
       } else {
         toast.error("Transaction was not successful");
       }
