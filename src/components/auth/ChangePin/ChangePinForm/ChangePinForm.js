@@ -127,7 +127,7 @@ class ChangePinForm extends Component {
     loading: false,
     oldPin: "",
     newPin: "",
-    confirmPin: ''
+    confirmPin: ""
   };
 
   handleInputChange = ({ target }) => {
@@ -153,6 +153,11 @@ class ChangePinForm extends Component {
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
       toast.error("Pleae fill form fields correctly");
+      return;
+    }
+
+    if (this.state.newPin !== this.state.confirmPin) {
+      toast.error("Pin does not match");
       return;
     }
 
@@ -204,33 +209,33 @@ class ChangePinForm extends Component {
           <Container>
             <Form onSubmit={this.handleSubmit}>
               <HeadingTwo className="mb-4">Change Pin</HeadingTwo>
-              
-                <FormItem>
-                  <label>Old Pin</label>
-                  <input
-                    minLength="4"
-                    maxLength="4"
-                    type="password"
-                    value={this.state.oldPin}
-                    name="oldPin"
-                    className="mr-2"
-                    onChange={this.handleInputChange}
-                    required
-                  />
-                </FormItem>
-                <FormItem>
-                  <label>New Pin</label>
-                  <input
-                    minLength="4"
-                    maxLength="4"
-                    type="password"
-                    value={this.state.newPin}
-                    name="newPin"
-                    className="ml-lg-2"
-                    onChange={this.handleInputChange}
-                    required
-                  />
-                </FormItem>
+
+              <FormItem>
+                <label>Old Pin</label>
+                <input
+                  minLength="4"
+                  maxLength="4"
+                  type="password"
+                  value={this.state.oldPin}
+                  name="oldPin"
+                  className="mr-2"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </FormItem>
+              <FormItem>
+                <label>New Pin</label>
+                <input
+                  minLength="4"
+                  maxLength="4"
+                  type="password"
+                  value={this.state.newPin}
+                  name="newPin"
+                  className="ml-lg-2"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </FormItem>
               <FormItem>
                 <label>Confirm Pin</label>
                 <input
