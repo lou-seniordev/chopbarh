@@ -70,6 +70,32 @@ const FormItem = styled.div`
   }
 `;
 
+const Button = styled.button`
+  all: unset;
+  padding: 0.5rem 1.3rem;
+  margin: 0 0.2rem;
+  transform: skew(-20deg);
+  display: inline-block;
+  transition: all 0.2s;
+  color: ${color.colorWhite};
+  background: ${color.colorPrimary};
+  font-size: 1.3rem;
+  z-index: 200;
+  align-self: ${props => (props.center ? "center" : "flex-start")};
+
+  span {
+    display: inline-block;
+    transform: skew(20deg);
+    color: #fff;
+  }
+
+  &:hover {
+    transform: translateY(-3px) skew(-20deg);
+    background: ${color.colorPrimaryHover};
+    color: ${color.colorWhite};
+  }
+`;
+
 class Voucher extends Component {
   state = {
     loading: false,
@@ -173,6 +199,12 @@ class Voucher extends Component {
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
             <p>Load Voucher of 100 naira?</p>
+            <Button>
+              <span>Load</span>
+            </Button>
+            <Button>
+              <span>Decline</span>
+            </Button>
           </ModalBody>
         </Modal>
         <VoucherWrapper className="container p-0">
