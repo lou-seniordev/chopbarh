@@ -5,7 +5,7 @@ import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
 
 const OverviewWrapper = styled.div`
-  background: #8c1936;
+  background: #6d0a23;
   color: #ddd;
   padding: 3rem 2rem;
   border-radius: 5px;

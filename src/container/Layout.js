@@ -83,8 +83,6 @@ class Layout extends Component {
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signup" component={SignUpPage} />
               <Redirect to="/" />
             </Switch>
           </Suspense>
@@ -97,7 +95,7 @@ class Layout extends Component {
               <Route path="/signup" component={SignUpPage} />
               <Route path="/set-nickname" component={SetNickname} />
               <Route path="/complete_profile" component={CompleteProfilePage} />
-              <Redirect to="/" />
+              <Redirect to="/login" />
             </Switch>
           </Suspense>
         )}
