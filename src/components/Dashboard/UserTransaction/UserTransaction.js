@@ -17,7 +17,7 @@ export default function UserTransaction() {
       <UserNavigation />
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-12" style={{ minHeight: "75vh" }}>
             <TransactionTabs />
           </div>
         </div>
