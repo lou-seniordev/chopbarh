@@ -39,3 +39,7 @@ export const fetchPlayerData = () => (dispatch, getState) => {
       dispatch(fetchPlayerFail());
     });
 };
+
+export const resetPlayerData = () => ({
+  type: actionType.RESET_PLAYER_DATA
+});
