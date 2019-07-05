@@ -23,6 +23,16 @@ import {
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
 
+const appRoutes = [
+  "/profile",
+  "/edit-profile",
+  "/change-pin",
+  "/deposit",
+  "/withdraw",
+  "/play",
+  "/transaction"
+];
+
 class Login extends Component {
   state = {
     formErrorModal: false,
@@ -94,8 +104,12 @@ class Login extends Component {
           localStorage.setItem("chopbarh-token:live", data.authToken);
           localStorage.setItem("chopbarh-id:live", data.userId);
           context.props.authSuccess(data.authToken, data.userId);
-          console.log("Auth Success");
-          context.props.history.push(this.props.lastLocation.pathname);
+
+          if (appRoutes.includes(this.props.lastLocation.pathname)) {
+            context.props.history.push(this.props.lastLocation.pathname);
+          } else {
+            context.props.history.push("/user");
+          }
         } else {
           console.log("Catch else..");
           context.setState({ accountErrorModal: true });
