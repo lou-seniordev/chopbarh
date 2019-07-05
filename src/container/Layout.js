@@ -25,6 +25,7 @@ const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
+const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 
 const Loading = () => (
   <div
@@ -83,7 +84,7 @@ class Layout extends Component {
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
-              <Redirect to="/" />
+              <Route path="*" component={NotFoundPage} />
             </Switch>
           </Suspense>
         ) : (
