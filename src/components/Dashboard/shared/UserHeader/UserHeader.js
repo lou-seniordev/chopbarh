@@ -397,7 +397,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchPlayerData,
-  fetchTopEarners
+  fetchTopEarners 
 };
 
 export default connect(

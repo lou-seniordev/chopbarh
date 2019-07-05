@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
+import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
 const OverviewWrapper = styled.div`
   background: #6d0a23;
@@ -39,6 +40,8 @@ const OverviewContentDescription = styled.p`
 `;
 
 class Overview extends Component {
+  
+
   render() {
     return (
       <OverviewWrapper className="container">
@@ -107,7 +110,7 @@ const mapStateToProps = state => ({
   error: state.player.error
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { fetchPlayerData };
 
 export default connect(
   mapStateToProps,
