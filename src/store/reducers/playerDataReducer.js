@@ -27,6 +27,11 @@ export default (state = initialState, action) => {
         loading: false,
         error: true
       };
+    case actionType.RESET_PLAYER_DATA:
+      return {
+        ...state,
+        playerData: null
+      };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
