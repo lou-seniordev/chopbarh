@@ -78,7 +78,6 @@ class SubmitPin extends Component {
           cvv: this.props.cvv
         };
         const value = +data.data.amount / 100;
-        this.props.setCreditCardData(payload);
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
       } else {
