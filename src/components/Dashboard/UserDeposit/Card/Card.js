@@ -57,9 +57,9 @@ class Card extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.creditCard.length && !this.props.isDataFetched) {
-      this.props.fetchCreditCardData();
-    }
+    this.props.fetchCreditCardData();
+    // if (!this.props.creditCard.length && !this.props.isDataFetched) {
+    // }
   };
 
   componentDidUpdate = prevProps => {

@@ -18,46 +18,48 @@ class WithdrawalTable extends Component {
   render() {
     return (
       <WithdrawalTableWrapper>
-        {this.props.withdrawalData ? (
-          <table className="table table-striped table-responsive">
-            <thead
-              style={{
-                background: "#8C1936",
-                color: "#fff",
-                textAlign: "center"
-              }}
-            >
-              <tr>
-                <th scope="col">Status</th>
-                <th scope="col">Reference</th>
-                <th scope="col">Transaction Date</th>
-                <th scope="col">Transaction Time</th>
-                <th scope="col">Transaction Fees</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Channel</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.withdrawalData.map((withdrawal, index) => (
-                <tr key={index} style={{ textAlign: "center" }}>
-                  <td>{withdrawal.status}</td>
-                  <td>{withdrawal.transaction_reference}</td>
-                  <td>{`${new Date(
-                    withdrawal.withdrawal_date
-                  ).toLocaleDateString()}`}</td>
-                  <td>{`${new Date(
-                    withdrawal.withdrawal_date
-                  ).toLocaleTimeString()}`}</td>
-                  <td>{withdrawal.transaction_fee}</td>
-                  <td>
-                    &#8358;
-                    {new Intl.NumberFormat().format(withdrawal.amount)}
-                  </td>
-                  <td>{withdrawal.channel}</td>
+        {!this.props.loading ? (
+          <div className="table-responsive">
+            <table className="table table-striped">
+              <thead
+                style={{
+                  background: "#8C1936",
+                  color: "#fff",
+                  textAlign: "center"
+                }}
+              >
+                <tr>
+                  <th scope="col">Status</th>
+                  <th scope="col">Reference</th>
+                  <th scope="col">Transaction Date</th>
+                  <th scope="col">Transaction Time</th>
+                  <th scope="col">Transaction Fees</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Channel</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.props.withdrawalData.map((withdrawal, index) => (
+                  <tr key={index} style={{ textAlign: "center" }}>
+                    <td>{withdrawal.status}</td>
+                    <td>{withdrawal.transaction_reference}</td>
+                    <td>{`${new Date(
+                      withdrawal.withdrawal_date
+                    ).toLocaleDateString()}`}</td>
+                    <td>{`${new Date(
+                      withdrawal.withdrawal_date
+                    ).toLocaleTimeString()}`}</td>
+                    <td>{withdrawal.transaction_fee}</td>
+                    <td>
+                      &#8358;
+                      {new Intl.NumberFormat().format(withdrawal.amount)}
+                    </td>
+                    <td>{withdrawal.channel}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <>
             {!this.props.error ? (

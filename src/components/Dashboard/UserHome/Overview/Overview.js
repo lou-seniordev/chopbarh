@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import color from "../../../styles/colors";
-import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
+import {
+  fetchPlayerData,
+  resetPlayerData
+} from "../../../../store/actions/playerDataActions";
 
 const OverviewWrapper = styled.div`
   background: #6d0a23;
@@ -40,12 +43,10 @@ const OverviewContentDescription = styled.p`
 `;
 
 class Overview extends Component {
-  
-
   render() {
     return (
       <OverviewWrapper className="container">
-        {this.props.playerData ? (
+        {!this.props.loading ? (
           <>
             <HeadingFour className="mb-5">Overview</HeadingFour>
             <OverviewContainer className="row text-center">
@@ -106,11 +107,12 @@ class Overview extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.player.loading,
   playerData: state.player.playerData,
   error: state.player.error
 });
 
-const mapDispatchToProps = { fetchPlayerData };
+const mapDispatchToProps = { fetchPlayerData, resetPlayerData };
 
 export default connect(
   mapStateToProps,
