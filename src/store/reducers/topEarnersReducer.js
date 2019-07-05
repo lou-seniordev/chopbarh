@@ -25,6 +25,11 @@ export default (state = initialState, action) => {
         loading: false,
         error: true
       };
+    case actionType.RESET_TOP_EARNERS:
+      return {
+        ...state,
+        results: null
+      };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
