@@ -4,6 +4,8 @@ import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
 const QuicktellerWrapper = styled.div`
+  text-align: center;
+
   button {
     all: unset;
     padding: 0.5rem 1.3rem;
