@@ -16,7 +16,7 @@ const QuicktellerWrapper = styled.div`
     font-size: 1.3rem;
     cursor: pointer;
     z-index: 200;
-    margin: 0 10rem;
+    margin-left: 10rem;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       font-size: 1.1rem;
