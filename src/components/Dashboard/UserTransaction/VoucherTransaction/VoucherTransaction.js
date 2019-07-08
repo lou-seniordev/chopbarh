@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, memo } from "react";
 import styled from "styled-components";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
@@ -76,28 +76,34 @@ const FormItem = styled.div`
   }
 `;
 
-export default function VoucherTransaction() {
-  return (
-    <VoucherTransactionWrapper>
-      <div>
-        <FormWrapper>
-          <FormItem>
-            <label>Transfer Credit to Friends</label>
-          </FormItem>
-          <FormItem>
-            <input type="text" placeholder="Phone Number" />
-          </FormItem>
-          <FormItem>
-            <input type="password" placeholder="Pin" />
-          </FormItem>
-          <FormItem>
-            <input type="text" placeholder="Amount" />
-          </FormItem>
-          <button type="submit" className="ml-2 mr-2">
-            <span>Transfer</span>
-          </button>
-        </FormWrapper>
-      </div>
-    </VoucherTransactionWrapper>
-  );
+// This is the component that is responsible for credit transfer to another player
+
+class VoucherTransaction extends Component {
+  render() {
+    return (
+      <VoucherTransactionWrapper>
+        <div>
+          <FormWrapper>
+            <FormItem>
+              <label>Transfer Credit to Friends</label>
+            </FormItem>
+            <FormItem>
+              <input type="text" placeholder="Phone Number" />
+            </FormItem>
+            <FormItem>
+              <input type="password" placeholder="Pin" />
+            </FormItem>
+            <FormItem>
+              <input type="text" placeholder="Amount" />
+            </FormItem>
+            <button type="submit" className="ml-2 mr-2">
+              <span>Transfer</span>
+            </button>
+          </FormWrapper>
+        </div>
+      </VoucherTransactionWrapper>
+    );
+  }
 }
+
+export default memo(VoucherTransaction);
