@@ -12,6 +12,7 @@ import {
 } from "../../../../store/actions/modalActions";
 import { fetchBankAccountData } from "../../../../store/actions/bankAccountActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
+import { removeCreditCard } from "../../../../store/actions/creditCardActions";
 
 class BankCharge extends Component {
   state = {
@@ -26,6 +27,7 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
+    this.props.removeCreditCard("AUTH_ei58n4shf4");
     fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {
         Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
@@ -202,6 +204,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setChargeReference,
   fetchBankAccountData,
+  removeCreditCard,
   openOTPModal,
   closeOTPModal
 };
