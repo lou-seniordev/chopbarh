@@ -4,6 +4,10 @@ import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
+import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
+import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
+import { getReference } from "../../../../lib/getReference";
 
 const VoucherTransactionWrapper = styled.div`
   /* margin-top: 8rem; */
@@ -118,6 +122,9 @@ class VoucherTransaction extends Component {
     }
 
     console.log(this.state);
+    const payload = {
+      ...this.state
+    };
 
     // Get the user with the number
     try {
@@ -133,12 +140,45 @@ class VoucherTransaction extends Component {
             "@class": ".LogEventRequest",
             eventKey: "ANALYTICS_PLAYER_DATA_VIA_PHONE",
             playerId: "5ceab8bada4bd40515df67a0",
-            PHONE_NUM: this.state.phone
+            PHONE_NUM: payload.phone
           })
         }
       );
 
       if (playerData.scriptData.results.length) {
+        const playerId = playerData.scriptData.results[0].PlayerID;
+        const historyObject = {
+          status: "Success",
+          amount: payload.amount,
+          date: new Date().toISOString(),
+          reference: getReference(),
+          fee: 0,
+          channel: "Credit Transfer"
+        };
+        // Reduce Coin Balance
+        this.props.setCoinBalance(payload.amount, 2);
+        // Add to history
+        this.props.setWithdrawalHistory(historyObject);
+        // Increase their coin balance
+        try {
+          const data = await fetch(
+            "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+              },
+              body: JSON.stringify({
+                "@class": ".LogEventRequest",
+                eventKey: "PLAYER_COINS_UPDATE",
+                playerId: playerId,
+                Coins: payload.amount,
+                Condition: 1
+              })
+            }
+          );
+        } catch (err) {}
       } else {
         toast.error("User with the phone number not found");
         return;
@@ -146,14 +186,6 @@ class VoucherTransaction extends Component {
     } catch (err) {
       toast.error("Transfer could not be completed");
     }
-
-    // Increase their coin balance
-
-    // Add to history
-
-    // Reduce the other's coin balance
-
-    // Add to history
   };
 
   render() {
@@ -203,4 +235,11 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData
 });
 
-export default connect(mapStateToProps)(memo(VoucherTransaction));
+const mapDispatchToProps = {
+  setCoinBalance
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(VoucherTransaction));
