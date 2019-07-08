@@ -10,7 +10,7 @@ import {
   closeOTPModal
 } from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
-import { setCreditCardData } from "../../../../../store/actions/creditCardActions";
+import { setCreditCardData, fetchCreditCardData } from "../../../../../store/actions/creditCardActions";
 
 class SubmitOTP extends Component {
   state = {
@@ -71,6 +71,7 @@ class SubmitOTP extends Component {
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
+        this.props.fetchCreditCardData();
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
@@ -133,6 +134,7 @@ const mapDispatchToProps = {
   setCoinBalance,
   setDepositHistory,
   setCreditCardData,
+  fetchCreditCardData,
   openOTPModal,
   closeOTPModal
 };

@@ -91,6 +91,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               cvv: payload.cvv
             })
           });
+        console.log(docRef);
       }
     } else {
       const docRef = await firestore
@@ -109,6 +110,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             }
           ]
         });
+
+      console.log(docRef);
     }
   } catch (err) {
     console.log("Error Setting new Card", err);

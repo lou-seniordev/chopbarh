@@ -14,7 +14,10 @@ import {
 } from "../../../../../store/actions/modalActions";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
-import { setCreditCardData } from "../../../../../store/actions/creditCardActions";
+import {
+  setCreditCardData,
+  fetchCreditCardData
+} from "../../../../../store/actions/creditCardActions";
 
 class SubmitPin extends Component {
   state = {
@@ -81,6 +84,7 @@ class SubmitPin extends Component {
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
+        this.props.fetchCreditCardData();
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);
@@ -148,7 +152,8 @@ const mapDispatchToProps = {
   closePhoneModal,
   setCoinBalance,
   setDepositHistory,
-  setCreditCardData
+  setCreditCardData,
+  fetchCreditCardData
 };
 
 export default withRouter(
