@@ -118,3 +118,17 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
     dispatch(setCreditCardFail());
   }
 };
+
+export const removeCreditCardInit = () => ({
+  type: actionType.REMOVE_CREDIT_CARD_INIT
+});
+
+export const removeCreditCardSuccess = () => ({
+  type: actionType.REMOVE_CREDIT_CARD_SUCCESS
+});
+
+export const removeCreditCardFail = () => ({
+  type: actionType.REMOVE_CREDIT_CARD_FAIL
+});
+
+export const removeCreditCard = () => ({});
