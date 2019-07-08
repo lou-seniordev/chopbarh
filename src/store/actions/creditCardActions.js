@@ -39,7 +39,7 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
 export const setCreditCardCVV = cvv => ({
   type: actionType.SET_CREDIT_CARD_CVV,
   cvv
-})
+});
 
 export const setCreditCardInit = () => ({
   type: actionType.SET_CREDIT_CARD_INIT
@@ -77,7 +77,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       console.log(cardExists);
 
       if (cardExists.length) {
-        console.log("Not adding...");
       } else {
         const docRef = await firestore
           .collection("card_charge")
@@ -92,17 +91,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               cvv: payload.cvv
             })
           });
-        console.log(docRef);
-        dispatch(
-          setCreditCardSuccess({
-            auth_code: payload.authorization_code,
-            card_type: payload.brand,
-            exp_month: payload.exp_month,
-            exp_year: payload.exp_year,
-            last_digits: payload.last4,
-            cvv: payload.cvv
-          })
-        );
       }
     } else {
       const docRef = await firestore
@@ -121,17 +109,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             }
           ]
         });
-      console.log(docRef);
-      dispatch(
-        setCreditCardSuccess({
-          auth_code: payload.authorization_code,
-          card_type: payload.brand,
-          exp_month: payload.exp_month,
-          exp_year: payload.exp_year,
-          last_digits: payload.last4,
-          cvv: payload.cvv
-        })
-      );
     }
   } catch (err) {
     console.log("Error Setting new Card", err);
