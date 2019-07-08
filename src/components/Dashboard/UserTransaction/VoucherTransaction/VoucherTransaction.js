@@ -4,10 +4,10 @@ import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import { getReference } from "../../../../lib/getReference";
+import firebase, { firestore } from "../../../../firebase";
 
 const VoucherTransactionWrapper = styled.div`
   /* margin-top: 8rem; */
@@ -117,18 +117,18 @@ class VoucherTransaction extends Component {
     }
 
     if (this.state.amount > this.props.playerData.CBCoins) {
+      this.setState({ loading: false });
       toast.error("You cannot transfer more than you have");
       return;
     }
 
-    console.log(this.state);
     const payload = {
       ...this.state
     };
 
     // Get the user with the number
     try {
-      const playerData = await fetch(
+      const playerDataResponse = await fetch(
         "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
         {
           method: "POST",
@@ -144,6 +144,7 @@ class VoucherTransaction extends Component {
           })
         }
       );
+      const playerData = await playerDataResponse.json();
 
       if (playerData.scriptData.results.length) {
         const playerId = playerData.scriptData.results[0].PlayerID;
@@ -159,8 +160,10 @@ class VoucherTransaction extends Component {
         this.props.setCoinBalance(payload.amount, 2);
         // Add to history
         this.props.setWithdrawalHistory(historyObject);
-        // Increase their coin balance
+        this.setState({ loading: false, phone: "", amount: "" });
+        toast.success("Credit was transferred successfully");
         try {
+          // Increase their coin balance
           const data = await fetch(
             "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
             {
@@ -178,12 +181,60 @@ class VoucherTransaction extends Component {
               })
             }
           );
+
+          try {
+            const snapshot = await firestore
+              .collection("deposits")
+              .where("id", "==", playerId)
+              .get();
+
+            const deposits = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+
+            if (deposits.length) {
+              const docRef = await firestore
+                .collection("deposits")
+                .doc(playerId)
+                .update({
+                  data: firebase.firestore.FieldValue.arrayUnion({
+                    amount: historyObject.amount,
+                    channel: historyObject.channel,
+                    deposit_date: historyObject.date,
+                    paid_at: historyObject.date,
+                    transaction_fees: historyObject.fee,
+                    transaction_reference: historyObject.reference,
+                    status: historyObject.status
+                  })
+                });
+            } else {
+              const docRef = await firestore
+                .collection("deposits")
+                .doc(playerId)
+                .set({
+                  id: playerId,
+                  data: [
+                    {
+                      amount: historyObject.amount,
+                      channel: historyObject.channel,
+                      deposit_date: historyObject.date,
+                      paid_at: historyObject.date,
+                      transaction_fees: historyObject.fee,
+                      transaction_reference: historyObject.reference,
+                      status: historyObject.status
+                    }
+                  ]
+                });
+            }
+          } catch (err) {}
         } catch (err) {}
       } else {
         toast.error("User with the phone number not found");
         return;
       }
     } catch (err) {
+      console.log(err);
       toast.error("Transfer could not be completed");
     }
   };
@@ -236,7 +287,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCoinBalance
+  setCoinBalance,
+  setWithdrawalHistory
 };
 
 export default connect(
