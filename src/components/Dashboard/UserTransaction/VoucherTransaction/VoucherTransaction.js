@@ -89,6 +89,22 @@ class VoucherTransaction extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  formIsValid = ({ amount, phone }) => {
+    if (
+      !isNaN(amount) !== true ||
+      !isNaN(phone) !== true ||
+      phone.length !== 11
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({ loading: true });
+  };
+
   render() {
     return (
       <VoucherTransactionWrapper>
@@ -118,8 +134,12 @@ class VoucherTransaction extends Component {
                 required
               />
             </FormItem>
-            <button type="submit" className="ml-2 mr-2">
-              <span>Transfer</span>
+            <button
+              type="submit"
+              disabled={this.state.loading}
+              className="ml-2 mr-2"
+            >
+              <span>{this.state.loading ? "Transferring..." : "Transfer"}</span>
             </button>
           </FormWrapper>
         </div>
