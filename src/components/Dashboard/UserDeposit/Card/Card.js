@@ -59,6 +59,8 @@ class Card extends Component {
   componentDidMount = () => {
     if (!this.props.creditCard.length) {
     this.props.fetchCreditCardData();
+    } else {
+      this.setState({ selectedValue: this.props.creditCard[0].auth_code });
     }
     // if (!this.props.creditCard.length && !this.props.isDataFetched) {
     // }
