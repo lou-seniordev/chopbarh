@@ -79,6 +79,12 @@ const FormItem = styled.div`
 // This is the component that is responsible for credit transfer to another player
 
 class VoucherTransaction extends Component {
+  state = {
+    loading: false,
+    phone: "",
+    amount: ""
+  };
+
   render() {
     return (
       <VoucherTransactionWrapper>
@@ -88,13 +94,13 @@ class VoucherTransaction extends Component {
               <label>Transfer Credit to Friends</label>
             </FormItem>
             <FormItem>
-              <input type="text" placeholder="Phone Number" />
+              <input type="text" name="phone" placeholder="Phone Number" />
             </FormItem>
-            <FormItem>
+            {/* <FormItem>
               <input type="password" placeholder="Pin" />
-            </FormItem>
+            </FormItem> */}
             <FormItem>
-              <input type="text" placeholder="Amount" />
+              <input type="text" name="amount" placeholder="Amount" />
             </FormItem>
             <button type="submit" className="ml-2 mr-2">
               <span>Transfer</span>
