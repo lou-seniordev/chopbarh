@@ -85,6 +85,10 @@ class VoucherTransaction extends Component {
     amount: ""
   };
 
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
   render() {
     return (
       <VoucherTransactionWrapper>
@@ -94,13 +98,25 @@ class VoucherTransaction extends Component {
               <label>Transfer Credit to Friends</label>
             </FormItem>
             <FormItem>
-              <input type="text" name="phone" placeholder="Phone Number" />
+              <input
+                type="text"
+                name="phone"
+                onChange={this.handleInputChange}
+                placeholder="Phone Number"
+                required
+              />
             </FormItem>
             {/* <FormItem>
               <input type="password" placeholder="Pin" />
             </FormItem> */}
             <FormItem>
-              <input type="text" name="amount" placeholder="Amount" />
+              <input
+                type="text"
+                name="amount"
+                onChange={this.handleInputChange}
+                placeholder="Amount"
+                required
+              />
             </FormItem>
             <button type="submit" className="ml-2 mr-2">
               <span>Transfer</span>
