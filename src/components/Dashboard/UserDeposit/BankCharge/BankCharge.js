@@ -1,6 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
 import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
@@ -13,20 +13,11 @@ import {
 import { fetchBankAccountData } from "../../../../store/actions/bankAccountActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
-const Banks = [
-  { name: "Access Bank", value: "044" },
-  { name: "ALAT by Wema", value: "035A" },
-  { name: "Fidelity Bank", value: "070" },
-  { name: "First City Monument Bank", value: "214" },
-  { name: "Sterling Bank", value: "232" },
-  { name: "Union Bank of Nigeria", value: "032" },
-  { name: "Unity Bank", value: "215" },
-  { name: "Zenith Bank", value: "057" }
-];
-
 class BankCharge extends Component {
   state = {
     loading: false,
+    dataLoading: true,
+    bankList: null,
     amount: "",
     bank: "",
     account_number: "",
@@ -35,9 +26,17 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.bankAccount) {
-      this.props.fetchBankAccountData();
-    }
+    fetch("https://api.paystack.co/bank", {
+      headers: {
+        Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ bankList: data.data, dataLoading: false });
+      })
+      .catch(err => this.setState({ dataLoading: false }));
   };
 
   toggleSubmitAmountModal = () => {
@@ -136,81 +135,60 @@ class BankCharge extends Component {
             />
           </ModalBody>
         </Modal>
-        {/* {this.props.bankAccount ? (
-          <>
-            <h4>Pay with Bank</h4>
-            <p>Click on a bank detail to pay with it</p>
-            {this.props.bankAccount.map((bank, index) => (
-              <div
-                key={index}
-                style={{
-                  background: "#eee",
-                  padding: "5px 12px 3px 12px",
-                  borderRadius: "5px",
-                  margin: "5px",
-                  cursor: "pointer",
-                  width: "100%"
-                }}
-                onClick={() =>
-                  this.setState({
-                    submitAmountModal: true,
-                    auth_code: bank.auth_code
-                  })
-                }
-              >
-                <p>{bank.bank}</p>
-                <p>{`XXXXXX${bank.last_digits}`}</p>
-              </div>
-            ))}
-            <hr />
-          </>
-        ) : (
-          <>{null}</>
-        )} */}
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem>
-            <label>Bank</label>
-            <select
-              name="bank"
-              value={this.state.bank}
-              onChange={this.handleInputChange}
-              required
-            >
-              {Banks.map(bank => (
-                <option key={bank.name} value={bank.value}>
-                  {bank.name}
-                </option>
-              ))}
-            </select>
-          </FormItem>
-          <HalfColumn>
-            <FormItem className="mr-3">
-              <label>Account Number</label>
-
-              <NumberFormat
-                value={this.state.account_number}
-                onChange={this.handleInputChange}
-                name="account_number"
-                required
-                placeholder="Account Number"
-              />
-            </FormItem>
+        {this.state.bankList ? (
+          <Form onSubmit={this.handleSubmit}>
             <FormItem>
-              <label>Amount</label>
-              <NumberFormat
-                thousandSeparator
-                value={this.state.amount}
+              <label>Bank</label>
+              <select
+                name="bank"
+                value={this.state.bank}
                 onChange={this.handleInputChange}
-                name="amount"
                 required
-                placeholder="Amount(NGN)"
-              />
+              >
+                {this.state.bankList.map(bank => (
+                  <option key={bank.id} value={bank.code}>
+                    {bank.name}
+                  </option>
+                ))}
+              </select>
             </FormItem>
-          </HalfColumn>
-          <button type="submit" className="mr-2" disabled={this.state.loading}>
-            <span>{this.state.loading ? "Processing" : "Load"}</span>
-          </button>
-        </Form>
+            <HalfColumn>
+              <FormItem className="mr-3">
+                <label>Account Number</label>
+
+                <NumberFormat
+                  value={this.state.account_number}
+                  onChange={this.handleInputChange}
+                  name="account_number"
+                  required
+                  placeholder="Account Number"
+                />
+              </FormItem>
+              <FormItem>
+                <label>Amount</label>
+                <NumberFormat
+                  thousandSeparator
+                  value={this.state.amount}
+                  onChange={this.handleInputChange}
+                  name="amount"
+                  required
+                  placeholder="Amount(NGN)"
+                />
+              </FormItem>
+            </HalfColumn>
+            <button
+              type="submit"
+              className="mr-2"
+              disabled={this.state.loading}
+            >
+              <span>{this.state.loading ? "Processing..." : "Load"}</span>
+            </button>
+          </Form>
+        ) : (
+          <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
+            <Spinner />
+          </div>
+        )}
       </>
     );
   }

@@ -14,7 +14,9 @@ const QuicktellerWrapper = styled.div`
     color: ${color.colorWhite};
     background: ${color.colorPrimary};
     font-size: 1.3rem;
+    cursor: pointer;
     z-index: 200;
+    margin: 0 10rem;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       font-size: 1.1rem;
@@ -67,11 +69,9 @@ export default function Quickteller() {
       <Info className="mb-4">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       </Info>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button>
-          <span>Visit Quickteller</span>
-        </button>
-      </div>
+      <button>
+        <span>Visit Quickteller</span>
+      </button>
     </QuicktellerWrapper>
   );
 }
