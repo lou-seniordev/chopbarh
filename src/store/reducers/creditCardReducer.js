@@ -5,6 +5,7 @@ const initialState = {
   creditCard: [],
   cvv: null,
   fetched: false,
+  removing: false,
   error: false
 };
 
@@ -38,6 +39,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         cvv: action.cvv
+      };
+    case actionType.REMOVE_CREDIT_CARD_INIT:
+      return {
+        ...state,
+        removing: true
+      };
+    case actionType.REMOVE_CREDIT_CARD_SUCCESS:
+      return {
+        ...state,
+        removing: false
+      };
+    case actionType.SET_BANK_ACCOUNT_FAIL:
+      return {
+        ...state,
+        removing: false
       };
     case actionType.AUTH_LOGOUT:
       return {
