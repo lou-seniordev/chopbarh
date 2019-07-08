@@ -225,6 +225,7 @@ class Card extends Component {
         const value = +data.data.amount / 100;
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
+        this.props.setChargeReference(payload);
       } else {
         toast.error(`Please try again`);
       }

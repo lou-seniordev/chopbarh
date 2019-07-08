@@ -80,12 +80,13 @@ class SubmitPin extends Component {
         const value = +data.data.amount / 100;
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
+        this.props.setCreditCardData(payload);
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
     }

@@ -70,6 +70,7 @@ class SubmitOTP extends Component {
         const value = +data.data.amount / 100;
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
+        this.props.setCreditCardData(payload);
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
