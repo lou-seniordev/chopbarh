@@ -135,7 +135,7 @@ class Card extends Component {
     };
 
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
+      const response = await fetch("https://api.paystack.co/transaction/charge_authorization", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -150,19 +150,14 @@ class Card extends Component {
         authAmount: "",
         authCVV: ""
       });
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_pin") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openPinModal();
-      } else if (data.data.status === "success") {
+      
+      if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
         this.props.setDepositHistory(data.data);
         this.props.setCoinBalance(value);
       } else {
-        toast.error(`Please try again`);
+        toast.error(`Transaction was not successful`);
       }
     } catch (err) {
       this.setState({ loading: false });
