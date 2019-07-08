@@ -26,7 +26,7 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
-    fetch("https://api.paystack.co/bank", {
+    fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {
         Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
         "Content-Type": "application/json"

@@ -1,5 +1,7 @@
 import React, { Component, memo } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
+import { connect } from "react-redux";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
@@ -100,16 +102,65 @@ class VoucherTransaction extends Component {
     return true;
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      this.setState({ loading: false });
+      toast.error(`Form is not valid`);
+      return;
+    }
+
+    if (this.state.amount > this.props.playerData.CBCoins) {
+      toast.error("You cannot transfer more than you have");
+      return;
+    }
+
+    console.log(this.state);
+
+    // Get the user with the number
+    try {
+      const playerData = await fetch(
+        "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            "@class": ".LogEventRequest",
+            eventKey: "ANALYTICS_PLAYER_DATA_VIA_PHONE",
+            playerId: "5ceab8bada4bd40515df67a0",
+            PHONE_NUM: this.state.phone
+          })
+        }
+      );
+
+      if (playerData.scriptData.results.length) {
+      } else {
+        toast.error("User with the phone number not found");
+        return;
+      }
+    } catch (err) {
+      toast.error("Transfer could not be completed");
+    }
+
+    // Increase their coin balance
+
+    // Add to history
+
+    // Reduce the other's coin balance
+
+    // Add to history
   };
 
   render() {
     return (
       <VoucherTransactionWrapper>
         <div>
-          <FormWrapper>
+          <FormWrapper onSubmit={this.handleSubmit}>
             <FormItem>
               <label>Transfer Credit to Friends</label>
             </FormItem>
@@ -148,4 +199,8 @@ class VoucherTransaction extends Component {
   }
 }
 
-export default memo(VoucherTransaction);
+const mapStateToProps = state => ({
+  playerData: state.player.playerData
+});
+
+export default connect(mapStateToProps)(memo(VoucherTransaction));
