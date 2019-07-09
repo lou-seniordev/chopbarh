@@ -7,16 +7,14 @@ const QuicktellerWrapper = styled.div`
   text-align: center;
 
   button {
-    all: unset;
     padding: 0.5rem 1.3rem;
-    transform: skew(-20deg) translateX(-50%);
+    border: 0;
     transition: all 0.2s;
     color: ${color.colorWhite};
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     cursor: pointer;
     z-index: 200;
-    margin-left: 10rem;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       font-size: 1.1rem;
@@ -29,9 +27,7 @@ const QuicktellerWrapper = styled.div`
     }
 
     &:hover {
-      transform: translateY(-3px) skew(-20deg) translateX(-50%);
       background: ${color.colorPrimaryHover};
-      color: ${color.colorWhite};
     }
   }
 `;
@@ -51,27 +47,28 @@ export default function Quickteller() {
     <QuicktellerWrapper>
       <StepText>Step 1:</StepText>
       <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Visit {"  "}
+        <button>www.quickteller.com/chopbarh</button>
       </Info>
       <StepText>Step 2:</StepText>
       <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        ​Enter your ChopBarh Login Mobile Phone Number: "PlayerNumber", the
+        amount you wish to deposit, your Email.
       </Info>
       <StepText>Step 3:</StepText>
       <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        ​The system will then call up your information from our system.
       </Info>
       <StepText>Step 4:</StepText>
       <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        ​Verify your information and payment details and click on PAY.
       </Info>
       <StepText>Step 5:</StepText>
       <Info className="mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        ​A payment receipt will be generated and you will receive an email
+        notification to the email provided. Your ChopBarh account would be
+        funded within 5 mins.
       </Info>
-      <button>
-        <span>Visit Quickteller</span>
-      </button>
     </QuicktellerWrapper>
   );
 }
