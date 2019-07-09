@@ -1,6 +1,14 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner } from "reactstrap";
+import {
+  Modal,
+  ModalBody,
+  Spinner,
+  Button,
+  Popover,
+  PopoverHeader,
+  PopoverBody
+} from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
@@ -17,7 +25,8 @@ import {
   FormItem,
   HalfColumn,
   ExistingCardForm,
-  ExistingCardFormItem
+  ExistingCardFormItem,
+  FormSubmitButton
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -53,12 +62,13 @@ class Card extends Component {
     cvv: "",
     auth_code: "",
     authCVV: "",
-    authAmount: ""
+    authAmount: "",
+    popoverOpen: false
   };
 
   componentDidMount = () => {
     if (!this.props.creditCard.length) {
-    this.props.fetchCreditCardData();
+      this.props.fetchCreditCardData();
     } else {
       this.setState({ selectedValue: this.props.creditCard[0].auth_code });
     }
@@ -83,6 +93,12 @@ class Card extends Component {
 
   handleRadioChange = value => {
     this.setState({ selectedValue: value, authCVV: "" });
+  };
+
+  toggle = () => {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
   };
 
   formIsValid = ({ amount, card, expiry, cvv }) => {
@@ -135,22 +151,25 @@ class Card extends Component {
     };
 
     try {
-      const response = await fetch("https://api.paystack.co/transaction/charge_authorization", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
+      const response = await fetch(
+        "https://api.paystack.co/transaction/charge_authorization",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
       const data = await response.json();
       this.setState({
         loading: false,
         authAmount: "",
         authCVV: ""
       });
-      
+
       if (data.data.status === "success") {
         toast.success("Transaction was successful");
         const value = +data.data.amount / 100;
@@ -308,9 +327,10 @@ class Card extends Component {
                                 month={card.exp_month}
                                 year={card.exp_year}
                               />
-                              <ExistingCardFormItem className="mt-lg-4 mt-md-4 mb-0 mb-sm-2">
+                              <ExistingCardFormItem>
                                 <input
                                   onChange={this.handleInputChange}
+                                  className="mt-lg-5 mt-md-4"
                                   name="authCVV"
                                   value={
                                     this.state.selectedValue === card.auth_code
@@ -324,6 +344,26 @@ class Card extends Component {
                                   placeholder="CVV"
                                 />
                               </ExistingCardFormItem>
+                              <Button
+                                id="Popover1"
+                                type="button"
+                                className="mb-2 ml-2"
+                              >
+                                &#10005;
+                              </Button>
+                              <Popover
+                                placement="bottom"
+                                isOpen={this.state.popoverOpen}
+                                target="Popover1"
+                                toggle={this.toggle}
+                              >
+                                <PopoverHeader>Popover Title</PopoverHeader>
+                                <PopoverBody>
+                                  Sed posuere consectetur est at lobortis.
+                                  Aenean eu leo quam. Pellentesque ornare sem
+                                  lacinia quam venenatis vestibulum.
+                                </PopoverBody>
+                              </Popover>
                             </div>
                           ))}
                         </RadioGroup>
@@ -337,7 +377,7 @@ class Card extends Component {
                             placeholder="Amount(NGN)"
                           />
                         </ExistingCardFormItem>
-                        <button
+                        <FormSubmitButton
                           type="submit"
                           className="mr-2 mt-n4"
                           disabled={this.state.loading}
@@ -345,7 +385,7 @@ class Card extends Component {
                           <span>
                             {this.state.loading ? "Please wait..." : "Load"}
                           </span>
-                        </button>
+                        </FormSubmitButton>
                       </ExistingCardForm>
                     </AccordionItemPanel>
                   </AccordionItem>
@@ -425,7 +465,7 @@ class Card extends Component {
                             />
                           </FormItem>
                         </HalfColumn>
-                        <button
+                        <FormSubmitButton
                           type="submit"
                           className="mr-2"
                           disabled={this.state.loading}
@@ -433,7 +473,7 @@ class Card extends Component {
                           <span>
                             {this.state.loading ? "Please wait..." : "Load"}
                           </span>
-                        </button>
+                        </FormSubmitButton>
                       </Form>
                     </AccordionItemPanel>
                   </AccordionItem>
@@ -509,13 +549,13 @@ class Card extends Component {
                     />
                   </FormItem>
                 </HalfColumn>
-                <button
+                <FormSubmitButton
                   type="submit"
                   className="mr-2"
                   disabled={this.state.loading}
                 >
                   <span>{this.state.loading ? "Please wait..." : "Load"}</span>
-                </button>
+                </FormSubmitButton>
               </Form>
             )}
           </>
