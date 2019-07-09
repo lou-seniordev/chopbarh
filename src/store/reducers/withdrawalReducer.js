@@ -3,6 +3,8 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   loading: true,
   withdrawalHistory: null,
+  withdrawalLimit: 500000,
+  withdrawalStatus: 0,
   error: false
 };
 
