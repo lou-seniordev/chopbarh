@@ -347,7 +347,7 @@ class Card extends Component {
                               <Button
                                 id="Popover1"
                                 type="button"
-                                className="mb-2 ml-2"
+                                className="mb-lg-2 mb-md-2 mb-sm-3 ml-2"
                               >
                                 &#10005;
                               </Button>
@@ -362,7 +362,12 @@ class Card extends Component {
                                   account. Do you want to continue?
                                   <div className="d-flex justify-content-center">
                                     <Button className="mr-1">Yes</Button>
-                                    <Button onClick={this.toggle}>No</Button>
+                                    <Button
+                                      className="btn-primary"
+                                      onClick={this.toggle}
+                                    >
+                                      No
+                                    </Button>
                                   </div>
                                 </PopoverBody>
                               </Popover>

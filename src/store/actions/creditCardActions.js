@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
@@ -131,40 +133,48 @@ export const removeCreditCardFail = () => ({
   type: actionType.REMOVE_CREDIT_CARD_FAIL
 });
 
-export const removeCreditCard = authCode => async (dispatch, getState) => {
+export const removeCreditCard = (event, authCode) => async (
+  dispatch,
+  getState
+) => {
   dispatch(removeCreditCardInit());
 
-  try {
-    const snapshot = await firestore
-      .collection("card_charge")
-      .where("id", "==", getState().auth.id)
-      .get();
+  console.log(authCode);
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    console.log(data);
-    if (data.length) {
-      // dispatch(fetchCreditCardSuccess(data[0].data));
-      const cardsArray = data[0].data;
-      let filteredArray = cardsArray.filter(
-        card => card.auth_code !== authCode
-      );
+  // try {
+  //   const snapshot = await firestore
+  //     .collection("card_charge")
+  //     .where("id", "==", getState().auth.id)
+  //     .get();
 
-      try {
-        const docRef = await firestore
-          .collection("card_charge")
-          .doc(getState().auth.id)
-          .update({
-            data: filteredArray
-          });
-      } catch (err) {
-        // console.log("Error Setting new Card", err);
-        // dispatch(setCreditCardFail());
-      }
-    } else {
-      // dispatch(fetchCreditCardFail());
-    }
-  } catch (err) {
-    console.log("Error...", err);
-    dispatch(removeCreditCardFail());
-  }
+  //   const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  //   console.log(data);
+  //   if (data.length) {
+  //     // dispatch(fetchCreditCardSuccess(data[0].data));
+  //     const cardsArray = data[0].data;
+  //     let filteredArray = cardsArray.filter(
+  //       card => card.auth_code !== authCode
+  //     );
+
+  //     try {
+  //       const docRef = await firestore
+  //         .collection("card_charge")
+  //         .doc(getState().auth.id)
+  //         .update({
+  //           data: filteredArray
+  //         });
+
+  //       toast.success("Card was removed");
+  //     } catch (err) {
+  //       toast.error("Card could not be removed. Please try again");
+  //       // console.log("Error Setting new Card", err);
+  //       // dispatch(setCreditCardFail());
+  //     }
+  //   } else {
+  //     // dispatch(fetchCreditCardFail());
+  //   }
+  // } catch (err) {
+  //   console.log("Error...", err);
+  //   dispatch(removeCreditCardFail());
+  // }
 };
