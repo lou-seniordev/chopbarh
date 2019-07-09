@@ -42,7 +42,8 @@ import {
 import {
   fetchCreditCardData,
   setCreditCardData,
-  setCreditCardCVV
+  setCreditCardCVV,
+  removeCreditCard
 } from "../../../../store/actions/creditCardActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
@@ -345,7 +346,7 @@ class Card extends Component {
                                 />
                               </ExistingCardFormItem>
                               <Button
-                                id="Popover1"
+                                id="Popover"
                                 type="button"
                                 className="mb-lg-2 mb-md-2 mb-sm-3 ml-2"
                               >
@@ -354,20 +355,38 @@ class Card extends Component {
                               <Popover
                                 placement="bottom"
                                 isOpen={this.state.popoverOpen}
-                                target="Popover1"
+                                target="Popover"
                                 toggle={this.toggle}
                               >
                                 <PopoverBody className="text-center">
                                   This action will remove this Card from your
                                   account. Do you want to continue?
                                   <div className="d-flex justify-content-center">
-                                    <Button className="mr-1">Yes</Button>
                                     <Button
-                                      className="btn-primary"
-                                      onClick={this.toggle}
+                                      className="mr-1"
+                                      disabled={this.props.removingCard}
+                                      onClick={e =>
+                                        this.props.removeCreditCard(
+                                          e,
+                                          card.auth_code
+                                        ) && this.toggle()
+                                      }
                                     >
-                                      No
+                                      {this.props.removingCard
+                                        ? "Removing..."
+                                        : "Yes"}
                                     </Button>
+                                    {this.props.removingCard ? (
+                                      <>{null}</>
+                                    ) : (
+                                      <Button
+                                        className="btn-primary"
+                                        disabled={this.props.removingCard}
+                                        onClick={this.toggle}
+                                      >
+                                        No
+                                      </Button>
+                                    )}
                                   </div>
                                 </PopoverBody>
                               </Popover>
@@ -577,7 +596,8 @@ const mapStateToProps = state => ({
   pinModal: state.modal.submitPinModal,
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
-  isDataFetched: state.creditCard.fetched
+  isDataFetched: state.creditCard.fetched,
+  removingCard: state.creditCard.removing
 });
 
 const mapDispatchToProps = {
@@ -586,6 +606,7 @@ const mapDispatchToProps = {
   setDepositHistory,
   setCreditCardData,
   setCreditCardCVV,
+  removeCreditCard,
   setCoinBalance,
   openOTPModal,
   closeOTPModal,

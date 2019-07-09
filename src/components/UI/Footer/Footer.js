@@ -112,7 +112,7 @@ export default function Footer() {
               <span>Betting</span>
             </p> */}
             <p>
-              <span>Download</span>
+              <span target="Popover">Download</span>
             </p>
             <p>
               <span>Talk to us</span>

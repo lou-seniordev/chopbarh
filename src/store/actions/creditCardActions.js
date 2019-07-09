@@ -139,42 +139,42 @@ export const removeCreditCard = (event, authCode) => async (
 ) => {
   dispatch(removeCreditCardInit());
 
-  console.log(authCode);
+  try {
+    const snapshot = await firestore
+      .collection("card_charge")
+      .where("id", "==", getState().auth.id)
+      .get();
 
-  // try {
-  //   const snapshot = await firestore
-  //     .collection("card_charge")
-  //     .where("id", "==", getState().auth.id)
-  //     .get();
+    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // console.log(data);
+    if (data.length) {
+      // dispatch(fetchCreditCardSuccess(data[0].data));
+      const cardsArray = data[0].data;
+      let filteredArray = cardsArray.filter(
+        card => card.auth_code !== authCode
+      );
 
-  //   const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  //   console.log(data);
-  //   if (data.length) {
-  //     // dispatch(fetchCreditCardSuccess(data[0].data));
-  //     const cardsArray = data[0].data;
-  //     let filteredArray = cardsArray.filter(
-  //       card => card.auth_code !== authCode
-  //     );
+      try {
+        const docRef = await firestore
+          .collection("card_charge")
+          .doc(getState().auth.id)
+          .update({
+            data: filteredArray
+          });
 
-  //     try {
-  //       const docRef = await firestore
-  //         .collection("card_charge")
-  //         .doc(getState().auth.id)
-  //         .update({
-  //           data: filteredArray
-  //         });
-
-  //       toast.success("Card was removed");
-  //     } catch (err) {
-  //       toast.error("Card could not be removed. Please try again");
-  //       // console.log("Error Setting new Card", err);
-  //       // dispatch(setCreditCardFail());
-  //     }
-  //   } else {
-  //     // dispatch(fetchCreditCardFail());
-  //   }
-  // } catch (err) {
-  //   console.log("Error...", err);
-  //   dispatch(removeCreditCardFail());
-  // }
+        toast.success("Card was removed");
+        dispatch(fetchCreditCardData());
+        window.location.reload();
+      } catch (err) {
+        toast.error("Card could not be removed. Please try again");
+        // console.log("Error Setting new Card", err);
+        // dispatch(setCreditCardFail());
+      }
+    } else {
+      // dispatch(fetchCreditCardFail());
+    }
+  } catch (err) {
+    console.log("Error...", err);
+    dispatch(removeCreditCardFail());
+  }
 };
