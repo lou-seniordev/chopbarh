@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
-import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  HalfColumn,
+  FormSubmitButton
+} from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
@@ -177,13 +182,13 @@ class BankCharge extends Component {
                 />
               </FormItem>
             </HalfColumn>
-            <button
+            <FormSubmitButton
               type="submit"
               className="mr-2"
               disabled={this.state.loading}
             >
               <span>{this.state.loading ? "Processing..." : "Load"}</span>
-            </button>
+            </FormSubmitButton>
           </Form>
         ) : (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>

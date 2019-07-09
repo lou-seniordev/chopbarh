@@ -3,7 +3,11 @@ import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { Form, FormItem } from "../../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  FormSubmitButton
+} from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
@@ -106,13 +110,13 @@ class SubmitPhone extends Component {
                 placeholder="Phone Number"
               />
             </FormItem>
-            <button
+            <FormSubmitButton
               type="submit"
               className="mr-2"
               disabled={this.state.loading}
             >
               <span>{this.state.loading ? "Processing..." : "Submit"}</span>
-            </button>
+            </FormSubmitButton>
           </>
         )}
       </Form>

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react";
+import React, { Component, memo } from "react";
+import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
@@ -15,6 +15,13 @@ class UserWithdraw extends Component {
         <Helmet title={`Chopbarh \u{2192} Withdraw`} />
         <UserHeader />
         <UserNavigation />
+        <div className="container">
+          <div className="row">
+            <div>
+              <p>Withdrawal Status</p>
+            </div>
+          </div>
+        </div>
         <div style={{ minHeight: "80vh" }}>
           <MediaQuery minDeviceWidth={767}>
             <WithdrawTabs />
@@ -23,16 +30,17 @@ class UserWithdraw extends Component {
             <WithdrawSmallScreens />
           </MediaQuery>
         </div>
-        <div className="container">
-          <p>Withdrawal Status</p>
-        </div>
         <Footer />
       </>
     );
   }
 }
 
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
 export default connect(
-  null,
-  null
-)(UserWithdraw);
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(UserWithdraw));
