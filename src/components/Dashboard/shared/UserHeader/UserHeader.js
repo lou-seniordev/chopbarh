@@ -333,6 +333,15 @@ class UserHeader extends Component {
                             />
                           </span>
                         </li>
+                        <Link className="nav-link text-uppercase" to="edit-profile">
+                          Profile
+                        </Link>
+                        <Link className="nav-link text-uppercase" to="change-pin">
+                          Change Pin
+                        </Link>
+                        <Link className="nav-link text-uppercase" to="logout">
+                          Logout
+                        </Link>
                       </>
                       {/* <li className="nav-item dropdown">
                         <a
@@ -397,7 +406,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchPlayerData,
-  fetchTopEarners 
+  fetchTopEarners
 };
 
 export default connect(

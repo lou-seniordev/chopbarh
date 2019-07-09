@@ -2,7 +2,12 @@ import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 // import NumberFormat from "react-number-format";
 import styled from "styled-components";
-import { Form, FormItem, HalfColumn } from "../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  HalfColumn,
+  FormSubmitButton
+} from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import Banks from "./Banks";
@@ -211,9 +216,13 @@ class AccountNumber extends Component {
               /> */}
             </FormItem>
           </HalfColumn>
-          <button type="submit" className="mr-2" disabled={this.state.loading}>
+          <FormSubmitButton
+            type="submit"
+            className="mr-2"
+            disabled={this.state.loading}
+          >
             <span>{this.state.loading ? "Processing..." : "Load"}</span>
-          </button>
+          </FormSubmitButton>
         </FormWrapper>
       </>
     );
