@@ -357,11 +357,13 @@ class Card extends Component {
                                 target="Popover1"
                                 toggle={this.toggle}
                               >
-                                <PopoverHeader>Popover Title</PopoverHeader>
-                                <PopoverBody>
-                                  Sed posuere consectetur est at lobortis.
-                                  Aenean eu leo quam. Pellentesque ornare sem
-                                  lacinia quam venenatis vestibulum.
+                                <PopoverBody className="text-center">
+                                  This action will remove this Card from your
+                                  account. Do you want to continue?
+                                  <div className="d-flex justify-content-center">
+                                    <Button className="mr-1">Yes</Button>
+                                    <Button onClick={this.toggle}>No</Button>
+                                  </div>
                                 </PopoverBody>
                               </Popover>
                             </div>
