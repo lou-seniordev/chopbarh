@@ -21,10 +21,11 @@ class UserWithdraw extends Component {
         withdrawal =>
           new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
       );
-      // const withdrawalTotal = withdrawalsMade.reduce(
-      //   (acc, current) => acc + Number(current.amount)
-      // );
-      console.log("Updating...", withdrawalsMade);
+      const withdrawalsTotal = withdrawalsMade.reduce(
+        (acc, current) => acc + Number(current.amount),
+        0
+      );
+      console.log("Updating...", withdrawalsMade, withdrawalsTotal);
     }
   };
 
@@ -37,7 +38,7 @@ class UserWithdraw extends Component {
         <div className="container">
           <div className="row ">
             <div className="col-lg-10 text-right mt-5 d-flex justify-content-end">
-              <div className="pr-5">
+              <div className="pr-lg-5 pr-md-3">
                 <p>Withdrawal Status</p>
                 <p>
                   Daily Limit: &#8358;

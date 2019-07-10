@@ -100,3 +100,8 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
     dispatch(setWithdrawalHistoryFail());
   }
 };
+
+export const setWithdrawalStatus = value => ({
+  type: actionType.SET_WITHDRAWAL_STATUS,
+  value
+});
