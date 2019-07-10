@@ -68,7 +68,8 @@ export default function ATM() {
       </Info>
       <StepText>Step 7:</StepText>
       <Info className="mb-4">
-        Input your Customer Reference number, which is your phone number
+        Input your Customer Reference number, which is your "ChopBarh" phone
+        number
       </Info>
       <StepText>Step 8:</StepText>
       <Info className="mb-4">

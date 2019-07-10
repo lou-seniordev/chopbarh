@@ -195,6 +195,12 @@ class BankCharge extends Component {
             <Spinner />
           </div>
         )}
+        <div className="text-center" style={{ color: "#000" }}>
+          <p>
+            **For deposits of &#8358;2,500 and above, there is a &#8358;100
+            charge added to the deposit amount**
+          </p>
+        </div>
       </>
     );
   }

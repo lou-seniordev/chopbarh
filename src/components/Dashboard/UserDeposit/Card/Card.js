@@ -248,10 +248,9 @@ class Card extends Component {
           fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
         };
         const value = +data.data.amount / 100;
-        // this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
+        this.props.setDepositHistory(historyObject);
+        this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
-        // this.props.fetchCreditCardData();
       } else {
         toast.error(`Please try again`);
       }
