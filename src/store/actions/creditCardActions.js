@@ -115,6 +115,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 
       console.log(docRef);
     }
+    dispatch(fetchCreditCardData());
   } catch (err) {
     console.log("Error Setting new Card", err);
     dispatch(setCreditCardFail());
@@ -161,15 +162,14 @@ export const removeCreditCard = (event, authCode) => async (
           .update({
             data: filteredArray
           });
-
-        toast.success("Card was removed");
-        dispatch(fetchCreditCardData());
-        window.location.reload();
       } catch (err) {
         toast.error("Card could not be removed. Please try again");
         // console.log("Error Setting new Card", err);
         // dispatch(setCreditCardFail());
       }
+      window.location.reload();
+      dispatch(fetchCreditCardData());
+      toast.success("Card was removed");
     } else {
       // dispatch(fetchCreditCardFail());
     }

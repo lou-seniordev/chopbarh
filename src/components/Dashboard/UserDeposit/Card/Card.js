@@ -6,7 +6,6 @@ import {
   Spinner,
   Button,
   Popover,
-  PopoverHeader,
   PopoverBody
 } from "reactstrap";
 import { withRouter } from "react-router-dom";
@@ -249,10 +248,10 @@ class Card extends Component {
           fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
         };
         const value = +data.data.amount / 100;
-        this.props.setDepositHistory(historyObject);
-        this.props.setCoinBalance(value);
+        // this.props.setDepositHistory(historyObject);
+        // this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
-        this.props.fetchCreditCardData();
+        // this.props.fetchCreditCardData();
       } else {
         toast.error(`Please try again`);
       }
