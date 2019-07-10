@@ -47,27 +47,41 @@ export default function ATM() {
     <ATMWrapper>
       <StepText>Step 1:</StepText>
       <Info className="mb-4">
-        Visit {"  "}
-        <button>www.quickteller.com/chopbarh</button>
+        Visit Visit any Quickteller/Interswitch enabled ATM
       </Info>
       <StepText>Step 2:</StepText>
-      <Info className="mb-4">
-        ​Enter your ChopBarh Login Mobile Phone Number: "PlayerNumber", the
-        amount you wish to deposit, your Email.
-      </Info>
+      <Info className="mb-4">​Insert your card and enter your pin.</Info>
       <StepText>Step 3:</StepText>
       <Info className="mb-4">
-        ​The system will then call up your information from our system.
+        ​Select “Pay Bills” or “Quickteller” depending on the ATM.
       </Info>
       <StepText>Step 4:</StepText>
-      <Info className="mb-4">
-        ​Verify your information and payment details and click on PAY.
-      </Info>
+      <Info className="mb-4">​Select your account type.</Info>
       <StepText>Step 5:</StepText>
       <Info className="mb-4">
-        ​A payment receipt will be generated and you will receive an email
-        notification to the email provided. Your ChopBarh account would be
-        funded within 5 mins.
+        You will be directed to choose a payment option – select either “Pay
+        Merchant” or “Others” depending on the ATM.
+      </Info>
+      <StepText>Step 6:</StepText>
+      <Info className="mb-4">
+        You will then be prompted for a Merchant Code
+      </Info>
+      <StepText>Step 7:</StepText>
+      <Info className="mb-4">
+        Input your Customer Reference number, which is your phone number
+      </Info>
+      <StepText>Step 8:</StepText>
+      <Info className="mb-4">
+        Input the amount that you would like to deposit.
+      </Info>
+      <StepText>Step 9:</StepText>
+      <Info className="mb-4">
+        Input your phone number and select “Proceed”.
+      </Info>
+      <StepText>Step 10:</StepText>
+      <Info className="mb-4">
+        You will then receive confirmation that the payment has been completed
+        successfully.
       </Info>
     </ATMWrapper>
   );

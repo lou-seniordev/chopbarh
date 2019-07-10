@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../Card/Card";
 import Quickteller from "../Quickteller/Quickteller";
+import ATM from "../ATM/ATM";
 //import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 import BankCharge from "../BankCharge/BankCharge";
 import Voucher from "../../UserHome/Voucher/Voucher";
@@ -69,7 +70,9 @@ export default function DepositTabs() {
             <div style={{ minHeight: "80vh" }} />
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
+            <div style={{ minHeight: "80vh" }}>
+              <ATM />
+            </div>
           </TabPanel>
         </Tabs>
       </div>
