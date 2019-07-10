@@ -595,8 +595,8 @@ class Card extends Component {
         )}
         <div className="text-center" style={{ color: "#000" }}>
           <p>
-            **For deposits above &#8358;2,500, there is a &#8358;100 charge
-            added to the deposit amount**
+            **For deposits of &#8358;2,500 and above, there is a &#8358;100
+            charge added to the deposit amount**
           </p>
         </div>
       </>
