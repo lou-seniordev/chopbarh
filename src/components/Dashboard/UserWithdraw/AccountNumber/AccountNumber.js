@@ -134,7 +134,6 @@ class AccountNumber extends Component {
         }
       );
       const data = await response.json();
-      console.log(data);
 
       // Confirm withdrawal actually goes through here
       if (data.status === "success") {

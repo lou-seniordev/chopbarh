@@ -84,8 +84,12 @@ class SubmitPin extends Component {
           ...data.data.authorization,
           cvv: this.props.cvv
         };
+        const historyObject = {
+          ...data.data,
+          fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
+        };
         const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
+        this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
         this.props.fetchCreditCardData();

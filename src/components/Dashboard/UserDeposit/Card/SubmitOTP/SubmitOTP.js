@@ -3,14 +3,21 @@ import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { Form, FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  FormSubmitButton
+} from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
   closeOTPModal
 } from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
-import { setCreditCardData, fetchCreditCardData } from "../../../../../store/actions/creditCardActions";
+import {
+  setCreditCardData,
+  fetchCreditCardData
+} from "../../../../../store/actions/creditCardActions";
 
 class SubmitOTP extends Component {
   state = {
@@ -67,8 +74,12 @@ class SubmitOTP extends Component {
           ...data.data.authorization,
           cvv: this.props.cvv
         };
+        const historyObject = {
+          ...data.data,
+          fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
+        };
         const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
+        this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
         this.props.fetchCreditCardData();

@@ -21,7 +21,7 @@ const HeadingTwo = styled.h2`
 export default function DepositTabs() {
   return (
     <DepositTabsWrapper className="container">
-      <div className="col-lg-8">
+      <div className="col-lg-10">
         <Tabs>
           <TabList>
             <Tab>

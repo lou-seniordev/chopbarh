@@ -200,7 +200,10 @@ class Card extends Component {
 
     const postData = {
       email: "somebody@nice.com",
-      amount: this.state.amount * 100,
+      amount:
+        Number(this.state.amount) >= 2500
+          ? (Number(this.state.amount) + 100) * 100
+          : Number(this.state.amount) * 100,
       card: {
         number: this.state.card,
         cvv: this.state.cvv,
@@ -241,10 +244,14 @@ class Card extends Component {
           ...data.data.authorization,
           cvv: postData.card.cvv
         };
+        const historyObject = {
+          ...data.data,
+          fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
+        };
         const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
+        this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
-        this.props.setChargeReference(payload);
+        this.props.setCreditCardData(payload);
         this.props.fetchCreditCardData();
       } else {
         toast.error(`Please try again`);
@@ -586,6 +593,12 @@ class Card extends Component {
             )}
           </>
         )}
+        <div className="text-center" style={{ color: "#000" }}>
+          <p>
+            **For deposits above &#8358;2,500, there is a &#8358;100 charge
+            added to the deposit amount**
+          </p>
+        </div>
       </>
     );
   }
