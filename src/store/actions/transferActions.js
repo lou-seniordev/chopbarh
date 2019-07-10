@@ -68,12 +68,9 @@ export const setTransferCredit = payload => async (dispatch, getState) => {
         .doc(getState().auth.id)
         .update({
           data: firebase.firestore.FieldValue.arrayUnion({
-            amount: payload.amount / 100,
-            channel: payload.channel,
+            amount: payload.amount,
+            type: payload.type,
             deposit_date: payload.transaction_date,
-            paid_at: payload.paid_at,
-            transaction_fees: payload.fees,
-            transaction_reference: payload.reference,
             status: payload.status
           })
         });
@@ -86,13 +83,10 @@ export const setTransferCredit = payload => async (dispatch, getState) => {
           id: getState().auth.id,
           data: [
             {
-              amount: payload.amount / 100,
-              channel: payload.channel,
-              deposit_date: payload.transaction_date,
-              paid_at: payload.paid_at,
-              transaction_fees: payload.fees,
-              transaction_reference: payload.reference,
-              status: payload.status
+              amount: payload.amount,
+            type: payload.type,
+            deposit_date: payload.transaction_date,
+            status: payload.status
             }
           ]
         });

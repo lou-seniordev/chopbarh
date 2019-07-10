@@ -7,7 +7,7 @@ import breakPoints from "../../../styles/breakpoints";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 // import { getReference } from "../../../../lib/getReference";
-// import firebase, { firestore } from "../../../../firebase";
+import {setTransferCredit} from '../../../../store/actions/transferActions'
 
 const VoucherTransactionWrapper = styled.div`
   /* margin-top: 8rem; */
@@ -88,7 +88,8 @@ class VoucherTransaction extends Component {
   state = {
     loading: false,
     phone: "",
-    amount: ""
+    amount: "",
+    pin: ""
   };
 
   handleInputChange = ({ target }) => {
@@ -99,7 +100,7 @@ class VoucherTransaction extends Component {
     if (
       !isNaN(amount) !== true ||
       !isNaN(phone) !== true ||
-      phone.length !== 11
+      phone.length !== 11 
     ) {
       return false;
     }
@@ -116,127 +117,49 @@ class VoucherTransaction extends Component {
       return;
     }
 
-    // if (this.state.amount > this.props.playerData.RealCoins) {
-    //   this.setState({ loading: false });
-    //   toast.error("You cannot transfer more than you have");
-    //   return;
-    // }
+    if (+this.state.amount > this.props.playerData.CBCoins) {
+      this.setState({ loading: false });
+      toast.error("You cannot transfer more than you have");
+      return;
+    }
 
-    // const payload = {
-    //   ...this.state
-    // };
+    try {
+      const transferCredit = await fetch(
+        "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
 
-    // // Get the user with the number
-    // try {
-    //   const playerDataResponse = await fetch(
-    //     "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Accept: "application/json"
-    //       },
-    //       body: JSON.stringify({
-    //         "@class": ".LogEventRequest",
-    //         eventKey: "ANALYTICS_PLAYER_DATA_VIA_PHONE",
-    //         playerId: "5ceab8bada4bd40515df67a0",
-    //         PHONE_NUM: payload.phone
-    //       })
-    //     }
-    //   );
-    //   const playerData = await playerDataResponse.json();
+          body: JSON.stringify({
+            "@class": ".LogEventRequest",
+            eventKey: "TRANSFER_COINS",
+            playerId: this.props.playerData.PlayerID,
+            PHONE_NUM: this.state.phone,
+            AMOUNT: this.state.amount
+          })
+        }
+      );
+      const transfer = await transferCredit.json();
+      this.setState({loading: false})
+      const payload = {
+        amount: this.state.amount,
+            type: 'Credit Transfer',
+            deposit_date: new Date().toISOString(),
+            status: 'Success'
+      }
 
-    //   if (playerData.scriptData.results.length) {
-    //     const playerId = playerData.scriptData.results[0].PlayerID;
-    //     const historyObject = {
-    //       status: "Success",
-    //       amount: payload.amount,
-    //       date: new Date().toISOString(),
-    //       reference: getReference(),
-    //       fee: 0,
-    //       channel: "Credit Transfer"
-    //     };
-    //     // Reduce Coin Balance
-    //     this.props.setCoinBalance(payload.amount, 2);
-    //     // Add to history
-    //     this.props.setWithdrawalHistory(historyObject);
-    //     this.setState({ loading: false, phone: "", amount: "" });
-    //     toast.success("Credit was transferred successfully");
-    //     try {
-    //       // Increase their coin balance
-    //       const data = await fetch(
-    //         "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
-    //         {
-    //           method: "POST",
-    //           headers: {
-    //             "Content-Type": "application/json",
-    //             Accept: "application/json"
-    //           },
-    //           body: JSON.stringify({
-    //             "@class": ".LogEventRequest",
-    //             eventKey: "PLAYER_COINS_UPDATE",
-    //             playerId: playerId,
-    //             Coins: payload.amount,
-    //             Condition: 1
-    //           })
-    //         }
-    //       );
-
-    //       try {
-    //         const snapshot = await firestore
-    //           .collection("deposits")
-    //           .where("id", "==", playerId)
-    //           .get();
-
-    //         const deposits = snapshot.docs.map(doc => ({
-    //           id: doc.id,
-    //           ...doc.data()
-    //         }));
-
-    //         if (deposits.length) {
-    //           const docRef = await firestore
-    //             .collection("deposits")
-    //             .doc(playerId)
-    //             .update({
-    //               data: firebase.firestore.FieldValue.arrayUnion({
-    //                 amount: historyObject.amount,
-    //                 channel: historyObject.channel,
-    //                 deposit_date: historyObject.date,
-    //                 paid_at: historyObject.date,
-    //                 transaction_fees: historyObject.fee,
-    //                 transaction_reference: historyObject.reference,
-    //                 status: historyObject.status
-    //               })
-    //             });
-    //         } else {
-    //           const docRef = await firestore
-    //             .collection("deposits")
-    //             .doc(playerId)
-    //             .set({
-    //               id: playerId,
-    //               data: [
-    //                 {
-    //                   amount: historyObject.amount,
-    //                   channel: historyObject.channel,
-    //                   deposit_date: historyObject.date,
-    //                   paid_at: historyObject.date,
-    //                   transaction_fees: historyObject.fee,
-    //                   transaction_reference: historyObject.reference,
-    //                   status: historyObject.status
-    //                 }
-    //               ]
-    //             });
-    //         }
-    //       } catch (err) {}
-    //     } catch (err) {}
-    //   } else {
-    //     toast.error("User with the phone number not found");
-    //     return;
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   toast.error("Transfer could not be completed");
-    // }
+      if (transfer.error) {
+        toast.error('Transfer was not successful')
+      } else {
+        toast.success('Transfer was successful')
+        this.props.setTransferCredit(payload)
+      }
+    } catch (err) {
+      toast.error('Action could not be completed')
+    }
   };
 
   render() {
@@ -256,9 +179,15 @@ class VoucherTransaction extends Component {
                 required
               />
             </FormItem>
-            <FormItem>
-              <input type="password" placeholder="Pin" />
-            </FormItem>
+            {/* <FormItem>
+              <input
+                type="password"
+                name="pin"
+                onChange={this.handleInputChange}
+                placeholder="Pin"
+                required
+              />
+            </FormItem> */}
             <FormItem>
               <input
                 type="text"
@@ -288,7 +217,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setCoinBalance,
-  setWithdrawalHistory
+  setWithdrawalHistory,
+  setTransferCredit
 };
 
 export default connect(
