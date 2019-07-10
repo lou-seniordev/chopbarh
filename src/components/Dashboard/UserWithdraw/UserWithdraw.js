@@ -1,13 +1,17 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
+import { Spinner } from "reactstrap";
 import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
 import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
 import WithdrawSmallScreens from "./WithdrawSmallScreens/WithdrawSmallScreens";
-import { fetchWithdrawalHistoryData } from "../../../store/actions/withdrawalActions";
+import {
+  fetchWithdrawalHistoryData,
+  setWithdrawalStatus
+} from "../../../store/actions/withdrawalActions";
 
 class UserWithdraw extends Component {
   componentDidMount = () => {
@@ -21,11 +25,16 @@ class UserWithdraw extends Component {
         withdrawal =>
           new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
       );
-      const withdrawalsTotal = withdrawalsMade.reduce(
-        (acc, current) => acc + Number(current.amount),
-        0
-      );
-      console.log("Updating...", withdrawalsMade, withdrawalsTotal);
+
+      if (withdrawalsMade.length) {
+        const withdrawalsTotal = withdrawalsMade.reduce(
+          (acc, current) => acc + Number(current.amount),
+          0
+        );
+        this.props.setWithdrawalStatus(withdrawalsTotal);
+      } else {
+        this.props.setWithdrawalStatus(0);
+      }
     }
   };
 
@@ -38,15 +47,21 @@ class UserWithdraw extends Component {
         <div className="container">
           <div className="row ">
             <div className="col-lg-10 text-right mt-5 d-flex justify-content-end">
-              <div className="pr-lg-5 pr-md-3">
-                <p>Withdrawal Status</p>
-                <p>
-                  Daily Limit: &#8358;
-                  {new Intl.NumberFormat().format(
-                    this.props.withdrawalLimit - this.props.withdrawalStatus
-                  )}
-                </p>
-              </div>
+              {this.props.loading ? (
+                <div className="pr-lg-5 pr-md-3">
+                  <Spinner />
+                </div>
+              ) : (
+                <div className="pr-lg-5 pr-md-3">
+                  <p>Withdrawal Status</p>
+                  <p>
+                    Daily Limit: &#8358;
+                    {new Intl.NumberFormat().format(
+                      this.props.withdrawalLimit - this.props.withdrawalStatus
+                    )}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -65,13 +80,15 @@ class UserWithdraw extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.withdrawal.loading,
   withdrawals: state.withdrawal.withdrawalHistory,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   withdrawalStatus: state.withdrawal.withdrawalStatus
 });
 
 const mapDispatchToProps = {
-  fetchWithdrawalHistoryData
+  fetchWithdrawalHistoryData,
+  setWithdrawalStatus
 };
 
 export default connect(

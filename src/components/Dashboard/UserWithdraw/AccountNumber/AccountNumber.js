@@ -73,10 +73,22 @@ class AccountNumber extends Component {
       return;
     }
 
-    // if (this.state.amount > this.props.playerData.RealCoins) {
-    //   toast.error("You cannot withdraw more than you have won");
-    //   return;
-    // }
+    if (this.state.amount > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (
+      this.props.withdrawalStatus + Number(this.state.amount) >
+      this.props.withdrawalLimit
+    ) {
+      toast.error(
+        "Withdrawal could not be completed. Your daily limit will be exceeded."
+      );
+      this.setState({ loading: false });
+      return;
+    }
 
     // Verify the account here and return the account Name in the UI
     // this.verifyAccount(this.state.account_number, this.state.bank)
@@ -230,7 +242,9 @@ class AccountNumber extends Component {
 }
 
 const mapStateToProps = state => ({
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
+  withdrawalLimit: state.withdrawal.withdrawalLimit,
+  withdrawalStatus: state.withdrawal.withdrawalStatus
 });
 
 const mapDispatchToProps = {
