@@ -27,6 +27,11 @@ export default (state = initialState, action) => {
         loading: false,
         error: true
       };
+    case actionType.SET_WITHDRAWAL_STATUS:
+      return {
+        ...state,
+        withdrawalStatus: action.value
+      };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
