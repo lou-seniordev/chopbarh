@@ -16,7 +16,15 @@ class UserWithdraw extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      console.log("Updating...", this.props.withdrawals);
+      const today = new Date().toLocaleDateString();
+      const withdrawalsMade = this.props.withdrawals.filter(
+        withdrawal =>
+          new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
+      );
+      // const withdrawalTotal = withdrawalsMade.reduce(
+      //   (acc, current) => acc + Number(current.amount)
+      // );
+      console.log("Updating...", withdrawalsMade);
     }
   };
 
@@ -28,9 +36,15 @@ class UserWithdraw extends Component {
         <UserNavigation />
         <div className="container">
           <div className="row ">
-            <div className="col-lg-8 mt-5 d-flex justify-content-end">
+            <div className="col-lg-10 text-right mt-5 d-flex justify-content-end">
               <div className="pr-5">
                 <p>Withdrawal Status</p>
+                <p>
+                  Daily Limit: &#8358;
+                  {new Intl.NumberFormat().format(
+                    this.props.withdrawalLimit - this.props.withdrawalStatus
+                  )}
+                </p>
               </div>
             </div>
           </div>
@@ -50,7 +64,9 @@ class UserWithdraw extends Component {
 }
 
 const mapStateToProps = state => ({
-  withdrawals: state.withdrawal.withdrawalHistory
+  withdrawals: state.withdrawal.withdrawalHistory,
+  withdrawalLimit: state.withdrawal.withdrawalLimit,
+  withdrawalStatus: state.withdrawal.withdrawalStatus
 });
 
 const mapDispatchToProps = {
