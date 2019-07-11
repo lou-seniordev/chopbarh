@@ -90,6 +90,8 @@ class AccountNumber extends Component {
       return;
     }
 
+    // Add new logic here to send to the withdraws ledger
+
     // Verify the account here and return the account Name in the UI
     // this.verifyAccount(this.state.account_number, this.state.bank)
     //   .then(data => {

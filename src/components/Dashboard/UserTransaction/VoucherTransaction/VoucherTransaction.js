@@ -7,7 +7,7 @@ import breakPoints from "../../../styles/breakpoints";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 // import { getReference } from "../../../../lib/getReference";
-import {setTransferCredit} from '../../../../store/actions/transferActions'
+import { setTransferCredit } from "../../../../store/actions/transferActions";
 
 const VoucherTransactionWrapper = styled.div`
   /* margin-top: 8rem; */
@@ -100,7 +100,7 @@ class VoucherTransaction extends Component {
     if (
       !isNaN(amount) !== true ||
       !isNaN(phone) !== true ||
-      phone.length !== 11 
+      phone.length !== 11
     ) {
       return false;
     }
@@ -138,27 +138,27 @@ class VoucherTransaction extends Component {
             eventKey: "TRANSFER_COINS",
             playerId: this.props.playerData.PlayerID,
             PHONE_NUM: this.state.phone,
-            AMOUNT: +this.state.amount
+            AMOUNT: Number(this.state.amount)
           })
         }
       );
       const transfer = await transferCredit.json();
-      this.setState({loading: false})
+      this.setState({ loading: false });
       const payload = {
         amount: this.state.amount,
-            type: 'Credit Transfer',
-            deposit_date: new Date().toISOString(),
-            status: 'Success'
-      }
+        type: "Credit Transfer",
+        deposit_date: new Date().toISOString(),
+        status: "Success"
+      };
 
       if (transfer.error) {
-        toast.error('Transfer was not successful')
+        toast.error("Transfer was not successful");
       } else {
-        toast.success('Transfer was successful')
-        this.props.setTransferCredit(payload)
+        toast.success("Transfer was successful");
+        this.props.setTransferCredit(payload);
       }
     } catch (err) {
-      toast.error('Action could not be completed')
+      toast.error("Action could not be completed");
     }
   };
 

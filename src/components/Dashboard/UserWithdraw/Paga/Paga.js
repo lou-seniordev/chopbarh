@@ -176,6 +176,8 @@ class Paga extends Component {
     let hash = CryptoJS.SHA512(hashParameter);
     hash = hash.toString(CryptoJS.enc.Hex);
 
+    // Add new logic for withdrawals ledger
+
     fetch(
       "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
       {

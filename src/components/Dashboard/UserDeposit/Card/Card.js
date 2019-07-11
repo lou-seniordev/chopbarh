@@ -172,7 +172,7 @@ class Card extends Component {
 
       if (data.data.status === "success") {
         toast.success("Transaction was successful");
-        
+
         const historyObject = {
           ...data.data,
           fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
@@ -341,7 +341,7 @@ class Card extends Component {
                               <ExistingCardFormItem>
                                 <input
                                   onChange={this.handleInputChange}
-                                  className="mt-lg-5 mt-md-4"
+                                  className="mt-lg-4 mt-md-3"
                                   name="authCVV"
                                   value={
                                     this.state.selectedValue === card.auth_code
