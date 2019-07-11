@@ -60,6 +60,12 @@ class UserWithdraw extends Component {
                       this.props.withdrawalLimit - this.props.withdrawalStatus
                     )}
                   </p>
+                  <p>
+                    Cash Balance: &#8358;
+                    {new Intl.NumberFormat().format(
+                      this.props.withdrawalLimit - this.props.withdrawalStatus
+                    )}
+                  </p>
                 </div>
               )}
             </div>
@@ -83,7 +89,7 @@ const mapStateToProps = state => ({
   loading: state.withdrawal.loading,
   withdrawals: state.withdrawal.withdrawalHistory,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
-  withdrawalStatus: state.withdrawal.withdrawalStatus
+  withdrawalStatus: state.withdrawal.withdrawalStatus,
 });
 
 const mapDispatchToProps = {

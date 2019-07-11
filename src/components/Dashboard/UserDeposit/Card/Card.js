@@ -172,8 +172,13 @@ class Card extends Component {
 
       if (data.data.status === "success") {
         toast.success("Transaction was successful");
+        
+        const historyObject = {
+          ...data.data,
+          fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
+        };
         const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
+        this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
       } else {
         toast.error(`Transaction was not successful`);

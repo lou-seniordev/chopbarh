@@ -138,7 +138,7 @@ class VoucherTransaction extends Component {
             eventKey: "TRANSFER_COINS",
             playerId: this.props.playerData.PlayerID,
             PHONE_NUM: this.state.phone,
-            AMOUNT: this.state.amount
+            AMOUNT: +this.state.amount
           })
         }
       );
