@@ -202,7 +202,7 @@ class Paga extends Component {
             channel: "Paga",
             date: new Date().toISOString()
           };
-          this.props.setCashBalance(this.state.amount, 2);
+          this.props.setCashBalance(Number(this.state.amount), 2);
           this.setState({ loading: false, phone: "", amount: "" });
           toast.success(`Transaction was successful`);
           this.props.setWithdrawalHistory(payload);

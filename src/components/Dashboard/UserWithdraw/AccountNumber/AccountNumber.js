@@ -152,7 +152,7 @@ class AccountNumber extends Component {
           bank: "",
           account_number: ""
         });
-        this.props.setCashBalance(data.data.amount, 2);
+        this.props.setCashBalance(Number(data.data.amount), 2);
         this.props.setWithdrawalHistory(payload);
       } else {
         toast.error("Transaction was not successful");
