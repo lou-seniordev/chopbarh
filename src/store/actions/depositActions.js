@@ -60,7 +60,6 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       id: doc.id,
       ...doc.data()
     }));
-    console.log(deposits);
 
     if (deposits.length) {
       const docRef = await firestore

@@ -32,48 +32,45 @@ export default function DepositTabs() {
               <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Account Number</HeadingTwo>
+              <HeadingTwo>Banks</HeadingTwo>
             </Tab>
-            <Tab>
-              <HeadingTwo>Quickteller</HeadingTwo>
-            </Tab>
-            {/* This is the Banks component */}
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Banks</HeadingTwo>
-            </Tab>
-            
-            <Tab>
               <HeadingTwo>ATM</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Account Number</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
           </TabList>
           <TabPanel>
             <Card />
           </TabPanel>
           <TabPanel>
-            <BankCharge />
+            <div style={{ minHeight: "80vh" }} />
           </TabPanel>
           <TabPanel>
-            <Quickteller />
+            <div style={{ minHeight: "80vh" }} />
           </TabPanel>
-
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Voucher center="true" noHeader />
             </div>
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
-          </TabPanel>
-          <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
-          </TabPanel>
-          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <ATM />
             </div>
+          </TabPanel>
+          <TabPanel>
+            <BankCharge />
+          </TabPanel>
+          <TabPanel>
+            <Quickteller />
           </TabPanel>
         </Tabs>
       </div>
