@@ -145,7 +145,7 @@ class Login extends Component {
         >
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
-            <p>Account not found. Please, Sign Up first</p>
+            <p>Your password might be wrong or you don't have an Account</p>
           </ModalBody>
         </Modal>
 

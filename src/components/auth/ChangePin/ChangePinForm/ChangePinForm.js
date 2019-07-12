@@ -157,6 +157,7 @@ class ChangePinForm extends Component {
     }
 
     if (this.state.newPin !== this.state.confirmPin) {
+      this.setState({ loading: false });
       toast.error("Pin does not match");
       return;
     }
@@ -186,18 +187,26 @@ class ChangePinForm extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(data, Object.values(data.error));
-        // if (
-        //   Object.values(data.error).length ||
-        //   Object.values(data.scriptData).length
-        // ) {
-        //   toast.error("Password was not reset successfully");
-        //   this.setState({ oldPin: "", newPin: "", loading: false });
-        // } else {
-        //   toast.success("Password was reset successfully");
-        // }
+        if (Object.values(data).length > 1) {
+          toast.error(data.scriptData.result);
+          this.setState({
+            oldPin: "",
+            newPin: "",
+            confirmPin: "",
+            loading: false
+          });
+        } else {
+          this.setState({
+            oldPin: "",
+            newPin: "",
+            confirmPin: "",
+            loading: false
+          });
+          toast.success("Password was reset successfully");
+        }
       })
       .catch(err => {
+        this.setState({ loading: false });
         toast.error("Something went wrong.");
       });
   };
