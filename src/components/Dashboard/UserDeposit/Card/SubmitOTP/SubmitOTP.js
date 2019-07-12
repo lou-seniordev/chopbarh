@@ -76,7 +76,10 @@ class SubmitOTP extends Component {
         };
         const historyObject = {
           ...data.data,
-          fees: +data.data.amount / 100 < 2500 ? data.data.fees : 100
+          fees:
+            +data.data.amount / 100 < 2500
+              ? 0.015 * (+data.data.amount / 100)
+              : 100
         };
         const value = +data.data.amount / 100;
         this.props.setDepositHistory(historyObject);

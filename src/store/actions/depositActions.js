@@ -71,7 +71,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             amount: payload.amount / 100,
             channel: payload.channel,
             deposit_date: payload.transaction_date,
-            paid_at: payload.paid_at,
+            paid_at: payload.transaction_date,
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
             status: payload.status
@@ -89,7 +89,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               amount: payload.amount / 100,
               channel: payload.channel,
               deposit_date: payload.transaction_date,
-              paid_at: payload.paid_at,
+              paid_at: payload.transaction_date,
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
               status: payload.status
