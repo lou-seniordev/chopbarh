@@ -116,7 +116,7 @@ class AccountNumber extends Component {
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
-      amount: this.state.amount,
+      amount: +this.state.amount + 50,
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
       narration: "Chopbarh Withdrawal",
       currency: "NGN",
@@ -141,10 +141,10 @@ class AccountNumber extends Component {
       if (data.status === "success") {
         const payload = {
           status: "Success",
-          amount: data.data.amount,
+          amount: +data.data.amount - 50,
           date: data.data.date_created,
           reference: data.data.reference,
-          fee: data.data.fee,
+          fee: 50,
           channel: "AZA"
         };
         toast.success("Transaction was Successful");
@@ -237,6 +237,12 @@ class AccountNumber extends Component {
             <span>{this.state.loading ? "Processing..." : "Load"}</span>
           </FormSubmitButton>
         </FormWrapper>
+        <div className="text-center" style={{ color: "#000" }}>
+          <p>
+            **For all withdrawals there is a &#8358;50 deducted from your cash
+            balance**
+          </p>
+        </div>
       </>
     );
   }

@@ -273,6 +273,12 @@ class Paga extends Component {
             <p>&rarr; Dial *242*2*4# to transfer to bank account</p>
           </div>
         </div>
+        <div className="text-center" style={{ color: "#000" }}>
+          <p>
+            **For all withdrawals there is a &#8358;50 deducted from your cash
+            balance**
+          </p>
+        </div>
       </>
     );
   }
