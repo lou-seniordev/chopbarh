@@ -181,7 +181,7 @@ class Card extends Component {
               : 100
         };
         const value = +data.data.amount / 100;
-        
+
         this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
       } else {

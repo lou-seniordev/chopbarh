@@ -7,6 +7,7 @@ import ATM from "../ATM/ATM";
 //import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 import BankCharge from "../BankCharge/BankCharge";
 import Voucher from "../../UserHome/Voucher/Voucher";
+import GTBank from "../GTBank/GTBank";
 
 const DepositTabsWrapper = styled.div`
   display: flex;
@@ -51,7 +52,9 @@ export default function DepositTabs() {
             <Card />
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
+            <div style={{ minHeight: "80vh" }}>
+              <GTBank />
+            </div>
           </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }} />
