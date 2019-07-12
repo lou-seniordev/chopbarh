@@ -1,5 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel
+} from "react-accessible-accordion";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
@@ -45,6 +52,74 @@ const Info = styled.p`
 export default function GTBank() {
   return (
     <GTBWrapper>
+      <Accordion preExpanded={["31"]}>
+        <AccordionItem uuid="31">
+          <AccordionItemHeading>
+            <AccordionItemButton>Deposit with USSD</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem uuid="32">
+          <AccordionItemHeading>
+            <AccordionItemButton>Deposit with GTBank Mobial App</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <StepText>Step 1:</StepText>
+            <Info className="mb-4">
+              Open the GTBank mobile banking app and sign in.
+            </Info>
+            <StepText>Step 2:</StepText>
+            <Info className="mb-4">
+              Click on 'Other Payments', then select 'More Payments'.
+      </Info>
+            <StepText>Step 3:</StepText>
+            <Info className="mb-4">
+             Click on 'Sports and Gaming' and select 'CHOPBARH'.
+      </Info>
+            <StepText>Step 4:</StepText>
+            <Info className="mb-4">
+              Click on CHOPBARH.
+      </Info>
+            <StepText>Step 5:</StepText>
+            <Info className="mb-4">Enter your ChopBarh Login Phone Number: 08181062778 and the amount you wish to deposit.</Info>
+            <StepText>Step 6:</StepText>
+            <Info className="mb-4">Select the GT Bank account that you wish to make the deposit from, insert your mobile banking pin and confirm.</Info>
+            <StepText>Step 7:</StepText>
+            <Info className="mb-4">
+              Upon successful payment, your ChopBarh coins will be credited instantly.
+      </Info>
+            </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem uuid="33">
+          <AccordionItemHeading>
+            <AccordionItemButton>Deposit with GTBank Website</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+   
+
+            <StepText>Step 1:</StepText>
+            <Info className="mb-4">
+              Login in to your GTBank account.
+            </Info>
+            <StepText>Step 2:</StepText>
+            <Info className="mb-4">
+              Click on 'Other Payments', then select 'More Payments'.
+      </Info>From the Internet banking homepage, click 'Payments & Collections' from the drop-down menu and then click 'Sports and Gaming'. Scroll and select 'CHOPBARH' and then click 'Make New Payments'.
+            <StepText>Step 3:</StepText>
+            <Info className="mb-4">
+              Enter your ChopBarh Login Phone Number: 08181062778 and the amount you wish to deposit.
+      </Info>
+            <StepText>Step 4:</StepText>
+            <Info className="mb-4">
+              Confirm all your details and bank charges. Answer any security questions and enter your token code or USSD.
+      </Info>
+            <StepText>Step 5:</StepText>
+            <Info className="mb-4">Upon successful payment, your ChopBarh coin will be credited instantly.</Info>
+            
+            </AccordionItemPanel>
+            </AccordionItem>
+            </Accordion>
       <StepText>Step 1:</StepText>
       <Info className="mb-4">
         Navigate to <button>www.gtbank.com</button>
