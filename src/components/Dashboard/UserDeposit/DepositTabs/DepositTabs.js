@@ -29,6 +29,9 @@ export default function DepositTabs() {
               <HeadingTwo>Card</HeadingTwo>
             </Tab>
             <Tab>
+              <HeadingTwo>GT Bank</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>Account Number</HeadingTwo>
             </Tab>
             <Tab>
@@ -41,9 +44,7 @@ export default function DepositTabs() {
             <Tab>
               <HeadingTwo>Banks</HeadingTwo>
             </Tab>
-            <Tab>
-              <HeadingTwo>GT Bank</HeadingTwo>
-            </Tab>
+            
             <Tab>
               <HeadingTwo>ATM</HeadingTwo>
             </Tab>

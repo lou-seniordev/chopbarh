@@ -19,26 +19,16 @@ export default function TransactionTabs() {
     <TransactionTabsWrapper className="col-md-8">
       <Tabs>
         <TabList>
-          {/* <Tab>
-            <HeadingTwo>All</HeadingTwo>
-          </Tab> */}
+          
           <Tab>
             <HeadingTwo>Deposit</HeadingTwo>
           </Tab>
           <Tab>
             <HeadingTwo>Withdrawal</HeadingTwo>
           </Tab>
-          <Tab>
-            <HeadingTwo>Transfers</HeadingTwo>
-          </Tab>
-          {/* 
-          <Tab>
-            <HeadingTwo>Refunds</HeadingTwo>
-          </Tab> */}
+          
         </TabList>
-        {/* <TabPanel>
-          <TransactionTable />
-        </TabPanel> */}
+        
         <TabPanel
           style={{
             maxHeight: "600px",
@@ -55,18 +45,7 @@ export default function TransactionTabs() {
         >
           <WithdrawalTable />
         </TabPanel>
-        <TabPanel
-          style={{
-            maxHeight: "600px",
-            overflow: "auto"
-          }}
-        />
-        {/* <TabPanel>
-          <TransactionTable />
-        </TabPanel>
-        <TabPanel>
-          <TransactionTable />
-        </TabPanel> */}
+        
       </Tabs>
     </TransactionTabsWrapper>
   );
