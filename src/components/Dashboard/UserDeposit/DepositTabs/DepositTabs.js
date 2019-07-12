@@ -4,10 +4,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../Card/Card";
 import Quickteller from "../Quickteller/Quickteller";
 import ATM from "../ATM/ATM";
-//import PayWithAccountNumber from "../PayWithAccountNumber/PayWithAccountNumber";
 import BankCharge from "../BankCharge/BankCharge";
 import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
+import NIBBS from "../NIBBS/NIBBS";
 
 const DepositTabsWrapper = styled.div`
   display: flex;
@@ -57,7 +57,9 @@ export default function DepositTabs() {
             </div>
           </TabPanel>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
+            <div style={{ minHeight: "80vh" }}>
+              <NIBBS />
+            </div>
           </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
