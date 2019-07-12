@@ -162,6 +162,7 @@ export const removeCreditCard = (event, authCode) => async (
           .update({
             data: filteredArray
           });
+          dispatch(removeCreditCardSuccess(docRef))
       } catch (err) {
         toast.error("Card could not be removed. Please try again");
         // console.log("Error Setting new Card", err);

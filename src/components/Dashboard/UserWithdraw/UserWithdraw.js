@@ -21,19 +21,21 @@ class UserWithdraw extends Component {
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       const today = new Date().toLocaleDateString();
-      const withdrawalsMade = this.props.withdrawals.filter(
-        withdrawal =>
-          new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
-      );
-
-      if (withdrawalsMade.length) {
-        const withdrawalsTotal = withdrawalsMade.reduce(
-          (acc, current) => acc + Number(current.amount),
-          0
+      if (this.props.withdrawals) {
+        const withdrawalsMade = this.props.withdrawals.filter(
+          withdrawal =>
+            new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
         );
-        this.props.setWithdrawalStatus(withdrawalsTotal);
-      } else {
-        this.props.setWithdrawalStatus(0);
+
+        if (withdrawalsMade.length) {
+          const withdrawalsTotal = withdrawalsMade.reduce(
+            (acc, current) => acc + Number(current.amount),
+            0
+          );
+          this.props.setWithdrawalStatus(withdrawalsTotal);
+        } else {
+          this.props.setWithdrawalStatus(0);
+        }
       }
     }
   };
@@ -53,7 +55,7 @@ class UserWithdraw extends Component {
                 </div>
               ) : (
                 <div className="pr-lg-5 pr-md-3">
-                  <p>Withdrawal Status</p>
+                  <p style={{ fontWeight: "bold" }}>Withdrawal Status</p>
                   <p>
                     Daily Limit: &#8358;
                     {new Intl.NumberFormat().format(
@@ -63,7 +65,7 @@ class UserWithdraw extends Component {
                   <p>
                     Cash Balance: &#8358;
                     {new Intl.NumberFormat().format(
-                      this.props.withdrawalLimit - this.props.withdrawalStatus
+                      this.props.playerData.RealCoins
                     )}
                   </p>
                 </div>
@@ -90,6 +92,7 @@ const mapStateToProps = state => ({
   withdrawals: state.withdrawal.withdrawalHistory,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   withdrawalStatus: state.withdrawal.withdrawalStatus,
+  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {
