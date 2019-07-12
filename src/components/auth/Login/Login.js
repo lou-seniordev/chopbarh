@@ -13,6 +13,7 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
+  Button,
   SignUpSignal
 } from "../../styles/LoginStyles";
 import keys from "../../../config/keys";
@@ -145,7 +146,10 @@ class Login extends Component {
         >
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
-            <p>Your password might be wrong or you don't have an Account</p>
+            <p>
+              Incorrect account information. Please, check your info and try
+              again or sign up if you don't have an account
+            </p>
           </ModalBody>
         </Modal>
 
@@ -195,7 +199,9 @@ class Login extends Component {
             <SignUpSignal>
               <span>No Account?</span>
               <br />
-              <Link to="signup">Sign Up</Link>
+              <Link to="signup">
+                <span>Create Account</span>
+              </Link>
             </SignUpSignal>
           </form>
         </FormWrapper>

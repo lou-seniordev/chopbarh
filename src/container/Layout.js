@@ -84,6 +84,7 @@ class Layout extends Component {
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
+              <Route path="/login" component={LoginPage} />
               <Route path="*" component={NotFoundPage} />
             </Switch>
           </Suspense>
