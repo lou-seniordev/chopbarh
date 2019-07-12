@@ -52,7 +52,7 @@ const Info = styled.p`
 export default function GTBank() {
   return (
     <GTBWrapper>
-      <Accordion preExpanded={["31"]}>
+      <Accordion>
         <AccordionItem uuid="31">
           <AccordionItemHeading>
             <AccordionItemButton>Deposit with USSD</AccordionItemButton>

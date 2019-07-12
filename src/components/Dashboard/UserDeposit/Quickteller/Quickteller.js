@@ -52,7 +52,7 @@ const Info = styled.p`
 export default function Quickteller() {
   return (
     <QuicktellerWrapper>
-      <Accordion preExpanded={["21"]}>
+      <Accordion>
         <AccordionItem uuid="21">
           <AccordionItemHeading>
             <AccordionItemButton>Pay Online</AccordionItemButton>

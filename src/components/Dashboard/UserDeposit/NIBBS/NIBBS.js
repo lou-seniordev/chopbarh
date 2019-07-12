@@ -52,7 +52,7 @@ const Info = styled.p`
 export default function NIBBS() {
   return (
     <NIBBSWrapper>
-      <Accordion preExpanded={["11"]}>
+      <Accordion>
         <AccordionItem uuid="11">
           <AccordionItemHeading>
             <AccordionItemButton>Pay Online</AccordionItemButton>
