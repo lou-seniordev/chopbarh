@@ -263,6 +263,8 @@ class Card extends Component {
         this.props.setDepositHistory(historyObject);
         this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
+      } else if (data.data.status === "open_url") {
+        window.open(data.data.url, "_blank");
       } else {
         toast.error(`Please try again`);
       }

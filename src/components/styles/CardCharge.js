@@ -37,6 +37,33 @@ export const FormSubmitButton = styled.button`
   }
 `;
 
+export const Button = styled.button`
+  all: unset;
+  padding: 0.5rem 1.3rem;
+  display: inline-block;
+  transition: all 0.2s;
+  color: ${color.colorWhite};
+  background: ${color.colorPrimary};
+  font-size: 1.3rem;
+  z-index: 200;
+
+  @media only screen and (max-width: ${breakPoints.mediumLite}) {
+    font-size: 1.1rem;
+  }
+
+  span {
+    display: inline-block;
+    transform: skew(20deg);
+    color: #fff;
+  }
+
+  &:hover {
+    transform: translateY(-3px) skew(-20deg) translateX(-50%);
+    background: ${color.colorPrimaryHover};
+    color: ${color.colorWhite};
+  }
+`;
+
 export const ExistingCardForm = styled(Form)`
   min-height: 5rem;
 

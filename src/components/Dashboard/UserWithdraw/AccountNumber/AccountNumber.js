@@ -1,5 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
+import { Modal, ModalBody } from "reactstrap";
 // import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import {
@@ -73,7 +74,7 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (this.state.amount > this.props.playerData.RealCoins) {
+    if (Number(this.state.amount) + 50 > this.props.playerData.RealCoins) {
       toast.error("You cannot withdraw more than you have won");
       this.setState({ loading: false });
       return;
@@ -168,6 +169,24 @@ class AccountNumber extends Component {
   render() {
     return (
       <>
+        <Modal
+          isOpen={true}
+          toggle={this.toggleModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <p>
+              <strong>Account: {this.state.account_name}</strong>
+            </p>
+            <p>Proceed with withdrawal?</p>
+            <div className="d-flex">
+              <FormSubmitButton>Yes</FormSubmitButton>
+              <FormSubmitButton>No</FormSubmitButton>
+            </div>
+          </ModalBody>
+        </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
           {this.state.account_confirmed && (
             <hgroup>
