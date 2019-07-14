@@ -7,7 +7,8 @@ import {
   Form,
   FormItem,
   HalfColumn,
-  FormSubmitButton
+  FormSubmitButton,
+  Button
 } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
@@ -176,14 +177,18 @@ class AccountNumber extends Component {
             marginTop: "22rem"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center mt-5" style={{ height: "20vh" }}>
             <p>
               <strong>Account: {this.state.account_name}</strong>
             </p>
             <p>Proceed with withdrawal?</p>
-            <div className="d-flex">
-              <FormSubmitButton>Yes</FormSubmitButton>
-              <FormSubmitButton>No</FormSubmitButton>
+            <div className="d-flex justify-content-center">
+              <Button className="mr-1">
+                <span>Yes</span>
+              </Button>
+              <Button className="ml-1">
+                <span>No</span>
+              </Button>
             </div>
           </ModalBody>
         </Modal>

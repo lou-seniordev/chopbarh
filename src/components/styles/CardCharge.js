@@ -41,6 +41,7 @@ export const Button = styled.button`
   all: unset;
   padding: 0.5rem 1.3rem;
   display: inline-block;
+  transform: skew(-20deg);
   transition: all 0.2s;
   color: ${color.colorWhite};
   background: ${color.colorPrimary};
@@ -58,7 +59,7 @@ export const Button = styled.button`
   }
 
   &:hover {
-    transform: translateY(-3px) skew(-20deg) translateX(-50%);
+    transform: translateY(-3px) skew(-20deg);
     background: ${color.colorPrimaryHover};
     color: ${color.colorWhite};
   }
