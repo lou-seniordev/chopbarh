@@ -28,7 +28,12 @@ class AccountNumber extends Component {
     bank: "",
     account_number: "",
     account_confirmed: false,
-    account_name: ""
+    account_name: "",
+    modal: false
+  };
+
+  toggleModal = () => {
+    this.setState({ modal: !this.state.modal });
   };
 
   handleInputChange = ({ target }) => {
@@ -94,6 +99,7 @@ class AccountNumber extends Component {
 
     // Add new logic here to send to the withdraws ledger
 
+    // Change to async/await
     // Verify the account here and return the account Name in the UI
     // this.verifyAccount(this.state.account_number, this.state.bank)
     //   .then(data => {
@@ -171,7 +177,7 @@ class AccountNumber extends Component {
     return (
       <>
         <Modal
-          isOpen={true}
+          isOpen={this.state.modal}
           toggle={this.toggleModal}
           style={{
             marginTop: "22rem"
@@ -186,7 +192,7 @@ class AccountNumber extends Component {
               <Button className="mr-1">
                 <span>Yes</span>
               </Button>
-              <Button className="ml-1">
+              <Button onClick={this.toggleModal} className="ml-1">
                 <span>No</span>
               </Button>
             </div>
