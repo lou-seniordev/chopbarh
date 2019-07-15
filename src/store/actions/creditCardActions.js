@@ -79,8 +79,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
         card => card.last_digits === payload.last4
       );
 
-      console.log(cardExists);
-
       if (cardExists.length) {
       } else {
         const docRef = await firestore
