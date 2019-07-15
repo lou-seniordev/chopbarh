@@ -32,12 +32,13 @@ class AccountNumber extends Component {
     modal: false,
     bankList: null,
     error: false,
-    dataLoading: true
+    dataLoading: true,
+    paying: false
   };
 
   componentDidMount = () => {
     fetch(
-      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-ac35922d8cd6299de34a4133fec7daa7-X",
       {
         headers: {
           "Content-Type": "application/json"
@@ -46,13 +47,17 @@ class AccountNumber extends Component {
     )
       .then(response => response.json())
       .then(data => {
-        this.setState({ bankList: data.data.Banks, dataLoading: false });
+        this.setState({
+          bankList: data.data.Banks,
+          dataLoading: false,
+          bank: data.data.Banks[0].Code
+        });
       })
       .catch(err => this.setState({ error: err, dataLoading: false }));
   };
 
   toggleModal = () => {
-    this.setState({ modal: !this.state.modal });
+    this.setState({ modal: !this.state.modal, loading: false });
   };
 
   handleInputChange = ({ target }) => {
@@ -70,91 +75,11 @@ class AccountNumber extends Component {
     return true;
   };
 
-  verifyAccount = (account, bank) => {
-    const postData = {
-      recipientaccount: account,
-      destbankcode: bank,
-      PBFPubKey: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X"
-    };
+  verifyAccount = (account, bank) => {};
 
-    return fetch(
-      "https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/resolve_account",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      }
-    ).then(response => response.json());
-  };
+  withdrawCash = async () => {
+    this.setState({ paying: true });
 
-  handleSubmit = async event => {
-    event.preventDefault();
-    this.setState({ loading: true });
-
-    if (!this.formIsValid(this.state)) {
-      toast.error("Form is not valid");
-      this.setState({ loading: false });
-      return;
-    }
-
-    if (Number(this.state.amount) < 50) {
-      toast.error(`You cannot withdraw less than \u20a6${50}`);
-      this.setState({ loading: false });
-      return;
-    }
-
-    if (Number(this.state.amount) > 50000) {
-      toast.error(
-        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
-          50000
-        )} at once`
-      );
-      this.setState({ loading: false });
-      return;
-    }
-
-    if (Number(this.state.amount) + 50 > this.props.playerData.RealCoins) {
-      toast.error("You cannot withdraw more than you have won");
-      this.setState({ loading: false });
-      return;
-    }
-
-    if (
-      this.props.withdrawalStatus + Number(this.state.amount) >
-      this.props.withdrawalLimit
-    ) {
-      toast.error(
-        "Withdrawal could not be completed. Your daily limit will be exceeded."
-      );
-      this.setState({ loading: false });
-      return;
-    }
-
-    // Add new logic here to send to the withdraws ledger
-
-    // Change to async/await
-    // Verify the account here and return the account Name in the UI
-    // this.verifyAccount(this.state.account_number, this.state.bank)
-    //   .then(data => {
-    //     console.log(data);
-    //     if (data.data.data.accountname) {
-    //       this.setState({
-    //         account_confirmed: true,
-    //         account_name: data.data.data.accountname
-    //       });
-    //       console.log("Confirmed");
-    //     } else {
-    //       this.setState({ loading: false });
-    //       console.log("Not Confirmed");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-
-    // Add logic to filter amount based on the value to factor in fees to be paid
     const valueCharged = +this.state.amount + 50;
     const postData = {
       account_bank: this.state.bank,
@@ -191,22 +116,107 @@ class AccountNumber extends Component {
           fee: 50,
           channel: "AZA"
         };
-        toast.info("Transaction is being processed");
         this.setState({
-          loading: false,
           amount: "",
           bank: "",
-          account_number: ""
+          account_number: "",
+          paying: false,
+          modal: false
         });
         this.props.setCashBalance(Number(valueCharged), 2);
         this.props.setWithdrawalHistory(payload);
+        toast.info("Transaction is being processed");
       } else {
+        this.setState({
+          amount: "",
+          bank: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
         toast.error("Transaction was not successful");
       }
     } catch (err) {
-      this.setState({ loading: false });
+      this.setState({ loading: false, modal: false });
       toast.error("Something went wrong");
     }
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    this.setState({ loading: true });
+
+    if (!this.formIsValid(this.state)) {
+      toast.error("Form is not valid");
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) < 50) {
+      toast.error(`You cannot withdraw less than \u20a6${50}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) > 50000) {
+      toast.error(
+        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+          50000
+        )} at once`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    // if (Number(this.state.amount) + 50 > this.props.playerData.RealCoins) {
+    //   toast.error("You cannot withdraw more than you have won");
+    //   this.setState({ loading: false });
+    //   return;
+    // }
+
+    if (
+      this.props.withdrawalStatus + Number(this.state.amount) >
+      this.props.withdrawalLimit
+    ) {
+      toast.error(
+        "Withdrawal could not be completed. Your daily limit will be exceeded."
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    const postData = {
+      recipientaccount: this.state.account_number,
+      destbankcode: this.state.bank,
+      PBFPubKey: "FLWPUBK-ac35922d8cd6299de34a4133fec7daa7-X"
+    };
+
+    fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.data.data.accountname) {
+          this.setState({
+            account_confirmed: true,
+            account_name: data.data.data.accountname,
+            modal: true
+          });
+        } else {
+          this.setState({ loading: false });
+          toast.error(
+            "Account verification not successful. Please check your details again"
+          );
+        }
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+        toast.error("Something went wrong");
+      });
   };
 
   render() {
@@ -219,13 +229,31 @@ class AccountNumber extends Component {
             marginTop: "22rem"
           }}
         >
-          <ModalBody className="text-center mt-5" style={{ height: "20vh" }}>
+          <ModalBody
+            className="text-center mt-5 mb-5"
+            style={{ miHeight: "20vh" }}
+          >
             <p>
               <strong>Account: {this.state.account_name}</strong>
             </p>
+            <p>
+              <strong>
+                Amount: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount)}
+              </strong>
+            </p>
+            <p>
+              <strong>Transaction Fee: &#8358;{50}</strong>
+            </p>
+            <p>
+              <strong>
+                Total: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount + 50)}
+              </strong>
+            </p>
             <p>Proceed with withdrawal?</p>
             <div className="d-flex justify-content-center">
-              <Button className="mr-1">
+              <Button className="mr-1" onClick={this.withdrawCash}>
                 <span>Yes</span>
               </Button>
               <Button onClick={this.toggleModal} className="ml-1">
