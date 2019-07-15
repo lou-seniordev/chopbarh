@@ -131,12 +131,6 @@ export default function QuickPlayTransaction(props) {
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
               </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
-              </Button>
             </div>
           </SliderContent>
         </div>
@@ -153,12 +147,6 @@ export default function QuickPlayTransaction(props) {
             <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
-              </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
               </Button>
             </div>
           </SliderContent>
@@ -177,12 +165,6 @@ export default function QuickPlayTransaction(props) {
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
               </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
-              </Button>
             </div>
           </SliderContent>
         </div>
@@ -199,12 +181,6 @@ export default function QuickPlayTransaction(props) {
             <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
-              </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
               </Button>
             </div>
           </SliderContent>
@@ -223,12 +199,6 @@ export default function QuickPlayTransaction(props) {
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
               </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
-              </Button>
             </div>
           </SliderContent>
         </div>
@@ -245,12 +215,6 @@ export default function QuickPlayTransaction(props) {
             <div className="hero__buttons mt-2 ml-lg-3 ml-md-3">
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span>Start Playing</span>{" "}
-              </Button>
-              <Button className="mr-lg-4 mr-md-4">
-                <span>Get it on iOS</span>
-              </Button>
-              <Button className="mr-lg-4 mr-md-4 mt-md-2">
-                <span>Get it on Android</span>
               </Button>
             </div>
           </SliderContent>
