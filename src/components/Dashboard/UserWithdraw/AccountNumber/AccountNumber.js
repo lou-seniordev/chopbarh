@@ -1,6 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 // import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import {
@@ -29,7 +29,26 @@ class AccountNumber extends Component {
     account_number: "",
     account_confirmed: false,
     account_name: "",
-    modal: false
+    modal: false,
+    bankList: null,
+    error: false,
+    dataLoading: true
+  };
+
+  componentDidMount = () => {
+    fetch(
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ bankList: data.data.Banks, dataLoading: false });
+      })
+      .catch(err => this.setState({ error: err, dataLoading: false }));
   };
 
   toggleModal = () => {
@@ -126,12 +145,13 @@ class AccountNumber extends Component {
       account_number: this.state.account_number,
       amount: +this.state.amount + 50,
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
-      narration: "Chopbarh Withdrawal",
+      narration: "Chopbarh Payment",
       currency: "NGN",
       reference: getReference()
     };
 
     try {
+      // prod https://api.ravepay.co/v2/gpx/transfers/create
       const response = await fetch(
         "https://ravesandboxapi.flutterwave.com/v2/gpx/transfers/create",
         {
@@ -198,58 +218,56 @@ class AccountNumber extends Component {
             </div>
           </ModalBody>
         </Modal>
-        <FormWrapper onSubmit={this.handleSubmit}>
-          {this.state.account_confirmed && (
-            <hgroup>
-              <h4>Account Name</h4>
-              <h5>{this.state.account_name}</h5>
-            </hgroup>
-          )}
-          <FormItem>
-            <label>Bank</label>
-            <select
-              name="bank"
-              value={this.state.bank}
-              onChange={this.handleInputChange}
-              required
-            >
-              {Banks.map(bank => (
-                <option key={bank.Id} value={bank.Code}>
-                  {bank.Name}
-                </option>
-              ))}
-            </select>
-          </FormItem>
-          <HalfColumn>
-            <FormItem className="mr-3">
-              <label>Account Number</label>
-              <input
-                type="text"
-                value={this.state.account_number}
-                onChange={this.handleInputChange}
-                name="account_number"
-                required
-                placeholder="Account Number"
-              />
-              {/* <NumberFormat
+        {this.state.dataLoading ? (
+          <>
+            {this.state.bankList ? (
+              <>
+                <FormWrapper onSubmit={this.handleSubmit}>
+                  <FormItem>
+                    <label>Bank</label>
+                    <select
+                      name="bank"
+                      value={this.state.bank}
+                      onChange={this.handleInputChange}
+                      required
+                    >
+                      {this.state.bankList.map(bank => (
+                        <option key={bank.Id} value={bank.Code}>
+                          {bank.Name}
+                        </option>
+                      ))}
+                    </select>
+                  </FormItem>
+                  <HalfColumn>
+                    <FormItem className="mr-3">
+                      <label>Account Number</label>
+                      <input
+                        type="text"
+                        value={this.state.account_number}
+                        onChange={this.handleInputChange}
+                        name="account_number"
+                        required
+                        placeholder="Account Number"
+                      />
+                      {/* <NumberFormat
                 value={this.state.account_number}
                 onChange={this.handleInputChange}
                 name="account_number"
                 required
                 placeholder="Account Number"
               /> */}
-            </FormItem>
-            <FormItem>
-              <label>Amount</label>
-              <input
-                type="text"
-                value={this.state.amount}
-                onChange={this.handleInputChange}
-                name="amount"
-                required
-                placeholder="Amount(NGN)"
-              />
-              {/* <NumberFormat
+                    </FormItem>
+                    <FormItem>
+                      <label>Amount</label>
+                      <input
+                        type="text"
+                        value={this.state.amount}
+                        onChange={this.handleInputChange}
+                        name="amount"
+                        required
+                        placeholder="Amount(NGN)"
+                      />
+                      {/* <NumberFormat
                 thousandSeparator
                 value={this.state.amount}
                 onChange={this.handleInputChange}
@@ -257,22 +275,36 @@ class AccountNumber extends Component {
                 required
                 placeholder="Amount(NGN)"
               /> */}
-            </FormItem>
-          </HalfColumn>
-          <FormSubmitButton
-            type="submit"
-            className="mr-2"
-            disabled={this.state.loading}
-          >
-            <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
-          </FormSubmitButton>
-        </FormWrapper>
-        <div className="text-center" style={{ color: "#000" }}>
-          <p>
-            **For all withdrawals there is a &#8358;50 deducted from your cash
-            balance**
-          </p>
-        </div>
+                    </FormItem>
+                  </HalfColumn>
+                  <FormSubmitButton
+                    type="submit"
+                    className="mr-2"
+                    disabled={this.state.loading}
+                  >
+                    <span>
+                      {this.state.loading ? "Processing..." : "Withdraw"}
+                    </span>
+                  </FormSubmitButton>
+                </FormWrapper>
+                <div className="text-center" style={{ color: "#000" }}>
+                  <p>
+                    **For all withdrawals there is a &#8358;50 deducted from
+                    your cash balance**
+                  </p>
+                </div>
+              </>
+            ) : (
+              <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
+                <p>Something went wrong</p>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
+            <Spinner />
+          </div>
+        )}
       </>
     );
   }
