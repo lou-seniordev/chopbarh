@@ -70,7 +70,10 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       ...doc.data()
     }));
 
-    if (creditCards.length) {
+    if (creditCards.length === 3) {
+      toast.info("Maximum number of Cards that can be saved is 3");
+      return;
+    } else if (creditCards.length) {
       // Check if it exists already
       const cardExists = getState().creditCard.creditCard.filter(
         card => card.last_digits === payload.last4
@@ -117,7 +120,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
     }
     dispatch(fetchCreditCardData());
   } catch (err) {
-    console.log("Error Setting new Card", err);
     dispatch(setCreditCardFail());
   }
 };
@@ -162,7 +164,7 @@ export const removeCreditCard = (event, authCode) => async (
           .update({
             data: filteredArray
           });
-          dispatch(removeCreditCardSuccess(docRef))
+        dispatch(removeCreditCardSuccess(docRef));
       } catch (err) {
         toast.error("Card could not be removed. Please try again");
         // console.log("Error Setting new Card", err);
