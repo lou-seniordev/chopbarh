@@ -117,6 +117,12 @@ class VoucherTransaction extends Component {
       return;
     }
 
+    if (+this.state.amount > 1000) {
+      this.setState({ loading: false });
+      toast.error(`You cannot transfer more than \u20a6${1000}`);
+      return;
+    }
+
     if (+this.state.amount > this.props.playerData.CBCoins) {
       this.setState({ loading: false });
       toast.error("You cannot transfer more than you have");
