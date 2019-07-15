@@ -218,7 +218,7 @@ class AccountNumber extends Component {
             </div>
           </ModalBody>
         </Modal>
-        {this.state.dataLoading ? (
+        {!this.state.dataLoading ? (
           <>
             {this.state.bankList ? (
               <>
