@@ -12,7 +12,7 @@ import {
 } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
-import Banks from "./Banks";
+
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import { getReference } from "../../../../lib/getReference";
 
@@ -20,6 +20,9 @@ const FormWrapper = styled(Form)`
   min-height: 20rem;
   margin-bottom: 3.2rem;
 `;
+
+// API.... sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a   Secret
+// API.... pk_live_208123773de037158fe467875f0501886d105a8f  Public
 
 class AccountNumber extends Component {
   state = {
@@ -38,7 +41,7 @@ class AccountNumber extends Component {
 
   componentDidMount = () => {
     fetch(
-      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-ac35922d8cd6299de34a4133fec7daa7-X",
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
       {
         headers: {
           "Content-Type": "application/json"
@@ -85,7 +88,7 @@ class AccountNumber extends Component {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
       amount: valueCharged,
-      seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
+      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
       reference: `${this.props.playerData.PhoneNum}-${getReference()}`
@@ -94,7 +97,7 @@ class AccountNumber extends Component {
     try {
       // prod https://api.ravepay.co/v2/gpx/transfers/create
       const response = await fetch(
-        "https://ravesandboxapi.flutterwave.com/v2/gpx/transfers/create",
+        "https://api.ravepay.co/v2/gpx/transfers/create",
         {
           method: "POST",
           mode: "cors",
@@ -188,7 +191,7 @@ class AccountNumber extends Component {
     const postData = {
       recipientaccount: this.state.account_number,
       destbankcode: this.state.bank,
-      PBFPubKey: "FLWPUBK-ac35922d8cd6299de34a4133fec7daa7-X"
+      PBFPubKey: "FLWPUBK-e87a9fb00e960628ab7fe30288405116-X"
     };
 
     fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {
