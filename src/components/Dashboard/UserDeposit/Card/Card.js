@@ -256,7 +256,7 @@ class Card extends Component {
           ...data.data,
           fees:
             +data.data.amount / 100 < 2500
-              ? 0.015 * (+data.data.amount / 100)
+              ? 0
               : 100
         };
         const value = +data.data.amount / 100;

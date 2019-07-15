@@ -264,7 +264,7 @@ class AccountNumber extends Component {
             className="mr-2"
             disabled={this.state.loading}
           >
-            <span>{this.state.loading ? "Processing..." : "Load"}</span>
+            <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </FormSubmitButton>
         </FormWrapper>
         <div className="text-center" style={{ color: "#000" }}>
