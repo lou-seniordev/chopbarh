@@ -99,6 +99,22 @@ class AccountNumber extends Component {
       return;
     }
 
+    if (Number(this.state.amount) < 50) {
+      toast.error(`You cannot withdraw less than \u20a6${50}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) > 50000) {
+      toast.error(
+        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+          50000
+        )} at once`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
     if (Number(this.state.amount) + 50 > this.props.playerData.RealCoins) {
       toast.error("You cannot withdraw more than you have won");
       this.setState({ loading: false });
@@ -139,7 +155,7 @@ class AccountNumber extends Component {
     //   });
 
     // Add logic to filter amount based on the value to factor in fees to be paid
-    const valueCharged = +this.state.amount + 50
+    const valueCharged = +this.state.amount + 50;
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
@@ -147,7 +163,7 @@ class AccountNumber extends Component {
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
-      reference: `${this.props.PhoneNum}-${getReference()}`
+      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
     };
 
     try {
@@ -169,7 +185,7 @@ class AccountNumber extends Component {
       if (data.status === "success") {
         const payload = {
           status: "Pending",
-          amount: +data.data.amount,
+          amount: +this.state.amount,
           date: data.data.date_created,
           reference: data.data.reference,
           fee: 50,
