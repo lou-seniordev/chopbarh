@@ -139,15 +139,15 @@ class AccountNumber extends Component {
     //   });
 
     // Add logic to filter amount based on the value to factor in fees to be paid
-
+    const valueCharged = +this.state.amount + 50
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
-      amount: +this.state.amount + 50,
+      amount: valueCharged,
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
-      reference: getReference()
+      reference: `${this.props.PhoneNum}-${getReference()}`
     };
 
     try {
@@ -168,21 +168,21 @@ class AccountNumber extends Component {
       // Confirm withdrawal actually goes through here
       if (data.status === "success") {
         const payload = {
-          status: "Success",
-          amount: +data.data.amount - 50,
+          status: "Pending",
+          amount: +data.data.amount,
           date: data.data.date_created,
           reference: data.data.reference,
           fee: 50,
           channel: "AZA"
         };
-        toast.success("Transaction was Successful");
+        toast.info("Transaction is being processed");
         this.setState({
           loading: false,
           amount: "",
           bank: "",
           account_number: ""
         });
-        this.props.setCashBalance(Number(data.data.amount), 2);
+        this.props.setCashBalance(Number(valueCharged), 2);
         this.props.setWithdrawalHistory(payload);
       } else {
         toast.error("Transaction was not successful");
