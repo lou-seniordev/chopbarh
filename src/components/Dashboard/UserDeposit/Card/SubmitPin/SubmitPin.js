@@ -79,7 +79,7 @@ class SubmitPin extends Component {
         this.props.openPhoneModal();
       } else if (data.data.status === "success") {
         this.props.closePinModal();
-        toast.success("Transaction was successful");
+        toast.info("Transaction is processing");
         const payload = {
           ...data.data.authorization,
           cvv: this.props.cvv
@@ -88,9 +88,9 @@ class SubmitPin extends Component {
           ...data.data,
           fees: +data.data.amount / 100 < 2500 ? 0 : 100
         };
-        const value = +data.data.amount / 100;
+        // const value = +data.data.amount / 100;
         this.props.setDepositHistory(historyObject);
-        this.props.setCoinBalance(value);
+        // this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
       } else {
         this.props.closePinModal();
