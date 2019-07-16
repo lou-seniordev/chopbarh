@@ -9,7 +9,7 @@ import {
   Button
 } from "reactstrap";
 import { toast } from "react-toastify";
-import NumberFormat from "react-number-format";
+// import NumberFormat from "react-number-format";
 import {
   Accordion,
   AccordionItem,
@@ -69,7 +69,11 @@ class BankCharge extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ bankList: data.data, dataLoading: false });
+        this.setState({
+          bankList: data.data,
+          dataLoading: false,
+          bank: data.data[0].code
+        });
       })
       .catch(err => this.setState({ dataLoading: false }));
   };
