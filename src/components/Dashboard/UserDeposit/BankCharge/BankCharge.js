@@ -52,7 +52,9 @@ class BankCharge extends Component {
     auth_code: "",
     submitAmountModal: false,
     popoverOpen: false,
-    selectedValue: null
+    selectedValue: null,
+    modalOpen: false,
+    paying: false
   };
 
   componentDidMount = () => {
@@ -79,6 +81,10 @@ class BankCharge extends Component {
           bankName: this.props.bankAccount[0].bank
         });
     }
+  };
+
+  toggleModal = () => {
+    this.setState({ modalOpen: !this.state.modalOpen, loading: false });
   };
 
   handleRadioChange = value => {
@@ -163,6 +169,12 @@ class BankCharge extends Component {
       this.setState({ loading: false });
       return;
     }
+
+    this.setState({ loading: false, modalOpen: true });
+  };
+
+  payMoney = async () => {
+    this.setState({ paying: true });
 
     const postData = {
       email: "somebody@mail.com",
