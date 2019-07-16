@@ -46,7 +46,9 @@ class BankCharge extends Component {
     bankList: null,
     amount: "",
     bank: "",
+    bankName: "",
     account_number: "",
+    authAmount: "",
     auth_code: "",
     submitAmountModal: false,
     popoverOpen: false,
@@ -72,7 +74,10 @@ class BankCharge extends Component {
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       this.props.bankAccount.length &&
-        this.setState({ selectedValue: this.props.bankAccount[0].auth_code });
+        this.setState({
+          selectedValue: this.props.bankAccount[0].auth_code,
+          bankName: this.props.bankAccount[0].bank
+        });
     }
   };
 
@@ -105,12 +110,56 @@ class BankCharge extends Component {
     return true;
   };
 
+  handleAuthSubmit = async (event, bankName) => {
+    event.preventDefault();
+    this.setState({ loading: true });
+
+    if (!isNaN(this.state.amount) !== true) {
+      toast.error(`Form is not valid`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (+this.state.authAmount < 50) {
+      toast.error(`Minimum deposit is \u20a6${50}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    const bankAccountObject = this.state.bankList.filter(
+      account => account.name === bankName
+    );
+
+    // console.log(bankAccountObject);
+
+    // const postData = {
+    //   email: "somebody@mail.com",
+    //   amount: this.state.amount * 100,
+    //   bank: {
+    //     code: this.state.bank,
+    //     account_number: this.state.account_number
+    //   },
+    //   birthday: "1995-03-29",
+    //   metadata: {
+    //     phone: this.props.playerData.PhoneNum
+    //   }
+    // };
+
+    this.setState({ loading: false });
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
       toast.error(`Form is not valid`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (+this.state.amount < 50) {
+      toast.error(`Minimum deposit is \u20a6${50}`);
       this.setState({ loading: false });
       return;
     }
@@ -122,7 +171,10 @@ class BankCharge extends Component {
         code: this.state.bank,
         account_number: this.state.account_number
       },
-      birthday: "1995-03-29"
+      birthday: "1995-03-29",
+      metadata: {
+        phone: this.props.playerData.PhoneNum
+      }
     };
 
     try {
@@ -198,7 +250,11 @@ class BankCharge extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <ExistingCardForm onSubmit={this.handleAuthSubmit}>
+                      <ExistingCardForm
+                        onSubmit={event =>
+                          this.handleAuthSubmit(event, this.state.bankName)
+                        }
+                      >
                         <RadioGroup
                           name="bankAccount"
                           selectedValue={this.state.selectedValue}
@@ -435,7 +491,8 @@ const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   bankAccount: state.bankAccount.bankAccount,
   loading: state.bankAccount.loading,
-  removingAccount: state.bankAccount.removing
+  removingAccount: state.bankAccount.removing,
+  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {
