@@ -25,7 +25,8 @@ import {
   HalfColumn,
   ExistingCardForm,
   ExistingCardFormItem,
-  FormSubmitButton
+  FormSubmitButton,
+  Button as FormElementButton
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -92,7 +93,7 @@ class Card extends Component {
   };
 
   toggleModal = () => {
-    this.setState({ modalOpen: !this.state.modalOpen });
+    this.setState({ modalOpen: !this.state.modalOpen, loading: false });
   };
 
   toggle = () => {
@@ -346,23 +347,32 @@ class Card extends Component {
                 </p>
                 <p>
                   <strong>
-                    Total: &#8358;
-                    {new Intl.NumberFormat().format(+this.state.amount + 100)}
+                    Total:{" "}
+                    {+this.state.amount < 2500
+                      ? `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.amount
+                        )}`
+                      : `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.amount + 100
+                        )}`}
                   </strong>
                 </p>
                 <p>Proceed with deposit?</p>
                 <div className="d-flex justify-content-center">
-                  <Button
+                  <FormElementButton
                     className="mr-1"
                     disabled={this.state.paying}
                     onClick={this.payMoney}
                   >
                     <span>{this.state.paying ? "Processing..." : "Yes"}</span>
-                  </Button>
+                  </FormElementButton>
                   {!this.state.paying ? (
-                    <Button onClick={this.toggleModal} className="ml-1">
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
                       <span>No</span>
-                    </Button>
+                    </FormElementButton>
                   ) : (
                     <>{null}</>
                   )}
@@ -386,25 +396,32 @@ class Card extends Component {
                 </p>
                 <p>
                   <strong>
-                    Total: &#8358;
-                    {new Intl.NumberFormat().format(
-                      +this.state.authAmount + 100
-                    )}
+                    Total:{" "}
+                    {+this.state.authAmount < 2500
+                      ? `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.authAmount
+                        )}`
+                      : `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.authAmount + 100
+                        )}`}
                   </strong>
                 </p>
                 <p>Proceed with deposit?</p>
                 <div className="d-flex justify-content-center">
-                  <Button
+                  <FormElementButton
                     className="mr-1"
                     disabled={this.state.paying}
                     onClick={this.payAuthMoney}
                   >
                     <span>{this.state.paying ? "Processing..." : "Yes"}</span>
-                  </Button>
+                  </FormElementButton>
                   {!this.state.paying ? (
-                    <Button onClick={this.toggleModal} className="ml-1">
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
                       <span>No</span>
-                    </Button>
+                    </FormElementButton>
                   ) : (
                     <>{null}</>
                   )}
