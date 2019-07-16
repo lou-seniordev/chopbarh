@@ -24,7 +24,8 @@ import {
   HalfColumn,
   FormSubmitButton,
   ExistingCardForm,
-  ExistingCardFormItem
+  ExistingCardFormItem,
+  Button as FormElementButton
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
@@ -194,7 +195,7 @@ class BankCharge extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
@@ -244,6 +245,60 @@ class BankCharge extends Component {
               auth_code={this.state.auth_code}
               close={this.toggleSubmitAmountModal}
             />
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.state.modalOpen}
+          toggle={this.toggleModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody
+            className="text-center mt-5 mb-5"
+            style={{ minHeight: "20vh" }}
+          >
+            <p>
+              <strong>
+                Amount: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount)}
+              </strong>
+            </p>
+            <p>
+              <strong>
+                Transaction Fee:{" "}
+                {+this.state.amount < 2500 ? `\u20a6${0}` : `\u20a6${100}`}
+              </strong>
+            </p>
+            <p>
+              <strong>
+                Total:{" "}
+                {+this.state.amount < 2500
+                  ? `\u20a6${new Intl.NumberFormat().format(
+                      +this.state.amount
+                    )}`
+                  : `\u20a6${new Intl.NumberFormat().format(
+                      +this.state.amount + 100
+                    )}`}
+              </strong>
+            </p>
+            <p>Proceed with deposit?</p>
+            <div className="d-flex justify-content-center">
+              <FormElementButton
+                className="mr-1"
+                disabled={this.state.paying}
+                onClick={this.payMoney}
+              >
+                <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+              </FormElementButton>
+              {!this.state.paying ? (
+                <FormElementButton onClick={this.toggleModal} className="ml-1">
+                  <span>No</span>
+                </FormElementButton>
+              ) : (
+                <>{null}</>
+              )}
+            </div>
           </ModalBody>
         </Modal>
         {this.props.loading ? (
@@ -381,7 +436,7 @@ class BankCharge extends Component {
                             <FormItem className="mr-3">
                               <label>Account Number</label>
 
-                              <NumberFormat
+                              <input
                                 value={this.state.account_number}
                                 onChange={this.handleInputChange}
                                 name="account_number"
@@ -391,8 +446,7 @@ class BankCharge extends Component {
                             </FormItem>
                             <FormItem>
                               <label>Amount</label>
-                              <NumberFormat
-                                thousandSeparator
+                              <input
                                 value={this.state.amount}
                                 onChange={this.handleInputChange}
                                 name="amount"
@@ -446,7 +500,7 @@ class BankCharge extends Component {
                       <FormItem className="mr-3">
                         <label>Account Number</label>
 
-                        <NumberFormat
+                        <input
                           value={this.state.account_number}
                           onChange={this.handleInputChange}
                           name="account_number"
@@ -456,8 +510,7 @@ class BankCharge extends Component {
                       </FormItem>
                       <FormItem>
                         <label>Amount</label>
-                        <NumberFormat
-                          thousandSeparator
+                        <input
                           value={this.state.amount}
                           onChange={this.handleInputChange}
                           name="amount"
