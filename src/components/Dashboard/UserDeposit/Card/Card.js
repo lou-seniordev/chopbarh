@@ -147,7 +147,10 @@ class Card extends Component {
     const postData = {
       email: "somebody@nice.com",
       amount: authAmount * 100,
-      authorization_code: creditCardObject[0].auth_code
+      authorization_code: creditCardObject[0].auth_code,
+      metadata: {
+        phone: this.props.playerData.PhoneNum
+      }
     };
 
     try {
@@ -157,7 +160,7 @@ class Card extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -171,7 +174,7 @@ class Card extends Component {
       });
 
       if (data.data.status === "success") {
-        toast.success("Transaction was successful");
+        toast.info("Transaction is processing");
 
         const historyObject = {
           ...data.data,
@@ -180,10 +183,10 @@ class Card extends Component {
               ? 0.015 * (+data.data.amount / 100)
               : 100
         };
-        const value = +data.data.amount / 100;
+        // const value = +data.data.amount / 100;
 
         this.props.setDepositHistory(historyObject);
-        this.props.setCoinBalance(value);
+        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Transaction was not successful`);
       }
@@ -217,6 +220,9 @@ class Card extends Component {
         cvv: this.state.cvv,
         expiry_month: cardExpirationData[0],
         expiry_year: year
+      },
+      metadata: {
+        phone: this.props.playerData.PhoneNum
       }
     };
 
@@ -227,7 +233,7 @@ class Card extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a `,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
@@ -256,9 +262,9 @@ class Card extends Component {
           ...data.data,
           fees: +data.data.amount / 100 < 2500 ? 0 : 100
         };
-        const value = +data.data.amount / 100;
+        // const value = +data.data.amount / 100;
         this.props.setDepositHistory(historyObject);
-        this.props.setCoinBalance(value);
+        // this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
       } else if (data.data.status === "open_url") {
         this.props.setChargeReference(data.data.reference);
@@ -620,7 +626,8 @@ const mapStateToProps = state => ({
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
   isDataFetched: state.creditCard.fetched,
-  removingCard: state.creditCard.removing
+  removingCard: state.creditCard.removing,
+  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {
