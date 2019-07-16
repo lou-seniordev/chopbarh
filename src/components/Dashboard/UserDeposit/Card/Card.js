@@ -63,7 +63,9 @@ class Card extends Component {
     auth_code: "",
     authCVV: "",
     authAmount: "",
-    popoverOpen: false
+    popoverOpen: false,
+    modalOpen: false,
+    paying: false
   };
 
   componentDidMount = () => {
@@ -72,8 +74,6 @@ class Card extends Component {
     } else {
       this.setState({ selectedValue: this.props.creditCard[0].auth_code });
     }
-    // if (!this.props.creditCard.length && !this.props.isDataFetched) {
-    // }
   };
 
   componentDidUpdate = prevProps => {
@@ -83,16 +83,16 @@ class Card extends Component {
     }
   };
 
-  toggleSubmitAmountModal = () => {
-    this.setState({ submitAmountModal: !this.state.submitAmountModal });
-  };
-
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
 
   handleRadioChange = value => {
     this.setState({ selectedValue: value, authCVV: "" });
+  };
+
+  toggleModal = () => {
+    this.setState({ modalOpen: !this.state.modalOpen });
   };
 
   toggle = () => {
@@ -120,7 +120,7 @@ class Card extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    const { authAmount, authCVV, selectedValue } = this.state;
+    const { authAmount, selectedValue } = this.state;
 
     if (selectedValue === null) {
       this.setState({ loading: false });
@@ -134,11 +134,17 @@ class Card extends Component {
       return;
     }
 
+    this.setState({ modalOpen: true });
+  };
+
+  payAuthMoney = async () => {
+    this.setState({ paying: true, loading: false });
+
     const creditCardObject = this.props.creditCard.filter(
-      card => card.auth_code === selectedValue
+      card => card.auth_code === this.state.selectedValue
     );
 
-    if (creditCardObject[0].cvv !== authCVV) {
+    if (creditCardObject[0].cvv !== this.state.authCVV) {
       this.setState({ loading: false });
       toast.error(`CVV is not correct`);
       return;
@@ -146,7 +152,7 @@ class Card extends Component {
 
     const postData = {
       email: "somebody@nice.com",
-      amount: authAmount * 100,
+      amount: this.state.authAmount * 100,
       authorization_code: creditCardObject[0].auth_code,
       metadata: {
         phone: this.props.playerData.PhoneNum
@@ -170,7 +176,9 @@ class Card extends Component {
       this.setState({
         loading: false,
         authAmount: "",
-        authCVV: ""
+        authCVV: "",
+        modalOpen: false,
+        paying: false
       });
 
       if (data.data.status === "success") {
@@ -205,6 +213,12 @@ class Card extends Component {
       toast.error(`Form is not valid`);
       return;
     }
+
+    this.setState({ modalOpen: true });
+  };
+
+  payMoney = async () => {
+    this.setState({ paying: true, loading: false });
 
     const cardExpirationData = this.state.expiry.split("/");
     const year = `20${cardExpirationData[1]}`;
@@ -244,7 +258,9 @@ class Card extends Component {
         amount: "",
         card: "",
         expiry: "",
-        cvv: ""
+        cvv: "",
+        modalOpen: false,
+        paying: false
       });
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
@@ -304,17 +320,97 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.submitAmountModal}
-          toggle={this.toggleSubmitAmountModal}
+          isOpen={this.state.modalOpen}
+          toggle={this.toggleModal}
           style={{
             marginTop: "22rem"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitAmount
-              auth_code={this.state.auth_code}
-              close={this.toggleSubmitAmountModal}
-            />
+          <ModalBody
+            className="text-center mt-5 mb-5"
+            style={{ minHeight: "20vh" }}
+          >
+            {this.state.amount ? (
+              <>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.amount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Transaction Fee:{" "}
+                    {+this.state.amount < 2500 ? `\u20a6${0}` : `\u20a6${100}`}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Total: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.amount + 100)}
+                  </strong>
+                </p>
+                <p>Proceed with deposit?</p>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.payMoney}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </Button>
+                  {!this.state.paying ? (
+                    <Button onClick={this.toggleModal} className="ml-1">
+                      <span>No</span>
+                    </Button>
+                  ) : (
+                    <>{null}</>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.authAmount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Transaction Fee:{" "}
+                    {+this.state.authAmount < 2500
+                      ? `\u20a6${0}`
+                      : `\u20a6${100}`}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Total: &#8358;
+                    {new Intl.NumberFormat().format(
+                      +this.state.authAmount + 100
+                    )}
+                  </strong>
+                </p>
+                <p>Proceed with deposit?</p>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.payAuthMoney}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </Button>
+                  {!this.state.paying ? (
+                    <Button onClick={this.toggleModal} className="ml-1">
+                      <span>No</span>
+                    </Button>
+                  ) : (
+                    <>{null}</>
+                  )}
+                </div>
+              </>
+            )}
           </ModalBody>
         </Modal>
         {this.props.loading ? (
