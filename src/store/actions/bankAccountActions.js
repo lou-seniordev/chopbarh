@@ -85,6 +85,7 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
           });
         dispatch(setBankAccountSuccess(docRef));
       }
+      dispatch(fetchBankAccountData());
     } else {
       const docRef = await firestore
         .collection("bank_charge")
