@@ -3,7 +3,8 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   loading: true,
   bankAccount: null,
-  error: false
+  error: false,
+  removing: false
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,21 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: true
+      };
+    case actionType.REMOVE_BANK_ACCOUNT_INIT:
+      return {
+        ...state,
+        removing: true
+      };
+    case actionType.REMOVE_BANK_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        removing: false
+      };
+    case actionType.REMOVE_BANK_ACCOUNT_FAIL:
+      return {
+        ...state,
+        removing: false
       };
     case actionType.AUTH_LOGOUT:
       return {

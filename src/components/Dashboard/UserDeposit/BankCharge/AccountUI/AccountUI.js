@@ -29,7 +29,7 @@ const CardComponentHeader = styled.p`
   width: 9rem;
 `;
 
-export default class CreditCard extends Component {
+export default class AccountUI extends Component {
   render() {
     return (
       <Container>
