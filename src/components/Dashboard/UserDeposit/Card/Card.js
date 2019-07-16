@@ -247,7 +247,7 @@ class Card extends Component {
         this.props.setChargeReference(data.data.reference);
         this.props.openPinModal();
       } else if (data.data.status === "success") {
-        toast.info("Transaction is processing");
+        toast.success("Transaction is processing");
         const payload = {
           ...data.data.authorization,
           cvv: postData.card.cvv
@@ -256,9 +256,9 @@ class Card extends Component {
           ...data.data,
           fees: +data.data.amount / 100 < 2500 ? 0 : 100
         };
-        // const value = +data.data.amount / 100;
+        const value = +data.data.amount / 100;
         this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
+        this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
       } else if (data.data.status === "open_url") {
         this.props.setChargeReference(data.data.reference);

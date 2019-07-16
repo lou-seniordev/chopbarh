@@ -81,7 +81,7 @@ class AccountNumber extends Component {
   verifyAccount = (account, bank) => {};
 
   withdrawCash = async () => {
-    this.setState({ paying: true });
+    this.setState({ paying: true, loading: false });
 
     const valueCharged = +this.state.amount + 50;
     const postData = {
