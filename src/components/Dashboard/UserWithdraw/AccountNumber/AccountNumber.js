@@ -256,12 +256,20 @@ class AccountNumber extends Component {
             </p>
             <p>Proceed with withdrawal?</p>
             <div className="d-flex justify-content-center">
-              <Button className="mr-1" onClick={this.withdrawCash}>
-                <span>Yes</span>
+              <Button
+                className="mr-1"
+                disabled={this.state.paying}
+                onClick={this.withdrawCash}
+              >
+                <span>{this.state.paying ? "Processing..." : "Yes"}</span>
               </Button>
-              <Button onClick={this.toggleModal} className="ml-1">
-                <span>No</span>
-              </Button>
+              {!this.state.paying ? (
+                <Button onClick={this.toggleModal} className="ml-1">
+                  <span>No</span>
+                </Button>
+              ) : (
+                <>{null}</>
+              )}
             </div>
           </ModalBody>
         </Modal>
