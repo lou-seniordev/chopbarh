@@ -1,6 +1,13 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner, Popover, PopoverBody } from "reactstrap";
+import {
+  Modal,
+  ModalBody,
+  Spinner,
+  Popover,
+  PopoverBody,
+  Button
+} from "reactstrap";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
 import {
@@ -17,8 +24,7 @@ import {
   HalfColumn,
   FormSubmitButton,
   ExistingCardForm,
-  ExistingCardFormItem,
-  Button
+  ExistingCardFormItem
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
@@ -194,11 +200,11 @@ class BankCharge extends Component {
                     <AccordionItemPanel>
                       <ExistingCardForm onSubmit={this.handleAuthSubmit}>
                         <RadioGroup
-                          name="creditCard"
+                          name="bankAccount"
                           selectedValue={this.state.selectedValue}
                           onChange={this.handleRadioChange}
                         >
-                          {this.props.creditCard.map((account, index) => (
+                          {this.props.bankAccount.map((account, index) => (
                             <div
                               className="d-flex align-items-center justify-content-center flex-wrap"
                               key={index}
@@ -212,7 +218,7 @@ class BankCharge extends Component {
                               <Button
                                 id="Popover"
                                 type="button"
-                                className="mb-lg-2 mb-md-2 mb-sm-3 ml-2"
+                                className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
                               >
                                 &#10005;
                               </Button>
@@ -281,7 +287,9 @@ class BankCharge extends Component {
                   </AccordionItem>
                   <AccordionItem uuid="200">
                     <AccordionItemHeading>
-                      Pay with new Account
+                      <AccordionItemButton>
+                        Pay with new Account
+                      </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       {this.state.bankList ? (

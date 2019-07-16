@@ -7,6 +7,7 @@ const Container = styled.div`
   border-radius: 5px;
   min-width: 26rem;
   margin: 14px;
+  margin-right: 7px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -26,7 +27,7 @@ const CardComponent = styled.div`
 const CardComponentHeader = styled.p`
   position: absolute;
   top: -29px;
-  width: 9rem;
+  width: 11rem;
 `;
 
 export default class AccountUI extends Component {

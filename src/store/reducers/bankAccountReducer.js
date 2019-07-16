@@ -2,7 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  bankAccount: null,
+  bankAccount: [],
   error: false,
   removing: false
 };
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_BANK_ACCOUNT_SUCCESS:
       return {
         ...state,
-        bankAccount: [...action.data],
+        bankAccount: state.bankAccount.concat(action.data),
         loading: false
       };
     case actionType.FETCH_BANK_ACCOUNT_FAIL:
