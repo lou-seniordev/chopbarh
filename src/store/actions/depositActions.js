@@ -73,7 +73,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             paid_at: payload.transaction_date,
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
-            status: payload.status
+            status: "Pending"
           })
         });
       dispatch(setDepositHistorySuccess(docRef));
@@ -91,7 +91,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               paid_at: payload.transaction_date,
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
-              status: payload.status
+              status: "Pending"
             }
           ]
         });

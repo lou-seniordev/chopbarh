@@ -269,8 +269,10 @@ class Paga extends Component {
         </Form>
         <div className="container">
           <div className="text-center" style={{ marginTop: "5rem" }}>
-            <p>&rarr; Dial *242# to claim your cash</p>
-            <p>&rarr; Dial *242*2*4# to transfer to bank account</p>
+            <p>&rarr; Dail *242# to Register for First time Users</p>
+            <p>&rarr; Dial *242*2*Amount*AccountNumber# for instant transfer to any bank</p>
+            <p>&rarr; Dial *242*3*Amount# to Withdraw at any Paga Agent</p>
+            <p>&rarr; Dial *242*4*Amount# to Withdraw at any ATM without a card or bank account</p>
           </div>
         </div>
         <div className="text-center" style={{ color: "#000" }}>
