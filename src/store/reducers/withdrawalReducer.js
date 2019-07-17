@@ -2,7 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  withdrawalHistory: null,
+  withdrawalHistory: [],
   withdrawalLimit: 500000,
   withdrawalStatus: 0,
   error: false
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_WITHDRAWAL_HISTORY_SUCCESS:
       return {
         ...state,
-        withdrawalHistory: [...action.data],
+        withdrawalHistory: state.withdrawalHistory.concat(action.data),
         loading: false
       };
     case actionType.FETCH_WITHDRAWAL_HISTORY_FAIL:
