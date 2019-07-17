@@ -26,7 +26,7 @@ class SubmitOTP extends Component {
   };
 
   formIsValid = ({ otp }) => {
-    if (!isNaN(otp) !== true || otp.length !== 6) {
+    if (!isNaN(otp) !== true || (otp.length >= 4 && otp.length <= 7)) {
       return false;
     }
     return true;
