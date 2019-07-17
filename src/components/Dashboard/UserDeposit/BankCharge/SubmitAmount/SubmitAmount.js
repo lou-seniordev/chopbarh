@@ -39,7 +39,7 @@ class SubmitAmount extends Component {
     }
 
     const postData = {
-      email: "somebody@nice.com",
+      email: `${this.props.playerData.PhoneNum}@mail.com`,
       amount: this.state.amount * 100,
       authorization_code: this.props.auth_code
     };
@@ -116,7 +116,8 @@ class SubmitAmount extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference
+  reference: state.charge.reference,
+  playerData: state.player.playerData
 });
 
 const mapDispatchToProps = {

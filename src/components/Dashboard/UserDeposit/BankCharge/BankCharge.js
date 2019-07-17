@@ -182,7 +182,7 @@ class BankCharge extends Component {
     this.setState({ paying: true });
 
     const postData = {
-      email: "somebody@mail.com",
+      email: `${this.props.playerData.PhoneNum}@mail.com`,
       amount: this.state.amount * 100,
       bank: {
         code: this.state.bank,
