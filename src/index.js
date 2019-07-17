@@ -21,6 +21,7 @@ import creditCardReducer from "./store/reducers/creditCardReducer";
 import depositReducer from "./store/reducers/depositReducer";
 import withdrawalReducer from "./store/reducers/withdrawalReducer";
 import transferReducer from "./store/reducers/transferReducer";
+import withdrawalAccountReducer from "./store/reducers/withdrawalAccountReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
   creditCard: creditCardReducer,
   deposit: depositReducer,
   withdrawal: withdrawalReducer,
-  transfer: transferReducer
+  transfer: transferReducer,
+  withdrawalAccount: withdrawalAccountReducer
 });
 
 const composeEnhancers =
