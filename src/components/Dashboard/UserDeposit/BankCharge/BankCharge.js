@@ -59,7 +59,9 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchBankAccountData();
+    if (!this.props.bankAccount.length) {
+      this.props.fetchBankAccountData();
+    }
 
     fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {

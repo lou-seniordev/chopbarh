@@ -77,9 +77,12 @@ export default function Header({ transparent }) {
           <ul className="navbar-nav mr-auto" />
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="howto" className="nav-link text-uppercase mr-5">
+              <a
+                href="https://chopbarh.zendesk.com/hc"
+                className="nav-link text-uppercase mr-5"
+              >
                 How to
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
               <Link to="games" className="nav-link text-uppercase mr-5">
