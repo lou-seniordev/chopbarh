@@ -28,6 +28,7 @@ export const fetchWithdrawalBankAccountData = () => async (
       .get();
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
     if (data.length) {
       dispatch(fetchWithdrawalBankAccountSuccess(data[0].data));
     } else {
@@ -125,7 +126,7 @@ export const removeWithdrawalBankAccountFail = () => ({
   type: actionType.REMOVE_WITHDRAWAL_BANK_ACCOUNT_FAIL
 });
 
-export const removeWithdrawalBankAccount = (event, authCode) => async (
+export const removeWithdrawalBankAccount = (event, code) => async (
   dispatch,
   getState
 ) => {
@@ -143,7 +144,7 @@ export const removeWithdrawalBankAccount = (event, authCode) => async (
       // dispatch(fetchWithdrawalBankAccountSuccess(data[0].data));
       const accountsArray = data[0].data;
       let filteredArray = accountsArray.filter(
-        account => account.auth_code !== authCode
+        account => account.code !== code
       );
 
       try {

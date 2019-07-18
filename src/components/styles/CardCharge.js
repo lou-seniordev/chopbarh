@@ -66,7 +66,7 @@ export const Button = styled.button`
 `;
 
 export const ExistingCardForm = styled(Form)`
-  min-height: 5rem;
+  min-height: 7rem;
 
   input {
     margin-bottom: 1rem;
