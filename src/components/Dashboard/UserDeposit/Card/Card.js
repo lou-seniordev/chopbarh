@@ -263,6 +263,18 @@ class Card extends Component {
         modalOpen: false,
         paying: false
       });
+
+      const historyObject = {
+        amount: this.state.amount,
+        channel: 'Card',
+        deposit_date: new Date().toISOString(),
+        fees: +data.data.amount / 100 < 2500 ? 0 : 100,
+        reference: '--',
+        status: 'Pending'
+      };
+      
+      this.props.setDepositHistory(historyObject);
+
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
         this.props.openOTPModal();
@@ -275,12 +287,6 @@ class Card extends Component {
           ...data.data.authorization,
           cvv: postData.card.cvv
         };
-        // const historyObject = {
-        //   ...data.data,
-        //   fees: +data.data.amount / 100 < 2500 ? 0 : 100
-        // };
-        // const value = +data.data.amount / 100;
-        // this.props.setDepositHistory(historyObject);
         // this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
       } else if (data.data.status === "pending") {
