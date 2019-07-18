@@ -77,6 +77,9 @@ class SubmitPin extends Component {
       } else if (data.data.status === "send_phone") {
         this.props.closePinModal();
         this.props.openPhoneModal();
+      }else if (data.data.status === "open_url") {
+        this.props.closePinModal();
+        window.open(data.data.url, "_blank");
       } else if (data.data.status === "success") {
         this.props.closePinModal();
         toast.info("Transaction is processing");

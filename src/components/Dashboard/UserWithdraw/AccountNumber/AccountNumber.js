@@ -44,6 +44,9 @@ const FormWrapper = styled(Form)`
 // API.... sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a   Secret
 // API.... pk_live_208123773de037158fe467875f0501886d105a8f  Public
 
+// FLWPUBK-e87a9fb00e960628ab7fe30288405116-X  .....Public Key
+// FLWSECK-6c50f0fa49045876075058059855ff70-X  .....Secret Key
+
 class AccountNumber extends Component {
   state = {
     loading: false,
@@ -109,8 +112,6 @@ class AccountNumber extends Component {
     }
     return true;
   };
-
-  verifyAccount = (account, bank) => {};
 
   withdrawCash = async () => {
     this.setState({ paying: true, loading: false });

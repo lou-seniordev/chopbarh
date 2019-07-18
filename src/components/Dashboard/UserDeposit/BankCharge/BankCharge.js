@@ -63,7 +63,7 @@ class BankCharge extends Component {
 
     fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {
-        Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+        Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
         "Content-Type": "application/json"
       }
     })
