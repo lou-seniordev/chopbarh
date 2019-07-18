@@ -33,8 +33,10 @@ import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import { getReference } from "../../../../lib/getReference";
 import AccountUI from "../../UserDeposit/BankCharge/AccountUI/AccountUI";
-import { removeWithdrawalBankAccount } from "../../../../store/actions/withdrawalAccountActions";
-
+import {
+  removeWithdrawalBankAccount,
+  fetchWithdrawalBankAccountData
+} from "../../../../store/actions/withdrawalAccountActions";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
@@ -306,7 +308,7 @@ class AccountNumber extends Component {
             </div>
           </ModalBody>
         </Modal>
-        {this.props.loading ? (
+        {/* {this.props.loading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
@@ -513,13 +515,7 @@ class AccountNumber extends Component {
                             required
                             placeholder="Account Number"
                           />
-                          {/* <NumberFormat
-                value={this.state.account_number}
-                onChange={this.handleInputChange}
-                name="account_number"
-                required
-                placeholder="Account Number"
-              /> */}
+                          
                         </FormItem>
                         <FormItem>
                           <label>Amount</label>
@@ -531,14 +527,7 @@ class AccountNumber extends Component {
                             required
                             placeholder="Amount(NGN)"
                           />
-                          {/* <NumberFormat
-                thousandSeparator
-                value={this.state.amount}
-                onChange={this.handleInputChange}
-                name="amount"
-                required
-                placeholder="Amount(NGN)"
-              /> */}
+                          
                         </FormItem>
                       </HalfColumn>
                       <FormSubmitButton
@@ -569,8 +558,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )}
-        {/* {!this.state.dataLoading ? (
+        )} */}
+        {!this.state.dataLoading ? (
           <>
             {this.state.bankList ? (
               <>
@@ -601,7 +590,6 @@ class AccountNumber extends Component {
                         required
                         placeholder="Account Number"
                       />
-                   
                     </FormItem>
                     <FormItem>
                       <label>Amount</label>
@@ -613,7 +601,6 @@ class AccountNumber extends Component {
                         required
                         placeholder="Amount(NGN)"
                       />
-                  
                     </FormItem>
                   </HalfColumn>
                   <FormSubmitButton
@@ -643,7 +630,7 @@ class AccountNumber extends Component {
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
-        )} */}
+        )}
       </>
     );
   }
@@ -660,7 +647,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setCashBalance,
-  setWithdrawalHistory, removeWithdrawalBankAccount
+  setWithdrawalHistory,
+  removeWithdrawalBankAccount,
+  fetchWithdrawalBankAccountData
 };
 
 export default connect(
