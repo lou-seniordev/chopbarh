@@ -75,7 +75,7 @@ export const setWithdrawalBankAccountData = payload => async (
       );
     } else if (withdrawalBankAccounts.length) {
       const accountExists = getState().withdrawalAccount.withdrawalAccount.filter(
-        account => account.last_digits === payload.last4
+        account => account.account_number === payload.account_number
       );
 
       if (accountExists.length) {
@@ -85,9 +85,9 @@ export const setWithdrawalBankAccountData = payload => async (
           .doc(getState().auth.id)
           .update({
             data: firebase.firestore.FieldValue.arrayUnion({
-              auth_code: payload.authorization_code,
+              account_number: payload.account_number,
               bank: payload.bank,
-              last_digits: payload.last4
+              code: payload.code
             })
           });
         dispatch(setWithdrawalBankAccountSuccess(docRef));
@@ -101,9 +101,9 @@ export const setWithdrawalBankAccountData = payload => async (
           id: getState().auth.id,
           data: [
             {
-              auth_code: payload.authorization_code,
+              account_number: payload.account_number,
               bank: payload.bank,
-              last_digits: payload.last4
+              code: payload.code
             }
           ]
         });
