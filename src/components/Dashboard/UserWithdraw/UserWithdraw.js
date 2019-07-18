@@ -12,6 +12,7 @@ import {
   fetchWithdrawalHistoryData,
   setWithdrawalStatus
 } from "../../../store/actions/withdrawalActions";
+import { fetchPlayerData } from "../../../store/actions/playerDataActions";
 
 class UserWithdraw extends Component {
   componentDidMount = () => {
@@ -62,12 +63,16 @@ class UserWithdraw extends Component {
                       this.props.withdrawalLimit - this.props.withdrawalStatus
                     )}
                   </p>
-                  <p>
-                    Cash Balance: &#8358;
-                    {new Intl.NumberFormat().format(
-                      this.props.playerData.RealCoins
-                    )}
-                  </p>
+                  {this.props.playerDataLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <p>
+                      Cash Balance: &#8358;
+                      {new Intl.NumberFormat().format(
+                        this.props.playerData.RealCoins
+                      )}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -92,12 +97,14 @@ const mapStateToProps = state => ({
   withdrawals: state.withdrawal.withdrawalHistory,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   withdrawalStatus: state.withdrawal.withdrawalStatus,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
+  playerDataLoading: state.player.loading
 });
 
 const mapDispatchToProps = {
   fetchWithdrawalHistoryData,
-  setWithdrawalStatus
+  setWithdrawalStatus,
+  fetchPlayerData
 };
 
 export default connect(

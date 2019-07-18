@@ -321,182 +321,119 @@ class AccountNumber extends Component {
         ) : (
           <>
             {this.props.withdrawalAccount.length > 0 ? (
-              <div style={{ minHeight: "20rem" }}>
-                <Accordion>
-                  <AccordionItem>
-                    <AccordionItemHeading>
-                      <AccordionItemButton>
-                        Withdraw with existing Account
-                      </AccordionItemButton>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>
-                      <ExistingCardForm
-                        style={{ margin: "4rem 0" }}
-                        onSubmit={event =>
-                          this.handleAuthSubmit(event, this.state.bankName)
-                        }
-                      >
-                        <RadioGroup
-                          name="withdrawalAccount"
-                          selectedValue={this.state.selectedValue}
-                          onChange={this.handleRadioChange}
+              <>
+                <div style={{ minHeight: "20rem" }}>
+                  <Accordion>
+                    <AccordionItem>
+                      <AccordionItemHeading>
+                        <AccordionItemButton>
+                          Withdraw with existing Account
+                        </AccordionItemButton>
+                      </AccordionItemHeading>
+                      <AccordionItemPanel>
+                        <ExistingCardForm
+                          style={{ margin: "4rem 0" }}
+                          onSubmit={event =>
+                            this.handleAuthSubmit(event, this.state.bankName)
+                          }
                         >
-                          {this.props.withdrawalAccount.map(
-                            (account, index) => (
-                              <div
-                                className="d-flex align-items-center justify-content-center flex-wrap"
-                                key={index}
-                              >
-                                <Radio value={account.code} />
-                                <AccountUI
-                                  number={account.account_number}
-                                  bank={account.bank}
-                                />
+                          <RadioGroup
+                            name="withdrawalAccount"
+                            selectedValue={this.state.selectedValue}
+                            onChange={this.handleRadioChange}
+                          >
+                            {this.props.withdrawalAccount.map(
+                              (account, index) => (
+                                <div
+                                  className="d-flex align-items-center justify-content-center flex-wrap"
+                                  key={index}
+                                >
+                                  <Radio value={account.code} />
+                                  <AccountUI
+                                    number={account.account_number}
+                                    bank={account.bank}
+                                  />
 
-                                <Button
-                                  id="Popover"
-                                  type="button"
-                                  className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
-                                >
-                                  &#10005;
-                                </Button>
-                                <Popover
-                                  placement="bottom"
-                                  isOpen={this.state.popoverOpen}
-                                  target="Popover"
-                                  toggle={this.toggle}
-                                >
-                                  <PopoverBody className="text-center">
-                                    This action will remove this Account detail.
-                                    Do you want to continue?
-                                    <div className="d-flex justify-content-center">
-                                      <Button
-                                        className="mr-1"
-                                        disabled={this.props.removingAccount}
-                                        onClick={e =>
-                                          this.props.removeWithdrawalBankAccount(
-                                            e,
-                                            account.code
-                                          ) && this.toggle()
-                                        }
-                                      >
-                                        {this.props.removingAccount
-                                          ? "Removing..."
-                                          : "Yes"}
-                                      </Button>
-                                      {this.props.removingAccount ? (
-                                        <>{null}</>
-                                      ) : (
+                                  <Button
+                                    id="Popover"
+                                    type="button"
+                                    className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
+                                  >
+                                    &#10005;
+                                  </Button>
+                                  <Popover
+                                    placement="bottom"
+                                    isOpen={this.state.popoverOpen}
+                                    target="Popover"
+                                    toggle={this.toggle}
+                                  >
+                                    <PopoverBody className="text-center">
+                                      This action will remove this Account
+                                      detail. Do you want to continue?
+                                      <div className="d-flex justify-content-center">
                                         <Button
-                                          className="btn-primary"
+                                          className="mr-1"
                                           disabled={this.props.removingAccount}
-                                          onClick={this.toggle}
+                                          onClick={e =>
+                                            this.props.removeWithdrawalBankAccount(
+                                              e,
+                                              account.code
+                                            ) && this.toggle()
+                                          }
                                         >
-                                          No
+                                          {this.props.removingAccount
+                                            ? "Removing..."
+                                            : "Yes"}
                                         </Button>
-                                      )}
-                                    </div>
-                                  </PopoverBody>
-                                </Popover>
-                              </div>
-                            )
-                          )}
-                        </RadioGroup>
-                        <ExistingCardFormItem className="ml-5">
-                          <input
-                            onChange={this.handleInputChange}
-                            name="authAmount"
-                            value={this.state.authAmount}
-                            minLength="1"
-                            required
-                            placeholder="Amount(NGN)"
-                          />
-                        </ExistingCardFormItem>
-                        <FormSubmitButton
-                          type="submit"
-                          className="mr-2 mt-n4"
-                          disabled={this.state.loading}
-                        >
-                          <span>
-                            {this.state.loading ? "Please wait..." : "Load"}
-                          </span>
-                        </FormSubmitButton>
-                      </ExistingCardForm>
-                    </AccordionItemPanel>
-                  </AccordionItem>
-                  <AccordionItem>
-                    <AccordionItemHeading>
-                      <AccordionItemButton>
-                        Withdraw with new Account
-                      </AccordionItemButton>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>
-                      {this.state.bankList ? (
-                        <Form onSubmit={this.handleSubmit}>
-                          <FormItem>
-                            <label>Bank</label>
-                            <select
-                              name="bank"
-                              value={this.state.bank}
+                                        {this.props.removingAccount ? (
+                                          <>{null}</>
+                                        ) : (
+                                          <Button
+                                            className="btn-primary"
+                                            disabled={
+                                              this.props.removingAccount
+                                            }
+                                            onClick={this.toggle}
+                                          >
+                                            No
+                                          </Button>
+                                        )}
+                                      </div>
+                                    </PopoverBody>
+                                  </Popover>
+                                </div>
+                              )
+                            )}
+                          </RadioGroup>
+                          <ExistingCardFormItem className="ml-5">
+                            <input
                               onChange={this.handleInputChange}
+                              name="authAmount"
+                              value={this.state.authAmount}
+                              minLength="1"
                               required
-                            >
-                              {this.state.bankList.map(bank => (
-                                <option key={bank.id} value={bank.code}>
-                                  {bank.name}
-                                </option>
-                              ))}
-                            </select>
-                          </FormItem>
-                          <HalfColumn>
-                            <FormItem className="mr-3">
-                              <label>Account Number</label>
-
-                              <input
-                                value={this.state.account_number}
-                                onChange={this.handleInputChange}
-                                name="account_number"
-                                required
-                                placeholder="Account Number"
-                              />
-                            </FormItem>
-                            <FormItem>
-                              <label>Amount</label>
-                              <input
-                                value={this.state.amount}
-                                onChange={this.handleInputChange}
-                                name="amount"
-                                required
-                                placeholder="Amount(NGN)"
-                              />
-                            </FormItem>
-                          </HalfColumn>
+                              placeholder="Amount(NGN)"
+                            />
+                          </ExistingCardFormItem>
                           <FormSubmitButton
                             type="submit"
-                            className="mr-2"
+                            className="mr-2 mt-n4"
                             disabled={this.state.loading}
                           >
                             <span>
-                              {this.state.loading ? "Processing..." : "Load"}
+                              {this.state.loading ? "Please wait..." : "Load"}
                             </span>
                           </FormSubmitButton>
-                        </Form>
-                      ) : (
-                        <div
-                          className="mt-5 text-center"
-                          style={{ minHeight: "30vh" }}
-                        >
-                          <Spinner />
-                        </div>
-                      )}
-                    </AccordionItemPanel>
-                  </AccordionItem>
-                </Accordion>
-              </div>
-            ) : (
-              <>
-                    {!this.state.dataLoading ? (
-                      <>
+                        </ExistingCardForm>
+                      </AccordionItemPanel>
+                    </AccordionItem>
+                    <AccordionItem>
+                      <AccordionItemHeading>
+                        <AccordionItemButton>
+                          Withdraw with new Account
+                        </AccordionItemButton>
+                      </AccordionItemHeading>
+                      <AccordionItemPanel>
                         {this.state.bankList ? (
                           <>
                             <FormWrapper onSubmit={this.handleSubmit}>
@@ -545,28 +482,114 @@ class AccountNumber extends Component {
                                 disabled={this.state.loading}
                               >
                                 <span>
-                                  {this.state.loading ? "Processing..." : "Withdraw"}
+                                  {this.state.loading
+                                    ? "Processing..."
+                                    : "Withdraw"}
                                 </span>
                               </FormSubmitButton>
                             </FormWrapper>
-                            <div className="text-center" style={{ color: "#000" }}>
-                              <p>
-                                **For all withdrawals there is a &#8358;50 deducted from
-                                your cash balance**
-                  </p>
-                            </div>
                           </>
                         ) : (
-                            <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
-                              <p>Something went wrong</p>
-                            </div>
-                          )}
+                          <div
+                            className="mt-5 text-center"
+                            style={{ minHeight: "30vh" }}
+                          >
+                            <p>Something went wrong</p>
+                          </div>
+                        )}
+                      </AccordionItemPanel>
+                    </AccordionItem>
+                  </Accordion>
+                  <div className="text-center" style={{ color: "#000" }}>
+                    <p>
+                      **For all withdrawals there is a &#8358;50 deducted from
+                      your cash balance**
+                    </p>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {!this.state.dataLoading ? (
+                  <>
+                    {this.state.bankList ? (
+                      <>
+                        <FormWrapper onSubmit={this.handleSubmit}>
+                          <FormItem>
+                            <label>Bank</label>
+                            <select
+                              name="bank"
+                              value={this.state.bank}
+                              onChange={this.handleInputChange}
+                              required
+                            >
+                              {this.state.bankList.map(bank => (
+                                <option key={bank.Id} value={bank.Code}>
+                                  {bank.Name}
+                                </option>
+                              ))}
+                            </select>
+                          </FormItem>
+                          <HalfColumn>
+                            <FormItem className="mr-3">
+                              <label>Account Number</label>
+                              <input
+                                type="text"
+                                value={this.state.account_number}
+                                onChange={this.handleInputChange}
+                                name="account_number"
+                                required
+                                placeholder="Account Number"
+                              />
+                            </FormItem>
+                            <FormItem>
+                              <label>Amount</label>
+                              <input
+                                type="text"
+                                value={this.state.amount}
+                                onChange={this.handleInputChange}
+                                name="amount"
+                                required
+                                placeholder="Amount(NGN)"
+                              />
+                            </FormItem>
+                          </HalfColumn>
+                          <FormSubmitButton
+                            type="submit"
+                            className="mr-2"
+                            disabled={this.state.loading}
+                          >
+                            <span>
+                              {this.state.loading
+                                ? "Processing..."
+                                : "Withdraw"}
+                            </span>
+                          </FormSubmitButton>
+                        </FormWrapper>
+                        <div className="text-center" style={{ color: "#000" }}>
+                          <p>
+                            **For all withdrawals there is a &#8358;50 deducted
+                            from your cash balance**
+                          </p>
+                        </div>
                       </>
                     ) : (
-                        <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
-                          <Spinner />
-                        </div>
-                      )}
+                      <div
+                        className="mt-5 text-center"
+                        style={{ minHeight: "30vh" }}
+                      >
+                        <p>Something went wrong</p>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div
+                    className="mt-5 text-center"
+                    style={{ minHeight: "30vh" }}
+                  >
+                    <Spinner />
+                  </div>
+                )}
               </>
             )}
           </>
