@@ -70,7 +70,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
       ...doc.data()
     }));
 
-    if (creditCards.length === 3) {
+    if (creditCards[0].data.length === 3) {
       toast.info("Maximum number of Cards that can be saved is 3");
       return;
     } else if (creditCards.length) {

@@ -62,7 +62,7 @@ export const setBankAccountData = payload => async (dispatch, getState) => {
       ...doc.data()
     }));
 
-    if (bankAccounts.length === 3) {
+    if (bankAccounts[0].data.length === 3) {
       toast.info(
         "You have reached the maximum number of bank accounts that can be saved"
       );
