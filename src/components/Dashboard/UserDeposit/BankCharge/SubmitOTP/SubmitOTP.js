@@ -69,9 +69,12 @@ class SubmitOTP extends Component {
         this.setState({ loading: false });
         toast.info(`Transaction is processing`);
         // const value = +data.data.amount / 100;
-        this.props.setBankAccountData(data.data.authorization);
-        this.props.setDepositHistory(data.data);
+        // this.props.setBankAccountData(data.data.authorization);
+        // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
+      } else if (data.data.status === "open_url") {
+        this.props.closePinModal();
+        window.open(data.data.url, "_blank");
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });

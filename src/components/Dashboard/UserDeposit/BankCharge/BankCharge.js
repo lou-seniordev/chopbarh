@@ -207,15 +207,31 @@ class BankCharge extends Component {
         body: JSON.stringify(postData)
       });
       const data = await response.json();
+
+      
+      const historyObject = {
+        amount: this.state.amount,
+        channel: 'Bank',
+        deposit_date: new Date().toISOString(),
+        fees: +data.data.amount / 100 < 2500 ? 0 : 100,
+        reference: '--',
+        status: 'Pending'
+      };
+      
+      this.props.setDepositHistory(historyObject);
+        
       this.setState({
-        loading: false,
-        amount: "",
-        bank: "",
-        account_number: ""
-      });
+          loading: false,
+          amount: "",
+          bank: "",
+          account_number: ""
+        });
+
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
         this.props.openOTPModal();
+      } else if (data.data.status === "open_url") {
+
       } else {
         toast.error(`Transaction not successful`);
       }

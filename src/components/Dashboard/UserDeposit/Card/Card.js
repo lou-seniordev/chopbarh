@@ -254,16 +254,7 @@ class Card extends Component {
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-      this.setState({
-        loading: false,
-        amount: "",
-        card: "",
-        expiry: "",
-        cvv: "",
-        modalOpen: false,
-        paying: false
-      });
-
+      
       const historyObject = {
         amount: this.state.amount,
         channel: 'Card',
@@ -274,6 +265,16 @@ class Card extends Component {
       };
       
       this.props.setDepositHistory(historyObject);
+        
+      this.setState({
+          loading: false,
+          amount: "",
+          card: "",
+          expiry: "",
+          cvv: "",
+          modalOpen: false,
+          paying: false
+        });
 
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
