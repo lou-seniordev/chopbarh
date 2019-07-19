@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_WITHDRAWAL_HISTORY_SUCCESS:
       return {
         ...state,
-        withdrawalHistory: state.withdrawalHistory.concat(action.data),
+        withdrawalHistory: [...action.data],
         loading: false
       };
     case actionType.FETCH_WITHDRAWAL_HISTORY_FAIL:
@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        transactionHistory: null
+        withdrawalHistory: null
       };
     default:
       return state;

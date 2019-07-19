@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_BANK_ACCOUNT_SUCCESS:
       return {
         ...state,
-        bankAccount: state.bankAccount.concat(action.data),
+        bankAccount: [...action.data],
         loading: false
       };
     case actionType.FETCH_BANK_ACCOUNT_FAIL:

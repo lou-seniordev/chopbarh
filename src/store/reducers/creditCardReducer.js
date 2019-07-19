@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
     case actionType.SET_CREDIT_CARD_SUCCESS:
       return {
         ...state,
-        creditCard: state.creditCard.concat(action.data),
+        creditCard: [...action.data],
         loading: false
       };
     case actionType.SET_CREDIT_CARD_CVV:
