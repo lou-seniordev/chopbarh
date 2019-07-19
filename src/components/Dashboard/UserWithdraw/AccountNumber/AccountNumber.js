@@ -35,7 +35,8 @@ import { getReference } from "../../../../lib/getReference";
 import AccountUI from "../AccountUI/AccountUI";
 import {
   removeWithdrawalBankAccount,
-  fetchWithdrawalBankAccountData
+  fetchWithdrawalBankAccountData,
+  setWithdrawalBankAccountData
 } from "../../../../store/actions/withdrawalAccountActions";
 
 const FormWrapper = styled(Form)`
@@ -53,7 +54,9 @@ class AccountNumber extends Component {
   state = {
     loading: false,
     amount: "",
+    authAmount: '',
     bank: "",
+    bankName: "",
     account_number: "",
     account_confirmed: false,
     account_name: "",
@@ -70,7 +73,7 @@ class AccountNumber extends Component {
     if (!this.props.withdrawalAccount.length) {
       this.props.fetchWithdrawalBankAccountData();
     } else {
-      this.setState({ selectedValue: this.props.withdrawalAccount[0].code });
+      this.setState({ selectedValue: this.props.withdrawalAccount[0].account_number });
     }
 
     fetch(
@@ -124,11 +127,22 @@ class AccountNumber extends Component {
   withdrawCash = async () => {
     this.setState({ paying: true, loading: false });
 
-    const valueCharged = +this.state.amount + 50;
+    const bankName = this.state.bankList.filter(
+      bank => bank.Code === this.state.bank
+    );
+
+    const dataObject = {
+      account_number: this.state.account_number,
+      code: this.state.bank,
+      bank: bankName[0].Name
+    };
+
+    this.props.setWithdrawalBankAccountData(dataObject);
+
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
-      amount: valueCharged,
+      amount: +this.state.amount,
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
@@ -167,7 +181,7 @@ class AccountNumber extends Component {
           paying: false,
           modal: false
         });
-        this.props.setCashBalance(Number(valueCharged), 2);
+        this.props.setCashBalance(Number(this.state.amount), 2);
         this.props.setWithdrawalHistory(payload);
         toast.info("Transaction is being processed");
       } else {
@@ -185,6 +199,114 @@ class AccountNumber extends Component {
       toast.error("Something went wrong");
     }
   };
+
+  withdrawCashAuth = async () => {
+    this.setState({ paying: true, loading: false });
+
+    const bankInformation = this.props.withdrawalAccount.filter(account => account.account_number === this.state.selectedValue)
+
+    const postData = {
+      account_bank: bankInformation[0].code,
+      account_number: bankInformation[0].account_number,
+      amount: +this.state.authAmount,
+      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
+      narration: "Chopbarh Payment",
+      currency: "NGN",
+      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
+    };
+
+    try {
+      // prod https://api.ravepay.co/v2/gpx/transfers/create
+      const response = await fetch(
+        "https://api.ravepay.co/v2/gpx/transfers/create",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
+      const data = await response.json();
+
+      // Confirm withdrawal actually goes through here
+      if (data.status === "success") {
+        const payload = {
+          status: "Pending",
+          amount: +this.state.authAmount,
+          date: data.data.date_created,
+          reference: data.data.reference,
+          fee: 50,
+          channel: "AZA"
+        };
+        this.setState({
+          authAmount: "",
+          bank: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        this.props.setCashBalance(Number(this.state.authAmount), 2);
+        this.props.setWithdrawalHistory(payload);
+        toast.info("Transaction is being processed");
+      } else {
+        this.setState({
+          amount: "",
+          bank: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        toast.error("Transaction was not successful");
+      }
+    } catch (err) {
+      this.setState({ loading: false, modal: false });
+      toast.error("Something went wrong");
+    }
+  }
+
+  handleAuthSubmit = event => {
+    event.preventDefault();
+    this.setState({ loading: true });
+
+    if (!isNaN(this.state.authAmount) !==true) {
+      toast.error("Form is not valid");
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) < 50) {
+      toast.error(`You cannot withdraw less than \u20a6${50}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) > 50000) {
+      toast.error(
+        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+          50000
+        )} at once`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (
+      this.props.withdrawalStatus + Number(this.state.authAmount) >
+      this.props.withdrawalLimit
+    ) {
+      toast.error(
+        "Withdrawal could not be completed. Your daily limit will be exceeded."
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    this.setState({
+      modal: true
+    });
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -275,9 +397,9 @@ class AccountNumber extends Component {
         >
           <ModalBody
             className="text-center mt-5 mb-5"
-            style={{ miHeight: "20vh" }}
+            style={{ minHeight: "20vh" }}
           >
-            <p>
+            {this.state.amount ? (<><p>
               <strong>Account: {this.state.account_name}</strong>
             </p>
             <p>
@@ -292,7 +414,7 @@ class AccountNumber extends Component {
             <p>
               <strong>
                 Total: &#8358;
-                {new Intl.NumberFormat().format(+this.state.amount + 50)}
+                {new Intl.NumberFormat().format(+this.state.amount - 50)}
               </strong>
             </p>
             <p>Proceed with withdrawal?</p>
@@ -311,7 +433,45 @@ class AccountNumber extends Component {
               ) : (
                 <>{null}</>
               )}
-            </div>
+            </div></>): (
+              <>
+                <p>
+                  <strong>Account: {this.state.account_name}</strong>
+                </p>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                {new Intl.NumberFormat().format(+this.state.authAmount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>Transaction Fee: &#8358;{50}</strong>
+                </p>
+                <p>
+                  <strong>
+                    Total: &#8358;
+                {new Intl.NumberFormat().format(+this.state.authAmount - 50)}
+                  </strong>
+                </p>
+                <p>Proceed with withdrawal?</p>
+                <div className="d-flex justify-content-center">
+                  <FormElementButton
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.withdrawCash}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </FormElementButton>
+                  {!this.state.paying ? (
+                    <FormElementButton onClick={this.toggleModal} className="ml-1">
+                      <span>No</span>
+                    </FormElementButton>
+                  ) : (
+                      <>{null}</>
+                    )}
+                </div>
+                </>
+            )}
           </ModalBody>
         </Modal>
         {this.props.loading ? (
@@ -348,7 +508,7 @@ class AccountNumber extends Component {
                                   className="d-flex align-items-center justify-content-center flex-wrap"
                                   key={index}
                                 >
-                                  <Radio value={account.code} />
+                                  <Radio value={account.account_number} />
                                   <AccountUI
                                     number={account.account_number}
                                     bank={account.bank}
@@ -377,7 +537,7 @@ class AccountNumber extends Component {
                                           onClick={e =>
                                             this.props.removeWithdrawalBankAccount(
                                               e,
-                                              account.code
+                                              account.account_number
                                             ) && this.toggle()
                                           }
                                         >
@@ -684,7 +844,8 @@ const mapDispatchToProps = {
   setCashBalance,
   setWithdrawalHistory,
   removeWithdrawalBankAccount,
-  fetchWithdrawalBankAccountData
+  fetchWithdrawalBankAccountData,
+  setWithdrawalBankAccountData
 };
 
 export default connect(

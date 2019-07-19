@@ -69,7 +69,7 @@ export const setWithdrawalBankAccountData = payload => async (
       ...doc.data()
     }));
 
-    if (withdrawalBankAccounts.length === 2) {
+    if (withdrawalBankAccounts[0].data.length === 2) {
       toast.info(
         "You have reached the maximum number of bank accounts that can be saved"
       );
@@ -108,6 +108,7 @@ export const setWithdrawalBankAccountData = payload => async (
           ]
         });
       dispatch(setWithdrawalBankAccountSuccess(docRef));
+      dispatch(fetchWithdrawalBankAccountData());
     }
   } catch (err) {
     dispatch(setWithdrawalBankAccountFail());
@@ -126,7 +127,7 @@ export const removeWithdrawalBankAccountFail = () => ({
   type: actionType.REMOVE_WITHDRAWAL_BANK_ACCOUNT_FAIL
 });
 
-export const removeWithdrawalBankAccount = (event, code) => async (
+export const removeWithdrawalBankAccount = (event, account_number) => async (
   dispatch,
   getState
 ) => {
@@ -144,7 +145,7 @@ export const removeWithdrawalBankAccount = (event, code) => async (
       // dispatch(fetchWithdrawalBankAccountSuccess(data[0].data));
       const accountsArray = data[0].data;
       let filteredArray = accountsArray.filter(
-        account => account.code !== code
+        account => account.account_number !== account_number
       );
 
       try {

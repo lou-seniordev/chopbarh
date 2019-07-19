@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_WITHDRAWAL_BANK_ACCOUNT_SUCCESS:
       return {
         ...state,
-        withdrawalAccount: state.withdrawalAccount.concat(action.data),
+        withdrawalAccount: [...action.data],
         loading: false
       };
     case actionType.FETCH_WITHDRAWAL_BANK_ACCOUNT_FAIL:
