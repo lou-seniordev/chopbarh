@@ -47,7 +47,6 @@ import {
 } from "../../../../store/actions/creditCardActions";
 // import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
-
 import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
 
@@ -179,7 +178,7 @@ class Card extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -233,15 +232,15 @@ class Card extends Component {
   payMoney = async () => {
     this.setState({ paying: true, loading: false });
 
-    let refId = referenceId()
+    let refId = referenceId();
 
     const historyObject = {
       amount: this.state.amount,
-      channel: 'Card',
+      channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: this.state.amount < 2500 ? 0 : 100,
-      reference: '--',
-      status: 'Pending',
+      reference: "--",
+      status: "Pending",
       refId
     };
 
@@ -275,22 +274,22 @@ class Card extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841 `,
+          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-        
+
       this.setState({
-          loading: false,
-          amount: "",
-          card: "",
-          expiry: "",
-          cvv: "",
-          modalOpen: false,
-          paying: false
-        });
+        loading: false,
+        amount: "",
+        card: "",
+        expiry: "",
+        cvv: "",
+        modalOpen: false,
+        paying: false
+      });
 
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
@@ -310,7 +309,7 @@ class Card extends Component {
         toast.info("Transaction is processing");
       } else if (data.data.status === "open_url") {
         this.props.setChargeReference(data.data.reference);
-        window.open(data.data.url, "_blank");
+        window.open(data.data.url);
       } else {
         toast.error(`Please try again`);
       }

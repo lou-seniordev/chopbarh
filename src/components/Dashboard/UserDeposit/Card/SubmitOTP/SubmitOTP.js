@@ -58,7 +58,7 @@ class SubmitOTP extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -84,7 +84,7 @@ class SubmitOTP extends Component {
         this.props.setCreditCardData(payload);
       } else if (data.data.status === "open_url") {
         this.props.closeOTPModal();
-        window.open(data.data.url, "_blank");
+        window.open(data.data.url);
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
