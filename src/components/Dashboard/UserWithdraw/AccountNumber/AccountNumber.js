@@ -142,7 +142,7 @@ class AccountNumber extends Component {
     const postData = {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
-      amount: +this.state.amount,
+      amount: +this.state.amount - 50,
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
@@ -208,7 +208,7 @@ class AccountNumber extends Component {
     const postData = {
       account_bank: bankInformation[0].code,
       account_number: bankInformation[0].account_number,
-      amount: +this.state.authAmount,
+      amount: +this.state.authAmount - 50,
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "Chopbarh Payment",
       currency: "NGN",

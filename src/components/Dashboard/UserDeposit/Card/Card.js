@@ -45,10 +45,22 @@ import {
   setCreditCardCVV,
   removeCreditCard
 } from "../../../../store/actions/creditCardActions";
-import SubmitAmount from "./SubmitAmount/SubmitAmount";
+// import SubmitAmount from "./SubmitAmount/SubmitAmount";
+
 
 import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
+
+// Test sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841
+
+function referenceId() {
+  let text = "";
+  let possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 15; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+}
 
 class Card extends Component {
   state = {
@@ -167,7 +179,7 @@ class Card extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -221,6 +233,20 @@ class Card extends Component {
   payMoney = async () => {
     this.setState({ paying: true, loading: false });
 
+    let refId = referenceId()
+
+    const historyObject = {
+      amount: this.state.amount,
+      channel: 'Card',
+      transaction_date: new Date().toISOString(),
+      fees: this.state.amount < 2500 ? 0 : 100,
+      reference: '--',
+      status: 'Pending',
+      refId
+    };
+
+    this.props.setDepositHistory(historyObject);
+
     const cardExpirationData = this.state.expiry.split("/");
     const year = `20${cardExpirationData[1]}`;
 
@@ -237,7 +263,8 @@ class Card extends Component {
         expiry_year: year
       },
       metadata: {
-        phone: this.props.playerData.PhoneNum
+        phone: this.props.playerData.PhoneNum,
+        refId
       }
     };
 
@@ -248,23 +275,12 @@ class Card extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a `,
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841 `,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-      
-      const historyObject = {
-        amount: this.state.amount,
-        channel: 'Card',
-        deposit_date: new Date().toISOString(),
-        fees: +data.data.amount / 100 < 2500 ? 0 : 100,
-        reference: '--',
-        status: 'Pending'
-      };
-      
-      this.props.setDepositHistory(historyObject);
         
       this.setState({
           loading: false,

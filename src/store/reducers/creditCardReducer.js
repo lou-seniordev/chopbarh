@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case actionType.FETCH_CREDIT_CARD_SUCCESS:
       return {
         ...state,
-        creditCard: state.creditCard.concat(action.data),
+        creditCard: [...action.data],
         loading: false,
         fetched: true
       };

@@ -62,18 +62,20 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
     }));
 
     if (deposits.length) {
+      console.log(payload);
       const docRef = await firestore
         .collection("deposits")
         .doc(getState().auth.id)
         .update({
           data: firebase.firestore.FieldValue.arrayUnion({
-            amount: payload.amount / 100,
+            amount: payload.amount,
             channel: payload.channel,
             deposit_date: payload.transaction_date,
             paid_at: payload.transaction_date,
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
-            status: "Pending"
+            status: "Pending",
+            refId: payload.refId
           })
         });
       dispatch(setDepositHistorySuccess(docRef));
@@ -91,7 +93,8 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               paid_at: payload.transaction_date,
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
-              status: "Pending"
+              status: "Pending",
+              refId: payload.refId
             }
           ]
         });
