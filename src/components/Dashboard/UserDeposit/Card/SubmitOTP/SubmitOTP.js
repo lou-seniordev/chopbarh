@@ -26,7 +26,7 @@ class SubmitOTP extends Component {
   };
 
   formIsValid = ({ otp }) => {
-    if (!isNaN(otp) !== true || (otp.length >= 4 && otp.length <= 7)) {
+    if (!isNaN(otp) !== true) {
       return false;
     }
     return true;
@@ -118,7 +118,6 @@ class SubmitOTP extends Component {
                 name="otp"
                 value={this.state.otp}
                 onChange={this.handleInputChange}
-                min="0"
                 required
                 placeholder="OTP"
               />
