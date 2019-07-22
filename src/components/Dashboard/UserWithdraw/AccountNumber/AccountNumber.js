@@ -54,7 +54,7 @@ class AccountNumber extends Component {
   state = {
     loading: false,
     amount: "",
-    authAmount: '',
+    authAmount: "",
     bank: "",
     bankName: "",
     account_number: "",
@@ -73,7 +73,9 @@ class AccountNumber extends Component {
     if (!this.props.withdrawalAccount.length) {
       this.props.fetchWithdrawalBankAccountData();
     } else {
-      this.setState({ selectedValue: this.props.withdrawalAccount[0].account_number });
+      this.setState({
+        selectedValue: this.props.withdrawalAccount[0].account_number
+      });
     }
 
     fetch(
@@ -174,6 +176,9 @@ class AccountNumber extends Component {
           fee: 50,
           channel: "AZA"
         };
+        this.props.setCashBalance(Number(this.state.amount), 2);
+        this.props.setWithdrawalHistory(payload);
+
         this.setState({
           amount: "",
           bank: "",
@@ -181,8 +186,6 @@ class AccountNumber extends Component {
           paying: false,
           modal: false
         });
-        this.props.setCashBalance(Number(this.state.amount), 2);
-        this.props.setWithdrawalHistory(payload);
         toast.info("Transaction is being processed");
       } else {
         this.setState({
@@ -203,7 +206,9 @@ class AccountNumber extends Component {
   withdrawCashAuth = async () => {
     this.setState({ paying: true, loading: false });
 
-    const bankInformation = this.props.withdrawalAccount.filter(account => account.account_number === this.state.selectedValue)
+    const bankInformation = this.props.withdrawalAccount.filter(
+      account => account.account_number === this.state.selectedValue
+    );
 
     const postData = {
       account_bank: bankInformation[0].code,
@@ -240,15 +245,16 @@ class AccountNumber extends Component {
           fee: 50,
           channel: "AZA"
         };
-        this.setState({
-          authAmount: "",
-          bank: "",
-          account_number: "",
-          paying: false,
-          modal: false
-        });
         this.props.setCashBalance(Number(this.state.authAmount), 2);
         this.props.setWithdrawalHistory(payload);
+          
+        this.setState({
+            authAmount: "",
+            bank: "",
+            account_number: "",
+            paying: false,
+            modal: false
+          });
         toast.info("Transaction is being processed");
       } else {
         this.setState({
@@ -264,13 +270,13 @@ class AccountNumber extends Component {
       this.setState({ loading: false, modal: false });
       toast.error("Something went wrong");
     }
-  }
+  };
 
   handleAuthSubmit = event => {
     event.preventDefault();
     this.setState({ loading: true });
 
-    if (!isNaN(this.state.authAmount) !==true) {
+    if (!isNaN(this.state.authAmount) !== true) {
       toast.error("Form is not valid");
       this.setState({ loading: false });
       return;
@@ -306,7 +312,7 @@ class AccountNumber extends Component {
     this.setState({
       modal: true
     });
-  }
+  };
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -399,41 +405,7 @@ class AccountNumber extends Component {
             className="text-center mt-5 mb-5"
             style={{ minHeight: "20vh" }}
           >
-            {this.state.amount ? (<><p>
-              <strong>Account: {this.state.account_name}</strong>
-            </p>
-            <p>
-              <strong>
-                Amount: &#8358;
-                {new Intl.NumberFormat().format(+this.state.amount)}
-              </strong>
-            </p>
-            <p>
-              <strong>Transaction Fee: &#8358;{50}</strong>
-            </p>
-            <p>
-              <strong>
-                Total: &#8358;
-                {new Intl.NumberFormat().format(+this.state.amount - 50)}
-              </strong>
-            </p>
-            <p>Proceed with withdrawal?</p>
-            <div className="d-flex justify-content-center">
-              <FormElementButton
-                className="mr-1"
-                disabled={this.state.paying}
-                onClick={this.withdrawCash}
-              >
-                <span>{this.state.paying ? "Processing..." : "Yes"}</span>
-              </FormElementButton>
-              {!this.state.paying ? (
-                <FormElementButton onClick={this.toggleModal} className="ml-1">
-                  <span>No</span>
-                </FormElementButton>
-              ) : (
-                <>{null}</>
-              )}
-            </div></>): (
+            {this.state.amount ? (
               <>
                 <p>
                   <strong>Account: {this.state.account_name}</strong>
@@ -441,7 +413,7 @@ class AccountNumber extends Component {
                 <p>
                   <strong>
                     Amount: &#8358;
-                {new Intl.NumberFormat().format(+this.state.authAmount)}
+                    {new Intl.NumberFormat().format(+this.state.amount)}
                   </strong>
                 </p>
                 <p>
@@ -450,7 +422,7 @@ class AccountNumber extends Component {
                 <p>
                   <strong>
                     Total: &#8358;
-                {new Intl.NumberFormat().format(+this.state.authAmount - 50)}
+                    {new Intl.NumberFormat().format(+this.state.amount - 50)}
                   </strong>
                 </p>
                 <p>Proceed with withdrawal?</p>
@@ -463,14 +435,60 @@ class AccountNumber extends Component {
                     <span>{this.state.paying ? "Processing..." : "Yes"}</span>
                   </FormElementButton>
                   {!this.state.paying ? (
-                    <FormElementButton onClick={this.toggleModal} className="ml-1">
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
                       <span>No</span>
                     </FormElementButton>
                   ) : (
-                      <>{null}</>
-                    )}
+                    <>{null}</>
+                  )}
                 </div>
-                </>
+              </>
+            ) : (
+              <>
+                <p>
+                  <strong>Account: {this.state.account_name}</strong>
+                </p>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.authAmount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>Transaction Fee: &#8358;{50}</strong>
+                </p>
+                <p>
+                  <strong>
+                    Total: &#8358;
+                    {new Intl.NumberFormat().format(
+                      +this.state.authAmount - 50
+                    )}
+                  </strong>
+                </p>
+                <p>Proceed with withdrawal?</p>
+                <div className="d-flex justify-content-center">
+                  <FormElementButton
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.withdrawCash}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </FormElementButton>
+                  {!this.state.paying ? (
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
+                      <span>No</span>
+                    </FormElementButton>
+                  ) : (
+                    <>{null}</>
+                  )}
+                </div>
+              </>
             )}
           </ModalBody>
         </Modal>
