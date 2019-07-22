@@ -74,7 +74,7 @@ class SubmitOTP extends Component {
         // this.props.setCoinBalance(value);
       } else if (data.data.status === "open_url") {
         this.props.closePinModal();
-        window.open(data.data.url, "_blank");
+        window.open(data.data.url, "_self");
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });

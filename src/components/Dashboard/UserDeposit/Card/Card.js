@@ -309,7 +309,7 @@ class Card extends Component {
         toast.info("Transaction is processing");
       } else if (data.data.status === "open_url") {
         this.props.setChargeReference(data.data.reference);
-        window.open(data.data.url);
+        window.open(data.data.url, "_self");
       } else {
         toast.error(`Please try again`);
       }

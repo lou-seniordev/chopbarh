@@ -84,7 +84,7 @@ class SubmitOTP extends Component {
         this.props.setCreditCardData(payload);
       } else if (data.data.status === "open_url") {
         this.props.closeOTPModal();
-        window.open(data.data.url);
+        window.open(data.data.url, "_self");
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
