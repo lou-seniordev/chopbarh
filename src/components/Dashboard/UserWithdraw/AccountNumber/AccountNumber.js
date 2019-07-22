@@ -247,14 +247,14 @@ class AccountNumber extends Component {
         };
         this.props.setCashBalance(Number(this.state.authAmount), 2);
         this.props.setWithdrawalHistory(payload);
-          
+
         this.setState({
-            authAmount: "",
-            bank: "",
-            account_number: "",
-            paying: false,
-            modal: false
-          });
+          authAmount: "",
+          bank: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
         toast.info("Transaction is being processed");
       } else {
         this.setState({
@@ -282,7 +282,7 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 50) {
+    if (Number(this.state.amount) < 200) {
       toast.error(`You cannot withdraw less than \u20a6${50}`);
       this.setState({ loading: false });
       return;
@@ -324,7 +324,7 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 50) {
+    if (Number(this.state.amount) < 200) {
       toast.error(`You cannot withdraw less than \u20a6${50}`);
       this.setState({ loading: false });
       return;
