@@ -263,7 +263,8 @@ class Card extends Component {
       },
       metadata: {
         phone: this.props.playerData.PhoneNum,
-        refId
+        refId,
+        cvv: this.state.cvv
       }
     };
 
