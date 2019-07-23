@@ -51,6 +51,7 @@ import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
 
 // Test sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841
+// sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
 
 function referenceId() {
   let text = "";
@@ -77,15 +78,16 @@ class Card extends Component {
     authAmount: "",
     popoverOpen: false,
     modalOpen: false,
-    paying: false
+    paying: false,
+    removeCardModal: false
   };
 
   componentDidMount = () => {
-    if (!this.props.creditCard.length) {
-      this.props.fetchCreditCardData();
-    } else {
-      this.setState({ selectedValue: this.props.creditCard[0].auth_code });
-    }
+    this.props.fetchCreditCardData();
+    // if (!this.props.creditCard.length) {
+    // } else {
+    //   this.setState({ selectedValue: this.props.creditCard[0].auth_code });
+    // }
   };
 
   componentDidUpdate = prevProps => {
@@ -107,10 +109,15 @@ class Card extends Component {
     this.setState({ modalOpen: !this.state.modalOpen, loading: false });
   };
 
-  toggle = () => {
+  toggleRemoveCard = () => {
     this.setState({
-      popoverOpen: !this.state.popoverOpen
+      removeCardModal: !this.state.removeCardModal
     });
+  };
+
+  removeCreditCard = () => {
+    this.setState({ removeCardModal: false });
+    this.props.removeCreditCard(null,this.state.selectedValue)
   };
 
   formIsValid = ({ amount, card, expiry, cvv }) => {
@@ -157,7 +164,7 @@ class Card extends Component {
     );
 
     if (creditCardObject[0].cvv !== this.state.authCVV) {
-      this.setState({ loading: false });
+      this.setState({ paying: false });
       toast.error(`CVV is not correct`);
       return;
     }
@@ -178,7 +185,7 @@ class Card extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -196,16 +203,16 @@ class Card extends Component {
       if (data.data.status === "success") {
         toast.info("Transaction is processing");
 
-        const historyObject = {
-          ...data.data,
-          fees:
-            +data.data.amount / 100 < 2500
-              ? 0.015 * (+data.data.amount / 100)
-              : 100
-        };
+        // const historyObject = {
+        //   ...data.data,
+        //   fees:
+        //     +data.data.amount / 100 < 2500
+        //       ? 0.015 * (+data.data.amount / 100)
+        //       : 100
+        // };
         // const value = +data.data.amount / 100;
 
-        this.props.setDepositHistory(historyObject);
+        // this.props.setDepositHistory(historyObject);
         // this.props.setCoinBalance(value);
       } else {
         toast.error(`Transaction was not successful`);
@@ -275,7 +282,7 @@ class Card extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
@@ -323,6 +330,31 @@ class Card extends Component {
   render() {
     return (
       <>
+        <Modal
+          isOpen={this.state.removeCardModal}
+          toggle={this.toggleRemoveCard}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+            <p className="mt-4">
+              This action will remove this card from your account. Do you want
+              to continue?
+            </p>
+            <div className="d-flex justify-content-center">
+              <FormElementButton
+                className="mr-2"
+                onClick={this.removeCreditCard}
+              >
+                <span>Yes</span>
+              </FormElementButton>
+              <FormElementButton onClick={this.toggleRemoveCard}>
+                <span>No</span>
+              </FormElementButton>
+            </div>
+          </ModalBody>
+        </Modal>
         <Modal
           isOpen={this.props.pinModal}
           toggle={this.props.closePinModal}
@@ -510,47 +542,13 @@ class Card extends Component {
                                 id="Popover"
                                 type="button"
                                 className="mb-lg-2 mb-md-2 mb-sm-3 ml-2"
+                                onClick={this.toggleRemoveCard}
+                                disabled={
+                                  card.auth_code !== this.state.selectedValue
+                                }
                               >
                                 &#10005;
                               </Button>
-                              <Popover
-                                placement="bottom"
-                                isOpen={this.state.popoverOpen}
-                                target="Popover"
-                                toggle={this.toggle}
-                              >
-                                <PopoverBody className="text-center">
-                                  This action will remove this Card from your
-                                  account. Do you want to continue?
-                                  <div className="d-flex justify-content-center">
-                                    <Button
-                                      className="mr-1"
-                                      disabled={this.props.removingCard}
-                                      onClick={e =>
-                                        this.props.removeCreditCard(
-                                          e,
-                                          card.auth_code
-                                        ) && this.toggle()
-                                      }
-                                    >
-                                      {this.props.removingCard
-                                        ? "Removing..."
-                                        : "Yes"}
-                                    </Button>
-                                    {this.props.removingCard ? (
-                                      <>{null}</>
-                                    ) : (
-                                      <Button
-                                        className="btn-primary"
-                                        disabled={this.props.removingCard}
-                                        onClick={this.toggle}
-                                      >
-                                        No
-                                      </Button>
-                                    )}
-                                  </div>
-                                </PopoverBody>
-                              </Popover>
                             </div>
                           ))}
                         </RadioGroup>
