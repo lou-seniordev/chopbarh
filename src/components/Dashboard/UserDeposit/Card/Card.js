@@ -1,13 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import {
-  Modal,
-  ModalBody,
-  Spinner,
-  Button,
-  Popover,
-  PopoverBody
-} from "reactstrap";
+import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
@@ -117,7 +110,7 @@ class Card extends Component {
 
   removeCreditCard = () => {
     this.setState({ removeCardModal: false });
-    this.props.removeCreditCard(null,this.state.selectedValue)
+    this.props.removeCreditCard(null, this.state.selectedValue);
   };
 
   formIsValid = ({ amount, card, expiry, cvv }) => {

@@ -151,11 +151,10 @@ export const removeCreditCard = (event, authCode) => async (
     if (data.length) {
       // dispatch(fetchCreditCardSuccess(data[0].data));
       const cardsArray = data[0].data;
-      console.log(cardsArray, authCode);
       let filteredArray = cardsArray.filter(
         card => card.auth_code !== authCode
       );
-      console.log(filteredArray);
+
       try {
         const docRef = await firestore
           .collection("card_charge")
@@ -170,8 +169,12 @@ export const removeCreditCard = (event, authCode) => async (
         // dispatch(setCreditCardFail());
       }
       // window.location.reload();
-      dispatch(fetchCreditCardData());
-      toast.success("Card was removed");
+      if (cardsArray.length !== filteredArray.length) {
+        dispatch(fetchCreditCardData());
+        toast.success("Card was removed");
+      } else {
+        toast.error("Card was not removed");
+      }
     } else {
       // dispatch(fetchCreditCardFail());
     }
