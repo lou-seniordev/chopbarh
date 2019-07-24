@@ -153,6 +153,8 @@ class BankCharge extends Component {
   };
 
   payAuthMoney = async () => {
+    this.setState({ paying: true });
+
     const bankAccountObject = this.props.bankAccount.filter(
       account => account.auth_code === this.state.selectedValue
     );
@@ -199,7 +201,8 @@ class BankCharge extends Component {
 
       this.setState({
         loading: false,
-        authAmount: ""
+        authAmount: "",
+        paying: false
       });
 
       if (data.data.status === "send_otp") {
@@ -292,7 +295,8 @@ class BankCharge extends Component {
         loading: false,
         amount: "",
         bank: "",
-        account_number: ""
+        account_number: "",
+        paying: false
       });
 
       if (data.data.status === "send_otp") {
@@ -313,11 +317,13 @@ class BankCharge extends Component {
         this.toggleModal();
         toast.info("Transaction is processing");
       } else {
+        this.toggleModal();
         toast.error(`Transaction not successful`);
       }
     } catch (err) {
+      this.toggleModal();
       toast.error(`Something went wrong`);
-      this.setState({ loading: false });
+      this.setState({ loading: false, paying: false });
     }
   };
 
