@@ -73,10 +73,15 @@ class SubmitOTP extends Component {
         // this.props.setDepositHistory(data.data);
         // this.props.setCoinBalance(value);
       } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
+        this.props.closeOTPModal();
+        window.open(data.data.url, "_self");
+      } else if (data.data.status === "pending") {
+        this.props.closeOTPModal();
+      } else if (data.data.status === "failed") {
+        this.props.closeOTPModal();
         window.open(data.data.url, "_self");
       } else {
-        toast.error(`Please try again`);
+        toast.error(data.data.message);
         this.setState({ loading: false });
       }
     } catch (err) {

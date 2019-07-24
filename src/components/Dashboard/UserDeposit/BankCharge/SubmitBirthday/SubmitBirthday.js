@@ -84,11 +84,18 @@ class SubmitBirthday extends Component {
         this.props.closeBirthdayModal();
         this.setState({ loading: false });
         toast.info(`Transaction is processing`);
+      } else if (data.data.status === "send_otp") {
+        this.props.closeBirthdayModal();
+        this.props.openOTPModal();
+      } else if (data.data.status === "send_phone") {
+        this.props.closeBirthdayModal();
+        this.props.openPhoneModal();
       } else if (data.data.status === "open_url") {
         this.props.closePinModal();
         window.open(data.data.url, "_self");
       } else {
-        toast.error(`Please try again`);
+        this.props.closeBirthdayModal();
+        toast.error(data.data.message);
         this.setState({ loading: false });
       }
     } catch (err) {
@@ -146,7 +153,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
-  closeBirthdayModal
+  closeBirthdayModal,
+  openPhoneModal
 };
 
 export default withRouter(
