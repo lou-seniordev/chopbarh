@@ -70,13 +70,13 @@ class AccountNumber extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.withdrawalAccount.length) {
-      this.props.fetchWithdrawalBankAccountData();
-    } else {
-      this.setState({
-        selectedValue: this.props.withdrawalAccount[0].account_number
-      });
-    }
+    this.props.fetchWithdrawalBankAccountData();
+    // if (!this.props.withdrawalAccount.length) {
+    // } else {
+    //   this.setState({
+    //     selectedValue: this.props.withdrawalAccount[0].account_number
+    //   });
+    // }
 
     fetch(
       "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
@@ -95,6 +95,15 @@ class AccountNumber extends Component {
         });
       })
       .catch(err => this.setState({ error: err, dataLoading: false }));
+  };
+
+  componentDidUpdate = prevProps => {
+    if (this.props !== prevProps) {
+      this.props.withdrawalAccount.length &&
+        this.setState({
+        selectedValue: this.props.withdrawalAccount[0].account_number
+      });
+    }
   };
 
   toggleModal = () => {
