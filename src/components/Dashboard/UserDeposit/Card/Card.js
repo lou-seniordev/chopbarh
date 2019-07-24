@@ -300,12 +300,12 @@ class Card extends Component {
         this.props.openPinModal();
       } else if (data.data.status === "success") {
         toast.info("Transaction is processing");
-        const payload = {
-          ...data.data.authorization,
-          cvv: postData.card.cvv
-        };
+        // const payload = {
+        //   ...data.data.authorization,
+        //   cvv: postData.card.cvv
+        // };
         // this.props.setCoinBalance(value);
-        this.props.setCreditCardData(payload);
+        // this.props.setCreditCardData(payload);
       } else if (data.data.status === "pending") {
         toast.info("Transaction is processing");
       } else if (data.data.status === "open_url") {

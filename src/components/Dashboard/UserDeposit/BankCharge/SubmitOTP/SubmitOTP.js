@@ -55,7 +55,7 @@ class SubmitOTP extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a `,
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841 `,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)

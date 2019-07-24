@@ -39,7 +39,16 @@ import {
 } from "../../../../store/actions/bankAccountActions";
 import SubmitAmount from "./SubmitAmount/SubmitAmount";
 import AccountUI from "./AccountUI/AccountUI";
+import { setDepositHistory } from "../../../../store/actions/depositActions";
 
+function referenceId() {
+  let text = "";
+  let possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 15; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+}
 class BankCharge extends Component {
   state = {
     loading: false,
@@ -139,9 +148,9 @@ class BankCharge extends Component {
       return;
     }
 
-    const bankAccountObject = this.state.bankList.filter(
-      account => account.name === bankName
-    );
+    // const bankAccountObject = this.state.bankList.filter(
+    //   account => account.name === bankName
+    // );
 
     // console.log(bankAccountObject);
 
@@ -183,6 +192,8 @@ class BankCharge extends Component {
   payMoney = async () => {
     this.setState({ paying: true });
 
+    let refId = referenceId();
+
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
       amount: this.state.amount * 100,
@@ -192,32 +203,35 @@ class BankCharge extends Component {
       },
       birthday: "1995-03-29",
       metadata: {
-        phone: this.props.playerData.PhoneNum
+        phone: this.props.playerData.PhoneNum,
+        bank_code: this.state.bank,
+        account_number: this.state.account_number
       }
     };
+
+    const historyObject = {
+      amount: this.state.amount,
+      channel: "Bank",
+      transaction_date: new Date().toISOString(),
+      fees: +this.state.amount < 2500 ? 0 : 100,
+      reference: "--",
+      status: "Pending",
+      refId
+    };
+
+    this.props.setDepositHistory(historyObject);
 
     try {
       const response = await fetch("https://api.paystack.co/charge", {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
       });
       const data = await response.json();
-
-      const historyObject = {
-        amount: this.state.amount,
-        channel: "Bank",
-        deposit_date: new Date().toISOString(),
-        fees: +data.data.amount / 100 < 2500 ? 0 : 100,
-        reference: "--",
-        status: "Pending"
-      };
-
-      this.props.setDepositHistory(historyObject);
 
       this.setState({
         loading: false,
@@ -228,6 +242,7 @@ class BankCharge extends Component {
 
       if (data.data.status === "send_otp") {
         this.props.setChargeReference(data.data.reference);
+        this.toggleModal();
         this.props.openOTPModal();
       } else if (data.data.status === "open_url") {
         window.open(data.data.url, "_self");
@@ -586,7 +601,8 @@ const mapDispatchToProps = {
   fetchBankAccountData,
   removeBankAccount,
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+  setDepositHistory
 };
 
 export default connect(
