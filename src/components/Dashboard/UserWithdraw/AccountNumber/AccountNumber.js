@@ -70,7 +70,7 @@ class AccountNumber extends Component {
   };
 
   componentDidMount = () => {
-    // this.props.fetchWithdrawalBankAccountData();
+    this.props.fetchWithdrawalBankAccountData();
     // if (!this.props.withdrawalAccount.length) {
     // } else {
     //   this.setState({

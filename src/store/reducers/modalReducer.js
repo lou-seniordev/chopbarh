@@ -3,6 +3,8 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   submitOTPModal: false,
   submitPinModal: false,
+  submitPhoneModal: false,
+  submitBirthdayModal: false,
   transactionSuccessModal: false,
   transactionFailModal: false
 };
@@ -28,6 +30,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         submitOTPModal: false
+      };
+    case actionType.OPEN_SUBMIT_PHONE_MODAL:
+      return {
+        ...state,
+        submitPhoneModal: true
+      };
+    case actionType.CLOSE_SUBMIT_PHONE_MODAL:
+      return {
+        ...state,
+        submitPhoneModal: false
+      };
+    case actionType.OPEN_SUBMIT_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        submitBirthdayModal: true
+      };
+    case actionType.CLOSE_SUBMIT_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        submitBirthdayModal: false
       };
     case actionType.OPEN_TRANSACTION_SUCCESS_MODAL:
       return {
