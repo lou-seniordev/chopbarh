@@ -66,7 +66,8 @@ class AccountNumber extends Component {
     dataLoading: true,
     selectedValue: null,
     paying: false,
-    popoverOpen: false
+    popoverOpen: false,
+    removeWithdrawalBankAccountModal: false
   };
 
   componentDidMount = () => {
@@ -120,6 +121,18 @@ class AccountNumber extends Component {
     });
   };
 
+  toggleRemoveWithdrawalBankAccount = () => {
+    this.setState({
+      removeWithdrawalBankAccountModal: !this.state
+        .removeWithdrawalBankAccountModal
+    });
+  };
+
+  removeWithdrawalBankAccount = () => {
+    this.setState({ removeWithdrawalBankAccountModal: false });
+    this.props.removeWithdrawalBankAccount(null, this.state.selectedValue);
+  };
+
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
@@ -144,14 +157,14 @@ class AccountNumber extends Component {
 
     let reference = getReference();
 
-    // const dataObject = {
-    //   account_number: this.state.account_number,
-    //   code: this.state.bank,
-    //   bank: bankName[0].Name,
-    //   name: this.state.account_name
-    // };
+    const dataObject = {
+      account_number: this.state.account_number,
+      code: this.state.bank,
+      bank: bankName[0].Name,
+      name: this.state.account_name
+    };
 
-    // this.props.setWithdrawalBankAccountData(dataObject);
+    this.props.setWithdrawalBankAccountData(dataObject);
 
     const payload = {
       status: "Pending",
@@ -296,13 +309,13 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 200) {
+    if (Number(this.state.authAmount) < 200) {
       toast.error(`You cannot withdraw less than \u20a6${200}`);
       this.setState({ loading: false });
       return;
     }
 
-    if (Number(this.state.amount) > 50000) {
+    if (Number(this.state.authAmount) > 50000) {
       toast.error(
         `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
           50000
@@ -408,6 +421,33 @@ class AccountNumber extends Component {
   render() {
     return (
       <>
+        <Modal
+          isOpen={this.state.removeWithdrawalBankAccountModal}
+          toggle={this.toggleRemoveWithdrawalBankAccount}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+            <p className="mt-4">
+              This action will remove this card from your account. Do you want
+              to continue?
+            </p>
+            <div className="d-flex justify-content-center">
+              <FormElementButton
+                className="mr-2"
+                onClick={this.removeWithdrawalBankAccount}
+              >
+                <span>Yes</span>
+              </FormElementButton>
+              <FormElementButton
+                onClick={this.toggleRemoveWithdrawalBankAccount}
+              >
+                <span>No</span>
+              </FormElementButton>
+            </div>
+          </ModalBody>
+        </Modal>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggleModal}
@@ -550,49 +590,16 @@ class AccountNumber extends Component {
                                     id="Popover"
                                     type="button"
                                     className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
+                                    onClick={
+                                      this.toggleRemoveWithdrawalBankAccount
+                                    }
+                                    disabled={
+                                      this.state.selectedValue !==
+                                      account.account_number
+                                    }
                                   >
                                     &#10005;
                                   </Button>
-                                  <Popover
-                                    placement="bottom"
-                                    isOpen={this.state.popoverOpen}
-                                    target="Popover"
-                                    toggle={this.toggle}
-                                  >
-                                    <PopoverBody className="text-center">
-                                      This action will remove this Account
-                                      detail. Do you want to continue?
-                                      <div className="d-flex justify-content-center">
-                                        <Button
-                                          className="mr-1"
-                                          disabled={this.props.removingAccount}
-                                          onClick={e =>
-                                            this.props.removeWithdrawalBankAccount(
-                                              e,
-                                              account.account_number
-                                            ) && this.toggle()
-                                          }
-                                        >
-                                          {this.props.removingAccount
-                                            ? "Removing..."
-                                            : "Yes"}
-                                        </Button>
-                                        {this.props.removingAccount ? (
-                                          <>{null}</>
-                                        ) : (
-                                          <Button
-                                            className="btn-primary"
-                                            disabled={
-                                              this.props.removingAccount
-                                            }
-                                            onClick={this.toggle}
-                                          >
-                                            No
-                                          </Button>
-                                        )}
-                                      </div>
-                                    </PopoverBody>
-                                  </Popover>
                                 </div>
                               )
                             )}
