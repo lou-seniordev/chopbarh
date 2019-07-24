@@ -56,10 +56,7 @@ class DepositTable extends Component {
                         ? "None"
                         : +deposit.transaction_fees}
                     </td> */}
-                    <td>
-                      &#8358;
-                      {+deposit.transaction_fees}
-                    </td>
+                    <td>{deposit.transaction_fees}</td>
                     <td>
                       &#8358;
                       {new Intl.NumberFormat().format(deposit.amount)}
