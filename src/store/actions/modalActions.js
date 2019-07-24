@@ -24,6 +24,14 @@ export const closePhoneModal = () => ({
   type: actionType.CLOSE_SUBMIT_PHONE_MODAL
 });
 
+export const openBirthdayModal = () => ({
+  type: actionType.OPEN_SUBMIT_BIRTHDAY_MODAL
+});
+
+export const closeBirthdayModal = () => ({
+  type: actionType.CLOSE_SUBMIT_BIRTHDAY_MODAL
+});
+
 export const openTransactionSuccessModal = () => ({
   type: actionType.OPEN_TRANSACTION_SUCCESS_MODAL
 });

@@ -24,15 +24,20 @@ import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+  openBirthdayModal,
+  closeBirthdayModal,
+  openPhoneModal,
+  closePhoneModal
 } from "../../../../store/actions/modalActions";
 import {
   fetchBankAccountData,
   removeBankAccount
 } from "../../../../store/actions/bankAccountActions";
-import SubmitAmount from "./SubmitAmount/SubmitAmount";
 import AccountUI from "./AccountUI/AccountUI";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
+import SubmitBirthday from "./SubmitBirthday/SubmitBirthday";
+import SubmitPhone from "./SubmitPhone/SubmitPhone";
 
 function referenceId() {
   let text = "";
@@ -168,7 +173,6 @@ class BankCharge extends Component {
         code: bankAccountObject[0].bank_code,
         account_number: bankAccountObject[0].account_number
       },
-      birthday: "1995-03-29",
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: bankAccountObject[0].bank_code,
@@ -209,8 +213,17 @@ class BankCharge extends Component {
         this.props.setChargeReference(data.data.reference);
         this.toggleModal();
         this.props.openOTPModal();
+      } else if (data.data.status === "send_phone") {
+        this.toggleModal();
+        this.props.openPhoneModal();
+      } else if (data.data.status === "send_birthday") {
+        this.toggleModal();
+        this.props.openBirthdayModal();
       } else if (data.data.status === "open_url") {
         window.open(data.data.url, "_self");
+      } else if (data.data.status === "pending") {
+        this.toggleModal();
+        toast.info("Transaction is processing");
       } else {
         toast.error(`Transaction not successful`);
       }
@@ -251,7 +264,6 @@ class BankCharge extends Component {
         code: this.state.bank,
         account_number: this.state.account_number
       },
-      birthday: "1995-03-29",
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: this.state.bank,
@@ -294,8 +306,17 @@ class BankCharge extends Component {
         this.props.setChargeReference(data.data.reference);
         this.toggleModal();
         this.props.openOTPModal();
+      } else if (data.data.status === "send_phone") {
+        this.toggleModal();
+        this.props.openPhoneModal();
+      } else if (data.data.status === "send_birthday") {
+        this.toggleModal();
+        this.props.openBirthdayModal();
       } else if (data.data.status === "open_url") {
         window.open(data.data.url, "_self");
+      } else if (data.data.status === "pending") {
+        this.toggleModal();
+        toast.info("Transaction is processing");
       } else {
         toast.error(`Transaction not successful`);
       }
@@ -345,17 +366,25 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.state.submitAmountModal}
-          toggle={this.toggleSubmitAmountModal}
+          isOpen={this.props.birthdayModal}
+          toggle={this.props.closeBirthdayModal}
           style={{
             marginTop: "22rem"
           }}
         >
           <ModalBody className="text-center" style={{ height: "20vh" }}>
-            <SubmitAmount
-              auth_code={this.state.auth_code}
-              close={this.toggleSubmitAmountModal}
-            />
+            <SubmitBirthday />
+          </ModalBody>
+        </Modal>
+        <Modal
+          isOpen={this.props.phoneModal}
+          toggle={this.props.closePhoneModal}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center" style={{ height: "20vh" }}>
+            <SubmitPhone />
           </ModalBody>
         </Modal>
         <Modal
@@ -687,6 +716,8 @@ class BankCharge extends Component {
 
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
+  phoneModal: state.modal.submitPhoneModal,
+  birthdayModal: state.modal.submitBirthdayModal,
   bankAccount: state.bankAccount.bankAccount,
   loading: state.bankAccount.loading,
   removingAccount: state.bankAccount.removing,
@@ -699,7 +730,11 @@ const mapDispatchToProps = {
   removeBankAccount,
   openOTPModal,
   closeOTPModal,
-  setDepositHistory
+  setDepositHistory,
+  openBirthdayModal,
+  openPhoneModal,
+  closeBirthdayModal,
+  closePhoneModal
 };
 
 export default connect(

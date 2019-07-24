@@ -8,20 +8,47 @@ import {
   FormItem,
   FormSubmitButton
 } from "../../../../styles/CardCharge";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
+import {
+  openOTPModal,
+  closeOTPModal,
+  openPhoneModal,
+  closeBirthdayModal
+} from "../../../../../store/actions/modalActions";
 
-class SubmitAmount extends Component {
+class SubmitBirthday extends Component {
   state = {
-    amount: "",
+    birthday: "",
     loading: false
   };
 
-  formIsValid = ({ amount }) => {
-    if (!isNaN(amount) !== true) {
-      return false;
-    }
-    return true;
+  // formIsValid = ({ otp }) => {
+  //   if (!isNaN(otp) !== true) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
+  getDate = date => {
+    const month =
+      Number(
+        new Date(
+          date
+            .split("/")
+            .reverse()
+            .join("/")
+        ).getMonth()
+      ) + 1;
+    return `${new Date(
+      date
+        .split("/")
+        .reverse()
+        .join("/")
+    ).getFullYear()}-0${month}-${new Date(
+      date
+        .split("/")
+        .reverse()
+        .join("/")
+    ).getDate()}`;
   };
 
   handleInputChange = ({ target }) => {
@@ -32,37 +59,34 @@ class SubmitAmount extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    if (!this.formIsValid(this.state)) {
-      this.setState({ loading: false });
-      // Handle Error
-      return;
-    }
-
     const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.amount * 100,
-      authorization_code: this.props.auth_code
+      birthday: this.getDate(this.state.birthday),
+      reference: this.props.reference
     };
 
     try {
-      const response = await fetch("https://api.paystack.co/charge/", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
+      const response = await fetch(
+        "https://api.paystack.co/charge/submit_birthday",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(postData)
+        }
+      );
 
       const data = await response.json();
       if (data.data.status === "success") {
+        // Verify payment before adding
+        this.props.closeBirthdayModal();
         this.setState({ loading: false });
-        this.props.close();
-        toast.success(`Transaction was successful`);
-        const value = +data.data.amount / 100;
-        this.props.setDepositHistory(data.data);
-        this.props.setCoinBalance(value);
+        toast.info(`Transaction is processing`);
+      } else if (data.data.status === "open_url") {
+        this.props.closePinModal();
+        window.open(data.data.url, "_self");
       } else {
         toast.error(`Please try again`);
         this.setState({ loading: false });
@@ -90,21 +114,20 @@ class SubmitAmount extends Component {
         ) : (
           <>
             <FormItem>
-              <label>Enter Amount</label>
+              <label>Enter Birthday</label>
               <input
                 type="text"
-                name="amount"
-                value={this.state.amount}
+                name="birthday"
+                value={this.state.birthday}
                 onChange={this.handleInputChange}
-                min="0"
                 required
-                placeholder="Amount"
+                placeholder="Birthday"
               />
             </FormItem>
             <FormSubmitButton
               type="submit"
               className="mr-2"
-              disabled={this.state.loading}
+              disabled={this.state.loading || this.state.birthday === ""}
             >
               <span>{this.state.loading ? "Processing..." : "Submit"}</span>
             </FormSubmitButton>
@@ -117,17 +140,18 @@ class SubmitAmount extends Component {
 
 const mapStateToProps = state => ({
   reference: state.charge.reference,
-  playerData: state.player.playerData
+  loading: state.coinBalance.loading
 });
 
 const mapDispatchToProps = {
-  setCoinBalance,
-  setDepositHistory
+  openOTPModal,
+  closeOTPModal,
+  closeBirthdayModal
 };
 
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(memo(SubmitAmount))
+  )(memo(SubmitBirthday))
 );
