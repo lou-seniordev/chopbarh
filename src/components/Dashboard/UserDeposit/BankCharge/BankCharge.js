@@ -64,7 +64,8 @@ class BankCharge extends Component {
     popoverOpen: false,
     selectedValue: null,
     modalOpen: false,
-    paying: false
+    paying: false,
+    removeAccountModal: false
   };
 
   componentDidMount = () => {
@@ -119,6 +120,17 @@ class BankCharge extends Component {
     this.setState({
       popoverOpen: !this.state.popoverOpen
     });
+  };
+
+  toggleRemoveAccount = () => {
+    this.setState({
+      removeAccountModal: !this.state.removeAccountModal
+    });
+  };
+
+  removeBankAccount = () => {
+    this.setState({ removeAccountModal: false });
+    this.props.removeBankAccount(null, this.state.selectedValue);
   };
 
   formIsValid = ({ amount, bank, account_number }) => {
@@ -259,6 +271,31 @@ class BankCharge extends Component {
     return (
       <>
         <Modal
+          isOpen={this.state.removeAccountModal}
+          toggle={this.toggleRemoveAccount}
+          style={{
+            marginTop: "22rem"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+            <p className="mt-4">
+              This action will remove this card from your account. Do you want
+              to continue?
+            </p>
+            <div className="d-flex justify-content-center">
+              <FormElementButton
+                className="mr-2"
+                onClick={this.removeBankAccount}
+              >
+                <span>Yes</span>
+              </FormElementButton>
+              <FormElementButton onClick={this.toggleRemoveAccount}>
+                <span>No</span>
+              </FormElementButton>
+            </div>
+          </ModalBody>
+        </Modal>
+        <Modal
           isOpen={this.props.otpModal}
           toggle={this.props.closeOTPModal}
           style={{
@@ -378,47 +415,10 @@ class BankCharge extends Component {
                                 id="Popover"
                                 type="button"
                                 className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
+                                onClick={this.toggleRemoveAccount}
                               >
                                 &#10005;
                               </Button>
-                              <Popover
-                                placement="bottom"
-                                isOpen={this.state.popoverOpen}
-                                target="Popover"
-                                toggle={this.toggle}
-                              >
-                                <PopoverBody className="text-center">
-                                  This action will remove this Account detail.
-                                  Do you want to continue?
-                                  <div className="d-flex justify-content-center">
-                                    <Button
-                                      className="mr-1"
-                                      disabled={this.props.removingAccount}
-                                      onClick={e =>
-                                        this.props.removeBankAccount(
-                                          e,
-                                          account.auth_code
-                                        ) && this.toggle()
-                                      }
-                                    >
-                                      {this.props.removingAccount
-                                        ? "Removing..."
-                                        : "Yes"}
-                                    </Button>
-                                    {this.props.removingAccount ? (
-                                      <>{null}</>
-                                    ) : (
-                                      <Button
-                                        className="btn-primary"
-                                        disabled={this.props.removingAccount}
-                                        onClick={this.toggle}
-                                      >
-                                        No
-                                      </Button>
-                                    )}
-                                  </div>
-                                </PopoverBody>
-                              </Popover>
                             </div>
                           ))}
                         </RadioGroup>
