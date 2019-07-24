@@ -269,18 +269,20 @@ export default function Hero() {
                 <span>Start Playing</span>{" "}
               </Button>
               <span style={{ cursor: "pointer" }}>
+                <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
                 <Image
                   src={AppStoreButton}
                   className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
                   alt="App Store"
-                />
+                /></a>
               </span>
               <span style={{ cursor: "pointer" }}>
+                <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                 <Image
                   src={PlayStoreButton}
                   className="mr-lg-4 mr-md-4 mr-sm-2"
                   alt="Play Store"
-                />
+                /></a>
               </span>
             </div>
           </SliderContent>
