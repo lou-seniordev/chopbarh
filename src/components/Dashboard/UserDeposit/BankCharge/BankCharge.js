@@ -139,7 +139,7 @@ class BankCharge extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    if (!isNaN(this.state.amount) !== true) {
+    if (!isNaN(this.state.authAmount) !== true) {
       toast.error(`Form is not valid`);
       this.setState({ loading: false });
       return;
@@ -151,6 +151,10 @@ class BankCharge extends Component {
       return;
     }
 
+    this.setState({ loading: false, modalOpen: true });
+  };
+
+  payAuthMoney = async () => {
     const bankAccountObject = this.props.bankAccount.filter(
       account => account.auth_code === this.state.selectedValue
     );
@@ -189,7 +193,7 @@ class BankCharge extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
@@ -272,7 +276,7 @@ class BankCharge extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
@@ -365,47 +369,103 @@ class BankCharge extends Component {
             className="text-center mt-5 mb-5"
             style={{ minHeight: "20vh" }}
           >
-            <p>
-              <strong>
-                Amount: &#8358;
-                {new Intl.NumberFormat().format(+this.state.amount)}
-              </strong>
-            </p>
-            <p>
-              <strong>
-                Transaction Fee:{" "}
-                {+this.state.amount < 2500 ? `\u20a6${0}` : `\u20a6${100}`}
-              </strong>
-            </p>
-            <p>
-              <strong>
-                Total:{" "}
-                {+this.state.amount < 2500
-                  ? `\u20a6${new Intl.NumberFormat().format(
-                      +this.state.amount
-                    )}`
-                  : `\u20a6${new Intl.NumberFormat().format(
-                      +this.state.amount + 100
-                    )}`}
-              </strong>
-            </p>
-            <p>Proceed with deposit?</p>
-            <div className="d-flex justify-content-center">
-              <FormElementButton
-                className="mr-1"
-                disabled={this.state.paying}
-                onClick={this.payMoney}
-              >
-                <span>{this.state.paying ? "Processing..." : "Yes"}</span>
-              </FormElementButton>
-              {!this.state.paying ? (
-                <FormElementButton onClick={this.toggleModal} className="ml-1">
-                  <span>No</span>
-                </FormElementButton>
-              ) : (
-                <>{null}</>
-              )}
-            </div>
+            {this.state.amount ? (
+              <>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.amount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Transaction Fee:{" "}
+                    {+this.state.amount < 2500 ? `\u20a6${0}` : `\u20a6${100}`}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Total:{" "}
+                    {+this.state.amount < 2500
+                      ? `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.amount
+                        )}`
+                      : `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.amount + 100
+                        )}`}
+                  </strong>
+                </p>
+                <p>Proceed with deposit?</p>
+                <div className="d-flex justify-content-center">
+                  <FormElementButton
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.payMoney}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </FormElementButton>
+                  {!this.state.paying ? (
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
+                      <span>No</span>
+                    </FormElementButton>
+                  ) : (
+                    <>{null}</>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <p>
+                  <strong>
+                    Amount: &#8358;
+                    {new Intl.NumberFormat().format(+this.state.authAmount)}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Transaction Fee:{" "}
+                    {+this.state.authAmount < 2500
+                      ? `\u20a6${0}`
+                      : `\u20a6${100}`}
+                  </strong>
+                </p>
+                <p>
+                  <strong>
+                    Total:{" "}
+                    {+this.state.authAmount < 2500
+                      ? `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.authAmount
+                        )}`
+                      : `\u20a6${new Intl.NumberFormat().format(
+                          +this.state.authAmount + 100
+                        )}`}
+                  </strong>
+                </p>
+                <p>Proceed with deposit?</p>
+                <div className="d-flex justify-content-center">
+                  <FormElementButton
+                    className="mr-1"
+                    disabled={this.state.paying}
+                    onClick={this.payAuthMoney}
+                  >
+                    <span>{this.state.paying ? "Processing..." : "Yes"}</span>
+                  </FormElementButton>
+                  {!this.state.paying ? (
+                    <FormElementButton
+                      onClick={this.toggleModal}
+                      className="ml-1"
+                    >
+                      <span>No</span>
+                    </FormElementButton>
+                  ) : (
+                    <>{null}</>
+                  )}
+                </div>
+              </>
+            )}
           </ModalBody>
         </Modal>
         {this.props.loading ? (
