@@ -159,9 +159,14 @@ export const removeWithdrawalBankAccount = (event, account_number) => async (
       } catch (err) {
         toast.error("Account could not be removed. Please try again");
       }
-      window.location.reload();
-      dispatch(fetchWithdrawalBankAccountData());
-      toast.success("Account was removed");
+      // window.location.reload();
+
+      if (accountsArray.length !== filteredArray.length) {
+        dispatch(fetchWithdrawalBankAccountData());
+        toast.success("Account was removed");
+      } else {
+        toast.error("Account was not removed");
+      }
     } else {
       // dispatch(fetchWithdrawalBankAccountFail());
     }

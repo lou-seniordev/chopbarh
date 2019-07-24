@@ -59,7 +59,6 @@ class BankCharge extends Component {
     authAmount: "",
     auth_code: "",
     submitAmountModal: false,
-    popoverOpen: false,
     selectedValue: null,
     modalOpen: false,
     paying: false,
@@ -110,12 +109,6 @@ class BankCharge extends Component {
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
-  };
-
-  toggle = () => {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen
-    });
   };
 
   toggleRemoveAccount = () => {
