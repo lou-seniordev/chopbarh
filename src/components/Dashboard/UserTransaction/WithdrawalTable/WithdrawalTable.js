@@ -49,7 +49,7 @@ class WithdrawalTable extends Component {
                     <td>{`${new Date(
                       withdrawal.withdrawal_date
                     ).toLocaleTimeString()}`}</td>
-                    <td>{withdrawal.transaction_fee}</td>
+                    <td>&#8358;{withdrawal.transaction_fee}</td>
                     <td>
                       &#8358;
                       {new Intl.NumberFormat().format(withdrawal.amount)}

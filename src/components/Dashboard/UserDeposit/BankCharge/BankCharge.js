@@ -307,9 +307,11 @@ class BankCharge extends Component {
         this.toggleModal();
         this.props.openOTPModal();
       } else if (data.data.status === "send_phone") {
+        this.props.setChargeReference(data.data.reference);
         this.toggleModal();
         this.props.openPhoneModal();
       } else if (data.data.status === "send_birthday") {
+        this.props.setChargeReference(data.data.reference);
         this.toggleModal();
         this.props.openBirthdayModal();
       } else if (data.data.status === "open_url") {

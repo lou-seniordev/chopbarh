@@ -116,7 +116,7 @@ class SubmitBirthday extends Component {
             <FormItem>
               <label>Enter Birthday</label>
               <input
-                type="text"
+                type="date"
                 name="birthday"
                 value={this.state.birthday}
                 onChange={this.handleInputChange}
