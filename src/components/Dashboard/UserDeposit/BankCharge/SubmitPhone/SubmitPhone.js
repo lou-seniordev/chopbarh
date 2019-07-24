@@ -10,11 +10,8 @@ import {
 } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
-  closeOTPModal,
-  openPinModal,
-  closePinModal
+  closeOTPModal
 } from "../../../../../store/actions/modalActions";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 
 class SubmitPhone extends Component {
   state = {
@@ -23,7 +20,7 @@ class SubmitPhone extends Component {
   };
 
   formIsValid = ({ phone }) => {
-    if (!isNaN(phone) !== true || phone.length !== 11) {
+    if (!isNaN(phone) !== true) {
       return false;
     }
     return true;
@@ -50,12 +47,12 @@ class SubmitPhone extends Component {
 
     try {
       const response = await fetch(
-        "https://api.paystack.co/charge/submit_pin",
+        "https://api.paystack.co/charge/submit_phone",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -63,19 +60,21 @@ class SubmitPhone extends Component {
       );
 
       const data = await response.json();
-      console.log(data);
-      this.setState({ loading: false });
-      if (data.data.status === "send_otp") {
+      if (data.data.status === "success") {
+        // Verify payment before adding
+        this.props.closeOTPModal();
+        this.setState({ loading: false });
+        toast.info(`Transaction is processing`);
+        // const value = +data.data.amount / 100;
+        // this.props.setBankAccountData(data.data.authorization);
+        // this.props.setDepositHistory(data.data);
+        // this.props.setCoinBalance(value);
+      } else if (data.data.status === "open_url") {
         this.props.closePinModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "success") {
-        this.props.closePinModal();
-        toast.success("Transaction was successful");
-        const value = +data.data.amount / 100;
-        this.props.setCoinBalance(value);
+        window.open(data.data.url, "_self");
       } else {
-        this.props.closePinModal();
         toast.error(`Please try again`);
+        this.setState({ loading: false });
       }
     } catch (err) {
       this.setState({ loading: false });
@@ -102,8 +101,8 @@ class SubmitPhone extends Component {
             <FormItem>
               <label>Enter Phone Number</label>
               <input
-                type="password"
-                name="phone"
+                type="text"
+                name="otp"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 required
@@ -125,16 +124,12 @@ class SubmitPhone extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference,
-  loading: state.coinBalance.loading
+  reference: state.charge.reference
 });
 
 const mapDispatchToProps = {
   openOTPModal,
-  closeOTPModal,
-  openPinModal,
-  closePinModal,
-  setCoinBalance
+  closeOTPModal
 };
 
 export default withRouter(
