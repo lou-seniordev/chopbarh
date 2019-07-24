@@ -190,14 +190,13 @@ class EditProfileForm extends Component {
 
     const postData = {
       FULL_NAME: this.state.name,
-      PHONE_NUM: this.state.phone,
       DOB: this.state.dob,
-      SEX: this.state.sex,
-      Email: this.state.email
+      SEX: this.state.sex.split('')[0],
+      EMAIL: this.state.email
     };
 
     postData["@class"] = ".LogEventRequest";
-    postData["eventKey"] = "REGISTER_PLAYER";
+    postData["eventKey"] = "PLAYER_PROFILE_UPDATE";
     postData["playerId"] = this.props.id;
     const formValue = JSON.stringify(postData);
 
