@@ -70,7 +70,7 @@ class AccountNumber extends Component {
   };
 
   componentDidMount = () => {
-    this.props.fetchWithdrawalBankAccountData();
+    // this.props.fetchWithdrawalBankAccountData();
     // if (!this.props.withdrawalAccount.length) {
     // } else {
     //   this.setState({
@@ -101,8 +101,8 @@ class AccountNumber extends Component {
     if (this.props !== prevProps) {
       this.props.withdrawalAccount.length &&
         this.setState({
-        selectedValue: this.props.withdrawalAccount[0].account_number
-      });
+          selectedValue: this.props.withdrawalAccount[0].account_number
+        });
     }
   };
 
@@ -142,13 +142,27 @@ class AccountNumber extends Component {
       bank => bank.Code === this.state.bank
     );
 
-    const dataObject = {
-      account_number: this.state.account_number,
-      code: this.state.bank,
-      bank: bankName[0].Name
+    let reference = getReference();
+
+    // const dataObject = {
+    //   account_number: this.state.account_number,
+    //   code: this.state.bank,
+    //   bank: bankName[0].Name,
+    //   name: this.state.account_name
+    // };
+
+    // this.props.setWithdrawalBankAccountData(dataObject);
+
+    const payload = {
+      status: "Pending",
+      amount: +this.state.amount,
+      date: new Date().toISOString(),
+      reference: `${this.props.playerData.PhoneNum}-${reference}`,
+      fee: 50,
+      channel: "AZA"
     };
 
-    this.props.setWithdrawalBankAccountData(dataObject);
+    this.props.setWithdrawalHistory(payload);
 
     const postData = {
       account_bank: this.state.bank,
@@ -157,7 +171,7 @@ class AccountNumber extends Component {
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "Chopbarh Payment",
       currency: "NGN",
-      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
+      reference: `${this.props.playerData.PhoneNum}-${reference}`
     };
 
     try {
@@ -177,16 +191,7 @@ class AccountNumber extends Component {
 
       // Confirm withdrawal actually goes through here
       if (data.status === "success") {
-        const payload = {
-          status: "Pending",
-          amount: +this.state.amount,
-          date: data.data.date_created,
-          reference: data.data.reference,
-          fee: 50,
-          channel: "AZA"
-        };
         this.props.setCashBalance(Number(this.state.amount), 2);
-        this.props.setWithdrawalHistory(payload);
 
         this.setState({
           amount: "",
