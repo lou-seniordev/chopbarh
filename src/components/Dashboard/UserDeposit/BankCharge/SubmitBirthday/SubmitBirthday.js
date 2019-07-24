@@ -122,6 +122,7 @@ class SubmitBirthday extends Component {
                 onChange={this.handleInputChange}
                 required
                 placeholder="Birthday"
+                max="2010-01-01"
               />
             </FormItem>
             <FormSubmitButton
@@ -139,8 +140,7 @@ class SubmitBirthday extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference,
-  loading: state.coinBalance.loading
+  reference: state.charge.reference
 });
 
 const mapDispatchToProps = {
