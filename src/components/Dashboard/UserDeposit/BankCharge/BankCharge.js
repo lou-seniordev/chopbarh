@@ -1,13 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import {
-  Modal,
-  ModalBody,
-  Spinner,
-  Popover,
-  PopoverBody,
-  Button
-} from "reactstrap";
+import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import { toast } from "react-toastify";
 // import NumberFormat from "react-number-format";
 import {
@@ -69,9 +62,7 @@ class BankCharge extends Component {
   };
 
   componentDidMount = () => {
-    if (!this.props.bankAccount.length) {
-      this.props.fetchBankAccountData();
-    }
+    this.props.fetchBankAccountData();
 
     fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {
@@ -144,7 +135,7 @@ class BankCharge extends Component {
     return true;
   };
 
-  handleAuthSubmit = async (event, bankName) => {
+  handleAuthSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -160,26 +151,69 @@ class BankCharge extends Component {
       return;
     }
 
-    // const bankAccountObject = this.state.bankList.filter(
-    //   account => account.name === bankName
-    // );
+    const bankAccountObject = this.props.bankAccount.filter(
+      account => account.auth_code === this.state.selectedValue
+    );
 
-    // console.log(bankAccountObject);
+    let refId = referenceId();
 
-    // const postData = {
-    //   email: "somebody@mail.com",
-    //   amount: this.state.amount * 100,
-    //   bank: {
-    //     code: this.state.bank,
-    //     account_number: this.state.account_number
-    //   },
-    //   birthday: "1995-03-29",
-    //   metadata: {
-    //     phone: this.props.playerData.PhoneNum
-    //   }
-    // };
+    const postData = {
+      email: `${this.props.playerData.PhoneNum}@mail.com`,
+      amount: this.state.authAmount * 100,
+      bank: {
+        code: bankAccountObject[0].bank_code,
+        account_number: bankAccountObject[0].account_number
+      },
+      birthday: "1995-03-29",
+      metadata: {
+        phone: this.props.playerData.PhoneNum,
+        bank_code: bankAccountObject[0].bank_code,
+        account_number: bankAccountObject[0].account_number
+      }
+    };
 
-    this.setState({ loading: false });
+    const historyObject = {
+      amount: this.state.authAmount,
+      channel: "Bank",
+      transaction_date: new Date().toISOString(),
+      fees: +this.state.authAmount < 2500 ? 0 : 100,
+      reference: "--",
+      status: "Pending",
+      refId
+    };
+
+    this.props.setDepositHistory(historyObject);
+
+    try {
+      const response = await fetch("https://api.paystack.co/charge", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+
+      this.setState({
+        loading: false,
+        authAmount: ""
+      });
+
+      if (data.data.status === "send_otp") {
+        this.props.setChargeReference(data.data.reference);
+        this.toggleModal();
+        this.props.openOTPModal();
+      } else if (data.data.status === "open_url") {
+        window.open(data.data.url, "_self");
+      } else {
+        toast.error(`Transaction not successful`);
+      }
+    } catch (err) {
+      toast.error(`Something went wrong`);
+      this.setState({ loading: false });
+    }
   };
 
   handleSubmit = async event => {
@@ -416,6 +450,9 @@ class BankCharge extends Component {
                                 type="button"
                                 className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
                                 onClick={this.toggleRemoveAccount}
+                                disabled={
+                                  this.state.selectedValue !== account.auth_code
+                                }
                               >
                                 &#10005;
                               </Button>
