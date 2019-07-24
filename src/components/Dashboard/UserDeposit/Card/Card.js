@@ -162,6 +162,20 @@ class Card extends Component {
       return;
     }
 
+    let refId = referenceId();
+
+    const historyObject = {
+      amount: this.state.authAmount,
+      channel: "Card",
+      transaction_date: new Date().toISOString(),
+      fees: this.state.amount < 2500 ? 0 : 100,
+      reference: "--",
+      status: "Pending",
+      refId
+    };
+
+    this.props.setDepositHistory(historyObject);
+
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
       amount: this.state.authAmount * 100,
