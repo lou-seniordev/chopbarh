@@ -1,5 +1,57 @@
 import React, { Component } from "react";
-import { Modal, ModalBody } from "reactstrap";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import breakpoint from "../components/styles/breakpoints";
+import color from "../components/styles/colors";
+
+const ErrorBoundaryWrapper = styled.div`
+  height: 100vh;
+  text-align: center;
+  padding: 50vh 0;
+  position: relative;
+
+  h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 6rem;
+
+    @media screen and (max-width: ${breakpoint.medium}) {
+      font-size: 5.5rem;
+    }
+  }
+
+  p {
+    background: #fff;
+    padding: 0.5rem;
+    display: inline-block;
+    position: absolute;
+    font-size: 1.8rem;
+    top: 60vh;
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: ${breakpoint.medium}) {
+      top: 62vh;
+      font-size: 1.5rem;
+    }
+  }
+
+  a {
+    margin: 2rem auto;
+    display: block;
+    background: ${color.colorPrimary};
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 13rem;
+    padding: 0.5rem;
+    transition: all 0.3s;
+
+    &:hover {
+      background: ${color.colorPrimaryHover};
+      transform: translateY(-3px);
+    }
+  }
+`;
 
 export default class ErrorBoundary extends Component {
   state = {
@@ -11,24 +63,18 @@ export default class ErrorBoundary extends Component {
     this.setState({ error, errorModal: true });
   };
 
-  toggleErrorModal = () => {};
-
   render() {
     const { error } = this.state;
 
     if (error) {
       return (
-        <Modal
-          isOpen={this.state.errorModal}
-          toggle={this.toggleErrorModal}
-          className="pt-5 mt-5"
-        >
-          <ModalBody>
-            <h2 style={{ textAlign: "center" }}>
-              Something went wrong. We're working on it
-            </h2>
-          </ModalBody>
-        </Modal>
+        <ErrorBoundaryWrapper>
+          <div>
+            <h3>Ooops!</h3>
+            <p>Something went wrong</p>
+            <Link to="/">Go to Homepage</Link>
+          </div>
+        </ErrorBoundaryWrapper>
       );
     }
 
