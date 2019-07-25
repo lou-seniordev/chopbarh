@@ -347,19 +347,20 @@ class AccountNumber extends Component {
       toast.error("Form is not valid");
       this.setState({ loading: false });
       return;
+      
     }
 
-    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-      toast.error("You cannot withdraw more than you have won");
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+    //   toast.error("You cannot withdraw more than you have won");
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
-    if (Number(this.state.amount) < 200) {
-      toast.error(`You cannot withdraw less than \u20a6${200}`);
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) < 200) {
+    //   toast.error(`You cannot withdraw less than \u20a6${200}`);
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
     if (Number(this.state.amount) > 50000) {
       toast.error(
