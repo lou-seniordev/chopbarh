@@ -1,11 +1,6 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
-import {
-  Modal,
-  ModalBody,
-  Spinner,
-  Button
-} from "reactstrap";
+import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 // import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import {
@@ -223,7 +218,7 @@ class AccountNumber extends Component {
         toast.error("Transaction was not successful");
       }
     } catch (err) {
-      this.setState({ loading: false, modal: false, paying: false, });
+      this.setState({ loading: false, modal: false, paying: false });
       toast.error("Something went wrong");
     }
   };
@@ -347,20 +342,19 @@ class AccountNumber extends Component {
       toast.error("Form is not valid");
       this.setState({ loading: false });
       return;
-      
     }
 
-    // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-    //   toast.error("You cannot withdraw more than you have won");
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
+      this.setState({ loading: false });
+      return;
+    }
 
-    // if (Number(this.state.amount) < 200) {
-    //   toast.error(`You cannot withdraw less than \u20a6${200}`);
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (Number(this.state.amount) < 200) {
+      toast.error(`You cannot withdraw less than \u20a6${200}`);
+      this.setState({ loading: false });
+      return;
+    }
 
     if (Number(this.state.amount) > 50000) {
       toast.error(
