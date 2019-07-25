@@ -178,7 +178,9 @@ class Card extends Component {
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.authAmount * 100,
+      amount: Number(this.state.authAmount) >= 2500
+          ? (Number(this.state.authAmount) + 100) * 100
+          : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
       metadata: {
         phone: this.props.playerData.PhoneNum
