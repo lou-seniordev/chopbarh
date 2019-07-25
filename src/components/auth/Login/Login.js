@@ -13,7 +13,6 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
-  Button,
   SignUpSignal
 } from "../../styles/LoginStyles";
 import keys from "../../../config/keys";

@@ -240,6 +240,19 @@ class AccountNumber extends Component {
       reference: `${this.props.playerData.PhoneNum}-${getReference()}`
     };
 
+    let reference = getReference();
+
+    const payload = {
+      status: "Pending",
+      amount: +this.state.authAmount,
+      date: new Date().toISOString(),
+      reference: `${this.props.playerData.PhoneNum}-${reference}`,
+      fee: 50,
+      channel: "AZA"
+    };
+
+    this.props.setWithdrawalHistory(payload);
+
     try {
       // prod https://api.ravepay.co/v2/gpx/transfers/create
       const response = await fetch(
@@ -257,16 +270,7 @@ class AccountNumber extends Component {
 
       // Confirm withdrawal actually goes through here
       if (data.status === "success") {
-        const payload = {
-          status: "Pending",
-          amount: +this.state.authAmount,
-          date: data.data.date_created,
-          reference: data.data.reference,
-          fee: 50,
-          channel: "AZA"
-        };
         this.props.setCashBalance(Number(this.state.authAmount), 2);
-        this.props.setWithdrawalHistory(payload);
 
         this.setState({
           authAmount: "",
@@ -298,6 +302,12 @@ class AccountNumber extends Component {
 
     if (!isNaN(this.state.authAmount) !== true) {
       toast.error("Form is not valid");
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.authAmount) > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
       this.setState({ loading: false });
       return;
     }
@@ -496,9 +506,6 @@ class AccountNumber extends Component {
             ) : (
               <>
                 <p>
-                  <strong>Account: {this.state.account_name}</strong>
-                </p>
-                <p>
                   <strong>
                     Amount: &#8358;
                     {new Intl.NumberFormat().format(+this.state.authAmount)}
@@ -520,7 +527,7 @@ class AccountNumber extends Component {
                   <FormElementButton
                     className="mr-1"
                     disabled={this.state.paying}
-                    onClick={this.withdrawCash}
+                    onClick={this.withdrawCashAuth}
                   >
                     <span>{this.state.paying ? "Processing..." : "Yes"}</span>
                   </FormElementButton>
