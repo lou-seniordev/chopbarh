@@ -31,6 +31,10 @@ const NIBBSWrapper = styled.div`
       display: inline-block;
       transform: skew(20deg);
       color: #fff;
+
+      @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+        color: #ffffff;
+      }
     }
 
     &:hover {
@@ -60,8 +64,8 @@ export default function NIBBS() {
           <AccordionItemPanel>
             <StepText>Step 1:</StepText>
             <Info className="mb-4">
-              Login on your bank’s internet banking platform (eligible banks
-              are shown above).
+              Login on your bank’s internet banking platform (eligible banks are
+              shown above).
             </Info>
             <StepText>Step 2:</StepText>
             <Info className="mb-4">

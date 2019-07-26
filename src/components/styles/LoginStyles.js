@@ -118,6 +118,10 @@ export const FormAction = styled.div`
       display: inline-block;
       transform: skew(20deg);
       color: #fff;
+
+      @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+        color: #ffffff;
+      }
     }
 
     &:hover {
