@@ -170,7 +170,7 @@ class Card extends Component {
       transaction_date: new Date().toISOString(),
       fees: this.state.amount < 2500 ? 0 : 100,
       reference: "--",
-      status: "Pending",
+      status: "--",
       refId
     };
 
@@ -256,7 +256,7 @@ class Card extends Component {
       transaction_date: new Date().toISOString(),
       fees: this.state.amount < 2500 ? 0 : 100,
       reference: "--",
-      status: "Pending",
+      status: "--",
       refId
     };
 

@@ -74,7 +74,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             paid_at: payload.transaction_date,
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
-            status: "Pending",
+            status: "--",
             refId: payload.refId
           })
         });
@@ -93,7 +93,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               paid_at: payload.transaction_date,
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
-              status: "Pending",
+              status: "--",
               refId: payload.refId
             }
           ]

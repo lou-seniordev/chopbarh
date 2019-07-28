@@ -160,7 +160,7 @@ class AccountNumber extends Component {
     this.props.setWithdrawalBankAccountData(dataObject);
 
     const payload = {
-      status: "Pending",
+      status: "--",
       amount: +this.state.amount,
       date: new Date().toISOString(),
       reference: `${this.props.playerData.PhoneNum}-${reference}`,
@@ -243,7 +243,7 @@ class AccountNumber extends Component {
     let reference = getReference();
 
     const payload = {
-      status: "Pending",
+      status: "--",
       amount: +this.state.authAmount,
       date: new Date().toISOString(),
       reference: `${this.props.playerData.PhoneNum}-${reference}`,
