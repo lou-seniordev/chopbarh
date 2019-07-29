@@ -69,11 +69,7 @@ export const setWithdrawalBankAccountData = payload => async (
       ...doc.data()
     }));
 
-    if (withdrawalBankAccounts[0].data.length === 2) {
-      toast.info(
-        "You have reached the maximum number of bank accounts that can be saved"
-      );
-    } else if (withdrawalBankAccounts.length) {
+    if (withdrawalBankAccounts.length) {
       const accountExists = getState().withdrawalAccount.withdrawalAccount.filter(
         account => account.account_number === payload.account_number
       );
