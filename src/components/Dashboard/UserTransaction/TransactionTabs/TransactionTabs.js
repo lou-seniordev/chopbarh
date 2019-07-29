@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import WithdrawalTable from "../WithdrawalTable/WithdrawalTable";
 import DepositTable from "../DepositTable/DepositTable";
+import RefundTable from "../RefundTable/RefundTable";
 
 const TransactionTabsWrapper = styled.div`
   display: block;
@@ -26,6 +27,9 @@ export default function TransactionTabs() {
           <Tab>
             <HeadingTwo>Withdrawal</HeadingTwo>
           </Tab>
+          <Tab>
+            <HeadingTwo>Refund</HeadingTwo>
+          </Tab>
           
         </TabList>
         
@@ -44,6 +48,14 @@ export default function TransactionTabs() {
           }}
         >
           <WithdrawalTable />
+        </TabPanel>
+        <TabPanel
+          style={{
+            maxHeight: "600px",
+            overflow: "auto"
+          }}
+        >
+          <RefundTable />
         </TabPanel>
         
       </Tabs>
