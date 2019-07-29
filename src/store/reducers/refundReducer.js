@@ -2,24 +2,24 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  depositHistory: null,
+  refundHistory: null,
   error: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionType.FETCH_DEPOSIT_HISTORY_INIT:
+    case actionType.FETCH_REFUND_HISTORY_INIT:
       return {
         ...state,
         loading: true
       };
-    case actionType.FETCH_DEPOSIT_HISTORY_SUCCESS:
+    case actionType.FETCH_REFUND_HISTORY_SUCCESS:
       return {
         ...state,
-        depositHistory: [...action.data],
+        refundHistory: [...action.data],
         loading: false
       };
-    case actionType.FETCH_DEPOSIT_HISTORY_FAIL:
+    case actionType.FETCH_REFUND_HISTORY_FAIL:
       return {
         ...state,
         loading: false,
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        depositHistory: null
+        refundHistory: null
       };
     default:
       return state;

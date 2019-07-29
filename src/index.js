@@ -22,6 +22,7 @@ import depositReducer from "./store/reducers/depositReducer";
 import withdrawalReducer from "./store/reducers/withdrawalReducer";
 import transferReducer from "./store/reducers/transferReducer";
 import withdrawalAccountReducer from "./store/reducers/withdrawalAccountReducer";
+import refundReducer from "./store/reducers/refundReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   deposit: depositReducer,
   withdrawal: withdrawalReducer,
   transfer: transferReducer,
-  withdrawalAccount: withdrawalAccountReducer
+  withdrawalAccount: withdrawalAccountReducer,
+  refunds: refundReducer
 });
 
 const composeEnhancers =
