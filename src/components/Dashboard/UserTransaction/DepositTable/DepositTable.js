@@ -18,7 +18,7 @@ class DepositTable extends Component {
   render() {
     return (
       <DepositTableWrapper>
-        {!this.props.loading ? (
+        {!this.props.loading && this.props.depositData.length ? (
           <div className="table-responsive">
             <table className="table table-striped">
               <thead

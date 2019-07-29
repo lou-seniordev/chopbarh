@@ -2,7 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
   loading: true,
-  depositHistory: null,
+  depositHistory: [],
   error: false
 };
 

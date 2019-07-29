@@ -26,11 +26,11 @@ const ErrorBoundaryWrapper = styled.div`
     display: inline-block;
     position: absolute;
     font-size: 1.8rem;
-    top: 60vh;
+    top: 66vh;
     transform: translate(-50%, -50%);
 
     @media screen and (max-width: ${breakpoint.medium}) {
-      top: 62vh;
+      top: 68vh;
       font-size: 1.5rem;
     }
   }
