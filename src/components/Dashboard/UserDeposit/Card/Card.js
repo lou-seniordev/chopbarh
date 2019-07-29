@@ -183,7 +183,8 @@ class Card extends Component {
           : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
       metadata: {
-        phone: this.props.playerData.PhoneNum
+        phone: this.props.playerData.PhoneNum,
+        refId
       }
     };
 
@@ -194,7 +195,7 @@ class Card extends Component {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+            Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify(postData)
@@ -291,7 +292,7 @@ class Card extends Component {
         method: "POST",
         mode: "cors",
         headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+          Authorization: `Bearer sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify(postData)
