@@ -168,7 +168,7 @@ class Card extends Component {
       amount: this.state.authAmount,
       channel: "Card",
       transaction_date: new Date().toISOString(),
-      fees: this.state.amount < 2500 ? 0 : 100,
+      fees: this.state.authAmount < 2500 ? 0 : 100,
       reference: "--",
       status: "--",
       refId
