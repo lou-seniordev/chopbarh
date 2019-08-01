@@ -41,7 +41,7 @@ const HeaderWrapper = styled.div`
       transform: skew(20deg);
       color: #fff;
 
-      @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
+      @media screen and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) {
         color: #ffffff;
       }
     }
@@ -119,12 +119,12 @@ export default function Header({ transparent }) {
               <div>
                 <button className="mr-2">
                   <Link to="login">
-                    <span>Login</span>
+                    <span style={{ color: "#ffffff" }}>Login</span>
                   </Link>
                 </button>
                 <button>
                   <Link to="signup">
-                    <span>Sign Up</span>
+                    <span style={{ color: "#ffffff" }}>Sign Up</span>
                   </Link>
                 </button>
               </div>
