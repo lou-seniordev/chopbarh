@@ -267,7 +267,9 @@ class ChangePinForm extends Component {
                 className="mr-2"
                 disabled={this.state.loading}
               >
-                <span>{this.state.loading ? "Plaese wait..." : "Change"}</span>
+                <span style={{ color: "#ffffff" }}>
+                  {this.state.loading ? "Plaese wait..." : "Change"}
+                </span>
               </button>
             </Form>
           </Container>

@@ -266,7 +266,7 @@ export default function Hero() {
             </ParagraphOne>
             <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
               <Button className="mr-lg-4 mr-md-4 mr-sm-2">
-                <span>Start Playing</span>{" "}
+                <span style={{ color: '#ffffff' }}>Start Playing</span>{" "}
               </Button>
               <span style={{ cursor: "pointer" }}>
                 <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">

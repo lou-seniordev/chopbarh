@@ -110,10 +110,12 @@ class SubmitVoucher extends Component {
         </Modal>
         <div className="d-flex">
           <button className="ml-2 mr-2" disabled={this.state.loading}>
-            <span>{this.state.loading ? "Loading..." : "Load"}</span>
+            <span style={{ color: "#ffffff" }}>
+              {this.state.loading ? "Loading..." : "Load"}
+            </span>
           </button>
           <button className="ml-2 mr-2" disabled={this.state.loading}>
-            <span>{"Cancel"}</span>
+            <span style={{ color: "#ffffff" }}>Cancel</span>
           </button>
         </div>
       </VoucherWrapper>

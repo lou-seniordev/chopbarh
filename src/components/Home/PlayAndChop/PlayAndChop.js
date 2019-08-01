@@ -71,7 +71,7 @@ export default function PlayAndChop() {
           Asperiores est voluptatem repudiandae molestias modi.
         </ParagraphOne>
         <Button className="mt-3">
-          <span>Explore</span>
+          <span style={{ color: "#ffffff" }}>Explore</span>
         </Button>
         <HR />
       </div>

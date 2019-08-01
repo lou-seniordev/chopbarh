@@ -195,7 +195,7 @@ class EditProfileForm extends Component {
     const postData = {
       FULL_NAME: this.state.name,
       DOB: this.state.dob,
-      SEX: this.state.sex.split('')[0],
+      SEX: this.state.sex.split("")[0],
       EMAIL: this.state.email
     };
 
@@ -314,7 +314,9 @@ class EditProfileForm extends Component {
                   className="mr-2"
                   disabled={this.state.loading}
                 >
-                  <span>{this.state.loading ? "Saving..." : "Save"}</span>
+                  <span style={{ color: "#ffffff" }}>
+                    {this.state.loading ? "Saving..." : "Save"}
+                  </span>
                 </button>
               </Form>
             )}

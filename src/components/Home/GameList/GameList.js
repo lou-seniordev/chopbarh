@@ -88,7 +88,7 @@ export default function GameList() {
           <Image src={Image6} alt="Game" />
         </ImageContainer>
         <Button className="mt-3">
-          <span>Explore</span>
+          <span style={{ color: "#ffffff" }}>Explore</span>
         </Button>
       </div>
     </GamesWrapper>

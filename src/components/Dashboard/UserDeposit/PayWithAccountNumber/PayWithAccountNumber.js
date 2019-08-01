@@ -112,7 +112,7 @@ export default function PayWithAccountNumber() {
         </FormItem>
       </HalfColumn>
       <button type="submit" className="mr-2">
-        <span>Deposit</span>
+        <span style={{ color: "#ffffff" }}>Deposit</span>
       </button>
     </Form>
   );

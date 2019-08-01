@@ -212,7 +212,9 @@ class VoucherTransaction extends Component {
               disabled={this.state.loading}
               className="ml-2 mr-2"
             >
-              <span>{this.state.loading ? "Transferring..." : "Transfer"}</span>
+              <span style={{ color: "#ffffff" }}>
+                {this.state.loading ? "Transferring..." : "Transfer"}
+              </span>
             </button>
           </FormWrapper>
         </div>

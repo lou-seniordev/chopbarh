@@ -65,7 +65,9 @@ export default function Quickteller() {
             <StepText>Step 1:</StepText>
             <Info className="mb-4">
               Visit {"  "}
-              <button>www.quickteller.com/chopbarh</button>
+              <button style={{ color: "#ffffff" }}>
+                www.quickteller.com/chopbarh
+              </button>
             </Info>
             <StepText>Step 2:</StepText>
             <Info className="mb-4">

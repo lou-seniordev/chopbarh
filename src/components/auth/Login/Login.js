@@ -192,7 +192,9 @@ class Login extends Component {
                 disabled={this.props.loading}
                 className="mr-2"
               >
-                <span>{this.props.loading ? "Please wait..." : "Login"}</span>
+                <span style={{ color: "#ffffff" }}>
+                  {this.props.loading ? "Please wait..." : "Login"}
+                </span>
               </button>
             </FormAction>
             <SignUpSignal>

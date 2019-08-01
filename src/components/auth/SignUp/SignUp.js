@@ -209,7 +209,7 @@ class SignUp extends Component {
                   className="mr-2"
                   disabled={this.state.otpLoading}
                 >
-                  <span>
+                  <span style={{ color: "#ffffff" }}>
                     {this.state.otpLoading ? "Please wait..." : "Submit"}
                   </span>
                 </button>
@@ -248,7 +248,6 @@ class SignUp extends Component {
                     type="date"
                     value={this.state.dob}
                     name="dob"
-                    
                     onChange={this.handleInputChange}
                     required
                     max="2010-01-01"
@@ -259,7 +258,6 @@ class SignUp extends Component {
                   <select
                     value={this.state.sex}
                     name="sex"
-                    
                     onChange={this.handleInputChange}
                     required
                   >
@@ -309,7 +307,7 @@ class SignUp extends Component {
                 className="mr-2"
                 disabled={this.state.loading}
               >
-                <span>
+                <span style={{ color: "#ffffff" }}>
                   {this.state.loading ? "Please wait..." : "Create Account"}
                 </span>
               </button>

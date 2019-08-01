@@ -157,7 +157,7 @@ export default function ForgotPassword() {
           </FormItem>
           <FormAction>
             <button className="mr-2">
-              <span>Send</span>
+              <span style={{ color: "#ffffff" }}>Send</span>
             </button>
           </FormAction>
           <Divider>
@@ -169,7 +169,7 @@ export default function ForgotPassword() {
           </FormItem>
           <FormAction>
             <button className="mr-2">
-              <span>Send</span>
+              <span style={{ color: "#ffffff" }}>Send</span>
             </button>
           </FormAction>
         </div>

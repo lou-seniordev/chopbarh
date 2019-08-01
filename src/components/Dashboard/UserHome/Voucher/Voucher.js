@@ -243,7 +243,9 @@ class Voucher extends Component {
               onClick={this.handleLoadVoucher}
               disabled={this.state.voucherLoading}
             >
-              <span>{this.state.voucherLoading ? "Loading..." : "Load"}</span>
+              <span style={{ color: "#ffffff" }}>
+                {this.state.voucherLoading ? "Loading..." : "Load"}
+              </span>
             </Button>
           </ModalBody>
         </Modal>
@@ -270,7 +272,9 @@ class Voucher extends Component {
                 this.state.voucher.split(" ").join("").length !== 16
               }
             >
-              <span>{this.state.loading ? "Loading..." : "Load"}</span>
+              <span style={{ color: "#ffffff" }}>
+                {this.state.loading ? "Loading..." : "Load"}
+              </span>
             </button>
           </FormWrapper>
         </VoucherWrapper>
