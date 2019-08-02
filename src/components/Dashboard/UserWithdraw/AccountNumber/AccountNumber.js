@@ -175,7 +175,7 @@ class AccountNumber extends Component {
       account_number: this.state.account_number,
       amount: +this.state.amount - 50,
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
-      narration: "Chopbarh Payment",
+      narration: "CHOPBARH PAYMENT",
       currency: "NGN",
       reference: `${this.props.playerData.PhoneNum}-${reference}`
     };
@@ -230,16 +230,6 @@ class AccountNumber extends Component {
       account => account.account_number === this.state.selectedValue
     );
 
-    const postData = {
-      account_bank: bankInformation[0].code,
-      account_number: bankInformation[0].account_number,
-      amount: +this.state.authAmount - 50,
-      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
-      narration: "Chopbarh Payment",
-      currency: "NGN",
-      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
-    };
-
     let reference = getReference();
 
     const payload = {
@@ -252,6 +242,16 @@ class AccountNumber extends Component {
     };
 
     this.props.setWithdrawalHistory(payload);
+
+    const postData = {
+      account_bank: bankInformation[0].code,
+      account_number: bankInformation[0].account_number,
+      amount: +this.state.authAmount - 50,
+      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
+      narration: "CHOPBARH PAYMENT",
+      currency: "NGN",
+      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
+    };
 
     try {
       // prod https://api.ravepay.co/v2/gpx/transfers/create
