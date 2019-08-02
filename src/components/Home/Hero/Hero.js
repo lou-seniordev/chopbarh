@@ -202,6 +202,48 @@ const Button = styled.button`
   }
 `;
 
+const MainLink = styled.a`
+  all: unset;
+  border: 3px solid ${color.colorWhite};
+  padding: 1rem 1.3rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transform: skew(-20deg);
+  display: inline-block;
+  transition: all 0.2s;
+
+  span {
+    display: inline-block;
+    transform: skew(20deg);
+  }
+
+  &:hover {
+    transform: translateY(-3px) skew(-20deg);
+    color: ${color.colorWhite};
+    background: ${color.colorPrimaryHover};
+  }
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    font-size: 1.3rem;
+    padding: 0.7rem 1.3rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.small}) {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    font-size: 0.8rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    padding: 0.5rem 0.8rem;
+  }
+`;
+
+
 const Container = styled.div`
   position: relative;
 `;
@@ -265,9 +307,9 @@ export default function Hero() {
               the moment
             </ParagraphOne>
             <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-              <Button className="mr-lg-4 mr-md-4 mr-sm-2">
+              <MainLink href="https://downloads.chopbar.com/chopbarh.apk" target="_blank" className="mr-lg-4 mr-md-4 mr-sm-2">
                 <span style={{ color: '#ffffff' }}>Start Playing</span>{" "}
-              </Button>
+              </MainLink>
               <span style={{ cursor: "pointer" }}>
                 <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
                 <Image
