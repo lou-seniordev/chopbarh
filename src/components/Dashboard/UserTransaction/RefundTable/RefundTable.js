@@ -40,14 +40,7 @@ class RefundTable extends Component {
               <tbody>
                 {this.props.refundData.map((refund, index) => (
                   <tr key={index} style={{ textAlign: "center" }}>
-                    {refund.status === "SUCCESSFUL" ? (
-                      <td>{refund.status}</td>
-                    ) : (
-                      <td style={{ textAlign: "center" }}>
-                        <p>{refund.status}</p>
-                        <p>(Try Again)</p>
-                      </td>
-                    )}
+                    <td>{refund.status}</td>
                     <td>{refund.transaction_reference}</td>
                     <td>{`${new Date(
                       refund.refund_date
