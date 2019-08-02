@@ -66,7 +66,7 @@ export default function GTBank() {
         <AccordionItem uuid="32">
           <AccordionItemHeading>
             <AccordionItemButton>
-              Deposit with GTBank Mobial App
+              Deposit with GTBank Mobile App
             </AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel>
@@ -86,8 +86,8 @@ export default function GTBank() {
             <Info className="mb-4">Click on CHOPBARH.</Info>
             <StepText>Step 5:</StepText>
             <Info className="mb-4">
-              Enter your ChopBarh Login Phone Number: 08181062778 and the amount
-              you wish to deposit.
+              Enter your ChopBarh Login Phone Number and the amount you wish to
+              deposit.
             </Info>
             <StepText>Step 6:</StepText>
             <Info className="mb-4">

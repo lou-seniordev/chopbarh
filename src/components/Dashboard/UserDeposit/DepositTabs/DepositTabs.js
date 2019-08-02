@@ -33,7 +33,7 @@ export default function DepositTabs() {
               <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Banks</HeadingTwo>
+              <HeadingTwo>Other Banks</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>

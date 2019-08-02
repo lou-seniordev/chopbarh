@@ -10,6 +10,9 @@ import Card from "../Card/Card";
 import BankCharge from "../BankCharge/BankCharge";
 import Quickteller from "../Quickteller/Quickteller";
 import Voucher from "../../UserHome/Voucher/Voucher";
+import GTBank from "../GTBank/GTBank";
+import NIBBS from "../NIBBS/NIBBS";
+import ATM from "../ATM/ATM";
 
 export default function DepositSmallScreens() {
   return (
@@ -22,6 +25,38 @@ export default function DepositSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <Card />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>GT Bank</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <GTBank />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Other Banks</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <NIBBS />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Voucher</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <Voucher center="true" noHeader />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>ATM</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <ATM />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
@@ -39,32 +74,6 @@ export default function DepositSmallScreens() {
             <AccordionItemPanel>
               <Quickteller />
             </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Voucher</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <Voucher center="true" noHeader />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Banks</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>Banks</AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>GT Bank</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>GT Bank</AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>ATM</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>ATM</AccordionItemPanel>
           </AccordionItem>
         </Accordion>
       </div>
