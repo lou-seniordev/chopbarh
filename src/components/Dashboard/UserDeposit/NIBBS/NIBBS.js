@@ -123,7 +123,7 @@ export default function NIBBS() {
             </Info>
             <StepText>Step 4:</StepText>
             <Info className="mb-4">
-              As soon as the teller confirms the payment, your Bet9ja account
+              As soon as the teller confirms the payment, your Chopbarh account
               will be credited instantly.
             </Info>
             <StepText>Step 5:</StepText>

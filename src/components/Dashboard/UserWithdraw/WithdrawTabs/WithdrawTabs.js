@@ -21,22 +21,22 @@ export default function WithdrawTabs(props) {
         <Tabs>
           <TabList>
             <Tab>
-              <HeadingTwo>AZA</HeadingTwo>
+              <HeadingTwo>AZA(Bank Account)</HeadingTwo>
             </Tab>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>Paga</HeadingTwo>
-            </Tab>
+            </Tab> */}
           </TabList>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <AccountNumber />
             </div>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Paga />
             </div>
-          </TabPanel>
+          </TabPanel> */}
         </Tabs>
       </div>
     </WithdrawTabsWrapper>
