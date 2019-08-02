@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import color from "./colors";
 import breakPoints from "./breakpoints";
-import userBG from "../assets/img/user.png";
 
 export const AuthWrapper = styled.div`
   display: grid;
@@ -35,7 +34,7 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.div`
   position: absolute;
-  background-image: url(${userBG});
+  background-image: url(${`https://res.cloudinary.com/chopbarh/image/upload/v1564747890/Landing%20Page%20Assets/user_juzpcq.png`});
   background-size: cover;
   top: 0;
   left: 0;

@@ -7,11 +7,6 @@ import { Down } from "grommet-icons";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
-import slider1 from "../../assets/img/slider_1.png";
-import sliderImage1 from "../../assets/img/SliderImage1.jpg";
-import sliderImage2 from "../../assets/img/SliderImage2.jpg";
-import sliderImage3 from "../../assets/img/SliderImage3.jpg";
-import sliderImage4 from "../../assets/img/SliderImage4.jpg";
 import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore.png";
 
@@ -161,46 +156,46 @@ const SliderContent = styled.div`
   }
 `;
 
-const Button = styled.button`
-  all: unset;
-  border: 3px solid ${color.colorWhite};
-  padding: 1rem 1.3rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  transform: skew(-20deg);
-  display: inline-block;
-  transition: all 0.2s;
+// const Button = styled.button`
+//   all: unset;
+//   border: 3px solid ${color.colorWhite};
+//   padding: 1rem 1.3rem;
+//   font-size: 1.5rem;
+//   font-weight: 600;
+//   transform: skew(-20deg);
+//   display: inline-block;
+//   transition: all 0.2s;
 
-  span {
-    display: inline-block;
-    transform: skew(20deg);
-  }
+//   span {
+//     display: inline-block;
+//     transform: skew(20deg);
+//   }
 
-  &:hover {
-    transform: translateY(-3px) skew(-20deg);
-    color: ${color.colorWhite};
-    background: ${color.colorPrimaryHover};
-  }
+//   &:hover {
+//     transform: translateY(-3px) skew(-20deg);
+//     color: ${color.colorWhite};
+//     background: ${color.colorPrimaryHover};
+//   }
 
-  @media only screen and (max-width: ${breakPoints.medium}) {
-    font-size: 1.3rem;
-    padding: 0.7rem 1.3rem;
-  }
+//   @media only screen and (max-width: ${breakPoints.medium}) {
+//     font-size: 1.3rem;
+//     padding: 0.7rem 1.3rem;
+//   }
 
-  @media only screen and (max-width: ${breakPoints.small}) {
-    font-size: 0.9rem;
-    margin-right: 0.5rem;
-    padding: 0.5rem 1rem;
-  }
+//   @media only screen and (max-width: ${breakPoints.small}) {
+//     font-size: 0.9rem;
+//     margin-right: 0.5rem;
+//     padding: 0.5rem 1rem;
+//   }
 
-  @media only screen and (max-width: ${breakPoints.smaller}) {
-    font-size: 0.8rem;
-  }
+//   @media only screen and (max-width: ${breakPoints.smaller}) {
+//     font-size: 0.8rem;
+//   }
 
-  @media only screen and (max-width: ${breakPoints.smallest}) {
-    padding: 0.5rem 0.8rem;
-  }
-`;
+//   @media only screen and (max-width: ${breakPoints.smallest}) {
+//     padding: 0.5rem 0.8rem;
+//   }
+// `;
 
 const MainLink = styled.a`
   all: unset;
@@ -211,6 +206,7 @@ const MainLink = styled.a`
   transform: skew(-20deg);
   display: inline-block;
   transition: all 0.2s;
+  cursor: pointer;
 
   span {
     display: inline-block;
@@ -242,7 +238,6 @@ const MainLink = styled.a`
     padding: 0.5rem 0.8rem;
   }
 `;
-
 
 const Container = styled.div`
   position: relative;
@@ -307,32 +302,42 @@ export default function Hero() {
               the moment
             </ParagraphOne>
             <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-              <MainLink href="https://downloads.chopbar.com/chopbarh.apk" target="_blank" className="mr-lg-4 mr-md-4 mr-sm-2">
-                <span style={{ color: '#ffffff' }}>Start Playing</span>{" "}
+              <MainLink
+                href="https://downloads.chopbarh.com/chopbarh.apk"
+                target="_blank"
+                className="mr-lg-4 mr-md-4 mr-sm-2"
+              >
+                <span style={{ color: "#ffffff" }}>Start Playing</span>{" "}
               </MainLink>
               <span style={{ cursor: "pointer" }}>
                 <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                <Image
-                  src={AppStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
-                  alt="App Store"
-                /></a>
+                  <Image
+                    src={AppStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+                    alt="App Store"
+                  />
+                </a>
               </span>
               <span style={{ cursor: "pointer" }}>
                 <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
-                <Image
-                  src={PlayStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2"
-                  alt="Play Store"
-                /></a>
+                  <Image
+                    src={PlayStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2"
+                    alt="Play Store"
+                  />
+                </a>
               </span>
             </div>
           </SliderContent>
-          <SliderImage className="d-block" src={slider1} alt="User" />
+          <SliderImage
+            className="d-block"
+            src="https://res.cloudinary.com/chopbarh/image/upload/v1564748049/Landing%20Page%20Assets/slider_1_vfw3gc.png"
+            alt="User"
+          />
         </div>
         <div
           style={{
-            background: `url('${sliderImage1}') ${
+            background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747886/Landing%20Page%20Assets/SliderImage1_byohor.jpg') ${
               color.colorPrimary
             } no-repeat center center`,
             backgroundSize: "cover"
@@ -346,7 +351,7 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage2}') ${
+            background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage2_hkx0ey.jpg') ${
               color.colorPrimary
             } no-repeat center center`,
             backgroundSize: "cover",
@@ -362,7 +367,7 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage3}') ${
+            background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage3_q37kzi.jpg') ${
               color.colorPrimary
             } no-repeat center center`,
             height: "100vh",
@@ -377,7 +382,7 @@ export default function Hero() {
         </div>
         <div
           style={{
-            background: `url('${sliderImage4}') no-repeat center center`,
+            background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747893/Landing%20Page%20Assets/SliderImage4_pjltmr.jpg') no-repeat center center`,
             height: "100vh",
             backgroundSize: "cover"
           }}
