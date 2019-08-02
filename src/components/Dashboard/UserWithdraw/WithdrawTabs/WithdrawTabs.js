@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AccountNumber from "../AccountNumber/AccountNumber";
-import Paga from "../Paga/Paga";
+// import Paga from "../Paga/Paga";
 
 const WithdrawTabsWrapper = styled.div`
   display: flex;
