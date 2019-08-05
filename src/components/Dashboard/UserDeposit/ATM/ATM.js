@@ -68,7 +68,7 @@ export default function ATM() {
       </Info>
       <StepText>Step 6:</StepText>
       <Info className="mb-4">
-        You will then be prompted for a Merchant Code
+        You will then be prompted for a Merchant Code. Enter 04366901 as your Merchant Code and press Enter/Proceed
       </Info>
       <StepText>Step 7:</StepText>
       <Info className="mb-4">
