@@ -36,7 +36,7 @@ const ErrorBoundaryWrapper = styled.div`
   }
 
   a {
-    margin: 2rem auto;
+    margin: 3rem auto;
     display: block;
     background: ${color.colorPrimary};
     color: #fff;
@@ -71,8 +71,10 @@ export default class ErrorBoundary extends Component {
         <ErrorBoundaryWrapper>
           <div>
             <h3>Ooops!</h3>
-            <p>Something went wrong</p>
-            <Link to="/">Go to Homepage</Link>
+            <p>An Error Occured!</p>
+            <Link to="/" onClick={this.forceUpdate}>
+              Go to Homepage
+            </Link>
           </div>
         </ErrorBoundaryWrapper>
       );
