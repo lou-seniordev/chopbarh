@@ -93,7 +93,7 @@ export default function Footer() {
               <span>Responsible Gaming</span>
             </p> */}
             <p>
-              <span>Become a Recaharge Distributor</span>
+              <span>Become a Recharge Distributor</span>
             </p>
           </FooterLinkContainer>
         </div>
@@ -124,9 +124,9 @@ export default function Footer() {
             <p>Contact Us</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            <p>Telephone: 09038764982</p>
-            <p>Email: help@chopbarh.com</p>
-            <p>&copy; 2019</p>
+            <p>Telephone: 0809-249-2331</p>
+            <p>Email: support@chopbarh.com</p>
+            <p>&copy; {new Date().getFullYear()}</p>
           </FooterLinkContainer>
         </div>
       </FooterContainer>
