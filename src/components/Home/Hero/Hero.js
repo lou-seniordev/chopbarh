@@ -100,20 +100,14 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    height: 3.2rem;
-    width: 10rem;
     margin-top: 0.26rem;
     margin-right: 0.3rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
-    height: 3rem;
-    width: 10rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smallest}) {
-    height: 3rem;
-    width: 10rem;
   }
 `;
 
@@ -302,11 +296,28 @@ export default function Hero() {
             backgroundSize: "cover"
           }}
         >
-          {/* <div className="center">
-          <h1>title</h1>
-          <p>description</p>
-          <button>button</button>
-        </div> */}
+          <SliderContent className="text-center">
+            <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+                  <Image
+                    src={AppStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+                    alt="App Store"
+                  />
+                </a>
+              </span>
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://downloads.chopbarh.com/chopbarh.apk">
+                  <Image
+                    src={PlayStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2"
+                    alt="Play Store"
+                  />
+                </a>
+              </span>
+            </div>
+          </SliderContent>
         </div>
         <div
           style={{
@@ -349,58 +360,60 @@ export default function Hero() {
             background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage3_q37kzi.jpg') ${
               color.colorPrimary
             } no-repeat center center`,
-            height: "100vh",
             backgroundSize: "cover"
           }}
         >
-          <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-            <span style={{ cursor: "pointer" }}>
-              <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                <Image
-                  src={AppStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
-                  alt="App Store"
-                />
-              </a>
-            </span>
-            <span style={{ cursor: "pointer" }}>
-              <a href="https://downloads.chopbarh.com/chopbarh.apk">
-                <Image
-                  src={PlayStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2"
-                  alt="Play Store"
-                />
-              </a>
-            </span>
-          </div>
+          <SliderContent className="text-center">
+            <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+                  <Image
+                    src={AppStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+                    alt="App Store"
+                  />
+                </a>
+              </span>
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://downloads.chopbarh.com/chopbarh.apk">
+                  <Image
+                    src={PlayStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2"
+                    alt="Play Store"
+                  />
+                </a>
+              </span>
+            </div>
+          </SliderContent>
         </div>
         <div
           style={{
             background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747893/Landing%20Page%20Assets/SliderImage4_pjltmr.jpg') no-repeat center center`,
-            height: "100vh",
             backgroundSize: "cover"
           }}
         >
-          <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-            <span style={{ cursor: "pointer" }}>
-              <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                <Image
-                  src={AppStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
-                  alt="App Store"
-                />
-              </a>
-            </span>
-            <span style={{ cursor: "pointer" }}>
-              <a href="https://downloads.chopbarh.com/chopbarh.apk">
-                <Image
-                  src={PlayStoreButton}
-                  className="mr-lg-4 mr-md-4 mr-sm-2"
-                  alt="Play Store"
-                />
-              </a>
-            </span>
-          </div>
+          <SliderContent className="text-center">
+            <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+                  <Image
+                    src={AppStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+                    alt="App Store"
+                  />
+                </a>
+              </span>
+              <span style={{ cursor: "pointer" }}>
+                <a href="https://downloads.chopbarh.com/chopbarh.apk">
+                  <Image
+                    src={PlayStoreButton}
+                    className="mr-lg-4 mr-md-4 mr-sm-2"
+                    alt="Play Store"
+                  />
+                </a>
+              </span>
+            </div>
+          </SliderContent>
         </div>
       </Slider>
     </Container>
