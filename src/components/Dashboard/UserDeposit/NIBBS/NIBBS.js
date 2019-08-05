@@ -10,6 +10,8 @@ import {
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
+import "react-accessible-accordion/dist/fancy-example.css";
+
 const NIBBSWrapper = styled.div`
   text-align: left;
 

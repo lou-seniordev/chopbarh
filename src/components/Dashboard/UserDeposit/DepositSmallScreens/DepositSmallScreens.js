@@ -14,6 +14,8 @@ import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
 
+import "react-accessible-accordion/dist/fancy-example.css";
+
 export default function DepositSmallScreens() {
   return (
     <div className="container p-0 my-5 px-1">

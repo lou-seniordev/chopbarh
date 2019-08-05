@@ -32,6 +32,8 @@ import {
   setWithdrawalBankAccountData
 } from "../../../../store/actions/withdrawalAccountActions";
 
+import "react-accessible-accordion/dist/fancy-example.css";
+
 const FormWrapper = styled(Form)`
   min-height: 20rem;
   margin-bottom: 3.2rem;

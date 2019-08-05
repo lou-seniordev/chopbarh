@@ -9,6 +9,8 @@ import {
 import AccountNumber from "../AccountNumber/AccountNumber";
 // import Paga from "../Paga/Paga";
 
+import "react-accessible-accordion/dist/fancy-example.css";
+
 export default function WithdrawSmallScreens() {
   return (
     <div className="container p-0 my-5 px-1">

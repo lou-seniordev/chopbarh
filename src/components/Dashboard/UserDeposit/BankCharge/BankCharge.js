@@ -39,6 +39,8 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 import SubmitBirthday from "./SubmitBirthday/SubmitBirthday";
 import SubmitPhone from "./SubmitPhone/SubmitPhone";
 
+import "react-accessible-accordion/dist/fancy-example.css";
+
 function referenceId() {
   let text = "";
   let possible =
