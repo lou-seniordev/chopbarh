@@ -434,7 +434,7 @@ class AccountNumber extends Component {
             transform: 'translateY(-50%)'
           }}
         >
-          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
             <p className="mt-4">
               This action will remove this card from your account. Do you want
               to continue?

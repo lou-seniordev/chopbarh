@@ -233,10 +233,11 @@ class Voucher extends Component {
           isOpen={this.state.voucherModal}
           toggle={this.toggleVoucherModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ minHeight: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "7rem" }}>
             <ModalHeader toggle={this.toggleVoucherModal} />
             <p>Load &#8358;{this.state.voucherValue} Voucher?</p>
             <Button

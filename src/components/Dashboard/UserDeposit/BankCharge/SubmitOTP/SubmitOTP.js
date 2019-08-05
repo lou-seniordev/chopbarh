@@ -1,13 +1,10 @@
 import React, { Component, memo } from "react";
 import { withRouter } from "react-router";
+import styled from "styled-components";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  Form,
-  FormItem,
-  FormSubmitButton
-} from "../../../../styles/CardCharge";
+import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
@@ -15,6 +12,10 @@ import {
 } from "../../../../../store/actions/modalActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import { setBankAccountData } from "../../../../../store/actions/bankAccountActions";
+
+const Form = styled.form`
+  min-height: 12rem;
+`;
 
 class SubmitOTP extends Component {
   state = {

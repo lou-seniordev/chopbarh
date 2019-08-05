@@ -340,10 +340,11 @@ class BankCharge extends Component {
           isOpen={this.state.removeAccountModal}
           toggle={this.toggleRemoveAccount}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
             <p className="mt-4">
               This action will remove this card from your account. Do you want
               to continue?
@@ -365,10 +366,11 @@ class BankCharge extends Component {
           isOpen={this.props.otpModal}
           toggle={this.props.closeOTPModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
             <SubmitOTP />
           </ModalBody>
         </Modal>
@@ -376,10 +378,11 @@ class BankCharge extends Component {
           isOpen={this.props.birthdayModal}
           toggle={this.props.closeBirthdayModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
             <SubmitBirthday />
           </ModalBody>
         </Modal>
@@ -387,10 +390,11 @@ class BankCharge extends Component {
           isOpen={this.props.phoneModal}
           toggle={this.props.closePhoneModal}
           style={{
-            marginTop: "22rem"
+           top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
             <SubmitPhone />
           </ModalBody>
         </Modal>
@@ -398,7 +402,8 @@ class BankCharge extends Component {
           isOpen={this.state.modalOpen}
           toggle={this.toggleModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
           <ModalBody

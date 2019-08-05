@@ -373,7 +373,7 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={true}
+          isOpen={this.props.pinModal}
           toggle={this.props.closePinModal}
           style={{
             top: "50%",

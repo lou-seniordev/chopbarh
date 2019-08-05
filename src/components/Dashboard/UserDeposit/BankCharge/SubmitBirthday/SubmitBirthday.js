@@ -1,19 +1,20 @@
 import React, { Component, memo } from "react";
 import { withRouter } from "react-router";
+import styled from "styled-components";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  Form,
-  FormItem,
-  FormSubmitButton
-} from "../../../../styles/CardCharge";
+import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
   openPhoneModal,
   closeBirthdayModal
 } from "../../../../../store/actions/modalActions";
+
+const Form = styled.form`
+  min-height: 12rem;
+`;
 
 class SubmitBirthday extends Component {
   state = {
