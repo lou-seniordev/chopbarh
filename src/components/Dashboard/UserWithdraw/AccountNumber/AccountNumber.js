@@ -430,7 +430,8 @@ class AccountNumber extends Component {
           isOpen={this.state.removeWithdrawalBankAccountModal}
           toggle={this.toggleRemoveWithdrawalBankAccount}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: 'translateY(-50%)'
           }}
         >
           <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
@@ -457,7 +458,8 @@ class AccountNumber extends Component {
           isOpen={this.state.modal}
           toggle={this.toggleModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: 'translateY(-50%)'
           }}
         >
           <ModalBody

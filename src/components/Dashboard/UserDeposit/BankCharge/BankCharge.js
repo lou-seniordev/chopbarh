@@ -89,12 +89,14 @@ class BankCharge extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      this.props.bankAccount.length &&
+      try {
+        this.props.bankAccount.length &&
         this.setState({
           selectedValue: this.props.bankAccount[0].auth_code,
           bankName: this.props.bankAccount[0].bank
         });
-    }
+      } catch(err) {}
+      }
   };
 
   toggleModal = () => {

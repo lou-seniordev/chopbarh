@@ -85,8 +85,10 @@ class Card extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      this.props.creditCard.length &&
-        this.setState({ selectedValue: this.props.creditCard[0].auth_code });
+      try {
+        this.props.creditCard.length &&
+          this.setState({ selectedValue: this.props.creditCard[0].auth_code });
+      } catch (err) {}
     }
   };
 
@@ -178,7 +180,8 @@ class Card extends Component {
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: Number(this.state.authAmount) >= 2500
+      amount:
+        Number(this.state.authAmount) >= 2500
           ? (Number(this.state.authAmount) + 100) * 100
           : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
@@ -551,7 +554,7 @@ class Card extends Component {
                               <Button
                                 id="Popover"
                                 type="button"
-                                className="mb-lg-2 mb-md-2 mb-sm-3 ml-2"
+                                className="mb-lg-2 mb-md-2 mb-sm-5 ml-2"
                                 onClick={this.toggleRemoveCard}
                                 disabled={
                                   card.auth_code !== this.state.selectedValue
