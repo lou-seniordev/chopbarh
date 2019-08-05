@@ -86,9 +86,12 @@ class Card extends Component {
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
+        console.log("Card Length");
         this.props.creditCard.length &&
           this.setState({ selectedValue: this.props.creditCard[0].auth_code });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -347,10 +350,11 @@ class Card extends Component {
           isOpen={this.state.removeCardModal}
           toggle={this.toggleRemoveCard}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center p-4" style={{ height: "20vh" }}>
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
             <p className="mt-4">
               This action will remove this card from your account. Do you want
               to continue?
@@ -369,13 +373,14 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.pinModal}
+          isOpen={true}
           toggle={this.props.closePinModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
             <SubmitPin />
           </ModalBody>
         </Modal>
@@ -383,10 +388,11 @@ class Card extends Component {
           isOpen={this.props.otpModal}
           toggle={this.props.closeOTPModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
-          <ModalBody className="text-center" style={{ height: "20vh" }}>
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
             <SubmitOTP />
           </ModalBody>
         </Modal>
@@ -394,12 +400,13 @@ class Card extends Component {
           isOpen={this.state.modalOpen}
           toggle={this.toggleModal}
           style={{
-            marginTop: "22rem"
+            top: "50%",
+            transform: "translateY(-50%)"
           }}
         >
           <ModalBody
             className="text-center mt-5 mb-5"
-            style={{ minHeight: "20vh" }}
+            style={{ minHeight: "5rem" }}
           >
             {this.state.amount ? (
               <>

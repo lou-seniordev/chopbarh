@@ -3,11 +3,8 @@ import { withRouter } from "react-router";
 import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  Form,
-  FormItem,
-  FormSubmitButton
-} from "../../../../styles/CardCharge";
+import styled from "styled-components";
+import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
@@ -22,6 +19,10 @@ import {
   setCreditCardData,
   fetchCreditCardData
 } from "../../../../../store/actions/creditCardActions";
+
+const Form = styled.form`
+  min-height: 12rem;
+`;
 
 // sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
 class SubmitPin extends Component {

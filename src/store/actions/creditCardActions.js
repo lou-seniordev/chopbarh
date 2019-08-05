@@ -29,6 +29,7 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
     // console.log(data);
     if (data.length) {
       dispatch(fetchCreditCardSuccess(data[0].data));
+      console.log(data[0].data);
     } else {
       dispatch(fetchCreditCardFail());
     }

@@ -132,6 +132,10 @@ class Login extends Component {
           isOpen={this.state.formErrorModal}
           toggle={this.toggleformErrorModal}
           className="pt-5 mt-4"
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
         >
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
@@ -142,6 +146,10 @@ class Login extends Component {
           isOpen={this.state.accountErrorModal}
           toggle={this.toggleAccountErrorModal}
           className="pt-5 mt-4"
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
         >
           <ModalBody className="text-center">
             <h2>Ooops!</h2>
