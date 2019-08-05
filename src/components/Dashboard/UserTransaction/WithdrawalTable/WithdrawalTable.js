@@ -41,14 +41,15 @@ class WithdrawalTable extends Component {
               <tbody>
                 {this.props.withdrawalData.map((withdrawal, index) => (
                   <tr key={index} style={{ textAlign: "center" }}>
-                    {withdrawal.status === "SUCCESSFUL" ? (
+                    {/* {withdrawal.status === "SUCCESSFUL" ? (
                       <td>{withdrawal.status}</td>
                     ) : (
                       <td style={{ textAlign: "center" }}>
                         <p>{withdrawal.status}</p>
                         <p>(Try Again)</p>
                       </td>
-                    )}
+                    )} */}
+                    <td>{withdrawal.status}</td>
                     <td>{withdrawal.transaction_reference}</td>
                     <td>{`${new Date(
                       withdrawal.withdrawal_date
