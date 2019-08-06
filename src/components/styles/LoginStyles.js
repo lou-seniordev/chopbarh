@@ -105,6 +105,7 @@ export const FormAction = styled.div`
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
+      -webkit-text-fill-color: #ffffff;
 
     @media only screen and (max-width: ${breakPoints.mediumLite}) {
       align-self: flex-start;
@@ -117,6 +118,7 @@ export const FormAction = styled.div`
       display: inline-block;
       transform: skew(20deg);
       color: #fff;
+        -webkit-text-fill-color: #ffffff;
 
       @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
         color: #ffffff;
@@ -141,6 +143,7 @@ export const Button = styled.a`
   background: ${color.colorPrimary};
   font-size: 1.3rem;
   z-index: 200;
+    -webkit-text-fill-color: #ffffff;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     align-self: flex-start;
@@ -153,6 +156,7 @@ export const Button = styled.a`
     display: inline-block;
     transform: skew(20deg);
     color: #fff;
+      -webkit-text-fill-color: #ffffff;
   }
 
   &:hover {
@@ -173,6 +177,7 @@ export const SignUpSignal = styled.div`
     display: inline-block;
     transition: all 0.2s;
     color: ${color.colorWhite};
+      -webkit-text-fill-color: #ffffff;
     background: ${color.colorPrimary};
     font-size: 1.3rem;
     z-index: 200;
@@ -189,6 +194,7 @@ export const SignUpSignal = styled.div`
       display: inline-block;
       transform: skew(20deg);
       color: #fff;
+        -webkit-text-fill-color: #ffffff;
     }
 
     &:hover {

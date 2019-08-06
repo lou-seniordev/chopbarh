@@ -151,6 +151,12 @@ class Card extends Component {
       return;
     }
 
+    if (+this.state.authAmount < 50) {
+      toast.error(`Minimum deposit is \u20a6${50}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     this.setState({ modalOpen: true });
   };
 
@@ -246,6 +252,12 @@ class Card extends Component {
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
       toast.error(`Form is not valid`);
+      return;
+    }
+
+    if (+this.state.amount < 50) {
+      toast.error(`Minimum deposit is \u20a6${50}`);
+      this.setState({ loading: false });
       return;
     }
 

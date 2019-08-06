@@ -16,6 +16,7 @@ export const FormSubmitButton = styled.button`
   transform: skew(-20deg) translateX(-50%);
   transition: all 0.2s;
   color: ${color.colorWhite};
+  -webkit-text-fill-color: #ffffff;
   background: ${color.colorPrimary};
   font-size: 1.3rem;
   z-index: 200;
@@ -28,6 +29,7 @@ export const FormSubmitButton = styled.button`
     display: inline-block;
     transform: skew(20deg);
     color: #fff;
+    -webkit-text-fill-color: #ffffff;
   }
 
   &:hover {
@@ -47,6 +49,7 @@ export const Button = styled.button`
   background: ${color.colorPrimary};
   font-size: 1.3rem;
   z-index: 200;
+  -webkit-text-fill-color: #ffffff;
 
   @media only screen and (max-width: ${breakPoints.mediumLite}) {
     font-size: 1.1rem;
@@ -56,6 +59,7 @@ export const Button = styled.button`
     display: inline-block;
     transform: skew(20deg);
     color: #fff;
+    -webkit-text-fill-color: #ffffff;
   }
 
   &:hover {

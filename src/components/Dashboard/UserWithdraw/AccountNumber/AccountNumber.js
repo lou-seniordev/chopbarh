@@ -252,7 +252,7 @@ class AccountNumber extends Component {
       seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
       narration: "CHOPBARH PAYMENT",
       currency: "NGN",
-      reference: `${this.props.playerData.PhoneNum}-${getReference()}`
+      reference: `${this.props.playerData.PhoneNum}-${reference}`
     };
 
     try {
@@ -431,7 +431,7 @@ class AccountNumber extends Component {
           toggle={this.toggleRemoveWithdrawalBankAccount}
           style={{
             top: "50%",
-            transform: 'translateY(-50%)'
+            transform: "translateY(-50%)"
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -459,7 +459,7 @@ class AccountNumber extends Component {
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: 'translateY(-50%)'
+            transform: "translateY(-50%)"
           }}
         >
           <ModalBody
@@ -797,78 +797,6 @@ class AccountNumber extends Component {
             )}
           </>
         )}
-        {/* {!this.state.dataLoading ? (
-          <>
-            {this.state.bankList ? (
-              <>
-                <FormWrapper onSubmit={this.handleSubmit}>
-                  <FormItem>
-                    <label>Bank</label>
-                    <select
-                      name="bank"
-                      value={this.state.bank}
-                      onChange={this.handleInputChange}
-                      required
-                    >
-                      {this.state.bankList.map(bank => (
-                        <option key={bank.Id} value={bank.Code}>
-                          {bank.Name}
-                        </option>
-                      ))}
-                    </select>
-                  </FormItem>
-                  <HalfColumn>
-                    <FormItem className="mr-3">
-                      <label>Account Number</label>
-                      <input
-                        type="text"
-                        value={this.state.account_number}
-                        onChange={this.handleInputChange}
-                        name="account_number"
-                        required
-                        placeholder="Account Number"
-                      />
-                    </FormItem>
-                    <FormItem>
-                      <label>Amount</label>
-                      <input
-                        type="text"
-                        value={this.state.amount}
-                        onChange={this.handleInputChange}
-                        name="amount"
-                        required
-                        placeholder="Amount(NGN)"
-                      />
-                    </FormItem>
-                  </HalfColumn>
-                  <FormSubmitButton
-                    type="submit"
-                    className="mr-2"
-                    disabled={this.state.loading}
-                  >
-                    <span>
-                      {this.state.loading ? "Processing..." : "Withdraw"}
-                    </span>
-                  </FormSubmitButton>
-                </FormWrapper>
-                <div className="text-center" style={{ color: "#000" }}>
-                  <p>
-                    **For all withdrawals there is a &#8358;50 deducted from
-                    your cash balance**
-                  </p>
-                </div>
-              </>
-            ) : (
-              <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
-                <p>Something went wrong</p>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
-            <Spinner />
-          </div>
-        )} */}
       </>
     );
   }
