@@ -8,6 +8,7 @@ import BankCharge from "../BankCharge/BankCharge";
 import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
+import RavePayment from "../Rave/Rave";
 
 const DepositTabsWrapper = styled.div`
   display: flex;
@@ -52,7 +53,9 @@ export default function DepositTabs() {
             </Tab>
           </TabList>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }} />
+            <div style={{ minHeight: "80vh" }}>
+              <RavePayment />
+            </div>
           </TabPanel>
           <TabPanel>
             <Card />
