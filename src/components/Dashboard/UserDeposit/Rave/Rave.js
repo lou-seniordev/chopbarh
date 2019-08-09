@@ -53,7 +53,7 @@ class RavePayment extends Component {
       amount: this.state.amount,
       channel: "Card",
       transaction_date: new Date().toISOString(),
-      fees: "--",
+      fees: "None",
       reference: "--",
       status: "--",
       refId: `${this.props.playerData.PhoneNum}-${reference}`
@@ -73,9 +73,10 @@ class RavePayment extends Component {
       country: "NG",
       currency: "NGN",
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
+      redirect_url: "https://www.chopbarh.com/user",
       onclose: function() {},
       callback: function(response) {
-        let flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a 					server page to complete status check.
+        // let flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a 					server page to complete status check.
         // console.log("This is the response returned after a charge", response);
         if (
           response.tx.chargeResponse == "00" ||
