@@ -26,6 +26,14 @@ export default function DepositSmallScreens() {
               <AccordionItemButton>Card</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
+              <div style={{ minHeight: "80vh" }} />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Paystack</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
               <Card />
             </AccordionItemPanel>
           </AccordionItem>

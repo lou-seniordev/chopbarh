@@ -30,6 +30,9 @@ export default function DepositTabs() {
               <HeadingTwo>Card</HeadingTwo>
             </Tab>
             <Tab>
+              <HeadingTwo>Paystack</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
             <Tab>
@@ -48,6 +51,9 @@ export default function DepositTabs() {
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
           </TabList>
+          <TabPanel>
+            <div style={{ minHeight: "80vh" }} />
+          </TabPanel>
           <TabPanel>
             <Card />
           </TabPanel>
