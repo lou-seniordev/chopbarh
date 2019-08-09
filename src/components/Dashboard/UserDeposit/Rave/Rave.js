@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-// import RavePaymentModal from "react-ravepayment";
+import {connect} from 'react-redux'
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 
 class RavePayment extends Component {
@@ -40,20 +40,22 @@ class RavePayment extends Component {
       return;
     }
 
+    let reference = this.getReference()
+
     window.getpaidSetup({
       PBFPubKey: this.state.key,
-      customer_email: this.state.email,
-      customer_firstname: "Chopbarh",
-      customer_lastname: "Tester",
+      customer_email: this.props.playerData.Email || this.state.email,
+      customer_firstname: this.props.playerData.FullName.split(' ')[0] || "Chopbarh",
+      customer_lastname: this.props.playerData.FullName.split(' ')[1] || "Tester",
       amount: Number(this.state.amount),
-      customer_phone: "234099940409",
+      customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
       currency: "NGN",
-      txref: this.getReference(),
+      txref: `${this.props.playerData.PhoneNum}-${reference}`,
       onclose: function() {},
       callback: function(response) {
         let flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a 					server page to complete status check.
-        console.log("This is the response returned after a charge", response);
+        // console.log("This is the response returned after a charge", response);
         if (
           response.tx.chargeResponse == "00" ||
           response.tx.chargeResponse == "0"
@@ -69,7 +71,7 @@ class RavePayment extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <FormItem>
             <label>Amount</label>
             <input
@@ -108,4 +110,8 @@ class RavePayment extends Component {
   }
 }
 
-export default RavePayment;
+const mapStateToProps = state => ({
+  playerData: state.player.playerData
+});
+
+export default connect(mapStateToProps)(RavePayment);

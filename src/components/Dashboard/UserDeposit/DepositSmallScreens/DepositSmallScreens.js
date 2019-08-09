@@ -13,6 +13,7 @@ import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
+import RavePayment from "../Rave/Rave";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -26,7 +27,7 @@ export default function DepositSmallScreens() {
               <AccordionItemButton>Card</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <div style={{ minHeight: "80vh" }} />
+              <RavePayment />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
