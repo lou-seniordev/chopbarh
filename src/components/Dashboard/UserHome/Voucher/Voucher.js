@@ -10,6 +10,7 @@ import {
   setVoucherHistory
 } from "../../../../store/actions/voucherActions";
 import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
+import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
 const VoucherWrapper = styled.div``;
 
@@ -109,6 +110,10 @@ class Voucher extends Component {
     voucherLoading: false
   };
 
+  componentDidMount = () => {
+    // this.props.setCoinBalance(100);
+  };
+
   toggleVoucherModal = () => {
     this.setState({ voucherModal: !this.state.voucherModal });
   };
@@ -157,7 +162,7 @@ class Voucher extends Component {
           paid_at: datePaid
         };
         this.props.setVoucherValue(data.data.value);
-        this.props.setCoinBalance(data.data.value);
+        // this.props.setCoinBalance(data.data.value);
         this.props.setVoucherHistory(payload);
         this.setState({
           loading: false,
@@ -165,6 +170,7 @@ class Voucher extends Component {
           voucherModal: false,
           voucher: ""
         });
+        this.props.fetchPlayerData();
       } else {
         this.setState({
           voucher: "",
@@ -291,7 +297,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setVoucherValue,
   setCoinBalance,
-  setVoucherHistory
+  setVoucherHistory,
+  fetchPlayerData
 };
 
 export default connect(
