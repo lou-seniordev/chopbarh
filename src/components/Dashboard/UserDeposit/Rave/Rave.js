@@ -48,8 +48,9 @@ class RavePayment extends Component {
       channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: "--",
-      reference: `${this.props.playerData.PhoneNum}-${reference}`,
-      status: "--"
+      reference: '--',
+      status: "--",
+      refId: `${this.props.playerData.PhoneNum}-${reference}`
     };
 
     this.props.setDepositHistory(historyObject);
