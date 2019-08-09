@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
+import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 class RavePayment extends Component {
   state = {
@@ -40,13 +41,26 @@ class RavePayment extends Component {
       return;
     }
 
-    let reference = this.getReference()
+    let reference = this.getReference();
+
+    const historyObject = {
+      amount: this.state.amount,
+      channel: "Card",
+      transaction_date: new Date().toISOString(),
+      fees: "--",
+      reference: `${this.props.playerData.PhoneNum}-${reference}`,
+      status: "--"
+    };
+
+    this.props.setDepositHistory(historyObject);
 
     window.getpaidSetup({
       PBFPubKey: this.state.key,
       customer_email: this.props.playerData.Email || this.state.email,
-      customer_firstname: this.props.playerData.FullName.split(' ')[0] || "Chopbarh",
-      customer_lastname: this.props.playerData.FullName.split(' ')[1] || "Tester",
+      customer_firstname:
+        this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
+      customer_lastname:
+        this.props.playerData.FullName.split(" ")[1] || "Tester",
       amount: Number(this.state.amount),
       customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
@@ -71,7 +85,7 @@ class RavePayment extends Component {
   render() {
     return (
       <div>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
             <input
@@ -114,4 +128,11 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData
 });
 
-export default connect(mapStateToProps)(RavePayment);
+const mapDispatchToProps = {
+  setDepositHistory
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RavePayment);
