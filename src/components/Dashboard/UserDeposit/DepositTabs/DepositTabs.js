@@ -31,10 +31,10 @@ export default function DepositTabs() {
               <HeadingTwo>Card</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Paystack</HeadingTwo>
+              <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>GT Bank</HeadingTwo>
+              <HeadingTwo>Flutterwave</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Other Banks</HeadingTwo>
@@ -53,16 +53,16 @@ export default function DepositTabs() {
             </Tab>
           </TabList>
           <TabPanel>
-            <div style={{ minHeight: "80vh" }}>
-              <RavePayment />
-            </div>
-          </TabPanel>
-          <TabPanel>
             <Card />
           </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <GTBank />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div style={{ minHeight: "80vh" }}>
+              <RavePayment />
             </div>
           </TabPanel>
           <TabPanel>

@@ -41,6 +41,12 @@ class RavePayment extends Component {
       return;
     }
 
+    if (+this.state.amount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     let reference = this.getReference();
 
     const historyObject = {
@@ -48,7 +54,7 @@ class RavePayment extends Component {
       channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: "--",
-      reference: '--',
+      reference: "--",
       status: "--",
       refId: `${this.props.playerData.PhoneNum}-${reference}`
     };
@@ -76,8 +82,10 @@ class RavePayment extends Component {
           response.tx.chargeResponse == "0"
         ) {
           // redirect to a success page
+          window.open("https://www/chopbarh.com/user");
         } else {
           // redirect to a failure page.
+          window.open("https://www/chopbarh.com/user");
         }
       }
     });

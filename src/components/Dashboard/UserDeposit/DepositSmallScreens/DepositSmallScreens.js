@@ -27,14 +27,6 @@ export default function DepositSmallScreens() {
               <AccordionItemButton>Card</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <RavePayment />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Paystack</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
               <Card />
             </AccordionItemPanel>
           </AccordionItem>
@@ -44,6 +36,14 @@ export default function DepositSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <GTBank />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Flutterwave</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <RavePayment />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
