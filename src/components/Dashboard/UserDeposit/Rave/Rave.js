@@ -6,7 +6,7 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 class RavePayment extends Component {
   state = {
-    key: "FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
+    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
     email: "chopbarh@mail.com",
     amount: ""
   };

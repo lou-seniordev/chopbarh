@@ -75,7 +75,7 @@ class AccountNumber extends Component {
     // }
 
     fetch(
-      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
       {
         headers: {
           "Content-Type": "application/json"
@@ -176,7 +176,7 @@ class AccountNumber extends Component {
       account_bank: this.state.bank,
       account_number: this.state.account_number,
       amount: +this.state.amount - 50,
-      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
+      seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
       narration: "CHOPBARH PAYMENT",
       currency: "NGN",
       reference: `${this.props.playerData.PhoneNum}-${reference}`
@@ -249,7 +249,7 @@ class AccountNumber extends Component {
       account_bank: bankInformation[0].code,
       account_number: bankInformation[0].account_number,
       amount: +this.state.authAmount - 50,
-      seckey: "FLWSECK-6c50f0fa49045876075058059855ff70-X",
+      seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
       narration: "CHOPBARH PAYMENT",
       currency: "NGN",
       reference: `${this.props.playerData.PhoneNum}-${reference}`
@@ -392,7 +392,7 @@ class AccountNumber extends Component {
     const postData = {
       recipientaccount: this.state.account_number,
       destbankcode: this.state.bank,
-      PBFPubKey: "FLWPUBK-e87a9fb00e960628ab7fe30288405116-X"
+      PBFPubKey: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X"
     };
 
     fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {

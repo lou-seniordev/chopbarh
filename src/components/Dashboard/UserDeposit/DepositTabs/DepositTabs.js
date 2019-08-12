@@ -27,49 +27,51 @@ export default function DepositTabs() {
       <div className="col-lg-10">
         <Tabs>
           <TabList>
-            <Tab>
-              <HeadingTwo>Card</HeadingTwo>
-            </Tab>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>GT Bank</HeadingTwo>
+            </Tab> */}
+            <Tab>
+              <HeadingTwo>Paystack</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Flutterwave</HeadingTwo>
+              <HeadingTwo>Bank Card</HeadingTwo>
             </Tab>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>Other Banks</HeadingTwo>
-            </Tab>
+            </Tab> */}
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>ATM</HeadingTwo>
+              <HeadingTwo>ATM Machine</HeadingTwo>
             </Tab>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>Account Number</HeadingTwo>
-            </Tab>
+            </Tab> */}
             <Tab>
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
           </TabList>
+          
           <TabPanel>
             <Card />
-          </TabPanel>
-          <TabPanel>
-            <div style={{ minHeight: "80vh" }}>
-              <GTBank />
-            </div>
           </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <RavePayment />
             </div>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
+            <div style={{ minHeight: "80vh" }}>
+              <GTBank />
+            </div>
+          </TabPanel> */}
+
+          {/* <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <NIBBS />
             </div>
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Voucher center="true" noHeader />
@@ -80,9 +82,9 @@ export default function DepositTabs() {
               <ATM />
             </div>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <BankCharge />
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel>
             <Quickteller />
           </TabPanel>

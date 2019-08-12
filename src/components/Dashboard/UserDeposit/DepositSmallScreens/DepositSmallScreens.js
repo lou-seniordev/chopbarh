@@ -24,7 +24,7 @@ export default function DepositSmallScreens() {
         <Accordion>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Card</AccordionItemButton>
+              <AccordionItemButton>Paystack</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <Card />
@@ -32,28 +32,29 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>GT Bank</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <GTBank />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Flutterwave</AccordionItemButton>
+              <AccordionItemButton>Bank Card</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <RavePayment />
             </AccordionItemPanel>
           </AccordionItem>
-          <AccordionItem>
+          {/* <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>GT Bank</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <GTBank />
+            </AccordionItemPanel>
+          </AccordionItem> */}
+
+          {/* <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>Other Banks</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <NIBBS />
             </AccordionItemPanel>
-          </AccordionItem>
+          </AccordionItem> */}
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>Voucher</AccordionItemButton>
@@ -64,7 +65,7 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>ATM</AccordionItemButton>
+              <AccordionItemButton>ATM Machine</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <ATM />
