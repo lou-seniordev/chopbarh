@@ -56,7 +56,8 @@ class RavePayment extends Component {
       fees: "None",
       reference: "--",
       status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`
+      refId: `${this.props.playerData.PhoneNum}-${reference}`,
+      gateway: 'Flutterwave'
     };
 
     this.props.setDepositHistory(historyObject);

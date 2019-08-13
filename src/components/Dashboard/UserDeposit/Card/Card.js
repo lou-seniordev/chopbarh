@@ -182,7 +182,8 @@ class Card extends Component {
       fees: this.state.authAmount < 2500 ? 0 : 100,
       reference: "--",
       status: "--",
-      refId
+      refId,
+      gateway: 'Paystack'
     };
 
     this.props.setDepositHistory(historyObject);
@@ -276,7 +277,8 @@ class Card extends Component {
       fees: this.state.amount < 2500 ? 0 : 100,
       reference: "--",
       status: "--",
-      refId
+      refId,
+      gateway: 'Paystack'
     };
 
     this.props.setDepositHistory(historyObject);

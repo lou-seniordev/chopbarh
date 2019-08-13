@@ -91,12 +91,12 @@ class BankCharge extends Component {
     if (this.props !== prevProps) {
       try {
         this.props.bankAccount.length &&
-        this.setState({
-          selectedValue: this.props.bankAccount[0].auth_code,
-          bankName: this.props.bankAccount[0].bank
-        });
-      } catch(err) {}
-      }
+          this.setState({
+            selectedValue: this.props.bankAccount[0].auth_code,
+            bankName: this.props.bankAccount[0].bank
+          });
+      } catch (err) {}
+    }
   };
 
   toggleModal = () => {
@@ -187,7 +187,8 @@ class BankCharge extends Component {
       fees: +this.state.authAmount < 2500 ? 0 : 100,
       reference: "--",
       status: "--",
-      refId
+      refId,
+      gateway: "Paystack"
     };
 
     this.props.setDepositHistory(historyObject);
@@ -280,7 +281,8 @@ class BankCharge extends Component {
       fees: +this.state.amount < 2500 ? 0 : 100,
       reference: "--",
       status: "--",
-      refId
+      refId,
+      gateway: "Paystack"
     };
 
     this.props.setDepositHistory(historyObject);
@@ -390,7 +392,7 @@ class BankCharge extends Component {
           isOpen={this.props.phoneModal}
           toggle={this.props.closePhoneModal}
           style={{
-           top: "50%",
+            top: "50%",
             transform: "translateY(-50%)"
           }}
         >
