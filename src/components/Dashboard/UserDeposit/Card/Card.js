@@ -183,7 +183,8 @@ class Card extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: 'Paystack'
+      gateway: 'Paystack',
+            made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
@@ -278,7 +279,8 @@ class Card extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: 'Paystack'
+      gateway: 'Paystack',
+            made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);

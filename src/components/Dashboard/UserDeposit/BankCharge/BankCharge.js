@@ -188,7 +188,8 @@ class BankCharge extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: "Paystack"
+      gateway: "Paystack",
+      made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
@@ -282,7 +283,8 @@ class BankCharge extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: "Paystack"
+      gateway: "Paystack",
+      made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
