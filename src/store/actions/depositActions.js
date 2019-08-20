@@ -74,7 +74,8 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
             status: "--",
-            refId: payload.refId
+            refId: payload.refId,
+            gateway: payload.gateway
           })
         });
       dispatch(setDepositHistorySuccess(docRef));
@@ -93,7 +94,8 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
               status: "--",
-              refId: payload.refId
+              refId: payload.refId,
+              gateway: payload.gateway
             }
           ]
         });
