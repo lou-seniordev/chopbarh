@@ -6,11 +6,12 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 class RavePayment extends Component {
   state = {
-    key: "FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
+    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
     email: "chopbarh@mail.com",
     amount: ""
   };
 
+  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
   getReference = () => {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -65,35 +66,40 @@ class RavePayment extends Component {
 
     window.getpaidSetup({
       PBFPubKey: this.state.key,
-      customer_email: this.props.playerData.Email || `${this.props.playerData.PhoneNum}@mail.com`,
+      customer_email:
+        this.props.playerData.Email ||
+        `${this.props.playerData.PhoneNum}@mail.com`,
       customer_firstname:
         this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
       customer_lastname:
-        this.props.playerData.FullName.split(" ")[1] || `${this.props.playerData.PhoneNum}`,
+        this.props.playerData.FullName.split(" ")[1] ||
+        `${this.props.playerData.PhoneNum}`,
       amount: Number(this.state.amount),
       customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
       currency: "NGN",
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
-      redirect_url: "https://www.chopbarh.com/user",
+      // redirect_url: "https://www.chopbarh.com/user",
       onclose: function() {},
       callback: function(response) {
-        // let flw_ref = response.tx.flwRef; // collect flwRef returned and pass to a 					server page to complete status check.
-        // console.log("This is the response returned after a charge", response);
+        let flw_ref = response.tx.flwRef;
+        console.log("This is the response returned after a charge", response);
         if (
           response.tx.chargeResponse == "00" ||
           response.tx.chargeResponse == "0"
         ) {
           // redirect to a success page
-          window.open("https://www/chopbarh.com/user");
+          // window.open("https://www.chopbarh.com/user");
+          // window.open("localhost:3000/user");
         } else {
           // redirect to a failure page.
-          window.open("https://www/chopbarh.com/user");
+          // window.open("https://www.chopbarh.com/user");
+          // window.open("localhost:3000/user");
         }
       }
     });
   };
-s
+
   render() {
     return (
       <div>
@@ -117,20 +123,6 @@ s
             <span>{this.state.loading ? "Please wait..." : "Load"}</span>
           </FormSubmitButton>
         </Form>
-        {/* <RavePaymentModal
-          text="Make Deposit"
-          class="payButton"
-          // metadata={[{ metaname: 'Device', metavalue: 'IPhone X' }]}
-          reference={this.getReference()}
-          disabled={true}
-          email={this.state.email}
-          amount={this.state.amount}
-          ravePubKey={this.state.key}
-          callback={this.callback}
-          close={this.close}
-          isProduction={true}
-          tag="button"
-        /> */}
       </div>
     );
   }
