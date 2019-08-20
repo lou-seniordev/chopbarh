@@ -86,11 +86,9 @@ class Card extends Component {
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
-        console.log("Card Length");
         this.props.creditCard.length &&
           this.setState({ selectedValue: this.props.creditCard[0].auth_code });
       } catch (err) {
-        console.log(err);
       }
     }
   };
@@ -151,8 +149,8 @@ class Card extends Component {
       return;
     }
 
-    if (+this.state.authAmount < 50) {
-      toast.error(`Minimum deposit is \u20a6${50}`);
+    if (+this.state.authAmount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
       this.setState({ loading: false });
       return;
     }
@@ -226,18 +224,6 @@ class Card extends Component {
 
       if (data.data.status === "success") {
         toast.info("Transaction is processing");
-
-        // const historyObject = {
-        //   ...data.data,
-        //   fees:
-        //     +data.data.amount / 100 < 2500
-        //       ? 0.015 * (+data.data.amount / 100)
-        //       : 100
-        // };
-        // const value = +data.data.amount / 100;
-
-        // this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
       } else {
         toast.error(`Transaction was not successful`);
       }
@@ -257,8 +243,8 @@ class Card extends Component {
       return;
     }
 
-    if (+this.state.amount < 50) {
-      toast.error(`Minimum deposit is \u20a6${50}`);
+    if (+this.state.amount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
       this.setState({ loading: false });
       return;
     }

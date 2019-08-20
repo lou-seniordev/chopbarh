@@ -6,7 +6,7 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 class RavePayment extends Component {
   state = {
-    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+    key: "FLWPUBK-e87a9fb00e960628ab7fe30288405116-X",
     email: "chopbarh@mail.com",
     amount: ""
   };
@@ -65,11 +65,11 @@ class RavePayment extends Component {
 
     window.getpaidSetup({
       PBFPubKey: this.state.key,
-      customer_email: this.props.playerData.Email || this.state.email,
+      customer_email: this.props.playerData.Email || `${this.props.playerData.PhoneNum}@mail.com`,
       customer_firstname:
         this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
       customer_lastname:
-        this.props.playerData.FullName.split(" ")[1] || "Tester",
+        this.props.playerData.FullName.split(" ")[1] || `${this.props.playerData.PhoneNum}`,
       amount: Number(this.state.amount),
       customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
@@ -93,7 +93,7 @@ class RavePayment extends Component {
       }
     });
   };
-
+s
   render() {
     return (
       <div>

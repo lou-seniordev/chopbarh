@@ -147,8 +147,8 @@ class BankCharge extends Component {
       return;
     }
 
-    if (+this.state.authAmount < 50) {
-      toast.error(`Minimum deposit is \u20a6${50}`);
+    if (+this.state.authAmount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
       this.setState({ loading: false });
       return;
     }
@@ -246,11 +246,11 @@ class BankCharge extends Component {
       return;
     }
 
-    // if (+this.state.amount < 50) {
-    //   toast.error(`Minimum deposit is \u20a6${50}`);
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (+this.state.amount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
 
     this.setState({ loading: false, modalOpen: true });
   };
