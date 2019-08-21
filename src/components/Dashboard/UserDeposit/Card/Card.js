@@ -88,8 +88,7 @@ class Card extends Component {
       try {
         this.props.creditCard.length &&
           this.setState({ selectedValue: this.props.creditCard[0].auth_code });
-      } catch (err) {
-      }
+      } catch (err) {}
     }
   };
 
@@ -181,8 +180,8 @@ class Card extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: 'Paystack',
-            made_by: this.props.playerData.PhoneNum
+      gateway: "Paystack",
+      made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
@@ -265,8 +264,8 @@ class Card extends Component {
       reference: "--",
       status: "--",
       refId,
-      gateway: 'Paystack',
-            made_by: this.props.playerData.PhoneNum
+      gateway: "Paystack",
+      made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
@@ -294,7 +293,7 @@ class Card extends Component {
     };
 
     this.props.setCreditCardCVV(this.state.cvv);
-
+    // sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
     try {
       const response = await fetch("https://api.paystack.co/charge", {
         method: "POST",

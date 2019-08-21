@@ -6,12 +6,12 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 class RavePayment extends Component {
   state = {
-    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+    key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
     email: "chopbarh@mail.com",
     amount: ""
   };
 
-  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
+  // key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
   getReference = () => {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -81,13 +81,23 @@ class RavePayment extends Component {
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
       // redirect_url: "https://www.chopbarh.com/user",
       onclose: function() {},
-      callback: function(response) {
+      callback: async response => {
         let flw_ref = response.tx.flwRef;
         console.log("This is the response returned after a charge", response);
         if (
           response.tx.chargeResponse == "00" ||
           response.tx.chargeResponse == "0"
         ) {
+          // const response = fetch("localhost:8080/ng/api/verify", {
+          //   method: "POST",
+          //   headers: {
+          //     Accept: "application/json",
+          //     "Content-Type": "application/json"
+          //   },
+          //   body: {
+          //     reference: flw_ref
+          //   }
+          // });
           // redirect to a success page
           // window.open("https://www.chopbarh.com/user");
           // window.open("localhost:3000/user");

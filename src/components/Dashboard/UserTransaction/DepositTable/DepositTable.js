@@ -42,7 +42,7 @@ class DepositTable extends Component {
                 {this.props.depositData.map((deposit, index) => (
                   <tr key={index} style={{ textAlign: "center" }}>
                     <td>{deposit.status}</td>
-                    <td>{deposit.transaction_reference}</td>
+                    <td>{deposit.refId}</td>
                     <td>{`${new Date(
                       deposit.deposit_date
                     ).toLocaleDateString()}`}</td>
