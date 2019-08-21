@@ -111,7 +111,6 @@ class Login extends Component {
             context.props.history.push("/user");
           }
         } else {
-          console.log("Catch else..");
           context.setState({ accountErrorModal: true });
           context.props.authFail();
         }

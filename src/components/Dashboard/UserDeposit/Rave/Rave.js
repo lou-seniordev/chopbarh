@@ -12,6 +12,7 @@ class RavePayment extends Component {
   };
 
   // key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
   getReference = () => {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -82,26 +83,31 @@ class RavePayment extends Component {
       // redirect_url: "https://www.chopbarh.com/user",
       onclose: function() {},
       callback: async response => {
-        let flw_ref = response.tx.flwRef;
+        let flw_ref = response.tx.txRef;
         console.log("This is the response returned after a charge", response);
         if (
-          response.tx.chargeResponse == "00" ||
-          response.tx.chargeResponse == "0"
+          response.tx.chargeResponseCode == "00" ||
+          response.tx.chargeResponseCode == "0"
         ) {
-          // const response = fetch("localhost:8080/ng/api/verify", {
-          //   method: "POST",
-          //   headers: {
-          //     Accept: "application/json",
-          //     "Content-Type": "application/json"
-          //   },
-          //   body: {
-          //     reference: flw_ref
-          //   }
-          // });
+          console.log("Success");
+          // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
+          const response = await fetch(
+            `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                ref: flw_ref
+              })
+            }
+          );
           // redirect to a success page
           // window.open("https://www.chopbarh.com/user");
           // window.open("localhost:3000/user");
         } else {
+          console.log("Fail");
           // redirect to a failure page.
           // window.open("https://www.chopbarh.com/user");
           // window.open("localhost:3000/user");
