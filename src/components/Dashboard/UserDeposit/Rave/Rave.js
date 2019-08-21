@@ -138,6 +138,16 @@ class RavePayment extends Component {
     });
   };
 
+  // Add new modal
+
+  // Add handleAuthSubmit
+
+  // Add selectedValue
+
+  // Add handleRadioChange
+
+  // Add hanldInputChange, authAmount
+
   render() {
     return (
       <>
