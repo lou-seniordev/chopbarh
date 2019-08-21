@@ -23,6 +23,7 @@ import withdrawalReducer from "./store/reducers/withdrawalReducer";
 import transferReducer from "./store/reducers/transferReducer";
 import withdrawalAccountReducer from "./store/reducers/withdrawalAccountReducer";
 import refundReducer from "./store/reducers/refundReducer";
+import raveCardReducer from "./store/reducers/raveCardReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -39,7 +40,8 @@ const rootReducer = combineReducers({
   withdrawal: withdrawalReducer,
   transfer: transferReducer,
   withdrawalAccount: withdrawalAccountReducer,
-  refunds: refundReducer
+  refunds: refundReducer,
+  raveCard: raveCardReducer
 });
 
 const composeEnhancers =
