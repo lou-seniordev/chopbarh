@@ -159,7 +159,7 @@ class RavePayment extends Component {
           body: JSON.stringify({
             SECKEY: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
             token: raveCardObject[0].auth_code,
-            currency: "NG",
+            currency: "NGN",
             amount: this.state.authAmount,
             email: `${this.props.playerData.PhoneNum}@mail.com`,
             txRef: `${this.props.playerData.PhoneNum}-${reference}`
