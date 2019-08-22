@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
-import { Spinner, Button } from "reactstrap";
+import { Spinner, Button, Modal, ModalBody } from "reactstrap";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
   Accordion,
@@ -15,10 +15,14 @@ import {
   FormItem,
   FormSubmitButton,
   ExistingCardForm,
-  ExistingCardFormItem
+  ExistingCardFormItem,
+  Button as FormElementButton
 } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
-import { fetchRaveCardData } from "../../../../store/actions/raveCardActions";
+import {
+  fetchRaveCardData,
+  removeRaveCard
+} from "../../../../store/actions/raveCardActions";
 import CreditCard from "./CreditCard/CreditCard";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -27,7 +31,11 @@ class RavePayment extends Component {
   state = {
     key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
     email: "chopbarh@mail.com",
-    amount: ""
+    amount: "",
+    selectedValue: null,
+    removeRaveCardModal: false,
+    authAmount: "",
+    last4Digits: ""
   };
 
   // key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
@@ -51,11 +59,81 @@ class RavePayment extends Component {
     this.setState({ [target.name]: target.value });
   };
 
+  componentDidUpdate = prevProps => {
+    if (this.props !== prevProps) {
+      try {
+        this.props.raveCard.length &&
+          this.setState({ selectedValue: this.props.raveCard[0].auth_code });
+      } catch (err) {}
+    }
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  handleRadioChange = value => {
+    this.setState({ selectedValue: value, last4Digits: "" });
+  };
+
+  toggleRemoveCard = () => {
+    this.setState({
+      removeRaveCardModal: !this.state.removeRaveCardModal
+    });
+  };
+
+  removeRaveCard = () => {
+    this.setState({ removeRaveCardModal: false });
+    this.props.removeRaveCard(null, this.state.selectedValue);
+  };
+
   formIsValid = ({ amount }) => {
     if (!isNaN(amount) !== true) {
       return false;
     }
     return true;
+  };
+
+  handleAuthSubmit = event => {
+    event.preventDefault();
+
+    const { authAmount, selectedValue } = this.state;
+
+    if (selectedValue === null) {
+      this.setState({ loading: false });
+      toast.error(`No Card was selected`);
+      return;
+    }
+
+    if (!isNaN(authAmount) !== true) {
+      this.setState({ loading: false });
+      toast.error(`Amount is not valid`);
+      return;
+    }
+
+    if (+this.state.authAmount < 100) {
+      toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    let reference = this.getReference();
+
+    const historyObject = {
+      amount: this.state.authAmount,
+      channel: "Card",
+      transaction_date: new Date().toISOString(),
+      fees: "None",
+      reference: "--",
+      status: "--",
+      refId: `${this.props.playerData.PhoneNum}-${reference}`,
+      gateway: "Flutterwave",
+      made_by: this.props.playerData.PhoneNum
+    };
+
+    this.props.setDepositHistory(historyObject);
+
+    // Fetch Flutterwave here
   };
 
   handleSubmit = event => {
@@ -138,19 +216,36 @@ class RavePayment extends Component {
     });
   };
 
-  // Add new modal
-
   // Add handleAuthSubmit
-
-  // Add selectedValue
-
-  // Add handleRadioChange
 
   // Add hanldInputChange, authAmount
 
   render() {
     return (
       <>
+        <Modal
+          isOpen={this.state.removeRaveCardModal}
+          toggle={this.toggleRemoveCard}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
+            <p className="mt-4">
+              This action will remove this card from your account. Do you want
+              to continue?
+            </p>
+            <div className="d-flex justify-content-center">
+              <FormElementButton className="mr-2" onClick={this.removeRaveCard}>
+                <span>Yes</span>
+              </FormElementButton>
+              <FormElementButton onClick={this.toggleRemoveCard}>
+                <span>No</span>
+              </FormElementButton>
+            </div>
+          </ModalBody>
+        </Modal>
         {this.props.loading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
@@ -169,7 +264,7 @@ class RavePayment extends Component {
                     <AccordionItemPanel>
                       <ExistingCardForm onSubmit={this.handleAuthSubmit}>
                         <RadioGroup
-                          name="creditCard"
+                          name="raveCard"
                           selectedValue={this.state.selectedValue}
                           onChange={this.handleRadioChange}
                         >
@@ -180,25 +275,25 @@ class RavePayment extends Component {
                             >
                               <Radio value={card.auth_code} />
                               <CreditCard
-                                  type={card.card_type}
-                                  number={card.last_digits}
-                                  expiry={card.expiry}
-                                />
+                                type={card.card_type}
+                                number={card.last_digits}
+                                expiry={card.expiry}
+                              />
                               <ExistingCardFormItem>
                                 <input
                                   onChange={this.handleInputChange}
                                   className="mt-lg-4 mt-md-3"
-                                  name="authCVV"
+                                  name="last4Digits"
                                   value={
                                     this.state.selectedValue === card.auth_code
-                                      ? this.state.authCVV
+                                      ? this.state.last4Digits
                                       : ""
                                   }
                                   disabled={
                                     this.state.selectedValue !== card.auth_code
                                   }
                                   minLength="1"
-                                  placeholder="CVV"
+                                  placeholder="Last 4 Card Digits"
                                 />
                               </ExistingCardFormItem>
                               <Button
@@ -311,7 +406,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setDepositHistory,
-  fetchRaveCardData
+  fetchRaveCardData,
+  removeRaveCard
 };
 
 export default connect(
