@@ -94,7 +94,7 @@ class RavePayment extends Component {
     return true;
   };
 
-  handleAuthSubmit = event => {
+  handleAuthSubmit = async event => {
     event.preventDefault();
 
     const { authAmount, selectedValue } = this.state;
@@ -117,21 +117,49 @@ class RavePayment extends Component {
       return;
     }
 
+    const raveCardObject = this.props.raveCard.filter(
+      card => card.auth_code === this.state.selectedValue
+    );
+
+    console.log(raveCardObject);
+
+    if (raveCardObject[0].last_digits !== this.state.last4Digits) {
+      // this.setState({ paying: false });
+      toast.error(`Last 4 digits is not correct`);
+      return;
+    }
+
     let reference = this.getReference();
 
-    const historyObject = {
-      amount: this.state.authAmount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: "None",
-      reference: "--",
-      status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`,
-      gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum
-    };
+    // try {
+    //   const historyObject = {
+    //     amount: this.state.authAmount,
+    //     channel: "Card",
+    //     transaction_date: new Date().toISOString(),
+    //     fees: "None",
+    //     reference: "--",
+    //     status: "--",
+    //     refId: `${this.props.playerData.PhoneNum}-${reference}`,
+    //     gateway: "Flutterwave",
+    //     made_by: this.props.playerData.PhoneNum
+    //   };
 
-    this.props.setDepositHistory(historyObject);
+    //   this.props.setDepositHistory(historyObject);
+
+    //   const response = await fetch('https://ravesandboxapi.flutterwave.com/flwv3-pug/getpaidx/api/tokenized/charge',
+    //   {method: 'POST', headers: {
+    //     'Content-Type': 'application/json'
+    //   }, body: JSON.stringify({
+    //     SECKEY: '',
+    //     token: '',
+    //     currency: 'NG',
+    //     amount: this.state.authAmount,
+    //     email: `${this.props.playerData.PhoneNum}@mail.com`,
+    //     txRef: `${this.props.playerData.PhoneNum}-${reference}`
+    //   })})
+    // } catch (err) {
+
+    // }
 
     // Fetch Flutterwave here
   };
