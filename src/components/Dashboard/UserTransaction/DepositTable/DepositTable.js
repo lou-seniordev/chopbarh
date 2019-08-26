@@ -53,7 +53,7 @@ class DepositTable extends Component {
                       {deposit.transaction_fees === "None" ||
                       deposit.transaction_fees === "--"
                         ? `\u20a6${0}`
-                        : `\u20a6${deposit.transaction_fees}`}
+                        : `\u20a6${Math.floor(deposit.transaction_fees)}`}
                     </td>
                     <td>
                       &#8358;
