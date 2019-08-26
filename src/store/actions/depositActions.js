@@ -104,7 +104,6 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       dispatch(setDepositHistorySuccess(docRef));
     }
   } catch (err) {
-    console.log(err);
     dispatch(setDepositHistoryFail());
   }
 };
