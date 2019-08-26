@@ -49,18 +49,10 @@ class DepositTable extends Component {
                     <td>{`${new Date(
                       deposit.deposit_date
                     ).toLocaleTimeString()}`}</td>
-                    {/* <td>
-                      &#8358;
-                      {+deposit.transaction_fees &&
-                      +deposit.transaction_fees < 100
-                        ? "None"
-                        : +deposit.transaction_fees}
-                    </td> */}
                     <td>
-                      {deposit.transaction_fees === 0
-                        ? "None"
-                        : deposit.transaction_fees === "None"
-                        ? "None"
+                      {deposit.transaction_fees === "None" ||
+                      deposit.transaction_fees === "--"
+                        ? `\u20a6${0}`
                         : `\u20a6${deposit.transaction_fees}`}
                     </td>
                     <td>
