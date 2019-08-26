@@ -73,9 +73,10 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             paid_at: payload.transaction_date,
             transaction_fees: payload.fees,
             transaction_reference: payload.reference,
-            status: "--",
+            status: "Pending",
             refId: payload.refId,
-            gateway: payload.gateway
+            gateway: payload.gateway,
+            customer_id: getState().player.playerData.PhoneNum
           })
         });
       dispatch(setDepositHistorySuccess(docRef));
@@ -87,15 +88,16 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
           id: getState().auth.id,
           data: [
             {
-              amount: payload.amount / 100,
+              amount: payload.amount,
               channel: payload.channel,
               deposit_date: payload.transaction_date,
               paid_at: payload.transaction_date,
               transaction_fees: payload.fees,
               transaction_reference: payload.reference,
-              status: "--",
+              status: "Pending",
               refId: payload.refId,
-              gateway: payload.gateway
+              gateway: payload.gateway,
+              customer_id: getState().player.playerData.PhoneNum
             }
           ]
         });
