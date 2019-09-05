@@ -115,7 +115,11 @@ export default function Footer() {
               <span target="Popover">Download</span>
             </p>
             <p>
-              <span>Talk to us</span>
+              <span>
+                <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
+                  Talk to us
+                </a>
+              </span>
             </p>
           </FooterLinkContainer>
         </div>
@@ -125,7 +129,12 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>Telephone: 0809-249-2331</p>
-            <p>Email: support@chopbarh.com</p>
+            <p>
+              Email:{" "}
+              <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
+                Please Click Here
+              </a>
+            </p>
             <p>&copy; {new Date().getFullYear()}</p>
           </FooterLinkContainer>
         </div>
