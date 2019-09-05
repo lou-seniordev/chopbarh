@@ -41,7 +41,8 @@ class DepositTable extends Component {
               <tbody>
                 {this.props.depositData.map((deposit, index) => (
                   <tr key={index} style={{ textAlign: "center" }}>
-                    <td>{deposit.status}</td>
+                    {deposit.status === 'Success' || deposit.status === 'success' || deposit.status === 'SUCCESSFUL' ? <td>SUCCESSFUL</td> : <td>{null}</td>}
+                    {/* <td>{deposit.status}</td> */}
                     <td>{deposit.refId}</td>
                     <td>{`${new Date(
                       deposit.deposit_date

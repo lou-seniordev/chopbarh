@@ -98,17 +98,6 @@ const Image = styled.img`
     height: 4rem;
     width: 15rem;
   }
-
-  @media only screen and (max-width: ${breakPoints.small}) {
-    margin-top: 0.26rem;
-    margin-right: 0.3rem;
-  }
-
-  @media only screen and (max-width: ${breakPoints.smaller}) {
-  }
-
-  @media only screen and (max-width: ${breakPoints.smallest}) {
-  }
 `;
 
 const SliderImage = styled.img`
