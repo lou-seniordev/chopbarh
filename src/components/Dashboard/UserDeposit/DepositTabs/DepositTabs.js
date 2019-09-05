@@ -14,7 +14,6 @@ const DepositTabsWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 5rem 2rem;
-  /* background: yellow; */
 `;
 
 const HeadingTwo = styled.h2`
@@ -27,18 +26,18 @@ export default function DepositTabs() {
       <div className="col-lg-10">
         <Tabs>
           <TabList>
-            {/* <Tab>
-              <HeadingTwo>GT Bank</HeadingTwo>
-            </Tab> */}
             <Tab>
               <HeadingTwo>Paystack</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Bank Card</HeadingTwo>
             </Tab>
-            {/* <Tab>
+            <Tab>
+              <HeadingTwo>GT Bank</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>Other Banks</HeadingTwo>
-            </Tab> */}
+            </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
@@ -61,17 +60,17 @@ export default function DepositTabs() {
               <RavePayment />
             </div>
           </TabPanel>
-          {/* <TabPanel>
+          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <GTBank />
             </div>
-          </TabPanel> */}
+          </TabPanel> 
 
-          {/* <TabPanel>
+          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <NIBBS />
             </div>
-          </TabPanel> */}
+          </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Voucher center="true" noHeader />

@@ -38,23 +38,22 @@ export default function DepositSmallScreens() {
               <RavePayment />
             </AccordionItemPanel>
           </AccordionItem>
-          {/* <AccordionItem>
+          <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>GT Bank</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <GTBank />
             </AccordionItemPanel>
-          </AccordionItem> */}
-
-          {/* <AccordionItem>
+          </AccordionItem>
+          <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>Other Banks</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <NIBBS />
             </AccordionItemPanel>
-          </AccordionItem> */}
+          </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>Voucher</AccordionItemButton>
