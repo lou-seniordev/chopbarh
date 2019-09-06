@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Card from "../Card/Card";
+import color from "../../../styles/colors";
 import Quickteller from "../Quickteller/Quickteller";
 import ATM from "../ATM/ATM";
 import BankCharge from "../BankCharge/BankCharge";
@@ -20,13 +21,23 @@ const HeadingTwo = styled.h2`
   font-size: 1.4rem;
 `;
 
+const InstaLink = styled.a`
+  background: ${color.colorPrimary};
+  padding: 0.5rem 1.3rem;
+
+  &:hover {
+    cursor: pointer;
+    background: ${color.colorPrimaryHover};
+  }
+`;
+
 export default function DepositTabs() {
   return (
     <DepositTabsWrapper className="container">
       <div className="col-lg-10">
         <Tabs>
           <TabList>
-          <Tab>
+            <Tab>
               <HeadingTwo>Bank Card</HeadingTwo>
             </Tab>
             <Tab>
@@ -51,7 +62,7 @@ export default function DepositTabs() {
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
           </TabList>
-          
+
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <RavePayment />
@@ -61,7 +72,7 @@ export default function DepositTabs() {
             <div style={{ minHeight: "80vh" }}>
               <GTBank />
             </div>
-          </TabPanel> 
+          </TabPanel>
 
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
@@ -71,6 +82,18 @@ export default function DepositTabs() {
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Voucher center="true" noHeader />
+              <div className="text-center mt-3" style={{ color: "#000" }}>
+                <p>
+                  **Get Vouchers from{" "}
+                  <InstaLink
+                    href="https://instagram.com/chopbarhvouchers?igshid=up50qse7x2t9"
+                    style={{ color: "#ffffff" }}
+                  >
+                    @chopbarhvouchers
+                  </InstaLink>{" "}
+                  on Instagram**
+                </p>
+              </div>
             </div>
           </TabPanel>
           <TabPanel>

@@ -92,7 +92,7 @@ export default function NIBBS() {
       <Accordion>
         <AccordionItem uuid="11">
           <AccordionItemHeading>
-            <AccordionItemButton>Pay Online</AccordionItemButton>
+            <AccordionItemButton>Pay with Online Banking</AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel>
             <BankLogoContainer>
@@ -149,12 +149,12 @@ export default function NIBBS() {
             </Info>
             <StepText>Step 3:</StepText>
             <Info className="mb-4">
-              Enter “Chopbarh” in the search bar and select the "Chopbarh option
-              in the menu".
+              Enter “Chopbarh” in the search bar and select the "User option in
+              the menu".
             </Info>
             <StepText>Step 4:</StepText>
             <Info className="mb-4">
-              Insert your phone number and click “Continue”.
+              Insert your phone number and amount and click “Continue”.
             </Info>
             <StepText>Step 5:</StepText>
             <Info className="mb-4">

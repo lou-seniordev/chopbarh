@@ -128,7 +128,7 @@ export default function GTBank() {
             and select 'CHOPBARH' and then click 'Make New Payments'.
             <StepText>Step 3:</StepText>
             <Info className="mb-4">
-              Enter your ChopBarh Login Phone Number: 08181062778 and the amount
+              Enter your ChopBarh Login Phone Number and the amount
               you wish to deposit.
             </Info>
             <StepText>Step 4:</StepText>
