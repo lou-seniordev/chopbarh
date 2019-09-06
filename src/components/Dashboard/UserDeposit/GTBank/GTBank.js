@@ -59,12 +59,12 @@ export default function GTBank() {
   return (
     <GTBWrapper>
       <Accordion>
-        <AccordionItem uuid="31">
+        {/* <AccordionItem uuid="31">
           <AccordionItemHeading>
             <AccordionItemButton>Deposit with USSD</AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel />
-        </AccordionItem>
+        </AccordionItem> */}
         <AccordionItem uuid="32">
           <AccordionItemHeading>
             <AccordionItemButton>
