@@ -182,18 +182,18 @@ const Container = styled.div`
   position: relative;
 `;
 
-const ScrollContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 90%;
-  transform: translate(-50%, -50%);
-  transition: all 0.2s;
-  cursor: pointer;
+// const ScrollContainer = styled.div`
+//   position: absolute;
+//   left: 50%;
+//   top: 90%;
+//   transform: translate(-50%, -50%);
+//   transition: all 0.2s;
+//   cursor: pointer;
 
-  &:hover {
-    transform: translate(-50%, -60%);
-  }
-`;
+//   &:hover {
+//     transform: translate(-50%, -60%);
+//   }
+// `;
 
 export default function Hero() {
   return (

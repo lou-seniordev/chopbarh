@@ -26,10 +26,7 @@ export default function DepositTabs() {
       <div className="col-lg-10">
         <Tabs>
           <TabList>
-            <Tab>
-              <HeadingTwo>Paystack</HeadingTwo>
-            </Tab>
-            <Tab>
+          <Tab>
               <HeadingTwo>Bank Card</HeadingTwo>
             </Tab>
             <Tab>
@@ -42,19 +39,19 @@ export default function DepositTabs() {
               <HeadingTwo>Voucher</HeadingTwo>
             </Tab>
             <Tab>
+              <HeadingTwo>Paystack</HeadingTwo>
+            </Tab>
+            <Tab>
+              <HeadingTwo>Account Number</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>ATM Machine</HeadingTwo>
             </Tab>
-            {/* <Tab>
-              <HeadingTwo>Account Number</HeadingTwo>
-            </Tab> */}
             <Tab>
               <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
           </TabList>
           
-          <TabPanel>
-            <Card />
-          </TabPanel>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <RavePayment />
@@ -77,13 +74,16 @@ export default function DepositTabs() {
             </div>
           </TabPanel>
           <TabPanel>
+            <Card />
+          </TabPanel>
+          <TabPanel>
+            <BankCharge />
+          </TabPanel>
+          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <ATM />
             </div>
           </TabPanel>
-          {/* <TabPanel>
-            <BankCharge />
-          </TabPanel> */}
           <TabPanel>
             <Quickteller />
           </TabPanel>

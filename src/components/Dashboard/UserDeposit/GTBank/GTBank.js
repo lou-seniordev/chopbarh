@@ -59,12 +59,19 @@ export default function GTBank() {
   return (
     <GTBWrapper>
       <Accordion>
-        {/* <AccordionItem uuid="31">
+        <AccordionItem uuid="31">
           <AccordionItemHeading>
             <AccordionItemButton>Deposit with USSD</AccordionItemButton>
           </AccordionItemHeading>
-          <AccordionItemPanel />
-        </AccordionItem> */}
+          <AccordionItemPanel>
+            <StepText>Step 1:</StepText>
+            <Info className="mb-4">Enter USSD code *737*50*AMOUNT*384#</Info>
+            <StepText>Step 2:</StepText>
+            <Info className="mb-4">
+              Use ChopBarh phone number for Reference ID
+            </Info>
+          </AccordionItemPanel>
+        </AccordionItem>
         <AccordionItem uuid="32">
           <AccordionItemHeading>
             <AccordionItemButton>

@@ -24,14 +24,6 @@ export default function DepositSmallScreens() {
         <Accordion>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Paystack</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <Card />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
               <AccordionItemButton>Bank Card</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
@@ -64,10 +56,10 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>ATM Machine</AccordionItemButton>
+              <AccordionItemButton>Paystack</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <ATM />
+              <Card />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
@@ -76,6 +68,14 @@ export default function DepositSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <BankCharge />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>ATM Machine</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <ATM />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
