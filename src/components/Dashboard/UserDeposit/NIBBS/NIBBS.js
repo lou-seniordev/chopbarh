@@ -14,8 +14,8 @@ import DiamondBank from "../../../assets/img/DiamondBank.jpg";
 import EcoBank from "../../../assets/img/EcoBank.jpg";
 import FCMB from "../../../assets/img/FCMB.png";
 import FidelityBank from "../../../assets/img/FidelityBank.jpg";
-import GTBank from "../../../assets/img/GTBank.png";
-import Keystone from "../../../assets/img/Keystone.png";
+import GTBank from "../../../assets/img/GTBank.jpg";
+import Keystone from "../../../assets/img/KeystoneBank.jpg";
 import WemaBank from "../../../assets/img/WemaBank.png";
 import ZenithBank from "../../../assets/img/ZenithBank.png";
 
@@ -106,7 +106,7 @@ export default function NIBBS() {
                 <Image alt="Eco Bank" src={EcoBank} />
               </div>
               <div>
-                <Image alt="FCMB" src={FCMB} />
+                <Image style={{ width: "60%" }} alt="FCMB" src={FCMB} />
               </div>
               <div>
                 <Image alt="Fidelity Bank" src={FidelityBank} />
@@ -115,13 +115,25 @@ export default function NIBBS() {
                 <Image alt="GT Bank" src={GTBank} />
               </div>
               <div>
-                <Image alt="Keystone Bank" src={Keystone} />
+                <Image
+                  style={{ width: "80%" }}
+                  alt="Keystone Bank"
+                  src={Keystone}
+                />
               </div>
               <div>
-                <Image alt="Wema Bank" src={WemaBank} />
+                <Image
+                  style={{ width: "80%" }}
+                  alt="Wema Bank"
+                  src={WemaBank}
+                />
               </div>
               <div>
-                <Image alt="Zenith Bank" src={ZenithBank} />
+                <Image
+                  style={{ width: "70%" }}
+                  alt="Zenith Bank"
+                  src={ZenithBank}
+                />
               </div>
             </BankLogoContainer>
             <StepText>Step 1:</StepText>
