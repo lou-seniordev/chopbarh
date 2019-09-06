@@ -9,6 +9,15 @@ import {
 } from "react-accessible-accordion";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import CitiBank from "../../../assets/img/CitiBank.png";
+import DiamondBank from "../../../assets/img/DiamondBank.jpg";
+import EcoBank from "../../../assets/img/EcoBank.jpg";
+import FCMB from "../../../assets/img/FCMB.png";
+import FidelityBank from "../../../assets/img/FidelityBank.jpg";
+import GTBank from "../../../assets/img/GTBank.png";
+import Keystone from "../../../assets/img/Keystone.png";
+import WemaBank from "../../../assets/img/WemaBank.png";
+import ZenithBank from "../../../assets/img/ZenithBank.png";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -55,6 +64,28 @@ const Info = styled.p`
   font-size: 1.3rem;
 `;
 
+const BankLogoContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 7.5rem;
+    height: 7.5rem;
+    margin: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & > *:nth-child(1) {
+    margin-left: 0;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+`;
+
 export default function NIBBS() {
   return (
     <NIBBSWrapper>
@@ -64,6 +95,35 @@ export default function NIBBS() {
             <AccordionItemButton>Pay Online</AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel>
+            <BankLogoContainer>
+              <div>
+                <Image alt="Citi Bank" src={CitiBank} />
+              </div>
+              <div>
+                <Image alt="Diamond Bank" src={DiamondBank} />
+              </div>
+              <div className="mb-n2">
+                <Image alt="Eco Bank" src={EcoBank} />
+              </div>
+              <div>
+                <Image alt="FCMB" src={FCMB} />
+              </div>
+              <div>
+                <Image alt="Fidelity Bank" src={FidelityBank} />
+              </div>
+              <div>
+                <Image alt="GT Bank" src={GTBank} />
+              </div>
+              <div>
+                <Image alt="Keystone Bank" src={Keystone} />
+              </div>
+              <div>
+                <Image alt="Wema Bank" src={WemaBank} />
+              </div>
+              <div>
+                <Image alt="Zenith Bank" src={ZenithBank} />
+              </div>
+            </BankLogoContainer>
             <StepText>Step 1:</StepText>
             <Info className="mb-4">
               Login on your bank’s internet banking platform (eligible banks are
