@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 import * as actionType from "../actionTypes/actionTypes";
-import firebase, { firestore } from "../../firebase";
+import { firestore } from "../../firebase";
 
 export const fetchRaveCardInit = () => ({
   type: actionType.FETCH_RAVE_CARD_INIT
