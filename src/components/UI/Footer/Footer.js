@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 import breakpoint from "../../styles/breakpoints";
@@ -103,7 +103,9 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             <p>
-              <span>How to Play</span>
+              <span>
+                <a href="https://chopbarh.zendesk.com/hc">How to Play</a>
+              </span>
             </p>
             <p>
               <span>Games</span>
@@ -112,7 +114,9 @@ export default function Footer() {
               <span>Betting</span>
             </p> */}
             <p>
-              <span target="Popover">Download</span>
+              <Link to="signup">
+                <span>Download</span>
+              </Link>
             </p>
             <p>
               <span>

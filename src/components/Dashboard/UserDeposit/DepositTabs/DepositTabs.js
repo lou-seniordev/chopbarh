@@ -53,7 +53,7 @@ export default function DepositTabs() {
               <HeadingTwo>Paystack</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Account Number</HeadingTwo>
+              <HeadingTwo>Zenith, UBA, Sterling, ALAT</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>ATM Machine</HeadingTwo>

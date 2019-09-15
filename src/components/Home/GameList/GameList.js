@@ -74,11 +74,11 @@ export default function GameList() {
     <GamesWrapper>
       <div className="container">
         <HeadingThree className="mb-5">Games</HeadingThree>
-        <ParagraphOne>
+        {/* <ParagraphOne>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
           praesentium placeat dolorum doloribus alias temporibus autem aliquam
           fuga aperiam odit! Sequi, modi. Possimus culpa dolorem eum fugiat.
-        </ParagraphOne>
+        </ParagraphOne> */}
         <ImageContainer>
           <Image src={Image1} alt="Game" />
           <Image src={Image2} alt="Game" />
@@ -87,9 +87,9 @@ export default function GameList() {
           <Image src={Image5} alt="Game" />
           <Image src={Image6} alt="Game" />
         </ImageContainer>
-        <Button className="mt-3">
+        {/* <Button className="mt-3">
           <span style={{ color: "#ffffff" }}>Explore</span>
-        </Button>
+        </Button> */}
       </div>
     </GamesWrapper>
   );

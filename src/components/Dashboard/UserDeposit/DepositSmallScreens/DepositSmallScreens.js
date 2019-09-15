@@ -88,7 +88,9 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Account Number</AccordionItemButton>
+              <AccordionItemButton>
+                Zenith, UBA, Sterling, ALAT
+              </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <BankCharge />

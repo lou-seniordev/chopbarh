@@ -15,8 +15,8 @@ export default function Home() {
       <Header />
       <Hero />
       <HowItWorks />
-      <PlayAndChop />
-      <Testimonials />
+      {/* <PlayAndChop />
+      <Testimonials /> */}
       <GameList />
       <Footer />
     </>

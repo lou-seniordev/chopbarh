@@ -95,8 +95,8 @@ export default function GTBank() {
             <Info className="mb-4">Click on CHOPBARH.</Info>
             <StepText>Step 5:</StepText>
             <Info className="mb-4">
-              Enter your ChopBarh Login Phone Number and the amount you wish to
-              deposit.
+              Enter your ChopBarh Login Phone Number as Reference ID and the
+              amount you wish to deposit.
             </Info>
             <StepText>Step 6:</StepText>
             <Info className="mb-4">
@@ -128,8 +128,8 @@ export default function GTBank() {
             and select 'CHOPBARH' and then click 'Make New Payments'.
             <StepText>Step 3:</StepText>
             <Info className="mb-4">
-              Enter your ChopBarh Login Phone Number and the amount
-              you wish to deposit.
+              Enter your ChopBarh Login Phone Number as Reference ID and the amount you wish to
+              deposit.
             </Info>
             <StepText>Step 4:</StepText>
             <Info className="mb-4">
