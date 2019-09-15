@@ -18,7 +18,7 @@ const DepositTabsWrapper = styled.div`
 `;
 
 const HeadingTwo = styled.h2`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 `;
 
 const InstaLink = styled.a`
@@ -53,7 +53,9 @@ export default function DepositTabs() {
               <HeadingTwo>Paystack</HeadingTwo>
             </Tab>
             <Tab>
-              <HeadingTwo>Zenith, UBA, Sterling, ALAT</HeadingTwo>
+              <HeadingTwo style={{ fontSize: "1rem" }}>
+                Zenith, UBA, Sterling, ALAT by Wema
+              </HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>ATM Machine</HeadingTwo>

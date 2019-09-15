@@ -89,7 +89,7 @@ export default function DepositSmallScreens() {
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>
-                Zenith, UBA, Sterling, ALAT
+                Zenith, UBA, Sterling, ALAT by Wema
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
