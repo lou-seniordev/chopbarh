@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import MediaQuery from "react-responsive";
+// import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
-import DepositTabs from "./DepositTabs/DepositTabs";
+// import DepositTabs from "./DepositTabs/DepositTabs";
 import DepositSmallScreens from "./DepositSmallScreens/DepositSmallScreens";
 
 export default function UserDeposit() {
@@ -14,12 +14,12 @@ export default function UserDeposit() {
       <UserHeader />
       <UserNavigation />
       <div style={{ minHeight: "80vh" }}>
-        <MediaQuery minDeviceWidth={767}>
+        {/* <MediaQuery minDeviceWidth={767}>
           <DepositTabs />
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={767}>
-          <DepositSmallScreens />
-        </MediaQuery>
+        </MediaQuery> */}
+        <DepositSmallScreens />
+        {/* <MediaQuery maxDeviceWidth={767}>
+        </MediaQuery> */}
       </div>
       <Footer />
     </>
