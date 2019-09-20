@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AccountNumber from "../AccountNumber/AccountNumber";
 // import Paga from "../Paga/Paga";
+import Eyowo from "../Eyowo/Eyowo";
 
 const WithdrawTabsWrapper = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const HeadingTwo = styled.h2`
   font-size: 1.4rem;
 `;
 
-export default function WithdrawTabs(props) {
+export default function WithdrawTabs() {
   return (
     <WithdrawTabsWrapper className="container">
       <div className="col-lg-8">
@@ -23,20 +24,20 @@ export default function WithdrawTabs(props) {
             <Tab>
               <HeadingTwo>AZA(Bank Account)</HeadingTwo>
             </Tab>
-            {/* <Tab>
-              <HeadingTwo>Paga</HeadingTwo>
-            </Tab> */}
+            <Tab>
+              <HeadingTwo>Eyowo</HeadingTwo>
+            </Tab>
           </TabList>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <AccountNumber />
             </div>
           </TabPanel>
-          {/* <TabPanel>
+          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
-              <Paga />
+              <Eyowo />
             </div>
-          </TabPanel> */}
+          </TabPanel>
         </Tabs>
       </div>
     </WithdrawTabsWrapper>
