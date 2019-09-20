@@ -2,15 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import styled from "styled-components";
-import {
-  Form,
-  FormItem,
-  HalfColumn,
-  FormSubmitButton,
-  ExistingCardForm,
-  ExistingCardFormItem,
-  Button as FormElementButton
-} from "../../../styles/CardCharge";
+import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
@@ -23,18 +15,90 @@ const FormWrapper = styled(Form)`
 `;
 
 class Eyowo extends Component {
+  state = {
+    phone_number: "",
+    amount: "",
+    loading: false
+  };
+
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  formIsValid = ({ amount, phone_number }) => {
+    if (
+      !isNaN(amount) !== true ||
+      !isNaN(phone_number) !== true ||
+      phone_number.length === 11
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    // Validate the form filled
+    if (!this.formIsValid(this.state)) {
+      toast.error("Form is not valid");
+      this.setState({ loading: false });
+      return;
+    }
+
+    // Confirm they can withdraw that amount
+    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) < 200) {
+      toast.error(`You cannot withdraw less than \u20a6${200}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.amount) > 50000) {
+      toast.error(
+        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+          50000
+        )} at once`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (
+      this.props.withdrawalStatus + Number(this.state.amount) >
+      this.props.withdrawalLimit
+    ) {
+      toast.error(
+        "Withdrawal could not be completed. Your daily limit will be exceeded."
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    // Do User authorization
+
+    // Set the Withdrawal History
+
+    // Send the money to them
+  };
+
   render() {
     return (
       <FormWrapper onSubmit={this.handleSubmit}>
-        <FormItem className="mr-3">
+        <FormItem>
           <label>Phone Number</label>
           <input
             type="text"
-            value={this.state.account_number}
+            value={this.state.phone_number}
             onChange={this.handleInputChange}
-            name="account_number"
+            name="phone_number"
             required
-            placeholder="Account Number"
+            placeholder="Phone Number"
           />
         </FormItem>
         <FormItem>
@@ -60,9 +124,17 @@ class Eyowo extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  playerData: state.player.playerData,
 
-const mapDispatchToProps = {};
+  withdrawalStatus: state.withdrawal.withdrawalStatus,
+  withdrawalAccount: state.withdrawalAccount.withdrawalAccount
+});
+
+const mapDispatchToProps = {
+  setCashBalance,
+  setWithdrawalHistory
+};
 
 export default connect(
   mapStateToProps,
