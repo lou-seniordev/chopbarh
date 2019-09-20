@@ -9,8 +9,6 @@ import Voucher from "./Voucher/Voucher";
 import QuickPlayTransaction from "../UserTransaction/QuickPlayTransaction/QuickPlayTransaction";
 import VoucherTransaction from "../UserTransaction/VoucherTransaction/VoucherTransaction";
 
-// Add redirect logic to Complete Registration when it isn't complete
-
 export default function UserHome() {
   return (
     <>
