@@ -97,6 +97,8 @@ class Eyowo extends Component {
       return;
     }
 
+    this.setState({ loading: true });
+
     const mobile = `234${this.state.phone_number
       .split("")
       .slice(1)
@@ -122,8 +124,9 @@ class Eyowo extends Component {
       const initialAuthResponse = await initialAuthRequest.json();
 
       if (initialAuthResponse.status === true) {
-        this.setState({ authModal: true });
+        this.setState({ authModal: true, loading: false });
       } else {
+        this.setState({ loading: false });
         toast.error("We could not validate your phone number");
       }
     } catch (err) {}
@@ -131,6 +134,8 @@ class Eyowo extends Component {
 
   handleUserAuthorization = async event => {
     event.preventDefault();
+
+    this.setState({ authLoading: true });
     // Authorize the user here
     const mobile = `234${this.state.phone_number
       .split("")
@@ -158,6 +163,7 @@ class Eyowo extends Component {
     if (followUpAuthResponse.status === true) {
       const token = followUpAuthResponse.data.accessToken;
 
+      // Send the money to them
       const transferRequest = await fetch(
         "https://api.console.eyowo.com/v1/users/transfers/phone",
         {
@@ -178,12 +184,12 @@ class Eyowo extends Component {
 
       if (transferResponse === true) {
         toast.info("Transaction is processing");
-        this.setState({ authModal: false });
+        this.setState({ authModal: false, authLoading: false });
+
         // Set the Withdrawal History
-        // Send the money to them
       } else {
         toast.error("Something went wrong");
-        this.setState({ authModal: false });
+        this.setState({ authModal: false, authLoading: false });
       }
     } else {
       toast.error("Please try again");
