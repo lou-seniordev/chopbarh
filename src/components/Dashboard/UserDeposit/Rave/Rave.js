@@ -56,10 +56,6 @@ class RavePayment extends Component {
     return text;
   };
 
-  handleInputChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  };
-
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
