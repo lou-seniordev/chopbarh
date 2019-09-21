@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner, Button } from "reactstrap";
+import { Modal, ModalBody, Spinner } from "reactstrap";
 import styled from "styled-components";
 // import eyowo from "eyowo-js";
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
@@ -8,11 +8,10 @@ import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
-import { getReference } from "../../../../lib/getReference";
+// import { getReference } from "../../../../lib/getReference";
 
 const appKey = "e322628ba5efa5a0c28b2bb2dab0f334";
-const appSecret =
-  "e057257f40b19771ed00fdb819842389baee618f8de99f74a6216e6c189ee926";
+// const appSecret = "e057257f40b19771ed00fdb819842389baee618f8de99f74a6216e6c189ee926";
 
 // const client = new eyowo.Client({
 //   appKey,
@@ -175,7 +174,8 @@ class Eyowo extends Component {
           },
           body: JSON.stringify({
             amount: Number(this.state.amount) * 100,
-            mobile
+            mobile,
+            accessToken: token
           })
         }
       );
@@ -187,6 +187,16 @@ class Eyowo extends Component {
         this.setState({ authModal: false, authLoading: false });
 
         // Set the Withdrawal History
+        const payload = {
+          status: "SUCCESSFUL",
+          amount: +this.state.amount,
+          date: new Date().toISOString(),
+          reference: `${this.props.playerData.PhoneNum}-${transferResponse.data.transaction.reference}`,
+          fee: 0,
+          channel: "Eyowo"
+        };
+
+        this.props.setWithdrawalHistory(payload);
       } else {
         toast.error("Something went wrong");
         this.setState({ authModal: false, authLoading: false });
@@ -217,7 +227,7 @@ class Eyowo extends Component {
             <p className="mt-4">
               Enter the passcode that was sent to your phone
             </p>
-            <FormWrapper onSubmit={this.handleUserAuthorization}>
+            <AuthFormWrapper onSubmit={this.handleUserAuthorization}>
               <FormItem>
                 <input
                   type="text"
@@ -237,7 +247,7 @@ class Eyowo extends Component {
                   {this.state.authLoading ? "Processing..." : "Submit"}
                 </span>
               </FormSubmitButton>
-            </FormWrapper>
+            </AuthFormWrapper>
           </ModalBody>
         </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
