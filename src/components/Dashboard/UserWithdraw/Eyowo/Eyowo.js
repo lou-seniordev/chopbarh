@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import styled from "styled-components";
+// import eyowo from "eyowo-js";
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
@@ -9,16 +10,33 @@ import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import { getReference } from "../../../../lib/getReference";
 
+const appKey = "e322628ba5efa5a0c28b2bb2dab0f334";
+const appSecret =
+  "e057257f40b19771ed00fdb819842389baee618f8de99f74a6216e6c189ee926";
+
+// const client = new eyowo.Client({
+//   appKey,
+//   appSecret,
+//   environment: "production"
+// });
+
 const FormWrapper = styled(Form)`
   min-height: 20rem;
   margin-bottom: 3.2rem;
 `;
 
+const AuthFormWrapper = styled(FormWrapper)`
+min-height: 10rem;
+`
+
 class Eyowo extends Component {
   state = {
     phone_number: "",
     amount: "",
-    loading: false
+    loading: false,
+    authModal: false,
+    passcode: '',
+    authLoading: false
   };
 
   handleInputChange = ({ target }) => {
@@ -29,97 +47,169 @@ class Eyowo extends Component {
     if (
       !isNaN(amount) !== true ||
       !isNaN(phone_number) !== true ||
-      phone_number.length === 11
+      phone_number.length !== 11
     ) {
       return false;
     }
     return true;
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     // Validate the form filled
     if (!this.formIsValid(this.state)) {
       toast.error("Form is not valid");
-      this.setState({ loading: false });
       return;
     }
 
     // Confirm they can withdraw that amount
-    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-      toast.error("You cannot withdraw more than you have won");
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+    //   toast.error("You cannot withdraw more than you have won");
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
-    if (Number(this.state.amount) < 200) {
-      toast.error(`You cannot withdraw less than \u20a6${200}`);
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) < 200) {
+    //   toast.error(`You cannot withdraw less than \u20a6${200}`);
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
-    if (Number(this.state.amount) > 50000) {
-      toast.error(
-        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
-          50000
-        )} at once`
-      );
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) > 50000) {
+    //   toast.error(
+    //     `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+    //       50000
+    //     )} at once`
+    //   );
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
-    if (
-      this.props.withdrawalStatus + Number(this.state.amount) >
-      this.props.withdrawalLimit
-    ) {
-      toast.error(
-        "Withdrawal could not be completed. Your daily limit will be exceeded."
-      );
-      this.setState({ loading: false });
-      return;
-    }
+    // if (
+    //   this.props.withdrawalStatus + Number(this.state.amount) >
+    //   this.props.withdrawalLimit
+    // ) {
+    //   toast.error(
+    //     "Withdrawal could not be completed. Your daily limit will be exceeded."
+    //   );
+    //   this.setState({ loading: false });
+    //   return;
+    // }
+
+    const mobile = `234${this.state.phone_number
+      .split("")
+      .slice(1)
+      .join("")}`;
 
     // Do User authorization
+    try {
+      const initialAuthRequest = await fetch(
+        "https://api.console.eyowo.com/v1/users/auth",
+        {
+          method: "POST",
+          headers: {
+            "x-app-key": appKey,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            mobile,
+            factor: "sms"
+          })
+        }
+      );
 
-    // Set the Withdrawal History
+      const initialAuthResponse = await initialAuthRequest.json();
 
-    // Send the money to them
+      if (initialAuthResponse.status === true) {
+        this.setState({authModal: true})
+        
+      } else {
+        toast.error("We could not validate your phone number");
+      }
+    } catch (err) {}
+  };
+
+  handleUserAuthorization = event => {
+    event.preventDefault()
+
+
+  }
+
+  toggleAuthModal = () => {
+    this.setState({
+      authModal: !this.state.authModal
+    });
   };
 
   render() {
     return (
-      <FormWrapper onSubmit={this.handleSubmit}>
-        <FormItem>
-          <label>Phone Number</label>
-          <input
-            type="text"
-            value={this.state.phone_number}
-            onChange={this.handleInputChange}
-            name="phone_number"
-            required
-            placeholder="Phone Number"
-          />
-        </FormItem>
-        <FormItem>
-          <label>Amount</label>
-          <input
-            type="text"
-            value={this.state.amount}
-            onChange={this.handleInputChange}
-            name="amount"
-            required
-            placeholder="Amount(NGN)"
-          />
-        </FormItem>
-        <FormSubmitButton
-          type="submit"
-          className="mr-2"
-          disabled={this.state.loading}
+      <>
+        <Modal
+          isOpen={true}
+          toggle={this.toggleAuthModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
         >
-          <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
-        </FormSubmitButton>
-      </FormWrapper>
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
+            <p className="mt-4">
+              Enter the passcode that was sent to your phone
+            </p>
+            <FormWrapper onSubmit={this.handleUserAuthorization}>
+              <FormItem>
+                <input
+                  type="text"
+                  value={this.state.passcode}
+                  onChange={this.handleInputChange}
+                  name="passcode"
+                  required
+                  placeholder="Passcode"
+                />
+              </FormItem>
+              <FormSubmitButton
+                type="submit"
+                className="mr-2"
+                disabled={this.state.authLoading}
+              >
+                <span>{this.state.authLoading ? "Processing..." : "Submit"}</span>
+              </FormSubmitButton>
+            </FormWrapper>
+          </ModalBody>
+        </Modal>
+        <FormWrapper onSubmit={this.handleSubmit}>
+          <FormItem>
+            <label>Phone Number</label>
+            <input
+              type="text"
+              value={this.state.phone_number}
+              onChange={this.handleInputChange}
+              name="phone_number"
+              required
+              placeholder="Phone Number"
+            />
+          </FormItem>
+          <FormItem>
+            <label>Amount</label>
+            <input
+              type="text"
+              value={this.state.amount}
+              onChange={this.handleInputChange}
+              name="amount"
+              required
+              placeholder="Amount(NGN)"
+            />
+          </FormItem>
+          <FormSubmitButton
+            type="submit"
+            className="mr-2"
+            disabled={this.state.loading}
+          >
+            <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
+          </FormSubmitButton>
+        </FormWrapper>
+      </>
     );
   }
 }
