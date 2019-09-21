@@ -25,7 +25,7 @@ const FormWrapper = styled(Form)`
 `;
 
 const AuthFormWrapper = styled(FormWrapper)`
-  min-height: 10rem;
+  min-height: 6rem;
 `;
 
 class Eyowo extends Component {
@@ -121,8 +121,9 @@ class Eyowo extends Component {
       );
 
       const initialAuthResponse = await initialAuthRequest.json();
+      // console.log(initialAuthResponse);
 
-      if (initialAuthResponse.status === true) {
+      if (initialAuthResponse.success === true) {
         this.setState({ authModal: true, loading: false });
       } else {
         this.setState({ loading: false });
@@ -159,8 +160,9 @@ class Eyowo extends Component {
 
     const followUpAuthResponse = await followUpAuthRequest.json();
 
-    if (followUpAuthResponse.status === true) {
+    if (followUpAuthResponse.success === true) {
       const token = followUpAuthResponse.data.accessToken;
+      // console.log(token);
 
       // Send the money to them
       const transferRequest = await fetch(
@@ -197,6 +199,9 @@ class Eyowo extends Component {
         };
 
         this.props.setWithdrawalHistory(payload);
+
+        // Remove the cash
+        this.props.setCashBalance(Number(this.state.amount), 2);
       } else {
         toast.error("Something went wrong");
         this.setState({ authModal: false, authLoading: false });
@@ -216,7 +221,7 @@ class Eyowo extends Component {
     return (
       <>
         <Modal
-          isOpen={true}
+          isOpen={this.state.authModal}
           toggle={this.toggleAuthModal}
           style={{
             top: "50%",
