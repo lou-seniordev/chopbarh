@@ -624,7 +624,7 @@ class AccountNumber extends Component {
                             disabled={this.state.loading}
                           >
                             <span>
-                              {this.state.loading ? "Please wait..." : "Load"}
+                              {this.state.loading ? "Please wait..." : "Withdraw"}
                             </span>
                           </FormSubmitButton>
                         </ExistingCardForm>
