@@ -238,7 +238,7 @@ class RavePayment extends Component {
         ) {
           // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
           const response = await fetch(
-            `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave`,
+            `https://pay.chopbarh.com/ng/api/verify`,
             {
               method: "POST",
               headers: {
