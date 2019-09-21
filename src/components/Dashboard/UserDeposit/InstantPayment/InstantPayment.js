@@ -13,10 +13,12 @@ const FormWrapper = styled(Form)`
 
 class InstantPayment extends Component {
   state = {
-    key: "FLWPUBK_TEST-60a5283655efd5e81ebecbc70f577f73-X",
+    key: "FLWPUBK-c5932c92f9633277760b44c1faf57207-X",
     email: "chopbarh@mail.com",
     amount: ""
   };
+
+  // FLWPUBK-c5932c92f9633277760b44c1faf57207-X
 
   getReference = () => {
     let text = "";
@@ -182,7 +184,7 @@ class InstantPayment extends Component {
         ) {
           // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
           const response = await fetch(
-            `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/ng/api/rave`,
+            `https://SimultaneousSarcasticArchitecture.dotunalukosprin.repl.co/ng/api/rave`,
             {
               method: "POST",
               headers: {
