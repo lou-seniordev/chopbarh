@@ -26,8 +26,8 @@ const FormWrapper = styled(Form)`
 `;
 
 const AuthFormWrapper = styled(FormWrapper)`
-min-height: 10rem;
-`
+  min-height: 10rem;
+`;
 
 class Eyowo extends Component {
   state = {
@@ -35,7 +35,7 @@ class Eyowo extends Component {
     amount: "",
     loading: false,
     authModal: false,
-    passcode: '',
+    passcode: "",
     authLoading: false
   };
 
@@ -64,38 +64,38 @@ class Eyowo extends Component {
     }
 
     // Confirm they can withdraw that amount
-    // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-    //   toast.error("You cannot withdraw more than you have won");
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+      toast.error("You cannot withdraw more than you have won");
+      this.setState({ loading: false });
+      return;
+    }
 
-    // if (Number(this.state.amount) < 200) {
-    //   toast.error(`You cannot withdraw less than \u20a6${200}`);
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (Number(this.state.amount) < 200) {
+      toast.error(`You cannot withdraw less than \u20a6${200}`);
+      this.setState({ loading: false });
+      return;
+    }
 
-    // if (Number(this.state.amount) > 50000) {
-    //   toast.error(
-    //     `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
-    //       50000
-    //     )} at once`
-    //   );
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (Number(this.state.amount) > 50000) {
+      toast.error(
+        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+          50000
+        )} at once`
+      );
+      this.setState({ loading: false });
+      return;
+    }
 
-    // if (
-    //   this.props.withdrawalStatus + Number(this.state.amount) >
-    //   this.props.withdrawalLimit
-    // ) {
-    //   toast.error(
-    //     "Withdrawal could not be completed. Your daily limit will be exceeded."
-    //   );
-    //   this.setState({ loading: false });
-    //   return;
-    // }
+    if (
+      this.props.withdrawalStatus + Number(this.state.amount) >
+      this.props.withdrawalLimit
+    ) {
+      toast.error(
+        "Withdrawal could not be completed. Your daily limit will be exceeded."
+      );
+      this.setState({ loading: false });
+      return;
+    }
 
     const mobile = `234${this.state.phone_number
       .split("")
@@ -122,19 +122,73 @@ class Eyowo extends Component {
       const initialAuthResponse = await initialAuthRequest.json();
 
       if (initialAuthResponse.status === true) {
-        this.setState({authModal: true})
-        
+        this.setState({ authModal: true });
       } else {
         toast.error("We could not validate your phone number");
       }
     } catch (err) {}
   };
 
-  handleUserAuthorization = event => {
-    event.preventDefault()
+  handleUserAuthorization = async event => {
+    event.preventDefault();
+    // Authorize the user here
+    const mobile = `234${this.state.phone_number
+      .split("")
+      .slice(1)
+      .join("")}`;
 
+    const followUpAuthRequest = await fetch(
+      "https://api.console.eyowo.com/v1/users/auth",
+      {
+        method: "POST",
+        headers: {
+          "x-app-key": appKey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          mobile,
+          factor: "sms",
+          passcode: this.state.passcode
+        })
+      }
+    );
 
-  }
+    const followUpAuthResponse = await followUpAuthRequest.json();
+
+    if (followUpAuthResponse.status === true) {
+      const token = followUpAuthResponse.data.accessToken;
+
+      const transferRequest = await fetch(
+        "https://api.console.eyowo.com/v1/users/transfers/phone",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-app-key": appKey,
+            "x-app-wallet-access-token": token
+          },
+          body: JSON.stringify({
+            amount: Number(this.state.amount) * 100,
+            mobile
+          })
+        }
+      );
+
+      const transferResponse = transferRequest.json();
+
+      if (transferResponse === true) {
+        toast.info("Transaction is processing");
+        this.setState({ authModal: false });
+        // Set the Withdrawal History
+        // Send the money to them
+      } else {
+        toast.error("Something went wrong");
+        this.setState({ authModal: false });
+      }
+    } else {
+      toast.error("Please try again");
+    }
+  };
 
   toggleAuthModal = () => {
     this.setState({
@@ -173,7 +227,9 @@ class Eyowo extends Component {
                 className="mr-2"
                 disabled={this.state.authLoading}
               >
-                <span>{this.state.authLoading ? "Processing..." : "Submit"}</span>
+                <span>
+                  {this.state.authLoading ? "Processing..." : "Submit"}
+                </span>
               </FormSubmitButton>
             </FormWrapper>
           </ModalBody>
