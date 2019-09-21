@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
+const FormWrapper = styled(Form)`
+  min-height: 15rem;
+`;
+
 class InstantPayment extends Component {
   state = {
-    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+    key: "FLWPUBK_TEST-60a5283655efd5e81ebecbc70f577f73-X",
     email: "chopbarh@mail.com",
     amount: ""
   };
-
-  // key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
-  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
 
   getReference = () => {
     let text = "";
@@ -180,7 +182,7 @@ class InstantPayment extends Component {
         ) {
           // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
           const response = await fetch(
-            `https://pay.chopbarh.com/ng/api/verify`,
+            `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/ng/api/rave`,
             {
               method: "POST",
               headers: {
@@ -206,7 +208,7 @@ class InstantPayment extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
+        <FormWrapper onSubmit={this.handleSubmit}>
           <FormItem>
             <label>Amount</label>
             <input
@@ -225,7 +227,7 @@ class InstantPayment extends Component {
           >
             <span>{this.state.loading ? "Please wait..." : "Load"}</span>
           </FormSubmitButton>
-        </Form>
+        </FormWrapper>
       </div>
     );
   }

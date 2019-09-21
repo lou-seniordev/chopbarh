@@ -16,6 +16,7 @@ import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
 import RavePayment from "../Rave/Rave";
+import InstantPayment from "../InstantPayment/InstantPayment";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -40,6 +41,14 @@ export default function DepositSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <RavePayment />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Bank Transfer</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <InstantPayment />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
