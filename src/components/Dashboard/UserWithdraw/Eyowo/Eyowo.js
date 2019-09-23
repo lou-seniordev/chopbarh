@@ -322,6 +322,12 @@ class Eyowo extends Component {
           </ModalBody>
         </Modal>
         <FormWrapper onSubmit={this.handleSubmit}>
+          <p
+            className="text-center"
+            style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
+          >
+            Dial *4255# before first withdrawal
+          </p>
           <FormItem>
             <label>Phone Number</label>
             <input

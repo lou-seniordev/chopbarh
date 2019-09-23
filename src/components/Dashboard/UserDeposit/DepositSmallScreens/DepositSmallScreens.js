@@ -43,14 +43,7 @@ export default function DepositSmallScreens() {
               <RavePayment />
             </AccordionItemPanel>
           </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Bank Transfer</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <InstantPayment />
-            </AccordionItemPanel>
-          </AccordionItem>
+          
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>GT Bank</AccordionItemButton>
@@ -65,6 +58,14 @@ export default function DepositSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <NIBBS />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Bank Transfer</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <InstantPayment />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
