@@ -60,7 +60,7 @@ class InstantPayment extends Component {
 
     const historyObject = {
       amount: this.state.amount,
-      channel: "Transfer",
+      channel: "Bank Transfer",
       transaction_date: new Date().toISOString(),
       fees: "0",
       reference: "--",

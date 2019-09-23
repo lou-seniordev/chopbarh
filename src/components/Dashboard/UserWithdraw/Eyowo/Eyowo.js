@@ -10,7 +10,7 @@ import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 // import { getReference } from "../../../../lib/getReference";
 
-const appKey = "e322628ba5efa5a0c28b2bb2dab0f334";
+const appKey = "0edef5bd4b6a1628b860b7025dccca86";
 // const appSecret = "e057257f40b19771ed00fdb819842389baee618f8de99f74a6216e6c189ee926";
 
 // const client = new eyowo.Client({
@@ -63,11 +63,11 @@ class Eyowo extends Component {
     }
 
     // Confirm they can withdraw that amount
-    if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-      toast.error("You cannot withdraw more than you have won");
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+    //   toast.error("You cannot withdraw more than you have won");
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
     if (Number(this.state.amount) < 200) {
       toast.error(`You cannot withdraw less than \u20a6${200}`);
@@ -176,15 +176,14 @@ class Eyowo extends Component {
           },
           body: JSON.stringify({
             amount: Number(this.state.amount) * 100,
-            mobile,
-            accessToken: token
+            mobile
           })
         }
       );
 
       const transferResponse = transferRequest.json();
 
-      if (transferResponse === true) {
+      if (transferResponse.success === true) {
         toast.info("Transaction is processing");
         this.setState({ authModal: false, authLoading: false });
 
@@ -208,6 +207,7 @@ class Eyowo extends Component {
       }
     } else {
       toast.error("Please try again");
+      this.setState({ authLoading: false });
     }
   };
 
