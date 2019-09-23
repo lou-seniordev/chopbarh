@@ -45,20 +45,20 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>
-                Pay with Transfer(Instant)
-              </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <InstantPayment />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
               <AccordionItemButton>GT Bank</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <GTBank />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                Bank Transfer
+              </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <InstantPayment />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
