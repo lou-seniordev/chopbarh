@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner } from "reactstrap";
 import styled from "styled-components";
 // import eyowo from "eyowo-js";
-import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
+import {
+  Form,
+  FormItem,
+  FormSubmitButton,
+  Button
+} from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
@@ -34,6 +39,8 @@ class Eyowo extends Component {
     amount: "",
     loading: false,
     authModal: false,
+    authorizing: false,
+    confirmModal: false,
     passcode: "",
     authLoading: false
   };
@@ -55,6 +62,8 @@ class Eyowo extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+
+    this.setState({ loading: true });
 
     // Validate the form filled
     if (!this.formIsValid(this.state)) {
@@ -96,7 +105,11 @@ class Eyowo extends Component {
       return;
     }
 
-    this.setState({ loading: true });
+    this.setState({ loading: false, confirmModal: true });
+  };
+
+  authorizeUser = async () => {
+    this.setState({ authorizing: true });
 
     const mobile = `234${this.state.phone_number
       .split("")
@@ -124,9 +137,13 @@ class Eyowo extends Component {
       // console.log(initialAuthResponse);
 
       if (initialAuthResponse.success === true) {
-        this.setState({ authModal: true, loading: false });
+        this.setState({
+          authModal: true,
+          confirmModal: false,
+          authorizing: false
+        });
       } else {
-        this.setState({ loading: false });
+        this.setState({ authorizing: false });
         toast.error("We could not validate your phone number");
       }
     } catch (err) {}
@@ -175,13 +192,13 @@ class Eyowo extends Component {
             "x-app-wallet-access-token": token
           },
           body: JSON.stringify({
-            amount: Number(this.state.amount) * 100,
+            amount: (Number(this.state.amount) - 50) * 100,
             mobile
           })
         }
       );
 
-      const transferResponse = transferRequest.json();
+      const transferResponse = await transferRequest.json();
 
       if (transferResponse.success === true) {
         toast.info("Transaction is processing");
@@ -213,13 +230,62 @@ class Eyowo extends Component {
 
   toggleAuthModal = () => {
     this.setState({
-      authModal: !this.state.authModal
+      authModal: !this.state.authModal,
+      passcode: ""
+    });
+  };
+
+  toggleConfirmModal = () => {
+    this.setState({
+      confirmModal: !this.state.confirmModal
     });
   };
 
   render() {
     return (
       <>
+        <Modal
+          isOpen={this.state.confirmModal}
+          toggle={this.toggleConfirmModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
+            <p>
+              <strong>
+                Amount: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount)}
+              </strong>
+            </p>
+            <p>
+              <strong>Transaction Fee: &#8358;{50}</strong>
+            </p>
+            <p>
+              <strong>
+                Total: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount - 50)}
+              </strong>
+            </p>
+            <p>Proceed with withdrawal?</p>
+            <div className="d-flex justify-content-center">
+              <Button className="mr-1" onClick={this.authorizeUser}>
+                <span>{this.state.authorizing ? "Processing..." : "Yes"}</span>
+              </Button>
+              {!this.state.authorizing ? (
+                <Button
+                  onClick={() => this.setState({ confirmModal: false })}
+                  className="ml-1"
+                >
+                  <span>No</span>
+                </Button>
+              ) : (
+                <>{null}</>
+              )}
+            </div>
+          </ModalBody>
+        </Modal>
         <Modal
           isOpen={this.state.authModal}
           toggle={this.toggleAuthModal}
