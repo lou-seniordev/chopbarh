@@ -41,92 +41,6 @@ class InstantPayment extends Component {
     return true;
   };
 
-  handleAuthSubmit = async event => {
-    event.preventDefault();
-
-    const { authAmount, selectedValue } = this.state;
-
-    if (selectedValue === null) {
-      this.setState({ loading: false });
-      toast.error(`No Card was selected`);
-      return;
-    }
-
-    if (!isNaN(authAmount) !== true) {
-      this.setState({ loading: false });
-      toast.error(`Amount is not valid`);
-      return;
-    }
-
-    if (+this.state.authAmount < 100) {
-      toast.error(`Minimum deposit is \u20a6${100}`);
-      this.setState({ loading: false });
-      return;
-    }
-
-    const raveCardObject = this.props.raveCard.filter(
-      card => card.auth_code === this.state.selectedValue
-    );
-
-    // console.log(raveCardObject);
-
-    // if (raveCardObject[0].last_digits !== this.state.last4Digits) {
-    //   // this.setState({ paying: false });
-    //   toast.error(`Last 4 digits is not correct`);
-    //   return;
-    // }
-
-    let reference = this.getReference();
-
-    try {
-      this.setState({ paying: true });
-
-      const historyObject = {
-        amount: this.state.authAmount,
-        channel: "Card",
-        transaction_date: new Date().toISOString(),
-        fees: "0",
-        reference: "--",
-        status: "--",
-        refId: `${this.props.playerData.PhoneNum}-${reference}`,
-        gateway: "Flutterwave",
-        made_by: this.props.playerData.PhoneNum
-      };
-
-      this.props.setDepositHistory(historyObject);
-
-      const response = await fetch(
-        "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            SECKEY: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
-            token: raveCardObject[0].auth_code,
-            currency: "NGN",
-            amount: this.state.authAmount,
-            email: `${this.props.playerData.PhoneNum}@mail.com`,
-            txRef: `${this.props.playerData.PhoneNum}-${reference}`
-          })
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.status === "success") {
-        this.setState({ paying: false });
-        toast.info("Transaction is processing");
-      } else {
-        this.setState({ paying: false });
-        toast.error("Transaction not successful");
-      }
-    } catch (err) {}
-
-    // Fetch Flutterwave here
-  };
-
   handleSubmit = event => {
     event.preventDefault();
 
@@ -146,7 +60,7 @@ class InstantPayment extends Component {
 
     const historyObject = {
       amount: this.state.amount,
-      channel: "NIP",
+      channel: "Transfer",
       transaction_date: new Date().toISOString(),
       fees: "0",
       reference: "--",

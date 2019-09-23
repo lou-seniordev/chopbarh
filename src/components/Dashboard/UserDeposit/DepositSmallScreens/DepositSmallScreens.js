@@ -45,7 +45,9 @@ export default function DepositSmallScreens() {
           </AccordionItem>
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Bank Transfer</AccordionItemButton>
+              <AccordionItemButton>
+                Pay with Transfer(Instant)
+              </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <InstantPayment />

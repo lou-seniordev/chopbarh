@@ -264,6 +264,8 @@ class Eyowo extends Component {
               onChange={this.handleInputChange}
               name="phone_number"
               required
+              minLength={11}
+              maxLength={11}
               placeholder="Phone Number"
             />
           </FormItem>
