@@ -7,7 +7,7 @@ import {
   AccordionItemPanel
 } from "react-accessible-accordion";
 import AccountNumber from "../AccountNumber/AccountNumber";
-// import Paga from "../Paga/Paga";
+import Paga from "../Paga/Paga";
 import Eyowo from "../Eyowo/Eyowo";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -23,6 +23,14 @@ export default function WithdrawSmallScreens() {
             </AccordionItemHeading>
             <AccordionItemPanel>
               <AccountNumber />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Paga</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <Paga />
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>

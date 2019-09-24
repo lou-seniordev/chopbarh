@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AccountNumber from "../AccountNumber/AccountNumber";
-// import Paga from "../Paga/Paga";
+import Paga from "../Paga/Paga";
 import Eyowo from "../Eyowo/Eyowo";
 
 const WithdrawTabsWrapper = styled.div`
@@ -25,12 +25,20 @@ export default function WithdrawTabs() {
               <HeadingTwo>AZA(Bank Account)</HeadingTwo>
             </Tab>
             <Tab>
+              <HeadingTwo>Paga</HeadingTwo>
+            </Tab>
+            <Tab>
               <HeadingTwo>Eyowo</HeadingTwo>
             </Tab>
           </TabList>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <AccountNumber />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div style={{ minHeight: "80vh" }}>
+              <Paga />
             </div>
           </TabPanel>
           <TabPanel>
