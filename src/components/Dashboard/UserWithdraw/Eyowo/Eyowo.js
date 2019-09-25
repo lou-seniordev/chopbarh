@@ -397,7 +397,7 @@ class Eyowo extends Component {
             className="text-center"
             style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
           >
-            Dial *4255# before first withdrawal
+            Dial *4255# to access your fund
           </p>
           <FormItem>
             <label>Phone Number</label>
