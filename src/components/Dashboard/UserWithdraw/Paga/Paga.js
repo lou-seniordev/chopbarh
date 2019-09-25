@@ -201,7 +201,7 @@ class Paga extends Component {
       "https://mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
       {
         method: "POST",
-        mode: "cors",
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
           Principal: "EC7C101A-542C-40D5-8BD8-F1B598E20B67",
