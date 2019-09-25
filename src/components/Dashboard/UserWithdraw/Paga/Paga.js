@@ -256,6 +256,8 @@ class Paga extends Component {
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 placeholder="Phone Number"
+                minLength={11}
+                maxLength={11}
                 required
               />
               {/* <NumberFormat
