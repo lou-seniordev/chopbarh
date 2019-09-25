@@ -137,7 +137,7 @@ class Eyowo extends Component {
 
       if(accessTokenResponse.success === true) {
         const token = accessTokenResponse.data.accessToken;
-        console.log(token);
+        // console.log(token);
 
         // Send the money to them
         const transferRequest = await fetch(

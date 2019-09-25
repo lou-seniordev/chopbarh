@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 // import NumberFormat from "react-number-format";
-// import { Modal, ModalBody } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
+import {
+  Button
+} from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import CryptoJS from "crypto-js";
 //import scuid from "scuid";
@@ -151,6 +154,16 @@ class Paga extends Component {
       return;
     }
 
+    if (Number(this.state.amount) < 200) {
+      toast.error(`You cannot withdraw less than \u20a6${200}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    this.setState({ loading: false, confirmModal: true });
+  };
+
+  activatePaga = async () => {
     const newState = { ...this.state };
     let sliced_phone_number = `234${newState.phone
       .split("")
@@ -164,7 +177,7 @@ class Paga extends Component {
     let params = ("" + hashParameter).split(",");
     const body = {
       referenceNumber: transactionReference,
-      amount: this.state.amount,
+      amount: Number(this.state.amount) - 50,
       minRecipientKYCLevel: "KYC2",
       destinationAccount: sliced_phone_number,
       alternateSenderName: "Chopbarh"
@@ -176,21 +189,21 @@ class Paga extends Component {
     }
     hashParameter =
       hashParameter +
-      "d98076e2d14c4045970edc466faa2ec8cc47c9b89b654001b5e4db27179a0b9559bee92b78034c558a9d24aca2fa4135db8938a3f4a74b7da1157dee68e15213";
+      "67152bc549c44f20a577e1f4ec30bd5fb0cd7d8e5d914344a9b9315f6c513df532be1e52e4f14ba48b8a600413be2fd6a706436b855d45b583f1364813e95674";
     let hash = CryptoJS.SHA512(hashParameter);
     hash = hash.toString(CryptoJS.enc.Hex);
 
     // Add new logic for withdrawals ledger
 
     fetch(
-      "https://qa1.mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
+      "https://mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
       {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          Principal: "98F32858-CC3B-42D4-95A3-742110A8D405",
-          Credentials: "rR9@f8u@bBES",
+          Principal: "EC7C101A-542C-40D5-8BD8-F1B598E20B67",
+          Credentials: "yS4%fg7RnEYnpft",
           Hash: hash
         },
         body: JSON.stringify(body)
@@ -203,7 +216,7 @@ class Paga extends Component {
           const payload = {
             status: "Success",
             amount: this.state.amount,
-            fee: 10,
+            fee: 50,
             reference: transactionReference,
             channel: "Paga",
             date: new Date().toISOString()
@@ -224,9 +237,57 @@ class Paga extends Component {
       });
   };
 
+  toggleConfirmModal = () => {
+    this.setState({
+      confirmModal: !this.state.confirmModal
+    });
+  };
+
   render() {
     return (
       <>
+        <Modal
+          isOpen={this.state.confirmModal}
+          toggle={this.toggleConfirmModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)"
+          }}
+        >
+          <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
+            <p>
+              <strong>
+                Amount: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount)}
+              </strong>
+            </p>
+            <p>
+              <strong>Transaction Fee: &#8358;{50}</strong>
+            </p>
+            <p>
+              <strong>
+                Total: &#8358;
+                {new Intl.NumberFormat().format(+this.state.amount - 50)}
+              </strong>
+            </p>
+            <p>Proceed with withdrawal?</p>
+            <div className="d-flex justify-content-center">
+              <Button className="mr-1" onClick={this.activatePaga}>
+                <span>{this.state.authorizing ? "Processing..." : "Yes"}</span>
+              </Button>
+              {!this.state.authorizing ? (
+                <Button
+                  onClick={() => this.setState({ confirmModal: false })}
+                  className="ml-1"
+                >
+                  <span>No</span>
+                </Button>
+              ) : (
+                <>{null}</>
+              )}
+            </div>
+          </ModalBody>
+        </Modal>
         <Form onSubmit={this.handleSubmit}>
           <HalfColumn>
             <FormItem className="mr-3">
