@@ -193,9 +193,11 @@ class Paga extends Component {
     let hash = CryptoJS.SHA512(hashParameter);
     hash = hash.toString(CryptoJS.enc.Hex);
 
+    // console.log(hash);
+
     // Add new logic for withdrawals ledger
 
-    fetch(
+    await fetch(
       "https://mypaga.com/paga-webservices/business-rest/secured/moneyTransfer",
       {
         method: "POST",
@@ -214,7 +216,7 @@ class Paga extends Component {
         // console.log(data);
         if (data.responseCode === 0) {
           const payload = {
-            status: "Success",
+            status: "SUCCESSFUL",
             amount: this.state.amount,
             fee: 50,
             reference: transactionReference,
