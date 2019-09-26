@@ -205,7 +205,7 @@ class Paga extends Component {
         headers: {
           "Content-Type": "application/json",
           Principal: "EC7C101A-542C-40D5-8BD8-F1B598E20B67",
-          Credentials: "uJ7@4CyZQ75evRt",
+          Credentials: "Chopbarh123!",
           Hash: hash
         },
         body: JSON.stringify(body)
