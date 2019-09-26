@@ -19,7 +19,8 @@ export const fetchPlayerData = () => (dispatch, getState) => {
     "@class": ".LogEventRequest",
     eventKey: "LOAD_DATA_PLAYER",
     playerId: getState().auth.id,
-    Player_ID: getState().auth.id
+    Player_ID: getState().auth.id,
+    Player_Version: "WEB_SERVER"
   };
 
   dispatch(fetchPlayerInit());

@@ -24,9 +24,9 @@ export default function WithdrawTabs() {
             <Tab>
               <HeadingTwo>AZA(Bank Account)</HeadingTwo>
             </Tab>
-            <Tab>
+            {/* <Tab>
               <HeadingTwo>Paga</HeadingTwo>
-            </Tab>
+            </Tab> */}
             <Tab>
               <HeadingTwo>Eyowo</HeadingTwo>
             </Tab>
@@ -36,11 +36,11 @@ export default function WithdrawTabs() {
               <AccountNumber />
             </div>
           </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Paga />
             </div>
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Eyowo />
