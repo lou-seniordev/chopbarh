@@ -426,7 +426,7 @@ class AccountNumber extends Component {
   render() {
     return (
       <>
-        <Modal
+        {/* <Modal
           isOpen={this.state.removeWithdrawalBankAccountModal}
           toggle={this.toggleRemoveWithdrawalBankAccount}
           style={{
@@ -796,7 +796,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )}
+        )} */}
+        <p className="text-center">Service currently unavailable</p>
       </>
     );
   }
