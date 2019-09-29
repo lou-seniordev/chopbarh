@@ -27,9 +27,9 @@ export default function WithdrawTabs() {
             {/* <Tab>
               <HeadingTwo>Paga</HeadingTwo>
             </Tab> */}
-            {/* <Tab>
+            <Tab>
               <HeadingTwo>Eyowo</HeadingTwo>
-            </Tab> */}
+            </Tab>
           </TabList>
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
@@ -41,11 +41,11 @@ export default function WithdrawTabs() {
               <Paga />
             </div>
           </TabPanel> */}
-          {/* <TabPanel>
+          <TabPanel>
             <div style={{ minHeight: "80vh" }}>
               <Eyowo />
             </div>
-          </TabPanel> */}
+          </TabPanel>
         </Tabs>
       </div>
     </WithdrawTabsWrapper>
