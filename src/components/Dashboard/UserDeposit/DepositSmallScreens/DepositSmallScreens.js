@@ -118,14 +118,14 @@ export default function DepositSmallScreens() {
             </AccordionItemPanel>
           </AccordionItem>
           
-          <AccordionItem>
+          <AccordionItemHeading>
             <AccordionItemHeading>
               <AccordionItemButton>NIBSS Ebillspay</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <NIBBS />
             </AccordionItemPanel>
-          </AccordionItem>
+          </AccordionItemHeading>
         </Accordion>
       </div>
     </div>
