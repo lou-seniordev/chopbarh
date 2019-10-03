@@ -52,22 +52,25 @@ export default function DepositSmallScreens() {
               <GTBank />
             </AccordionItemPanel>
           </AccordionItem>
+
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Other Banks</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <NIBBS />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Bank Transfer</AccordionItemButton>
+              <AccordionItemButton>Bank Transfer (All Banks Supported)</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <InstantPayment />
             </AccordionItemPanel>
           </AccordionItem>
+
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quickteller</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <Quickteller />
+            </AccordionItemPanel>
+          </AccordionItem>
+
           <AccordionItem>
             <AccordionItemHeading>
               <AccordionItemButton>Voucher</AccordionItemButton>
@@ -114,12 +117,13 @@ export default function DepositSmallScreens() {
               <ATM />
             </AccordionItemPanel>
           </AccordionItem>
+          
           <AccordionItem>
             <AccordionItemHeading>
-              <AccordionItemButton>Quickteller</AccordionItemButton>
+              <AccordionItemButton>NIBSS Ebillspay</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <Quickteller />
+              <NIBBS />
             </AccordionItemPanel>
           </AccordionItem>
         </Accordion>

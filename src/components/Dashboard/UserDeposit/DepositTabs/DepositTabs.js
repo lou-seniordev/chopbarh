@@ -43,8 +43,9 @@ export default function DepositTabs() {
             <Tab>
               <HeadingTwo>GT Bank</HeadingTwo>
             </Tab>
+            
             <Tab>
-              <HeadingTwo>Other Banks</HeadingTwo>
+              <HeadingTwo>Quickteller</HeadingTwo>
             </Tab>
             <Tab>
               <HeadingTwo>Voucher</HeadingTwo>
@@ -60,8 +61,9 @@ export default function DepositTabs() {
             <Tab>
               <HeadingTwo>ATM Machine</HeadingTwo>
             </Tab>
+            
             <Tab>
-              <HeadingTwo>Quickteller</HeadingTwo>
+              <HeadingTwo>NIBSS Ebillspay</HeadingTwo>
             </Tab>
           </TabList>
 
