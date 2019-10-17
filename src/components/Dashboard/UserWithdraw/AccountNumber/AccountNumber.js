@@ -314,8 +314,8 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.authAmount) < 200) {
-      toast.error(`You cannot withdraw less than \u20a6${200}`);
+    if (Number(this.state.authAmount) < 2000) {
+      toast.error(`You cannot withdraw less than \u20a6${2000}`);
       this.setState({ loading: false });
       return;
     }
@@ -362,8 +362,8 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 200) {
-      toast.error(`You cannot withdraw less than \u20a6${200}`);
+    if (Number(this.state.amount) < 2000) {
+      toast.error(`You cannot withdraw less than \u20a6${2000}`);
       this.setState({ loading: false });
       return;
     }
