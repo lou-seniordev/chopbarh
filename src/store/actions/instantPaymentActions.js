@@ -23,17 +23,18 @@ export const fetchInstantPaymentAccountData = () => async (
  try {
   const snapshot = await firestore
    .collection("instant_payment")
-   .where("id", "==", getState().auth.id)
+   .doc(getState().auth.id)
    .get();
 
-  const data = snapshot.docs.map(doc => ({ ...doc.data() }));
-  console.log(data);
+  const data = snapshot.data();
+  //   console.log(snapshot.data(), getState().auth.id);
   //   if (data.length) {
-  //    dispatch(fetchInstantPaymentAccountSuccess(data[0].data));
+  dispatch(fetchInstantPaymentAccountSuccess(data));
   //   } else {
   //    dispatch(fetchInstantPaymentAccountFail());
   //   }
  } catch (err) {
+  console.log(err);
   dispatch(fetchInstantPaymentAccountFail());
  }
 };
@@ -65,8 +66,9 @@ export const setInstantPaymentAccountData = payload => async (
     account_number: payload.account_number
    });
 
-  dispatch(fetchBankAccountData());
+  dispatch(fetchInstantPaymentAccountData());
  } catch (err) {
+  console.log(err);
   dispatch(setInstantPaymentAccountFail());
  }
 };

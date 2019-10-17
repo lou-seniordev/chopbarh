@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
+import {
+ fetchInstantPaymentAccountData,
+ setInstantPaymentAccountData
+} from "../../../../store/actions/instantPaymentActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -25,6 +29,12 @@ class InstantPayment extends Component {
    note: null
   }
  };
+
+ componentDidMount = () => {
+  this.props.fetchInstantPaymentAccountData();
+ };
+
+ //  TODO: Add componentDidUpdate here
 
  getReference = () => {
   let text = "";
@@ -86,7 +96,7 @@ class InstantPayment extends Component {
    made_by: this.props.playerData.PhoneNum
   };
 
-  this.props.setDepositHistory(historyObject);
+  //   this.props.setDepositHistory(historyObject);
 
   // Make request to Rave
   const chargeData = {
@@ -113,6 +123,9 @@ class InstantPayment extends Component {
     });
 
     //  Attach this account number to this person
+    this.props.setInstantPaymentAccountData({
+     account_number: data.data.accountnumber
+    });
    })
    .catch(err => {
     // Display error modal
@@ -192,7 +205,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
- setDepositHistory
+ setDepositHistory,
+ fetchInstantPaymentAccountData,
+ setInstantPaymentAccountData
 };
 
 export default connect(
