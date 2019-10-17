@@ -115,11 +115,12 @@ class Eyowo extends Component {
       .split("")
       .slice(1)
       .join("")}`;
-
-    // Do User authorization
+    
     try {
-      const initialAuthRequest = await fetch(
-        "https://api.console.eyowo.com/v1/users/auth",
+
+      //Get access Token
+      const accessToken = await fetch(
+        "https://api.console.eyowo.com/v1/users/accessToken",
         {
           method: "POST",
           headers: {
@@ -127,26 +128,96 @@ class Eyowo extends Component {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            mobile,
-            factor: "sms"
+            refreshToken: "5d89eea08c3f865d585fe6b750cde51482d8710a"
           })
         }
       );
 
-      const initialAuthResponse = await initialAuthRequest.json();
-      // console.log(initialAuthResponse);
+      const accessTokenResponse = await accessToken.json();
 
-      if (initialAuthResponse.success === true) {
-        this.setState({
-          authModal: true,
-          confirmModal: false,
-          authorizing: false
-        });
+      if(accessTokenResponse.success === true) {
+        const token = accessTokenResponse.data.accessToken;
+        // console.log(token);
+
+        // Send the money to them
+        const transferRequest = await fetch(
+          "https://api.console.eyowo.com/v1/users/transfers/phone",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-app-key": appKey,
+              "x-app-wallet-access-token": token
+            },
+            body: JSON.stringify({
+              amount: (Number(this.state.amount) - 50) * 100,
+              mobile
+            })
+          }
+        );
+
+        const transferResponse = await transferRequest.json();
+
+        if (transferResponse.success === true) {
+          toast.info("Transaction is processing");
+          this.setState({ confirmModal: false });
+
+          // Set the Withdrawal History
+          const payload = {
+            status: "SUCCESSFUL",
+            amount: +this.state.amount,
+            date: new Date().toISOString(),
+            reference: `${this.props.playerData.PhoneNum}-${transferResponse.data.transaction.reference}`,
+            fee: 0,
+            channel: "Eyowo"
+          };
+
+          this.props.setWithdrawalHistory(payload);
+
+          // Remove the cash
+          this.props.setCashBalance(Number(this.state.amount), 2);
+        } else {
+          toast.error("Something went wrong");
+          this.setState({ authModal: false, authLoading: false });
+        }
       } else {
         this.setState({ authorizing: false });
-        toast.error("We could not validate your phone number");
+        toast.error("Something went wrong!");
       }
-    } catch (err) {}
+
+    } catch(err){}
+
+    // Do User authorization
+    // try {
+    //   const initialAuthRequest = await fetch(
+    //     "https://api.console.eyowo.com/v1/users/auth",
+    //     {
+    //       method: "POST",
+    //       headers: {
+    //         "x-app-key": appKey,
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify({
+    //         mobile,
+    //         factor: "sms"
+    //       })
+    //     }
+    //   );
+
+    //   const initialAuthResponse = await initialAuthRequest.json();
+    //   // console.log(initialAuthResponse);
+
+    //   if (initialAuthResponse.success === true) {
+    //     this.setState({
+    //       authModal: true,
+    //       confirmModal: false,
+    //       authorizing: false
+    //     });
+    //   } else {
+    //     this.setState({ authorizing: false });
+    //     toast.error("We could not validate your phone number");
+    //   }
+    // } catch (err) {}
   };
 
   handleUserAuthorization = async event => {
@@ -326,7 +397,7 @@ class Eyowo extends Component {
             className="text-center"
             style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
           >
-            Dial *4255# before first withdrawal
+            Dial *4255# to access your fund
           </p>
           <FormItem>
             <label>Phone Number</label>
