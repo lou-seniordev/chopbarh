@@ -37,6 +37,7 @@ class InstantPayment extends Component {
  };
 
  componentDidUpdate = prevProps => {
+  console.log("Updating...");
   if (this.props !== prevProps) {
    console.log(this.props);
    this.setState({ fetching: false });
@@ -244,7 +245,7 @@ class InstantPayment extends Component {
         </Modal>
         <div className="text-center" style={{ minHeight: "5rem" }}>
          <p>
-          This method gives you a custom account number through whoch you can
+          This method gives you a custom account number through which you can
           send subsequent transactions to in the future
          </p>
          <FormSubmitButton

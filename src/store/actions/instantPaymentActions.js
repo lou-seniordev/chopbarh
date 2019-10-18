@@ -68,6 +68,14 @@ export const setInstantPaymentAccountData = payload => async (
    .set({
     account_number: payload.account_number
    });
+
+  setTimeout(() => {
+   dispatch(
+    fetchInstantPaymentAccountSuccess({
+     account_number: payload.account_number
+    })
+   );
+  }, 5000);
  } catch (err) {
   console.log(err);
   dispatch(setInstantPaymentAccountFail());
