@@ -1,6 +1,12 @@
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
+function addDays(date, days) {
+ const copy = new Date(Number(date));
+ copy.setDate(date.getDate() + days);
+ return copy;
+}
+
 export const fetchInstantPaymentAccountInit = () => ({
  type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_INIT
 });
@@ -67,7 +73,8 @@ export const setInstantPaymentAccountData = payload => async (
    .doc(getState().auth.id)
    .set({
     account_number: payload.account_number,
-    bank_name: payload.bank_name
+    bank_name: payload.bank_name,
+    expiry: addDays(new Date(), 180)
    });
 
   setTimeout(() => {
@@ -82,4 +89,65 @@ export const setInstantPaymentAccountData = payload => async (
   console.log(err);
   dispatch(setInstantPaymentAccountFail());
  }
+};
+
+export const removeInstantPaymentAccountInit = () => ({
+ type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_INIT
+});
+
+export const removeInstantPaymentAccountSuccess = () => ({
+ type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_SUCCESS
+});
+
+export const removeInstantPaymentAccountFail = () => ({
+ type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_FAIL
+});
+
+export const removeInstantPaymentAccount = event => async (
+ dispatch,
+ getState
+) => {
+ dispatch(removeInstantPaymentAccountInit());
+
+ //  try {
+ //   const snapshot = await firestore
+ //    .collection("bank_charge")
+ //    .where("id", "==", getState().auth.id)
+ //    .get();
+
+ //   const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+ //   // console.log(data);
+ //   if (data.length) {
+ //    // dispatch(fetchInstantPaymentAccountSuccess(data[0].data));
+ //    const accountsArray = data[0].data;
+ //    let filteredArray = accountsArray.filter(
+ //     account => account.auth_code !== authCode
+ //    );
+
+ //    try {
+ //     const docRef = await firestore
+ //      .collection("bank_charge")
+ //      .doc(getState().auth.id)
+ //      .update({
+ //       data: filteredArray
+ //      });
+ //     dispatch(removeInstantPaymentAccountSuccess(docRef));
+ //    } catch (err) {
+ //     toast.error("Account could not be removed. Please try again");
+ //    }
+ //    // window.location.reload();
+
+ //    if (accountsArray.length !== filteredArray.length) {
+ //     dispatch(fetchInstantPaymentAccountData());
+ //     toast.success("Account was removed");
+ //    } else {
+ //     toast.error("Account was not removed");
+ //    }
+ //   } else {
+ //    // dispatch(fetchInstantPaymentAccountFail());
+ //   }
+ //  } catch (err) {
+ //   console.log("Error...", err);
+ //   dispatch(removeInstantPaymentAccountFail());
+ //  }
 };
