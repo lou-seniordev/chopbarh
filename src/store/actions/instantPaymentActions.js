@@ -1,5 +1,6 @@
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
+import { toast } from "react-toastify";
 
 function addDays(date, days) {
  const copy = new Date(Number(date));
@@ -108,6 +109,21 @@ export const removeInstantPaymentAccount = event => async (
  getState
 ) => {
  dispatch(removeInstantPaymentAccountInit());
+
+ try {
+  const docRef = await firestore
+   .collection("instant_payment")
+   .doc(getState().auth.id)
+   .delete();
+
+  toast.success("Account Successfully deleted");
+  setTimeout(() => {
+   window.location.reload();
+  }, 2000);
+ } catch (err) {
+  console.log(err);
+  dispatch(setInstantPaymentAccountFail());
+ }
 
  //  try {
  //   const snapshot = await firestore

@@ -7,7 +7,8 @@ import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
  fetchInstantPaymentAccountData,
- setInstantPaymentAccountData
+ setInstantPaymentAccountData,
+ removeInstantPaymentAccount
 } from "../../../../store/actions/instantPaymentActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -29,7 +30,8 @@ class InstantPayment extends Component {
   paymentData: {
    accountnumber: null,
    note: null
-  }
+  },
+  removing: false
  };
 
  componentDidMount = () => {
@@ -118,6 +120,8 @@ class InstantPayment extends Component {
 
  deleteAccount = () => {
   //  Delete Account
+  this.setState({ removing: true });
+  this.props.removeInstantPaymentAccount();
  };
 
  handleSubmit = event => {
@@ -209,7 +213,9 @@ class InstantPayment extends Component {
          <p>
           Bank Name: <strong>{this.props.account.bank_name}</strong>
          </p>
-         <Button onClick={this.deleteAccount}>Delete Account</Button>
+         <Button onClick={this.deleteAccount} disabled={this.state.removing}>
+          {this.state.removing ? "Deleting..." : "Delete Account"}
+         </Button>
         </div>
        </>
       ) : (
@@ -288,7 +294,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
  setDepositHistory,
  fetchInstantPaymentAccountData,
- setInstantPaymentAccountData
+ setInstantPaymentAccountData,
+ removeInstantPaymentAccount
 };
 
 export default connect(
