@@ -116,6 +116,10 @@ class InstantPayment extends Component {
   // If the user has used the moethod before, it should not have them
  };
 
+ deleteAccount = () => {
+  //  Delete Account
+ };
+
  handleSubmit = event => {
   event.preventDefault();
 
@@ -205,6 +209,7 @@ class InstantPayment extends Component {
          <p>
           Bank Name: <strong>{this.props.account.bank_name}</strong>
          </p>
+         <Button onClick={this.deleteAccount}>Delete Account</Button>
         </div>
        </>
       ) : (
