@@ -198,7 +198,7 @@ class InstantPayment extends Component {
       {this.props.account !== null ? (
        <>
         <div className="text-center" style={{ minHeight: "5rem" }}>
-         <p>Please make Payment to the account number</p>
+         <p>Please make Payment to the account number:</p>
          <p>
           Account Number: <strong>{this.props.account.account_number}</strong>
          </p>
@@ -241,6 +241,9 @@ class InstantPayment extends Component {
           <p>
            Account Number:{" "}
            <strong>{this.state.paymentData.accountnumber}</strong>
+          </p>
+          <p>
+           Bank Name: <strong>{this.state.paymentData.bankname}</strong>
           </p>
           <p>
            Note: <strong>{this.state.paymentData.note}</strong>
