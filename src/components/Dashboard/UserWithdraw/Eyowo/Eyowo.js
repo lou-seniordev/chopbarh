@@ -313,7 +313,7 @@ class Eyowo extends Component {
  render() {
   return (
    <>
-    <Modal
+    {/* <Modal
      isOpen={this.state.confirmModal}
      toggle={this.toggleConfirmModal}
      style={{
@@ -424,7 +424,8 @@ class Eyowo extends Component {
      >
       <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
      </FormSubmitButton>
-    </FormWrapper>
+    </FormWrapper> */}
+    <p className="text-center">Service currently unavailable</p>
    </>
   );
  }
