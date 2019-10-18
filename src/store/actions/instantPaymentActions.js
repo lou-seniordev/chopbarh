@@ -29,12 +29,15 @@ export const fetchInstantPaymentAccountData = () => async (
   const data = snapshot.data();
   //   console.log(snapshot.data(), getState().auth.id);
   //   if (data.length) {
-  dispatch(fetchInstantPaymentAccountSuccess(data));
+  if (!Object.keys(data).length) {
+   dispatch(fetchInstantPaymentAccountFail());
+  } else {
+   dispatch(fetchInstantPaymentAccountSuccess(data));
+  }
   //   } else {
   //    dispatch(fetchInstantPaymentAccountFail());
   //   }
  } catch (err) {
-  console.log(err);
   dispatch(fetchInstantPaymentAccountFail());
  }
 };
@@ -65,8 +68,6 @@ export const setInstantPaymentAccountData = payload => async (
    .set({
     account_number: payload.account_number
    });
-
-  dispatch(fetchInstantPaymentAccountData());
  } catch (err) {
   console.log(err);
   dispatch(setInstantPaymentAccountFail());

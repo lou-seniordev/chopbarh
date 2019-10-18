@@ -53,14 +53,16 @@ export default function DepositSmallScreens() {
       </AccordionItemPanel>
      </AccordionItem>
 
-     {/* <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Bank Transfer (All Banks Supported)</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <InstantPayment />
-            </AccordionItemPanel>
-          </AccordionItem> */}
+     <AccordionItem>
+      <AccordionItemHeading>
+       <AccordionItemButton>
+        Bank Transfer (All Banks Supported)
+       </AccordionItemButton>
+      </AccordionItemHeading>
+      <AccordionItemPanel>
+       <InstantPayment />
+      </AccordionItemPanel>
+     </AccordionItem>
 
      <AccordionItem>
       <AccordionItemHeading>
