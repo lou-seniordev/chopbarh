@@ -66,13 +66,15 @@ export const setInstantPaymentAccountData = payload => async (
    .collection("instant_payment")
    .doc(getState().auth.id)
    .set({
-    account_number: payload.account_number
+    account_number: payload.account_number,
+    bank_name: payload.bank_name
    });
 
   setTimeout(() => {
    dispatch(
     fetchInstantPaymentAccountSuccess({
-     account_number: payload.account_number
+     account_number: payload.account_number,
+     bank_name: payload.bank_name
     })
    );
   }, 5000);

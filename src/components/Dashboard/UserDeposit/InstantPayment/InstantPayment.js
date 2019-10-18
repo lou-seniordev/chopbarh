@@ -77,7 +77,7 @@ class InstantPayment extends Component {
   this.setState({ loading: true });
   // Make request to Rave
   const chargeData = {
-   seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
+   seckey: "FLWSECK-6a2153446d5f15349075c71f591f9290-X",
    narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
    email: `${this.props.playerData.PhoneNum}@mail.com`,
    is_permanent: true
@@ -101,7 +101,8 @@ class InstantPayment extends Component {
 
     //  Attach this account number to this person
     this.props.setInstantPaymentAccountData({
-     account_number: data.data.accountnumber
+     account_number: data.data.accountnumber,
+     bank_name: data.data.bankname
     });
    })
    .catch(err => {
@@ -201,6 +202,9 @@ class InstantPayment extends Component {
          <p>
           Account Number: <strong>{this.props.account.account_number}</strong>
          </p>
+         <p>
+          Bank Name: <strong>{this.props.account.bank_name}</strong>
+         </p>
         </div>
        </>
       ) : (
@@ -270,7 +274,7 @@ class InstantPayment extends Component {
 
 const mapStateToProps = state => ({
  playerData: state.player.playerData,
- account: state.instantPayment.account_number
+ account: state.instantPayment.account
 });
 
 const mapDispatchToProps = {
