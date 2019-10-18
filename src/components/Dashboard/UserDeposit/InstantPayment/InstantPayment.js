@@ -77,7 +77,7 @@ class InstantPayment extends Component {
   this.setState({ loading: true });
   // Make request to Rave
   const chargeData = {
-   seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
+   seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
    narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
    email: `${this.props.playerData.PhoneNum}@mail.com`,
    is_permanent: true
