@@ -82,7 +82,12 @@ class InstantPayment extends Component {
    seckey: "FLWSECK-6a2153446d5f15349075c71f591f9290-X",
    narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
    email: `${this.props.playerData.PhoneNum}@mail.com`,
-   is_permanent: true
+   is_permanent: true,
+   phonenumber: this.props.playerData.PhoneNum,
+   firstname: this.props.playerData.FullName.split(" ")[0],
+   lastname: this.props.playerData.FullName.split(" ")[1]
+    ? this.props.playerData.FullName.split(" ")[1]
+    : `${this.props.playerData.PhoneNum}`
   };
 
   fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
