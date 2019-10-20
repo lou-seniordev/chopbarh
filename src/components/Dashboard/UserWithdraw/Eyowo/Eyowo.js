@@ -221,6 +221,11 @@ class Eyowo extends Component {
  handleUserAuthorization = async event => {
   event.preventDefault();
 
+  if (this.props.playerData.PlayerStatus === 0) {
+   toast.error("Your account has been deactivated");
+   return;
+  }
+
   this.setState({ authLoading: true });
   // Authorize the user here
   const mobile = `234${this.state.phone_number
@@ -433,7 +438,6 @@ class Eyowo extends Component {
 
 const mapStateToProps = state => ({
  playerData: state.player.playerData,
-
  withdrawalStatus: state.withdrawal.withdrawalStatus,
  withdrawalAccount: state.withdrawalAccount.withdrawalAccount
 });

@@ -144,6 +144,11 @@ class AccountNumber extends Component {
  };
 
  withdrawCash = async () => {
+  if (this.props.playerData.PlayerStatus === 0) {
+   toast.error("Your account has been deactivated.");
+   return;
+  }
+
   this.setState({ paying: true, loading: false });
 
   const bankName = this.state.bankList.filter(
@@ -226,6 +231,11 @@ class AccountNumber extends Component {
  };
 
  withdrawCashAuth = async () => {
+  if (this.props.playerData.PlayerStatus === 0) {
+   toast.error("Your account has been deactivated.");
+   return;
+  }
+
   this.setState({ paying: true, loading: false });
 
   const bankInformation = this.props.withdrawalAccount.filter(

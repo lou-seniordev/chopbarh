@@ -20,7 +20,7 @@ export default function UserHome() {
    </div>
    <div className="container">
     <div className="row">
-     <div className="col-lg-6 p-0 mt-4 d-sm-flex justify-content-sm-center">
+     <div className="col-lg-12 p-0 mt-4 d-flex justify-content-center">
       <Voucher center="true" />
      </div>
      {/* <div className="col-lg-6 mt-4 p-0">
