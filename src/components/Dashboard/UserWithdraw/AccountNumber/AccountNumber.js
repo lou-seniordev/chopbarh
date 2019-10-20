@@ -144,11 +144,6 @@ class AccountNumber extends Component {
  };
 
  withdrawCash = async () => {
-  if (this.props.playerData.PlayerStatus === 0) {
-   toast.error("Your account has been deactivated.");
-   return;
-  }
-
   this.setState({ paying: true, loading: false });
 
   const bankName = this.state.bankList.filter(
@@ -231,11 +226,6 @@ class AccountNumber extends Component {
  };
 
  withdrawCashAuth = async () => {
-  if (this.props.playerData.PlayerStatus === 0) {
-   toast.error("Your account has been deactivated.");
-   return;
-  }
-
   this.setState({ paying: true, loading: false });
 
   const bankInformation = this.props.withdrawalAccount.filter(
@@ -310,6 +300,12 @@ class AccountNumber extends Component {
 
  handleAuthSubmit = event => {
   event.preventDefault();
+
+  if (this.props.playerData.PlayerStatus === 0) {
+   toast.error("Your account has been deactivated.");
+   return;
+  }
+
   this.setState({ loading: true });
 
   if (!isNaN(this.state.authAmount) !== true) {
@@ -358,6 +354,12 @@ class AccountNumber extends Component {
 
  handleSubmit = async event => {
   event.preventDefault();
+
+  if (this.props.playerData.PlayerStatus === 0) {
+   toast.error("Your account has been deactivated.");
+   return;
+  }
+
   this.setState({ loading: true });
 
   if (!this.formIsValid(this.state)) {
@@ -436,7 +438,7 @@ class AccountNumber extends Component {
  render() {
   return (
    <>
-    {/* <Modal
+    <Modal
           isOpen={this.state.removeWithdrawalBankAccountModal}
           toggle={this.toggleRemoveWithdrawalBankAccount}
           style={{
@@ -806,8 +808,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )} */}
-    <p className="text-center">Service currently unavailable</p>
+        )}
+    {/* <p className="text-center">Service currently unavailable</p> */}
    </>
   );
  }
