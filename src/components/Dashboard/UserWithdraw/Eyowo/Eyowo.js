@@ -78,8 +78,8 @@ class Eyowo extends Component {
   //   return;
   // }
 
-  if (Number(this.state.amount) < 2000) {
-   toast.error(`You cannot withdraw less than \u20a6${2000}`);
+  if (Number(this.state.amount) < 1000) {
+   toast.error(`You cannot withdraw less than \u20a6${1000}`);
    this.setState({ loading: false });
    return;
   }
@@ -318,7 +318,7 @@ class Eyowo extends Component {
  render() {
   return (
    <>
-    {/* <Modal
+    <Modal
      isOpen={this.state.confirmModal}
      toggle={this.toggleConfirmModal}
      style={{
@@ -429,8 +429,8 @@ class Eyowo extends Component {
      >
       <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
      </FormSubmitButton>
-    </FormWrapper> */}
-    <p className="text-center">Service currently unavailable</p>
+    </FormWrapper>
+    {/* <p className="text-center">Service currently unavailable</p> */}
    </>
   );
  }
