@@ -83,6 +83,7 @@ class InstantPayment extends Component {
    narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
    email: `${this.props.playerData.PhoneNum}@mail.com`,
    is_permanent: true,
+   txRef: `${this.props.playerData.PhoneNum}-${this.getReference()}`,
    phonenumber: this.props.playerData.PhoneNum,
    firstname: this.props.playerData.FullName.split(" ")[0],
    lastname: this.props.playerData.FullName.split(" ")[1]
