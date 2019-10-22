@@ -249,7 +249,6 @@ class AccountNumber extends Component {
   } else {
    toast.error("Withdrawals cannot be completed at the moment");
   }} catch(err) {
-    console.log(err)
     this.setState({paying: false})
     toast.error('Something went wrong. Please try again later')
   }
@@ -258,73 +257,101 @@ class AccountNumber extends Component {
  withdrawCashAuth = async () => {
   this.setState({ paying: true, loading: false });
 
+  const context = this
+
+  this.props.setCashBalance(Number(this.state.authAmount), 2);
+
   const bankInformation = this.props.withdrawalAccount.filter(
    account => account.account_number === this.state.selectedValue
   );
-
-  let reference = getReference();
-
-  const payload = {
-   status: "--",
-   amount: +this.state.authAmount,
-   date: new Date().toISOString(),
-   reference: `${this.props.playerData.PhoneNum}-${reference}`,
-   fee: 50,
-   channel: "AZA"
-  };
-
-  this.props.setWithdrawalHistory(payload);
-
-  const postData = {
-   account_bank: bankInformation[0].code,
-   account_number: bankInformation[0].account_number,
-   amount: +this.state.authAmount - 50,
-   seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
-   narration: "CHOPBARH PAYMENT",
-   currency: "NGN",
-   reference: `${this.props.playerData.PhoneNum}-${reference}`
-  };
-
   try {
-   // prod https://api.ravepay.co/v2/gpx/transfers/create
-   const response = await fetch(
-    "https://api.ravepay.co/v2/gpx/transfers/create",
-    {
-     method: "POST",
-     mode: "cors",
-     headers: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify(postData)
-    }
-   );
-   const data = await response.json();
-
-   // Confirm withdrawal actually goes through here
-   if (data.status === "success") {
-    this.props.setCashBalance(Number(this.state.authAmount), 2);
-
-    this.setState({
-     authAmount: "",
-     bank: "",
-     account_number: "",
-     paying: false,
-     modal: false
-    });
-    toast.info("Transaction is being processed");
-   } else {
-    this.setState({
-     amount: "",
-     bank: "",
-     account_number: "",
-     paying: false,
-     modal: false
-    });
-    toast.error("Transaction was not successful");
+  // Send request to cloud function
+  const userProfile = await fetch(
+   "https://cors-anywhere.herokuapp.com/https://chopbarh-user-api.alukodotun.now.sh/api/v1/get_user_profile",
+   {
+    method: "POST",
+    headers: {
+     "Content-Type": "application/json",
+     apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+    },
+    body: JSON.stringify({
+     phone_number: this.props.playerData.PhoneNum
+    })
    }
-  } catch (err) {
-   this.setState({ loading: false, modal: false });
-   toast.error("Something went wrong");
+  );
+
+  const userProfileJSON = await userProfile.json();
+
+  if (
+   userProfileJSON.status === true &&
+   userProfileJSON.data.RealCoins > +this.state.authAmount
+  ) {
+    let reference = getReference();
+
+    const payload = {
+     status: "--",
+     amount: +context.state.authAmount,
+     date: new Date().toISOString(),
+     reference: `${context.props.playerData.PhoneNum}-${reference}`,
+     fee: 50,
+     channel: "AZA"
+    };
+
+    context.props.setWithdrawalHistory(payload);
+
+    const postData = {
+     account_bank: bankInformation[0].code,
+     account_number: bankInformation[0].account_number,
+     amount: +context.state.authAmount - 50,
+     seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
+     narration: "CHOPBARH PAYMENT",
+     currency: "NGN",
+     reference: `${context.props.playerData.PhoneNum}-${reference}`
+    };
+
+    try {
+     // prod https://api.ravepay.co/v2/gpx/transfers/create
+     const response = await fetch(
+      "https://api.ravepay.co/v2/gpx/transfers/create",
+      {
+       method: "POST",
+       mode: "cors",
+       headers: {
+        "Content-Type": "application/json"
+       },
+       body: JSON.stringify(postData)
+      }
+     );
+     const data = await response.json();
+
+     // Confirm withdrawal actually goes through here
+     if (data.status === "success") {
+      context.setState({
+       authAmount: "",
+       bank: "",
+       account_number: "",
+       paying: false,
+       modal: false
+      });
+      toast.info("Transaction is being processed");
+     } else {
+      context.setState({
+       amount: "",
+       bank: "",
+       account_number: "",
+       paying: false,
+       modal: false
+      });
+      toast.error("Transaction was not successful");
+     }
+    } catch (err) {
+     context.setState({ loading: false, modal: false });
+     toast.error("Something went wrong");
+    }
+  } else {}
+  } catch(err) {
+    this.setState({ paying: false });
+    toast.error("Something went wrong. Please try again later");
   }
  };
 
