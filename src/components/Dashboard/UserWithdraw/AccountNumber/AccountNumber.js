@@ -147,6 +147,8 @@ class AccountNumber extends Component {
   this.setState({ paying: true, loading: false });
   const context = this;
 
+  this.props.setCashBalance(Number(this.state.amount), 2);
+
   const bankName = this.state.bankList.filter(
    bank => bank.Code === this.state.bank
   );
@@ -222,8 +224,6 @@ class AccountNumber extends Component {
 
     // Confirm withdrawal actually goes through here
     if (data.status === "success") {
-     context.props.setCashBalance(Number(context.state.amount), 2);
-
      context.setState({
       amount: "",
       bank: "",
