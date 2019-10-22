@@ -193,7 +193,8 @@ class AccountNumber extends Component {
        date: new Date().toISOString(),
        reference: `${this.props.playerData.PhoneNum}-${reference}`,
        fee: 50,
-       channel: "AZA"
+       channel: "AZA",
+       gameTransactionId: gameEngineResponseJSON.scriptData.Result.TranID
       };
 
       context.props.setWithdrawalHistory(payload);
@@ -303,7 +304,8 @@ class AccountNumber extends Component {
          date: new Date().toISOString(),
          reference: `${context.props.playerData.PhoneNum}-${reference}`,
          fee: 50,
-         channel: "AZA"
+         channel: "AZA",
+         gameTransactionId: gameEngineResponseJSON.scriptData.Result.TranID
         };
 
         context.props.setWithdrawalHistory(payload);
