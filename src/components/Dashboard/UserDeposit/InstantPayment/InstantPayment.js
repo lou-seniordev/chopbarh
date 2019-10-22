@@ -219,9 +219,9 @@ class InstantPayment extends Component {
          <p>
           Bank Name: <strong>{this.props.account.bank_name}</strong>
          </p>
-         <Button onClick={this.deleteAccount} disabled={this.state.removing}>
+         {/* <Button onClick={this.deleteAccount} disabled={this.state.removing}>
           {this.state.removing ? "Deleting..." : "Delete Account"}
-         </Button>
+         </Button> */}
         </div>
        </>
       ) : (

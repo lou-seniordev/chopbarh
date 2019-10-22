@@ -31,6 +31,7 @@ import {
  fetchWithdrawalBankAccountData,
  setWithdrawalBankAccountData
 } from "../../../../store/actions/withdrawalAccountActions";
+import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -147,113 +148,115 @@ class AccountNumber extends Component {
   this.setState({ paying: true, loading: false });
   const context = this;
 
-  this.props.setCashBalance(Number(this.state.amount), 2);
-
   const bankName = this.state.bankList.filter(
    bank => bank.Code === this.state.bank
   );
-
+  
   try {
-  // Send request to cloud function
-  const userProfile = await fetch(
-   "https://cors-anywhere.herokuapp.com/https://chopbarh-user-api.alukodotun.now.sh/api/v1/get_user_profile",
-   {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json",
-     apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
-    },
-    body: JSON.stringify({
-     phone_number: this.props.playerData.PhoneNum
-    })
-   }
-  );
-
-  const userProfileJSON = await userProfile.json();
-
-  if (
-   userProfileJSON.status === true &&
-   userProfileJSON.data.RealCoins > +this.state.amount
-  ) {
-   let reference = getReference();
-
-   const dataObject = {
-    account_number: this.state.account_number,
-    code: this.state.bank,
-    bank: bankName[0].Name,
-    name: this.state.account_name
-   };
-
-   context.props.setWithdrawalBankAccountData(dataObject);
-
-   const payload = {
-    status: "--",
-    amount: +this.state.amount,
-    date: new Date().toISOString(),
-    reference: `${this.props.playerData.PhoneNum}-${reference}`,
-    fee: 50,
-    channel: "AZA"
-   };
-
-   context.props.setWithdrawalHistory(payload);
-
-   const postData = {
-    account_bank: this.state.bank,
-    account_number: this.state.account_number,
-    amount: +this.state.amount - 50,
-    seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
-    narration: "CHOPBARH PAYMENT",
-    currency: "NGN",
-    reference: `${this.props.playerData.PhoneNum}-${reference}`
-   };
-
-   try {
-    // prod https://api.ravepay.co/v2/gpx/transfers/create
-    const response = await fetch(
-     "https://api.ravepay.co/v2/gpx/transfers/create",
+    const gameEngineResponse = await fetch(
+     "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
      {
       method: "POST",
-      mode: "cors",
       headers: {
-       "Content-Type": "application/json"
+       "Content-Type": "application/json",
+       Accept: "application/json"
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify({
+       "@class": ".LogEventRequest",
+       eventKey: "PLAYER_CASH_UPDATE",
+       playerId: this.props.playerData.PlayerID,
+       Cash: +this.state.amount,
+       Condition: 2
+      })
      }
     );
-    const data = await response.json();
 
-    // Confirm withdrawal actually goes through here
-    if (data.status === "success") {
-     context.setState({
-      amount: "",
-      bank: "",
-      account_number: "",
-      paying: false,
-      modal: false
-     });
-     toast.info("Transaction is being processed");
-    } else {
-     context.setState({
-      amount: "",
-      bank: "",
-      account_number: "",
-      paying: false,
-      modal: false
-     });
-     toast.error("Transaction was not successful");
+    const gameEngineResponseJSON = await gameEngineResponse.json()
+
+    if (!Object.keys(gameEngineResponseJSON).includes('error') && gameEngineResponseJSON.scriptData.Result.Cash > +this.state.amount) {
+      this.props.fetchPlayerData()
+
+      let reference = getReference();
+
+      const dataObject = {
+       account_number: this.state.account_number,
+       code: this.state.bank,
+       bank: bankName[0].Name,
+       name: this.state.account_name
+      };
+
+      context.props.setWithdrawalBankAccountData(dataObject);
+
+      const payload = {
+       status: "--",
+       amount: +this.state.amount,
+       date: new Date().toISOString(),
+       reference: `${this.props.playerData.PhoneNum}-${reference}`,
+       fee: 50,
+       channel: "AZA"
+      };
+
+      context.props.setWithdrawalHistory(payload);
+
+      const postData = {
+       account_bank: this.state.bank,
+       account_number: this.state.account_number,
+       amount: +this.state.amount - 50,
+       seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
+       narration: "CHOPBARH PAYMENT",
+       currency: "NGN",
+       reference: `${this.props.playerData.PhoneNum}-${reference}`
+      };
+
+      try {
+       // prod https://api.ravepay.co/v2/gpx/transfers/create
+       const response = await fetch(
+        "https://api.ravepay.co/v2/gpx/transfers/create",
+        {
+         method: "POST",
+         mode: "cors",
+         headers: {
+          "Content-Type": "application/json"
+         },
+         body: JSON.stringify(postData)
+        }
+       );
+       const data = await response.json();
+
+       // Confirm withdrawal actually goes through here
+       if (data.status === "success") {
+        context.setState({
+         amount: "",
+         account_number: "",
+         paying: false,
+         modal: false
+        });
+        toast.info("Transaction is being processed");
+       } else {
+        context.setState({
+         amount: "",
+         account_number: "",
+         paying: false,
+         modal: false
+        });
+        toast.error("Transaction was not successful");
+       }
+      } catch (err) {
+       context.setState({ loading: false, modal: false, paying: false });
+       toast.error("Something went wrong");
+      }
     }
-   } catch (err) {
-    context.setState({ loading: false, modal: false, paying: false });
-    toast.error("Something went wrong");
-   }
-  } else {
-             context.setState({ paying: false });
-   toast.error("Withdrawals cannot be completed at the moment");
-  }} catch(err) {
-    // console.log(err)
-    this.setState({paying: false})
-    toast.error('Something went wrong. Please try again later')
+    else {
+      context.setState({ paying: false, modal: false });
+      toast.error("Withdrawals cannot be completed at the moment");
+    }
+
+  } catch(err) {
+    this.setState({ paying: false, modal:false });
+    toast.error("Something went wrong. Please try again later");
   }
+
+  // this.props.setCashBalance(Number(this.state.amount), 2);
  };
 
  withdrawCashAuth = async () => {
@@ -261,35 +264,36 @@ class AccountNumber extends Component {
 
   const context = this
 
-  this.props.setCashBalance(Number(this.state.authAmount), 2);
+  // this.props.setCashBalance(Number(this.state.authAmount), 2);
   
   const bankInformation = this.props.withdrawalAccount.filter(
    account => account.account_number === this.state.selectedValue
   );
 
   try {
-       // Send request to cloud function
-       const userProfile = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://chopbarh-user-api.alukodotun.now.sh/api/v1/get_user_profile",
-        {
-         method: "POST",
-         headers: {
-          "Content-Type": "application/json",
-          apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
-         },
-         body: JSON.stringify({
-          phone_number: this.props.playerData.PhoneNum
-         })
-        }
-       );
+    const gameEngineResponse = await fetch(
+     "https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+     {
+      method: "POST",
+      headers: {
+       "Content-Type": "application/json",
+       Accept: "application/json"
+      },
+      body: JSON.stringify({
+       "@class": ".LogEventRequest",
+       eventKey: "PLAYER_CASH_UPDATE",
+       playerId: this.props.playerData.PlayerID,
+       Cash: +this.state.authAmount,
+       Condition: 2
+      })
+     }
+    );
 
-       const userProfileJSON = await userProfile.json();
-
-       console.log(userProfileJSON, this.state.authAmount)
-
+    const gameEngineResponseJSON = await gameEngineResponse.json();
+  
        if (
-        userProfileJSON.status === true &&
-        userProfileJSON.data.RealCoins > +this.state.authAmount
+        !Object.keys(gameEngineResponseJSON).includes("error") &&
+        gameEngineResponseJSON.scriptData.Result.Cash > +this.state.authAmount
        ) {
         let reference = getReference();
 
@@ -333,7 +337,6 @@ class AccountNumber extends Component {
          if (data.status === "success") {
           context.setState({
            authAmount: "",
-           bank: "",
            account_number: "",
            paying: false,
            modal: false
@@ -342,7 +345,6 @@ class AccountNumber extends Component {
          } else {
           context.setState({
            amount: "",
-           bank: "",
            account_number: "",
            paying: false,
            modal: false
@@ -354,11 +356,14 @@ class AccountNumber extends Component {
          toast.error("Something went wrong");
         }
        } else {
-         context.setState({paying: false})
-         toast.error("Withdrawal cannot be completed right now. Please try later");
+        context.setState({ paying: false, modal: false });
+        toast.error(
+         "Withdrawal cannot be completed right now. Please try later"
+        );
        }
       } catch(err) {
-    toast.error("Something went wrong");
+        this.setState({ paying: false, modal: false });
+      toast.error("Something went wrong");
   }
  };
 
@@ -893,7 +898,8 @@ const mapDispatchToProps = {
  setWithdrawalHistory,
  removeWithdrawalBankAccount,
  fetchWithdrawalBankAccountData,
- setWithdrawalBankAccountData
+ setWithdrawalBankAccountData,
+ fetchPlayerData
 };
 
 export default connect(
