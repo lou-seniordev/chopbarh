@@ -72,11 +72,11 @@ class Eyowo extends Component {
   }
 
   // Confirm they can withdraw that amount
-  // if (Number(this.state.amount) > this.props.playerData.RealCoins) {
-  //   toast.error("You cannot withdraw more than you have won");
-  //   this.setState({ loading: false });
-  //   return;
-  // }
+  if (Number(this.state.amount) > this.props.playerData.RealCoins) {
+   toast.error("You cannot withdraw more than you have won");
+   this.setState({ loading: false });
+   return;
+  }
 
   if (Number(this.state.amount) < 1000) {
    toast.error(`You cannot withdraw less than \u20a6${1000}`);
@@ -318,7 +318,7 @@ class Eyowo extends Component {
  render() {
   return (
    <>
-    <Modal
+    {/* <Modal
      isOpen={this.state.confirmModal}
      toggle={this.toggleConfirmModal}
      style={{
@@ -429,8 +429,8 @@ class Eyowo extends Component {
      >
       <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
      </FormSubmitButton>
-    </FormWrapper>
-    {/* <p className="text-center">Service currently unavailable</p> */}
+    </FormWrapper> */}
+    <p className="text-center">Service currently unavailable</p>
    </>
   );
  }
