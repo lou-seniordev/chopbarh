@@ -170,7 +170,7 @@ class Card extends Component {
       return;
     }
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.authAmount,
@@ -254,7 +254,7 @@ class Card extends Component {
   payMoney = async () => {
     this.setState({ paying: true, loading: false });
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.amount,
