@@ -15,7 +15,7 @@ import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
-// import RavePayment from "../Rave/Rave";
+import RavePayment from "../Rave/Rave";
 import InstantPayment from "../InstantPayment/InstantPayment";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -51,7 +51,7 @@ export default function DepositSmallScreens() {
 							<AccordionItemButton>Bank Card</AccordionItemButton>
 						</AccordionItemHeading>
 						<AccordionItemPanel>
-							<Card />
+							<RavePayment />
 						</AccordionItemPanel>
 					</AccordionItem>
 
@@ -91,6 +91,15 @@ export default function DepositSmallScreens() {
 									on Instagram**
 								</p>
 							</div>
+						</AccordionItemPanel>
+					</AccordionItem>
+
+					<AccordionItem>
+						<AccordionItemHeading>
+							<AccordionItemButton>Paystack</AccordionItemButton>
+						</AccordionItemHeading>
+						<AccordionItemPanel>
+							<Card />
 						</AccordionItemPanel>
 					</AccordionItem>
 
