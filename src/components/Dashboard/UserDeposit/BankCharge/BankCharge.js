@@ -163,7 +163,7 @@ class BankCharge extends Component {
       account => account.auth_code === this.state.selectedValue
     );
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
@@ -189,7 +189,7 @@ class BankCharge extends Component {
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -258,7 +258,7 @@ class BankCharge extends Component {
   payMoney = async () => {
     this.setState({ paying: true });
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
