@@ -33,7 +33,6 @@ import {
 } from "../../../../store/actions/withdrawalAccountActions";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
-import debugApplication from "../../../../lib/debugger";
 import "react-accessible-accordion/dist/fancy-example.css";
 
 const FormWrapper = styled(Form)`
@@ -154,29 +153,45 @@ class AccountNumber extends Component {
 		);
 
 		try {
-			const gameEngineResponse = await fetch(
-				"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+			// const gameEngineResponse = await fetch(
+			// 	"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+			// 	{
+			// 		method: "POST",
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			Accept: "application/json"
+			// 		},
+			// 		body: JSON.stringify({
+			// 			"@class": ".LogEventRequest",
+			// 			eventKey: "PLAYER_CASH_UPDATE",
+			// 			playerId: this.props.playerData.PlayerID,
+			// 			Cash: +this.state.amount,
+			// 			Condition: 2
+			// 		})
+			// 	}
+			// );
+
+			// const gameEngineResponseJSON = await gameEngineResponse.json();
+			const response = await fetch(
+				"https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
 				{
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Accept: "application/json"
+						Accept: "application/json",
+						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
 					},
-					body: JSON.stringify({
-						"@class": ".LogEventRequest",
-						eventKey: "PLAYER_CASH_UPDATE",
+					body: JSON.stringify({		
 						playerId: this.props.playerData.PlayerID,
-						Cash: +this.state.amount,
-						Condition: 2
+						amount: +this.state.authAmount,
+						condition: 2
 					})
 				}
 			);
 
-			const gameEngineResponseJSON = await gameEngineResponse.json();
+			const data = await response.json();
 
-			debugApplication(gameEngineResponseJSON);
-
-			if (!Object.keys(gameEngineResponseJSON).includes("error")) {
+			if (data.status === true) {
 				this.props.fetchPlayerData();
 
 				let reference = getReference();
@@ -273,29 +288,26 @@ class AccountNumber extends Component {
 		);
 
 		try {
-			const gameEngineResponse = await fetch(
-				"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
+			const response = await fetch(
+				"https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
 				{
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Accept: "application/json"
+						Accept: "application/json",
+						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
 					},
-					body: JSON.stringify({
-						"@class": ".LogEventRequest",
-						eventKey: "PLAYER_CASH_UPDATE",
+					body: JSON.stringify({		
 						playerId: this.props.playerData.PlayerID,
-						Cash: +this.state.authAmount,
-						Condition: 2
+						amount: +this.state.authAmount,
+						condition: 2
 					})
 				}
 			);
 
-			const gameEngineResponseJSON = await gameEngineResponse.json();
+			const data = await response.json();
 
-			debugApplication(gameEngineResponseJSON);
-
-			if (!Object.keys(gameEngineResponseJSON).includes("error")) {
+			if (data.status === true) {
 				let reference = getReference();
 
 				const payload = {
@@ -362,6 +374,7 @@ class AccountNumber extends Component {
 				toast.error("Withdrawals cannot be completed at the moment");
 			}
 		} catch (err) {
+			console.log(err)
 			this.setState({ paying: false, modal: false });
 			toast.error("Something went wrong");
 		}
