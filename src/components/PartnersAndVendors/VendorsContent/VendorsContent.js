@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
+import bg from "../../assets/img/page_background@2x.png";
 
 const VendorsContentWrapper = styled.div``;
 
 const VendorsContentHeader = styled.div`
-	background: ${color.colorPrimary};
+	background: ${color.colorPrimary} url(${bg});
+	background-size: cover;
+	background-repeat: no-repeat;
 	height: 20vh;
 	color: #fff;
 	display: flex;
@@ -21,7 +24,11 @@ const VendorsContentHeader = styled.div`
 	}
 
 	h3 {
-		font-size: 3rem;
+		font-size: 3.5rem;
+
+		@media only screen and (max-width: ${breakPoints.medium}) {
+			font-size: 3rem;
+		}
 
 		@media only screen and (max-width: ${breakPoints.small}) {
 			font-size: 2.5rem;
