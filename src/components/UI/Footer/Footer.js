@@ -93,7 +93,9 @@ export default function Footer() {
               <span>Responsible Gaming</span>
             </p> */}
 						<p>
-							<span>Become a Recharge Vendor</span>
+							<Link to="vendors">
+								<span>Become a Recharge Vendor</span>
+							</Link>
 						</p>
 					</FooterLinkContainer>
 				</div>
