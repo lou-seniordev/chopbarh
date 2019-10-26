@@ -212,7 +212,7 @@ class AccountNumber extends Component {
 					reference: `${this.props.playerData.PhoneNum}-${reference}`,
 					fee: 50,
 					channel: "AZA",
-					gameTransactionId: data.Result.TranID
+					gameTransactionId: data.data.TranID
 				};
 
 				context.props.setWithdrawalHistory(payload);
@@ -317,7 +317,7 @@ class AccountNumber extends Component {
 					reference: `${context.props.playerData.PhoneNum}-${reference}`,
 					fee: 50,
 					channel: "AZA",
-					gameTransactionId: data.Result.TranID
+					gameTransactionId: data.data.TranID
 				};
 
 				context.props.setWithdrawalHistory(payload);
