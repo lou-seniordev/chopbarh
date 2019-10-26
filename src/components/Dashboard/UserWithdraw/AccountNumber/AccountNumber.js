@@ -181,7 +181,7 @@ class AccountNumber extends Component {
 			// 			Accept: "application/json",
 			// 			apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
 			// 		},
-			// 		body: JSON.stringify({		
+			// 		body: JSON.stringify({
 			// 			playerId: this.props.playerData.PlayerID,
 			// 			amount: +this.state.authAmount,
 			// 			condition: 2
@@ -191,7 +191,7 @@ class AccountNumber extends Component {
 
 			// const data = await response.json();
 
-			if (!Object.keys(gameEngineResponseJSON).includes('error')) {
+			if (!Object.keys(gameEngineResponseJSON).includes("error")) {
 				this.props.fetchPlayerData();
 
 				let reference = getReference();
@@ -308,7 +308,7 @@ class AccountNumber extends Component {
 
 			const gameEngineResponseJSON = await gameEngineResponse.json();
 
-			if (!Object.keys(gameEngineResponseJSON).includes('error')) {
+			if (!Object.keys(gameEngineResponseJSON).includes("error")) {
 				let reference = getReference();
 
 				const payload = {
@@ -375,7 +375,7 @@ class AccountNumber extends Component {
 				toast.error("Withdrawals cannot be completed at the moment");
 			}
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 			this.setState({ paying: false, modal: false });
 			toast.error("Something went wrong");
 		}
@@ -403,11 +403,11 @@ class AccountNumber extends Component {
 			return;
 		}
 
-		if (Number(this.state.authAmount) < 1000) {
-			toast.error(`You cannot withdraw less than \u20a6${1000}`);
-			this.setState({ loading: false });
-			return;
-		}
+		// if (Number(this.state.authAmount) < 1000) {
+		// 	toast.error(`You cannot withdraw less than \u20a6${1000}`);
+		// 	this.setState({ loading: false });
+		// 	return;
+		// }
 
 		if (Number(this.state.authAmount) > 50000) {
 			toast.error(
@@ -892,7 +892,7 @@ class AccountNumber extends Component {
             )}
           </>
         )}
-				{/* <p className="text-center">Service currently unavailable</p> */}
+				<p className="text-center">Service currently unavailable</p>
 			</>
 		);
 	}
