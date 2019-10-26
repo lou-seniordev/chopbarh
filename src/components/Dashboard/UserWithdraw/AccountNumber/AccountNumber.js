@@ -153,45 +153,45 @@ class AccountNumber extends Component {
 		);
 
 		try {
-			// const gameEngineResponse = await fetch(
-			// 	"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
-			// 	{
-			// 		method: "POST",
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 			Accept: "application/json"
-			// 		},
-			// 		body: JSON.stringify({
-			// 			"@class": ".LogEventRequest",
-			// 			eventKey: "PLAYER_CASH_UPDATE",
-			// 			playerId: this.props.playerData.PlayerID,
-			// 			Cash: +this.state.amount,
-			// 			Condition: 2
-			// 		})
-			// 	}
-			// );
-
-			// const gameEngineResponseJSON = await gameEngineResponse.json();
-			const response = await fetch(
-				"https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
+			const gameEngineResponse = await fetch(
+				"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
 				{
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Accept: "application/json",
-						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
+						Accept: "application/json"
 					},
-					body: JSON.stringify({		
+					body: JSON.stringify({
+						"@class": ".LogEventRequest",
+						eventKey: "PLAYER_CASH_UPDATE",
 						playerId: this.props.playerData.PlayerID,
-						amount: +this.state.authAmount,
-						condition: 2
+						Cash: +this.state.amount,
+						Condition: 2
 					})
 				}
 			);
 
-			const data = await response.json();
+			const gameEngineResponseJSON = await gameEngineResponse.json();
+			// const response = await fetch(
+			// 	"https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
+			// 	{
+			// 		method: "POST",
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			Accept: "application/json",
+			// 			apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
+			// 		},
+			// 		body: JSON.stringify({		
+			// 			playerId: this.props.playerData.PlayerID,
+			// 			amount: +this.state.authAmount,
+			// 			condition: 2
+			// 		})
+			// 	}
+			// );
 
-			if (data.status === true) {
+			// const data = await response.json();
+
+			if (!Object.keys(gameEngineResponseJSON).includes('error')) {
 				this.props.fetchPlayerData();
 
 				let reference = getReference();
@@ -212,7 +212,7 @@ class AccountNumber extends Component {
 					reference: `${this.props.playerData.PhoneNum}-${reference}`,
 					fee: 50,
 					channel: "AZA",
-					gameTransactionId: data.data.TranID
+					gameTransactionId: gameEngineResponseJSON.scriptData.Result.TranID
 				};
 
 				context.props.setWithdrawalHistory(payload);
@@ -288,26 +288,27 @@ class AccountNumber extends Component {
 		);
 
 		try {
-			const response = await fetch(
-				"https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
+			const gameEngineResponse = await fetch(
+				"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
 				{
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Accept: "application/json",
-						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
+						Accept: "application/json"
 					},
-					body: JSON.stringify({		
+					body: JSON.stringify({
+						"@class": ".LogEventRequest",
+						eventKey: "PLAYER_CASH_UPDATE",
 						playerId: this.props.playerData.PlayerID,
-						amount: +this.state.authAmount,
-						condition: 2
+						Cash: +this.state.amount,
+						Condition: 2
 					})
 				}
 			);
 
-			const data = await response.json();
+			const gameEngineResponseJSON = await gameEngineResponse.json();
 
-			if (data.status === true) {
+			if (!Object.keys(gameEngineResponseJSON).includes('error')) {
 				let reference = getReference();
 
 				const payload = {
@@ -317,7 +318,7 @@ class AccountNumber extends Component {
 					reference: `${context.props.playerData.PhoneNum}-${reference}`,
 					fee: 50,
 					channel: "AZA",
-					gameTransactionId: data.data.TranID
+					gameTransactionId: gameEngineResponseJSON.scriptData.Result.TranID
 				};
 
 				context.props.setWithdrawalHistory(payload);
