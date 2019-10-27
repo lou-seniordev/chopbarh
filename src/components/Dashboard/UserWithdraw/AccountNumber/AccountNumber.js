@@ -179,7 +179,7 @@ class AccountNumber extends Component {
 					headers: {
 						"Content-Type": "application/json",
 						Accept: "application/json",
-						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
+						apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
 					},
 					body: JSON.stringify({
 						playerId: this.props.playerData.PlayerID,
@@ -295,7 +295,7 @@ class AccountNumber extends Component {
 					headers: {
 						"Content-Type": "application/json",
 						Accept: "application/json",
-						apiKey: 'd979dfb8-5150-4b59-8402-4cc39e2e0f47'
+						apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
 					},
 					body: JSON.stringify({
 						playerId: this.props.playerData.PlayerID,
@@ -402,11 +402,11 @@ class AccountNumber extends Component {
 			return;
 		}
 
-		// if (Number(this.state.authAmount) < 1000) {
-		// 	toast.error(`You cannot withdraw less than \u20a6${1000}`);
-		// 	this.setState({ loading: false });
-		// 	return;
-		// }
+		if (Number(this.state.authAmount) < 1000) {
+			toast.error(`You cannot withdraw less than \u20a6${1000}`);
+			this.setState({ loading: false });
+			return;
+		}
 
 		if (Number(this.state.authAmount) > 50000) {
 			toast.error(
