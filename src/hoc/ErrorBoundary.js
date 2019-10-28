@@ -62,7 +62,7 @@ export default class ErrorBoundary extends Component {
 				<ErrorBoundaryWrapper>
 					<div>
 						<h3>
-							Ooops!
+							Ooops! <br />
 							<span>An Error Occured!</span>
 						</h3>
 						<Link to="/" onClick={this.forceUpdate}>

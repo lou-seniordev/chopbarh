@@ -94,7 +94,6 @@ class Login extends Component {
 		})
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				if (data.status === true) {
 					localStorage.setItem("chopbarh-token:live", data.authToken);
 					localStorage.setItem("chopbarh-id:live", data.userId);
