@@ -74,18 +74,29 @@ export const setVoucherHistory = payload => async (dispatch, getState) => {
 		dispatch(setVoucherHistoryFail());
 	}
 
-	try {
-		const docRef = await firestore.collection("new_deposits").add({
-			amount: payload.value,
-			channel: "Voucher",
-			deposit_date: payload.transaction_date,
-			paid_at: payload.paid_at,
-			transaction_fees: "None",
-			transaction_reference: getReference(),
-			status: payload.status,
-			customer_id: getState().player.playerData.PhoneNum,
-			time: firebase.firestore.FieldValue.serverTimestamp(),
-			playerId: getState().auth.id
-		});
-	} catch (err) {}
+	// try {
+	// 	const docRef = await firestore.collection("new_deposits").add({
+	// 		amount: payload.value,
+	// 		channel: "Voucher",
+	// 		deposit_date: payload.transaction_date,
+	// 		paid_at: payload.paid_at,
+	// 		transaction_fees: "None",
+	// 		transaction_reference: getReference(),
+	// 		status: payload.status,
+	// 		customer_id: getState().player.playerData.PhoneNum,
+	// 		time: firebase.firestore.FieldValue.serverTimestamp(),
+	// 		playerId: getState().auth.id,
+
+	// 		deposit_date: payload.transaction_date,
+	// 		paid_at: payload.transaction_date,
+	// 		transaction_fees: payload.fees,
+	// 		transaction_reference: payload.reference,
+	// 		status: "PENDING",
+	// 		refId: payload.refId,
+	// 		gateway: payload.gateway,
+	// 		customer_id: getState().player.playerData.PhoneNum,
+	// 		time: firebase.firestore.FieldValue.serverTimestamp(),
+	// 		playerId: getState().auth.id
+	// 	});
+	// } catch (err) {}
 };
