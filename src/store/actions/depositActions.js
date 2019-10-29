@@ -107,20 +107,20 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
 		dispatch(setDepositHistoryFail());
 	}
 
-	try {
-		const docRef = await firestore.collection("new_deposits").add({
-			amount: payload.amount,
-			channel: payload.channel,
-			deposit_date: payload.transaction_date,
-			paid_at: payload.transaction_date,
-			transaction_fees: payload.fees,
-			transaction_reference: payload.reference,
-			status: "PENDING",
-			refId: payload.refId,
-			gateway: payload.gateway,
-			customer_id: getState().player.playerData.PhoneNum,
-			time: firebase.firestore.FieldValue.serverTimestamp(),
-			playerId: getState().auth.id
-		});
-	} catch (err) {}
+	// try {
+	// 	const docRef = await firestore.collection("new_deposits").add({
+	// 		amount: payload.amount,
+	// 		channel: payload.channel,
+	// 		deposit_date: payload.transaction_date,
+	// 		paid_at: payload.transaction_date,
+	// 		transaction_fees: payload.fees,
+	// 		transaction_reference: payload.reference,
+	// 		status: "PENDING",
+	// 		refId: payload.refId,
+	// 		gateway: payload.gateway,
+	// 		customer_id: getState().player.playerData.PhoneNum,
+	// 		time: firebase.firestore.FieldValue.serverTimestamp(),
+	// 		playerId: getState().auth.id
+	// 	});
+	// } catch (err) {}
 };
