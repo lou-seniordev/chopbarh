@@ -79,7 +79,7 @@ export const setVoucherHistory = payload => async (dispatch, getState) => {
 			amount: payload.value,
 			channel: "Voucher",
 			deposit_date: payload.transaction_date,
-			paid_at: payload.paid_at,
+			paid_at: Date.now(),
 			transaction_fees: 0,
 			transaction_reference: getReference(),
 			status: payload.status,

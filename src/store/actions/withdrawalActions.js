@@ -94,8 +94,10 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
 						transaction_reference: payload.reference,
 						channel: payload.channel,
 						withdrawal_date: payload.date,
-            paid_at: payload.date,
-            gameTransactionId: payload.gameTransactionId ? payload.gameTransactionId : '--'
+						paid_at: payload.date,
+						gameTransactionId: payload.gameTransactionId
+							? payload.gameTransactionId
+							: "--"
 					})
 				});
 			dispatch(setWithdrawalHistorySuccess(docRef));
@@ -113,8 +115,10 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
 							transaction_reference: payload.reference,
 							channel: payload.channel,
 							withdrawal_date: payload.date,
-              paid_at: payload.date,
-              gameTransactionId: payload.gameTransactionId ? payload.gameTransactionId : '--'
+							paid_at: payload.date,
+							gameTransactionId: payload.gameTransactionId
+								? payload.gameTransactionId
+								: "--"
 						}
 					]
 				});
@@ -132,10 +136,12 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
 			transaction_reference: payload.reference,
 			channel: payload.channel,
 			withdrawal_date: payload.date,
-			paid_at: payload.date,
+			paid_at: Date.now(),
 			time: firebase.firestore.FieldValue.serverTimestamp(),
-      playerId: getState().auth.id,
-      gameTransactionId: payload.gameTransactionId ? payload.gameTransactionId : '--'
+			playerId: getState().auth.id,
+			gameTransactionId: payload.gameTransactionId
+				? payload.gameTransactionId
+				: "--"
 		});
 	} catch (err) {}
 };
