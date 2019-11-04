@@ -210,12 +210,22 @@ class InstantPayment extends Component {
 						{this.props.account !== null ? (
 							<>
 								<div className="text-center" style={{ minHeight: "5rem" }}>
-									<p>Please make Payment to the account number:</p>
+									<p>
+										Please make Payment and save the Wema Account Number created for you
+									</p>
+									<p>
+										You can use this account multiple times. All deposits to this accounts
+										will be automatically credited to your chopbarh
+									</p>
 									<p>
 										Account Number: <strong>{this.props.account.account_number}</strong>
 									</p>
 									<p>
 										Bank Name: <strong>{this.props.account.bank_name}</strong>
+									</p>
+									<p>
+										Funds Will be Automatically credited to your chopbarh account within
+										2-5 minutes of successful deposit
 									</p>
 									{/* <Button onClick={this.deleteAccount} disabled={this.state.removing}>
           {this.state.removing ? "Deleting..." : "Delete Account"}

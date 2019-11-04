@@ -38,7 +38,7 @@ export default function DepositSmallScreens() {
 					<AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>
-								Bank Transfer (All Banks Supported)
+								Bank Transfer - All Banks (Recommended and Instant)
 							</AccordionItemButton>
 						</AccordionItemHeading>
 						<AccordionItemPanel>
