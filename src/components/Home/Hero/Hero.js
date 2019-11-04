@@ -213,9 +213,9 @@ const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
 `;
 
 const VendorButtonImageSmall = styled.img`
-	width: 90%;
+	width: 100%;
 	transition: all 0.2s;
-	margin-top: 0.5rem;
+	margin-top: 0.8rem;
 
 	&:hover {
 		cursor: pointer;
