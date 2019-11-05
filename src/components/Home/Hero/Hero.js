@@ -213,7 +213,7 @@ const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
 `;
 
 const VendorButtonImageSmall = styled.img`
-	width: 100%;
+	width: 120%;
 	transition: all 0.2s;
 	margin-top: 0.8rem;
 
@@ -253,7 +253,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
 											alt="App Store"
 										/>
 									</a>
@@ -262,7 +262,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -290,7 +290,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
 											alt="App Store"
 										/>
 									</a>
@@ -299,7 +299,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -325,7 +325,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
 											alt="App Store"
 										/>
 									</a>
@@ -334,7 +334,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -357,7 +357,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
 											alt="App Store"
 										/>
 									</a>
@@ -366,7 +366,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -389,7 +389,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-md-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
 											alt="App Store"
 										/>
 									</a>
@@ -398,7 +398,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -432,7 +432,7 @@ export default function Hero() {
 									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 										<Image
 											src={AppStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-2"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-2"
 											alt="App Store"
 										/>
 									</a>
@@ -441,7 +441,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2"
+											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>

@@ -120,9 +120,9 @@ export default function Header({ transparent }) {
 									</Link>
 								</button>
 								<button>
-									<Link to="signup">
+									<a href="https://www.chopbarh.net">
 										<span style={{ color: "#ffffff" }}>Sign Up</span>
-									</Link>
+									</a>
 								</button>
 							</div>
 						)}
