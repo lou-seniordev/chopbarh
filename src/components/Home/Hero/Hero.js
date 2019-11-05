@@ -138,6 +138,12 @@ const SliderContent = styled.div`
 	}
 `;
 
+const SliderContentSmallScreens = styled(SliderContent)`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`;
+
 // const MainLink = styled.a`
 //   all: unset;
 //   border: 3px solid ${color.colorWhite};
@@ -422,7 +428,7 @@ export default function Hero() {
 			<MediaQuery maxDeviceWidth={767}>
 				<HeroWrapper>
 					<div>
-						<SliderContent>
+						<SliderContentSmallScreens>
 							<HeadingTwoFirst className="hero__title">Play and Chop</HeadingTwoFirst>
 							<ParagraphOne>
 								Play and win from collection of childhood games that live up to the
@@ -458,7 +464,7 @@ export default function Hero() {
 							<Link to="vendors">
 								<VendorButtonImageSmall src={VendorButton} />
 							</Link>
-						</SliderContent>
+						</SliderContentSmallScreens>
 						<SliderImage
 							className="d-block"
 							src="https://res.cloudinary.com/chopbarh/image/upload/v1564748049/Landing%20Page%20Assets/slider_1_vfw3gc.png"
