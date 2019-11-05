@@ -281,7 +281,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -327,7 +327,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -371,7 +371,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -412,7 +412,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -453,7 +453,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
