@@ -9,6 +9,7 @@ import Background from "../../assets/svg/WavyHeader.svg";
 import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore.png";
 import VendorButton from "../../assets/img/vendor_button@2x.png";
+import AndroidInstructions from "../../assets/img/AndroidInstructions.png";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -85,18 +86,18 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
-  height: 6rem;
-  width: 17rem;
-  transition: all 0.2s;
+	height: 6rem;
+	width: 17rem;
+	transition: all 0.2s;
 
-  &:hover {
-    transform: translateY(-3px);
-  }
+	&:hover {
+		transform: translateY(-3px);
+	}
 
-  /* @media only screen and (max-width: ${breakPoints.medium}) {
-    height: 5rem;
-    width: 15rem;
-  } */
+	@media only screen and (max-width: ${breakPoints.medium}) {
+		height: 5rem;
+		width: 15rem;
+	}
 `;
 
 const SliderImage = styled.img`
@@ -142,6 +143,7 @@ const SliderContentSmallScreens = styled(SliderContent)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: flex-start;
 `;
 
 // const MainLink = styled.a`
@@ -206,6 +208,7 @@ const Container = styled.div`
 const VendorButtonImage = styled.img`
 	width: 48%;
 	transition: all 0.2s;
+	margin-top: 3rem;
 
 	@media only screen and (max-width: ${breakPoints.large}) {
 		width: 60%;
@@ -219,15 +222,17 @@ const VendorButtonImage = styled.img`
 
 const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
 	padding-left: 1rem;
+	margin-top: 3rem;
 	width: 50%;
 `;
 
 const VendorButtonImageSmall = styled.img`
 	width: 100%;
 	transition: all 0.2s;
-	margin-top: 0.8rem;
+	margin-top: 4rem;
 
 	@media only screen and (max-width: ${breakPoints.smaller}) {
+		margin-top: 6rem;
 		width: 24rem;
 	}
 
@@ -281,6 +286,15 @@ export default function Hero() {
 										/>
 									</a>
 								</span>
+								<span style={{ cursor: "pointer" }}>
+									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+										<Image
+											src={AndroidInstructions}
+											className="mb-lg-3 mb-md-3"
+											alt="Play Store"
+										/>
+									</a>
+								</span>
 							</div>
 							<Link to="vendors">
 								<VendorButtonImageFirstSlide src={VendorButton} />
@@ -314,6 +328,15 @@ export default function Hero() {
 										<Image
 											src={PlayStoreButton}
 											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											alt="Play Store"
+										/>
+									</a>
+								</span>
+								<span style={{ cursor: "pointer" }}>
+									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+										<Image
+											src={AndroidInstructions}
+											className="mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -353,6 +376,15 @@ export default function Hero() {
 										/>
 									</a>
 								</span>
+								<span style={{ cursor: "pointer" }}>
+									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+										<Image
+											src={AndroidInstructions}
+											className="mb-lg-3 mb-md-3"
+											alt="Play Store"
+										/>
+									</a>
+								</span>
 							</div>
 							<Link to="vendors">
 								<VendorButtonImage src={VendorButton} />
@@ -381,6 +413,15 @@ export default function Hero() {
 										<Image
 											src={PlayStoreButton}
 											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+											alt="Play Store"
+										/>
+									</a>
+								</span>
+								<span style={{ cursor: "pointer" }}>
+									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+										<Image
+											src={AndroidInstructions}
+											className="mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -417,6 +458,15 @@ export default function Hero() {
 										/>
 									</a>
 								</span>
+								<span style={{ cursor: "pointer" }}>
+									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+										<Image
+											src={AndroidInstructions}
+											className="mb-lg-3 mb-md-3"
+											alt="Play Store"
+										/>
+									</a>
+								</span>
 							</div>
 							<Link to="vendors">
 								<VendorButtonImage src={VendorButton} />
@@ -429,37 +479,48 @@ export default function Hero() {
 				<HeroWrapper>
 					<div>
 						<SliderContentSmallScreens>
-							<HeadingTwoFirst className="hero__title">Play and Chop</HeadingTwoFirst>
-							<ParagraphOne>
-								Play and win from collection of childhood games that live up to the
-								moment
-							</ParagraphOne>
-							<div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-								{/* <MainLink
+							<div>
+								<HeadingTwoFirst className="hero__title">Play and Chop</HeadingTwoFirst>
+								<ParagraphOne>
+									Play and win from collection of childhood games that live up to the
+									moment
+								</ParagraphOne>
+								<div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+									{/* <MainLink
                 href="https://downloads.chopbarh.com/chopbarh.apk https://play.google.com/store/apps/details?id=com.chopbarh.common"
                 target="_blank"
                 className="mr-lg-4 mr-md-4 mr-sm-2"
               >
                 <span style={{ color: "#ffffff" }}>Start Playing</span>{" "}
               </MainLink> */}
-								<span style={{ cursor: "pointer" }}>
-									<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-										<Image
-											src={AppStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-2"
-											alt="App Store"
-										/>
-									</a>
-								</span>
-								<span style={{ cursor: "pointer" }}>
-									<a href="https://downloads.chopbarh.com/chopbarh.apk">
-										<Image
-											src={PlayStoreButton}
-											className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
-											alt="Play Store"
-										/>
-									</a>
-								</span>
+									<span style={{ cursor: "pointer" }}>
+										<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+											<Image
+												src={AppStoreButton}
+												className="mr-lg-3 mr-md-3 mr-sm-2 mb-2"
+												alt="App Store"
+											/>
+										</a>
+									</span>
+									<span style={{ cursor: "pointer" }}>
+										<a href="https://downloads.chopbarh.com/chopbarh.apk">
+											<Image
+												src={PlayStoreButton}
+												className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3 mb-2"
+												alt="Play Store"
+											/>
+										</a>
+									</span>
+									<span style={{ cursor: "pointer" }}>
+										<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+											<Image
+												src={AndroidInstructions}
+												className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+												alt="Play Store"
+											/>
+										</a>
+									</span>
+								</div>
 							</div>
 							<Link to="vendors">
 								<VendorButtonImageSmall src={VendorButton} />
