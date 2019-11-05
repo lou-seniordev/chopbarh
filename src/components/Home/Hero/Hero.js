@@ -201,6 +201,10 @@ const VendorButtonImage = styled.img`
 	width: 48%;
 	transition: all 0.2s;
 
+	@media only screen and (max-width: ${breakPoints.large}) {
+		width: 60%;
+	}
+
 	&:hover {
 		cursor: pointer;
 		transform: translateY(-3px);
@@ -213,9 +217,13 @@ const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
 `;
 
 const VendorButtonImageSmall = styled.img`
-	width: 120%;
+	width: 100%;
 	transition: all 0.2s;
 	margin-top: 0.8rem;
+
+	@media only screen and (max-width: ${breakPoints.smaller}) {
+		width: 24rem;
+	}
 
 	&:hover {
 		cursor: pointer;
