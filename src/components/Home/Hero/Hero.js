@@ -100,6 +100,12 @@ const Image = styled.img`
 	}
 `;
 
+const AndroidInstructionImage = styled(Image)`
+	@media only screen and (max-width: ${breakPoints.small}) {
+		margin-top: 5rem;
+	}
+`;
+
 const SliderImage = styled.img`
 	position: absolute;
 	top: 15vh;
@@ -231,8 +237,11 @@ const VendorButtonImageSmall = styled.img`
 	transition: all 0.2s;
 	margin-top: 4rem;
 
+	@media only screen and (max-width: ${breakPoints.small}) {
+		margin-top: 1rem;
+	}
+
 	@media only screen and (max-width: ${breakPoints.smaller}) {
-		margin-top: 6rem;
 		width: 24rem;
 	}
 
@@ -513,9 +522,9 @@ export default function Hero() {
 									</span>
 									<span style={{ cursor: "pointer" }}>
 										<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-											<Image
+											<AndroidInstructionImage
 												src={AndroidInstructions}
-												className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3"
+												className="mr-lg-4 mr-md-4 mr-sm-2"
 												alt="Play Store"
 											/>
 										</a>
