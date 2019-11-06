@@ -147,7 +147,9 @@ export default function VendorsContent() {
 					<Row>
 						<div className="col-md-4">
 							<h4>Lagos (Surulere)</h4>
-							<p>31 Adelabu street Surulere, Lagos</p>
+							<p>31 Adelabu street </p>
+							<p>Surulere</p>
+							<p>Lagos</p>
 							<p>Tel: 08142827759</p>
 						</div>
 						<div className="col-md-4">
@@ -160,7 +162,8 @@ export default function VendorsContent() {
 						</div>
 						<div className="col-md-4">
 							<h4>Port Harcourt</h4>
-							<p>Coming Soon</p>
+							<p>Address: Rafco Plaza Ada George Road, Portharcourt, Rivers state</p>
+							<p>Tel: 08134883256</p>
 						</div>
 					</Row>
 				</Container>
