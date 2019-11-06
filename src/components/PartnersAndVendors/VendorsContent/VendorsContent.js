@@ -162,7 +162,9 @@ export default function VendorsContent() {
 						</div>
 						<div className="col-md-4">
 							<h4>Port Harcourt</h4>
-							<p>Address: Rafco Plaza Ada George Road, Portharcourt, Rivers state</p>
+							<p>Rafco Plaza Ada George Road</p>
+							<p>Port Harcourt</p>
+							<p>Rivers state</p>
 							<p>Tel: 08134883256</p>
 						</div>
 					</Row>

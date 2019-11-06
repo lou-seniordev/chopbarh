@@ -1,6 +1,6 @@
 {
 	"hosting": {
-		"site": "chopbarh-uat",
+		"site": "chopbarh-website",
 		"public": "build",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
 		"rewrites": [
