@@ -37,6 +37,25 @@ export const fetchWithdrawalHistoryData = () => async (dispatch, getState) => {
 	// 	const snapshot = await firestore
 	// 		.collection("new_withdrawals")
 	// 		.where("playerId", "==", getState().auth.id)
+	// 		.orderBy("time", "desc")
+	// 		.limit(10)
+	// 		.get();
+
+	// 	const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+	// 	if (data.length) {
+	// 		dispatch(fetchWithdrawalHistorySuccess(data));
+	// 	} else {
+	// 		dispatch(fetchWithdrawalHistorySuccess());
+	// 	}
+	// } catch (err) {
+	// 	dispatch(fetchWithdrawalHistoryFail());
+	// }
+
+	// try {
+	// 	const snapshot = await firestore
+	// 		.collection("new_withdrawals")
+	// 		.where("playerId", "==", getState().auth.id)
 	// 		.where("transaction_reference", "==", "09014202339-FRDOJWHTY1DFPT8")
 	// 		.get();
 

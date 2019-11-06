@@ -26,6 +26,20 @@ export const fetchDepositHistoryFail = () => ({
 export const fetchDepositHistoryData = () => async (dispatch, getState) => {
 	dispatch(fetchDepositHistoryInit());
 
+	// try {
+	// 	const snapshot = await firestore
+	// 		.collection("new_deposits")
+	// 		.where("playerId", "==", getState().auth.id)
+	// 		.orderBy("time", "desc")
+	// 		.get();
+
+	// 	const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+	// 	const docId = data[0].id;
+	// 	console.log(data);
+	// } catch (err) {
+	// 	console.log(err);
+	// }
+
 	try {
 		const snapshot = await firestore
 			.collection("deposits")

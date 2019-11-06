@@ -304,7 +304,7 @@ export default function Hero() {
 									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
 										<Image
 											src={AndroidInstructions}
-											className="mb-lg-3 mb-md-3"
+											className="mb-lg-3 mt-lg-3 mt-md-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -350,7 +350,7 @@ export default function Hero() {
 									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
 										<Image
 											src={AndroidInstructions}
-											className="mb-lg-3 mb-md-3"
+											className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -394,7 +394,7 @@ export default function Hero() {
 									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
 										<Image
 											src={AndroidInstructions}
-											className="mb-lg-3 mb-md-3"
+											className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -435,7 +435,7 @@ export default function Hero() {
 									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
 										<Image
 											src={AndroidInstructions}
-											className="mb-lg-3 mb-md-3"
+											className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -476,7 +476,7 @@ export default function Hero() {
 									<a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
 										<Image
 											src={AndroidInstructions}
-											className="mb-lg-3 mb-md-3"
+											className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
 											alt="Play Store"
 										/>
 									</a>
