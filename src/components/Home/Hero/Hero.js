@@ -7,9 +7,9 @@ import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import AppStoreButton from "../../assets/img/AppStore.png";
-import PlayStoreButton from "../../assets/img/PlayStore.png";
+import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
 import VendorButton from "../../assets/img/vendor_button@2x.png";
-import AndroidInstructions from "../../assets/img/AndroidInstructions.png";
+import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -96,7 +96,12 @@ const Image = styled.img`
 
 	@media only screen and (max-width: ${breakPoints.medium}) {
 		height: 5rem;
-		width: 15rem;
+		width: 17rem;
+	}
+
+	@media only screen and (max-width: ${breakPoints.small}) {
+		height: 6rem;
+		width: 20rem;
 	}
 `;
 
@@ -290,7 +295,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -336,7 +341,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -380,7 +385,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -421,7 +426,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -462,7 +467,7 @@ export default function Hero() {
 									<a href="https://downloads.chopbarh.com/chopbarh.apk">
 										<Image
 											src={PlayStoreButton}
-											className="mr-lg-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+											className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
 											alt="Play Store"
 										/>
 									</a>
@@ -495,13 +500,6 @@ export default function Hero() {
 									moment
 								</ParagraphOne>
 								<div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-									{/* <MainLink
-                href="https://downloads.chopbarh.com/chopbarh.apk https://play.google.com/store/apps/details?id=com.chopbarh.common"
-                target="_blank"
-                className="mr-lg-4 mr-md-4 mr-sm-2"
-              >
-                <span style={{ color: "#ffffff" }}>Start Playing</span>{" "}
-              </MainLink> */}
 									<span style={{ cursor: "pointer" }}>
 										<a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
 											<Image
