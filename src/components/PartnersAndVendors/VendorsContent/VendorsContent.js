@@ -178,8 +178,8 @@ export default function VendorsContent() {
 						</div>
 						<div className="col-md-4">
 							<p>
-								For inquiry about becoming an Authorized Distributor please contact us
-								at 08071721925 for availability and requirements.
+								For Corporate inquiries and Partnerships please contact us at
+								08071721925 for availability and requirements
 							</p>
 						</div>
 					</Row>
