@@ -47,7 +47,6 @@ class DepositTable extends Component {
 				loading: false
 			}));
 		} catch (err) {
-			console.log(err);
 			this.setState({ error: true });
 		}
 	};
