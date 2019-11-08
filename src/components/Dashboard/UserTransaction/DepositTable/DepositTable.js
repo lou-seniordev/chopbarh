@@ -18,7 +18,7 @@ class DepositTable extends Component {
 	state = {
 		loading: true,
 		error: false,
-		depositData: null,
+		depositData: [],
 		lastVisible: null,
 		hasMore: true,
 		limit: 10
@@ -36,6 +36,11 @@ class DepositTable extends Component {
 			let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 			let lastVisible = snapshots.docs[snapshots.docs.length - 1];
 
+			if (data.length === 0) {
+				this.setState({ loading: false, error: true });
+				return;
+			}
+
 			if (data.length < this.state.limit) {
 				this.setState({ depositData: data, loading: false, hasMore: false });
 				return;
@@ -47,7 +52,7 @@ class DepositTable extends Component {
 				loading: false
 			}));
 		} catch (err) {
-			this.setState({ error: true });
+			this.setState({ error: true, loading: false });
 		}
 	};
 
@@ -74,7 +79,7 @@ class DepositTable extends Component {
 				lastVisible
 			});
 		} catch (error) {
-			this.setState({ error: true });
+			this.setState({ error: true, loading: false });
 		}
 	};
 
