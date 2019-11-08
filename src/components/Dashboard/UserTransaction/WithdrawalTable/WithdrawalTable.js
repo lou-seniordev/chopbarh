@@ -36,6 +36,11 @@ class WithdrawalTable extends Component {
 			let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 			let lastVisible = snapshots.docs[snapshots.docs.length - 1];
 
+			if (data.length < this.state.limit) {
+				this.setState({ withdrawalData: data, loading: false, hasMore: false });
+				return;
+			}
+
 			this.setState(() => ({
 				withdrawalData: data,
 				lastVisible,
