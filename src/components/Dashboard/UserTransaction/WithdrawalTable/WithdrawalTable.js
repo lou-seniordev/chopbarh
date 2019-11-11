@@ -21,7 +21,7 @@ class WithdrawalTable extends Component {
 		withdrawalData: [],
 		lastVisible: null,
 		hasMore: true,
-		limit: 10
+		limit: 20
 	};
 
 	componentDidMount = async () => {
@@ -95,7 +95,6 @@ class WithdrawalTable extends Component {
 						<InfiniteScroll
 							dataLength={this.state.withdrawalData.length}
 							next={this.fetchMoreData}
-							hasMore={true}
 							loader={
 								<div className="text-center mx-auto">
 									<Spinner />

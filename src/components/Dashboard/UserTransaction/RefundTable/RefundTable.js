@@ -21,7 +21,7 @@ class RefundTable extends Component {
 		refundData: [],
 		lastVisible: null,
 		hasMore: true,
-		limit: 10
+		limit: 20
 	};
 
 	componentDidMount = async () => {
@@ -96,7 +96,6 @@ class RefundTable extends Component {
 						<InfiniteScroll
 							dataLength={this.state.refundData.length}
 							next={this.fetchMoreData}
-							hasMore={true}
 							loader={
 								<div className="text-center mx-auto">
 									<Spinner />

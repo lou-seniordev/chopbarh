@@ -193,6 +193,7 @@ class Card extends Component {
           ? (Number(this.state.authAmount) + 100) * 100
           : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId
@@ -285,6 +286,7 @@ class Card extends Component {
         expiry_month: cardExpirationData[0],
         expiry_year: year
       },
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId,

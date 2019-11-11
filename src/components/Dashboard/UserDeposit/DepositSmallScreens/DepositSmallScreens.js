@@ -11,7 +11,7 @@ import Card from "../Card/Card";
 import color from "../../../styles/colors";
 import BankCharge from "../BankCharge/BankCharge";
 import Quickteller from "../Quickteller/Quickteller";
-import Voucher from "../../UserHome/Voucher/Voucher";
+// import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
@@ -73,7 +73,7 @@ export default function DepositSmallScreens() {
 						</AccordionItemPanel>
 					</AccordionItem>
 
-					<AccordionItem>
+					{/* <AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>Voucher</AccordionItemButton>
 						</AccordionItemHeading>
@@ -92,7 +92,7 @@ export default function DepositSmallScreens() {
 								</p>
 							</div>
 						</AccordionItemPanel>
-					</AccordionItem>
+					</AccordionItem> */}
 
 					<AccordionItem>
 						<AccordionItemHeading>

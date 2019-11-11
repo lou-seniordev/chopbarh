@@ -21,7 +21,7 @@ class DepositTable extends Component {
 		depositData: [],
 		lastVisible: null,
 		hasMore: true,
-		limit: 10
+		limit: 20
 	};
 
 	componentDidMount = async () => {
@@ -70,7 +70,7 @@ class DepositTable extends Component {
 			let lastVisible = snapshots.docs[snapshots.docs.length - 1];
 
 			if (!data.length) {
-				this.setState({ hasMore: false });
+				this.setState({ hasMore: false, loading: false });
 				return;
 			}
 			// Set State
@@ -95,7 +95,6 @@ class DepositTable extends Component {
 						<InfiniteScroll
 							dataLength={this.state.depositData.length}
 							next={this.fetchMoreData}
-							hasMore={true}
 							loader={
 								<div className="text-center mx-auto">
 									<Spinner />

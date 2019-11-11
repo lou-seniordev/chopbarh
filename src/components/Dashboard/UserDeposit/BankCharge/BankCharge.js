@@ -172,6 +172,7 @@ class BankCharge extends Component {
         code: bankAccountObject[0].bank_code,
         account_number: bankAccountObject[0].account_number
       },
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: bankAccountObject[0].bank_code,
@@ -267,6 +268,7 @@ class BankCharge extends Component {
         code: this.state.bank,
         account_number: this.state.account_number
       },
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: this.state.bank,
