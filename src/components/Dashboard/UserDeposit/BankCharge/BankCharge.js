@@ -164,6 +164,7 @@ class BankCharge extends Component {
     );
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
+    let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
@@ -172,7 +173,7 @@ class BankCharge extends Component {
         code: bankAccountObject[0].bank_code,
         account_number: bankAccountObject[0].account_number
       },
-      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
+      reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: bankAccountObject[0].bank_code,
@@ -186,11 +187,11 @@ class BankCharge extends Component {
       channel: "Bank",
       transaction_date: new Date().toISOString(),
       fees: +this.state.authAmount < 2500 ? 0 : 100,
-      reference: "--",
+      reference,
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum,
+      made_by: this.props.playerData.PhoneNum
     };
 
     this.props.setDepositHistory(historyObject);
@@ -259,7 +260,8 @@ class BankCharge extends Component {
   payMoney = async () => {
     this.setState({ paying: true });
 
-    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
+    let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
@@ -268,7 +270,7 @@ class BankCharge extends Component {
         code: this.state.bank,
         account_number: this.state.account_number
       },
-      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
+      reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: this.state.bank,
@@ -282,7 +284,7 @@ class BankCharge extends Component {
       channel: "Bank",
       transaction_date: new Date().toISOString(),
       fees: +this.state.amount < 2500 ? 0 : 100,
-      reference: "--",
+      reference,
       status: "--",
       refId,
       gateway: "Paystack",
@@ -755,7 +757,4 @@ const mapDispatchToProps = {
   closePhoneModal
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(BankCharge));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(BankCharge));
