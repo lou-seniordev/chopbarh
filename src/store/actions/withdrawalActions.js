@@ -32,6 +32,47 @@ export const fetchWithdrawalHistoryData = () => async (dispatch, getState) => {
   } catch (err) {
     dispatch(fetchWithdrawalHistoryFail());
   }
+
+  // try {
+  // 	const snapshot = await firestore
+  // 		.collection("new_withdrawals")
+  // 		.where("playerId", "==", getState().auth.id)
+  // 		.orderBy("time", "desc")
+  // 		.limit(10)
+  // 		.get();
+
+  // 	const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+  // 	if (data.length) {
+  // 		dispatch(fetchWithdrawalHistorySuccess(data));
+  // 	} else {
+  // 		dispatch(fetchWithdrawalHistorySuccess());
+  // 	}
+  // } catch (err) {
+  // 	dispatch(fetchWithdrawalHistoryFail());
+  // }
+
+  // try {
+  // 	const snapshot = await firestore
+  // 		.collection("new_withdrawals")
+  // 		.where("playerId", "==", getState().auth.id)
+  // 		.where("transaction_reference", "==", "09014202339-FRDOJWHTY1DFPT8")
+  // 		.get();
+
+  // 	const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+  // 	const docId = data[0].id;
+
+  // 	try {
+  // 		const ref = await firestore
+  // 			.collection("new_withdrawals")
+  // 			.doc(docId)
+  // 			.update({ status: "SUCCESS" });
+  // 	} catch (err) {
+  // 		console.log(err);
+  // 	}
+
+  // 	console.log(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+  // } catch (err) {}
 };
 
 export const setWithdrawalHistoryInit = () => ({
@@ -72,7 +113,10 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
             transaction_reference: payload.reference,
             channel: payload.channel,
             withdrawal_date: payload.date,
-            paid_at: payload.date
+            paid_at: payload.date,
+            gameTransactionId: payload.gameTransactionId
+              ? payload.gameTransactionId
+              : "--"
           })
         });
       dispatch(setWithdrawalHistorySuccess(docRef));
@@ -90,7 +134,10 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
               transaction_reference: payload.reference,
               channel: payload.channel,
               withdrawal_date: payload.date,
-              paid_at: payload.date
+              paid_at: payload.date,
+              gameTransactionId: payload.gameTransactionId
+                ? payload.gameTransactionId
+                : "--"
             }
           ]
         });
@@ -99,6 +146,23 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
   } catch (err) {
     dispatch(setWithdrawalHistoryFail());
   }
+
+  try {
+    const docRef = await firestore.collection("new_withdrawals").add({
+      amount: payload.amount,
+      status: payload.status,
+      transaction_fee: payload.fee,
+      transaction_reference: payload.reference,
+      channel: payload.channel,
+      withdrawal_date: payload.date,
+      paid_at: Date.now(),
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      playerId: getState().auth.id,
+      gameTransactionId: payload.gameTransactionId
+        ? payload.gameTransactionId
+        : "--"
+    });
+  } catch (err) {}
 };
 
 export const setWithdrawalStatus = value => ({

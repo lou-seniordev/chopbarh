@@ -170,7 +170,7 @@ class Card extends Component {
       return;
     }
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.authAmount,
@@ -193,6 +193,7 @@ class Card extends Component {
           ? (Number(this.state.authAmount) + 100) * 100
           : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId
@@ -254,7 +255,7 @@ class Card extends Component {
   payMoney = async () => {
     this.setState({ paying: true, loading: false });
 
-    let refId = referenceId();
+    let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.amount,
@@ -285,6 +286,7 @@ class Card extends Component {
         expiry_month: cardExpirationData[0],
         expiry_year: year
       },
+      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId,
@@ -766,7 +768,7 @@ class Card extends Component {
             )}
           </>
         )}
-        <div className="text-center" style={{ color: "#000" }}>
+        <div className="text-center mt-4" style={{ color: "#000" }}>
           <p>
             **For deposits of &#8358;2,500 and above, there is a &#8358;100
             charge added to the deposit amount**

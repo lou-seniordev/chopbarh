@@ -2,7 +2,7 @@ import * as actionType from "../actionTypes/actionTypes";
 
 const initialState = {
  loading: true,
- account_number: null,
+ account: null,
  error: false
 };
 
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
   case actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_SUCCESS:
    return {
     ...state,
-    account_number: { ...action.data },
+    account: { ...action.data },
     loading: false
    };
   case actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_FAIL:
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
    return {
     ...state,
     loading: true,
-    account_number: null
+    account: null
    };
   default:
    return state;
