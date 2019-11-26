@@ -5,6 +5,7 @@ import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import bg from "../../assets/img/page_background@2x.png";
 import image from "../../assets/img/chopbarh_ad.png";
+import { Button } from "../../styles/CardCharge";
 
 const VendorsContentWrapper = styled.div``;
 
@@ -170,6 +171,11 @@ export default function VendorsContent() {
               </p>
             </div>
           </Row>
+          <div className="text-center mt-5 mb-4">
+            <Button>
+              <span>Apply Now</span>
+            </Button>
+          </div>
         </Container>
       </VendorsContentSection>
       <VendorsContentSection>
