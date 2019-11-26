@@ -141,7 +141,7 @@ export default function VendorsContent() {
     <VendorsContentWrapper>
       <VendorsContentHeader>
         <h3>
-          Become a <br /> Voucher Reseller
+          Become a <br /> Super Agent
         </h3>
         <span>
           Make over 50k profit everyday being a ChopBarh Super agent. <br />
@@ -155,25 +155,26 @@ export default function VendorsContent() {
           <Row>
             <div className="col-md-6">
               <h4>What a Super Agent Does</h4>
-              <p>Open a ChopBarh center</p>
-              <p>Install the Chopbarh App for users</p>
-              <p>Facilitate ChopBarh games</p>
-              <p>Make money on every game played</p>
-              <p>Make additional money on every win</p>
-              <p>Make money cashing out for customers</p>
+              <p>- Open a ChopBarh center</p>
+              <p>- Install the Chopbarh App for users</p>
+              <p>- Facilitate ChopBarh games</p>
+              <p>- Make money on every game played</p>
+              <p>- Make additional money on every win</p>
+              <p>- Make money cashing out for customers</p>
               <p>
-                Open other sub-agents and make money from all their transactions
+                - Open other sub-agents and make money from all their
+                transactions
               </p>
             </div>
             <div className="col-md-6">
               <h4>Minimum Requirements for a Chopbarh Super Agent</h4>
-              <p>Location/Shop: Get a shop space</p>
+              <p>- Location/Shop: Get a shop space</p>
               <p>
-                Equipments: Minimum of 2 Smartphones(Android or iPhone), 2 TVs,
-                1 Generator set and good internet
+                - Equipments: Minimum of 2 Smartphones(Android or iPhone), 2
+                TVs, 1 Generator set and good internet
               </p>
               <p>
-                Branding: Location/Shop should be painted in Chopbarh colors
+                - Branding: Location/Shop should be painted in Chopbarh colors
               </p>
             </div>
           </Row>
