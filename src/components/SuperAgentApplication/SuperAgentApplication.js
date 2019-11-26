@@ -20,6 +20,7 @@ class SuperAgentApplication extends Component {
     gender: "",
     phone: "",
     loading: true,
+    submitting: false,
     states: null
   };
 
@@ -33,9 +34,16 @@ class SuperAgentApplication extends Component {
   };
 
   //   TODO: Handle Error State too
-  handleInputChange = () => {};
 
-  handleSubmit = () => {};
+  handleInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    // vValidate form here and submit
+  };
 
   render() {
     return (
@@ -131,8 +139,11 @@ class SuperAgentApplication extends Component {
                     onChange={this.handleInputChange}
                     required
                   >
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    {this.state.states.map(state => (
+                      <option key={state.name} value={state.name}>
+                        {state.name}
+                      </option>
+                    ))}
                   </select>
                 </FormItem>
                 <button type="submit" className="mr-2">
