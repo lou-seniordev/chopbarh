@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Col, Row } from "reactstrap";
+import { Container, Row } from "reactstrap";
+import { Link } from "react-router-dom";
 import color from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import bg from "../../assets/img/page_background@2x.png";
@@ -96,6 +97,11 @@ const VendorsContentSection = styled.div`
       margin: 0 2.5rem;
     }
   }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
 `;
 
 const VendorsContentCaption = styled.div`
@@ -173,7 +179,9 @@ export default function VendorsContent() {
           </Row>
           <div className="text-center mt-5 mb-4">
             <Button>
-              <span>Apply Now</span>
+              <span>
+                <Link to="/super-agent-application">Apply Now</Link>
+              </span>
             </Button>
           </div>
         </Container>
