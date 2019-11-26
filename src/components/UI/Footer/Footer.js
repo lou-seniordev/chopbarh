@@ -94,7 +94,7 @@ export default function Footer() {
             </p> */}
             <p>
               <Link to="vendors">
-                <span>Become a Recharge Vendor</span>
+                <span>Become a Super Agent</span>
               </Link>
             </p>
           </FooterLinkContainer>
