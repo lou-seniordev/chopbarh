@@ -26,11 +26,11 @@ class SuperAgentApplication extends Component {
 
   componentDidMount = async () => {
     const statesRequest = await fetch(
-      "http://locationsng-api.herokuapp.com/api/v1/states"
+      "https://nigerian-states-info.herokuapp.com/api/v1/states"
     );
     const statesResponse = await statesRequest.json();
 
-    this.setState({ loading: false, states: statesResponse });
+    this.setState({ loading: false, states: statesResponse.data });
   };
 
   //   TODO: Handle Error State too
@@ -140,8 +140,8 @@ class SuperAgentApplication extends Component {
                     required
                   >
                     {this.state.states.map(state => (
-                      <option key={state.name} value={state.name}>
-                        {state.name}
+                      <option key={state.Name} value={state.info.officialName}>
+                        {state.info.officialName}
                       </option>
                     ))}
                   </select>
