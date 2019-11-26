@@ -203,7 +203,7 @@ class SuperAgentApplication extends Component {
                         required
                       />
                     </FormItem>
-                    <FormItem className="mr-3">
+                    <FormItem>
                       <label>Date of Birth</label>
                       <input
                         type="date"
