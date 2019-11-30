@@ -95,7 +95,7 @@ export default function Header({ transparent }) {
             </li>
             <li className="nav-item">
               <Link to="vendors" className="nav-link text-uppercase mr-5">
-                Become a Super Agent
+                Become a Chopbarh Agent
               </Link>
             </li>
             <li className="nav-item">

@@ -141,11 +141,11 @@ export default function VendorsContent() {
     <VendorsContentWrapper>
       <VendorsContentHeader>
         <h3>
-          Become a <br /> Super Agent
+          Become a <br /> Chopbarh Agent
         </h3>
         <span>
-          Make over 50k profit everyday being a ChopBarh Super agent. <br />
-          To become a Super Agent please visit any of our Authorized Centers
+          Make over 50k profit everyday being a ChopBarh Chopbarh agent. <br />
+          To become a Chopbarh Agent please visit any of our Authorized Centers
           near you to for requirements and onboarding. Or call 07063741315 for
           information
         </span>
@@ -154,7 +154,7 @@ export default function VendorsContent() {
         <Container>
           <Row>
             <div className="col-md-6">
-              <h4>What a Super Agent Does</h4>
+              <h4>What a Chopbarh Agent Does</h4>
               <p>- Open a ChopBarh center</p>
               <p>- Install the Chopbarh App for users</p>
               <p>- Facilitate ChopBarh games</p>
@@ -167,7 +167,7 @@ export default function VendorsContent() {
               </p>
             </div>
             <div className="col-md-6">
-              <h4>Minimum Requirements for a Chopbarh Super Agent</h4>
+              <h4>Minimum Requirements for a Chopbarh Chopbarh Agent</h4>
               <p>- Location/Shop: Get a shop space</p>
               <p>
                 - Equipments: Minimum of 2 Smartphones(Android or iPhone), 2

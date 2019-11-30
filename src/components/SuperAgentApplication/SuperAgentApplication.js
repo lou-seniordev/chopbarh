@@ -130,7 +130,7 @@ class SuperAgentApplication extends Component {
   render() {
     return (
       <>
-        <Helmet title={`Chopbarh \u{2192} Super Agent Application`} />
+        <Helmet title={`Chopbarh \u{2192} Chopbarh Agent Application`} />
         <Header />
         <SignUpWrapper>
           <Container>
@@ -161,7 +161,7 @@ class SuperAgentApplication extends Component {
                 ) : (
                   <Form onSubmit={this.handleSubmit}>
                     <HeadingTwo className="mb-4">
-                      Super Agent Application
+                      Chopbarh Agent Application
                     </HeadingTwo>
                     <FormItem>
                       <label>First Name</label>

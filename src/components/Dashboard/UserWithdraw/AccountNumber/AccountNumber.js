@@ -154,7 +154,7 @@ class AccountNumber extends Component {
 
     try {
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://pay.chopbarh.com/ng/user/withdraw",
+        "https://pay.chopbarh.com/ng/user/withdraw",
         {
           method: "POST",
           headers: {
@@ -343,7 +343,7 @@ class AccountNumber extends Component {
 
     try {
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://pay.chopbarh.com/ng/user/withdraw",
+        "https://pay.chopbarh.com/ng/user/withdraw",
         {
           method: "POST",
           headers: {
