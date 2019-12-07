@@ -1,10 +1,10 @@
 import React from "react";
 import {
-	Accordion,
-	AccordionItem,
-	AccordionItemHeading,
-	AccordionItemButton,
-	AccordionItemPanel
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel
 } from "react-accessible-accordion";
 import styled from "styled-components";
 import Card from "../Card/Card";
@@ -21,59 +21,59 @@ import InstantPayment from "../InstantPayment/InstantPayment";
 import "react-accessible-accordion/dist/fancy-example.css";
 
 const InstaLink = styled.a`
-	background: ${color.colorPrimary};
-	padding: 0.5rem 1.3rem;
+  background: ${color.colorPrimary};
+  padding: 0.5rem 1.3rem;
 
-	&:hover {
-		cursor: pointer;
-		background: ${color.colorPrimaryHover};
-	}
+  &:hover {
+    cursor: pointer;
+    background: ${color.colorPrimaryHover};
+  }
 `;
 
 export default function DepositSmallScreens() {
-	return (
-		<div className="container p-0 my-5 px-1">
-			<div className="col-lg-12 p-0">
-				<Accordion>
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>
-								Bank Transfer - All Banks (Recommended and Instant)
-							</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<InstantPayment />
-						</AccordionItemPanel>
-					</AccordionItem>
+  return (
+    <div className="container p-0 my-5 px-1">
+      <div className="col-lg-12 p-0">
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                Bank Transfer - All Banks (Recommended and Instant)
+              </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <InstantPayment />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>Bank Card</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<RavePayment />
-						</AccordionItemPanel>
-					</AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Bank Card</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <RavePayment />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>GT Bank</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<GTBank />
-						</AccordionItemPanel>
-					</AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>GT Bank</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <GTBank />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>Quickteller</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<Quickteller />
-						</AccordionItemPanel>
-					</AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quickteller</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <Quickteller />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					{/* <AccordionItem>
+          {/* <AccordionItem>
 						<AccordionItemHeading>
 							<AccordionItemButton>Voucher</AccordionItemButton>
 						</AccordionItemHeading>
@@ -94,44 +94,44 @@ export default function DepositSmallScreens() {
 						</AccordionItemPanel>
 					</AccordionItem> */}
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>Paystack</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<Card />
-						</AccordionItemPanel>
-					</AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Paystack</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <Card />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>
-								Zenith, UBA, Sterling, ALAT by Wema
-							</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<BankCharge />
-						</AccordionItemPanel>
-					</AccordionItem>
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>ATM Machine</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<ATM />
-						</AccordionItemPanel>
-					</AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                Zenith, UBA, Sterling, ALAT by Wema
+              </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <BankCharge />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>ATM Machine</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <ATM />
+            </AccordionItemPanel>
+          </AccordionItem>
 
-					<AccordionItem>
-						<AccordionItemHeading>
-							<AccordionItemButton>NIBSS Ebillspay</AccordionItemButton>
-						</AccordionItemHeading>
-						<AccordionItemPanel>
-							<NIBBS />
-						</AccordionItemPanel>
-					</AccordionItem>
-				</Accordion>
-			</div>
-		</div>
-	);
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>NIBSS Ebillspay</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <NIBBS />
+            </AccordionItemPanel>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    </div>
+  );
 }
