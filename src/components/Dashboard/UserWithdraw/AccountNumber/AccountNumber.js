@@ -76,7 +76,7 @@ class AccountNumber extends Component {
     // }
 
     fetch(
-      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
       {
         headers: {
           "Content-Type": "application/json"

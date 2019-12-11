@@ -1,0 +1,17 @@
+[debug] [2019-12-11T14:54:20.980Z] ----------------------------------------------------------------------
+[debug] [2019-12-11T14:54:20.982Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only hosting:chopbarh-website
+[debug] [2019-12-11T14:54:20.983Z] CLI Version:   7.4.0
+[debug] [2019-12-11T14:54:20.983Z] Platform:      darwin
+[debug] [2019-12-11T14:54:20.983Z] Node Version:  v12.8.0
+[debug] [2019-12-11T14:54:20.985Z] Time:          Wed Dec 11 2019 21:54:20 GMT+0700 (Novosibirsk Standard Time)
+[debug] [2019-12-11T14:54:20.985Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-12-11T14:54:21.054Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-11T14:54:21.054Z] > authorizing via signed-in user
+[debug] [2019-12-11T14:54:21.054Z] [iam] checking project chopbarh-website for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-11T14:54:21.057Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-12-11T14:54:21.057Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-12-11T14:54:22.364Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-11T14:54:22.573Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/chopbarh-website:testIamPermissions  
+
