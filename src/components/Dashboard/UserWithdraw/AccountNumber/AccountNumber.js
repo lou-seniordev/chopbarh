@@ -167,7 +167,8 @@ class AccountNumber extends Component {
             amount: +this.state.amount,
             phone_number: this.props.playerData.PhoneNum,
             account_number: this.state.account_number,
-            bank: this.state.bank
+            bank: this.state.bank,
+            bank_name: bankName[0].Name
           })
         }
       );
@@ -356,7 +357,8 @@ class AccountNumber extends Component {
             amount: +this.state.authAmount,
             phone_number: this.props.playerData.PhoneNum,
             account_number: bankInformation[0].account_number,
-            bank: bankInformation[0].code
+            bank: bankInformation[0].code,
+            bank_name: ""
           })
         }
       );
@@ -589,7 +591,7 @@ class AccountNumber extends Component {
     const postData = {
       recipientaccount: this.state.account_number,
       destbankcode: this.state.bank,
-      PBFPubKey: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X"
+      PBFPubKey: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X"
     };
 
     fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {
@@ -980,7 +982,7 @@ class AccountNumber extends Component {
                         className="mt-5 text-center"
                         style={{ minHeight: "30vh" }}
                       >
-                        <p>Something went wrong</p>
+                        <p>Resource was not loaded</p>
                       </div>
                     )}
                   </>

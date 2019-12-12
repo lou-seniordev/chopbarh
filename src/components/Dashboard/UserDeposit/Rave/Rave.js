@@ -181,7 +181,8 @@ class RavePayment extends Component {
             phone_number: this.props.playerData.PhoneNum,
             token: raveCardObject[0].auth_code,
             reference: `${this.props.playerData.PhoneNum}-${reference}`,
-            email: raveCardObject[0].email
+            email: raveCardObject[0].email,
+            playerId: this.props.playerData.PlayerID
           })
         }
       );
