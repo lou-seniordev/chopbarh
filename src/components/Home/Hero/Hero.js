@@ -14,7 +14,7 @@ import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
 import "react-animated-slider/build/horizontal.css";
 
 const HeroWrapper = styled.div`
-  height: 87vh;
+  height: 94vh;
   /* width: 98.7vw; */
   position: relative;
   background: url(${Background}) ${color.colorPrimary};
@@ -69,6 +69,10 @@ const HeadingTwoFirst = styled(HeadingTwo)`
     display: flex;
     justify-content: center;
   }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    font-size: 2rem;
+  }
 `;
 
 const ParagraphOne = styled.p`
@@ -82,6 +86,10 @@ const ParagraphOne = styled.p`
   @media only screen and (max-width: ${breakPoints.small}) {
     margin-top: 1rem;
     font-size: 1.3rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    margin-top: 0.5rem;
   }
 `;
 
@@ -103,11 +111,24 @@ const Image = styled.img`
     height: 6rem;
     width: 20rem;
   }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    height: 5rem;
+    width: 16rem;
+  }
 `;
 
 const AndroidInstructionImage = styled(Image)`
   @media only screen and (max-width: ${breakPoints.small}) {
     margin-top: 5rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    margin-top: 1rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    margin-top: 0.8rem;
   }
 `;
 
@@ -248,6 +269,10 @@ const VendorButtonImageSmall = styled.img`
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
     width: 24rem;
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    width: 19rem;
   }
 
   &:hover {
@@ -499,9 +524,9 @@ export default function Hero() {
             <SliderContentSmallScreens>
               <div>
                 <iframe
-                  width="320"
-                  height="275"
-                  src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                  width="300"
+                  height="250"
+                  src="https://www.youtube.com/embed/gBeXOvNpR3c"
                 ></iframe>
                 <HeadingTwoFirst className="hero__title">
                   Play and Chop
@@ -528,6 +553,11 @@ export default function Hero() {
                         alt="Play Store"
                       />
                     </a>
+                  </span>
+                  <span>
+                    <ParagraphOne>
+                      Download now and get &#8358;100 free
+                    </ParagraphOne>
                   </span>
                   <span style={{ cursor: "pointer" }}>
                     <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
