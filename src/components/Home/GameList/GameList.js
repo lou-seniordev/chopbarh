@@ -11,6 +11,11 @@ import breakpoints from "../../styles/breakpoints";
 const GamesWrapper = styled.div`
   text-align: center;
   margin-top: 5rem;
+  margin-bottom: 5rem;
+
+  @media only screen and (max-width: 425px) {
+    margin-bottom: 0px;
+  }
 `;
 
 const HeadingThree = styled.h3`
@@ -68,7 +73,7 @@ const ImageContainer = styled.div`
 
   & > * {
     background-color: crimson;
-    height: 10rem;
+    height: 16rem;
     margin: 0.5rem;
   }
 
@@ -90,28 +95,28 @@ const ImageContainer = styled.div`
 const Image1 = styled.img`
   @media only screen and (max-width: ${breakpoints.medium}) {
     grid-row: 1 / 2;
-    height: 12rem;
+    height: 14rem;
   }
 `;
 
 const Image2 = styled.img`
   @media only screen and (max-width: ${breakpoints.medium}) {
     grid-row: 2 / 3;
-    height: 12rem;
+    height: 14rem;
   }
 `;
 
 const Image3 = styled.img`
   @media only screen and (max-width: ${breakpoints.medium}) {
     grid-row: 3 / 4;
-    height: 12rem;
+    height: 14rem;
   }
 `;
 
 const Image4 = styled.img`
   @media only screen and (max-width: ${breakpoints.medium}) {
     grid-row: 4 / -1;
-    height: 12rem;
+    height: 14rem;
   }
 `;
 
