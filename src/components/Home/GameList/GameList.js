@@ -72,7 +72,7 @@ const ImageContainer = styled.div`
   align-items: center;
 
   & > * {
-    background-color: crimson;
+    background-color: ${color.colorPrimary};
     height: 16rem;
     margin: 0.5rem;
   }
