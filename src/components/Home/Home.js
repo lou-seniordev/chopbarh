@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import MediaQuery from "react-responsive";
 import Header from "../UI/Header/Header";
 import Hero from "./Hero/Hero";
 import HowItWorks from "./HowItWorks/HowItWorks";
@@ -14,10 +15,13 @@ export default function Home() {
       <Helmet title={`Chopbarh \u{2192} Home`} />
       <Header />
       <Hero />
-      <HowItWorks />
-      {/* <PlayAndChop />
-      <Testimonials /> */}
-      <GameList />
+      <MediaQuery minDeviceWidth={425}>
+        <HowItWorks />
+        <GameList />
+      </MediaQuery>
+      <MediaQuery maxDeviceWidth={425}>
+        <div>Hey there!!!</div>
+      </MediaQuery>
       <Footer />
     </>
   );

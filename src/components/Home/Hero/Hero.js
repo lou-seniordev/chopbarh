@@ -14,12 +14,16 @@ import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
 import "react-animated-slider/build/horizontal.css";
 
 const HeroWrapper = styled.div`
-  height: 94vh;
+  height: 87vh;
   /* width: 98.7vw; */
   position: relative;
   background: url(${Background}) ${color.colorPrimary};
   overflow: hidden;
   color: ${color.colorWhite};
+
+  @media only screen and (max-width: ${breakPoints.smallest}) {
+    height: 94vh;
+  }
 `;
 
 // const HeroContentWrapper = styled.div`
@@ -523,11 +527,13 @@ export default function Hero() {
           <div>
             <SliderContentSmallScreens>
               <div>
-                <iframe
-                  width="300"
-                  height="250"
-                  src="https://www.youtube.com/embed/gBeXOvNpR3c"
-                ></iframe>
+                <MediaQuery maxDeviceWidth={425}>
+                  <iframe
+                    width="300"
+                    height="250"
+                    src="https://www.youtube.com/embed/gBeXOvNpR3c"
+                  ></iframe>
+                </MediaQuery>
                 <HeadingTwoFirst className="hero__title">
                   Play and Chop
                 </HeadingTwoFirst>
