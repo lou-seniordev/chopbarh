@@ -561,7 +561,9 @@ export default function Hero() {
                     </a>
                   </span>
                   <span>
-                    <ParagraphOne>
+                    <ParagraphOne
+                      style={{ textTransform: "uppercase", fontWeight: "bold" }}
+                    >
                       Download now and get &#8358;100 free
                     </ParagraphOne>
                   </span>
