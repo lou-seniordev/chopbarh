@@ -11,7 +11,6 @@ import Image6 from "../../assets/img/ChopBarhPairs6.png";
 const GamesWrapper = styled.div`
   text-align: center;
   margin-top: 5rem;
-  padding-bottom: 5rem;
 `;
 
 const HeadingThree = styled.h3`

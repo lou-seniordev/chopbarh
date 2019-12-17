@@ -8,7 +8,6 @@ import VersusAndWin from "../../assets/svg/VersusAndWin.svg";
 
 const HowItWorksWrapper = styled.div`
   text-align: center;
-  padding: 2rem;
   margin-top: 5rem;
 `;
 

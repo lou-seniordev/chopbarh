@@ -20,7 +20,8 @@ export default function Home() {
         <GameList />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={425}>
-        <div>Hey there!!!</div>
+        <GameList />
+        <HowItWorks />
       </MediaQuery>
       <Footer />
     </>
