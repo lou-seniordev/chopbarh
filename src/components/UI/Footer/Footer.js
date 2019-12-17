@@ -134,7 +134,7 @@ export default function Footer() {
             <p>Contact Us</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            <p>Telephone: 0809-249-2331</p>
+            <p>Telephone: 0903-662-3253</p>
             <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
