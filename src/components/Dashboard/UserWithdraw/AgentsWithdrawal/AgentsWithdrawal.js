@@ -8,6 +8,7 @@ import {
   HalfColumn,
   FormSubmitButton
 } from "../../../styles/CardCharge";
+import firebase, { firestore } from "../../../../firebase";
 
 const FormWrapper = styled(Form)`
   min-height: 20rem;
@@ -18,7 +19,34 @@ class AgentsWithdrawal extends Component {
   state = {
     loading: false,
     phone_number: "",
-    amount: ""
+    amount: "",
+    currentTransferAmount: 0
+  };
+
+  componentDidMount = async () => {
+    var now = new Date();
+    var startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var timestamp = startOfDay.getTime() / 1000;
+
+    try {
+      let snapshots = await firestore
+        .collection("transfer_to_agent")
+        .where("playerId", "==", localStorage.getItem("chopbarh-id:live"))
+        .where("at", ">=", timestamp)
+        .get();
+
+      let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+      let totalTransferredSoFar = data.reduce(
+        (acc, cur) => (acc += cur.amount),
+        0
+      );
+      // console.log(data, totalTransferredSoFar);
+
+      this.setState({ currentTransferAmount: totalTransferredSoFar });
+    } catch (err) {
+      // console.log(err);
+    }
   };
 
   handleInputChange = ({ target }) => {
@@ -60,7 +88,7 @@ class AgentsWithdrawal extends Component {
 
     if (Number(this.state.amount) < 1000) {
       toast.error(
-        `You cannot withdraw less than \u20a6${new Intl.NumberFormat().format(
+        `You cannot transfer less than \u20a6${new Intl.NumberFormat().format(
           1000
         )}`
       );
@@ -70,7 +98,17 @@ class AgentsWithdrawal extends Component {
 
     if (Number(this.state.amount) > 20000) {
       toast.error(
-        `You cannot withdraw more than \u20a6${new Intl.NumberFormat().format(
+        `You cannot transfer more than \u20a6${new Intl.NumberFormat().format(
+          20000
+        )}`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (Number(this.state.currentTransferAmount) >= 20000) {
+      toast.error(
+        `You have exceeded your transfer limit of \u20a6${new Intl.NumberFormat().format(
           20000
         )}`
       );
@@ -101,6 +139,17 @@ class AgentsWithdrawal extends Component {
       const data = await response.json();
 
       if (data.status === true) {
+        try {
+          const docRef = await firestore.collection("transfer_to_agent").add({
+            amount: +this.state.amount,
+            phone_number: this.state.phone_number,
+            playerId: this.props.playerData.PlayerID,
+            at: Date.now(),
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            date: new Date().toISOString()
+          });
+        } catch (err) {}
+
         toast.info("Transaction is processing");
         context.setState({ loading: false, amount: "", phone_number: "" });
       } else {
@@ -116,11 +165,22 @@ class AgentsWithdrawal extends Component {
   render() {
     return (
       <>
-        {/* <div style={{ color: "#000" }}>
-          <p>
-            <strong>Daily Limit</strong>: #20,000
-          </p>
-        </div> */}
+        <div className="mb-4">
+          <h5>
+            <strong>Daily Transfer Limit:</strong> &#8358;
+            {new Intl.NumberFormat().format(20000)}
+          </h5>
+          <h5>
+            <strong>Current Daily Transfer:</strong> &#8358;
+            {new Intl.NumberFormat().format(this.state.currentTransferAmount)}
+          </h5>
+          <h5>
+            <strong>Allowable Transfer:</strong> &#8358;
+            {new Intl.NumberFormat().format(
+              20000 - this.state.currentTransferAmount
+            )}
+          </h5>
+        </div>
         <FormWrapper onSubmit={this.handleSubmit}>
           <HalfColumn>
             <FormItem className="mr-3">
