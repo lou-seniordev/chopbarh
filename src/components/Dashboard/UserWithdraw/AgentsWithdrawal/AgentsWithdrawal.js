@@ -86,10 +86,10 @@ class AgentsWithdrawal extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 1000) {
+    if (Number(this.state.amount) < 250) {
       toast.error(
         `You cannot transfer less than \u20a6${new Intl.NumberFormat().format(
-          1000
+          250
         )}`
       );
       this.setState({ loading: false });
