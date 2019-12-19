@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import AccountNumber from "../AccountNumber/AccountNumber";
+import AgentsWithdrawal from "../AgentsWithdrawal/AgentsWithdrawal";
 // import Paga from "../Paga/Paga";
 // import Eyowo from "../Eyowo/Eyowo";
 
@@ -43,7 +44,7 @@ export default function WithdrawTabs() {
           </TabPanel> */}
           <TabPanel>
             <div style={{ minHeight: "80vh" }}>
-              <br />
+              <AgentsWithdrawal />
             </div>
           </TabPanel>
         </Tabs>
