@@ -116,6 +116,19 @@ class AgentsWithdrawal extends Component {
       return;
     }
 
+    let attemptedTransfer =
+      Number(this.state.currentTransferAmount) + Number(this.state.amount);
+
+    if (attemptedTransfer > 20000) {
+      toast.error(
+        `Your transfer transfer limit of \u20a6${new Intl.NumberFormat().format(
+          20000
+        )} will be exceeded. Please check your Allowable Transfer`
+      );
+      this.setState({ loading: false });
+      return;
+    }
+
     const context = this;
 
     try {
