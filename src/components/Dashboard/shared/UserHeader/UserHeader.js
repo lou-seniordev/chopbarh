@@ -17,7 +17,7 @@ import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
-import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions.js";
+// import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions.js";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -41,7 +41,7 @@ class UserHeader extends Component {
 
   componentDidMount = () => {
     this.props.fetchPlayerData();
-    this.props.fetchTopEarners();
+    // this.props.fetchTopEarners();
     // if (!this.props.isPlayerDataAvailable) {
     // }
   };
@@ -333,10 +333,16 @@ class UserHeader extends Component {
                             />
                           </span>
                         </li>
-                        <Link className="nav-link text-uppercase" to="edit-profile">
+                        <Link
+                          className="nav-link text-uppercase"
+                          to="edit-profile"
+                        >
                           Profile
                         </Link>
-                        <Link className="nav-link text-uppercase" to="change-pin">
+                        <Link
+                          className="nav-link text-uppercase"
+                          to="change-pin"
+                        >
                           Change Pin
                         </Link>
                         <Link className="nav-link text-uppercase" to="logout">
@@ -405,11 +411,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchPlayerData,
-  fetchTopEarners
+  fetchPlayerData
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(UserHeader));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(UserHeader));
