@@ -118,7 +118,7 @@ const Image = styled.img`
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
     height: 5rem;
-    width: 16rem;
+    width: 18rem;
   }
 `;
 
