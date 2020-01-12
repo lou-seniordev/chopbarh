@@ -77,7 +77,7 @@ export default function Header({ transparent }) {
               marginLeft: "-1.2rem"
             }}
           >
-            Help: 0903-662-3253
+            Contact Us: 0903-662-3253
           </p>
         </MediaQuery>
         <button
@@ -103,7 +103,7 @@ export default function Header({ transparent }) {
                   marginLeft: "2.5rem"
                 }}
               >
-                Help: 0903-662-3253
+                Contact Us: 0903-662-3253
               </p>
             </MediaQuery>
           </ul>
