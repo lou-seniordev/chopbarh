@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+import MediaQuery from "react-responsive";
 import colors from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Logo from "../Logo/Logo";
@@ -65,6 +67,19 @@ export default function Header({ transparent }) {
         <Link className="navbar-brand navbar-logo mt-n4" to="/">
           <Logo />
         </Link>
+        <MediaQuery maxDeviceWidth={991}>
+          <p
+            className="nav-item mt-4"
+            style={{
+              color: "#fff",
+              textTransform: "uppercase",
+              fontSize: "1.4rem",
+              marginLeft: "-1.2rem"
+            }}
+          >
+            Help: 0903-662-3253
+          </p>
+        </MediaQuery>
         <button
           className="navbar-toggler custom-toggler"
           type="button"
@@ -76,9 +91,22 @@ export default function Header({ transparent }) {
         >
           <span className="navbar-toggler-icon" />
         </button>
-
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto" />
+          <ul className="navbar-nav ml-auto mr-auto">
+            <MediaQuery minDeviceWidth={991}>
+              <p
+                className="nav-item mt-4"
+                style={{
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  fontSize: "1.4rem",
+                  marginLeft: "2.5rem"
+                }}
+              >
+                Help: 0903-662-3253
+              </p>
+            </MediaQuery>
+          </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
               <a
