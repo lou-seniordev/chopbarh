@@ -85,8 +85,11 @@ class AccountNumber extends Component {
     )
       .then(response => response.json())
       .then(data => {
+        const { Banks } = data.data;
+        const bankList = Banks.filter(bank => bank.Code !== "090175");
+
         this.setState({
-          bankList: data.data.Banks,
+          bankList,
           dataLoading: false,
           bank: data.data.Banks[0].Code
         });
@@ -341,6 +344,17 @@ class AccountNumber extends Component {
     const bankInformation = this.props.withdrawalAccount.filter(
       account => account.account_number === this.state.selectedValue
     );
+
+    if (bankInformation[0].code === "090175") {
+      this.setState({
+        authAmount: "",
+        account_number: "",
+        paying: false,
+        modal: false
+      });
+      toast.error("Service is unavailable at the moment");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -749,7 +763,7 @@ class AccountNumber extends Component {
             )}
           </ModalBody>
         </Modal>
-        {this.props.loading ? (
+        {/* {this.props.loading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
@@ -997,8 +1011,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )}
-        {/* <p className="text-center">Service currently unavailable</p> */}
+        )} */}
+        <p className="text-center">Service currently unavailable</p>
       </>
     );
   }
