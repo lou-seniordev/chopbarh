@@ -70,8 +70,7 @@ class DepositSmallScreens extends Component {
                   <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>
-                        Instant Bank Transfer - All Banks (Recommended and
-                        Instant)
+                        Instant Bank Transfer
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>

@@ -617,17 +617,6 @@ class Card extends Component {
                             minLength="1"
                             placeholder="Amount(NGN)"
                           />
-
-                          {/* <NumberFormat
-                    thousandSeparator
-                    onChange={this.handleInputChange}
-                    name="amount"
-                    value={this.state.amount}
-                    required
-                    min={1}
-                    minLength="1"
-                    placeholder="Amount(NGN)"
-                  /> */}
                         </FormItem>
                         <FormItem>
                           <label>Card Number</label>
@@ -639,15 +628,6 @@ class Card extends Component {
                             required
                             placeholder="Enter Card Number"
                           />
-                          {/* <NumberFormat
-                    format="#### #### #### #### ####"
-                    onChange={this.handleInputChange}
-                    name="card"
-                    value={this.state.card}
-                    minLength="16"
-                    required
-                    placeholder="Enter Card Number"
-                  /> */}
                         </FormItem>
                         <HalfColumn>
                           <FormItem className="mr-3">
@@ -701,17 +681,6 @@ class Card extends Component {
                     minLength="1"
                     placeholder="Amount(NGN)"
                   />
-
-                  {/* <NumberFormat
-                    thousandSeparator
-                    onChange={this.handleInputChange}
-                    name="amount"
-                    value={this.state.amount}
-                    required
-                    min={1}
-                    minLength="1"
-                    placeholder="Amount(NGN)"
-                  /> */}
                 </FormItem>
                 <FormItem>
                   <label>Card Number</label>
@@ -723,15 +692,6 @@ class Card extends Component {
                     required
                     placeholder="Enter Card Number"
                   />
-                  {/* <NumberFormat
-                    format="#### #### #### #### ####"
-                    onChange={this.handleInputChange}
-                    name="card"
-                    value={this.state.card}
-                    minLength="16"
-                    required
-                    placeholder="Enter Card Number"
-                  /> */}
                 </FormItem>
                 <HalfColumn>
                   <FormItem className="mr-3">
