@@ -133,9 +133,9 @@ class RavePayment extends Component {
 
     let reference = this.getReference();
 
-    try {
-      this.setState({ paying: true });
+    this.setState({ paying: true });
 
+    try {
       const historyObject = {
         amount: this.state.authAmount,
         channel: "Card",
