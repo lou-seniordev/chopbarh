@@ -93,7 +93,7 @@ class Layout extends Component {
                 path="/super-agent-application"
                 component={SuperAgentApplicationPage}
               />
-              <Route path="*" component={NotFoundPage} />
+              <Redirect push to="/user" />
             </Switch>
           </Suspense>
         ) : (
@@ -108,8 +108,6 @@ class Layout extends Component {
                 path="/super-agent-application"
                 component={SuperAgentApplicationPage}
               />
-              {/* <Route path="/set-nickname" component={SetNickname} />
-              <Route path="/complete_profile" component={CompleteProfilePage} /> */}
 
               <Redirect push to="/login" />
             </Switch>
