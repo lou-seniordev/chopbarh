@@ -35,7 +35,7 @@ export const fetchInstantPaymentAccountData = () => async (
 
     const data = snapshot.data();
 
-    console.log(data);
+    // console.log(data);
     //   console.log(snapshot.data(), getState().auth.id);
     //   if (data.length) {
     try {
