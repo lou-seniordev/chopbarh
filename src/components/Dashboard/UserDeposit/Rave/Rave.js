@@ -148,7 +148,7 @@ class RavePayment extends Component {
         made_by: this.props.playerData.PhoneNum
       };
 
-      this.props.setDepositHistory(historyObject);
+      // this.props.setDepositHistory(historyObject);
 
       // const response = await fetch(
       //   "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
