@@ -130,11 +130,7 @@ class DepositTable extends Component {
                   {this.state.depositData.map((deposit, index) => (
                     <tr key={index} style={{ textAlign: "center" }}>
                       <td>{deposit.status.toUpperCase()}</td>
-                      <td>
-                        {deposit.transaction_reference !== "--"
-                          ? deposit.transaction_reference
-                          : deposit.refId}
-                      </td>
+                      <td>{deposit.refId}</td>
                       <td>{`${new Date(
                         deposit.deposit_date
                       ).toLocaleDateString()}`}</td>
