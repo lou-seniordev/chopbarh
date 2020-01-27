@@ -138,7 +138,7 @@ export default function Footer() {
             <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
-                Please Click Here
+                Submit a Ticket
               </a>
             </p>
             <p>&copy; {new Date().getFullYear()}</p>
