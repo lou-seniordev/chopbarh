@@ -2,12 +2,6 @@ import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 import { toast } from "react-toastify";
 
-function addDays(date, days) {
-  const copy = new Date(Number(date));
-  copy.setDate(date.getDate() + days);
-  return copy;
-}
-
 export const fetchInstantPaymentAccountInit = () => ({
   type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_INIT
 });
@@ -81,8 +75,7 @@ export const setInstantPaymentAccountData = payload => async (
       .doc(getState().auth.id)
       .set({
         account_number: payload.account_number,
-        bank_name: payload.bank_name,
-        expiry: addDays(new Date(), 180)
+        bank_name: payload.bank_name
       });
 
     setTimeout(() => {

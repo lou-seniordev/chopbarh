@@ -5,7 +5,6 @@ import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
   closeOTPModal
@@ -135,7 +134,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCoinBalance,
   setDepositHistory,
   setCreditCardData,
   fetchCreditCardData,

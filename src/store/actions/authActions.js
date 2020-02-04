@@ -4,11 +4,6 @@ export const authStart = () => ({
   type: actionType.AUTH_START
 });
 
-export const authOTPGenerator = otp => ({
-  type: actionType.AUTH_OTP,
-  otp
-});
-
 export const authSuccess = (token, id) => {
   expirationTimer();
 
