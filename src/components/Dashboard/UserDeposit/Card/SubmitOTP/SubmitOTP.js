@@ -71,18 +71,6 @@ class SubmitOTP extends Component {
         this.props.closeOTPModal();
         this.setState({ loading: false });
         toast.info(`Transaction is processing`);
-        // const payload = {
-        //   ...data.data.authorization,
-        //   cvv: this.props.cvv
-        // };
-        // const historyObject = {
-        //   ...data.data,
-        //   fees: +data.data.amount / 100 < 2500 ? 0 : 100
-        // };
-        // const value = +data.data.amount / 100;
-        // this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
-        // this.props.setCreditCardData(payload);
       } else if (data.data.status === "send_otp") {
         this.props.closeOTPModal();
         this.props.openOTPModal();
@@ -156,8 +144,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitOTP))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitOTP))
 );
