@@ -5,8 +5,7 @@ const initialState = {
   loading: false,
   error: false,
   token: null,
-  id: null,
-  otp: null
+  id: null
 };
 
 export default (state = initialState, action) => {
@@ -15,11 +14,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true
-      };
-    case actionType.AUTH_OTP:
-      return {
-        ...state,
-        otp: action.otp
       };
     case actionType.AUTH_SUCCESS:
       return {

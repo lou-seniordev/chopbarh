@@ -29,7 +29,7 @@ export const fetchRaveCardData = () => async (dispatch, getState) => {
     // console.log(data);
     if (data.length) {
       dispatch(fetchRaveCardSuccess(data[0].data));
-      console.log(data[0].data);
+      // console.log(data[0].data);
     } else {
       dispatch(fetchRaveCardFail());
     }

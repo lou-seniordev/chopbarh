@@ -76,7 +76,7 @@ class AccountNumber extends Component {
     // }
 
     fetch(
-      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+      "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
       {
         headers: {
           "Content-Type": "application/json"
@@ -85,8 +85,11 @@ class AccountNumber extends Component {
     )
       .then(response => response.json())
       .then(data => {
+        const { Banks } = data.data;
+        const bankList = Banks.filter(bank => bank.Code !== "090175");
+
         this.setState({
-          bankList: data.data.Banks,
+          bankList,
           dataLoading: false,
           bank: data.data.Banks[0].Code
         });
@@ -153,27 +156,8 @@ class AccountNumber extends Component {
     );
 
     try {
-      // const gameEngineResponse = await fetch(
-      // 	"https://Y376891fcBvk.live.gamesparks.net/rs/debug/lz53ZTZDy60nxL9nXbJDvnYzSN8YYCJN/LogEventRequest",
-      // 	{
-      // 		method: "POST",
-      // 		headers: {
-      // 			"Content-Type": "application/json",
-      // 			Accept: "application/json"
-      // 		},
-      // 		body: JSON.stringify({
-      // 			"@class": ".LogEventRequest",
-      // 			eventKey: "PLAYER_CASH_UPDATE",
-      // 			playerId: this.props.playerData.PlayerID,
-      // 			Cash: +this.state.amount,
-      // 			Condition: 2
-      // 		})
-      // 	}
-      // );
-
-      // const gameEngineResponseJSON = await gameEngineResponse.json();
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
+        "https://pay.chopbarh.com/ng/user/withdraw",
         {
           method: "POST",
           headers: {
@@ -184,7 +168,10 @@ class AccountNumber extends Component {
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.amount,
-            condition: 2
+            phone_number: this.props.playerData.PhoneNum,
+            account_number: this.state.account_number,
+            bank: this.state.bank,
+            bank_name: bankName[0].Name
           })
         }
       );
@@ -192,104 +179,54 @@ class AccountNumber extends Component {
       const data = await response.json();
 
       if (data.status === true) {
-        this.props.fetchPlayerData();
-
-        let reference = getReference();
-
-        const dataObject = {
-          account_number: this.state.account_number,
-          code: this.state.bank,
-          bank: bankName[0].Name,
-          name: this.state.account_name
-        };
-
-        context.props.setWithdrawalBankAccountData(dataObject);
-
-        const payload = {
-          status: "--",
-          amount: +this.state.amount,
-          date: new Date().toISOString(),
-          reference: `${this.props.playerData.PhoneNum}-${reference}`,
-          fee: 50,
-          channel: "AZA",
-          gameTransactionId: data.data.TranID
-        };
-
-        context.props.setWithdrawalHistory(payload);
-
-        const postData = {
-          account_bank: this.state.bank,
-          account_number: this.state.account_number,
-          amount: +this.state.amount - 50,
-          seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
-          narration: "CHOPBARH PAYMENT",
-          currency: "NGN",
-          reference: `${this.props.playerData.PhoneNum}-${reference}`
-        };
-
-        try {
-          // prod https://api.ravepay.co/v2/gpx/transfers/create
-          const response = await fetch(
-            "https://api.ravepay.co/v2/gpx/transfers/create",
-            {
-              method: "POST",
-              mode: "cors",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(postData)
-            }
-          );
-          const data = await response.json();
-
-          // Confirm withdrawal actually goes through here
-          if (data.status === "success") {
-            context.setState({
-              amount: "",
-              account_number: "",
-              paying: false,
-              modal: false
-            });
-            toast.info("Transaction is being processed");
-          } else {
-            context.setState({
-              amount: "",
-              account_number: "",
-              paying: false,
-              modal: false
-            });
-            toast.error("Transaction was not successful");
-          }
-        } catch (err) {
-          context.setState({ loading: false, modal: false, paying: false });
-          toast.error("Something went wrong");
-        }
+        this.setState({
+          amount: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        toast.info("Transaction is Processing");
       } else {
-        context.setState({ paying: false, modal: false });
-        toast.error("Withdrawals cannot be completed at the moment");
+        this.setState({
+          amount: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        toast.error("Transaction was not successful. Please try again later");
       }
     } catch (err) {
-      this.setState({ paying: false, modal: false });
-      toast.error("Something went wrong. Please try again later");
+      this.setState({
+        amount: "",
+        account_number: "",
+        paying: false,
+        modal: false
+      });
+      toast.error("Something went wrong");
     }
-
-    // this.props.setCashBalance(Number(this.state.amount), 2);
   };
 
   withdrawCashAuth = async () => {
     this.setState({ paying: true, loading: false });
 
-    const context = this;
-
-    // this.props.setCashBalance(Number(this.state.authAmount), 2);
-
     const bankInformation = this.props.withdrawalAccount.filter(
       account => account.account_number === this.state.selectedValue
     );
 
+    if (bankInformation[0].code === "090175") {
+      this.setState({
+        authAmount: "",
+        account_number: "",
+        paying: false,
+        modal: false
+      });
+      toast.error("Service is unavailable at the moment");
+      return;
+    }
+
     try {
       const response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://chopbarh-api.nutod.repl.co/api/set_cash_balance",
+        "https://pay.chopbarh.com/ng/user/withdraw",
         {
           method: "POST",
           headers: {
@@ -300,7 +237,10 @@ class AccountNumber extends Component {
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.authAmount,
-            condition: 2
+            phone_number: this.props.playerData.PhoneNum,
+            account_number: bankInformation[0].account_number,
+            bank: bankInformation[0].code,
+            bank_name: ""
           })
         }
       );
@@ -308,74 +248,29 @@ class AccountNumber extends Component {
       const data = await response.json();
 
       if (data.status === true) {
-        let reference = getReference();
-
-        const payload = {
-          status: "--",
-          amount: +context.state.authAmount,
-          date: new Date().toISOString(),
-          reference: `${context.props.playerData.PhoneNum}-${reference}`,
-          fee: 50,
-          channel: "AZA",
-          gameTransactionId: data.data.TranID
-        };
-
-        context.props.setWithdrawalHistory(payload);
-
-        const postData = {
-          account_bank: bankInformation[0].code,
-          account_number: bankInformation[0].account_number,
-          amount: +context.state.authAmount - 50,
-          seckey: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
-          narration: "CHOPBARH PAYMENT",
-          currency: "NGN",
-          reference: `${context.props.playerData.PhoneNum}-${reference}`
-        };
-
-        try {
-          // prod https://api.ravepay.co/v2/gpx/transfers/create
-          const response = await fetch(
-            "https://api.ravepay.co/v2/gpx/transfers/create",
-            {
-              method: "POST",
-              mode: "cors",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(postData)
-            }
-          );
-          const data = await response.json();
-
-          // Confirm withdrawal actually goes through here
-          if (data.status === "success") {
-            context.setState({
-              authAmount: "",
-              account_number: "",
-              paying: false,
-              modal: false
-            });
-            toast.info("Transaction is being processed");
-          } else {
-            context.setState({
-              amount: "",
-              account_number: "",
-              paying: false,
-              modal: false
-            });
-            toast.error("Transaction was not successful");
-          }
-        } catch (err) {
-          context.setState({ loading: false, modal: false });
-          toast.error("Something went wrong");
-        }
+        this.setState({
+          authAmount: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        toast.info("Transaction is being processed");
       } else {
-        context.setState({ paying: false, modal: false });
-        toast.error("Withdrawals cannot be completed at the moment");
+        this.setState({
+          authAmount: "",
+          account_number: "",
+          paying: false,
+          modal: false
+        });
+        toast.error("Transaction was not successful. Please try again later");
       }
     } catch (err) {
-      console.log(err);
-      this.setState({ paying: false, modal: false });
+      this.setState({
+        authAmount: "",
+        account_number: "",
+        paying: false,
+        modal: false
+      });
       toast.error("Something went wrong");
     }
   };
@@ -486,7 +381,7 @@ class AccountNumber extends Component {
     const postData = {
       recipientaccount: this.state.account_number,
       destbankcode: this.state.bank,
-      PBFPubKey: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X"
+      PBFPubKey: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X"
     };
 
     fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {
@@ -644,95 +539,183 @@ class AccountNumber extends Component {
             )}
           </ModalBody>
         </Modal>
-        {this.props.loading ? (
+        {this.props.loading || this.props.playerDataLoading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
         ) : (
           <>
-            {this.props.withdrawalAccount.length > 0 ? (
+            {/* {this.props.playerData.PlayerStatus === 1 && (
+              <p className="text-center">Service currently unavailable</p>
+            )} */}
+            {this.props.playerData.PlayerStatus === 0 ? (
+              <p className="text-center">Service currently unavailable</p>
+            ) : (
               <>
-                <div style={{ minHeight: "20rem" }}>
-                  <Accordion>
-                    <AccordionItem>
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          Withdraw with existing Account
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <ExistingCardForm
-                          style={{ margin: "4rem 0" }}
-                          onSubmit={event =>
-                            this.handleAuthSubmit(event, this.state.bankName)
-                          }
-                        >
-                          <RadioGroup
-                            name="withdrawalAccount"
-                            selectedValue={this.state.selectedValue}
-                            onChange={this.handleRadioChange}
-                          >
-                            {this.props.withdrawalAccount.map(
-                              (account, index) => (
-                                <div
-                                  className="d-flex align-items-center justify-content-center flex-wrap"
-                                  key={index}
-                                >
-                                  <Radio value={account.account_number} />
-                                  <AccountUI
-                                    number={account.account_number}
-                                    bank={account.bank}
-                                  />
+                {this.props.withdrawalAccount.length > 0 ? (
+                  <>
+                    <div style={{ minHeight: "20rem" }}>
+                      <Accordion>
+                        <AccordionItem>
+                          <AccordionItemHeading>
+                            <AccordionItemButton>
+                              Withdraw with existing Account
+                            </AccordionItemButton>
+                          </AccordionItemHeading>
+                          <AccordionItemPanel>
+                            <ExistingCardForm
+                              style={{ margin: "4rem 0" }}
+                              onSubmit={event =>
+                                this.handleAuthSubmit(
+                                  event,
+                                  this.state.bankName
+                                )
+                              }
+                            >
+                              <RadioGroup
+                                name="withdrawalAccount"
+                                selectedValue={this.state.selectedValue}
+                                onChange={this.handleRadioChange}
+                              >
+                                {this.props.withdrawalAccount.map(
+                                  (account, index) => (
+                                    <div
+                                      className="d-flex align-items-center justify-content-center flex-wrap"
+                                      key={index}
+                                    >
+                                      <Radio value={account.account_number} />
+                                      <AccountUI
+                                        number={account.account_number}
+                                        bank={account.bank}
+                                      />
 
-                                  <Button
-                                    id="Popover"
-                                    type="button"
-                                    className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
-                                    onClick={
-                                      this.toggleRemoveWithdrawalBankAccount
-                                    }
-                                    disabled={
-                                      this.state.selectedValue !==
-                                      account.account_number
-                                    }
+                                      <Button
+                                        id="Popover"
+                                        type="button"
+                                        className="mb-lg-1 mb-md-1 mb-sm-2 ml-1"
+                                        onClick={
+                                          this.toggleRemoveWithdrawalBankAccount
+                                        }
+                                        disabled={
+                                          this.state.selectedValue !==
+                                          account.account_number
+                                        }
+                                      >
+                                        &#10005;
+                                      </Button>
+                                    </div>
+                                  )
+                                )}
+                              </RadioGroup>
+                              <ExistingCardFormItem className="ml-5">
+                                <input
+                                  onChange={this.handleInputChange}
+                                  name="authAmount"
+                                  value={this.state.authAmount}
+                                  minLength="1"
+                                  required
+                                  placeholder="Amount(NGN)"
+                                />
+                              </ExistingCardFormItem>
+                              <FormSubmitButton
+                                type="submit"
+                                className="mr-2 mt-n4"
+                                disabled={this.state.loading}
+                              >
+                                <span>
+                                  {this.state.loading
+                                    ? "Please wait..."
+                                    : "Withdraw"}
+                                </span>
+                              </FormSubmitButton>
+                            </ExistingCardForm>
+                          </AccordionItemPanel>
+                        </AccordionItem>
+                        <AccordionItem>
+                          <AccordionItemHeading>
+                            <AccordionItemButton>
+                              Withdraw with new Account
+                            </AccordionItemButton>
+                          </AccordionItemHeading>
+                          <AccordionItemPanel>
+                            {this.state.bankList ? (
+                              <>
+                                <FormWrapper onSubmit={this.handleSubmit}>
+                                  <FormItem>
+                                    <label>Bank</label>
+                                    <select
+                                      name="bank"
+                                      value={this.state.bank}
+                                      onChange={this.handleInputChange}
+                                      required
+                                    >
+                                      {this.state.bankList.map(bank => (
+                                        <option key={bank.Id} value={bank.Code}>
+                                          {bank.Name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </FormItem>
+                                  <HalfColumn>
+                                    <FormItem className="mr-3">
+                                      <label>Account Number</label>
+                                      <input
+                                        type="text"
+                                        value={this.state.account_number}
+                                        onChange={this.handleInputChange}
+                                        name="account_number"
+                                        required
+                                        placeholder="Account Number"
+                                      />
+                                    </FormItem>
+                                    <FormItem>
+                                      <label>Amount</label>
+                                      <input
+                                        type="text"
+                                        value={this.state.amount}
+                                        onChange={this.handleInputChange}
+                                        name="amount"
+                                        required
+                                        placeholder="Amount(NGN)"
+                                      />
+                                    </FormItem>
+                                  </HalfColumn>
+                                  <FormSubmitButton
+                                    type="submit"
+                                    className="mr-2"
+                                    disabled={this.state.loading}
                                   >
-                                    &#10005;
-                                  </Button>
-                                </div>
-                              )
+                                    <span>
+                                      {this.state.loading
+                                        ? "Processing..."
+                                        : "Withdraw"}
+                                    </span>
+                                  </FormSubmitButton>
+                                </FormWrapper>
+                              </>
+                            ) : (
+                              <div
+                                className="mt-5 text-center"
+                                style={{ minHeight: "30vh" }}
+                              >
+                                <p>Something went wrong</p>
+                              </div>
                             )}
-                          </RadioGroup>
-                          <ExistingCardFormItem className="ml-5">
-                            <input
-                              onChange={this.handleInputChange}
-                              name="authAmount"
-                              value={this.state.authAmount}
-                              minLength="1"
-                              required
-                              placeholder="Amount(NGN)"
-                            />
-                          </ExistingCardFormItem>
-                          <FormSubmitButton
-                            type="submit"
-                            className="mr-2 mt-n4"
-                            disabled={this.state.loading}
-                          >
-                            <span>
-                              {this.state.loading
-                                ? "Please wait..."
-                                : "Withdraw"}
-                            </span>
-                          </FormSubmitButton>
-                        </ExistingCardForm>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                    <AccordionItem>
-                      <AccordionItemHeading>
-                        <AccordionItemButton>
-                          Withdraw with new Account
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
+                          </AccordionItemPanel>
+                        </AccordionItem>
+                      </Accordion>
+                      <div className="text-center" style={{ color: "#000" }}>
+                        <p>
+                          **For all withdrawals there is a &#8358;50 deducted
+                          from your cash balance**
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {!this.state.dataLoading ? (
+                      <>
                         {this.state.bankList ? (
                           <>
                             <FormWrapper onSubmit={this.handleSubmit}>
@@ -787,107 +770,34 @@ class AccountNumber extends Component {
                                 </span>
                               </FormSubmitButton>
                             </FormWrapper>
+                            <div
+                              className="text-center"
+                              style={{ color: "#000" }}
+                            >
+                              <p>
+                                **For all withdrawals there is a &#8358;50
+                                deducted from your cash balance**
+                              </p>
+                            </div>
                           </>
                         ) : (
                           <div
                             className="mt-5 text-center"
                             style={{ minHeight: "30vh" }}
                           >
-                            <p>Something went wrong</p>
+                            <p>Resource was not loaded</p>
                           </div>
                         )}
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                  </Accordion>
-                  <div className="text-center" style={{ color: "#000" }}>
-                    <p>
-                      **For all withdrawals there is a &#8358;50 deducted from
-                      your cash balance**
-                    </p>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {!this.state.dataLoading ? (
-                  <>
-                    {this.state.bankList ? (
-                      <>
-                        <FormWrapper onSubmit={this.handleSubmit}>
-                          <FormItem>
-                            <label>Bank</label>
-                            <select
-                              name="bank"
-                              value={this.state.bank}
-                              onChange={this.handleInputChange}
-                              required
-                            >
-                              {this.state.bankList.map(bank => (
-                                <option key={bank.Id} value={bank.Code}>
-                                  {bank.Name}
-                                </option>
-                              ))}
-                            </select>
-                          </FormItem>
-                          <HalfColumn>
-                            <FormItem className="mr-3">
-                              <label>Account Number</label>
-                              <input
-                                type="text"
-                                value={this.state.account_number}
-                                onChange={this.handleInputChange}
-                                name="account_number"
-                                required
-                                placeholder="Account Number"
-                              />
-                            </FormItem>
-                            <FormItem>
-                              <label>Amount</label>
-                              <input
-                                type="text"
-                                value={this.state.amount}
-                                onChange={this.handleInputChange}
-                                name="amount"
-                                required
-                                placeholder="Amount(NGN)"
-                              />
-                            </FormItem>
-                          </HalfColumn>
-                          <FormSubmitButton
-                            type="submit"
-                            className="mr-2"
-                            disabled={this.state.loading}
-                          >
-                            <span>
-                              {this.state.loading
-                                ? "Processing..."
-                                : "Withdraw"}
-                            </span>
-                          </FormSubmitButton>
-                        </FormWrapper>
-                        <div className="text-center" style={{ color: "#000" }}>
-                          <p>
-                            **For all withdrawals there is a &#8358;50 deducted
-                            from your cash balance**
-                          </p>
-                        </div>
                       </>
                     ) : (
                       <div
                         className="mt-5 text-center"
                         style={{ minHeight: "30vh" }}
                       >
-                        <p>Something went wrong</p>
+                        <Spinner />
                       </div>
                     )}
                   </>
-                ) : (
-                  <div
-                    className="mt-5 text-center"
-                    style={{ minHeight: "30vh" }}
-                  >
-                    <Spinner />
-                  </div>
                 )}
               </>
             )}
@@ -903,6 +813,7 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   loading: state.withdrawalAccount.loading,
+  playerDataLoading: state.player.loading,
   withdrawalStatus: state.withdrawal.withdrawalStatus,
   withdrawalAccount: state.withdrawalAccount.withdrawalAccount,
   removingAccount: state.withdrawalAccount.removing

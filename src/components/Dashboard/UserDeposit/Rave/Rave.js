@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { Spinner, Button, Modal, ModalBody } from "reactstrap";
@@ -11,7 +12,6 @@ import {
   AccordionItemPanel
 } from "react-accessible-accordion";
 import {
-  Form,
   FormItem,
   FormSubmitButton,
   ExistingCardForm,
@@ -27,9 +27,14 @@ import CreditCard from "./CreditCard/CreditCard";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
+const Form = styled.form`
+  position: relative;
+  min-height: 20rem;
+`;
+
 class RavePayment extends Component {
   state = {
-    key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+    key: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
     email: "chopbarh@mail.com",
     amount: "",
     selectedValue: null,
@@ -39,7 +44,7 @@ class RavePayment extends Component {
     paying: false
   };
 
-  // key: "FLWPUBK-d1914cca4535e30998a1289ca01a50b1-X",
+  // key: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
   // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
 
   componentDidMount = () => {
@@ -48,7 +53,7 @@ class RavePayment extends Component {
 
   getReference = () => {
     let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     for (let i = 0; i < 10; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -128,9 +133,9 @@ class RavePayment extends Component {
 
     let reference = this.getReference();
 
-    try {
-      this.setState({ paying: true });
+    this.setState({ paying: true });
 
+    try {
       const historyObject = {
         amount: this.state.authAmount,
         channel: "Card",
@@ -143,29 +148,48 @@ class RavePayment extends Component {
         made_by: this.props.playerData.PhoneNum
       };
 
-      this.props.setDepositHistory(historyObject);
+      // this.props.setDepositHistory(historyObject);
 
+      // const response = await fetch(
+      //   "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json"
+      //     },
+      //     body: JSON.stringify({
+      //       SECKEY: "FLWSECK-4f658855410a2a435b17aa5e0e3b5ba0-X",
+      //       token: raveCardObject[0].auth_code,
+      //       currency: "NGN",
+      //       amount: this.state.authAmount,
+      //       email: `${this.props.playerData.PhoneNum}@mail.com`,
+      //       txRef: `${this.props.playerData.PhoneNum}-${reference}`
+      //     })
+      //   }
+      // );
       const response = await fetch(
-        "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
+        "https://pay.chopbarh.com/ng/user/make_deposit",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
           },
           body: JSON.stringify({
-            SECKEY: "FLWSECK-152efa07e12758633c4da1be7a0067c4-X",
+            amount: +this.state.authAmount,
+            phone_number: this.props.playerData.PhoneNum,
             token: raveCardObject[0].auth_code,
-            currency: "NGN",
-            amount: this.state.authAmount,
-            email: `${this.props.playerData.PhoneNum}@mail.com`,
-            txRef: `${this.props.playerData.PhoneNum}-${reference}`
+            reference: `${this.props.playerData.PhoneNum}-${reference}`,
+            email: raveCardObject[0].email,
+            playerId: this.props.playerData.PlayerID
           })
         }
       );
 
       const data = await response.json();
 
-      if (data.status === "success") {
+      if (data.status === true) {
         this.setState({ paying: false });
         toast.info("Transaction is processing");
       } else {
@@ -380,7 +404,10 @@ class RavePayment extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <Form onSubmit={this.handleSubmit}>
+                      <Form
+                        onSubmit={this.handleSubmit}
+                        style={{ minHeight: "15rem !important" }}
+                      >
                         <FormItem>
                           <label>Amount</label>
                           <input
@@ -451,7 +478,4 @@ const mapDispatchToProps = {
   removeRaveCard
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RavePayment);
+export default connect(mapStateToProps, mapDispatchToProps)(RavePayment);

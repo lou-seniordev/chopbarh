@@ -171,13 +171,14 @@ class Card extends Component {
     }
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
+    let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.authAmount,
       channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: this.state.authAmount < 2500 ? 0 : 100,
-      reference: "--",
+      reference,
       status: "--",
       refId,
       gateway: "Paystack",
@@ -193,7 +194,7 @@ class Card extends Component {
           ? (Number(this.state.authAmount) + 100) * 100
           : Number(this.state.authAmount) * 100,
       authorization_code: creditCardObject[0].auth_code,
-      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
+      reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId
@@ -256,13 +257,14 @@ class Card extends Component {
     this.setState({ paying: true, loading: false });
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
+    let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     const historyObject = {
       amount: this.state.amount,
       channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: this.state.amount < 2500 ? 0 : 100,
-      reference: "--",
+      reference,
       status: "--",
       refId,
       gateway: "Paystack",
@@ -286,7 +288,7 @@ class Card extends Component {
         expiry_month: cardExpirationData[0],
         expiry_year: year
       },
-      reference: `${this.props.playerData.PhoneNum}-${referenceId()}`,
+      reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId,
@@ -615,17 +617,6 @@ class Card extends Component {
                             minLength="1"
                             placeholder="Amount(NGN)"
                           />
-
-                          {/* <NumberFormat
-                    thousandSeparator
-                    onChange={this.handleInputChange}
-                    name="amount"
-                    value={this.state.amount}
-                    required
-                    min={1}
-                    minLength="1"
-                    placeholder="Amount(NGN)"
-                  /> */}
                         </FormItem>
                         <FormItem>
                           <label>Card Number</label>
@@ -637,15 +628,6 @@ class Card extends Component {
                             required
                             placeholder="Enter Card Number"
                           />
-                          {/* <NumberFormat
-                    format="#### #### #### #### ####"
-                    onChange={this.handleInputChange}
-                    name="card"
-                    value={this.state.card}
-                    minLength="16"
-                    required
-                    placeholder="Enter Card Number"
-                  /> */}
                         </FormItem>
                         <HalfColumn>
                           <FormItem className="mr-3">
@@ -699,17 +681,6 @@ class Card extends Component {
                     minLength="1"
                     placeholder="Amount(NGN)"
                   />
-
-                  {/* <NumberFormat
-                    thousandSeparator
-                    onChange={this.handleInputChange}
-                    name="amount"
-                    value={this.state.amount}
-                    required
-                    min={1}
-                    minLength="1"
-                    placeholder="Amount(NGN)"
-                  /> */}
                 </FormItem>
                 <FormItem>
                   <label>Card Number</label>
@@ -721,15 +692,6 @@ class Card extends Component {
                     required
                     placeholder="Enter Card Number"
                   />
-                  {/* <NumberFormat
-                    format="#### #### #### #### ####"
-                    onChange={this.handleInputChange}
-                    name="card"
-                    value={this.state.card}
-                    minLength="16"
-                    required
-                    placeholder="Enter Card Number"
-                  /> */}
                 </FormItem>
                 <HalfColumn>
                   <FormItem className="mr-3">
@@ -804,8 +766,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(Card))
+  connect(mapStateToProps, mapDispatchToProps)(memo(Card))
 );

@@ -27,45 +27,45 @@ import raveCardReducer from "./store/reducers/raveCardReducer";
 import instantPaymentReducer from "./store/reducers/instantPaymentReducer";
 
 const rootReducer = combineReducers({
- auth: authReducer,
- player: playerDataReducer,
- topEarners: topEarnersReducer,
- charge: chargeReducer,
- coinBalance: coinBalanceReducer,
- modal: modalReducer,
- voucher: voucherReducer,
- transaction: transactionHistoryReducer,
- bankAccount: bankAccountReducer,
- creditCard: creditCardReducer,
- deposit: depositReducer,
- withdrawal: withdrawalReducer,
- transfer: transferReducer,
- withdrawalAccount: withdrawalAccountReducer,
- refunds: refundReducer,
- raveCard: raveCardReducer,
- instantPayment: instantPaymentReducer
+  auth: authReducer,
+  player: playerDataReducer,
+  topEarners: topEarnersReducer,
+  charge: chargeReducer,
+  coinBalance: coinBalanceReducer,
+  modal: modalReducer,
+  voucher: voucherReducer,
+  transaction: transactionHistoryReducer,
+  bankAccount: bankAccountReducer,
+  creditCard: creditCardReducer,
+  deposit: depositReducer,
+  withdrawal: withdrawalReducer,
+  transfer: transferReducer,
+  withdrawalAccount: withdrawalAccountReducer,
+  refunds: refundReducer,
+  raveCard: raveCardReducer,
+  instantPayment: instantPaymentReducer
 });
 
 const composeEnhancers =
- process.env.NODE_ENV === "development"
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  : null || compose;
+  process.env.NODE_ENV === "development"
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : null || compose;
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
- rootReducer,
- composeEnhancers(applyMiddleware(thunk))
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 const app = (
- <Provider store={store}>
-  <Router>
-   <LastLocationProvider>
-    <App />
-   </LastLocationProvider>
-  </Router>
- </Provider>
+  <Provider store={store}>
+    <Router>
+      <LastLocationProvider>
+        <App />
+      </LastLocationProvider>
+    </Router>
+  </Provider>
 );
 
 ReactDOM.render(app, document.getElementById("root"));

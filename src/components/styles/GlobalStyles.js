@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import color from "./colors";
+import breakPoint from "./breakpoints";
 
 export const GlobalStyles = createGlobalStyle`
   *, 
@@ -19,6 +20,17 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
 
     /* // Adjust font sizes here */
+    @media only screen and (max-width: ${breakPoint.largest}) {
+      font-size: 58%;
+    }
+
+    @media only screen and (max-width: ${breakPoint.large}) {
+      font-size: 55%;
+    }
+
+    @media only screen and (max-width: ${breakPoint.smallest}) {
+      font-size: 54%;
+    }
   }
 
   body {
