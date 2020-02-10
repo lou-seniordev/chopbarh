@@ -221,12 +221,6 @@ class AgentsWithdrawal extends Component {
             <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </FormSubmitButton>
         </FormWrapper>
-        {/* <div className="text-center" style={{ color: "#000" }}>
-          <p>
-            **For all withdrawals there is a &#8358;50 deducted from your cash
-            balance**
-          </p>
-        </div> */}
       </>
     );
   }
