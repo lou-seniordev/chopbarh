@@ -24,7 +24,6 @@ import { toast } from "react-toastify";
 import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
-import { getReference } from "../../../../lib/getReference";
 import AccountUI from "../AccountUI/AccountUI";
 import {
   removeWithdrawalBankAccount,
@@ -149,7 +148,6 @@ class AccountNumber extends Component {
 
   withdrawCash = async () => {
     this.setState({ paying: true, loading: false });
-    const context = this;
 
     const bankName = this.state.bankList.filter(
       bank => bank.Code === this.state.bank

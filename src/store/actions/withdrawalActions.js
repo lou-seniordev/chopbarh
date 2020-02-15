@@ -148,7 +148,7 @@ export const setWithdrawalHistory = payload => async (dispatch, getState) => {
   }
 
   try {
-    const docRef = await firestore.collection("new_withdrawals").add({
+    await firestore.collection("new_withdrawals").add({
       amount: payload.amount,
       status: payload.status,
       transaction_fee: payload.fee,

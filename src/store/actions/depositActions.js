@@ -1,14 +1,14 @@
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
-async function fetchCountObject() {
-  const snapshot = await firestore
-    .collection("totalcounts")
-    .doc("new_deposits")
-    .get();
+// async function fetchCountObject() {
+//   const snapshot = await firestore
+//     .collection("totalcounts")
+//     .doc("new_deposits")
+//     .get();
 
-  return snapshot.data();
-}
+//   return snapshot.data();
+// }
 
 export const fetchDepositHistoryInit = () => ({
   type: actionType.FETCH_DEPOSIT_HISTORY_INIT
@@ -142,7 +142,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       .collection("totalcounts")
       .doc("new_deposits");
 
-    const firestoreRequest = await firestore.collection("new_deposits").add({
+    await firestore.collection("new_deposits").add({
       amount: payload.amount,
       channel: payload.channel,
       deposit_date: payload.transaction_date,

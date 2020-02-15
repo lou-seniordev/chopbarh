@@ -1,5 +1,5 @@
 import * as actionType from "../actionTypes/actionTypes";
-import firebase, { firestore } from "../../firebase";
+import { firestore } from "../../firebase";
 import { toast } from "react-toastify";
 
 export const fetchInstantPaymentAccountInit = () => ({
@@ -70,7 +70,7 @@ export const setInstantPaymentAccountData = payload => async (
   dispatch(setInstantPaymentAccountInit());
 
   try {
-    const docRef = await firestore
+    await firestore
       .collection("instant_payment")
       .doc(getState().auth.id)
       .set({
@@ -87,7 +87,6 @@ export const setInstantPaymentAccountData = payload => async (
       );
     }, 5000);
   } catch (err) {
-    console.log(err);
     dispatch(setInstantPaymentAccountFail());
   }
 };
@@ -111,7 +110,7 @@ export const removeInstantPaymentAccount = event => async (
   dispatch(removeInstantPaymentAccountInit());
 
   try {
-    const docRef = await firestore
+    await firestore
       .collection("instant_payment")
       .doc(getState().auth.id)
       .delete();

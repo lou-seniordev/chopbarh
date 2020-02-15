@@ -29,7 +29,7 @@ const VendorsPage = lazy(() => import("../Pages/VendorsPage"));
 const SuperAgentApplicationPage = lazy(() =>
   import("../Pages/SuperAgentApplicationPage")
 );
-const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
+// const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 
 const Loading = () => (
   <div
@@ -93,7 +93,7 @@ class Layout extends Component {
                 path="/super-agent-application"
                 component={SuperAgentApplicationPage}
               />
-              <Redirect push to="/user" />
+              <Redirect push to="/" />
             </Switch>
           </Suspense>
         ) : (

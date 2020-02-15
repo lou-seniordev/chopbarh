@@ -136,20 +136,6 @@ class RavePayment extends Component {
     this.setState({ paying: true });
 
     try {
-      const historyObject = {
-        amount: this.state.authAmount,
-        channel: "Card",
-        transaction_date: new Date().toISOString(),
-        fees: "0",
-        reference: "--",
-        status: "--",
-        refId: `${this.props.playerData.PhoneNum}-${reference}`,
-        gateway: "Flutterwave",
-        made_by: this.props.playerData.PhoneNum
-      };
-
-      // this.props.setDepositHistory(historyObject);
-
       // const response = await fetch(
       //   "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
       //   {
@@ -247,28 +233,23 @@ class RavePayment extends Component {
       country: "NG",
       currency: "NGN",
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
-      // redirect_url: "https://www.chopbarh.com/user",
       onclose: function() {},
       callback: async response => {
         let flw_ref = response.tx.txRef;
-        console.log("This is the response returned after a charge", response);
         if (
           response.tx.chargeResponseCode == "00" ||
           response.tx.chargeResponseCode == "0"
         ) {
           // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
-          const response = await fetch(
-            `https://pay.chopbarh.com/ng/api/verify`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                ref: flw_ref
-              })
-            }
-          );
+          await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              ref: flw_ref
+            })
+          });
           // redirect to a success page
           // window.open("https://www.chopbarh.com/user");
           // window.open("localhost:3000/user");

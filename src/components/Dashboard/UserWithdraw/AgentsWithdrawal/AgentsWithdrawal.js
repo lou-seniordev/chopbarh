@@ -153,7 +153,7 @@ class AgentsWithdrawal extends Component {
 
       if (data.status === true) {
         try {
-          const docRef = await firestore.collection("transfer_to_agent").add({
+          await firestore.collection("transfer_to_agent").add({
             amount: +this.state.amount,
             phone_number: this.state.phone_number,
             playerId: this.props.playerData.PlayerID,

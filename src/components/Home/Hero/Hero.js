@@ -529,6 +529,7 @@ export default function Hero() {
               <div>
                 <MediaQuery maxDeviceWidth={425}>
                   <iframe
+                    title="Chopbarh Video"
                     width="300"
                     height="250"
                     src="https://www.youtube.com/embed/gBeXOvNpR3c"

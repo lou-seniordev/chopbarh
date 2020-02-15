@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner, Button } from "reactstrap";
-import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
+import { Modal, ModalBody, Spinner } from "reactstrap";
+import { FormSubmitButton } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchInstantPaymentAccountData,
@@ -12,10 +11,6 @@ import {
 } from "../../../../store/actions/instantPaymentActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
-
-const FormWrapper = styled(Form)`
-  min-height: 15.1rem;
-`;
 
 class InstantPayment extends Component {
   state = {
@@ -144,22 +139,6 @@ class InstantPayment extends Component {
     }
 
     this.setState({ loading: true });
-
-    let reference = this.getReference();
-
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Bank Transfer",
-      transaction_date: new Date().toISOString(),
-      fees: "0",
-      reference: "--",
-      status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`,
-      gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    //   this.props.setDepositHistory(historyObject);
 
     // Make request to Rave
     const chargeData = {
