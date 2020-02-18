@@ -537,7 +537,7 @@ class AccountNumber extends Component {
             )}
           </ModalBody>
         </Modal>
-        {/* {this.props.loading || this.props.playerDataLoading ? (
+        {this.props.loading || this.props.playerDataLoading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
@@ -797,8 +797,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )} */}
-        <p className="text-center">Service currently unavailable</p>
+        )}
+        {/* <p className="text-center">Service currently unavailable</p> */}
       </>
     );
   }
