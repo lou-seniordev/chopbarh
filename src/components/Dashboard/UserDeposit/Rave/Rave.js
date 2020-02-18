@@ -237,8 +237,8 @@ class RavePayment extends Component {
       callback: async response => {
         let flw_ref = response.tx.txRef;
         if (
-          response.tx.chargeResponseCode == "00" ||
-          response.tx.chargeResponseCode == "0"
+          response.tx.chargeResponseCode === "00" ||
+          response.tx.chargeResponseCode === "0"
         ) {
           // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
           await fetch(`https://pay.chopbarh.com/ng/api/verify`, {

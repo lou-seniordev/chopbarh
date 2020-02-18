@@ -537,15 +537,12 @@ class AccountNumber extends Component {
             )}
           </ModalBody>
         </Modal>
-        {this.props.loading || this.props.playerDataLoading ? (
+        {/* {this.props.loading || this.props.playerDataLoading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
         ) : (
           <>
-            {/* {this.props.playerData.PlayerStatus === 1 && (
-              <p className="text-center">Service currently unavailable</p>
-            )} */}
             {this.props.playerData.PlayerStatus === 0 ? (
               <p className="text-center">Service currently unavailable</p>
             ) : (
@@ -800,8 +797,8 @@ class AccountNumber extends Component {
               </>
             )}
           </>
-        )}
-        {/* <p className="text-center">Service currently unavailable</p> */}
+        )} */}
+        <p className="text-center">Service currently unavailable</p>
       </>
     );
   }
