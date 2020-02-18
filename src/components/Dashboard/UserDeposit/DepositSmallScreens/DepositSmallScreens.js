@@ -67,7 +67,7 @@ class DepositSmallScreens extends Component {
               )}
               {this.props.playerData.PlayerStatus !== 2 && (
                 <>
-                  {/* <AccordionItem>
+                  <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>
                         Instant Bank Transfer
@@ -76,16 +76,16 @@ class DepositSmallScreens extends Component {
                     <AccordionItemPanel>
                       <InstantPayment />
                     </AccordionItemPanel>
-                  </AccordionItem> */}
+                  </AccordionItem>
 
-                  {/* <AccordionItem>
+                  <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>Bank Card</AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       <RavePayment />
                     </AccordionItemPanel>
-                  </AccordionItem> */}
+                  </AccordionItem>
 
                   <AccordionItem>
                     <AccordionItemHeading>
@@ -104,7 +104,7 @@ class DepositSmallScreens extends Component {
                       <Quickteller />
                     </AccordionItemPanel>
                   </AccordionItem>
-                  {/* <AccordionItem>
+                  <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>Paystack</AccordionItemButton>
                     </AccordionItemHeading>
@@ -122,7 +122,7 @@ class DepositSmallScreens extends Component {
                     <AccordionItemPanel>
                       <BankCharge />
                     </AccordionItemPanel>
-                  </AccordionItem> */}
+                  </AccordionItem>
                   <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>ATM Machine</AccordionItemButton>
