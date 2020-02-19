@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 // import NumberFormat from "react-number-format";
 import { Modal, ModalBody } from "reactstrap";
-import {
-  Button
-} from "../../../styles/CardCharge";
+import { Button } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
 import CryptoJS from "crypto-js";
 //import scuid from "scuid";
@@ -17,7 +15,6 @@ import {
   closeTransactionFailModal,
   closeTransactionSuccessModal
 } from "../../../../store/actions/modalActions";
-import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import { getReference } from "../../../../lib/getReference";
 
@@ -223,7 +220,6 @@ class Paga extends Component {
             channel: "Paga",
             date: new Date().toISOString()
           };
-          this.props.setCashBalance(Number(this.state.amount), 2);
           this.setState({ loading: false, phone: "", amount: "" });
           toast.success(`Transaction was successful`);
           this.props.setWithdrawalHistory(payload);
@@ -374,11 +370,7 @@ const mapDispatchToProps = {
   openTransactionFailModal,
   closeTransactionFailModal,
   closeTransactionSuccessModal,
-  setWithdrawalHistory,
-  setCashBalance
+  setWithdrawalHistory
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Paga);
+export default connect(mapStateToProps, mapDispatchToProps)(Paga);

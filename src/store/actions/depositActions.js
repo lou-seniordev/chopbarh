@@ -1,15 +1,6 @@
 import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
-// async function fetchCountObject() {
-//   const snapshot = await firestore
-//     .collection("totalcounts")
-//     .doc("new_deposits")
-//     .get();
-
-//   return snapshot.data();
-// }
-
 export const fetchDepositHistoryInit = () => ({
   type: actionType.FETCH_DEPOSIT_HISTORY_INIT
 });
@@ -25,20 +16,6 @@ export const fetchDepositHistoryFail = () => ({
 
 export const fetchDepositHistoryData = () => async (dispatch, getState) => {
   dispatch(fetchDepositHistoryInit());
-
-  // try {
-  // 	const snapshot = await firestore
-  // 		.collection("new_deposits")
-  // 		.where("playerId", "==", getState().auth.id)
-  // 		.orderBy("time", "desc")
-  // 		.get();
-
-  // 	const data = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-  // 	const docId = data[0].id;
-  // 	console.log(data);
-  // } catch (err) {
-  // 	console.log(err);
-  // }
 
   try {
     const snapshot = await firestore
@@ -160,6 +137,31 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
 
     docRef.update({
       count: firebase.firestore.FieldValue.increment(1)
+    });
+  } catch (err) {}
+
+  try {
+    await fetch("https://backend.chopbarh.com/api/deposits", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "api-key": "200aeco-190aefd30-aecobdq"
+      },
+      body: JSON.stringify({
+        amount: payload.amount,
+        channel: payload.channel,
+        customer_id: getState().player.playerData.PhoneNum,
+        deposit_date: payload.transaction_date,
+        gameTransactionId: "N/A",
+        playerId: getState().auth.id,
+        refId: payload.refId,
+        gateway: payload.gateway,
+        status: "PENDING",
+        paid_at: Date.now(),
+        transaction_fees: payload.fees,
+        transaction_reference: payload.reference
+      })
     });
   } catch (err) {}
 

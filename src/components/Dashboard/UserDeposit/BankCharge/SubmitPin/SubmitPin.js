@@ -16,7 +16,6 @@ import {
   openPhoneModal,
   closePhoneModal
 } from "../../../../../store/actions/modalActions";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import { setTransactionHistory } from "../../../../../store/actions/transactionHistoryActions";
 
 class SubmitPin extends Component {
@@ -146,13 +145,10 @@ const mapDispatchToProps = {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
-  setCoinBalance,
+
   setTransactionHistory
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPin))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPin))
 );

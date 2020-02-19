@@ -21,7 +21,6 @@ import {
   Button as FormElementButton
 } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
-import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 import AccountUI from "../AccountUI/AccountUI";
@@ -815,7 +814,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCashBalance,
   setWithdrawalHistory,
   removeWithdrawalBankAccount,
   fetchWithdrawalBankAccountData,

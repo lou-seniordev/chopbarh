@@ -5,7 +5,6 @@ import { Spinner } from "reactstrap";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import {
   openOTPModal,
   closeOTPModal
@@ -72,7 +71,6 @@ class SubmitOTP extends Component {
         // const value = +data.data.amount / 100;
         // this.props.setBankAccountData(data.data.authorization);
         // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
       } else if (data.data.status === "open_url") {
         this.props.closeOTPModal();
         window.open(data.data.url, "_self");
@@ -138,7 +136,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCoinBalance,
   openOTPModal,
   setDepositHistory,
   setBankAccountData,
@@ -146,8 +143,5 @@ const mapDispatchToProps = {
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitOTP))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitOTP))
 );

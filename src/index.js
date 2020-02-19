@@ -12,7 +12,6 @@ import authReducer from "./store/reducers/authReducer";
 import playerDataReducer from "./store/reducers/playerDataReducer";
 import topEarnersReducer from "./store/reducers/topEarnersReducer";
 import chargeReducer from "./store/reducers/chargeReducer";
-import coinBalanceReducer from "./store/reducers/coinBalanceReducer";
 import modalReducer from "./store/reducers/modalReducer";
 import voucherReducer from "./store/reducers/voucherReducer";
 import transactionHistoryReducer from "./store/reducers/transactionHistoryReducer";
@@ -31,7 +30,6 @@ const rootReducer = combineReducers({
   player: playerDataReducer,
   topEarners: topEarnersReducer,
   charge: chargeReducer,
-  coinBalance: coinBalanceReducer,
   modal: modalReducer,
   voucher: voucherReducer,
   transaction: transactionHistoryReducer,

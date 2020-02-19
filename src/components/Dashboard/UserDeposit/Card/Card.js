@@ -24,7 +24,6 @@ import {
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
-import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   openOTPModal,
@@ -758,7 +757,7 @@ const mapDispatchToProps = {
   setCreditCardData,
   setCreditCardCVV,
   removeCreditCard,
-  setCoinBalance,
+
   openOTPModal,
   closeOTPModal,
   openPinModal,
