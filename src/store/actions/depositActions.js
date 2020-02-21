@@ -166,5 +166,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
         })
       }
     );
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
