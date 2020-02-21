@@ -114,7 +114,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { fetchPlayerData, resetPlayerData };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(Overview));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Overview));

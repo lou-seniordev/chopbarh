@@ -757,7 +757,6 @@ const mapDispatchToProps = {
   setCreditCardData,
   setCreditCardCVV,
   removeCreditCard,
-
   openOTPModal,
   closeOTPModal,
   openPinModal,

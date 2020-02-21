@@ -15,6 +15,7 @@ export const fetchPlayerFail = () => ({
 
 export const fetchPlayerData = () => (dispatch, getState) => {
   dispatch(fetchPlayerInit());
+
   fetch("https://chopbarh-api.nutod.repl.co/api/get_user_profile", {
     method: "POST",
     headers: {
@@ -33,6 +34,35 @@ export const fetchPlayerData = () => (dispatch, getState) => {
     })
     .catch(err => {
       dispatch(fetchPlayerFail());
+    });
+
+  fetch("https://backend.chopbarh.com/api/deposits", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      amount: "100",
+      channel: "CARD",
+      customer_id: "09014202339",
+      deposit_date: new Date().toISOString(),
+      gameTransactionId: "N/A",
+      playerId: "5d5ed4835a5f2305222de3ff",
+      refId: "09014202339-AWESOME",
+      gateway: "PAYSTACK",
+      status: "PENDING",
+      paid_at: Date.now(),
+      transaction_fees: 0,
+      transaction_reference: "N/A"
+    })
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.log(err);
     });
 };
 

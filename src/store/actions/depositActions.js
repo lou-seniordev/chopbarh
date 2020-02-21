@@ -163,7 +163,9 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
         transaction_reference: payload.reference
       })
     });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 
   // try {
   // 	const docRef = await firestore.collection("new_deposits").add({
