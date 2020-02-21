@@ -141,46 +141,30 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
   } catch (err) {}
 
   try {
-    await fetch("https://backend.chopbarh.com/api/deposits", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "api-key": "200aeco-190aefd30-aecobdq"
-      },
-      body: JSON.stringify({
-        amount: payload.amount,
-        channel: payload.channel,
-        customer_id: getState().player.playerData.PhoneNum,
-        deposit_date: payload.transaction_date,
-        gameTransactionId: "N/A",
-        playerId: getState().auth.id,
-        refId: payload.refId,
-        gateway: payload.gateway,
-        status: "PENDING",
-        paid_at: Date.now(),
-        transaction_fees: payload.fees,
-        transaction_reference: payload.reference
-      })
-    });
-  } catch (err) {
-    console.log(err);
-  }
-
-  // try {
-  // 	const docRef = await firestore.collection("new_deposits").add({
-  // 		amount: payload.amount,
-  // 		channel: payload.channel,
-  // 		deposit_date: payload.transaction_date,
-  // 		paid_at: payload.transaction_date,
-  // 		transaction_fees: payload.fees,
-  // 		transaction_reference: payload.reference,
-  // 		status: "PENDING",
-  // 		refId: payload.refId,
-  // 		gateway: payload.gateway,
-  // 		customer_id: getState().player.playerData.PhoneNum,
-  // 		time: firebase.firestore.FieldValue.serverTimestamp(),
-  // 		playerId: getState().auth.id
-  // 	});
-  // } catch (err) {}
+    await fetch(
+      "https://cors-anywhere.herokuapp.com/https://backend.chopbarh.com/api/deposits",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "api-key": "200aeco-190aefd30-aecobdq"
+        },
+        body: JSON.stringify({
+          amount: payload.amount,
+          channel: payload.channel,
+          customer_id: getState().player.playerData.PhoneNum,
+          deposit_date: payload.transaction_date,
+          gameTransactionId: "N/A",
+          playerId: getState().auth.id,
+          refId: payload.refId,
+          gateway: payload.gateway,
+          status: "PENDING",
+          paid_at: Date.now(),
+          transaction_fees: payload.fees,
+          transaction_reference: payload.reference
+        })
+      }
+    );
+  } catch (err) {}
 };

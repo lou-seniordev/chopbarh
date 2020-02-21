@@ -36,34 +36,25 @@ export const fetchPlayerData = () => (dispatch, getState) => {
       dispatch(fetchPlayerFail());
     });
 
-  fetch("https://backend.chopbarh.com/api/deposits", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      amount: "100",
-      channel: "CARD",
-      customer_id: "09014202339",
-      deposit_date: new Date().toISOString(),
-      gameTransactionId: "N/A",
-      playerId: "5d5ed4835a5f2305222de3ff",
-      refId: "09014202339-AWESOME",
-      gateway: "PAYSTACK",
-      status: "PENDING",
-      paid_at: Date.now(),
-      transaction_fees: 0,
-      transaction_reference: "N/A"
-    })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  // fetch(
+  //   "https://cors-anywhere.herokuapp.com/https://backend.chopbarh.com/api/player/get",
+  //   {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       "api-key": process.env.REACT_APP_API_KEY
+  //     },
+  //     body: JSON.stringify({
+  //       phone_number: "09014202339"
+  //     })
+  //   }
+  // )
+  //   .then(response => response.json())
+  //   .then(data => {})
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
 };
 
 export const resetPlayerData = () => ({

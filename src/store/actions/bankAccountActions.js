@@ -163,7 +163,6 @@ export const removeBankAccount = (event, authCode) => async (
       // dispatch(fetchBankAccountFail());
     }
   } catch (err) {
-    console.log("Error...", err);
     dispatch(removeBankAccountFail());
   }
 };

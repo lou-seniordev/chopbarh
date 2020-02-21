@@ -29,7 +29,6 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
     // console.log(data);
     if (data.length) {
       dispatch(fetchCreditCardSuccess(data[0].data));
-      console.log(data[0].data);
     } else {
       dispatch(fetchCreditCardFail());
     }
@@ -82,7 +81,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 
       if (cardExists.length) {
       } else {
-        const docRef = await firestore
+        await firestore
           .collection("card_charge")
           .doc(getState().auth.id)
           .update({
@@ -95,10 +94,9 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               cvv: payload.cvv
             })
           });
-        console.log(docRef);
       }
     } else {
-      const docRef = await firestore
+      await firestore
         .collection("card_charge")
         .doc(getState().auth.id)
         .set({
@@ -114,8 +112,6 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
             }
           ]
         });
-
-      console.log(docRef);
     }
     dispatch(fetchCreditCardData());
   } catch (err) {
@@ -180,7 +176,6 @@ export const removeCreditCard = (event, authCode) => async (
       // dispatch(fetchCreditCardFail());
     }
   } catch (err) {
-    console.log("Error...", err);
     dispatch(removeCreditCardFail());
   }
 };
