@@ -148,7 +148,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "api-key": "200aeco-190aefd30-aecobdq"
+          "api-key": process.env.REACT_APP_API_KEY
         },
         body: JSON.stringify({
           amount: payload.amount,
