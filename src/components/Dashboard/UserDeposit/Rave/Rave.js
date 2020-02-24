@@ -154,7 +154,7 @@ class RavePayment extends Component {
       //   }
       // );
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/make_deposit",
+        "https://pay.chopbarh.com/ng/api/deposit",
         {
           method: "POST",
           headers: {

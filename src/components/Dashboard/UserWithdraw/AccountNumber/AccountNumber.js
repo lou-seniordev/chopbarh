@@ -153,25 +153,22 @@ class AccountNumber extends Component {
     );
 
     try {
-      const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
-          },
-          body: JSON.stringify({
-            playerId: this.props.playerData.PlayerID,
-            amount: +this.state.amount,
-            phone_number: this.props.playerData.PhoneNum,
-            account_number: this.state.account_number,
-            bank: this.state.bank,
-            bank_name: bankName[0].Name
-          })
-        }
-      );
+      const response = await fetch("https://pay.chopbarh.com/ng/api/withdraw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+        },
+        body: JSON.stringify({
+          playerId: this.props.playerData.PlayerID,
+          amount: +this.state.amount,
+          phone_number: this.props.playerData.PhoneNum,
+          account_number: this.state.account_number,
+          bank: this.state.bank,
+          bank_name: bankName[0].Name
+        })
+      });
 
       const data = await response.json();
 
@@ -222,25 +219,22 @@ class AccountNumber extends Component {
     }
 
     try {
-      const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
-          },
-          body: JSON.stringify({
-            playerId: this.props.playerData.PlayerID,
-            amount: +this.state.authAmount,
-            phone_number: this.props.playerData.PhoneNum,
-            account_number: bankInformation[0].account_number,
-            bank: bankInformation[0].code,
-            bank_name: ""
-          })
-        }
-      );
+      const response = await fetch("https://pay.chopbarh.com/ng/api/withdraw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+        },
+        body: JSON.stringify({
+          playerId: this.props.playerData.PlayerID,
+          amount: +this.state.authAmount,
+          phone_number: this.props.playerData.PhoneNum,
+          account_number: bankInformation[0].account_number,
+          bank: bankInformation[0].code,
+          bank_name: ""
+        })
+      });
 
       const data = await response.json();
 

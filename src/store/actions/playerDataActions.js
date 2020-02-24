@@ -13,7 +13,7 @@ export const fetchPlayerFail = () => ({
   type: actionType.FETCH_PLAYER_DATA_FAIL
 });
 
-export const fetchPlayerData = () => (dispatch, getState) => {
+export const fetchPlayerData = () => async (dispatch, getState) => {
   dispatch(fetchPlayerInit());
 
   fetch("https://chopbarh-api.nutod.repl.co/api/get_user_profile", {
@@ -52,6 +52,25 @@ export const fetchPlayerData = () => (dispatch, getState) => {
   // )
   //   .then(response => response.json())
   //   .then(data => {})
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+
+  // fetch("https://backend.chopbarh.com/api/player/get", {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //     "api-key": process.env.REACT_APP_API_KEY
+  //   },
+  //   body: JSON.stringify({
+  //     phone_number: "09014202339"
+  //   })
+  // })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data);
+  //   })
   //   .catch(err => {
   //     console.log(err);
   //   });
