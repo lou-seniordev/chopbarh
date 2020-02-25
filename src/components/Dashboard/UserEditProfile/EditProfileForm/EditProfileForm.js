@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import keys from "../../../../config/keys";
 
 const EditProfileWrapper = styled.div`
   z-index: 2000;
@@ -188,7 +187,7 @@ class EditProfileForm extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async  event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -204,31 +203,31 @@ class EditProfileForm extends Component {
     postData["playerId"] = this.props.id;
     const formValue = JSON.stringify(postData);
 
-    axios(
-      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-        keys.apiKeySuffix
-      }/LogEventRequest`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          this.setState({ loading: false });
-          toast.error("Profile was not updated. Please, try again");
-        } else {
-          this.setState({ loading: false });
-          toast.success("Profile was successfully updated.");
-        }
-      })
-      .catch(err => {
-        this.setState({ loading: false });
-      });
+    // axios(
+    //   `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
+    //     keys.apiKeySuffix
+    //   }/LogEventRequest`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: formValue
+    //   }
+    // )
+    //   .then(response => {
+    //     if (response.data.error) {
+    //       this.setState({ loading: false });
+    //       toast.error("Profile was not updated. Please, try again");
+    //     } else {
+    //       this.setState({ loading: false });
+    //       toast.success("Profile was successfully updated.");
+    //     }
+    //   })
+    //   .catch(err => {
+    //     this.setState({ loading: false });
+    //   });
   };
 
   render() {

@@ -66,10 +66,6 @@ class SubmitPhone extends Component {
         this.props.closeOTPModal();
         this.setState({ loading: false });
         toast.info(`Transaction is processing`);
-        // const value = +data.data.amount / 100;
-        // this.props.setBankAccountData(data.data.authorization);
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
       } else if (data.data.status === "open_url") {
         this.props.closePinModal();
         window.open(data.data.url, "_self");

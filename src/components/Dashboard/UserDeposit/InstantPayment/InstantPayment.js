@@ -7,7 +7,7 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
-  removeInstantPaymentAccount
+  removeInstantPaymentAccount,
 } from "../../../../store/actions/instantPaymentActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -24,9 +24,9 @@ class InstantPayment extends Component {
     errorModal: false,
     paymentData: {
       accountnumber: null,
-      note: null
+      note: null,
     },
-    removing: false
+    removing: false,
   };
 
   componentDidMount = () => {
@@ -81,15 +81,15 @@ class InstantPayment extends Component {
       firstname: this.props.playerData.FullName.split(" ")[0],
       lastname: this.props.playerData.FullName.split(" ")[1]
         ? this.props.playerData.FullName.split(" ")[1]
-        : `${this.props.playerData.PhoneNum}`
+        : `${this.props.playerData.PhoneNum}`,
     };
 
     fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(chargeData)
+      body: JSON.stringify(chargeData),
     })
       .then(response => response.json())
       .then(data => {
@@ -97,20 +97,20 @@ class InstantPayment extends Component {
         this.setState({
           successModal: true,
           paymentData: { ...data.data },
-          loading: false
+          loading: false,
         });
 
         //  Attach this account number to this person
         this.props.setInstantPaymentAccountData({
           account_number: data.data.accountnumber,
-          bank_name: data.data.bankname
+          bank_name: data.data.bankname,
         });
       })
       .catch(err => {
         // Display error modal
         this.setState({
           loading: false,
-          errorModal: true
+          errorModal: true,
         });
       });
 
@@ -145,15 +145,15 @@ class InstantPayment extends Component {
       seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
       narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
       email: "chopbarh@mail.com",
-      is_permanent: true
+      is_permanent: true,
     };
 
     fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(chargeData)
+      body: JSON.stringify(chargeData),
     })
       .then(response => response.json())
       .then(data => {
@@ -161,12 +161,12 @@ class InstantPayment extends Component {
         this.setState({
           successModal: true,
           paymentData: { ...data.data },
-          loading: false
+          loading: false,
         });
 
         //  Attach this account number to this person
         this.props.setInstantPaymentAccountData({
-          account_number: data.data.accountnumber
+          account_number: data.data.accountnumber,
         });
       })
       .catch(err => {
@@ -221,7 +221,7 @@ class InstantPayment extends Component {
                   toggle={this.toggleErrorModal}
                   style={{
                     top: "50%",
-                    transform: "translateY(-50%)"
+                    transform: "translateY(-50%)",
                   }}
                 >
                   <ModalBody
@@ -239,7 +239,7 @@ class InstantPayment extends Component {
                   toggle={this.toggleSuccessModal}
                   style={{
                     top: "50%",
-                    transform: "translateY(-50%)"
+                    transform: "translateY(-50%)",
                   }}
                 >
                   <ModalBody
@@ -295,14 +295,14 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData,
   account: state.instantPayment.account,
   error: state.instantPayment.error,
-  loading: state.instantPayment.loading
+  loading: state.instantPayment.loading,
 });
 
 const mapDispatchToProps = {
   setDepositHistory,
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
-  removeInstantPaymentAccount
+  removeInstantPaymentAccount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstantPayment);

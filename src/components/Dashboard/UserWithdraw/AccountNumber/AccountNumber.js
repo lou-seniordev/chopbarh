@@ -153,12 +153,12 @@ class AccountNumber extends Component {
     );
 
     try {
-      const response = await fetch("https://pay.chopbarh.com/ng/api/withdraw", {
+      const response = await fetch("https://pay.chopbarh.com/ng/user/withdraw", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+          apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
         },
         body: JSON.stringify({
           playerId: this.props.playerData.PlayerID,
@@ -219,12 +219,12 @@ class AccountNumber extends Component {
     }
 
     try {
-      const response = await fetch("https://pay.chopbarh.com/ng/api/withdraw", {
+      const response = await fetch("https://pay.chopbarh.com/ng/user/withdraw", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+          apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
         },
         body: JSON.stringify({
           playerId: this.props.playerData.PlayerID,

@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
 // import { getReference } from "../../../../lib/getReference";
 import { setTransferCredit } from "../../../../store/actions/transferActions";
@@ -228,7 +227,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCoinBalance,
   setWithdrawalHistory,
   setTransferCredit
 };

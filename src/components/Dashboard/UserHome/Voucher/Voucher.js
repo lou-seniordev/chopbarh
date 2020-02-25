@@ -9,7 +9,6 @@ import {
   setVoucherValue,
   setVoucherHistory
 } from "../../../../store/actions/voucherActions";
-import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
 
 const VoucherWrapper = styled.div``;
@@ -111,7 +110,6 @@ class Voucher extends Component {
   };
 
   componentDidMount = () => {
-    // this.props.setCoinBalance(100);
   };
 
   toggleVoucherModal = () => {
@@ -162,7 +160,6 @@ class Voucher extends Component {
           paid_at: datePaid
         };
         this.props.setVoucherValue(data.data.value);
-        // this.props.setCoinBalance(data.data.value);
         this.props.setVoucherHistory(payload);
         this.setState({
           loading: false,
@@ -296,7 +293,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setVoucherValue,
-  setCoinBalance,
   setVoucherHistory,
   fetchPlayerData
 };

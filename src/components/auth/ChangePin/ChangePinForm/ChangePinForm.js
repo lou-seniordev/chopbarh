@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-// import NumberFormat from "react-number-format";
-// import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
-// import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import keys from "../../../../config/keys";
 
 const ChangePinWrapper = styled.div`
   z-index: 2000;
@@ -110,28 +106,12 @@ const FormItem = styled.div`
   }
 `;
 
-// const HalfColumn = styled.div`
-//   display: flex;
-
-//   @media only screen and (max-width: ${breakPoints.large}) {
-//     flex-direction: column;
-//   }
-
-//   div {
-//     width: 50%;
-
-//     @media only screen and (max-width: ${breakPoints.large}) {
-//       width: 100%;
-//     }
-//   }
-// `;
-
 class ChangePinForm extends Component {
   state = {
     loading: false,
     oldPin: "",
     newPin: "",
-    confirmPin: ""
+    confirmPin: "",
   };
 
   handleInputChange = ({ target }) => {
@@ -150,7 +130,7 @@ class ChangePinForm extends Component {
     return true;
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -167,52 +147,41 @@ class ChangePinForm extends Component {
     }
 
     const newState = { ...this.state };
-    const formState = {
-      OLD: newState.oldPin,
-      NEW: newState.newPin,
-      playerId: this.props.id
+    const postData = {
+      old_pin: newState.oldPin,
+      new_pin: newState.newPin,
+      playerId: this.props.id,
     };
-    formState["@class"] = ".LogEventRequest";
-    formState["eventKey"] = "REGISTER_CHANGE_PASSWORD";
-    const formValue = JSON.stringify(formState);
 
-    fetch(
-      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-        keys.apiKeySuffix
-      }/LogEventRequest`,
-      {
+    const changePinResponse = await (
+      await fetch("https://pay.chopbarh.com/api/change_pin", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
         },
-        body: formValue
-      }
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (Object.values(data).length > 1) {
-          toast.error(data.scriptData.result);
-          this.setState({
-            oldPin: "",
-            newPin: "",
-            confirmPin: "",
-            loading: false
-          });
-        } else {
-          this.setState({
-            oldPin: "",
-            newPin: "",
-            confirmPin: "",
-            loading: false
-          });
-          toast.success("Password was reset successfully");
-        }
+        body: JSON.stringify(postData),
       })
-      .catch(err => {
-        this.setState({ loading: false });
-        toast.error("Something went wrong.");
+    ).json();
+
+    if (changePinResponse.status === true) {
+      this.setState({
+        oldPin: "",
+        newPin: "",
+        confirmPin: "",
+        loading: false,
       });
+      toast.success("Password was reset successfully");
+    } else {
+      this.setState({
+        oldPin: "",
+        newPin: "",
+        confirmPin: "",
+        loading: false,
+      });
+      toast.error("Password was not reset due to an error");
+    }
   };
 
   render() {
@@ -281,12 +250,9 @@ class ChangePinForm extends Component {
 
 const mapStateToProps = state => ({
   id: state.auth.id,
-  loading: state.player.loading
+  loading: state.player.loading,
 });
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChangePinForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePinForm);

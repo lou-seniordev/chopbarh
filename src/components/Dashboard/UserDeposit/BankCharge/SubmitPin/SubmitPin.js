@@ -79,9 +79,6 @@ class SubmitPin extends Component {
       } else if (data.data.status === "success") {
         this.props.closePinModal();
         toast.success("Transaction was successful");
-        // const value = +data.data.amount / 100;
-        // this.props.setTransactionHistory(data.data);
-        // this.props.setCoinBalance(value);
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);

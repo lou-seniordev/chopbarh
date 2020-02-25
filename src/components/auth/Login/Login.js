@@ -84,11 +84,12 @@ class Login extends Component {
 
     const context = this;
 
-    fetch("https://chopbarh-api.nutod.repl.co/api/auth", {
+    fetch("https://pay.chopbarh.com/api/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
       },
       body: formValue
     })

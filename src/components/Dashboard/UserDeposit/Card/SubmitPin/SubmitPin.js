@@ -13,7 +13,6 @@ import {
   openPhoneModal,
   closePhoneModal
 } from "../../../../../store/actions/modalActions";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import {
   setCreditCardData,
@@ -89,13 +88,6 @@ class SubmitPin extends Component {
           ...data.data.authorization,
           cvv: this.props.cvv
         };
-        // const historyObject = {
-        //   ...data.data,
-        //   fees: +data.data.amount / 100 < 2500 ? 0 : 100
-        // };
-        // const value = +data.data.amount / 100;
-        // this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
         this.props.setCreditCardData(payload);
       } else {
         this.props.closePinModal();
@@ -162,7 +154,6 @@ const mapDispatchToProps = {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
-  setCoinBalance,
   setDepositHistory,
   setCreditCardData,
   fetchCreditCardData
