@@ -67,10 +67,12 @@ export const Form = styled.form`
     span {
       display: inline-block;
       transform: skew(20deg);
-      color: #fff;
+      color: #ffffff;
 
       @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
-        color: #ffffff;
+        -webkit-text-fill-color: rgba(255, 255, 255, 1);
+        -webkit-opacity: 1;
+        color: rgba(255, 255, 255, 1);
       }
     }
 

@@ -92,7 +92,7 @@ class SuperAgentApplication extends Component {
     } = this.state;
     // Submit to Firestore
     try {
-      const { id } = await firestore.collection("test_super_agent").add({
+      const { id } = await firestore.collection("super_agent").add({
         firstname,
         lastname,
         email,
@@ -105,6 +105,8 @@ class SuperAgentApplication extends Component {
         city,
         description,
         DOB: dob,
+        applied_at: Date.now(),
+        time: new Date().toString(),
       });
 
       if (id) {
@@ -327,7 +329,13 @@ class SuperAgentApplication extends Component {
                       className="mr-2"
                       disabled={this.state.submitting}
                     >
-                      <span style={{ color: "#fff" }}>
+                      <span
+                        style={{
+                          " -webkit-text-fill-color": rgba(255, 255, 255, 1),
+                          "-webkit-opacity": 1,
+                          color: rgba(255, 255, 255, 1),
+                        }}
+                      >
                         {this.state.submitting ? "Please wait..." : "Submit"}
                       </span>
                     </button>
