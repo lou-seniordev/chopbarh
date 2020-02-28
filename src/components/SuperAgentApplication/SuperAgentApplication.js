@@ -331,9 +331,8 @@ class SuperAgentApplication extends Component {
                     >
                       <span
                         style={{
-                          " -webkit-text-fill-color": rgba(255, 255, 255, 1),
-                          "-webkit-opacity": 1,
-                          color: rgba(255, 255, 255, 1),
+                          WebkitTextFillColor: `${rgb(255, 255, 255, 1)}`,
+                          color: `${rgb(255, 255, 255, 1)}`,
                         }}
                       >
                         {this.state.submitting ? "Please wait..." : "Submit"}
