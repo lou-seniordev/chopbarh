@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
-import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
 
@@ -131,7 +130,7 @@ class EditProfileForm extends Component {
     phone: "",
     dob: "",
     sex: "",
-    email: ""
+    email: "",
   };
 
   componentDidMount = () => {
@@ -142,7 +141,7 @@ class EditProfileForm extends Component {
         phone: PhoneNum,
         dob: this.getDate(DOB),
         sex: Sex,
-        email: Email
+        email: Email,
       });
     }
   };
@@ -155,7 +154,7 @@ class EditProfileForm extends Component {
         phone: PhoneNum,
         dob: this.getDate(DOB),
         sex: Sex,
-        email: Email
+        email: Email,
       });
     }
   };
@@ -187,47 +186,42 @@ class EditProfileForm extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = async  event => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
     const postData = {
-      FULL_NAME: this.state.name,
-      DOB: this.state.dob,
-      SEX: this.state.sex.split("")[0],
-      EMAIL: this.state.email
+      name: this.state.name,
+      dob: this.state.dob,
+      sex: this.state.sex.split("")[0],
+      email: this.state.email,
+      playerId: this.props.id,
     };
 
-    postData["@class"] = ".LogEventRequest";
-    postData["eventKey"] = "PLAYER_PROFILE_UPDATE";
-    postData["playerId"] = this.props.id;
-    const formValue = JSON.stringify(postData);
+    try {
+      const editProfileResponse = await (
+        await fetch("https://pay.chopbarh.com/ng/api/update_profile", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
+          },
+          body: JSON.stringify(postData),
+        })
+      ).json();
 
-    // axios(
-    //   `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-    //     keys.apiKeySuffix
-    //   }/LogEventRequest`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json"
-    //     },
-    //     data: formValue
-    //   }
-    // )
-    //   .then(response => {
-    //     if (response.data.error) {
-    //       this.setState({ loading: false });
-    //       toast.error("Profile was not updated. Please, try again");
-    //     } else {
-    //       this.setState({ loading: false });
-    //       toast.success("Profile was successfully updated.");
-    //     }
-    //   })
-    //   .catch(err => {
-    //     this.setState({ loading: false });
-    //   });
+      if (editProfileResponse.status === true) {
+        this.setState({ loading: false });
+        toast.success("Profile was successfully updated.");
+      } else {
+        this.setState({ loading: false });
+        toast.error("Profile was not updated. Please, try again");
+      }
+    } catch (error) {
+      this.setState({ loading: false });
+      toast.error("An error occurred. Please, try again");
+    }
   };
 
   render() {
@@ -241,7 +235,7 @@ class EditProfileForm extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginTop: "5rem"
+                  marginTop: "5rem",
                 }}
               >
                 <Spinner />
@@ -329,12 +323,9 @@ class EditProfileForm extends Component {
 const mapStateToProps = state => ({
   id: state.auth.id,
   loading: state.player.loading,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditProfileForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileForm);

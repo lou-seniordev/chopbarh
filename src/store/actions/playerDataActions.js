@@ -1,28 +1,29 @@
 import * as actionType from "../actionTypes/actionTypes";
 
 export const fetchPlayerInit = () => ({
-  type: actionType.FETCH_PLAYER_DATA_INIT
+  type: actionType.FETCH_PLAYER_DATA_INIT,
 });
 
 export const fetchPlayerSuccess = data => ({
   type: actionType.FETCH_PLAYER_DATA_SUCCESS,
-  data
+  data,
 });
 
 export const fetchPlayerFail = () => ({
-  type: actionType.FETCH_PLAYER_DATA_FAIL
+  type: actionType.FETCH_PLAYER_DATA_FAIL,
 });
 
 export const fetchPlayerData = () => async (dispatch, getState) => {
   dispatch(fetchPlayerInit());
 
-  fetch("https://chopbarh-api.nutod.repl.co/api/get_user_profile", {
+  fetch("https://pay.chopbarh.com/ng/api/get_user_profile", {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      apiKey: process.env.REACT_APP_API_KEY,
     },
-    body: JSON.stringify({ playerId: getState().auth.id })
+    body: JSON.stringify({ playerId: getState().auth.id }),
   })
     .then(response => response.json())
     .then(data => {
@@ -35,47 +36,8 @@ export const fetchPlayerData = () => async (dispatch, getState) => {
     .catch(err => {
       dispatch(fetchPlayerFail());
     });
-
-  // fetch(
-  //   "https://cors-anywhere.herokuapp.com/https://backend.chopbarh.com/api/player/get",
-  //   {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "api-key": process.env.REACT_APP_API_KEY
-  //     },
-  //     body: JSON.stringify({
-  //       phone_number: "09014202339"
-  //     })
-  //   }
-  // )
-  //   .then(response => response.json())
-  //   .then(data => {})
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-
-  // fetch("https://backend.chopbarh.com/api/player/get", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //     "api-key": process.env.REACT_APP_API_KEY
-  //   },
-  //   body: JSON.stringify({
-  //     phone_number: "09014202339"
-  //   })
-  // })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     console.log(data);
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
 };
 
 export const resetPlayerData = () => ({
-  type: actionType.RESET_PLAYER_DATA
+  type: actionType.RESET_PLAYER_DATA,
 });

@@ -154,7 +154,7 @@ class ChangePinForm extends Component {
     };
 
     const changePinResponse = await (
-      await fetch("https://pay.chopbarh.com/api/change_pin", {
+      await fetch("https://pay.chopbarh.com/ng/api/change_pin", {
         method: "POST",
         headers: {
           Accept: "application/json",

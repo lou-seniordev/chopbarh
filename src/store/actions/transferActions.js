@@ -2,16 +2,16 @@ import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
 export const fetchTransferCreditInit = () => ({
-  type: actionType.FETCH_CREDIT_TRANSFER_INIT
+  type: actionType.FETCH_CREDIT_TRANSFER_INIT,
 });
 
 export const fetchTransferCreditSuccess = data => ({
   type: actionType.FETCH_CREDIT_TRANSFER_SUCCESS,
-  data
+  data,
 });
 
 export const fetchTransferCreditFail = () => ({
-  type: actionType.FETCH_CREDIT_TRANSFER_FAIL
+  type: actionType.FETCH_CREDIT_TRANSFER_FAIL,
 });
 
 export const fetchTransferCreditData = () => async (dispatch, getState) => {
@@ -35,16 +35,16 @@ export const fetchTransferCreditData = () => async (dispatch, getState) => {
 };
 
 export const setTransferCreditInit = () => ({
-  type: actionType.SET_CREDIT_TRANSFER_INIT
+  type: actionType.SET_CREDIT_TRANSFER_INIT,
 });
 
 export const setTransferCreditSuccess = data => ({
   type: actionType.SET_CREDIT_TRANSFER_SUCCESS,
-  data
+  data,
 });
 
 export const setTransferCreditFail = () => ({
-  type: actionType.SET_CREDIT_TRANSFER_FAIL
+  type: actionType.SET_CREDIT_TRANSFER_FAIL,
 });
 
 export const setTransferCredit = payload => async (dispatch, getState) => {
@@ -58,7 +58,7 @@ export const setTransferCredit = payload => async (dispatch, getState) => {
 
     const transfers = snapshot.docs.map(doc => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
     console.log(transfers);
 
@@ -71,8 +71,8 @@ export const setTransferCredit = payload => async (dispatch, getState) => {
             amount: payload.amount,
             type: payload.type,
             deposit_date: payload.transaction_date,
-            status: payload.status
-          })
+            status: payload.status,
+          }),
         });
       dispatch(setTransferCreditSuccess(docRef));
     } else {
@@ -84,11 +84,11 @@ export const setTransferCredit = payload => async (dispatch, getState) => {
           data: [
             {
               amount: payload.amount,
-            type: payload.type,
-            deposit_date: payload.transaction_date,
-            status: payload.status
-            }
-          ]
+              type: payload.type,
+              deposit_date: payload.transaction_date,
+              status: payload.status,
+            },
+          ],
         });
       dispatch(setTransferCreditSuccess(docRef));
     }
