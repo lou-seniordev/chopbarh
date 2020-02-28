@@ -327,7 +327,7 @@ class SuperAgentApplication extends Component {
                       className="mr-2"
                       disabled={this.state.submitting}
                     >
-                      <span>
+                      <span style={{ color: "#fff" }}>
                         {this.state.submitting ? "Please wait..." : "Submit"}
                       </span>
                     </button>
