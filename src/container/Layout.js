@@ -104,6 +104,10 @@ class Layout extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/vendors" component={VendorsPage} />
+              <Route
+                path="/super-agent-application"
+                component={SuperAgentApplicationPage}
+              />
               <Redirect push to="/login" />
             </Switch>
           </Suspense>

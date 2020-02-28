@@ -30,7 +30,6 @@ const appRoutes = [
   "/withdraw",
   "/play",
   "/transaction",
-  "/super-agent-application",
 ];
 
 class Login extends Component {
