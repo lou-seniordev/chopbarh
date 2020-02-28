@@ -13,12 +13,12 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
-  SignUpSignal
+  SignUpSignal,
 } from "../../styles/LoginStyles";
 import {
   authStart,
   authSuccess,
-  authFail
+  authFail,
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
 
@@ -29,7 +29,8 @@ const appRoutes = [
   "/deposit",
   "/withdraw",
   "/play",
-  "/transaction"
+  "/transaction",
+  "/super-agent-application",
 ];
 
 class Login extends Component {
@@ -38,7 +39,7 @@ class Login extends Component {
     accountErrorModal: false,
     userName: "",
     password: "",
-    loading: false
+    loading: false,
   };
 
   toggleformErrorModal = () => {
@@ -77,7 +78,7 @@ class Login extends Component {
     const newState = { ...this.state };
     const formState = {
       phone_number: newState.userName,
-      password: newState.password
+      password: newState.password,
     };
 
     const formValue = JSON.stringify(formState);
@@ -89,9 +90,9 @@ class Login extends Component {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
+        apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
       },
-      body: formValue
+      body: formValue,
     })
       .then(response => response.json())
       .then(data => {
@@ -128,7 +129,7 @@ class Login extends Component {
           className="pt-5 mt-4"
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center">
@@ -142,7 +143,7 @@ class Login extends Component {
           className="pt-5 mt-4"
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center">
@@ -214,13 +215,13 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.auth.loading
+  loading: state.auth.loading,
 });
 
 const mapDispatchToProps = {
   authStart,
   authSuccess,
-  authFail
+  authFail,
 };
 
 export default withRouter(

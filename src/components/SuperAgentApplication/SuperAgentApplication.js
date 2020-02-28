@@ -1,6 +1,7 @@
 import React, { Component, memo } from "react";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
+import { connect } from "react-redux";
 import Header from "../UI/Header/Header";
 import {
   SignUpWrapper,
@@ -105,6 +106,7 @@ class SuperAgentApplication extends Component {
         city,
         description,
         DOB: dob,
+        playerId: this.props.id,
       });
 
       if (id) {
@@ -342,4 +344,8 @@ class SuperAgentApplication extends Component {
   }
 }
 
-export default memo(SuperAgentApplication);
+const mapStateToProps = state => ({
+  id: state.auth.id,
+});
+
+export default connect(mapStateToProps)(memo(SuperAgentApplication));

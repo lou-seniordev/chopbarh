@@ -37,7 +37,7 @@ const Loading = () => (
       height: "98vh",
       display: "flex",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
     }}
   >
     <Spinner type="grow" style={{ color: "#6D0A23" }} />
@@ -104,11 +104,6 @@ class Layout extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/vendors" component={VendorsPage} />
-              <Route
-                path="/super-agent-application"
-                component={SuperAgentApplicationPage}
-              />
-
               <Redirect push to="/login" />
             </Switch>
           </Suspense>
@@ -119,12 +114,12 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: localStorage.getItem("chopbarh-token:live") !== null
+  isAuthenticated: localStorage.getItem("chopbarh-token:live") !== null,
 });
 
 const mapDispatchToProps = {
   authSuccess,
-  fetchPlayerData
+  fetchPlayerData,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

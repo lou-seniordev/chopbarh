@@ -142,7 +142,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
 
   try {
     await fetch(
-      "https://cors-anywhere.herokuapp.com/https://backend.chopbarh.com/api/deposits",
+      "https://backend.chopbarh.com/api/deposits",
       {
         method: "POST",
         headers: {
