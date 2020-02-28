@@ -329,12 +329,7 @@ class SuperAgentApplication extends Component {
                       className="mr-2"
                       disabled={this.state.submitting}
                     >
-                      <span
-                        style={{
-                          WebkitTextFillColor: `${rgb(255, 255, 255, 1)}`,
-                          color: `${rgb(255, 255, 255, 1)}`,
-                        }}
-                      >
+                      <span style={{ color: "#fff" }}>
                         {this.state.submitting ? "Please wait..." : "Submit"}
                       </span>
                     </button>
