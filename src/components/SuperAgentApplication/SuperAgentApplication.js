@@ -92,13 +92,37 @@ class SuperAgentApplication extends Component {
     } = this.state;
     // Submit to Firestore
     try {
+      await fetch("https://backend.chopbarh.com/api/accounts/super_agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "api-key": "200aeco-190aefd30-aecobdq",
+        },
+        body: JSON.stringify({
+          email,
+          first_name: firstname,
+          last_name: lastname,
+          phone_number: chopbarh_phone,
+          gender,
+          DOB: dob,
+          address,
+          alternate_phone: alternate_phone ? alternate_phone : "N/A",
+          city,
+          status: "PENDING",
+          type,
+          description: description ? description : "N/A",
+          state,
+        }),
+      });
+
       const { id } = await firestore.collection("super_agent").add({
         firstname,
         lastname,
         email,
         gender,
         state,
-        chopbarh_phone_number: chopbarh_phone,
+        phone_number: chopbarh_phone,
         alternate_phone,
         address,
         type,
@@ -107,6 +131,7 @@ class SuperAgentApplication extends Component {
         DOB: dob,
         applied_at: Date.now(),
         time: new Date().toString(),
+        status: "PENDING",
       });
 
       if (id) {
