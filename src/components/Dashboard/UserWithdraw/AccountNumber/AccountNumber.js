@@ -2,7 +2,7 @@ import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import styled from "styled-components";
-import CryptoJS from "crypto-js";
+import Cryptr from "cryptr";
 import {
   Accordion,
   AccordionItem,
@@ -62,6 +62,8 @@ class AccountNumber extends Component {
     removeWithdrawalBankAccountModal: false,
     password: "",
     passwordModal: "",
+    verification: "",
+    verifying: false,
   };
 
   componentDidMount = () => {
@@ -139,18 +141,19 @@ class AccountNumber extends Component {
   };
 
   handlePasswordInputValidation = event => {
+    this.setState({ verifying: true });
     event.preventDefault();
 
     if (this.state.password.length === 4) {
-      this.setState({ passwordModal: false, modal: true });
+      const verif = process.env.REACT_APP_HASH_KEY_PROD;
+
+      this.setState({
+        passwordModal: false,
+        modal: true,
+        verification: new Cryptr(verif).encrypt(this.state.password),
+        verifying: false,
+      });
     }
-
-    var ciphertext = CryptoJS.AES.encrypt(
-      this.state.password,
-      process.env.REACT_APP_HASH_KEY_PROD
-    ).toString();
-
-    console.log(ciphertext);
   };
 
   formIsValid = ({ amount, account_number }) => {
@@ -182,6 +185,8 @@ class AccountNumber extends Component {
     );
 
     try {
+      const verif = process.env.REACT_APP_HASH_KEY_PROD;
+
       const response = await fetch(
         "https://pay.chopbarh.com/ng/user/withdraw",
         {
@@ -190,10 +195,7 @@ class AccountNumber extends Component {
             "Content-Type": "application/json",
             Accept: "application/json",
             apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: CryptoJS.AES.encrypt(
-              this.state.password,
-              process.env.REACT_APP_HASH_KEY_PROD
-            ).toString(),
+            verification: this.state.verification,
           },
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,
@@ -268,6 +270,8 @@ class AccountNumber extends Component {
     }
 
     try {
+      const verif = process.env.REACT_APP_HASH_KEY_PROD;
+
       const response = await fetch(
         "https://pay.chopbarh.com/ng/user/withdraw",
         {
@@ -276,10 +280,7 @@ class AccountNumber extends Component {
             "Content-Type": "application/json",
             Accept: "application/json",
             apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: CryptoJS.AES.encrypt(
-              this.state.password,
-              process.env.REACT_APP_HASH_KEY_PROD
-            ).toString(),
+            verification: this.state.verification,
           },
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,
@@ -347,11 +348,11 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.authAmount) < 1000) {
-      toast.error(`You cannot withdraw less than \u20a6${1000}`);
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.authAmount) < 1000) {
+    //   toast.error(`You cannot withdraw less than \u20a6${1000}`);
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
     if (Number(this.state.authAmount) > 50000) {
       toast.error(
@@ -401,11 +402,11 @@ class AccountNumber extends Component {
       return;
     }
 
-    if (Number(this.state.amount) < 1000) {
-      toast.error(`You cannot withdraw less than \u20a6${1000}`);
-      this.setState({ loading: false });
-      return;
-    }
+    // if (Number(this.state.amount) < 1000) {
+    //   toast.error(`You cannot withdraw less than \u20a6${1000}`);
+    //   this.setState({ loading: false });
+    //   return;
+    // }
 
     if (Number(this.state.amount) > 50000) {
       toast.error(
