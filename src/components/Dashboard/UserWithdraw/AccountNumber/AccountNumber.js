@@ -182,29 +182,26 @@ class AccountNumber extends Component {
     );
 
     try {
-      const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: CryptoJS.AES.encrypt(
-              this.state.password,
-              process.env.REACT_APP_HASH_KEY_PROD
-            ).toString(),
-          },
-          body: JSON.stringify({
-            playerId: this.props.playerData.PlayerID,
-            amount: +this.state.amount,
-            phone_number: this.props.playerData.PhoneNum,
-            account_number: this.state.account_number,
-            bank: this.state.bank,
-            bank_name: bankName[0].Name,
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:8080/ng/user/withdraw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
+          verification: CryptoJS.AES.encrypt(
+            this.state.password,
+            process.env.REACT_APP_HASH_KEY_PROD
+          ).toString(),
+        },
+        body: JSON.stringify({
+          playerId: this.props.playerData.PlayerID,
+          amount: +this.state.amount,
+          phone_number: this.props.playerData.PhoneNum,
+          account_number: this.state.account_number,
+          bank: this.state.bank,
+          bank_name: bankName[0].Name,
+        }),
+      });
 
       const data = await response.json();
 
@@ -223,6 +220,7 @@ class AccountNumber extends Component {
           account_number: "",
           paying: false,
           modal: false,
+          password: "",
         });
         toast.error("Transaction was not successful. Please try again later");
       }
@@ -232,6 +230,7 @@ class AccountNumber extends Component {
         account_number: "",
         paying: false,
         modal: false,
+        password: "",
       });
       toast.error("Something went wrong");
     }
@@ -266,29 +265,26 @@ class AccountNumber extends Component {
     }
 
     try {
-      const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: CryptoJS.AES.encrypt(
-              this.state.password,
-              process.env.REACT_APP_HASH_KEY_PROD
-            ).toString(),
-          },
-          body: JSON.stringify({
-            playerId: this.props.playerData.PlayerID,
-            amount: +this.state.authAmount,
-            phone_number: this.props.playerData.PhoneNum,
-            account_number: bankInformation[0].account_number,
-            bank: bankInformation[0].code,
-            bank_name: "",
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:8080/ng/user/withdraw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
+          verification: CryptoJS.AES.encrypt(
+            this.state.password,
+            process.env.REACT_APP_HASH_KEY_PROD
+          ).toString(),
+        },
+        body: JSON.stringify({
+          playerId: this.props.playerData.PlayerID,
+          amount: +this.state.authAmount,
+          phone_number: this.props.playerData.PhoneNum,
+          account_number: bankInformation[0].account_number,
+          bank: bankInformation[0].code,
+          bank_name: "",
+        }),
+      });
 
       const data = await response.json();
 
@@ -307,6 +303,7 @@ class AccountNumber extends Component {
           account_number: "",
           paying: false,
           modal: false,
+          password: "",
         });
         toast.error("Transaction was not successful. Please try again later");
       }
@@ -316,6 +313,7 @@ class AccountNumber extends Component {
         account_number: "",
         paying: false,
         modal: false,
+        password: "",
       });
       toast.error("Something went wrong");
     }
