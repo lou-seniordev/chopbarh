@@ -2,7 +2,7 @@ import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import styled from "styled-components";
-import Cryptr from "cryptr";
+import crypto from "crypto-extra";
 import {
   Accordion,
   AccordionItem,
@@ -62,8 +62,6 @@ class AccountNumber extends Component {
     removeWithdrawalBankAccountModal: false,
     password: "",
     passwordModal: "",
-    verification: "",
-    verifying: false,
   };
 
   componentDidMount = () => {
@@ -141,16 +139,12 @@ class AccountNumber extends Component {
   };
 
   handlePasswordInputValidation = event => {
-    this.setState({ verifying: true });
     event.preventDefault();
 
     if (this.state.password.length === 4) {
-      const verif = process.env.REACT_APP_HASH_KEY_PROD;
-
       this.setState({
         passwordModal: false,
         modal: true,
-        verification: new Cryptr(verif).encrypt(this.state.password),
         verifying: false,
       });
     }
@@ -195,7 +189,7 @@ class AccountNumber extends Component {
             "Content-Type": "application/json",
             Accept: "application/json",
             apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: this.state.verification,
+            verification: crypto.encrypt(this.state.password, verif),
           },
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,
@@ -280,7 +274,7 @@ class AccountNumber extends Component {
             "Content-Type": "application/json",
             Accept: "application/json",
             apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: this.state.verification,
+            verification: crypto.encrypt(this.state.password, verif),
           },
           body: JSON.stringify({
             playerId: this.props.playerData.PlayerID,

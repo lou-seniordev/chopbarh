@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "crypto-extra": "^1.0.1",
     "crypto-js": "^3.1.9-1",
     "cryptr": "^6.0.1",
     "enzyme": "^3.9.0",
