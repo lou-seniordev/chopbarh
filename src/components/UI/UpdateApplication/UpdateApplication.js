@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MediaQuery from "react-responsive";
+import Colors from "../../styles/colors";
 import AppStore from "../../assets/img/AppStore.png";
 import PlayStore from "../../assets/img/PlayStore@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
@@ -12,6 +13,24 @@ const UpdateApplicationWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  h2 {
+    color: ${Colors.colorPrimary};
+    transform: skewX(-15deg);
+    font-weight: bold;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    margin: 1.5rem 0;
+  }
+
+  h3 {
+    color: ${Colors.colorPrimary};
+    transform: skewX(-15deg);
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    margin: 1.5rem 0;
+  }
 `;
 
 const Image = styled.img`
@@ -30,7 +49,8 @@ function UpdateApplication() {
       <MediaQuery minDeviceWidth={767}>
         <div>
           {/* <Logo /> */}
-          <h2>CHOPBARH.COM</h2>
+          <h2>CHOPBARH UPDATE</h2>
+          <h3>Select your phone to download your update</h3>
           <p>
             <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
               <Image src={AppStore} alt="App Store" />
@@ -65,8 +85,9 @@ function UpdateApplication() {
       </MediaQuery>
       <MediaQuery maxDeviceWidth={767}>
         <div>
-          <Logo />
-          <h2>CHOPBARH.COM</h2>
+          {/* <Logo /> */}
+          <h2>CHOPBARH UPDATE</h2>
+          <h3>Select your phone to download your update</h3>
           <p>
             <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
               <Image src={AppStore} alt="App Store" />
