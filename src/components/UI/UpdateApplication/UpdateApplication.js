@@ -5,7 +5,7 @@ import Colors from "../../styles/colors";
 import AppStore from "../../assets/img/AppStore.png";
 import PlayStore from "../../assets/img/PlayStore@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
-import Logo from "../UI/Logo/Logo";
+import Logo from "../AlternateLogo/AlternateLogo";
 
 const UpdateApplicationWrapper = styled.div`
   height: 100vh;
@@ -50,7 +50,7 @@ function UpdateApplication() {
       <UpdateApplicationWrapper>
         <MediaQuery minDeviceWidth={767}>
           <div>
-            {/* <Logo /> */}
+            <Logo />
             <h2>CHOPBARH UPDATE</h2>
             <h3>Select your phone to download your update</h3>
             <p>
@@ -87,7 +87,7 @@ function UpdateApplication() {
         </MediaQuery>
         <MediaQuery maxDeviceWidth={767}>
           <div>
-            {/* <Logo /> */}
+            <Logo />
             <h2>CHOPBARH UPDATE</h2>
             <h3>Select your phone to download your update</h3>
             <p>
