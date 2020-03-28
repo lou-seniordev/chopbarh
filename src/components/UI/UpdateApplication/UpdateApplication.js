@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Helmet from "react-helmet";
 import MediaQuery from "react-responsive";
 import Colors from "../../styles/colors";
 import AppStore from "../../assets/img/AppStore.png";
@@ -47,7 +46,7 @@ const Image = styled.img`
 function UpdateApplication() {
   return (
     <>
-      <Helmet title={`Chopbarh \u{2192} Update`} />
+      {/* <Helmet title={`Chopbarh \u{2192} Update`} /> */}
       <UpdateApplicationWrapper>
         <MediaQuery minDeviceWidth={767}>
           <div>

@@ -10,14 +10,10 @@ const GamesPage = lazy(() => import("../Pages/GamesPage"));
 const LoginPage = lazy(() => import("../Pages/LoginPage"));
 const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
 const ChangePinPage = lazy(() => import("../Pages/ChangePinPage"));
-// const CompleteProfilePage = lazy(() => import("../Pages/CompleteProfilePage"));
 const ForgotPassword = lazy(() =>
   import("../components/auth/ForgotPassword/ForgotPassword")
 );
 const Logout = lazy(() => import("../components/auth/Logout/Logout"));
-// const SetNickname = lazy(() =>
-//   import("../components/auth/SetNickname/SetNickname")
-// );
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
 const UserPlayPage = lazy(() => import("../Pages/UserPlayPage"));
 const UserEditProfilePage = lazy(() => import("../Pages/UserEditProfilePage"));
@@ -32,7 +28,6 @@ const SuperAgentApplicationPage = lazy(() =>
 const UpdateApplicationPage = lazy(() =>
   import("../Pages/UpdateApplicationPage")
 );
-// const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 
 const Loading = () => (
   <div
@@ -57,21 +52,6 @@ class Layout extends Component {
         localStorage.getItem("chopbarh-id:live")
       );
   }
-
-  // UNSAFE_componentWillMount = () => {
-  //   if (this.props.isAuthenticated) {
-  //     this.props.authSuccess(
-  //       localStorage.getItem("chopbarh-token:live"),
-  //       localStorage.getItem("chopbarh-id:live")
-  //     );
-  //     //this.props.fetchPlayerData();
-  //   }
-  //   // if (localStorage.getItem("chopbarh-token:live")) {
-  //   //   localStorage.removeItem("chopbarh-token:live");
-  //   //   localStorage.removeItem("chopbarh-id:live");
-  //   //   this.props.history.replace("/");
-  //   // }
-  // };
 
   render() {
     return (
