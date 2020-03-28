@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import breakpoint from "../components/styles/breakpoints";
 import color from "../components/styles/colors";
 
@@ -44,14 +44,19 @@ const ErrorBoundaryWrapper = styled.div`
   }
 `;
 
-export default class ErrorBoundary extends Component {
+class ErrorBoundary extends Component {
   state = {
     error: null,
-    errorModal: false
+    errorModal: false,
   };
 
   componentDidCatch = error => {
     this.setState({ error, errorModal: true });
+  };
+
+  goBack = () => {
+    this.props.history.push("/");
+    window.location.reload();
   };
 
   render() {
@@ -65,8 +70,8 @@ export default class ErrorBoundary extends Component {
               Ooops! <br />
               <span>An Error Occured!</span>
             </h3>
-            <Link to="/" onClick={this.forceUpdate}>
-              User
+            <Link to="/" onClick={this.goBack}>
+              Home
             </Link>
           </div>
         </ErrorBoundaryWrapper>
@@ -76,3 +81,5 @@ export default class ErrorBoundary extends Component {
     return <div>{this.props.children}</div>;
   }
 }
+
+export default withRouter(ErrorBoundary);
