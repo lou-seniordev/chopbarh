@@ -5,7 +5,7 @@ import Colors from "../../styles/colors";
 import AppStore from "../../assets/img/AppStore.png";
 import PlayStore from "../../assets/img/PlayStore@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
-// import Logo from "../UI/Logo/Logo";
+import Logo from "../UI/Logo/Logo";
 
 const UpdateApplicationWrapper = styled.div`
   height: 100vh;
