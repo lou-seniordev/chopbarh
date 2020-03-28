@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import MediaQuery from "react-responsive";
 import Colors from "../../styles/colors";
 import AppStore from "../../assets/img/AppStore.png";
@@ -45,32 +46,34 @@ const Image = styled.img`
 
 function UpdateApplication() {
   return (
-    <UpdateApplicationWrapper>
-      <MediaQuery minDeviceWidth={767}>
-        <div>
-          {/* <Logo /> */}
-          <h2>CHOPBARH UPDATE</h2>
-          <h3>Select your phone to download your update</h3>
-          <p>
-            <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-              <Image src={AppStore} alt="App Store" />
-            </a>
-          </p>
-          <p>
-            <a href="https://downloads.chopbarh.com/chopbarh.apk">
-              <Image src={PlayStore} alt="Play Store" />
-            </a>
-          </p>
-          <p>
-            <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-              <Image
-                className="mt-4"
-                src={AndroidInstructions}
-                alt="Android Instructions"
-              />
-            </a>
-          </p>
-          {/* <p
+    <>
+      <Helmet title={`Chopbarh \u{2192} Update`} />
+      <UpdateApplicationWrapper>
+        <MediaQuery minDeviceWidth={767}>
+          <div>
+            {/* <Logo /> */}
+            <h2>CHOPBARH UPDATE</h2>
+            <h3>Select your phone to download your update</h3>
+            <p>
+              <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+                <Image src={AppStore} alt="App Store" />
+              </a>
+            </p>
+            <p>
+              <a href="https://downloads.chopbarh.com/chopbarh.apk">
+                <Image src={PlayStore} alt="Play Store" />
+              </a>
+            </p>
+            <p>
+              <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+                <Image
+                  className="mt-4"
+                  src={AndroidInstructions}
+                  alt="Android Instructions"
+                />
+              </a>
+            </p>
+            {/* <p
             className="nav-item mt-4"
             style={{
               color: "#fff",
@@ -81,34 +84,34 @@ function UpdateApplication() {
           >
             Contact Us: 0903-662-3253
           </p> */}
-        </div>
-      </MediaQuery>
-      <MediaQuery maxDeviceWidth={767}>
-        <div>
-          {/* <Logo /> */}
-          <h2>CHOPBARH UPDATE</h2>
-          <h3>Select your phone to download your update</h3>
-          <p>
-            <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-              <Image src={AppStore} alt="App Store" />
-            </a>
-          </p>
-          <p>
-            <a href="https://downloads.chopbarh.com/chopbarh.apk">
-              <Image src={PlayStore} alt="Play Store" />
-            </a>
-          </p>
-          <p>
-            <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-              <Image
-                className="mt-4"
-                src={AndroidInstructions}
-                alt="Android Instructions"
-              />
-            </a>
-          </p>
-          <h2>Download now and get &#8358;100 free</h2>
-          {/* <p
+          </div>
+        </MediaQuery>
+        <MediaQuery maxDeviceWidth={767}>
+          <div>
+            {/* <Logo /> */}
+            <h2>CHOPBARH UPDATE</h2>
+            <h3>Select your phone to download your update</h3>
+            <p>
+              <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
+                <Image src={AppStore} alt="App Store" />
+              </a>
+            </p>
+            <p>
+              <a href="https://downloads.chopbarh.com/chopbarh.apk">
+                <Image src={PlayStore} alt="Play Store" />
+              </a>
+            </p>
+            <p>
+              <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
+                <Image
+                  className="mt-4"
+                  src={AndroidInstructions}
+                  alt="Android Instructions"
+                />
+              </a>
+            </p>
+            <h2>Download now and get &#8358;100 free</h2>
+            {/* <p
             className="nav-item mt-4"
             style={{
               color: "#fff",
@@ -119,9 +122,10 @@ function UpdateApplication() {
           >
             Contact Us: 0903-662-3253
           </p> */}
-        </div>
-      </MediaQuery>
-    </UpdateApplicationWrapper>
+          </div>
+        </MediaQuery>
+      </UpdateApplicationWrapper>
+    </>
   );
 }
 
