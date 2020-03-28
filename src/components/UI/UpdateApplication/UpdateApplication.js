@@ -50,7 +50,7 @@ function UpdateApplication() {
               />
             </a>
           </p>
-          <p
+          {/* <p
             className="nav-item mt-4"
             style={{
               color: "#fff",
@@ -60,7 +60,7 @@ function UpdateApplication() {
             }}
           >
             Contact Us: 0903-662-3253
-          </p>
+          </p> */}
         </div>
       </MediaQuery>
       <MediaQuery maxDeviceWidth={767}>
@@ -87,7 +87,7 @@ function UpdateApplication() {
             </a>
           </p>
           <h2>Download now and get &#8358;100 free</h2>
-          <p
+          {/* <p
             className="nav-item mt-4"
             style={{
               color: "#fff",
@@ -97,7 +97,7 @@ function UpdateApplication() {
             }}
           >
             Contact Us: 0903-662-3253
-          </p>
+          </p> */}
         </div>
       </MediaQuery>
     </UpdateApplicationWrapper>
