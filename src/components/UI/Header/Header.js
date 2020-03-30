@@ -6,6 +6,7 @@ import MediaQuery from "react-responsive";
 import colors from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
 import Logo from "../Logo/Logo";
+import WhatsAppIcon from "../../assets/svg/WhatsAppIcon.svg";
 
 const HeaderWrapper = styled.div`
   background: ${props =>
@@ -68,19 +69,26 @@ export default function Header({ transparent }) {
           <Logo />
         </Link>
         <MediaQuery maxDeviceWidth={991}>
-          <div>
-            <p
-              className="nav-item mt-4"
+          <Link to="contacts">
+            <div
+              // className="nav-item mt-4"
               style={{
                 color: "#fff",
                 textTransform: "uppercase",
                 fontSize: "1.35rem",
                 marginLeft: "-1.2rem",
+                border: "1px solid #aaa",
+                padding: ".5rem",
+                display: "flex",
+                alignItems: "center",
+                borderRadius: "2px",
+                cursor: "pointer",
               }}
             >
-              Contact Us: 0903-662-3253
-            </p>
-          </div>
+              <span className="mr-3">Contact Us:</span>
+              <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
+            </div>
+          </Link>
         </MediaQuery>
         <button
           className="navbar-toggler custom-toggler mt-3"
