@@ -530,7 +530,10 @@ export default function Hero() {
                     height="250"
                     src="https://www.youtube.com/embed/gBeXOvNpR3c"
                   ></iframe> */}
-                  <HeadingTwoFirst className="hero__title">
+                  <HeadingTwoFirst
+                    className="hero__title"
+                    style={{ color: "#ebc709" }}
+                  >
                     COVID-19
                     <br />
                     &#8358;10 Billion Intervention Funds Available
