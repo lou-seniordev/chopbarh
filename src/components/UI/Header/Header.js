@@ -74,20 +74,8 @@ export default function Header({ transparent }) {
               style={{
                 color: "#fff",
                 textTransform: "uppercase",
-                fontSize: "1.25rem",
+                fontSize: "1.35rem",
                 marginLeft: "-1.2rem",
-              }}
-            >
-              Contact Us: 0903-662-3253
-            </p>
-            <p
-              className="nav-item"
-              style={{
-                color: "#fff",
-                textTransform: "uppercase",
-                fontSize: "1.25rem",
-                marginLeft: "-1.2rem",
-                marginTop: "-1rem",
               }}
             >
               Contact Us: 0903-662-3253
