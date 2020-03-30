@@ -40,7 +40,7 @@ const HeroWrapper = styled.div`
 //   }
 // `;
 
-const HeadingTwo = styled.h2`
+export const HeadingTwo = styled.h2`
   font-size: 6.5rem;
   text-transform: uppercase;
   font-style: italic;
