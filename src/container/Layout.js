@@ -28,6 +28,7 @@ const SuperAgentApplicationPage = lazy(() =>
 const UpdateApplicationPage = lazy(() =>
   import("../Pages/UpdateApplicationPage")
 );
+const ContactUsPage = lazy(() => import("../Pages/ContactUsPage"));
 
 const Loading = () => (
   <div
@@ -77,6 +78,7 @@ class Layout extends Component {
                 component={SuperAgentApplicationPage}
               />
               <Route path="/update" component={UpdateApplicationPage} />
+              <Route path="/contacts" component={ContactUsPage} />
               <Redirect push to="/" />
             </Switch>
           </Suspense>
@@ -93,6 +95,7 @@ class Layout extends Component {
                 component={SuperAgentApplicationPage}
               />
               <Route path="/update" component={UpdateApplicationPage} />
+              <Route path="/contacts" component={ContactUsPage} />
               <Redirect push to="/login" />
             </Switch>
           </Suspense>
