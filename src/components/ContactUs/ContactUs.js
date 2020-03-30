@@ -38,8 +38,8 @@ export default function ContactUs() {
           />
         </ImageContainer>
         <p>0903-662-3253</p>
-        <p>0903-662-3253</p>
-        <p>0903-662-3253</p>
+        {/* <p>0903-662-3253</p>
+        <p>0903-662-3253</p> */}
       </ContactUsWrapper>
     </>
   );
