@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Slider from "react-animated-slider";
 import MediaQuery from "react-responsive";
 import color from "../../styles/colors";
@@ -8,7 +8,7 @@ import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
-import VendorButton from "../../assets/img/vendor_button@2x.png";
+// import VendorButton from "../../assets/img/vendor_button@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
 
 import "react-animated-slider/build/horizontal.css";
@@ -112,14 +112,14 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    height: 6rem;
-    width: 20rem;
+    height: 9rem;
+    width: 22rem;
   }
 
-  @media only screen and (max-width: ${breakPoints.smaller}) {
+  /* @media only screen and (max-width: ${breakPoints.smaller}) {
     height: 5rem;
     width: 18rem;
-  }
+  } */
 `;
 
 const AndroidInstructionImage = styled(Image)`
@@ -256,13 +256,13 @@ const VendorButtonImage = styled.img`
   }
 `;
 
-const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
+export const VendorButtonImageFirstSlide = styled(VendorButtonImage)`
   padding-left: 1rem;
   margin-top: 3rem;
   width: 50%;
 `;
 
-const VendorButtonImageSmall = styled.img`
+export const VendorButtonImageSmall = styled.img`
   width: 100%;
   transition: all 0.2s;
   margin-top: 4rem;
@@ -290,7 +290,7 @@ export default function Hero() {
             style={{
               background: `url('${Background}') ${color.colorPrimary} no-repeat center center`,
               backgroundSize: "cover",
-              color: "#fff"
+              color: "#fff",
             }}
           >
             <SliderContent>
@@ -337,9 +337,9 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              <Link to="vendors">
+              {/* <Link to="vendors">
                 <VendorButtonImageFirstSlide src={VendorButton} />
-              </Link>
+              </Link> */}
             </SliderContent>
             <SliderImage
               className="d-block"
@@ -350,7 +350,7 @@ export default function Hero() {
           <div
             style={{
               background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747886/Landing%20Page%20Assets/SliderImage1_byohor.jpg') ${color.colorPrimary} no-repeat center center`,
-              backgroundSize: "cover"
+              backgroundSize: "cover",
             }}
           >
             <SliderContent className="text-center">
@@ -383,16 +383,16 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              <Link to="vendors">
+              {/* <Link to="vendors">
                 <VendorButtonImage src={VendorButton} />
-              </Link>
+              </Link> */}
             </SliderContent>
           </div>
           <div
             style={{
               background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage2_hkx0ey.jpg') ${color.colorPrimary} no-repeat center center`,
               backgroundSize: "cover",
-              color: "#fff"
+              color: "#fff",
             }}
           >
             <SliderContent className="text-center">
@@ -429,15 +429,15 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              <Link to="vendors">
+              {/* <Link to="vendors">
                 <VendorButtonImage src={VendorButton} />
-              </Link>
+              </Link> */}
             </SliderContent>
           </div>
           <div
             style={{
               background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage3_q37kzi.jpg') ${color.colorPrimary} no-repeat center center`,
-              backgroundSize: "cover"
+              backgroundSize: "cover",
             }}
           >
             <SliderContent className="text-center">
@@ -470,15 +470,15 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              <Link to="vendors">
+              {/* <Link to="vendors">
                 <VendorButtonImage src={VendorButton} />
-              </Link>
+              </Link> */}
             </SliderContent>
           </div>
           <div
             style={{
               background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747893/Landing%20Page%20Assets/SliderImage4_pjltmr.jpg') no-repeat center center`,
-              backgroundSize: "cover"
+              backgroundSize: "cover",
             }}
           >
             <SliderContent className="text-center">
@@ -511,9 +511,9 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              <Link to="vendors">
+              {/* <Link to="vendors">
                 <VendorButtonImage src={VendorButton} />
-              </Link>
+              </Link> */}
             </SliderContent>
           </div>
         </Slider>
@@ -524,15 +524,20 @@ export default function Hero() {
             <SliderContentSmallScreens>
               <div>
                 <MediaQuery maxDeviceWidth={425}>
-                  <iframe
+                  {/* <iframe
                     title="Chopbarh Video"
                     width="300"
                     height="250"
                     src="https://www.youtube.com/embed/gBeXOvNpR3c"
-                  ></iframe>
+                  ></iframe> */}
+                  <HeadingTwoFirst className="hero__title">
+                    COVID-19
+                    <br />
+                    &#8358;10 Billion Intervention Funds Available
+                  </HeadingTwoFirst>
                 </MediaQuery>
-                <HeadingTwoFirst className="hero__title">
-                  Play and Chop
+                <HeadingTwoFirst className="hero__title mt-4">
+                  DOWNLOAD NOW
                 </HeadingTwoFirst>
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
@@ -557,13 +562,13 @@ export default function Hero() {
                       />
                     </a>
                   </span>
-                  <span>
+                  {/* <span>
                     <ParagraphOne
                       style={{ textTransform: "uppercase", fontWeight: "bold" }}
                     >
                       Download now and get &#8358;100 free
                     </ParagraphOne>
-                  </span>
+                  </span> */}
                   <span style={{ cursor: "pointer" }}>
                     <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
                       <AndroidInstructionImage
@@ -573,9 +578,9 @@ export default function Hero() {
                       />
                     </a>
                   </span>
-                  <Link to="vendors">
+                  {/* <Link to="vendors">
                     <VendorButtonImageSmall src={VendorButton} />
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </SliderContentSmallScreens>
