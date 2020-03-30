@@ -37,9 +37,9 @@ export default function ContactUs() {
             height="30"
           />
         </ImageContainer>
+        <p>0814-597-1022</p>
+        <p>0704-388-8516</p>
         <p>0903-662-3253</p>
-        {/* <p>0903-662-3253</p>
-        <p>0903-662-3253</p> */}
       </ContactUsWrapper>
     </>
   );
