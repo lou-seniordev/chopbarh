@@ -68,20 +68,34 @@ export default function Header({ transparent }) {
           <Logo />
         </Link>
         <MediaQuery maxDeviceWidth={991}>
-          <p
-            className="nav-item mt-4"
-            style={{
-              color: "#fff",
-              textTransform: "uppercase",
-              fontSize: "1.4rem",
-              marginLeft: "-1.2rem"
-            }}
-          >
-            Contact Us: 0903-662-3253
-          </p>
+          <div>
+            <p
+              className="nav-item mt-4"
+              style={{
+                color: "#fff",
+                textTransform: "uppercase",
+                fontSize: "1.25rem",
+                marginLeft: "-1.2rem",
+              }}
+            >
+              Contact Us: 0903-662-3253
+            </p>
+            <p
+              className="nav-item"
+              style={{
+                color: "#fff",
+                textTransform: "uppercase",
+                fontSize: "1.25rem",
+                marginLeft: "-1.2rem",
+                marginTop: "-1rem",
+              }}
+            >
+              Contact Us: 0903-662-3253
+            </p>
+          </div>
         </MediaQuery>
         <button
-          className="navbar-toggler custom-toggler"
+          className="navbar-toggler custom-toggler mt-3"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
@@ -100,7 +114,7 @@ export default function Header({ transparent }) {
                   color: "#fff",
                   textTransform: "uppercase",
                   fontSize: "1.4rem",
-                  marginLeft: "2.5rem"
+                  marginLeft: "2.5rem",
                 }}
               >
                 Contact Us: 0903-662-3253
