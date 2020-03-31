@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
@@ -67,7 +67,7 @@ class DepositSmallScreens extends Component {
               )}
               {this.props.playerData.PlayerStatus !== 2 && (
                 <>
-                  <AccordionItem>
+                  {/* <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>
                         Instant Bank Transfer
@@ -76,16 +76,16 @@ class DepositSmallScreens extends Component {
                     <AccordionItemPanel>
                       <InstantPayment />
                     </AccordionItemPanel>
-                  </AccordionItem>
+                  </AccordionItem> */}
 
-                  <AccordionItem>
+                  {/* <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>Bank Card</AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       <RavePayment />
                     </AccordionItemPanel>
-                  </AccordionItem>
+                  </AccordionItem> */}
 
                   <AccordionItem>
                     <AccordionItemHeading>
@@ -104,16 +104,16 @@ class DepositSmallScreens extends Component {
                       <Quickteller />
                     </AccordionItemPanel>
                   </AccordionItem>
-                  <AccordionItem>
+                  {/* <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>Paystack</AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       <Card />
                     </AccordionItemPanel>
-                  </AccordionItem>
+                  </AccordionItem> */}
 
-                  <AccordionItem>
+                  {/* <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>
                         Zenith, UBA, Sterling, ALAT by Wema
@@ -122,7 +122,7 @@ class DepositSmallScreens extends Component {
                     <AccordionItemPanel>
                       <BankCharge />
                     </AccordionItemPanel>
-                  </AccordionItem>
+                  </AccordionItem> */}
                   <AccordionItem>
                     <AccordionItemHeading>
                       <AccordionItemButton>ATM Machine</AccordionItemButton>
@@ -152,7 +152,7 @@ class DepositSmallScreens extends Component {
 
 const mapStateToProps = state => ({
   playerData: state.player.playerData,
-  loading: state.player.loading
+  loading: state.player.loading,
 });
 
 export default connect(mapStateToProps)(DepositSmallScreens);
