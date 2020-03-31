@@ -178,7 +178,7 @@ class AgentsWithdrawal extends Component {
   render() {
     return (
       <>
-        {/* {<div className="mb-4">
+        <div className="mb-4">
           <h5>
             <strong>Daily Transfer Limit:</strong> &#8358;
             {new Intl.NumberFormat().format(20000)}
@@ -220,8 +220,8 @@ class AgentsWithdrawal extends Component {
           <FormSubmitButton type="submit" className="mr-2">
             <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </FormSubmitButton>
-        </FormWrapper>} */}
-        <p className="text-center">Service currently unavailable</p>
+        </FormWrapper>
+        {/* <p className="text-center">Service currently unavailable</p> */}
       </>
     );
   }
