@@ -6,7 +6,7 @@ import {
   Form,
   FormItem,
   HalfColumn,
-  FormSubmitButton
+  FormSubmitButton,
 } from "../../../styles/CardCharge";
 import firebase, { firestore } from "../../../../firebase";
 
@@ -20,7 +20,7 @@ class AgentsWithdrawal extends Component {
     loading: false,
     phone_number: "",
     amount: "",
-    currentTransferAmount: 0
+    currentTransferAmount: 0,
   };
 
   componentDidMount = async () => {
@@ -139,13 +139,13 @@ class AgentsWithdrawal extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
+            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
           },
           body: JSON.stringify({
             amount: +this.state.amount,
             phone_number: this.state.phone_number,
-            playerId: this.props.playerData.PlayerID
-          })
+            playerId: this.props.playerData.PlayerID,
+          }),
         }
       );
 
@@ -159,7 +159,7 @@ class AgentsWithdrawal extends Component {
             playerId: this.props.playerData.PlayerID,
             at: Date.now(),
             time: firebase.firestore.FieldValue.serverTimestamp(),
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
           });
         } catch (err) {}
 
@@ -178,7 +178,7 @@ class AgentsWithdrawal extends Component {
   render() {
     return (
       <>
-        <div className="mb-4">
+        {/* {<div className="mb-4">
           <h5>
             <strong>Daily Transfer Limit:</strong> &#8358;
             {new Intl.NumberFormat().format(20000)}
@@ -220,15 +220,15 @@ class AgentsWithdrawal extends Component {
           <FormSubmitButton type="submit" className="mr-2">
             <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </FormSubmitButton>
-        </FormWrapper>
-        {/* <p className="text-center">Service currently unavailable</p> */}
+        </FormWrapper>} */}
+        <p className="text-center">Service currently unavailable</p>
       </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 export default connect(mapStateToProps)(AgentsWithdrawal);
