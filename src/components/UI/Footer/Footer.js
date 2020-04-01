@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Phone } from "grommet-icons";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 import breakpoint from "../../styles/breakpoints";
+import WhatsAppIcon from "../../assets/svg/WhatsAppIcon.svg";
 
 /* 
 
@@ -92,6 +94,7 @@ export default function Footer() {
             {/* <p>
               <span>Responsible Gaming</span>
             </p> */}
+
             <p>
               <Link to="vendors">
                 <span>Become a Chopbarh Agent</span>
@@ -135,6 +138,20 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             {/* <p>Telephone: 0903-662-3253</p> */}
+            <div
+              style={{ display: "flex", cursor: "pointer" }}
+              className="mb-3"
+            >
+              <Link to="contacts">
+                <Phone size="25px" color="#dddddd" />
+                <img
+                  src={WhatsAppIcon}
+                  alt="Whatsapp Icon"
+                  className="ml-3"
+                  height="25"
+                />
+              </Link>
+            </div>
             <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
