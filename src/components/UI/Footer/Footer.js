@@ -70,6 +70,8 @@ const FooterLinkContainer = styled.div`
   }
 `;
 
+const ContactBox = styled.div``;
+
 export default function Footer() {
   return (
     <FooterWrapper className="footer">
@@ -138,10 +140,7 @@ export default function Footer() {
           </FooterLinkHeader>
           <FooterLinkContainer>
             {/* <p>Telephone: 0903-662-3253</p> */}
-            <div
-              style={{ display: "flex", cursor: "pointer" }}
-              className="mb-3"
-            >
+            <ContactBox className="mb-3">
               <Link to="contacts">
                 <Phone size="25px" color="#dddddd" />
                 <img
@@ -151,7 +150,7 @@ export default function Footer() {
                   height="25"
                 />
               </Link>
-            </div>
+            </ContactBox>
             <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
