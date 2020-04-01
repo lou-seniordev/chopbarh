@@ -8,6 +8,7 @@ import HowItWorks from "./HowItWorks/HowItWorks";
 // import Testimonials from "./Testimonials/Testimonials";
 import GameList from "./GameList/GameList";
 import Footer from "../UI/Footer/Footer";
+import Covid from "./COVID/Covid";
 
 export default function Home() {
   return (
@@ -17,9 +18,11 @@ export default function Home() {
       <Hero />
       <MediaQuery minDeviceWidth={425}>
         <HowItWorks />
+        <Covid />
         <GameList />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={425}>
+        <Covid />
         <GameList />
         <HowItWorks />
       </MediaQuery>
