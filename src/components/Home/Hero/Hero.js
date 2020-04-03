@@ -319,7 +319,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                  <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -365,7 +365,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                  <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -411,7 +411,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                  <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -452,7 +452,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                  <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -493,7 +493,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                  <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -557,7 +557,7 @@ export default function Hero() {
                     </a>
                   </span>
                   <span style={{ cursor: "pointer" }}>
-                    <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
+                    <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
                       <Image
                         src={PlayStoreButton}
                         className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3 mb-2"

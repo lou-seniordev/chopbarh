@@ -9,19 +9,19 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import {
   FormItem,
   FormSubmitButton,
   ExistingCardForm,
   ExistingCardFormItem,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchRaveCardData,
-  removeRaveCard
+  removeRaveCard,
 } from "../../../../store/actions/raveCardActions";
 import CreditCard from "./CreditCard/CreditCard";
 
@@ -41,7 +41,7 @@ class RavePayment extends Component {
     removeRaveCardModal: false,
     authAmount: "",
     last4Digits: "",
-    paying: false
+    paying: false,
   };
 
   // key: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
@@ -80,7 +80,7 @@ class RavePayment extends Component {
 
   toggleRemoveCard = () => {
     this.setState({
-      removeRaveCardModal: !this.state.removeRaveCardModal
+      removeRaveCardModal: !this.state.removeRaveCardModal,
     });
   };
 
@@ -160,7 +160,7 @@ class RavePayment extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY
+            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
           },
           body: JSON.stringify({
             amount: +this.state.authAmount,
@@ -168,8 +168,8 @@ class RavePayment extends Component {
             token: raveCardObject[0].auth_code,
             reference: `${this.props.playerData.PhoneNum}-${reference}`,
             email: raveCardObject[0].email,
-            playerId: this.props.playerData.PlayerID
-          })
+            playerId: this.props.playerData.PlayerID,
+          }),
         }
       );
 
@@ -213,7 +213,7 @@ class RavePayment extends Component {
       status: "--",
       refId: `${this.props.playerData.PhoneNum}-${reference}`,
       gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -223,11 +223,8 @@ class RavePayment extends Component {
       customer_email:
         this.props.playerData.Email ||
         `${this.props.playerData.PhoneNum}@mail.com`,
-      customer_firstname:
-        this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
-      customer_lastname:
-        this.props.playerData.FullName.split(" ")[1] ||
-        `${this.props.playerData.PhoneNum}`,
+      customer_firstname: "Chopbarh",
+      customer_lastname: `${this.props.playerData.PhoneNum}`,
       amount: Number(this.state.amount),
       customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
@@ -244,11 +241,11 @@ class RavePayment extends Component {
           await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              ref: flw_ref
-            })
+              ref: flw_ref,
+            }),
           });
           // redirect to a success page
           // window.open("https://www.chopbarh.com/user");
@@ -258,7 +255,7 @@ class RavePayment extends Component {
           // window.open("https://www.chopbarh.com/user");
           // window.open("localhost:3000/user");
         }
-      }
+      },
     });
   };
 
@@ -274,7 +271,7 @@ class RavePayment extends Component {
           toggle={this.toggleRemoveCard}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -450,13 +447,13 @@ class RavePayment extends Component {
 const mapStateToProps = state => ({
   playerData: state.player.playerData,
   raveCard: state.raveCard.raveCard,
-  loading: state.raveCard.loading
+  loading: state.raveCard.loading,
 });
 
 const mapDispatchToProps = {
   setDepositHistory,
   fetchRaveCardData,
-  removeRaveCard
+  removeRaveCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RavePayment);

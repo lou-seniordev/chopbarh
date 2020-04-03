@@ -140,31 +140,31 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
     });
   } catch (err) {}
 
-  try {
-    await fetch(
-      "https://backend.chopbarh.com/api/deposits",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "api-key": process.env.REACT_APP_API_KEY
-        },
-        body: JSON.stringify({
-          amount: payload.amount,
-          channel: payload.channel,
-          customer_id: getState().player.playerData.PhoneNum,
-          deposit_date: payload.transaction_date,
-          gameTransactionId: "N/A",
-          playerId: getState().auth.id,
-          refId: payload.refId,
-          gateway: payload.gateway,
-          status: "PENDING",
-          paid_at: Date.now(),
-          transaction_fees: payload.fees,
-          transaction_reference: payload.reference
-        })
-      }
-    );
-  } catch (err) {}
+  // try {
+  //   await fetch(
+  //     "https://backend.chopbarh.com/api/deposits",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "api-key": process.env.REACT_APP_API_KEY
+  //       },
+  //       body: JSON.stringify({
+  //         amount: payload.amount,
+  //         channel: payload.channel,
+  //         customer_id: getState().player.playerData.PhoneNum,
+  //         deposit_date: payload.transaction_date,
+  //         gameTransactionId: "N/A",
+  //         playerId: getState().auth.id,
+  //         refId: payload.refId,
+  //         gateway: payload.gateway,
+  //         status: "PENDING",
+  //         paid_at: Date.now(),
+  //         transaction_fees: payload.fees,
+  //         transaction_reference: payload.reference
+  //       })
+  //     }
+  //   );
+  // } catch (err) {}
 };
