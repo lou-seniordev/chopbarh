@@ -159,11 +159,11 @@ const SliderImage = styled.img`
 const SliderContent = styled.div`
   position: absolute;
   top: 50%;
-  left: ${props => (props.first ? "35%" : "50%")};
+  left: ${(props) => (props.first ? "35%" : "50%")};
   z-index: 2000;
   transform: translate(-50%, -50%);
 
-  margin-left: ${props => (props.first ? "2rem" : "0")};
+  margin-left: ${(props) => (props.first ? "2rem" : "0")};
 
   @media only screen and (max-width: ${breakPoints.large}) {
     left: 50%;
@@ -534,9 +534,9 @@ export default function Hero() {
                     className="hero__title"
                     style={{ color: "#ebc709" }}
                   >
-                    COVID-19
+                    UP TO
                     <br />
-                    &#8358;10 Billion Intervention Funds Available
+                    &#8358;10 Billion Registration Funds Available
                   </HeadingTwoFirst>
                 </MediaQuery>
                 <HeadingTwoFirst className="hero__title mt-4">

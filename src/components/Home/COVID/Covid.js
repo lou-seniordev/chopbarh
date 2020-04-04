@@ -27,7 +27,7 @@ export default function Covid() {
     <CovidWrapper>
       <div className="container">
         <HeadingThree className="mb-5">
-          Covid-19 Funds Instructions
+          Registration Funds Instructions
         </HeadingThree>
         <div className=" mb-5">
           <MediaQuery minDeviceWidth={426}>
