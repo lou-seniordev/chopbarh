@@ -35,7 +35,7 @@ export default function Covid() {
               title="Covid-19 Instructions"
               width="400"
               height="315"
-              src="https://www.youtube.com/embed/o9xizsDRerw"
+              src="https://www.youtube.com/embed/uRqztOHSe1M"
             ></iframe>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={425}>
@@ -43,7 +43,7 @@ export default function Covid() {
               title="Covid-19 Instructions"
               width="220"
               height="215"
-              src="https://www.youtube.com/embed/o9xizsDRerw"
+              src="https://www.youtube.com/embed/uRqztOHSe1M"
             ></iframe>
           </MediaQuery>
         </div>
