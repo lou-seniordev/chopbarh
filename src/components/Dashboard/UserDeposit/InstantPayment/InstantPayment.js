@@ -33,7 +33,7 @@ class InstantPayment extends Component {
     this.props.fetchInstantPaymentAccountData();
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (this.props !== prevProps) {
       this.setState({ fetching: false });
     }
@@ -78,10 +78,8 @@ class InstantPayment extends Component {
       is_permanent: true,
       txRef: `${this.props.playerData.PhoneNum}-${this.getReference()}`,
       phonenumber: this.props.playerData.PhoneNum,
-      firstname: this.props.playerData.FullName.split(" ")[0],
-      lastname: this.props.playerData.FullName.split(" ")[1]
-        ? this.props.playerData.FullName.split(" ")[1]
-        : `${this.props.playerData.PhoneNum}`,
+      firstname: `${this.props.playerData.PhoneNum}`,
+      lastname: `${this.props.playerData.PhoneNum}`,
     };
 
     fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
@@ -91,8 +89,8 @@ class InstantPayment extends Component {
       },
       body: JSON.stringify(chargeData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Display the result in Modal
         this.setState({
           successModal: true,
@@ -106,7 +104,7 @@ class InstantPayment extends Component {
           bank_name: data.data.bankname,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         // Display error modal
         this.setState({
           loading: false,
@@ -123,7 +121,7 @@ class InstantPayment extends Component {
     this.props.removeInstantPaymentAccount();
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     if (!this.formIsValid(this.state)) {
@@ -155,8 +153,8 @@ class InstantPayment extends Component {
       },
       body: JSON.stringify(chargeData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Display the result in Modal
         this.setState({
           successModal: true,
@@ -169,7 +167,7 @@ class InstantPayment extends Component {
           account_number: data.data.accountnumber,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         // Display error modal
         this.setState({ loading: false, errorModal: true });
       });
@@ -209,9 +207,12 @@ class InstantPayment extends Component {
                     Funds Will be Automatically credited to your chopbarh
                     account within 2-5 minutes of successful deposit
                   </p>
-                  {/* <Button onClick={this.deleteAccount} disabled={this.state.removing}>
-          {this.state.removing ? "Deleting..." : "Delete Account"}
-         </Button> */}
+                  {/* <Button
+                    onClick={this.deleteAccount}
+                    disabled={this.state.removing}
+                  >
+                    {this.state.removing ? "Deleting..." : "Delete Account"}
+                  </Button> */}
                 </div>
               </>
             ) : (
@@ -291,7 +292,7 @@ class InstantPayment extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playerData: state.player.playerData,
   account: state.instantPayment.account,
   error: state.instantPayment.error,

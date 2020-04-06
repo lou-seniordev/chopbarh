@@ -9,7 +9,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
@@ -19,7 +19,7 @@ import {
   ExistingCardForm,
   ExistingCardFormItem,
   FormSubmitButton,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
@@ -29,13 +29,13 @@ import {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
   setCreditCardData,
   setCreditCardCVV,
-  removeCreditCard
+  removeCreditCard,
 } from "../../../../store/actions/creditCardActions";
 // import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
@@ -49,7 +49,7 @@ function referenceId() {
   let text = "";
   let possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 15; i++)
+  for (let i = 0; i < 20; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
@@ -71,7 +71,7 @@ class Card extends Component {
     popoverOpen: false,
     modalOpen: false,
     paying: false,
-    removeCardModal: false
+    removeCardModal: false,
   };
 
   componentDidMount = () => {
@@ -82,7 +82,7 @@ class Card extends Component {
     // }
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (this.props !== prevProps) {
       try {
         this.props.creditCard.length &&
@@ -95,7 +95,7 @@ class Card extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleRadioChange = value => {
+  handleRadioChange = (value) => {
     this.setState({ selectedValue: value, authCVV: "" });
   };
 
@@ -105,7 +105,7 @@ class Card extends Component {
 
   toggleRemoveCard = () => {
     this.setState({
-      removeCardModal: !this.state.removeCardModal
+      removeCardModal: !this.state.removeCardModal,
     });
   };
 
@@ -129,7 +129,7 @@ class Card extends Component {
     return true;
   };
 
-  handleAuthSubmit = async event => {
+  handleAuthSubmit = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -160,7 +160,7 @@ class Card extends Component {
     this.setState({ paying: true, loading: false });
 
     const creditCardObject = this.props.creditCard.filter(
-      card => card.auth_code === this.state.selectedValue
+      (card) => card.auth_code === this.state.selectedValue
     );
 
     if (creditCardObject[0].cvv !== this.state.authCVV) {
@@ -181,7 +181,7 @@ class Card extends Component {
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -196,8 +196,8 @@ class Card extends Component {
       reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
-        refId
-      }
+        refId,
+      },
     };
 
     try {
@@ -208,9 +208,9 @@ class Card extends Component {
           mode: "cors",
           headers: {
             Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
       const data = await response.json();
@@ -219,7 +219,7 @@ class Card extends Component {
         authAmount: "",
         authCVV: "",
         modalOpen: false,
-        paying: false
+        paying: false,
       });
 
       if (data.data.status === "success") {
@@ -233,7 +233,7 @@ class Card extends Component {
     }
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -267,7 +267,7 @@ class Card extends Component {
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -285,14 +285,14 @@ class Card extends Component {
         number: this.state.card,
         cvv: this.state.cvv,
         expiry_month: cardExpirationData[0],
-        expiry_year: year
+        expiry_year: year,
       },
       reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         refId,
-        cvv: this.state.cvv
-      }
+        cvv: this.state.cvv,
+      },
     };
 
     this.props.setCreditCardCVV(this.state.cvv);
@@ -303,9 +303,9 @@ class Card extends Component {
         mode: "cors",
         headers: {
           Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
       const data = await response.json();
 
@@ -316,7 +316,7 @@ class Card extends Component {
         expiry: "",
         cvv: "",
         modalOpen: false,
-        paying: false
+        paying: false,
       });
 
       if (data.data.status === "send_otp") {
@@ -349,7 +349,7 @@ class Card extends Component {
           toggle={this.toggleRemoveCard}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -375,7 +375,7 @@ class Card extends Component {
           toggle={this.props.closePinModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -387,7 +387,7 @@ class Card extends Component {
           toggle={this.props.closeOTPModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -399,7 +399,7 @@ class Card extends Component {
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody
@@ -734,14 +734,14 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
   isDataFetched: state.creditCard.fetched,
   removingCard: state.creditCard.removing,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {
@@ -754,7 +754,7 @@ const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
 };
 
 export default withRouter(
