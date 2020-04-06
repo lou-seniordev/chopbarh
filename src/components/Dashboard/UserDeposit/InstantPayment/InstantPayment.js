@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner } from "reactstrap";
+import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import { FormSubmitButton } from "../../../styles/CardCharge";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
@@ -207,12 +207,12 @@ class InstantPayment extends Component {
                     Funds Will be Automatically credited to your chopbarh
                     account within 2-5 minutes of successful deposit
                   </p>
-                  {/* <Button
+                  <Button
                     onClick={this.deleteAccount}
                     disabled={this.state.removing}
                   >
-                    {this.state.removing ? "Deleting..." : "Delete Account"}
-                  </Button> */}
+                    {this.state.removing ? "Deleting..." : "X"}
+                  </Button>
                 </div>
               </>
             ) : (
