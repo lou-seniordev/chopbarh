@@ -59,7 +59,7 @@ function UpdateApplication() {
               </a>
             </p>
             <p>
-              <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
+              <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_15_0_live.apk?alt=media&token=af74316e-ee8d-4e55-97f8-a28927053ff5">
                 <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>
@@ -96,7 +96,7 @@ function UpdateApplication() {
               </a>
             </p>
             <p>
-              <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_14_0_live.apk?alt=media&token=286f898c-7046-403d-a968-3fe5001585b7">
+              <a href="https://firebasestorage.googleapis.com/v0/b/chopbarh-website.appspot.com/o/ChopBarh_2_15_0_live.apk?alt=media&token=af74316e-ee8d-4e55-97f8-a28927053ff5">
                 <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>
