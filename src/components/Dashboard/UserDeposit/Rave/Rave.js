@@ -61,7 +61,7 @@ class RavePayment extends Component {
     return text;
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (this.props !== prevProps) {
       try {
         this.props.raveCard.length &&
@@ -74,7 +74,7 @@ class RavePayment extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleRadioChange = value => {
+  handleRadioChange = (value) => {
     this.setState({ selectedValue: value, last4Digits: "" });
   };
 
@@ -96,7 +96,7 @@ class RavePayment extends Component {
     return true;
   };
 
-  handleAuthSubmit = async event => {
+  handleAuthSubmit = async (event) => {
     event.preventDefault();
 
     const { authAmount, selectedValue } = this.state;
@@ -120,7 +120,7 @@ class RavePayment extends Component {
     }
 
     const raveCardObject = this.props.raveCard.filter(
-      card => card.auth_code === this.state.selectedValue
+      (card) => card.auth_code === this.state.selectedValue
     );
 
     // console.log(raveCardObject);
@@ -187,7 +187,7 @@ class RavePayment extends Component {
     // Fetch Flutterwave here
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     if (!this.formIsValid(this.state)) {
@@ -209,7 +209,7 @@ class RavePayment extends Component {
       channel: "Card",
       transaction_date: new Date().toISOString(),
       fees: "0",
-      reference: "--",
+      reference: "N/A",
       status: "--",
       refId: `${this.props.playerData.PhoneNum}-${reference}`,
       gateway: "Flutterwave",
@@ -230,8 +230,8 @@ class RavePayment extends Component {
       country: "NG",
       currency: "NGN",
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
-      onclose: function() {},
-      callback: async response => {
+      onclose: function () {},
+      callback: async (response) => {
         let flw_ref = response.tx.txRef;
         if (
           response.tx.chargeResponseCode === "00" ||
@@ -444,7 +444,7 @@ class RavePayment extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playerData: state.player.playerData,
   raveCard: state.raveCard.raveCard,
   loading: state.raveCard.loading,

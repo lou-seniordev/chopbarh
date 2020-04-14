@@ -75,10 +75,10 @@ class AccountNumber extends Component {
         },
       }
     )
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const { Banks } = data.data;
-        const bankList = Banks.filter(bank => bank.Code !== "090175");
+        const bankList = Banks.filter((bank) => bank.Code !== "090175");
 
         this.setState({
           bankList,
@@ -86,10 +86,10 @@ class AccountNumber extends Component {
           bank: data.data.Banks[0].Code,
         });
       })
-      .catch(err => this.setState({ error: err, dataLoading: false }));
+      .catch((err) => this.setState({ error: err, dataLoading: false }));
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (this.props !== prevProps) {
       this.props.withdrawalAccount.length &&
         this.setState({
@@ -112,7 +112,7 @@ class AccountNumber extends Component {
     this.setState({ passwordModal: !this.state.passwordModal, loading: false });
   };
 
-  handleRadioChange = value => {
+  handleRadioChange = (value) => {
     this.setState({ selectedValue: value });
   };
 
@@ -138,7 +138,7 @@ class AccountNumber extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handlePasswordInputValidation = event => {
+  handlePasswordInputValidation = (event) => {
     event.preventDefault();
 
     if (this.state.password.length === 4) {
@@ -175,7 +175,7 @@ class AccountNumber extends Component {
     this.setState({ paying: true, loading: false });
 
     const bankName = this.state.bankList.filter(
-      bank => bank.Code === this.state.bank
+      (bank) => bank.Code === this.state.bank
     );
 
     try {
@@ -249,7 +249,7 @@ class AccountNumber extends Component {
     this.setState({ paying: true, loading: false });
 
     const bankInformation = this.props.withdrawalAccount.filter(
-      account => account.account_number === this.state.selectedValue
+      (account) => account.account_number === this.state.selectedValue
     );
 
     if (bankInformation[0].code === "090175") {
@@ -320,7 +320,7 @@ class AccountNumber extends Component {
     }
   };
 
-  handleAuthSubmit = event => {
+  handleAuthSubmit = (event) => {
     event.preventDefault();
 
     if (this.props.playerData.PlayerStatus === 0) {
@@ -374,7 +374,7 @@ class AccountNumber extends Component {
     });
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     if (this.props.playerData.PlayerStatus === 0) {
@@ -436,8 +436,8 @@ class AccountNumber extends Component {
       },
       body: JSON.stringify(postData),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.data.data.accountname) {
           this.setState({
             account_confirmed: true,
@@ -451,7 +451,7 @@ class AccountNumber extends Component {
           );
         }
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({ loading: false });
         toast.error("Something went wrong");
       });
@@ -642,7 +642,7 @@ class AccountNumber extends Component {
                           <AccordionItemPanel>
                             <ExistingCardForm
                               style={{ margin: "4rem 0" }}
-                              onSubmit={event =>
+                              onSubmit={(event) =>
                                 this.handleAuthSubmit(
                                   event,
                                   this.state.bankName
@@ -726,7 +726,7 @@ class AccountNumber extends Component {
                                       onChange={this.handleInputChange}
                                       required
                                     >
-                                      {this.state.bankList.map(bank => (
+                                      {this.state.bankList.map((bank) => (
                                         <option key={bank.Id} value={bank.Code}>
                                           {bank.Name}
                                         </option>
@@ -804,7 +804,7 @@ class AccountNumber extends Component {
                                   onChange={this.handleInputChange}
                                   required
                                 >
-                                  {this.state.bankList.map(bank => (
+                                  {this.state.bankList.map((bank) => (
                                     <option key={bank.Id} value={bank.Code}>
                                       {bank.Name}
                                     </option>
@@ -886,7 +886,7 @@ class AccountNumber extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playerData: state.player.playerData,
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   loading: state.withdrawalAccount.loading,

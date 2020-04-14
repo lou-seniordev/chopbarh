@@ -35,7 +35,7 @@ class AgentsWithdrawal extends Component {
         .where("at", ">=", timestamp)
         .get();
 
-      let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      let data = snapshots.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
       let totalTransferredSoFar = data.reduce(
         (acc, cur) => (acc += cur.amount),
@@ -64,7 +64,7 @@ class AgentsWithdrawal extends Component {
     return true;
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     if (this.props.playerData.PlayerStatus === 0) {
@@ -227,7 +227,7 @@ class AgentsWithdrawal extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playerData: state.player.playerData,
 });
 

@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
@@ -18,7 +18,7 @@ import {
   FormSubmitButton,
   ExistingCardForm,
   ExistingCardFormItem,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
@@ -28,11 +28,11 @@ import {
   openBirthdayModal,
   closeBirthdayModal,
   openPhoneModal,
-  closePhoneModal
+  closePhoneModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchBankAccountData,
-  removeBankAccount
+  removeBankAccount,
 } from "../../../../store/actions/bankAccountActions";
 import AccountUI from "./AccountUI/AccountUI";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
@@ -45,7 +45,7 @@ function referenceId() {
   let text = "";
   let possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 15; i++)
+  for (let i = 0; i < 20; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
@@ -64,7 +64,7 @@ class BankCharge extends Component {
     selectedValue: null,
     modalOpen: false,
     paying: false,
-    removeAccountModal: false
+    removeAccountModal: false,
   };
 
   componentDidMount = () => {
@@ -73,27 +73,27 @@ class BankCharge extends Component {
     fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
       headers: {
         Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({
           bankList: data.data,
           dataLoading: false,
-          bank: data.data[0].code
+          bank: data.data[0].code,
         });
       })
-      .catch(err => this.setState({ dataLoading: false }));
+      .catch((err) => this.setState({ dataLoading: false }));
   };
 
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = (prevProps) => {
     if (this.props !== prevProps) {
       try {
         this.props.bankAccount.length &&
           this.setState({
             selectedValue: this.props.bankAccount[0].auth_code,
-            bankName: this.props.bankAccount[0].bank
+            bankName: this.props.bankAccount[0].bank,
           });
       } catch (err) {}
     }
@@ -103,7 +103,7 @@ class BankCharge extends Component {
     this.setState({ modalOpen: !this.state.modalOpen, loading: false });
   };
 
-  handleRadioChange = value => {
+  handleRadioChange = (value) => {
     this.setState({ selectedValue: value });
   };
 
@@ -117,7 +117,7 @@ class BankCharge extends Component {
 
   toggleRemoveAccount = () => {
     this.setState({
-      removeAccountModal: !this.state.removeAccountModal
+      removeAccountModal: !this.state.removeAccountModal,
     });
   };
 
@@ -137,7 +137,7 @@ class BankCharge extends Component {
     return true;
   };
 
-  handleAuthSubmit = async event => {
+  handleAuthSubmit = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -160,7 +160,7 @@ class BankCharge extends Component {
     this.setState({ paying: true });
 
     const bankAccountObject = this.props.bankAccount.filter(
-      account => account.auth_code === this.state.selectedValue
+      (account) => account.auth_code === this.state.selectedValue
     );
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
@@ -171,15 +171,15 @@ class BankCharge extends Component {
       amount: this.state.authAmount * 100,
       bank: {
         code: bankAccountObject[0].bank_code,
-        account_number: bankAccountObject[0].account_number
+        account_number: bankAccountObject[0].account_number,
       },
       reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: bankAccountObject[0].bank_code,
         account_number: bankAccountObject[0].account_number,
-        refId
-      }
+        refId,
+      },
     };
 
     const historyObject = {
@@ -191,7 +191,7 @@ class BankCharge extends Component {
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -202,16 +202,16 @@ class BankCharge extends Component {
         mode: "cors",
         headers: {
           Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
       const data = await response.json();
 
       this.setState({
         loading: false,
         authAmount: "",
-        paying: false
+        paying: false,
       });
 
       if (data.data.status === "send_otp") {
@@ -238,7 +238,7 @@ class BankCharge extends Component {
     }
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -268,15 +268,15 @@ class BankCharge extends Component {
       amount: this.state.amount * 100,
       bank: {
         code: this.state.bank,
-        account_number: this.state.account_number
+        account_number: this.state.account_number,
       },
       reference,
       metadata: {
         phone: this.props.playerData.PhoneNum,
         bank_code: this.state.bank,
         account_number: this.state.account_number,
-        refId
-      }
+        refId,
+      },
     };
 
     const historyObject = {
@@ -288,7 +288,7 @@ class BankCharge extends Component {
       status: "--",
       refId,
       gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
+      made_by: this.props.playerData.PhoneNum,
     };
 
     this.props.setDepositHistory(historyObject);
@@ -299,9 +299,9 @@ class BankCharge extends Component {
         mode: "cors",
         headers: {
           Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
       const data = await response.json();
 
@@ -310,7 +310,7 @@ class BankCharge extends Component {
         amount: "",
         bank: "",
         account_number: "",
-        paying: false
+        paying: false,
       });
 
       if (data.data.status === "send_otp") {
@@ -349,7 +349,7 @@ class BankCharge extends Component {
           toggle={this.toggleRemoveAccount}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -375,7 +375,7 @@ class BankCharge extends Component {
           toggle={this.props.closeOTPModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -387,7 +387,7 @@ class BankCharge extends Component {
           toggle={this.props.closeBirthdayModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -399,7 +399,7 @@ class BankCharge extends Component {
           toggle={this.props.closePhoneModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -411,7 +411,7 @@ class BankCharge extends Component {
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody
@@ -534,7 +534,7 @@ class BankCharge extends Component {
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       <ExistingCardForm
-                        onSubmit={event =>
+                        onSubmit={(event) =>
                           this.handleAuthSubmit(event, this.state.bankName)
                         }
                       >
@@ -607,7 +607,7 @@ class BankCharge extends Component {
                               onChange={this.handleInputChange}
                               required
                             >
-                              {this.state.bankList.map(bank => (
+                              {this.state.bankList.map((bank) => (
                                 <option key={bank.id} value={bank.code}>
                                   {bank.name}
                                 </option>
@@ -671,7 +671,7 @@ class BankCharge extends Component {
                         onChange={this.handleInputChange}
                         required
                       >
-                        {this.state.bankList.map(bank => (
+                        {this.state.bankList.map((bank) => (
                           <option key={bank.id} value={bank.code}>
                             {bank.name}
                           </option>
@@ -734,14 +734,14 @@ class BankCharge extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   otpModal: state.modal.submitOTPModal,
   phoneModal: state.modal.submitPhoneModal,
   birthdayModal: state.modal.submitBirthdayModal,
   bankAccount: state.bankAccount.bankAccount,
   loading: state.bankAccount.loading,
   removingAccount: state.bankAccount.removing,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {
@@ -754,7 +754,7 @@ const mapDispatchToProps = {
   openBirthdayModal,
   openPhoneModal,
   closeBirthdayModal,
-  closePhoneModal
+  closePhoneModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(BankCharge));

@@ -2,16 +2,16 @@ import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
 export const fetchDepositHistoryInit = () => ({
-  type: actionType.FETCH_DEPOSIT_HISTORY_INIT
+  type: actionType.FETCH_DEPOSIT_HISTORY_INIT,
 });
 
-export const fetchDepositHistorySuccess = data => ({
+export const fetchDepositHistorySuccess = (data) => ({
   type: actionType.FETCH_DEPOSIT_HISTORY_SUCCESS,
-  data
+  data,
 });
 
 export const fetchDepositHistoryFail = () => ({
-  type: actionType.FETCH_DEPOSIT_HISTORY_FAIL
+  type: actionType.FETCH_DEPOSIT_HISTORY_FAIL,
 });
 
 export const fetchDepositHistoryData = () => async (dispatch, getState) => {
@@ -23,7 +23,7 @@ export const fetchDepositHistoryData = () => async (dispatch, getState) => {
       .where("id", "==", getState().auth.id)
       .get();
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     if (data.length) {
       dispatch(fetchDepositHistorySuccess(data[0].data.reverse()));
     } else {
@@ -35,19 +35,19 @@ export const fetchDepositHistoryData = () => async (dispatch, getState) => {
 };
 
 export const setDepositHistoryInit = () => ({
-  type: actionType.SET_DEPOSIT_HISTORY_INIT
+  type: actionType.SET_DEPOSIT_HISTORY_INIT,
 });
 
-export const setDepositHistorySuccess = data => ({
+export const setDepositHistorySuccess = (data) => ({
   type: actionType.SET_DEPOSIT_HISTORY_SUCCESS,
-  data
+  data,
 });
 
 export const setDepositHistoryFail = () => ({
-  type: actionType.SET_DEPOSIT_HISTORY_FAIL
+  type: actionType.SET_DEPOSIT_HISTORY_FAIL,
 });
 
-export const setDepositHistory = payload => async (dispatch, getState) => {
+export const setDepositHistory = (payload) => async (dispatch, getState) => {
   dispatch(setDepositHistoryInit());
 
   try {
@@ -56,9 +56,9 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       .where("id", "==", getState().auth.id)
       .get();
 
-    const deposits = snapshot.docs.map(doc => ({
+    const deposits = snapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
 
     if (deposits.length) {
@@ -76,8 +76,8 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
             status: "Pending",
             refId: payload.refId,
             gateway: payload.gateway,
-            customer_id: getState().player.playerData.PhoneNum
-          })
+            customer_id: getState().player.playerData.PhoneNum,
+          }),
         });
       dispatch(setDepositHistorySuccess(docRef));
     } else {
@@ -97,9 +97,9 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
               status: "Pending",
               refId: payload.refId,
               gateway: payload.gateway,
-              customer_id: getState().player.playerData.PhoneNum
-            }
-          ]
+              customer_id: getState().player.playerData.PhoneNum,
+            },
+          ],
         });
       dispatch(setDepositHistorySuccess(docRef));
     }
@@ -132,39 +132,36 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       customer_id: getState().player.playerData.PhoneNum,
       time: firebase.firestore.FieldValue.serverTimestamp(),
       playerId: getState().auth.id,
-      rowNum: countValue + 1
+      rowNum: countValue + 1,
     });
 
     docRef.update({
-      count: firebase.firestore.FieldValue.increment(1)
+      count: firebase.firestore.FieldValue.increment(1),
     });
   } catch (err) {}
 
-  // try {
-  //   await fetch(
-  //     "https://backend.chopbarh.com/api/deposits",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "api-key": process.env.REACT_APP_API_KEY
-  //       },
-  //       body: JSON.stringify({
-  //         amount: payload.amount,
-  //         channel: payload.channel,
-  //         customer_id: getState().player.playerData.PhoneNum,
-  //         deposit_date: payload.transaction_date,
-  //         gameTransactionId: "N/A",
-  //         playerId: getState().auth.id,
-  //         refId: payload.refId,
-  //         gateway: payload.gateway,
-  //         status: "PENDING",
-  //         paid_at: Date.now(),
-  //         transaction_fees: payload.fees,
-  //         transaction_reference: payload.reference
-  //       })
-  //     }
-  //   );
-  // } catch (err) {}
+  try {
+    await fetch("https://backend.chopbarh.com/api/deposits", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "api-key": process.env.REACT_APP_API_KEY_PROD,
+      },
+      body: JSON.stringify({
+        amount: payload.amount,
+        channel: payload.channel,
+        customer_id: getState().player.playerData.PhoneNum,
+        deposit_date: payload.transaction_date,
+        gameTransactionId: "N/A",
+        playerId: getState().auth.id,
+        refId: payload.refId,
+        gateway: payload.gateway,
+        status: "PENDING",
+        paid_at: Date.now(),
+        transaction_fees: payload.fees,
+        transaction_reference: payload.reference,
+      }),
+    });
+  } catch (err) {}
 };
