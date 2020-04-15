@@ -9,7 +9,7 @@ import Logo from "../Logo/Logo";
 import WhatsAppIcon from "../../assets/svg/WhatsAppIcon.svg";
 
 const HeaderWrapper = styled.div`
-  background: ${props =>
+  background: ${(props) =>
     props.transparent ? "transparent" : `${colors.colorGrayDarkOne}`};
   min-height: 6rem;
   padding: 0.4rem 2rem;
@@ -104,7 +104,7 @@ export default function Header({ transparent }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mr-auto">
             <MediaQuery minDeviceWidth={991}>
-              <p
+              {/* <p
                 className="nav-item mt-4"
                 style={{
                   color: "#fff",
@@ -114,7 +114,27 @@ export default function Header({ transparent }) {
                 }}
               >
                 Contact Us: 0903-662-3253
-              </p>
+              </p> */}
+              <Link to="contacts">
+                <div
+                  // className="nav-item mt-4"
+                  style={{
+                    color: "#fff",
+                    textTransform: "uppercase",
+                    fontSize: "1.35rem",
+                    marginLeft: "-1.2rem",
+                    border: "1px solid #aaa",
+                    padding: ".5rem",
+                    display: "flex",
+                    alignItems: "center",
+                    borderRadius: "2px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span className="mr-3">Contact Us:</span>
+                  <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
+                </div>
+              </Link>
             </MediaQuery>
           </ul>
           <ul className="navbar-nav">
