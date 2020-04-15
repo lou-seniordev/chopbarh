@@ -523,13 +523,13 @@ export default function Hero() {
           <div>
             <SliderContentSmallScreens>
               <div>
-                <MediaQuery maxDeviceWidth={425}>
-                  {/* <iframe
+                {/* <MediaQuery maxDeviceWidth={425}>
+                  <iframe
                     title="Chopbarh Video"
                     width="300"
                     height="250"
                     src="https://www.youtube.com/embed/gBeXOvNpR3c"
-                  ></iframe> */}
+                  ></iframe>
                   <HeadingTwoFirst
                     className="hero__title"
                     style={{ color: "#ebc709" }}
@@ -538,9 +538,12 @@ export default function Hero() {
                     <br />
                     &#8358;10 Billion Registration Funds Available
                   </HeadingTwoFirst>
-                </MediaQuery>
-                <HeadingTwoFirst className="hero__title mt-4">
-                  DOWNLOAD NOW
+                </MediaQuery> */}
+                <HeadingTwoFirst
+                  className="hero__title mt-4"
+                  style={{ color: "#ebc709" }}
+                >
+                  DOWNLOAD NOW AND GET FREE COINS
                 </HeadingTwoFirst>
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
