@@ -47,9 +47,8 @@ import CreditCard from "./CreditCard/CreditCard";
 
 function referenceId() {
   let text = "";
-  let possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 20; i++)
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (let i = 0; i < 25; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }

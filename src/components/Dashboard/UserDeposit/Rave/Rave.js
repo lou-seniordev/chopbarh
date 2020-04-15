@@ -223,8 +223,11 @@ class RavePayment extends Component {
       customer_email:
         this.props.playerData.Email ||
         `${this.props.playerData.PhoneNum}@mail.com`,
-      customer_firstname: "Chopbarh",
-      customer_lastname: `${this.props.playerData.PhoneNum}`,
+      customer_firstname:
+        this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
+      customer_lastname:
+        this.props.playerData.FullName.split(" ")[1] ||
+        `${this.props.playerData.PhoneNum}`,
       amount: Number(this.state.amount),
       customer_phone: this.props.playerData.PhoneNum,
       country: "NG",
@@ -258,10 +261,6 @@ class RavePayment extends Component {
       },
     });
   };
-
-  // Add handleAuthSubmit
-
-  // Add hanldInputChange, authAmount
 
   render() {
     return (
