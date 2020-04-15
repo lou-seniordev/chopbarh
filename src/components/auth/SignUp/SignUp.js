@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Header from "../../UI/Header/Header";
 import breakPoints from "../../styles/breakpoints";
 import AppStore from "../../assets/img/AppStore.png";
-import PlayStore from "../../assets/img/PlayStore.png";
+import PlayStore from "../../assets/img/PlayStore@2x.png";
 // import { SignUpWrapper } from "../../styles/SignUpStyles";
 
 const SignUpWrapper = styled.div`
