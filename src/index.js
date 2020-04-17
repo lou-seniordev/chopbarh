@@ -10,16 +10,13 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/authReducer";
 import playerDataReducer from "./store/reducers/playerDataReducer";
-import topEarnersReducer from "./store/reducers/topEarnersReducer";
 import chargeReducer from "./store/reducers/chargeReducer";
 import modalReducer from "./store/reducers/modalReducer";
 import voucherReducer from "./store/reducers/voucherReducer";
-import transactionHistoryReducer from "./store/reducers/transactionHistoryReducer";
 import bankAccountReducer from "./store/reducers/bankAccountReducer";
 import creditCardReducer from "./store/reducers/creditCardReducer";
 import depositReducer from "./store/reducers/depositReducer";
 import withdrawalReducer from "./store/reducers/withdrawalReducer";
-import transferReducer from "./store/reducers/transferReducer";
 import withdrawalAccountReducer from "./store/reducers/withdrawalAccountReducer";
 import refundReducer from "./store/reducers/refundReducer";
 import raveCardReducer from "./store/reducers/raveCardReducer";
@@ -28,16 +25,13 @@ import instantPaymentReducer from "./store/reducers/instantPaymentReducer";
 const rootReducer = combineReducers({
   auth: authReducer,
   player: playerDataReducer,
-  topEarners: topEarnersReducer,
   charge: chargeReducer,
   modal: modalReducer,
   voucher: voucherReducer,
-  transaction: transactionHistoryReducer,
   bankAccount: bankAccountReducer,
   creditCard: creditCardReducer,
   deposit: depositReducer,
   withdrawal: withdrawalReducer,
-  transfer: transferReducer,
   withdrawalAccount: withdrawalAccountReducer,
   refunds: refundReducer,
   raveCard: raveCardReducer,
