@@ -187,9 +187,9 @@ class UserHeader extends Component {
                           <Link className="dropdown-item" to="edit-profile">
                             Profile
                           </Link>
-                          <Link className="dropdown-item" to="change-pin">
+                          {/* <Link className="dropdown-item" to="change-pin">
                             Change Pin
-                          </Link>
+                          </Link> */}
                           <Link className="dropdown-item" to="logout">
                             Logout
                           </Link>
@@ -339,12 +339,12 @@ class UserHeader extends Component {
                         >
                           Profile
                         </Link>
-                        <Link
+                        {/* <Link
                           className="nav-link text-uppercase"
                           to="change-pin"
                         >
                           Change Pin
-                        </Link>
+                        </Link> */}
                         <Link className="nav-link text-uppercase" to="logout">
                           Logout
                         </Link>
