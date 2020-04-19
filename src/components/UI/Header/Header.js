@@ -104,17 +104,6 @@ export default function Header({ transparent }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mr-auto">
             <MediaQuery minDeviceWidth={991}>
-              {/* <p
-                className="nav-item mt-4"
-                style={{
-                  color: "#fff",
-                  textTransform: "uppercase",
-                  fontSize: "1.4rem",
-                  marginLeft: "2.5rem",
-                }}
-              >
-                Contact Us: 0903-662-3253
-              </p> */}
               <Link to="contacts">
                 <div
                   // className="nav-item mt-4"

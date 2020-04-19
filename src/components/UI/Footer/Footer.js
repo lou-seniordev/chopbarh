@@ -139,7 +139,6 @@ export default function Footer() {
             <p>Contact Us</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            {/* <p>Telephone: 0903-662-3253</p> */}
             <ContactBox className="mb-3">
               <Link to="contacts">
                 <Phone size="25px" color="#dddddd" />
