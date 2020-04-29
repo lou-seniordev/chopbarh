@@ -81,7 +81,7 @@ class Card extends Component {
     // }
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
         this.props.creditCard.length &&
@@ -94,7 +94,7 @@ class Card extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleRadioChange = (value) => {
+  handleRadioChange = value => {
     this.setState({ selectedValue: value, authCVV: "" });
   };
 
@@ -128,7 +128,7 @@ class Card extends Component {
     return true;
   };
 
-  handleAuthSubmit = async (event) => {
+  handleAuthSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -152,6 +152,12 @@ class Card extends Component {
       return;
     }
 
+    if (+this.state.authAmount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     this.setState({ modalOpen: true });
   };
 
@@ -159,7 +165,7 @@ class Card extends Component {
     this.setState({ paying: true, loading: false });
 
     const creditCardObject = this.props.creditCard.filter(
-      (card) => card.auth_code === this.state.selectedValue
+      card => card.auth_code === this.state.selectedValue
     );
 
     if (creditCardObject[0].cvv !== this.state.authCVV) {
@@ -232,7 +238,7 @@ class Card extends Component {
     }
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -244,6 +250,12 @@ class Card extends Component {
 
     if (+this.state.amount < 100) {
       toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (+this.state.amount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
       this.setState({ loading: false });
       return;
     }
@@ -733,7 +745,7 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
   creditCard: state.creditCard.creditCard,

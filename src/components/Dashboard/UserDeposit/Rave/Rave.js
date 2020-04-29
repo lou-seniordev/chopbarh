@@ -61,7 +61,7 @@ class RavePayment extends Component {
     return text;
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
         this.props.raveCard.length &&
@@ -74,7 +74,7 @@ class RavePayment extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleRadioChange = (value) => {
+  handleRadioChange = value => {
     this.setState({ selectedValue: value, last4Digits: "" });
   };
 
@@ -96,7 +96,7 @@ class RavePayment extends Component {
     return true;
   };
 
-  handleAuthSubmit = async (event) => {
+  handleAuthSubmit = async event => {
     event.preventDefault();
 
     const { authAmount, selectedValue } = this.state;
@@ -119,8 +119,14 @@ class RavePayment extends Component {
       return;
     }
 
+    if (+this.state.authAmount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     const raveCardObject = this.props.raveCard.filter(
-      (card) => card.auth_code === this.state.selectedValue
+      card => card.auth_code === this.state.selectedValue
     );
 
     // console.log(raveCardObject);
@@ -136,23 +142,6 @@ class RavePayment extends Component {
     this.setState({ paying: true });
 
     try {
-      // const response = await fetch(
-      //   "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json"
-      //     },
-      //     body: JSON.stringify({
-      //       SECKEY: "FLWSECK-4f658855410a2a435b17aa5e0e3b5ba0-X",
-      //       token: raveCardObject[0].auth_code,
-      //       currency: "NGN",
-      //       amount: this.state.authAmount,
-      //       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      //       txRef: `${this.props.playerData.PhoneNum}-${reference}`
-      //     })
-      //   }
-      // );
       const response = await fetch(
         "https://pay.chopbarh.com/ng/user/make_deposit",
         {
@@ -187,7 +176,7 @@ class RavePayment extends Component {
     // Fetch Flutterwave here
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     if (!this.formIsValid(this.state)) {
@@ -198,6 +187,12 @@ class RavePayment extends Component {
 
     if (+this.state.amount < 100) {
       toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
+    if (+this.state.amount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
       this.setState({ loading: false });
       return;
     }
@@ -234,7 +229,7 @@ class RavePayment extends Component {
       currency: "NGN",
       txref: `${this.props.playerData.PhoneNum}-${reference}`,
       onclose: function () {},
-      callback: async (response) => {
+      callback: async response => {
         let flw_ref = response.tx.txRef;
         if (
           response.tx.chargeResponseCode === "00" ||
@@ -443,7 +438,7 @@ class RavePayment extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   playerData: state.player.playerData,
   raveCard: state.raveCard.raveCard,
   loading: state.raveCard.loading,
