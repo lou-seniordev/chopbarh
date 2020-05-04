@@ -77,7 +77,7 @@ export const setDepositHistory = payload => async (dispatch, getState) => {
       .doc("new_deposits");
 
     await firestore.collection("new_deposits").add({
-      amount: payload.amount,
+      amount: Number(payload.amount),
       channel: payload.channel,
       deposit_date: payload.transaction_date,
       paid_at: Date.now(),
