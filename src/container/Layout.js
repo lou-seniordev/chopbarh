@@ -22,9 +22,6 @@ const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
 const VendorsPage = lazy(() => import("../Pages/VendorsPage"));
-const SuperAgentApplicationPage = lazy(() =>
-  import("../Pages/SuperAgentApplicationPage")
-);
 const UpdateApplicationPage = lazy(() =>
   import("../Pages/UpdateApplicationPage")
 );
@@ -73,10 +70,6 @@ class Layout extends Component {
               <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/vendors" component={VendorsPage} />
-              <Route
-                path="/super-agent-application"
-                component={SuperAgentApplicationPage}
-              />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
               <Redirect push to="/" />
@@ -90,10 +83,6 @@ class Layout extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
               <Route path="/vendors" component={VendorsPage} />
-              <Route
-                path="/super-agent-application"
-                component={SuperAgentApplicationPage}
-              />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
               <Redirect push to="/login" />
@@ -105,7 +94,7 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isAuthenticated: localStorage.getItem("chopbarh-token:live") !== null,
 });
 
