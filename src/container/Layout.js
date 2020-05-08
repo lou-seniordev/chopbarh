@@ -9,7 +9,6 @@ const LandingPage = lazy(() => import("../Pages/LandingPage"));
 const GamesPage = lazy(() => import("../Pages/GamesPage"));
 const LoginPage = lazy(() => import("../Pages/LoginPage"));
 const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
-// const ChangePinPage = lazy(() => import("../Pages/ChangePinPage"));
 const ForgotPassword = lazy(() =>
   import("../components/auth/ForgotPassword/ForgotPassword")
 );
@@ -64,7 +63,6 @@ class Layout extends Component {
               <Route path="/user" component={UserHomePage} />
               <Route path="/profile" component={UserProfilePage} />
               <Route path="/edit-profile" component={UserEditProfilePage} />
-              {/* <Route path="/change-pin" component={ChangePinPage} /> */}
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/play" component={UserPlayPage} />
