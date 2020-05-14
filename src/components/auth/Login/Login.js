@@ -84,6 +84,7 @@ class Login extends Component {
 
     const context = this;
 
+    // TODO: Complete Backend Service before deploying this
     fetch("https://pay.chopbarh.com/api/auth", {
       method: "POST",
       headers: {
