@@ -1,6 +1,7 @@
 import React, { Component, memo } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import { Update } from "grommet-icons";
@@ -36,7 +37,7 @@ const HeaderWrapper = styled.div`
 class UserHeader extends Component {
   state = {
     cashBalance: true,
-    coinBalance: true
+    coinBalance: true,
   };
 
   componentDidMount = () => {
@@ -55,6 +56,10 @@ class UserHeader extends Component {
   };
 
   render() {
+    if (!this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <HeaderWrapper>
         <nav
@@ -122,7 +127,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.CBCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -153,7 +158,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.RealCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -289,7 +294,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.CBCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -320,7 +325,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.RealCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -407,11 +412,15 @@ const mapStateToProps = state => ({
   isPlayerDataAvailable: state.player.playerData !== null,
   playerData: state.player.playerData,
   loading: state.player.loading,
-  error: state.player.error
+  error: state.player.error,
+  isAuthenticated:
+    localStorage.getItem("chopbarh-token") !== null &&
+    jwt.decode(localStorage.getItem("chopbarh-token")).uid ===
+      localStorage.getItem("chopbarh-id"),
 });
 
 const mapDispatchToProps = {
-  fetchPlayerData
+  fetchPlayerData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(UserHeader));

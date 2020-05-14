@@ -13,6 +13,7 @@
     "eyowo-js": "^1.2.3",
     "firebase": "^6.1.0",
     "grommet-icons": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
     "pure-react-carousel": "^1.21.1",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",

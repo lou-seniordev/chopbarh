@@ -1,5 +1,6 @@
 import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
 import { fetchPlayerData } from "../store/actions/playerDataActions";
@@ -41,6 +42,7 @@ const Loading = () => (
 
 class Layout extends Component {
   componentDidMount = () => {
+    console.log(this.props);
     this.props.isAuthenticated &&
       this.props.authSuccess(
         localStorage.getItem("chopbarh-token"),
@@ -102,7 +104,10 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.player.error,
+  isAuthenticated:
+    localStorage.getItem("chopbarh-token") !== null &&
+    jwt.decode(localStorage.getItem("chopbarh-token")).uid ===
+      localStorage.getItem("chopbarh-id"),
 });
 
 const mapDispatchToProps = {
