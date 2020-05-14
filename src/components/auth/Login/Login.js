@@ -84,7 +84,7 @@ class Login extends Component {
 
     const context = this;
 
-    fetch("http://localhost:8080/api/auth", {
+    fetch("https://pay.chopbarh.com/api/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -105,10 +105,8 @@ class Login extends Component {
             .signInWithCustomToken(data.serviceToken)
             .then(info => {
               if (appRoutes.includes(context.props.lastLocation.pathname)) {
-                console.log("Going somehwere else");
                 context.props.history.push(context.props.lastLocation.pathname);
               } else {
-                console.log("Going to Dashboard");
                 context.props.history.push("/user");
               }
             });

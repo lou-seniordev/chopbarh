@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
@@ -42,7 +42,6 @@ const Loading = () => (
 
 class Layout extends Component {
   componentDidMount = () => {
-    console.log(this.props);
     this.props.isAuthenticated &&
       this.props.authSuccess(
         localStorage.getItem("chopbarh-token"),
@@ -79,7 +78,7 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
-              <Redirect push to="/contacts" />
+              <Route path="/*" component={NotFoundPage} />
             </Switch>
           </Suspense>
         ) : (

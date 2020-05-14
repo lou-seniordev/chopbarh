@@ -1,11 +1,12 @@
 import * as actionType from "../actionTypes/actionTypes";
+import firebase from "../../firebase";
 
 export const authStart = () => ({
   type: actionType.AUTH_START,
 });
 
 export const authSuccess = (token, id) => {
-  expirationTimer();
+  inactivityLogoutTimer();
 
   return {
     type: actionType.AUTH_SUCCESS,
@@ -16,18 +17,22 @@ export const authSuccess = (token, id) => {
 
 export const authFail = () => ({ type: actionType.AUTH_FAILURE });
 
-export const authLogout = () => {
+export const authLogout = () => async () => {
   localStorage.removeItem("chopbarh-token");
   localStorage.removeItem("chopbarh-id");
+
+  await firebase.auth().signOut();
 
   return {
     type: actionType.AUTH_LOGOUT,
   };
 };
 
-export const expirationLogout = () => {
+export const expirationLogout = () => async () => {
   localStorage.removeItem("chopbarh-token");
   localStorage.removeItem("chopbarh-id");
+
+  await firebase.auth().signOut();
 
   window.location = "/";
 
@@ -36,7 +41,7 @@ export const expirationLogout = () => {
   };
 };
 
-export const expirationTimer = () => {
+export const inactivityLogoutTimer = () => {
   let time;
   window.onload = resetTimer;
   document.onload = resetTimer;
