@@ -12,11 +12,11 @@ const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
 const ForgotPassword = lazy(() =>
   import("../components/auth/ForgotPassword/ForgotPassword")
 );
+const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 const Logout = lazy(() => import("../components/auth/Logout/Logout"));
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
 const UserPlayPage = lazy(() => import("../Pages/UserPlayPage"));
 const UserEditProfilePage = lazy(() => import("../Pages/UserEditProfilePage"));
-const UserProfilePage = lazy(() => import("../Pages/UserProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
@@ -40,15 +40,23 @@ const Loading = () => (
 );
 
 class Layout extends Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount = () => {
     this.props.isAuthenticated &&
       this.props.authSuccess(
-        localStorage.getItem("chopbarh-token:live"),
-        localStorage.getItem("chopbarh-id:live")
+        localStorage.getItem("chopbarh-token"),
+        localStorage.getItem("chopbarh-id")
       );
-  }
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps !== this.props) {
+      this.props.isAuthenticated &&
+        this.props.authSuccess(
+          localStorage.getItem("chopbarh-token"),
+          localStorage.getItem("chopbarh-id")
+        );
+    }
+  };
 
   render() {
     return (
@@ -61,7 +69,6 @@ class Layout extends Component {
               <Route path="/reset" component={ForgotPassword} />
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHomePage} />
-              <Route path="/profile" component={UserProfilePage} />
               <Route path="/edit-profile" component={UserEditProfilePage} />
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
@@ -70,7 +77,7 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
-              <Redirect push to="/" />
+              <Redirect push to="/contacts" />
             </Switch>
           </Suspense>
         ) : (
@@ -83,7 +90,9 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
-              <Redirect push to="/login" />
+              <Route path="/user" component={UserHomePage} />
+              <Route path="/*" component={NotFoundPage} />
+              {/* <Redirect push to="/" /> */}
             </Switch>
           </Suspense>
         )}
@@ -93,7 +102,7 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: localStorage.getItem("chopbarh-token:live") !== null,
+  isAuthenticated: state.player.error,
 });
 
 const mapDispatchToProps = {

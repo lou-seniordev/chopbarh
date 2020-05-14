@@ -1,7 +1,7 @@
 import * as actionType from "../actionTypes/actionTypes";
 
 export const authStart = () => ({
-  type: actionType.AUTH_START
+  type: actionType.AUTH_START,
 });
 
 export const authSuccess = (token, id) => {
@@ -10,29 +10,29 @@ export const authSuccess = (token, id) => {
   return {
     type: actionType.AUTH_SUCCESS,
     token,
-    id
+    id,
   };
 };
 
 export const authFail = () => ({ type: actionType.AUTH_FAILURE });
 
 export const authLogout = () => {
-  localStorage.removeItem("chopbarh-token:live");
-  localStorage.removeItem("chopbarh-id:live");
+  localStorage.removeItem("chopbarh-token");
+  localStorage.removeItem("chopbarh-id");
 
   return {
-    type: actionType.AUTH_LOGOUT
+    type: actionType.AUTH_LOGOUT,
   };
 };
 
 export const expirationLogout = () => {
-  localStorage.removeItem("chopbarh-token:live");
-  localStorage.removeItem("chopbarh-id:live");
+  localStorage.removeItem("chopbarh-token");
+  localStorage.removeItem("chopbarh-id");
 
   window.location = "/";
 
   return {
-    type: actionType.AUTH_LOGOUT
+    type: actionType.AUTH_LOGOUT,
   };
 };
 

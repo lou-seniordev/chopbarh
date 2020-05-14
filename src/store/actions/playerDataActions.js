@@ -23,7 +23,10 @@ export const fetchPlayerData = () => async (dispatch, getState) => {
       "Content-Type": "application/json",
       apiKey: process.env.REACT_APP_API_KEY,
     },
-    body: JSON.stringify({ playerId: getState().auth.id }),
+    body: JSON.stringify({
+      playerId: localStorage.getItem("chopbarh-id"),
+      token: localStorage.getItem("chopbarh-token"),
+    }),
   })
     .then(response => response.json())
     .then(data => {

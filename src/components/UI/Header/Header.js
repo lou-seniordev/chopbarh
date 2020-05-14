@@ -9,7 +9,7 @@ import Logo from "../Logo/Logo";
 import WhatsAppIcon from "../../assets/svg/WhatsAppIcon.svg";
 
 const HeaderWrapper = styled.div`
-  background: ${(props) =>
+  background: ${props =>
     props.transparent ? "transparent" : `${colors.colorGrayDarkOne}`};
   min-height: 6rem;
   padding: 0.4rem 2rem;
@@ -155,14 +155,14 @@ export default function Header({ transparent }) {
                 About Us
               </Link>
             </li>
-            {localStorage.getItem("chopbarh-token:live") && (
+            {localStorage.getItem("chopbarh-token") && (
               <li className="nav-item">
                 <Link to="user" className="nav-link text-uppercase mr-5">
                   Dashboard
                 </Link>
               </li>
             )}
-            {!localStorage.getItem("chopbarh-token:live") && (
+            {!localStorage.getItem("chopbarh-token") && (
               <div>
                 <button className="mr-2">
                   <Link to="login">

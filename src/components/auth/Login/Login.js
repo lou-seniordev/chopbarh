@@ -21,9 +21,9 @@ import {
   authFail,
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
+import firebase from "../../../firebase";
 
 const appRoutes = [
-  "/profile",
   "/edit-profile",
   "/change-pin",
   "/deposit",
@@ -84,7 +84,7 @@ class Login extends Component {
 
     const context = this;
 
-    fetch("https://pay.chopbarh.com/api/auth", {
+    fetch("http://localhost:8080/api/auth", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -96,15 +96,22 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
-          localStorage.setItem("chopbarh-token:live", data.authToken);
-          localStorage.setItem("chopbarh-id:live", data.userId);
-          context.props.authSuccess(data.authToken, data.userId);
+          localStorage.setItem("chopbarh-token", data.serviceToken);
+          localStorage.setItem("chopbarh-id", data.userId);
+          // context.props.authSuccess(data.serviceToken, data.userId);
 
-          if (appRoutes.includes(this.props.lastLocation.pathname)) {
-            context.props.history.push(this.props.lastLocation.pathname);
-          } else {
-            context.props.history.push("/user");
-          }
+          return firebase
+            .auth()
+            .signInWithCustomToken(data.serviceToken)
+            .then(info => {
+              if (appRoutes.includes(context.props.lastLocation.pathname)) {
+                console.log("Going somehwere else");
+                context.props.history.push(context.props.lastLocation.pathname);
+              } else {
+                console.log("Going to Dashboard");
+                context.props.history.push("/user");
+              }
+            });
         } else {
           context.setState({ accountErrorModal: true });
           context.props.authFail();

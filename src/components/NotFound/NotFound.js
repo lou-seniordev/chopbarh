@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import breakpoint from "../styles/breakpoints";
@@ -44,16 +44,25 @@ const NotFoundWrapper = styled.div`
   }
 `;
 
-export default function NotFound() {
-  return (
-    <NotFoundWrapper>
-      <div>
-        <h3>
-          Ooops! <br />
-          <span>Page not found</span>
-        </h3>
-        <Link to="/user">User</Link>
-      </div>
-    </NotFoundWrapper>
-  );
+export default class NotFound extends Component {
+  goBack = () => {
+    this.props.history.push("/");
+    window.location.reload();
+  };
+
+  render() {
+    return (
+      <NotFoundWrapper>
+        <div>
+          <h3>
+            Ooops! <br />
+            <span>Page was not found!</span>
+          </h3>
+          <Link to="/" onClick={this.goBack}>
+            Home
+          </Link>
+        </div>
+      </NotFoundWrapper>
+    );
+  }
 }
