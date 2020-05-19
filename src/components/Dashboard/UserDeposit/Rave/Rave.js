@@ -18,7 +18,6 @@ import {
   ExistingCardFormItem,
   Button as FormElementButton,
 } from "../../../styles/CardCharge";
-import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchRaveCardData,
   removeRaveCard,
@@ -43,9 +42,6 @@ class RavePayment extends Component {
     last4Digits: "",
     paying: false,
   };
-
-  // key: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
-  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
 
   componentDidMount = () => {
     this.props.fetchRaveCardData();
@@ -176,8 +172,10 @@ class RavePayment extends Component {
     // Fetch Flutterwave here
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+
+    this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
@@ -191,70 +189,76 @@ class RavePayment extends Component {
       return;
     }
 
-    if (+this.state.amount > 250000) {
-      // toast.error(`Minimum deposit is \u20a6${100}`);
+    if (+this.state.amount > 500000) {
       this.setState({ loading: false });
       return;
     }
 
     let reference = this.getReference();
 
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: "0",
-      reference: "N/A",
-      status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`,
-      gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum,
-    };
-
-    this.props.setDepositHistory(historyObject);
-
-    window.getpaidSetup({
-      PBFPubKey: this.state.key,
-      customer_email:
-        this.props.playerData.Email ||
-        `${this.props.playerData.PhoneNum}@mail.com`,
-      customer_firstname:
-        this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
-      customer_lastname:
-        this.props.playerData.FullName.split(" ")[1] ||
-        `${this.props.playerData.PhoneNum}`,
-      amount: Number(this.state.amount),
-      customer_phone: this.props.playerData.PhoneNum,
-      country: "NG",
-      currency: "NGN",
-      txref: `${this.props.playerData.PhoneNum}-${reference}`,
-      onclose: function () {},
-      callback: async response => {
-        let flw_ref = response.tx.txRef;
-        if (
-          response.tx.chargeResponseCode === "00" ||
-          response.tx.chargeResponseCode === "0"
-        ) {
-          // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
-          await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ref: flw_ref,
-            }),
-          });
-          // redirect to a success page
-          // window.open("https://www.chopbarh.com/user");
-          // window.open("localhost:3000/user");
-        } else {
-          // redirect to a failure page.
-          // window.open("https://www.chopbarh.com/user");
-          // window.open("localhost:3000/user");
+    const raveModalRecordResponse = await (
+      await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/ravemodal/player/deposit/record",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            amount: +this.state.amount,
+            transaction_reference: `${this.props.playerData.PhoneNum}-${reference}`,
+            transaction_fees: 0,
+            refId: `${this.props.playerData.PhoneNum}-${reference}`,
+            phone_number: `${this.props.playerData.PhoneNum}`,
+            playerId: `${this.props.playerData.PlayerID}`,
+          }),
         }
-      },
-    });
+      )
+    ).json();
+
+    this.setState({ loading: false });
+
+    if (raveModalRecordResponse.status === true) {
+      window.getpaidSetup({
+        PBFPubKey: this.state.key,
+        customer_email:
+          this.props.playerData.Email ||
+          `${this.props.playerData.PhoneNum}@mail.com`,
+        customer_firstname:
+          this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
+        customer_lastname:
+          this.props.playerData.FullName.split(" ")[1] ||
+          `${this.props.playerData.PhoneNum}`,
+        amount: Number(this.state.amount),
+        customer_phone: this.props.playerData.PhoneNum,
+        country: "NG",
+        currency: "NGN",
+        txref: `${this.props.playerData.PhoneNum}-${reference}`,
+        onclose: function () {},
+        callback: async response => {
+          let flw_ref = response.tx.txRef;
+          if (
+            response.tx.chargeResponseCode === "00" ||
+            response.tx.chargeResponseCode === "0"
+          ) {
+            await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                ref: flw_ref,
+              }),
+            });
+          } else {
+          }
+        },
+      });
+    } else {
+      toast.error("An error occured. Please try again later");
+    }
   };
 
   render() {
@@ -445,7 +449,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   fetchRaveCardData,
   removeRaveCard,
 };

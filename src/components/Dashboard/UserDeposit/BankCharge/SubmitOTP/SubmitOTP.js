@@ -9,7 +9,6 @@ import {
   openOTPModal,
   closeOTPModal,
 } from "../../../../../store/actions/modalActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import { setBankAccountData } from "../../../../../store/actions/bankAccountActions";
 
 const Form = styled.form`
@@ -70,7 +69,6 @@ class SubmitOTP extends Component {
         toast.info(`Transaction is processing`);
         // const value = +data.data.amount / 100;
         // this.props.setBankAccountData(data.data.authorization);
-        // this.props.setDepositHistory(data.data);
       } else if (data.data.status === "open_url") {
         this.props.closeOTPModal();
         window.open(data.data.url, "_self");
@@ -136,7 +134,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   openOTPModal,
-  setDepositHistory,
   setBankAccountData,
   closeOTPModal,
 };
