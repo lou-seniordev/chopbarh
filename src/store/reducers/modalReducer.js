@@ -7,6 +7,10 @@ const initialState = {
   submitBirthdayModal: false,
   transactionSuccessModal: false,
   transactionFailModal: false,
+  cardPinModal: false,
+  cardOTPModal: false,
+  cardPhoneModal: false,
+  cardBirthdayModal: false,
 };
 
 export default (state = initialState, action) => {
@@ -70,6 +74,46 @@ export default (state = initialState, action) => {
       return {
         ...state,
         transactionFailModal: false,
+      };
+    case actionType.OPEN_CARD_PIN_MODAL:
+      return {
+        ...state,
+        cardPinModal: true,
+      };
+    case actionType.CLOSE_CARD_PIN_MODAL:
+      return {
+        ...state,
+        cardPinModal: false,
+      };
+    case actionType.OPEN_CARD_OTP_MODAL:
+      return {
+        ...state,
+        cardOTPModal: true,
+      };
+    case actionType.CLOSE_CARD_OTP_MODAL:
+      return {
+        ...state,
+        cardOTPModal: false,
+      };
+    case actionType.OPEN_CARD_PHONE_MODAL:
+      return {
+        ...state,
+        cardPhoneModal: true,
+      };
+    case actionType.CLOSE_CARD_PHONE_MODAL:
+      return {
+        ...state,
+        cardPhoneModal: false,
+      };
+    case actionType.OPEN_CARD_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        cardBirthdayModal: true,
+      };
+    case actionType.CLOSE_CARD_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        cardBirthdayModal: false,
       };
     default:
       return state;
