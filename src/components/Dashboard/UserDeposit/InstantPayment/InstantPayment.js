@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 import { FormSubmitButton } from "../../../styles/CardCharge";
-import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
@@ -309,7 +308,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
   removeInstantPaymentAccount,

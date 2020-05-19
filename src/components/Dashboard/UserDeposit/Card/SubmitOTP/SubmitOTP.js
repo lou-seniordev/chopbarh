@@ -9,7 +9,6 @@ import {
   openOTPModal,
   closeOTPModal,
 } from "../../../../../store/actions/modalActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import {
   setCreditCardData,
   fetchCreditCardData,
@@ -133,7 +132,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   setCreditCardData,
   fetchCreditCardData,
   openOTPModal,

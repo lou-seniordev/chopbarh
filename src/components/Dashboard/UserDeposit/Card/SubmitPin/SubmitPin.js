@@ -13,7 +13,6 @@ import {
   openPhoneModal,
   closePhoneModal
 } from "../../../../../store/actions/modalActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import {
   setCreditCardData,
   fetchCreditCardData
@@ -154,7 +153,6 @@ const mapDispatchToProps = {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
-  setDepositHistory,
   setCreditCardData,
   fetchCreditCardData
 };
