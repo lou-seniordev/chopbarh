@@ -65,7 +65,7 @@ class SubmitPin extends Component {
 
     try {
       const submitPinResponse = await fetch(
-        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_pin",
+        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_pin",
         {
           method: "POST",
           headers: {

@@ -319,7 +319,7 @@ class Card extends Component {
 
     try {
       const paystackCardChargeResponse = await fetch(
-        "http://localhost:5000/dev-sample-31348/us-central1/paystackcarddeposit/player/deposit/card_charge",
+        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackcarddeposit/player/deposit/card_charge",
         {
           method: "POST",
           headers: {
