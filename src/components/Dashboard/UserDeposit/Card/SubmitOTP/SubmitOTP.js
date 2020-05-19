@@ -8,6 +8,8 @@ import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
+  openCardOTPModal,
+  closeCardOTPModal,
 } from "../../../../../store/actions/modalActions";
 import {
   setCreditCardData,
@@ -72,20 +74,20 @@ class SubmitOTP extends Component {
 
       if (data.status === true) {
         if (data.data.status === "success") {
-          context.props.closeOTPModal();
+          context.props.closeCardOTPModal();
           toast.info(`Transaction is processing`);
         } else if (data.data.status === "send_otp") {
-          context.props.closeOTPModal();
-          context.props.openOTPModal();
+          context.props.closeCardOTPModal();
+          context.props.openCardOTPModal();
         } else if (data.data.status === "open_url") {
-          context.props.closeOTPModal();
+          context.props.closeCardOTPModal();
           window.open(data.data.url, "_self");
         } else {
           toast.error(`Please try again`);
-          context.props.closeOTPModal();
+          context.props.closeCardOTPModal();
         }
       } else {
-        context.props.closeOTPModal();
+        context.props.closeCardOTPModal();
         toast.error(`Transaction Declined`);
       }
     } catch (err) {
@@ -145,6 +147,9 @@ const mapDispatchToProps = {
   fetchCreditCardData,
   openOTPModal,
   closeOTPModal,
+
+  openCardOTPModal,
+  closeCardOTPModal,
 };
 
 export default withRouter(

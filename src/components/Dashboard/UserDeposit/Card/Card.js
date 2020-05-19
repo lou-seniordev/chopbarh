@@ -31,8 +31,14 @@ import {
   closeOTPModal,
   openPinModal,
   closePinModal,
-  openPhoneModal,
-  closePhoneModal,
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
@@ -113,8 +119,8 @@ class Card extends Component {
   };
 
   toggleSubmitPhoneModal = () => {
-    this.setState({submitPhoneModal: !this.state.submitPhoneModal})
-  }
+    this.setState({ submitPhoneModal: !this.state.submitPhoneModal });
+  };
 
   removeCreditCard = () => {
     this.setState({ removeCardModal: false });
@@ -350,10 +356,10 @@ class Card extends Component {
       if (data.status === true) {
         if (data.data.status === "send_otp") {
           this.props.setChargeReference(data.data.reference);
-          this.props.openOTPModal();
+          this.props.openCardOTPModal();
         } else if (data.data.status === "send_pin") {
           this.props.setChargeReference(data.data.reference);
-          this.props.openPinModal();
+          this.props.openCardPinModal();
         } else if (data.data.status === "success") {
           toast.info("Transaction is processing");
         } else if (data.data.status === "pending") {
@@ -403,8 +409,8 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.pinModal}
-          toggle={this.props.closePinModal}
+          isOpen={this.props.cardPinModal}
+          toggle={this.props.closeCardPinModal}
           style={{
             top: "50%",
             transform: "translateY(-50%)",
@@ -415,8 +421,8 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.otpModal}
-          toggle={this.props.closeOTPModal}
+          isOpen={this.props.cardOTPModal}
+          toggle={this.props.closeCardOTPModal}
           style={{
             top: "50%",
             transform: "translateY(-50%)",
@@ -426,10 +432,18 @@ class Card extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
-        <SubmitPhone
-          submitPhoneModal={this.state.submitPhoneModal}
-          toggleSubmitPhoneModal={this.toggleSubmitPhoneModal}
-        />
+        <Modal
+          isOpen={this.props.cardPhoneModal}
+          toggle={this.props.closeCardPhoneModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
+            <SubmitPhone />
+          </ModalBody>
+        </Modal>
         <Modal
           isOpen={this.state.modalOpen}
           toggle={this.toggleModal}
@@ -773,7 +787,10 @@ class Card extends Component {
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
-  phoneModal: state.modal.submitPhoneModal,
+  cardPinModal: state.modal.cardPinModal,
+  cardOTPModal: state.modal.cardOTPModal,
+  cardPhoneModal: state.modal.cardPhoneModal,
+  cardBirthdayModal: state.modal.cardBirthdayModal,
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
   isDataFetched: state.creditCard.fetched,
@@ -792,8 +809,15 @@ const mapDispatchToProps = {
   closeOTPModal,
   openPinModal,
   closePinModal,
-  openPhoneModal,
-  closePhoneModal,
+
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 };
 
 export default withRouter(

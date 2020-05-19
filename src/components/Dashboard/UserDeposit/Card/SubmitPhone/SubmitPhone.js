@@ -8,6 +8,11 @@ import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  closeCardPhoneModal,
 } from "../../../../../store/actions/modalActions";
 
 const Form = styled.form`
@@ -48,7 +53,7 @@ class SubmitPhone extends Component {
 
     try {
       const submitPhoneResponse = await fetch(
-        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_otp",
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_phone",
         {
           method: "POST",
           mode: "cors",
@@ -65,16 +70,24 @@ class SubmitPhone extends Component {
 
       console.log(data);
 
-      if (data.data.status === "success") {
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          this.props.closeCardOTPModal();
+          this.setState({ loading: false });
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "open_url") {
+          this.props.closeCardPinModal();
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "send_otp") {
+          this.props.closeCardPhoneModal();
+          this.props.openCardOTPModal();
+        } else {
+          toast.error(`Please try again`);
+          this.setState({ loading: false });
+        }
       } else {
-        toast.error(`Please try again`);
         this.setState({ loading: false });
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });
@@ -130,6 +143,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
+
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  closeCardPhoneModal,
 };
 
 export default withRouter(

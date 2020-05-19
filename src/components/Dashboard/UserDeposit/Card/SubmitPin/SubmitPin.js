@@ -12,6 +12,14 @@ import {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 } from "../../../../../store/actions/modalActions";
 import {
   setCreditCardData,
@@ -76,28 +84,23 @@ class SubmitPin extends Component {
       this.setState({ loading: false });
       if (data.status === true) {
         if (data.data.status === "send_otp") {
-          this.props.closePinModal();
-          this.props.openOTPModal();
+          this.props.closeCardPinModal();
+          this.props.openCardOTPModal();
         } else if (data.data.status === "send_phone") {
-          this.props.closePinModal();
-          this.props.openPhoneModal();
+          this.props.closeCardPinModal();
+          this.props.openCardPhoneModal();
         } else if (data.data.status === "open_url") {
-          this.props.closePinModal();
+          this.props.closeCardPinModal();
           window.open(data.data.url, "_self");
         } else if (data.data.status === "success") {
-          this.props.closePinModal();
+          this.props.closeCardPinModal();
           toast.info("Transaction is processing");
-          // const payload = {
-          //   ...data.data.authorization,
-          //   cvv: this.props.cvv,
-          // };
-          // this.props.setCreditCardData(payload);
         } else {
-          this.props.closePinModal();
+          this.props.closeCardPinModal();
           toast.error(`Please try again`);
         }
       } else {
-        this.props.closePinModal();
+        this.props.closeCardPinModal();
         toast.error(`Transaction Declined`);
       }
     } catch (err) {
@@ -161,6 +164,15 @@ const mapDispatchToProps = {
   closePhoneModal,
   setCreditCardData,
   fetchCreditCardData,
+
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 };
 
 export default withRouter(
