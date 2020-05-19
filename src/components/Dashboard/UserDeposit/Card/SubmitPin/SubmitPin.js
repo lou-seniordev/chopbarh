@@ -11,11 +11,11 @@ import {
   openPinModal,
   closePinModal,
   openPhoneModal,
-  closePhoneModal
+  closePhoneModal,
 } from "../../../../../store/actions/modalActions";
 import {
   setCreditCardData,
-  fetchCreditCardData
+  fetchCreditCardData,
 } from "../../../../../store/actions/creditCardActions";
 
 const Form = styled.form`
@@ -26,7 +26,7 @@ const Form = styled.form`
 class SubmitPin extends Component {
   state = {
     pin: "",
-    loading: false
+    loading: false,
   };
 
   formIsValid = ({ pin }) => {
@@ -52,48 +52,55 @@ class SubmitPin extends Component {
 
     const postData = {
       pin: this.state.pin,
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_pin",
+      const submitPinResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_pin",
         {
           method: "POST",
-          mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
+      const data = await submitPinResponse.json();
+
+      console.log(data);
+
       this.setState({ loading: false });
-      if (data.data.status === "send_otp") {
-        this.props.closePinModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.props.closePinModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "success") {
-        this.props.closePinModal();
-        toast.info("Transaction is processing");
-        const payload = {
-          ...data.data.authorization,
-          cvv: this.props.cvv
-        };
-        this.props.setCreditCardData(payload);
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.closePinModal();
+          this.props.openOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.props.closePinModal();
+          this.props.openPhoneModal();
+        } else if (data.data.status === "open_url") {
+          this.props.closePinModal();
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "success") {
+          this.props.closePinModal();
+          toast.info("Transaction is processing");
+          // const payload = {
+          //   ...data.data.authorization,
+          //   cvv: this.props.cvv,
+          // };
+          // this.props.setCreditCardData(payload);
+        } else {
+          this.props.closePinModal();
+          toast.error(`Please try again`);
+        }
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);
       }
     } catch (err) {
-      console.log(err);
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
     }
@@ -107,7 +114,7 @@ class SubmitPin extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -142,8 +149,7 @@ class SubmitPin extends Component {
 
 const mapStateToProps = state => ({
   reference: state.charge.reference,
-  loading: state.coinBalance.loading,
-  cvv: state.creditCard.cvv
+  cvv: state.creditCard.cvv,
 });
 
 const mapDispatchToProps = {
@@ -154,12 +160,9 @@ const mapDispatchToProps = {
   openPhoneModal,
   closePhoneModal,
   setCreditCardData,
-  fetchCreditCardData
+  fetchCreditCardData,
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPin))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPin))
 );

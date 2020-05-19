@@ -276,7 +276,7 @@ class Card extends Component {
       made_by: this.props.playerData.PhoneNum,
     };
 
-    this.props.setDepositHistory(historyObject);
+    // this.props.setDepositHistory(historyObject);
 
     const cardExpirationData = this.state.expiry.split("/");
     const year = `20${cardExpirationData[1]}`;
@@ -302,18 +302,32 @@ class Card extends Component {
     };
 
     this.props.setCreditCardCVV(this.state.cvv);
-    // sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
+
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      const data = await response.json();
+      const paystackCardChargeResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackcarddeposit/player/deposit/card_charge",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.amount),
+            phone_number: this.props.playerData.PhoneNum,
+            playerId: this.props.playerData.PlayerID,
+            expiry_month: cardExpirationData[0],
+            expiry_year: year,
+            card_number: this.state.card,
+            cvv: this.state.cvv,
+            transaction_reference: reference,
+            refId,
+          }),
+        }
+      );
+      const data = await paystackCardChargeResponse.json();
 
       this.setState({
         loading: false,
@@ -325,19 +339,23 @@ class Card extends Component {
         paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_pin") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openPinModal();
-      } else if (data.data.status === "success") {
-        toast.info("Transaction is processing");
-      } else if (data.data.status === "pending") {
-        toast.info("Transaction is processing");
-      } else if (data.data.status === "open_url") {
-        this.props.setChargeReference(data.data.reference);
-        window.open(data.data.url, "_self");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.props.openOTPModal();
+        } else if (data.data.status === "send_pin") {
+          this.props.setChargeReference(data.data.reference);
+          this.props.openPinModal();
+        } else if (data.data.status === "success") {
+          toast.info("Transaction is processing");
+        } else if (data.data.status === "pending") {
+          toast.info("Transaction is processing");
+        } else if (data.data.status === "open_url") {
+          this.props.setChargeReference(data.data.reference);
+          window.open(data.data.url, "_self");
+        } else {
+          toast.error(`Please try again`);
+        }
       } else {
         toast.error(`Please try again`);
       }

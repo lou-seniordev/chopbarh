@@ -97,20 +97,26 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
-          localStorage.setItem("chopbarh-token", data.serviceToken);
+          localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
           // context.props.authSuccess(data.serviceToken, data.userId);
 
-          return firebase
-            .auth()
-            .signInWithCustomToken(data.serviceToken)
-            .then(info => {
-              if (appRoutes.includes(context.props.lastLocation.pathname)) {
-                context.props.history.push(context.props.lastLocation.pathname);
-              } else {
-                context.props.history.push("/user");
-              }
-            });
+          if (appRoutes.includes(context.props.lastLocation.pathname)) {
+            context.props.history.push(context.props.lastLocation.pathname);
+          } else {
+            context.props.history.push("/user");
+          }
+
+          // return firebase
+          //   .auth()
+          //   .signInWithCustomToken(data.serviceToken)
+          //   .then(info => {
+          //     if (appRoutes.includes(context.props.lastLocation.pathname)) {
+          //       context.props.history.push(context.props.lastLocation.pathname);
+          //     } else {
+          //       context.props.history.push("/user");
+          //     }
+          //   });
         } else {
           context.setState({ accountErrorModal: true });
           context.props.authFail();
