@@ -177,20 +177,6 @@ class Card extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const historyObject = {
-      amount: this.state.authAmount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: this.state.authAmount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum,
-    };
-
-    this.props.setDepositHistory(historyObject);
-
     const postData = {
       email: `${this.props.playerData.PhoneNum}@mail.com`,
       amount:
@@ -206,19 +192,28 @@ class Card extends Component {
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/transaction/charge_authorization",
+      const paystackAuthChargeResponse = await fetch(
+        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
         {
           method: "POST",
-          mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData),
+          body: JSON.stringify({
+            amount: Number(this.state.authAmount),
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            phone_number: this.props.playerData.PhoneNum,
+            playerId: this.props.playerData.PlayerID,
+            authorization_code: creditCardObject[0].auth_code,
+            transaction_reference: reference,
+            refId,
+          }),
         }
       );
-      const data = await response.json();
+      const data = await paystackAuthChargeResponse.json();
+
       this.setState({
         loading: false,
         authAmount: "",
@@ -227,7 +222,7 @@ class Card extends Component {
         paying: false,
       });
 
-      if (data.data.status === "success") {
+      if (data.status === true) {
         toast.info("Transaction is processing");
       } else {
         toast.error(`Transaction was not successful`);
