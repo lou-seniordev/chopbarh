@@ -98,7 +98,7 @@ class SubmitPin extends Component {
         }
       } else {
         this.props.closePinModal();
-        toast.error(`Please try again`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });

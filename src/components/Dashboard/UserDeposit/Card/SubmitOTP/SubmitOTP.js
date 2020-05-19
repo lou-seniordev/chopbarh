@@ -51,33 +51,42 @@ class SubmitOTP extends Component {
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_otp",
+      const submitOTPResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_otp",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
-      if (data.data.status === "success") {
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-      } else if (data.data.status === "send_otp") {
-        this.props.closeOTPModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "open_url") {
-        this.props.closeOTPModal();
-        window.open(data.data.url, "_self");
+      const data = await submitOTPResponse.json();
+
+      const context = this;
+      context.setState({ loading: false });
+
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          context.props.closeOTPModal();
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "send_otp") {
+          context.props.closeOTPModal();
+          context.props.openOTPModal();
+        } else if (data.data.status === "open_url") {
+          context.props.closeOTPModal();
+          window.open(data.data.url, "_self");
+        } else {
+          toast.error(`Please try again`);
+          context.props.closeOTPModal();
+        }
       } else {
-        toast.error(`Please try again`);
-        this.setState({ loading: false });
+        context.props.closeOTPModal();
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });

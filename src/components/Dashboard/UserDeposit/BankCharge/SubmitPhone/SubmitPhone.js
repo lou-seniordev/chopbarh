@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
 } from "../../../../../store/actions/modalActions";
 
 const Form = styled.form`
@@ -17,7 +17,7 @@ const Form = styled.form`
 class SubmitPhone extends Component {
   state = {
     phone: "",
-    loading: false
+    loading: false,
   };
 
   formIsValid = ({ phone }) => {
@@ -43,7 +43,7 @@ class SubmitPhone extends Component {
 
     const postData = {
       phone: this.state.phone,
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
@@ -54,9 +54,9 @@ class SubmitPhone extends Component {
           mode: "cors",
           headers: {
             Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
@@ -87,7 +87,7 @@ class SubmitPhone extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -96,10 +96,10 @@ class SubmitPhone extends Component {
         ) : (
           <>
             <FormItem>
-              <label>Enter Phone Number</label>
+              <label>Enter Phone</label>
               <input
                 type="text"
-                name="otp"
+                name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 required
@@ -121,17 +121,14 @@ class SubmitPhone extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference
+  reference: state.charge.reference,
 });
 
 const mapDispatchToProps = {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPhone))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPhone))
 );

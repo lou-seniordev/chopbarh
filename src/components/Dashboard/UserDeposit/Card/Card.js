@@ -23,6 +23,7 @@ import {
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
+import SubmitPhone from "./SubmitPhone/SubmitPhone";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
@@ -30,6 +31,8 @@ import {
   closeOTPModal,
   openPinModal,
   closePinModal,
+  openPhoneModal,
+  closePhoneModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
@@ -59,6 +62,7 @@ class Card extends Component {
     submitOTPModal: false,
     submitPinModal: false,
     submitAmountModal: false,
+    submitPhoneModal: true,
     selectedValue: null,
     amount: "",
     card: "",
@@ -107,6 +111,10 @@ class Card extends Component {
       removeCardModal: !this.state.removeCardModal,
     });
   };
+
+  toggleSubmitPhoneModal = () => {
+    this.setState({submitPhoneModal: !this.state.submitPhoneModal})
+  }
 
   removeCreditCard = () => {
     this.setState({ removeCardModal: false });
@@ -418,6 +426,10 @@ class Card extends Component {
             <SubmitOTP />
           </ModalBody>
         </Modal>
+        <SubmitPhone
+          submitPhoneModal={this.state.submitPhoneModal}
+          toggleSubmitPhoneModal={this.toggleSubmitPhoneModal}
+        />
         <Modal
           isOpen={this.state.modalOpen}
           toggle={this.toggleModal}
@@ -761,6 +773,7 @@ class Card extends Component {
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
+  phoneModal: state.modal.submitPhoneModal,
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
   isDataFetched: state.creditCard.fetched,
@@ -779,6 +792,8 @@ const mapDispatchToProps = {
   closeOTPModal,
   openPinModal,
   closePinModal,
+  openPhoneModal,
+  closePhoneModal,
 };
 
 export default withRouter(
