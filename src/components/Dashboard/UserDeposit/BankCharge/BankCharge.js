@@ -20,7 +20,6 @@ import {
   ExistingCardFormItem,
   Button as FormElementButton,
 } from "../../../styles/CardCharge";
-import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
@@ -36,6 +35,7 @@ import {
 } from "../../../../store/actions/bankAccountActions";
 import AccountUI from "./AccountUI/AccountUI";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
+import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitBirthday from "./SubmitBirthday/SubmitBirthday";
 import SubmitPhone from "./SubmitPhone/SubmitPhone";
 
@@ -75,18 +75,18 @@ class BankCharge extends Component {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         this.setState({
           bankList: data.data,
           dataLoading: false,
           bank: data.data[0].code,
         });
       })
-      .catch((err) => this.setState({ dataLoading: false }));
+      .catch(err => this.setState({ dataLoading: false }));
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       try {
         this.props.bankAccount.length &&
@@ -102,7 +102,7 @@ class BankCharge extends Component {
     this.setState({ modalOpen: !this.state.modalOpen, loading: false });
   };
 
-  handleRadioChange = (value) => {
+  handleRadioChange = value => {
     this.setState({ selectedValue: value });
   };
 
@@ -136,7 +136,7 @@ class BankCharge extends Component {
     return true;
   };
 
-  handleAuthSubmit = async (event) => {
+  handleAuthSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -159,7 +159,7 @@ class BankCharge extends Component {
     this.setState({ paying: true });
 
     const bankAccountObject = this.props.bankAccount.filter(
-      (account) => account.auth_code === this.state.selectedValue
+      account => account.auth_code === this.state.selectedValue
     );
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
@@ -193,18 +193,22 @@ class BankCharge extends Component {
       made_by: this.props.playerData.PhoneNum,
     };
 
-    this.props.setDepositHistory(historyObject);
+    // this.props.setDepositHistory(historyObject);
 
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
+      const response = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackbankdeposit/player/deposit/bank_charge",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify(postData),
+        }
+      );
       const data = await response.json();
 
       this.setState({
@@ -237,7 +241,7 @@ class BankCharge extends Component {
     }
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -290,19 +294,34 @@ class BankCharge extends Component {
       made_by: this.props.playerData.PhoneNum,
     };
 
-    this.props.setDepositHistory(historyObject);
+    // this.props.setDepositHistory(historyObject);
 
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      });
-      const data = await response.json();
+      const paystackBankChargeResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackbankdeposit/player/deposit/bank_charge",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.amount),
+            playerId: this.props.playerData.PlayerID,
+            phone_number: this.props.playerData.PhoneNum,
+            bank_code: this.state.bank,
+            account_number: this.state.account_number,
+            refId,
+            transaction_reference: reference,
+          }),
+        }
+      );
+      const data = await paystackBankChargeResponse.json();
+
+      console.log(data);
 
       this.setState({
         loading: false,
@@ -533,7 +552,7 @@ class BankCharge extends Component {
                     </AccordionItemHeading>
                     <AccordionItemPanel>
                       <ExistingCardForm
-                        onSubmit={(event) =>
+                        onSubmit={event =>
                           this.handleAuthSubmit(event, this.state.bankName)
                         }
                       >
@@ -606,7 +625,7 @@ class BankCharge extends Component {
                               onChange={this.handleInputChange}
                               required
                             >
-                              {this.state.bankList.map((bank) => (
+                              {this.state.bankList.map(bank => (
                                 <option key={bank.id} value={bank.code}>
                                   {bank.name}
                                 </option>
@@ -670,7 +689,7 @@ class BankCharge extends Component {
                         onChange={this.handleInputChange}
                         required
                       >
-                        {this.state.bankList.map((bank) => (
+                        {this.state.bankList.map(bank => (
                           <option key={bank.id} value={bank.code}>
                             {bank.name}
                           </option>
@@ -733,7 +752,7 @@ class BankCharge extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   phoneModal: state.modal.submitPhoneModal,
   birthdayModal: state.modal.submitBirthdayModal,
