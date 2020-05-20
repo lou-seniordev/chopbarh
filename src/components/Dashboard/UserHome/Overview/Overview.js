@@ -65,7 +65,7 @@ class Overview extends Component {
             </div>
           </OverviewContainer>
         )}
-        {this.props.playerData && (
+        {!this.props.loading && this.props.playerData && (
           <>
             <HeadingFour className="mb-5 text-center">Overview</HeadingFour>
             <OverviewContainer className="row text-center">

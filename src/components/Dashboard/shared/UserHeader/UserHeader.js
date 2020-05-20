@@ -413,10 +413,7 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData,
   loading: state.player.loading,
   error: state.player.error,
-  isAuthenticated:
-    localStorage.getItem("chopbarh-token") !== null &&
-    jwt.decode(localStorage.getItem("chopbarh-token")).uid ===
-      localStorage.getItem("chopbarh-id"),
+  isAuthenticated: localStorage.getItem("chopbarh-token") !== null,
 });
 
 const mapDispatchToProps = {

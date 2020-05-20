@@ -103,10 +103,7 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated:
-    localStorage.getItem("chopbarh-token") !== null &&
-    jwt.decode(localStorage.getItem("chopbarh-token")).uid ===
-      localStorage.getItem("chopbarh-id"),
+  isAuthenticated: localStorage.getItem("chopbarh-token") !== null,
 });
 
 const mapDispatchToProps = {
