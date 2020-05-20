@@ -28,6 +28,12 @@ import {
   closeBirthdayModal,
   openPhoneModal,
   closePhoneModal,
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankBirthdayModal,
+  closeBankBirthdayModal,
+  openBankPhoneModal,
+  closeBankPhoneModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchBankAccountData,
@@ -331,26 +337,31 @@ class BankCharge extends Component {
         paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "send_birthday") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openBirthdayModal();
-      } else if (data.data.status === "open_url") {
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "pending") {
-        this.toggleModal();
-        toast.info("Transaction is processing");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankPhoneModal();
+        } else if (data.data.status === "send_birthday") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankBirthdayModal();
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "pending") {
+          this.toggleModal();
+          toast.info("Transaction is processing");
+        } else {
+          this.toggleModal();
+          toast.error(`Transaction not successful`);
+        }
       } else {
         this.toggleModal();
-        toast.error(`Transaction not successful`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.toggleModal();
@@ -389,8 +400,8 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.otpModal}
-          toggle={this.props.closeOTPModal}
+          isOpen={this.props.bankOTPModal}
+          toggle={this.props.closeBankOTPModal}
           style={{
             top: "50%",
             transform: "translateY(-50%)",
@@ -401,7 +412,7 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.birthdayModal}
+          isOpen={this.props.bankBirthdayModal}
           toggle={this.props.closeBirthdayModal}
           style={{
             top: "50%",
@@ -413,8 +424,8 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.phoneModal}
-          toggle={this.props.closePhoneModal}
+          isOpen={this.props.bankPhoneModal}
+          toggle={this.props.closeBankPhoneModal}
           style={{
             top: "50%",
             transform: "translateY(-50%)",
@@ -756,6 +767,11 @@ const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   phoneModal: state.modal.submitPhoneModal,
   birthdayModal: state.modal.submitBirthdayModal,
+
+  bankOTPModal: state.modal.bankOTPModal,
+  bankPhoneModal: state.modal.bankPhoneModal,
+  bankBirthdayModal: state.modal.bankBirthdayModal,
+
   bankAccount: state.bankAccount.bankAccount,
   loading: state.bankAccount.loading,
   removingAccount: state.bankAccount.removing,
@@ -773,6 +789,13 @@ const mapDispatchToProps = {
   openPhoneModal,
   closeBirthdayModal,
   closePhoneModal,
+
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankBirthdayModal,
+  closeBankBirthdayModal,
+  openBankPhoneModal,
+  closeBankPhoneModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(BankCharge));
