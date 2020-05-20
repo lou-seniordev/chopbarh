@@ -70,26 +70,49 @@ class BankCharge extends Component {
     modalOpen: false,
     paying: false,
     removeAccountModal: false,
+    error: false,
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.fetchBankAccountData();
 
-    fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
-      headers: {
-        Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
+    try {
+      const paystackBankListResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbanklist/player/deposit/banks",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+            },
+          }
+        )
+      ).json();
+
+      if (paystackBankListResponse.status === true) {
         this.setState({
-          bankList: data.data,
+          bankList: paystackBankListResponse.data,
           dataLoading: false,
-          bank: data.data[0].code,
+          bank: paystackBankListResponse.data[0].code,
         });
-      })
-      .catch(err => this.setState({ dataLoading: false }));
+      } else {
+        this.setState({ dataLoading: false, error: true });
+      }
+    } catch (error) {
+      this.setState({ dataLoading: false, error: true });
+    }
+
+    // fetch("http://localhost:5000/dev-sample-31348/us-central1/paystackbanklist/player/deposit/banks", {
+    //   headers: {
+    //     Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //   })
+    //   .catch(err => this.setState({ dataLoading: false }));
   };
 
   componentDidUpdate = prevProps => {
@@ -203,7 +226,7 @@ class BankCharge extends Component {
 
     try {
       const paystackBankChargeResponse = await fetch(
-        "http://localhost:5000/dev-sample-31348/us-central1/paystackbankdeposit/player/deposit/bank_charge",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbankdeposit/player/deposit/bank_charge",
         {
           method: "POST",
           mode: "cors",
@@ -317,7 +340,7 @@ class BankCharge extends Component {
 
     try {
       const paystackBankChargeResponse = await fetch(
-        "http://localhost:5000/dev-sample-31348/us-central1/paystackbankdeposit/player/deposit/bank_charge",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbankdeposit/player/deposit/bank_charge",
         {
           method: "POST",
           mode: "cors",
@@ -688,12 +711,25 @@ class BankCharge extends Component {
                           </FormSubmitButton>
                         </Form>
                       ) : (
-                        <div
-                          className="mt-5 text-center"
-                          style={{ minHeight: "30vh" }}
-                        >
-                          <Spinner />
-                        </div>
+                        <>
+                          {!this.state.error ? (
+                            <div
+                              className="mt-5 text-center"
+                              style={{ minHeight: "30vh" }}
+                            >
+                              <Spinner />
+                            </div>
+                          ) : (
+                            <div
+                              className="mt-5 text-center"
+                              style={{ minHeight: "30vh" }}
+                            >
+                              <p>
+                                An error occured while fetching bank information
+                              </p>
+                            </div>
+                          )}
+                        </>
                       )}
                     </AccordionItemPanel>
                   </AccordionItem>

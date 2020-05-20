@@ -53,7 +53,7 @@ class SubmitPhone extends Component {
 
     try {
       const submitPhoneResponse = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_phone",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_phone",
         {
           method: "POST",
           mode: "cors",

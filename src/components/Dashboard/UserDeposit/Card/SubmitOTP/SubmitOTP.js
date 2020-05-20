@@ -54,7 +54,7 @@ class SubmitOTP extends Component {
 
     try {
       const submitOTPResponse = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_otp",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_otp",
         {
           method: "POST",
           mode: "cors",

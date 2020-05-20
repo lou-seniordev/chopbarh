@@ -30,7 +30,6 @@ const Form = styled.form`
   min-height: 12rem;
 `;
 
-// sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
 class SubmitPin extends Component {
   state = {
     pin: "",
@@ -65,7 +64,7 @@ class SubmitPin extends Component {
 
     try {
       const submitPinResponse = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_pin",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_pin",
         {
           method: "POST",
           headers: {

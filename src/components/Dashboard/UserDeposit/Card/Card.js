@@ -51,9 +51,6 @@ import {
 import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
 
-// Test sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841
-// sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
-
 function referenceId() {
   let text = "";
   let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -207,7 +204,7 @@ class Card extends Component {
 
     try {
       const paystackAuthChargeResponse = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
         {
           method: "POST",
           headers: {
@@ -319,7 +316,7 @@ class Card extends Component {
 
     try {
       const paystackCardChargeResponse = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackcarddeposit/player/deposit/card_charge",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackcarddeposit/player/deposit/card_charge",
         {
           method: "POST",
           headers: {
@@ -371,7 +368,7 @@ class Card extends Component {
           toast.error(`Please try again`);
         }
       } else {
-        toast.error(`Please try again`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });
