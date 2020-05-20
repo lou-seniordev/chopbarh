@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
-  openOTPModal,
+  closeBankOTPModal,
   closeOTPModal,
 } from "../../../../../store/actions/modalActions";
 import { setBankAccountData } from "../../../../../store/actions/bankAccountActions";
@@ -49,7 +49,7 @@ class SubmitOTP extends Component {
 
     try {
       const response = await fetch(
-        "http://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_otp",
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_otp",
         {
           method: "POST",
           mode: "cors",
@@ -64,21 +64,18 @@ class SubmitOTP extends Component {
 
       const data = await response.json();
 
-      console.log(data);
-
       if (data.status === true) {
         if (data.data.status === "success") {
-          // Verify payment before adding
-          this.props.closeOTPModal();
+          this.props.closeBankOTPModal();
           this.setState({ loading: false });
           toast.info(`Transaction is processing`);
         } else if (data.data.status === "open_url") {
-          this.props.closeOTPModal();
+          this.props.closeBankOTPModal();
           window.open(data.data.url, "_self");
         } else if (data.data.status === "pending") {
-          this.props.closeOTPModal();
+          this.props.closeBankOTPModal();
         } else if (data.data.status === "failed") {
-          this.props.closeOTPModal();
+          this.props.closeBankOTPModal();
           window.open(data.data.url, "_self");
         } else {
           toast.error(data.data.message);
@@ -86,6 +83,7 @@ class SubmitOTP extends Component {
         }
       } else {
         toast.error("Transaction Declined");
+        this.setState({ loading: false });
       }
     } catch (err) {
       this.setState({ loading: false });
@@ -139,7 +137,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  openOTPModal,
+  closeBankOTPModal,
   setBankAccountData,
   closeOTPModal,
 };

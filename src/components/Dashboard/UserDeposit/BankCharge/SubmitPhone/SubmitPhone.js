@@ -8,6 +8,9 @@ import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
   closeOTPModal,
+  openBankOTPModal,
+  closeBankOTPModal,
+  closeBankPhoneModal,
 } from "../../../../../store/actions/modalActions";
 
 const Form = styled.form`
@@ -47,30 +50,37 @@ class SubmitPhone extends Component {
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_phone",
+      const submitPhoneResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_phone",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
             "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
-      if (data.data.status === "success") {
-        // Verify payment before adding
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
+      const data = await submitPhoneResponse.json();
+
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          this.setState({ loading: false });
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "send_otp") {
+          this.props.closeBankPhoneModal();
+          this.props.openBankOTPModal();
+        } else {
+          toast.error(`Please try again`);
+          this.setState({ loading: false });
+        }
       } else {
-        toast.error(`Please try again`);
+        toast.error(`Transaction Declined`);
         this.setState({ loading: false });
       }
     } catch (err) {
@@ -127,6 +137,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
+
+  openBankOTPModal,
+  closeBankOTPModal,
+  closeBankPhoneModal,
 };
 
 export default withRouter(

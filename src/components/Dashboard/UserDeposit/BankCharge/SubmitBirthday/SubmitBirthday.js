@@ -9,7 +9,11 @@ import {
   openOTPModal,
   closeOTPModal,
   openPhoneModal,
-  closeBirthdayModal
+  closeBirthdayModal,
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankPhoneModal,
+  closeBankBirthdayModal,
 } from "../../../../../store/actions/modalActions";
 
 const Form = styled.form`
@@ -19,7 +23,7 @@ const Form = styled.form`
 class SubmitBirthday extends Component {
   state = {
     birthday: "",
-    loading: false
+    loading: false,
   };
 
   // formIsValid = ({ otp }) => {
@@ -31,24 +35,11 @@ class SubmitBirthday extends Component {
 
   getDate = date => {
     const month =
-      Number(
-        new Date(
-          date
-            .split("/")
-            .reverse()
-            .join("/")
-        ).getMonth()
-      ) + 1;
+      Number(new Date(date.split("/").reverse().join("/")).getMonth()) + 1;
     return `${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
+      date.split("/").reverse().join("/")
     ).getFullYear()}-0${month}-${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
+      date.split("/").reverse().join("/")
     ).getDate()}`;
   };
 
@@ -62,41 +53,48 @@ class SubmitBirthday extends Component {
 
     const postData = {
       birthday: this.getDate(this.state.birthday),
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_birthday",
+      const submitBirthdayResponse = await fetch(
+        "http://localhost:5000/dev-sample-31348/us-central1/paystackchargeresolvers/player/deposit/submit_birthday",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
-      if (data.data.status === "success") {
-        // Verify payment before adding
-        this.props.closeBirthdayModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-      } else if (data.data.status === "send_otp") {
-        this.props.closeBirthdayModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.props.closeBirthdayModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
+      const data = await submitBirthdayResponse.json();
+
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          this.props.closeBankBirthdayModal();
+          this.setState({ loading: false });
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "send_otp") {
+          this.props.closeBankBirthdayModal();
+          this.props.openBankOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.props.closeBankBirthdayModal();
+          this.props.openBankPhoneModal();
+        } else if (data.data.status === "open_url") {
+          this.props.closePinModal();
+          window.open(data.data.url, "_self");
+        } else {
+          this.props.closeBankBirthdayModal();
+          toast.error(data.data.message);
+          this.setState({ loading: false });
+        }
       } else {
-        this.props.closeBirthdayModal();
-        toast.error(data.data.message);
+        this.props.closeBankBirthdayModal();
+        toast.error("Transaction Declined");
         this.setState({ loading: false });
       }
     } catch (err) {
@@ -113,7 +111,7 @@ class SubmitBirthday extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -148,19 +146,21 @@ class SubmitBirthday extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference
+  reference: state.charge.reference,
 });
 
 const mapDispatchToProps = {
   openOTPModal,
   closeOTPModal,
   closeBirthdayModal,
-  openPhoneModal
+  openPhoneModal,
+
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankPhoneModal,
+  closeBankBirthdayModal,
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitBirthday))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitBirthday))
 );

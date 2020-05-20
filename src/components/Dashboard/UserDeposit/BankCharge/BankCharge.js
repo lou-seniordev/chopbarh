@@ -202,7 +202,7 @@ class BankCharge extends Component {
     // this.props.setDepositHistory(historyObject);
 
     try {
-      const response = await fetch(
+      const paystackBankChargeResponse = await fetch(
         "http://localhost:5000/dev-sample-31348/us-central1/paystackbankdeposit/player/deposit/bank_charge",
         {
           method: "POST",
@@ -212,10 +212,19 @@ class BankCharge extends Component {
             Accept: "application/json",
             "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData),
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.authAmount),
+            playerId: this.props.playerData.PlayerID,
+            phone_number: this.props.playerData.PhoneNum,
+            bank_code: bankAccountObject[0].bank_code,
+            account_number: bankAccountObject[0].account_number,
+            refId,
+            transaction_reference: reference,
+          }),
         }
       );
-      const data = await response.json();
+      const data = await paystackBankChargeResponse.json();
 
       this.setState({
         loading: false,
@@ -223,23 +232,27 @@ class BankCharge extends Component {
         paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.toggleModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "send_birthday") {
-        this.toggleModal();
-        this.props.openBirthdayModal();
-      } else if (data.data.status === "open_url") {
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "pending") {
-        this.toggleModal();
-        toast.info("Transaction is processing");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.toggleModal();
+          this.props.openBankPhoneModal();
+        } else if (data.data.status === "send_birthday") {
+          this.toggleModal();
+          this.props.openBankBirthdayModal();
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "pending") {
+          this.toggleModal();
+          toast.info("Transaction is processing");
+        } else {
+          toast.error(`Transaction not successful`);
+        }
       } else {
-        toast.error(`Transaction not successful`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       toast.error(`Something went wrong`);
@@ -326,8 +339,6 @@ class BankCharge extends Component {
         }
       );
       const data = await paystackBankChargeResponse.json();
-
-      console.log(data);
 
       this.setState({
         loading: false,
@@ -445,7 +456,7 @@ class BankCharge extends Component {
         >
           <ModalBody
             className="text-center mt-5 mb-5"
-            style={{ minHeight: "20vh" }}
+            style={{ minHeight: "5rem" }}
           >
             {this.state.amount ? (
               <>
