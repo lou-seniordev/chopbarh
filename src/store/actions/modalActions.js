@@ -79,3 +79,27 @@ export const openCardBirthdayModal = () => ({
 export const closeCardBirthdayModal = () => ({
   type: actionType.CLOSE_CARD_BIRTHDAY_MODAL,
 });
+
+export const openBankOTPModal = () => ({
+  type: actionType.OPEN_BANK_OTP_MODAL,
+});
+
+export const closeBankOTPModal = () => ({
+  type: actionType.CLOSE_BANK_OTP_MODAL,
+});
+
+export const openBankPhoneModal = () => ({
+  type: actionType.OPEN_BANK_PHONE_MODAL,
+});
+
+export const closeBankPhoneModal = () => ({
+  type: actionType.CLOSE_BANK_PHONE_MODAL,
+});
+
+export const openBankBirthdayModal = () => ({
+  type: actionType.OPEN_BANK_BIRTHDAY_MODAL,
+});
+
+export const closeBankBirthdayModal = () => ({
+  type: actionType.CLOSE_BANK_BIRTHDAY_MODAL,
+});

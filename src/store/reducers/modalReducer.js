@@ -11,6 +11,9 @@ const initialState = {
   cardOTPModal: false,
   cardPhoneModal: false,
   cardBirthdayModal: false,
+  bankOTPModal: false,
+  bankPhoneModal: false,
+  bankBirthdayModal: false,
 };
 
 export default (state = initialState, action) => {
@@ -114,6 +117,36 @@ export default (state = initialState, action) => {
       return {
         ...state,
         cardBirthdayModal: false,
+      };
+    case actionType.OPEN_BANK_OTP_MODAL:
+      return {
+        ...state,
+        bankOTPModal: true,
+      };
+    case actionType.CLOSE_BANK_OTP_MODAL:
+      return {
+        ...state,
+        bankOTPModal: false,
+      };
+    case actionType.OPEN_BANK_PHONE_MODAL:
+      return {
+        ...state,
+        bankPhoneModal: true,
+      };
+    case actionType.CLOSE_BANK_PHONE_MODAL:
+      return {
+        ...state,
+        bankPhoneModal: false,
+      };
+    case actionType.OPEN_BANK_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        bankBirthdayModal: true,
+      };
+    case actionType.CLOSE_BANK_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        bankBirthdayModal: false,
       };
     default:
       return state;
