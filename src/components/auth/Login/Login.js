@@ -99,12 +99,14 @@ class Login extends Component {
         if (data.status === true) {
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
-          // context.props.authSuccess(data.serviceToken, data.userId);
+          this.props.authSuccess(data.authToken, data.userId);
 
-          if (appRoutes.includes(context.props.lastLocation.pathname)) {
-            context.props.history.push(context.props.lastLocation.pathname);
+          if (appRoutes.includes(this.props.lastLocation.pathname)) {
+            console.log("Found a Page");
+            this.props.history.push(this.props.lastLocation.pathname);
           } else {
-            context.props.history.push("/user");
+            console.log("No page found");
+            this.props.history.push("/user");
           }
 
           // return firebase

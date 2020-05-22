@@ -1,6 +1,6 @@
 import React, { Component, Suspense, lazy } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
-import jwt from "jsonwebtoken";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+// import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 import { authSuccess } from "../store/actions/authActions";
 import { fetchPlayerData } from "../store/actions/playerDataActions";
@@ -13,7 +13,7 @@ const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
 const ForgotPassword = lazy(() =>
   import("../components/auth/ForgotPassword/ForgotPassword")
 );
-const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
+// const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 const Logout = lazy(() => import("../components/auth/Logout/Logout"));
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
 const UserPlayPage = lazy(() => import("../Pages/UserPlayPage"));
@@ -41,23 +41,27 @@ const Loading = () => (
 );
 
 class Layout extends Component {
-  componentDidMount = () => {
+  constructor(props) {
+    super(props);
+
     this.props.isAuthenticated &&
       this.props.authSuccess(
-        localStorage.getItem("chopbarh-token"),
-        localStorage.getItem("chopbarh-id")
+        localStorage.getItem("chopbarh-token:live"),
+        localStorage.getItem("chopbarh-id:live")
       );
-  };
+  }
+  // componentDidMount = () => {
+  // };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps !== this.props) {
-      this.props.isAuthenticated &&
-        this.props.authSuccess(
-          localStorage.getItem("chopbarh-token"),
-          localStorage.getItem("chopbarh-id")
-        );
-    }
-  };
+  // componentDidUpdate = prevProps => {
+  //   if (prevProps !== this.props) {
+  //     this.props.isAuthenticated &&
+  //       this.props.authSuccess(
+  //         localStorage.getItem("chopbarh-token"),
+  //         localStorage.getItem("chopbarh-id")
+  //       );
+  //   }
+  // };
 
   render() {
     return (
@@ -78,6 +82,8 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignUpPage} />
               <Redirect push to="/" />
             </Switch>
           </Suspense>

@@ -21,7 +21,7 @@ export const authLogout = () => async () => {
   localStorage.removeItem("chopbarh-token");
   localStorage.removeItem("chopbarh-id");
 
-  await firebase.auth().signOut();
+  // await firebase.auth().signOut();
 
   return {
     type: actionType.AUTH_LOGOUT,
@@ -32,7 +32,7 @@ export const expirationLogout = () => async () => {
   localStorage.removeItem("chopbarh-token");
   localStorage.removeItem("chopbarh-id");
 
-  await firebase.auth().signOut();
+  // await firebase.auth().signOut();
 
   window.location = "/";
 
