@@ -78,7 +78,7 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
-              <Route path="/*" component={NotFoundPage} />
+              <Redirect push to="/" />
             </Switch>
           </Suspense>
         ) : (
@@ -92,7 +92,7 @@ class Layout extends Component {
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
               <Route path="/user" component={UserHomePage} />
-              <Route path="/*" component={NotFoundPage} />
+              <Redirect push to="/login" />
               {/* <Redirect push to="/" /> */}
             </Switch>
           </Suspense>
