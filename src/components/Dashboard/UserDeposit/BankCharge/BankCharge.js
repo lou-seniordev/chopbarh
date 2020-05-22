@@ -102,17 +102,6 @@ class BankCharge extends Component {
     } catch (error) {
       this.setState({ dataLoading: false, error: true });
     }
-
-    // fetch("http://localhost:5000/dev-sample-31348/us-central1/paystackbanklist/player/deposit/banks", {
-    //   headers: {
-    //     Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //   })
-    //   .catch(err => this.setState({ dataLoading: false }));
   };
 
   componentDidUpdate = prevProps => {
