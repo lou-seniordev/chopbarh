@@ -54,11 +54,7 @@ class Login extends Component {
   };
 
   formIsValid = ({ userName, password }) => {
-    if (
-      userName.length !== 11 ||
-      !isNaN(userName) !== true ||
-      password.length !== 4
-    ) {
+    if (userName.length !== 11 || !isNaN(userName) !== true) {
       return false;
     }
     return true;
@@ -195,7 +191,7 @@ class Login extends Component {
                 value={this.state.password}
                 required
                 minLength="4"
-                maxLength="4"
+                maxLength="12"
               />
             </FormItem>
             <FormAction>
