@@ -59,7 +59,7 @@ function UpdateApplication() {
               </a>
             </p>
             <p>
-              <a href="https://chopbarh.live/download">
+              <a href="https://bit.ly/3dszMAZ">
                 <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>
@@ -85,7 +85,7 @@ function UpdateApplication() {
               </a>
             </p>
             <p>
-              <a href="https://chopbarh.live/download">
+              <a href="https://bit.ly/3dszMAZ">
                 <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>

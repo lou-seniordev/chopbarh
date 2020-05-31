@@ -68,7 +68,7 @@ class SignUp extends Component {
               {/* <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
                 <img src={PlayStore} alt="Play Store" />
               </a> */}
-              <a href="https://chopbarh.live/download">
+              <a href="https://bit.ly/3dszMAZ">
                 <img src={PlayStore} alt="Play Store" />
               </a>
             </p>

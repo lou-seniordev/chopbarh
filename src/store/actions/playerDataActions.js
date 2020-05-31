@@ -18,6 +18,7 @@ export const fetchPlayerData = () => async (dispatch, getState) => {
 
   fetch("https://pay.chopbarh.com/ng/api/get_user_profile", {
     method: "POST",
+    mode: "cors",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

@@ -606,7 +606,7 @@ class AccountNumber extends Component {
                     value={this.state.password}
                     onChange={this.handleInputChange}
                     minLength="4"
-                    maxLength="4"
+                    maxLength="12"
                     required
                     placeholder="Password"
                   />
