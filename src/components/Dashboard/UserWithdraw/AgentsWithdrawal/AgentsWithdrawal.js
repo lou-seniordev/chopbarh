@@ -31,7 +31,7 @@ class AgentsWithdrawal extends Component {
     try {
       let snapshots = await firestore
         .collection("transfer_to_agent")
-        .where("playerId", "==", localStorage.getItem("chopbarh-id:live"))
+        .where("playerId", "==", localStorage.getItem("chopbarh-id"))
         .where("at", ">=", timestamp)
         .get();
 

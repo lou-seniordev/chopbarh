@@ -173,7 +173,7 @@ class DepositTable extends Component {
 const mapStateToProps = state => ({
   playerId: state.player.playerData
     ? state.player.playerData.PlayerID
-    : localStorage.getItem("chopbarh-id:live"),
+    : localStorage.getItem("chopbarh-id"),
   loading: state.deposit.loading,
   error: state.deposit.error,
   depositData: state.deposit.depositHistory,
