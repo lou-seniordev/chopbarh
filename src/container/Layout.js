@@ -46,8 +46,8 @@ class Layout extends Component {
 
     this.props.isAuthenticated &&
       this.props.authSuccess(
-        localStorage.getItem("chopbarh-token:live"),
-        localStorage.getItem("chopbarh-id:live")
+        localStorage.getItem("chopbarh-token"),
+        localStorage.getItem("chopbarh-id")
       );
   }
   // componentDidMount = () => {

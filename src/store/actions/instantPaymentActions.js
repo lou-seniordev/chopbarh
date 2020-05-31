@@ -3,16 +3,16 @@ import { firestore } from "../../firebase";
 import { toast } from "react-toastify";
 
 export const fetchInstantPaymentAccountInit = () => ({
-  type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_INIT
+  type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_INIT,
 });
 
 export const fetchInstantPaymentAccountSuccess = data => ({
   type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_SUCCESS,
-  data
+  data,
 });
 
 export const fetchInstantPaymentAccountFail = () => ({
-  type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_FAIL
+  type: actionType.FETCH_INSTANT_PAYMENT_ACCOUNT_FAIL,
 });
 
 export const fetchInstantPaymentAccountData = () => async (
@@ -28,6 +28,8 @@ export const fetchInstantPaymentAccountData = () => async (
       .get();
 
     const data = snapshot.data();
+
+    console.log(data);
 
     // console.log(data);
     //   console.log(snapshot.data(), getState().auth.id);
@@ -51,16 +53,16 @@ export const fetchInstantPaymentAccountData = () => async (
 };
 
 export const setInstantPaymentAccountInit = () => ({
-  type: actionType.SET_INSTANT_PAYMENT_ACCOUNT_INIT
+  type: actionType.SET_INSTANT_PAYMENT_ACCOUNT_INIT,
 });
 
 export const setInstantPaymentAccountSuccess = data => ({
   type: actionType.SET_INSTANT_PAYMENT_ACCOUNT_SUCCESS,
-  data
+  data,
 });
 
 export const setInstantPaymentAccountFail = () => ({
-  type: actionType.SET_INSTANT_PAYMENT_ACCOUNT_FAIL
+  type: actionType.SET_INSTANT_PAYMENT_ACCOUNT_FAIL,
 });
 
 export const setInstantPaymentAccountData = payload => async (
@@ -70,19 +72,16 @@ export const setInstantPaymentAccountData = payload => async (
   dispatch(setInstantPaymentAccountInit());
 
   try {
-    await firestore
-      .collection("instant_payment")
-      .doc(getState().auth.id)
-      .set({
-        account_number: payload.account_number,
-        bank_name: payload.bank_name
-      });
+    await firestore.collection("instant_payment").doc(getState().auth.id).set({
+      account_number: payload.account_number,
+      bank_name: payload.bank_name,
+    });
 
     setTimeout(() => {
       dispatch(
         fetchInstantPaymentAccountSuccess({
           account_number: payload.account_number,
-          bank_name: payload.bank_name
+          bank_name: payload.bank_name,
         })
       );
     }, 5000);
@@ -92,15 +91,15 @@ export const setInstantPaymentAccountData = payload => async (
 };
 
 export const removeInstantPaymentAccountInit = () => ({
-  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_INIT
+  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_INIT,
 });
 
 export const removeInstantPaymentAccountSuccess = () => ({
-  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_SUCCESS
+  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_SUCCESS,
 });
 
 export const removeInstantPaymentAccountFail = () => ({
-  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_FAIL
+  type: actionType.REMOVE_INSTANT_PAYMENT_ACCOUNT_FAIL,
 });
 
 export const removeInstantPaymentAccount = event => async (
