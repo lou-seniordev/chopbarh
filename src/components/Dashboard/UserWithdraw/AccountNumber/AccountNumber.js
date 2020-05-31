@@ -141,7 +141,7 @@ class AccountNumber extends Component {
   handlePasswordInputValidation = event => {
     event.preventDefault();
 
-    if (this.state.password.length === 4) {
+    if (this.state.password.length >= 4) {
       this.setState({
         passwordModal: false,
         modal: true,
@@ -162,7 +162,7 @@ class AccountNumber extends Component {
   };
 
   withdrawCash = async () => {
-    if (this.state.password.length !== 4) {
+    if (this.state.password.length < 4) {
       this.setState({
         amount: "",
         account_number: "",
@@ -236,7 +236,7 @@ class AccountNumber extends Component {
   };
 
   withdrawCashAuth = async () => {
-    if (this.state.password.length !== 4) {
+    if (this.state.password.length < 4) {
       this.setState({
         authAmount: "",
         account_number: "",

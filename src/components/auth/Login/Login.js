@@ -98,10 +98,8 @@ class Login extends Component {
           this.props.authSuccess(data.authToken, data.userId);
 
           if (appRoutes.includes(this.props.lastLocation.pathname)) {
-            console.log("Found a Page");
             this.props.history.push(this.props.lastLocation.pathname);
           } else {
-            console.log("No page found");
             this.props.history.push("/user");
           }
 
