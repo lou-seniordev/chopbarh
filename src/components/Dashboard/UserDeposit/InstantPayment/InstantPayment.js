@@ -13,7 +13,6 @@ import "react-accessible-accordion/dist/fancy-example.css";
 
 class InstantPayment extends Component {
   state = {
-    key: "FLWPUBK-c5932c92f9633277760b44c1faf57207-X",
     email: "chopbarh@mail.com",
     amount: "",
     account_active: false,
@@ -32,7 +31,7 @@ class InstantPayment extends Component {
     this.props.fetchInstantPaymentAccountData();
   };
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
       this.setState({ fetching: false });
     }
@@ -71,39 +70,46 @@ class InstantPayment extends Component {
     this.setState({ loading: true });
     // Make request to Rave
     const chargeData = {
-      seckey: "FLWSECK-6a2153446d5f15349075c71f591f9290-X",
       narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      is_permanent: true,
       txRef: `${this.props.playerData.PhoneNum}-${this.getReference()}`,
       phonenumber: this.props.playerData.PhoneNum,
       firstname: `${this.props.playerData.PhoneNum}`,
       lastname: `${this.props.playerData.PhoneNum}`,
     };
 
-    fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(chargeData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Display the result in Modal
-        this.setState({
-          successModal: true,
-          paymentData: { ...data.data },
-          loading: false,
-        });
-
-        //  Attach this account number to this person
-        this.props.setInstantPaymentAccountData({
-          account_number: data.data.accountnumber,
-          bank_name: data.data.bankname,
-        });
+    fetch(
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/raveinstantpayment/player/request/account",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(chargeData),
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          // Display the result in Modal
+          this.setState({
+            successModal: true,
+            paymentData: { ...data.data },
+            loading: false,
+          });
+          //  Attach this account number to this person
+          this.props.setInstantPaymentAccountData({
+            account_number: data.data.accountnumber,
+            bank_name: data.data.bankname,
+          });
+        } else {
+          this.setState({
+            loading: false,
+            errorModal: true,
+          });
+        }
       })
-      .catch((err) => {
+      .catch(err => {
         // Display error modal
         this.setState({
           loading: false,
@@ -118,60 +124,6 @@ class InstantPayment extends Component {
     //  Delete Account
     this.setState({ removing: true });
     this.props.removeInstantPaymentAccount();
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!this.formIsValid(this.state)) {
-      this.setState({ loading: false });
-      toast.error(`Amount is not valid`);
-      return;
-    }
-
-    if (+this.state.amount < 100) {
-      toast.error(`Minimum deposit is \u20a6${100}`);
-      this.setState({ loading: false });
-      return;
-    }
-
-    this.setState({ loading: true });
-
-    // Make request to Rave
-    const chargeData = {
-      seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
-      narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
-      email: "chopbarh@mail.com",
-      is_permanent: true,
-    };
-
-    fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(chargeData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Display the result in Modal
-        this.setState({
-          successModal: true,
-          paymentData: { ...data.data },
-          loading: false,
-        });
-
-        //  Attach this account number to this person
-        this.props.setInstantPaymentAccountData({
-          account_number: data.data.accountnumber,
-        });
-      })
-      .catch((err) => {
-        // Display error modal
-        this.setState({ loading: false, errorModal: true });
-      });
-
-    // If the user has used the moethod before, it should not have them
   };
 
   render() {
@@ -300,7 +252,7 @@ class InstantPayment extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   playerData: state.player.playerData,
   account: state.instantPayment.account,
   error: state.instantPayment.error,
