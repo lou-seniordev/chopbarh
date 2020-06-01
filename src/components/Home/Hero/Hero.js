@@ -10,6 +10,7 @@ import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
 // import VendorButton from "../../assets/img/vendor_button@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
+import MegaMillions from "../../assets/img/MegaMillions.jpeg";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -89,7 +90,7 @@ const ParagraphOne = styled.p`
 
   @media only screen and (max-width: ${breakPoints.small}) {
     margin-top: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smallest}) {
@@ -159,11 +160,11 @@ const SliderImage = styled.img`
 const SliderContent = styled.div`
   position: absolute;
   top: 50%;
-  left: ${(props) => (props.first ? "35%" : "50%")};
+  left: ${props => (props.first ? "35%" : "50%")};
   z-index: 2000;
   transform: translate(-50%, -50%);
 
-  margin-left: ${(props) => (props.first ? "2rem" : "0")};
+  margin-left: ${props => (props.first ? "2rem" : "0")};
 
   @media only screen and (max-width: ${breakPoints.large}) {
     left: 50%;
@@ -539,12 +540,18 @@ export default function Hero() {
                     &#8358;10 Billion Registration Funds Available
                   </HeadingTwoFirst>
                 </MediaQuery> */}
-                <HeadingTwoFirst
+                {/* <HeadingTwoFirst
                   className="hero__title mt-4"
                   style={{ color: "#ebc709" }}
                 >
                   DOWNLOAD NOW AND GET FREE COINS
-                </HeadingTwoFirst>
+                </HeadingTwoFirst> */}
+                <img
+                  src={MegaMillions}
+                  alt="Mega Millions"
+                  width="250"
+                  className="mb-2"
+                />
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
                   to the moment
