@@ -171,7 +171,10 @@ class InstantPayment extends Component {
                   </p>
                   <p>
                     Funds Will be Automatically credited to your chopbarh
-                    account within 2-5 minutes of successful deposit
+                    account within 2-5 minutes of successful deposit.
+                    <br />
+                    However deposits could take up to 24 hours due to occasional
+                    banking delays.
                   </p>
                 </div>
               </>
