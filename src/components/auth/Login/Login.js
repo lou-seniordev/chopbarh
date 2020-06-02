@@ -181,7 +181,7 @@ class Login extends Component {
               />
             </FormItem>
             <FormItem>
-              <label>Enter Pin</label>
+              <label>Enter Password</label>
               <input
                 type="password"
                 name="password"
