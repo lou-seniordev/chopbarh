@@ -21,7 +21,7 @@ import {
   authFail,
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
-import firebase from "../../../firebase";
+// import firebase from "../../../firebase";
 
 const appRoutes = [
   "/edit-profile",
