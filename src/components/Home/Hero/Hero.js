@@ -320,7 +320,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://bit.ly/3dqpelK">
+                  <a href="https://bit.ly/2MmfMnl">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -366,7 +366,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://bit.ly/3dqpelK">
+                  <a href="https://bit.ly/2MmfMnl">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -412,7 +412,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://bit.ly/3dqpelK">
+                  <a href="https://bit.ly/2MmfMnl">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -453,7 +453,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://bit.ly/3dqpelK">
+                  <a href="https://bit.ly/2MmfMnl">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -494,7 +494,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://bit.ly/3dqpelK">
+                  <a href="https://bit.ly/2MmfMnl">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -567,7 +567,7 @@ export default function Hero() {
                     </a>
                   </span>
                   <span style={{ cursor: "pointer" }}>
-                    <a href="https://bit.ly/3dqpelK">
+                    <a href="https://bit.ly/2MmfMnl">
                       <Image
                         src={PlayStoreButton}
                         className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3 mb-2"
