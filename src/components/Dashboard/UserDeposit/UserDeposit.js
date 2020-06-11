@@ -17,9 +17,12 @@ export default function UserDeposit() {
         {/* <MediaQuery minDeviceWidth={767}>
           <DepositTabs />
         </MediaQuery> */}
-        <DepositSmallScreens />
         {/* <MediaQuery maxDeviceWidth={767}>
         </MediaQuery> */}
+        <DepositSmallScreens />
+        {/* <p className="text-center mt-5">
+          Services are unavailable at this time
+        </p> */}
       </div>
       <Footer />
     </>

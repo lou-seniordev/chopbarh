@@ -252,7 +252,6 @@ class RavePayment extends Component {
                 ref: flw_ref,
               }),
             });
-          } else {
           }
         },
       });

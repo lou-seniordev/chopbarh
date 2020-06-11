@@ -10,7 +10,7 @@ import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
 import WithdrawSmallScreens from "./WithdrawSmallScreens/WithdrawSmallScreens";
 import {
   fetchWithdrawalHistoryData,
-  setWithdrawalStatus
+  setWithdrawalStatus,
 } from "../../../store/actions/withdrawalActions";
 import { fetchPlayerData } from "../../../store/actions/playerDataActions";
 
@@ -85,6 +85,9 @@ class UserWithdraw extends Component {
           <MediaQuery maxDeviceWidth={767}>
             <WithdrawSmallScreens />
           </MediaQuery>
+          {/* <p className="text-center mt-5">
+            Services are unavailable at this time
+          </p> */}
         </div>
         <Footer />
       </>
@@ -98,16 +101,13 @@ const mapStateToProps = state => ({
   withdrawalLimit: state.withdrawal.withdrawalLimit,
   withdrawalStatus: state.withdrawal.withdrawalStatus,
   playerData: state.player.playerData,
-  playerDataLoading: state.player.loading
+  playerDataLoading: state.player.loading,
 });
 
 const mapDispatchToProps = {
   fetchWithdrawalHistoryData,
   setWithdrawalStatus,
-  fetchPlayerData
+  fetchPlayerData,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(UserWithdraw));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(UserWithdraw));
