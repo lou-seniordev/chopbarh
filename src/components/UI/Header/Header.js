@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 import colors from "../../styles/colors";
 import breakPoints from "../../styles/breakpoints";
@@ -58,127 +58,135 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-export default function Header({ transparent }) {
-  return (
-    <HeaderWrapper transparent={transparent}>
-      <nav
-        className="navbar navbar-expand-lg navbar-dark mt-2"
-        role="navigation"
-      >
-        <Link className="navbar-brand navbar-logo mt-n4" to="/">
-          <Logo />
-        </Link>
-        <MediaQuery maxDeviceWidth={991}>
-          <Link to="contacts">
-            <div
-              // className="nav-item mt-4"
-              style={{
-                color: "#fff",
-                textTransform: "uppercase",
-                fontSize: "1.35rem",
-                marginLeft: "-1.2rem",
-                border: "1px solid #aaa",
-                padding: ".5rem",
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "2px",
-                cursor: "pointer",
-              }}
-            >
-              <span className="mr-3">Contact Us:</span>
-              <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
-            </div>
-          </Link>
-        </MediaQuery>
-        <button
-          className="navbar-toggler custom-toggler mt-3"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+class Header extends Component {
+  render() {
+    return (
+      <HeaderWrapper transparent={this.props.transparent}>
+        <nav
+          className="navbar navbar-expand-lg navbar-dark mt-2"
+          role="navigation"
         >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto mr-auto">
-            <MediaQuery minDeviceWidth={991}>
-              <Link to="contacts">
-                <div
-                  // className="nav-item mt-4"
-                  style={{
-                    color: "#fff",
-                    textTransform: "uppercase",
-                    fontSize: "1.35rem",
-                    marginLeft: "-1.2rem",
-                    border: "1px solid #aaa",
-                    padding: ".5rem",
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: "2px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <span className="mr-3">Contact Us:</span>
-                  <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
-                </div>
-              </Link>
-            </MediaQuery>
-          </ul>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a
-                href="https://chopbarh.zendesk.com/hc"
-                className="nav-link text-uppercase mr-5"
+          <Link className="navbar-brand navbar-logo mt-n4" to="/">
+            <Logo />
+          </Link>
+          <MediaQuery maxDeviceWidth={991}>
+            <Link to="contacts">
+              <div
+                // className="nav-item mt-4"
+                style={{
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  fontSize: "1.35rem",
+                  marginLeft: "-1.2rem",
+                  border: "1px solid #aaa",
+                  padding: ".5rem",
+                  display: "flex",
+                  alignItems: "center",
+                  borderRadius: "2px",
+                  cursor: "pointer",
+                }}
               >
-                How to
-              </a>
-            </li>
-            <li className="nav-item">
-              <Link to="games" className="nav-link text-uppercase mr-5">
-                Games
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="vendors" className="nav-link text-uppercase mr-5">
-                Become a Chopbarh Agent
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="faqs" className="nav-link text-uppercase mr-5">
-                FAQs
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="about" className="nav-link text-uppercase mr-5">
-                About Us
-              </Link>
-            </li>
-            {localStorage.getItem("chopbarh-token") && (
+                <span className="mr-3">Contact Us:</span>
+                <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
+              </div>
+            </Link>
+          </MediaQuery>
+          <button
+            className="navbar-toggler custom-toggler mt-3"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto mr-auto">
+              <MediaQuery minDeviceWidth={991}>
+                <Link to="contacts">
+                  <div
+                    // className="nav-item mt-4"
+                    style={{
+                      color: "#fff",
+                      textTransform: "uppercase",
+                      fontSize: "1.35rem",
+                      marginLeft: "-1.2rem",
+                      border: "1px solid #aaa",
+                      padding: ".5rem",
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "2px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span className="mr-3">Contact Us:</span>
+                    <img src={WhatsAppIcon} alt="Whatsapp Icon" height="20" />
+                  </div>
+                </Link>
+              </MediaQuery>
+            </ul>
+            <ul className="navbar-nav">
               <li className="nav-item">
-                <Link to="user" className="nav-link text-uppercase mr-5">
-                  Dashboard
+                <a
+                  href="https://chopbarh.zendesk.com/hc"
+                  className="nav-link text-uppercase mr-5"
+                >
+                  How to
+                </a>
+              </li>
+              <li className="nav-item">
+                <Link to="games" className="nav-link text-uppercase mr-5">
+                  Games
                 </Link>
               </li>
-            )}
-            {!localStorage.getItem("chopbarh-token") && (
-              <div>
-                <button className="mr-2">
-                  <Link to="login">
-                    <span style={{ color: "#ffffff" }}>Login</span>
+              <li className="nav-item">
+                <Link to="vendors" className="nav-link text-uppercase mr-5">
+                  Become a Chopbarh Agent
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="faqs" className="nav-link text-uppercase mr-5">
+                  FAQs
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="about" className="nav-link text-uppercase mr-5">
+                  About Us
+                </Link>
+              </li>
+              {this.props.isAuthenticated && (
+                <li className="nav-item">
+                  <Link to="user" className="nav-link text-uppercase mr-5">
+                    Dashboard
                   </Link>
-                </button>
-                <button>
-                  <Link to="signup">
-                    <span style={{ color: "#ffffff" }}>Sign Up</span>
-                  </Link>
-                </button>
-              </div>
-            )}
-          </ul>
-        </div>
-      </nav>
-    </HeaderWrapper>
-  );
+                </li>
+              )}
+              {!this.props.isAuthenticated && (
+                <div>
+                  <button className="mr-2">
+                    <Link to="login">
+                      <span style={{ color: "#ffffff" }}>Login</span>
+                    </Link>
+                  </button>
+                  <button>
+                    <Link to="signup">
+                      <span style={{ color: "#ffffff" }}>Sign Up</span>
+                    </Link>
+                  </button>
+                </div>
+              )}
+            </ul>
+          </div>
+        </nav>
+      </HeaderWrapper>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.authenticated,
+});
+
+export default connect(mapStateToProps)(Header);

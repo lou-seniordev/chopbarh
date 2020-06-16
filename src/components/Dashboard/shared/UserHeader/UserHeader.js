@@ -413,7 +413,7 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData,
   loading: state.player.loading,
   error: state.player.error,
-  isAuthenticated: localStorage.getItem("chopbarh-token") !== null,
+  isAuthenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = {

@@ -61,7 +61,7 @@ class AccountNumber extends Component {
     popoverOpen: false,
     removeWithdrawalBankAccountModal: false,
     password: "",
-    passwordModal: "",
+    passwordModal: false,
   };
 
   componentDidMount = () => {

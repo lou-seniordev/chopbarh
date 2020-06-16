@@ -44,14 +44,15 @@ class Layout extends Component {
   constructor(props) {
     super(props);
 
-    this.props.isAuthenticated &&
-      this.props.authSuccess(
-        localStorage.getItem("chopbarh-token"),
-        localStorage.getItem("chopbarh-id")
-      );
+    // this.props.isAuthenticated &&
+    //   this.props.authSuccess(
+    //     localStorage.getItem("chopbarh-token"),
+    //     localStorage.getItem("chopbarh-id")
+    //   );
   }
-  // componentDidMount = () => {
-  // };
+  componentDidMount = () => {
+    console.log(this.props.isAuthenticated);
+  };
 
   // componentDidUpdate = prevProps => {
   //   if (prevProps !== this.props) {
@@ -77,8 +78,8 @@ class Layout extends Component {
               <Route path="/edit-profile" component={UserEditProfilePage} />
               <Route path="/deposit" component={UserDepositPage} />
               <Route path="/withdraw" component={UserWithdrawPage} />
-              <Route path="/play" component={UserPlayPage} />
               <Route path="/transaction" component={UserTransactionPage} />
+              <Route path="/play" component={UserPlayPage} />
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
@@ -97,7 +98,7 @@ class Layout extends Component {
               <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
-              <Route path="/user" component={UserHomePage} />
+              {/* <Route path="/user" component={UserHomePage} /> */}
               <Redirect push to="/login" />
               {/* <Redirect push to="/" /> */}
             </Switch>
@@ -109,7 +110,7 @@ class Layout extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: localStorage.getItem("chopbarh-token") !== null,
+  isAuthenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = {
