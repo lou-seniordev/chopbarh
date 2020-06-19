@@ -62,8 +62,8 @@ class MonnifyPaymentAccount extends Component {
     // Make request to get an Account
     const postData = {
       phonenumber: this.props.playerData.PhoneNum,
-      firstname: `${this.props.playerData.PhoneNum}`,
-      lastname: `${this.props.playerData.PhoneNum}`,
+      firstname: `${this.props.playerData.FullName.split(" ")[0]}`,
+      lastname: `${this.props.playerData.FullName.split(" ")[1]}`,
       nickname: `${this.props.playerData.NickName.toUpperCase()}`,
       playerId: `${this.props.playerData.PlayerID}`,
     };
