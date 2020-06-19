@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
-import { Spinner } from "reactstrap";
+import { Spinner, Button } from "reactstrap";
 import { FormSubmitButton } from "../../../styles/CardCharge";
 import { firestore } from "../../../../firebase";
 
@@ -178,7 +178,7 @@ class MonnifyPaymentAccount extends Component {
         )}
         {!this.state.loading && this.state.paymentAccountData && (
           <div className="text-center" style={{ minHeight: "5rem" }}>
-            {/* <div
+            <div
               className="mb-2"
               style={{
                 display: "flex",
@@ -192,7 +192,7 @@ class MonnifyPaymentAccount extends Component {
               >
                 {this.state.deactivatingAccount ? "Deleting..." : "X"}
               </Button>
-            </div> */}
+            </div>
             <p>
               Please make Payment and save the Account Number created for you
             </p>
