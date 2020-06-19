@@ -13,22 +13,12 @@ class MonnifyPaymentAccount extends Component {
     isRequestingAccount: false,
     error: false,
     emptyDataState: false,
+    paymentAccountData: null,
+    isRequestSuccessful: false,
   };
 
-  componentDidMount = async () => {
-    // Try to fetch the details from firestore
-    try {
-      let snapshots = await firestore
-        .collection("monnify_payment_account")
-        .where("playerId", "==", this.props.playerData.PlayerID)
-        .get();
-
-      let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-
-      console.log(data);
-    } catch (error) {
-      this.setState({ error: true, loading: false });
-    }
+  componentDidMount = () => {
+    this.fetchPaymentAccount();
   };
 
   getReference = () => {
@@ -39,6 +29,27 @@ class MonnifyPaymentAccount extends Component {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+  };
+
+  fetchPaymentAccount = async () => {
+    this.setState({ loading: true });
+
+    try {
+      let snapshots = await firestore
+        .collection("monnify_payment_account")
+        .where("playerId", "==", this.props.playerData.PlayerID)
+        .get();
+
+      let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+
+      if (data.length) {
+        this.setState({ loading: false, paymentAccountData: data[0] });
+      } else {
+        this.setState({ emptyDataState: true, loading: false });
+      }
+    } catch (error) {
+      this.setState({ error: true, loading: false });
+    }
   };
 
   requestPaymentAccount = async () => {
@@ -65,7 +76,17 @@ class MonnifyPaymentAccount extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
+          this.fetchPaymentAccount();
+
+          this.setState({
+            isRequestSuccessful: true,
+            isRequestingAccount: false,
+          });
         } else {
+          this.setState({
+            isRequestSuccessful: false,
+            isRequestingAccount: false,
+          });
         }
       })
       .catch(err => {
@@ -91,34 +112,73 @@ class MonnifyPaymentAccount extends Component {
             <Spinner />
           </div>
         )}
-        {this.state.error &&
-          !this.state.loading(
-            <div className="text-center">
-              An error occurred while fetching your account. Please try again
-              later.
-            </div>
-          )}
-        {this.state.emptyDataState &&
-          !this.state.loading(
-            <div className="text-center" style={{ minHeight: "6rem" }}>
-              <p>
-                This method gives you a custom account number through which you
-                can send subsequent transactions to in the future
-              </p>
-              <FormSubmitButton
-                type="submit"
-                className="mr-2"
-                disabled={this.state.isRequestingAccount}
-                onClick={this.requestPaymentAccount}
+        {!this.state.loading && this.state.error && (
+          <div className="text-center">
+            An error occurred while fetching your account. Please try again
+            later.
+          </div>
+        )}
+        {!this.state.loading && this.state.emptyDataState && (
+          <div className="text-center" style={{ minHeight: "6rem" }}>
+            <p>
+              This method gives you a custom account number through which you
+              can send subsequent transactions to in the future
+            </p>
+            <FormSubmitButton
+              type="submit"
+              className="mr-2"
+              disabled={this.state.isRequestingAccount}
+              onClick={this.requestPaymentAccount}
+            >
+              <span>
+                {this.state.isRequestingAccount
+                  ? "Please wait..."
+                  : "Request Account Number"}
+              </span>
+            </FormSubmitButton>
+          </div>
+        )}
+        {!this.state.loading && this.state.paymentAccountData && (
+          <div className="text-center" style={{ minHeight: "5rem" }}>
+            {/* <div
+              className="mb-2"
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginRight: "3rem",
+              }}
+            >
+              <Button
+                onClick={this.deleteAccount}
+                disabled={this.state.removing}
               >
-                <span>
-                  {this.state.isRequestingAccount
-                    ? "Please wait..."
-                    : "Request Account Number"}
-                </span>
-              </FormSubmitButton>
-            </div>
-          )}
+                {this.state.removing ? "Deleting..." : "X"}
+              </Button>
+            </div> */}
+            <p>
+              Please make Payment and save the Account Number created for you
+            </p>
+            <p>
+              You can use this account multiple times. All deposits to this
+              accounts will be automatically credited to your chopbarh
+            </p>
+            <p>
+              Account Number:{" "}
+              <strong>{this.state.paymentAccountData.account_number}</strong>
+            </p>
+            <p>
+              Bank Name:{" "}
+              <strong>{this.state.paymentAccountData.bank_name}</strong>
+            </p>
+            <p>
+              Funds Will be Automatically credited to your chopbarh account
+              within 30 minutes to 1 hour of successful deposit.
+              <br />
+              However deposits could take up to 24 hours due to occasional
+              banking delays.
+            </p>
+          </div>
+        )}
       </>
     );
   }
@@ -131,13 +191,4 @@ const mapStateToProps = state => ({
   loading: state.instantPayment.loading,
 });
 
-const mapDispatchToProps = {
-  fetchInstantPaymentAccountData,
-  setInstantPaymentAccountData,
-  removeInstantPaymentAccount,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MonnifyPaymentAccount);
+export default connect(mapStateToProps)(MonnifyPaymentAccount);

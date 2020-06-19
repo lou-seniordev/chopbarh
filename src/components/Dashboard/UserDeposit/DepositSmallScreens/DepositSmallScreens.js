@@ -18,7 +18,7 @@ import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
 import RavePayment from "../Rave/Rave";
-import InstantPayment from "../InstantPayment/InstantPayment";
+import MonnifyPaymentAccount from "../MonnifyPaymentAccount/MonnifyPaymentAccount";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -74,7 +74,7 @@ class DepositSmallScreens extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <InstantPayment />
+                      <MonnifyPaymentAccount />
                     </AccordionItemPanel>
                   </AccordionItem>
 

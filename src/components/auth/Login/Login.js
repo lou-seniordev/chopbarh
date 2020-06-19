@@ -43,8 +43,8 @@ class Login extends Component {
   };
 
   componentDidMount = () => {
-    localStorage.removeItem("chopbarh-token");
-    localStorage.removeItem("chopbarh-id");
+    // localStorage.removeItem("chopbarh-token");
+    // localStorage.removeItem("chopbarh-id");
   };
 
   toggleformErrorModal = () => {
@@ -99,12 +99,14 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
-          console.log("Working Fine...");
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
 
-          if (appRoutes.includes(this.props.lastLocation.pathname)) {
+          if (
+            this.props.lastLocation !== null &&
+            appRoutes.includes(this.props.lastLocation.pathname)
+          ) {
             this.props.history.push(this.props.lastLocation.pathname);
           } else {
             this.props.history.push("/user");
@@ -126,6 +128,7 @@ class Login extends Component {
         }
       })
       .catch(err => {
+        console.log(err);
         context.props.authFail();
       });
   };
