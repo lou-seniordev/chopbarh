@@ -15,6 +15,7 @@ class MonnifyPaymentAccount extends Component {
     emptyDataState: false,
     paymentAccountData: null,
     isRequestSuccessful: false,
+    deactivatingAccount: false,
   };
 
   componentDidMount = () => {
@@ -32,7 +33,11 @@ class MonnifyPaymentAccount extends Component {
   };
 
   fetchPaymentAccount = async () => {
-    this.setState({ loading: true, emptyDataState: false });
+    this.setState({
+      loading: true,
+      emptyDataState: false,
+      paymentAccountData: null,
+    });
 
     try {
       let snapshots = await firestore
@@ -100,11 +105,42 @@ class MonnifyPaymentAccount extends Component {
       });
   };
 
-  //   deleteAccount = () => {
-  //     //  Delete Account
-  //     this.setState({ removing: true });
-  //     this.props.removeInstantPaymentAccount();
-  //   };
+  deactivatePaymentAccount = async () => {
+    this.setState({ deactivatingAccount: true });
+
+    try {
+      const accountDeactivationResponse = await (
+        await fetch("https://backend.chopbarh.com/api/accounts/payment", {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "api-key": process.env.REACT_APP_API_KEY_PROD,
+          },
+          body: JSON.stringify({
+            account_number: this.state.paymentAccountData.account_number,
+            playerId: this.state.paymentAccountData.playerId,
+          }),
+        })
+      ).json();
+
+      if (accountDeactivationResponse.status === true) {
+        await firestore
+          .collection("monnify_payment_account")
+          .doc(this.state.paymentAccountData.id)
+          .delete();
+        this.setState({ deactivatingAccount: false });
+        toast.success("Your account was successfully deactivated");
+        this.fetchPaymentAccount();
+      } else {
+        this.setState({ deactivatingAccount: false });
+        toast.error("Your account was not successfully deactivated");
+      }
+    } catch (error) {
+      this.setState({ deactivatingAccount: false });
+      toast.error("An error occured while deactivating your account");
+    }
+  };
 
   render() {
     return (
@@ -151,10 +187,10 @@ class MonnifyPaymentAccount extends Component {
               }}
             >
               <Button
-                onClick={this.deleteAccount}
-                disabled={this.state.removing}
+                onClick={this.deactivatePaymentAccount}
+                disabled={this.state.deactivatingAccount}
               >
-                {this.state.removing ? "Deleting..." : "X"}
+                {this.state.deactivatingAccount ? "Deleting..." : "X"}
               </Button>
             </div> */}
             <p>
