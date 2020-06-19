@@ -32,7 +32,7 @@ class MonnifyPaymentAccount extends Component {
   };
 
   fetchPaymentAccount = async () => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, emptyDataState: false });
 
     try {
       let snapshots = await firestore
@@ -64,7 +64,7 @@ class MonnifyPaymentAccount extends Component {
     };
 
     fetch(
-      "https://us-central1-dev-sample-31348.cloudfunctions.net/raveinstantpayment/player/request/account",
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/monnifydedicatedaccount/player/request/dedicated/account",
       {
         method: "POST",
         headers: {
@@ -82,19 +82,21 @@ class MonnifyPaymentAccount extends Component {
             isRequestSuccessful: true,
             isRequestingAccount: false,
           });
+          toast.success("Payment Account Request was Successful");
         } else {
           this.setState({
             isRequestSuccessful: false,
             isRequestingAccount: false,
           });
+          toast.error("Payment Account Request was not Successful");
         }
       })
       .catch(err => {
         // Display error modal
         this.setState({
           isRequestingAccount: false,
-          errorModal: true,
         });
+        toast.error("An error occured while processing the request");
       });
   };
 
