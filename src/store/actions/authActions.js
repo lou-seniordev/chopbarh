@@ -1,5 +1,4 @@
 import * as actionType from "../actionTypes/actionTypes";
-import firebase from "../../firebase";
 
 export const authStart = () => ({
   type: actionType.AUTH_START,

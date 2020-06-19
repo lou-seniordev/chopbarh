@@ -188,20 +188,6 @@ class Card extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount:
-        Number(this.state.authAmount) >= 2500
-          ? (Number(this.state.authAmount) + 100) * 100
-          : Number(this.state.authAmount) * 100,
-      authorization_code: creditCardObject[0].auth_code,
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        refId,
-      },
-    };
-
     try {
       const paystackAuthChargeResponse = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
@@ -275,42 +261,8 @@ class Card extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: this.state.amount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum,
-    };
-
-    // this.props.setDepositHistory(historyObject);
-
     const cardExpirationData = this.state.expiry.split("/");
     const year = `20${cardExpirationData[1]}`;
-
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount:
-        Number(this.state.amount) >= 2500
-          ? (Number(this.state.amount) + 100) * 100
-          : Number(this.state.amount) * 100,
-      card: {
-        number: this.state.card,
-        cvv: this.state.cvv,
-        expiry_month: cardExpirationData[0],
-        expiry_year: year,
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        refId,
-        cvv: this.state.cvv,
-      },
-    };
 
     this.props.setCreditCardCVV(this.state.cvv);
 

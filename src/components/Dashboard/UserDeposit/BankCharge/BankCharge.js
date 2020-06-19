@@ -183,36 +183,6 @@ class BankCharge extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.authAmount * 100,
-      bank: {
-        code: bankAccountObject[0].bank_code,
-        account_number: bankAccountObject[0].account_number,
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        bank_code: bankAccountObject[0].bank_code,
-        account_number: bankAccountObject[0].account_number,
-        refId,
-      },
-    };
-
-    const historyObject = {
-      amount: this.state.authAmount,
-      channel: "Bank",
-      transaction_date: new Date().toISOString(),
-      fees: +this.state.authAmount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum,
-    };
-
-    // this.props.setDepositHistory(historyObject);
-
     try {
       const paystackBankChargeResponse = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbankdeposit/player/deposit/bank_charge",
@@ -296,36 +266,6 @@ class BankCharge extends Component {
 
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
-
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.amount * 100,
-      bank: {
-        code: this.state.bank,
-        account_number: this.state.account_number,
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        bank_code: this.state.bank,
-        account_number: this.state.account_number,
-        refId,
-      },
-    };
-
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Bank",
-      transaction_date: new Date().toISOString(),
-      fees: +this.state.amount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum,
-    };
-
-    // this.props.setDepositHistory(historyObject);
 
     try {
       const paystackBankChargeResponse = await fetch(

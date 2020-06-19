@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
-import { Modal, ModalBody, Spinner, Button } from "reactstrap";
+import { Spinner } from "reactstrap";
 import { FormSubmitButton } from "../../../styles/CardCharge";
 import { firestore } from "../../../../firebase";
 

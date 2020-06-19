@@ -1,7 +1,6 @@
 import React, { Component, memo } from "react";
 import styled from "styled-components";
 import { Link, Redirect } from "react-router-dom";
-import jwt from "jsonwebtoken";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import { Update } from "grommet-icons";
