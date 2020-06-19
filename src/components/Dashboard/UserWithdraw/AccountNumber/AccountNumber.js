@@ -615,7 +615,6 @@ class AccountNumber extends Component {
                   <span>Submit</span>
                 </FormSubmitButton>
               </>
-              )}
             </PassworForm>
           </ModalBody>
         </Modal>

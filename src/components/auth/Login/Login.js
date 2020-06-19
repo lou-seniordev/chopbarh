@@ -30,6 +30,7 @@ const appRoutes = [
   "/withdraw",
   "/play",
   "/transaction",
+  "/user",
 ];
 
 class Login extends Component {
@@ -39,6 +40,11 @@ class Login extends Component {
     userName: "",
     password: "",
     loading: false,
+  };
+
+  componentDidMount = () => {
+    localStorage.removeItem("chopbarh-token");
+    localStorage.removeItem("chopbarh-id");
   };
 
   toggleformErrorModal = () => {
@@ -93,6 +99,7 @@ class Login extends Component {
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
+          console.log("Working Fine...");
           localStorage.setItem("chopbarh-token", data.authToken);
           localStorage.setItem("chopbarh-id", data.userId);
           this.props.authSuccess(data.authToken, data.userId);
