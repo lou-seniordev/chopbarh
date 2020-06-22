@@ -4,16 +4,16 @@ import * as actionType from "../actionTypes/actionTypes";
 import { firestore } from "../../firebase";
 
 export const fetchRaveCardInit = () => ({
-  type: actionType.FETCH_RAVE_CARD_INIT
+  type: actionType.FETCH_RAVE_CARD_INIT,
 });
 
 export const fetchRaveCardSuccess = data => ({
   type: actionType.FETCH_RAVE_CARD_SUCCESS,
-  data
+  data,
 });
 
 export const fetchRaveCardFail = () => ({
-  type: actionType.FETCH_RAVE_CARD_FAIL
+  type: actionType.FETCH_RAVE_CARD_FAIL,
 });
 
 export const fetchRaveCardData = () => async (dispatch, getState) => {
@@ -22,33 +22,31 @@ export const fetchRaveCardData = () => async (dispatch, getState) => {
   try {
     const snapshot = await firestore
       .collection("rave_card")
-      .where("id", "==", getState().auth.id)
+      .where("playerId", "==", getState().auth.id)
       .get();
 
     const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     // console.log(data);
     if (data.length) {
-      dispatch(fetchRaveCardSuccess(data[0].data));
-      // console.log(data[0].data);
+      dispatch(fetchRaveCardSuccess(data));
     } else {
       dispatch(fetchRaveCardFail());
     }
   } catch (err) {
-    console.log("Error...", err);
     dispatch(fetchRaveCardFail());
   }
 };
 
 export const removeRaveCardInit = () => ({
-  type: actionType.REMOVE_RAVE_CARD_INIT
+  type: actionType.REMOVE_RAVE_CARD_INIT,
 });
 
 export const removeRaveCardSuccess = () => ({
-  type: actionType.REMOVE_RAVE_CARD_SUCCESS
+  type: actionType.REMOVE_RAVE_CARD_SUCCESS,
 });
 
 export const removeRaveCardFail = () => ({
-  type: actionType.REMOVE_RAVE_CARD_FAIL
+  type: actionType.REMOVE_RAVE_CARD_FAIL,
 });
 
 export const removeRaveCard = (event, authCode) => async (
@@ -57,46 +55,49 @@ export const removeRaveCard = (event, authCode) => async (
 ) => {
   dispatch(removeRaveCardInit());
 
-  try {
-    const snapshot = await firestore
-      .collection("rave_card")
-      .where("id", "==", getState().auth.id)
-      .get();
+  const raveCardIdToBeRemoved = getState().raveCard.raveCard.filter(
+    card => card.auth_code === authCode
+  );
 
-    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    // console.log(data);
-    if (data.length) {
-      // dispatch(fetchRaveCardSuccess(data[0].data));
-      const cardsArray = data[0].data;
-      let filteredArray = cardsArray.filter(
-        card => card.auth_code !== authCode
-      );
+  if (raveCardIdToBeRemoved.length) {
+    try {
+      const raveCardRemovalResponse = await (
+        await fetch(
+          `https://backend.chopbarh.com/api/cards/rave/${getState().auth.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "api-key": process.env.REACT_APP_API_KEY_PROD,
+            },
+            body: JSON.stringify({
+              auth_code: authCode,
+              playerId: getState().auth.id,
+            }),
+          }
+        )
+      ).json();
 
-      try {
-        const docRef = await firestore
+      if (raveCardRemovalResponse.status === true) {
+        await firestore
           .collection("rave_card")
-          .doc(getState().auth.id)
-          .update({
-            data: filteredArray
-          });
-        dispatch(removeRaveCardSuccess(docRef));
-      } catch (err) {
-        toast.error("Card could not be removed. Please try again");
-        // console.log("Error Setting new Card", err);
-        // dispatch(setRaveCardFail());
-      }
-      // window.location.reload();
-      if (cardsArray.length !== filteredArray.length) {
+          .doc(raveCardIdToBeRemoved[0].id)
+          .delete();
+
         dispatch(fetchRaveCardData());
         toast.success("Card was removed");
       } else {
-        toast.error("Card was not removed");
+        toast.error("Card was not successfully removed");
       }
-    } else {
-      // dispatch(fetchRaveCardFail());
+    } catch (err) {
+      console.log("Error...", err);
+      toast.error("Card was not successfully removed");
+      dispatch(removeRaveCardFail());
     }
-  } catch (err) {
-    console.log("Error...", err);
-    dispatch(removeRaveCardFail());
+  } else {
+    toast.error(
+      "An error occured while trying to remove this account. Please try again later"
+    );
   }
 };
