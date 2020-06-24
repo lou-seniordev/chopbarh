@@ -21,7 +21,7 @@ import {
   authFail,
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
-// import firebase from "../../../firebase";
+import firebase from "../../../firebase";
 
 const appRoutes = [
   "/edit-profile",
@@ -43,8 +43,8 @@ class Login extends Component {
   };
 
   componentDidMount = () => {
-    // localStorage.removeItem("chopbarh-token");
-    // localStorage.removeItem("chopbarh-id");
+    localStorage.removeItem("chopbarh-token");
+    localStorage.removeItem("chopbarh-id");
   };
 
   toggleformErrorModal = () => {
@@ -86,49 +86,53 @@ class Login extends Component {
 
     const context = this;
 
-    // TODO: Complete Backend Service before deploying this
-    fetch("https://pay.chopbarh.com/api/auth", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-      },
-      body: formValue,
-    })
+    fetch(
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/userAuth/login",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: formValue,
+      }
+    )
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
-          localStorage.setItem("chopbarh-token", data.authToken);
-          localStorage.setItem("chopbarh-id", data.userId);
-          this.props.authSuccess(data.authToken, data.userId);
-
-          if (
-            this.props.lastLocation !== null &&
-            appRoutes.includes(this.props.lastLocation.pathname)
-          ) {
-            this.props.history.push(this.props.lastLocation.pathname);
-          } else {
-            this.props.history.push("/user");
-          }
-
-          // return firebase
-          //   .auth()
-          //   .signInWithCustomToken(data.serviceToken)
-          //   .then(info => {
-          //     if (appRoutes.includes(context.props.lastLocation.pathname)) {
-          //       context.props.history.push(context.props.lastLocation.pathname);
-          //     } else {
-          //       context.props.history.push("/user");
-          //     }
-          //   });
+          // localStorage.setItem("chopbarh-token", data.authToken);
+          // localStorage.setItem("chopbarh-id", data.userId);
+          // this.props.authSuccess(data.authToken, data.userId);
+          // if (
+          //   this.props.lastLocation !== null &&
+          //   appRoutes.includes(this.props.lastLocation.pathname)
+          // ) {
+          //   this.props.history.push(this.props.lastLocation.pathname);
+          // } else {
+          //   this.props.history.push("/user");
+          // }
+          return firebase
+            .auth()
+            .signInWithCustomToken(data.data.serviceToken)
+            .then(info => {
+              localStorage.setItem("chopbarh-token", data.data.userToken);
+              localStorage.setItem("chopbarh-id", data.data.PlayerID);
+              context.props.authSuccess(data.authToken, data.userId);
+              if (
+                context.props.lastLocation !== null &&
+                appRoutes.includes(context.props.lastLocation.pathname)
+              ) {
+                context.props.history.push(context.props.lastLocation.pathname);
+              } else {
+                context.props.history.push("/user");
+              }
+            });
         } else {
           context.setState({ accountErrorModal: true });
           context.props.authFail();
         }
       })
       .catch(err => {
-        console.log(err);
         context.props.authFail();
       });
   };

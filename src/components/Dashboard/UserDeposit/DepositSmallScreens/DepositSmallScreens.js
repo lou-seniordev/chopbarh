@@ -17,7 +17,7 @@ import Voucher from "../../UserHome/Voucher/Voucher";
 import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
-import RavePayment from "../Rave/Rave";
+// import RavePayment from "../Rave/Rave";
 import MonnifyPaymentAccount from "../MonnifyPaymentAccount/MonnifyPaymentAccount";
 
 import "react-accessible-accordion/dist/fancy-example.css";
@@ -83,7 +83,7 @@ class DepositSmallScreens extends Component {
                       <AccordionItemButton>Bank Card</AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <RavePayment />
+                      <Card />
                     </AccordionItemPanel>
                   </AccordionItem>
 
