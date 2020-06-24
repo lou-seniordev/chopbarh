@@ -49,6 +49,10 @@ export const removeRaveCardFail = () => ({
   type: actionType.REMOVE_RAVE_CARD_FAIL,
 });
 
+const resetRaveCard = () => ({
+  type: actionType.RESET_RAVE_CARD,
+});
+
 export const removeRaveCard = (event, authCode) => async (
   dispatch,
   getState
@@ -84,14 +88,14 @@ export const removeRaveCard = (event, authCode) => async (
           .collection("rave_card")
           .doc(raveCardIdToBeRemoved[0].id)
           .delete();
-
-        dispatch(fetchRaveCardData());
+        dispatch(resetRaveCard());
         toast.success("Card was removed");
+        dispatch(fetchRaveCardData());
       } else {
         toast.error("Card was not successfully removed");
       }
     } catch (err) {
-      console.log("Error...", err);
+      // console.log("Error...", err);
       toast.error("Card was not successfully removed");
       dispatch(removeRaveCardFail());
     }
