@@ -117,7 +117,10 @@ class Login extends Component {
             .then(info => {
               localStorage.setItem("chopbarh-token", data.data.userToken);
               localStorage.setItem("chopbarh-id", data.data.PlayerID);
-              context.props.authSuccess(data.authToken, data.userId);
+              context.props.authSuccess(
+                data.data.userToken,
+                data.data.PlayerID
+              );
               if (
                 context.props.lastLocation !== null &&
                 appRoutes.includes(context.props.lastLocation.pathname)

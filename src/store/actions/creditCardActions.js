@@ -4,16 +4,16 @@ import * as actionType from "../actionTypes/actionTypes";
 import firebase, { firestore } from "../../firebase";
 
 export const fetchCreditCardInit = () => ({
-  type: actionType.FETCH_CREDIT_CARD_INIT
+  type: actionType.FETCH_CREDIT_CARD_INIT,
 });
 
 export const fetchCreditCardSuccess = data => ({
   type: actionType.FETCH_CREDIT_CARD_SUCCESS,
-  data
+  data,
 });
 
 export const fetchCreditCardFail = () => ({
-  type: actionType.FETCH_CREDIT_CARD_FAIL
+  type: actionType.FETCH_CREDIT_CARD_FAIL,
 });
 
 export const fetchCreditCardData = () => async (dispatch, getState) => {
@@ -40,20 +40,20 @@ export const fetchCreditCardData = () => async (dispatch, getState) => {
 
 export const setCreditCardCVV = cvv => ({
   type: actionType.SET_CREDIT_CARD_CVV,
-  cvv
+  cvv,
 });
 
 export const setCreditCardInit = () => ({
-  type: actionType.SET_CREDIT_CARD_INIT
+  type: actionType.SET_CREDIT_CARD_INIT,
 });
 
 export const setCreditCardSuccess = data => ({
   type: actionType.SET_CREDIT_CARD_SUCCESS,
-  data
+  data,
 });
 
 export const setCreditCardFail = () => ({
-  type: actionType.SET_CREDIT_CARD_FAIL
+  type: actionType.SET_CREDIT_CARD_FAIL,
 });
 
 export const setCreditCardData = payload => async (dispatch, getState) => {
@@ -67,7 +67,7 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 
     const creditCards = snapshot.docs.map(doc => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
 
     if (creditCards[0].data.length === 3) {
@@ -91,8 +91,8 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               exp_month: payload.exp_month,
               exp_year: payload.exp_year,
               last_digits: payload.last4,
-              cvv: payload.cvv
-            })
+              cvv: payload.cvv,
+            }),
           });
       }
     } else {
@@ -108,9 +108,9 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
               exp_month: payload.exp_month,
               exp_year: payload.exp_year,
               last_digits: payload.last4,
-              cvv: payload.cvv
-            }
-          ]
+              cvv: payload.cvv,
+            },
+          ],
         });
     }
     dispatch(fetchCreditCardData());
@@ -120,15 +120,15 @@ export const setCreditCardData = payload => async (dispatch, getState) => {
 };
 
 export const removeCreditCardInit = () => ({
-  type: actionType.REMOVE_CREDIT_CARD_INIT
+  type: actionType.REMOVE_CREDIT_CARD_INIT,
 });
 
 export const removeCreditCardSuccess = () => ({
-  type: actionType.REMOVE_CREDIT_CARD_SUCCESS
+  type: actionType.REMOVE_CREDIT_CARD_SUCCESS,
 });
 
 export const removeCreditCardFail = () => ({
-  type: actionType.REMOVE_CREDIT_CARD_FAIL
+  type: actionType.REMOVE_CREDIT_CARD_FAIL,
 });
 
 export const removeCreditCard = (event, authCode) => async (
@@ -157,7 +157,7 @@ export const removeCreditCard = (event, authCode) => async (
           .collection("card_charge")
           .doc(getState().auth.id)
           .update({
-            data: filteredArray
+            data: filteredArray,
           });
         dispatch(removeCreditCardSuccess(docRef));
       } catch (err) {
