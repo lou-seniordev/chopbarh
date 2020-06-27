@@ -44,6 +44,7 @@ import { setDepositHistory } from "../../../../store/actions/depositActions";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitBirthday from "./SubmitBirthday/SubmitBirthday";
 import SubmitPhone from "./SubmitPhone/SubmitPhone";
+// import firebase from "../../../../firebase";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -77,6 +78,8 @@ class BankCharge extends Component {
     this.props.fetchBankAccountData();
 
     try {
+      // const idToken = await firebase.auth().currentUser.getIdToken();
+
       const paystackBankListResponse = await (
         await fetch(
           "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbanklist/player/deposit/banks",

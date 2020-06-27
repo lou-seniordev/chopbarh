@@ -86,6 +86,8 @@ class Login extends Component {
 
     const context = this;
 
+    // TODO: Change to async/await
+
     fetch(
       "https://us-central1-dev-sample-31348.cloudfunctions.net/userAuth/login",
       {

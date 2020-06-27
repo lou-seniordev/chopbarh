@@ -13,6 +13,7 @@ export const fetchPlayerFail = () => ({
   type: actionType.FETCH_PLAYER_DATA_FAIL,
 });
 
+// TODO: Check the currentUser object is not null before you can continue
 export const fetchPlayerData = () => async (dispatch, getState) => {
   dispatch(fetchPlayerInit());
 

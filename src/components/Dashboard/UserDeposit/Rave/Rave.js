@@ -43,7 +43,7 @@ class RavePayment extends Component {
     paying: false,
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.fetchRaveCardData();
   };
 
