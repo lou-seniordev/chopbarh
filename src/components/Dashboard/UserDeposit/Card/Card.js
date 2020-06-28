@@ -50,6 +50,7 @@ import {
 
 import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
+import firebase from "../../../../firebase";
 
 function referenceId() {
   let text = "";
@@ -189,6 +190,8 @@ class Card extends Component {
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const paystackAuthChargeResponse = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
         {
@@ -196,6 +199,7 @@ class Card extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
             "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify({
@@ -267,6 +271,8 @@ class Card extends Component {
     this.props.setCreditCardCVV(this.state.cvv);
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const paystackCardChargeResponse = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackcarddeposit/player/deposit/card_charge",
         {
@@ -274,6 +280,7 @@ class Card extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
             "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify({

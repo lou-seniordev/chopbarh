@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { Spinner, Button } from "reactstrap";
 import { FormSubmitButton } from "../../../styles/CardCharge";
-import { firestore } from "../../../../firebase";
+import firebase, { firestore } from "../../../../firebase";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -68,41 +68,44 @@ class MonnifyPaymentAccount extends Component {
       playerId: `${this.props.playerData.PlayerID}`,
     };
 
-    fetch(
-      "https://us-central1-dev-sample-31348.cloudfunctions.net/monnifydedicatedaccount/player/request/dedicated/account",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      }
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === true) {
-          this.fetchPaymentAccount();
+    try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
 
-          this.setState({
-            isRequestSuccessful: true,
-            isRequestingAccount: false,
-          });
-          toast.success("Payment Account Request was Successful");
-        } else {
-          this.setState({
-            isRequestSuccessful: false,
-            isRequestingAccount: false,
-          });
-          toast.error("Payment Account Request was not Successful");
-        }
-      })
-      .catch(err => {
-        // Display error modal
+      const monniyAccountRequestResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/monnifydedicatedaccount/player/request/dedicated/account",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify(postData),
+          }
+        )
+      ).json();
+
+      if (monniyAccountRequestResponse.status === true) {
+        this.fetchPaymentAccount();
+
         this.setState({
+          isRequestSuccessful: true,
           isRequestingAccount: false,
         });
-        toast.error("An error occured while processing the request");
+        toast.success("Payment Account Request was Successful");
+      } else {
+        this.setState({
+          isRequestSuccessful: false,
+          isRequestingAccount: false,
+        });
+        toast.error("Payment Account Request was not Successful");
+      }
+    } catch (error) {
+      this.setState({
+        isRequestingAccount: false,
       });
+      toast.error("An error occured while processing the request");
+    }
   };
 
   deactivatePaymentAccount = async () => {

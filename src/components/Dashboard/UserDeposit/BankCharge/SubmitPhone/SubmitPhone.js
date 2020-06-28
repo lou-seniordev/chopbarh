@@ -12,6 +12,7 @@ import {
   closeBankOTPModal,
   closeBankPhoneModal,
 } from "../../../../../store/actions/modalActions";
+import firebase from "../../../../../firebase";
 
 const Form = styled.form`
   min-height: 12rem;
@@ -50,6 +51,8 @@ class SubmitPhone extends Component {
     };
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const submitPhoneResponse = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_phone",
         {
@@ -58,6 +61,7 @@ class SubmitPhone extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
             "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify(postData),

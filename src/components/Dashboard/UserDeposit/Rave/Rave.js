@@ -23,7 +23,7 @@ import {
   removeRaveCard,
 } from "../../../../store/actions/raveCardActions";
 import CreditCard from "./CreditCard/CreditCard";
-
+import firebase from "../../../../firebase";
 import "react-accessible-accordion/dist/fancy-example.css";
 
 const Form = styled.form`
@@ -196,67 +196,74 @@ class RavePayment extends Component {
 
     let reference = this.getReference();
 
-    const raveModalRecordResponse = await (
-      await fetch(
-        "https://us-central1-dev-sample-31348.cloudfunctions.net/ravemodal/player/deposit/record",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
-          },
-          body: JSON.stringify({
-            amount: +this.state.amount,
-            transaction_reference: `${this.props.playerData.PhoneNum}-${reference}`,
-            transaction_fees: 0,
-            refId: `${this.props.playerData.PhoneNum}-${reference}`,
-            phone_number: `${this.props.playerData.PhoneNum}`,
-            playerId: `${this.props.playerData.PlayerID}`,
-          }),
-        }
-      )
-    ).json();
+    try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
 
-    this.setState({ loading: false });
-
-    if (raveModalRecordResponse.status === true) {
-      window.getpaidSetup({
-        PBFPubKey: this.state.key,
-        customer_email:
-          this.props.playerData.Email ||
-          `${this.props.playerData.PhoneNum}@mail.com`,
-        customer_firstname:
-          this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
-        customer_lastname:
-          this.props.playerData.FullName.split(" ")[1] ||
-          `${this.props.playerData.PhoneNum}`,
-        amount: Number(this.state.amount),
-        customer_phone: this.props.playerData.PhoneNum,
-        country: "NG",
-        currency: "NGN",
-        txref: `${this.props.playerData.PhoneNum}-${reference}`,
-        onclose: function () {},
-        callback: async response => {
-          let flw_ref = response.tx.txRef;
-          if (
-            response.tx.chargeResponseCode === "00" ||
-            response.tx.chargeResponseCode === "0"
-          ) {
-            await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                ref: flw_ref,
-              }),
-            });
+      const raveModalRecordResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/ravemodal/player/deposit/record",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${idToken}`,
+              "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+            },
+            body: JSON.stringify({
+              amount: +this.state.amount,
+              transaction_reference: `${this.props.playerData.PhoneNum}-${reference}`,
+              transaction_fees: 0,
+              refId: `${this.props.playerData.PhoneNum}-${reference}`,
+              phone_number: `${this.props.playerData.PhoneNum}`,
+              playerId: `${this.props.playerData.PlayerID}`,
+            }),
           }
-        },
-      });
-    } else {
-      toast.error("An error occured. Please try again later");
+        )
+      ).json();
+
+      this.setState({ loading: false });
+
+      if (raveModalRecordResponse.status === true) {
+        window.getpaidSetup({
+          PBFPubKey: this.state.key,
+          customer_email:
+            this.props.playerData.Email ||
+            `${this.props.playerData.PhoneNum}@mail.com`,
+          customer_firstname:
+            this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
+          customer_lastname:
+            this.props.playerData.FullName.split(" ")[1] ||
+            `${this.props.playerData.PhoneNum}`,
+          amount: Number(this.state.amount),
+          customer_phone: this.props.playerData.PhoneNum,
+          country: "NG",
+          currency: "NGN",
+          txref: `${this.props.playerData.PhoneNum}-${reference}`,
+          onclose: function () {},
+          callback: async response => {
+            let flw_ref = response.tx.txRef;
+            if (
+              response.tx.chargeResponseCode === "00" ||
+              response.tx.chargeResponseCode === "0"
+            ) {
+              await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  ref: flw_ref,
+                }),
+              });
+            }
+          },
+        });
+      } else {
+        toast.error("An error occured. Please try again later");
+      }
+    } catch (error) {
+      toast.error("An error occured while processing the request");
     }
   };
 

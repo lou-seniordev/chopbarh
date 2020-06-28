@@ -10,6 +10,7 @@ import {
   closeOTPModal,
 } from "../../../../../store/actions/modalActions";
 import { setBankAccountData } from "../../../../../store/actions/bankAccountActions";
+import firebase from "../../../../../firebase";
 
 const Form = styled.form`
   min-height: 12rem;
@@ -48,6 +49,8 @@ class SubmitOTP extends Component {
     };
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
         "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_otp",
         {
@@ -56,6 +59,7 @@ class SubmitOTP extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
             "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
           body: JSON.stringify(postData),
