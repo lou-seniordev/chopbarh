@@ -5,6 +5,7 @@ import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
+import firebase from "../../../../firebase";
 
 const EditProfileWrapper = styled.div`
   z-index: 2000;
@@ -135,12 +136,12 @@ class EditProfileForm extends Component {
 
   componentDidMount = () => {
     if (this.props.playerData !== null) {
-      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      const { FullName, PhoneNum, DOB, SEX, Email } = this.props.playerData;
       this.setState({
         name: FullName,
         phone: PhoneNum,
         dob: this.getDate(DOB),
-        sex: Sex,
+        sex: SEX,
         email: Email,
       });
     }
@@ -148,12 +149,12 @@ class EditProfileForm extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      const { FullName, PhoneNum, DOB, SEX, Email } = this.props.playerData;
       this.setState({
         name: FullName,
         phone: PhoneNum,
         dob: this.getDate(DOB),
-        sex: Sex,
+        sex: SEX,
         email: Email,
       });
     }
@@ -161,24 +162,19 @@ class EditProfileForm extends Component {
 
   getDate = date => {
     const month =
-      Number(
-        new Date(
-          date
-            .split("/")
-            .reverse()
-            .join("/")
-        ).getMonth()
-      ) + 1;
+      Number(new Date(date.split("/").reverse().join("/")).getMonth()) + 1;
+
+    let updatedMonth;
+    if (month < 10) {
+      updatedMonth = `0${month}`;
+    } else {
+      updatedMonth = month;
+    }
+
     return `${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
-    ).getFullYear()}-0${month}-${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
+      date.split("/").reverse().join("/")
+    ).getFullYear()}-${updatedMonth}-${new Date(
+      date.split("/").reverse().join("/")
     ).getDate()}`;
   };
 
@@ -190,25 +186,32 @@ class EditProfileForm extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
+    console.log(this.state);
+
     const postData = {
       name: this.state.name,
       dob: this.state.dob,
-      sex: this.state.sex.split("")[0],
+      sex: this.state.sex,
       email: this.state.email,
       playerId: this.props.id,
     };
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const editProfileResponse = await (
-        await fetch("https://pay.chopbarh.com/ng/api/update_profile", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-          },
-          body: JSON.stringify(postData),
-        })
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/userProfileUtil/profile/update",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify(postData),
+          }
+        )
       ).json();
 
       if (editProfileResponse.status === true) {
