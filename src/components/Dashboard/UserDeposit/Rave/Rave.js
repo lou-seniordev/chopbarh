@@ -244,19 +244,26 @@ class RavePayment extends Component {
           onclose: function () {},
           callback: async response => {
             let flw_ref = response.tx.txRef;
+
+            const idToken = await firebase.auth().currentUser.getIdToken();
+
             if (
               response.tx.chargeResponseCode === "00" ||
               response.tx.chargeResponseCode === "0"
             ) {
-              await fetch(`https://pay.chopbarh.com/ng/api/verify`, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  ref: flw_ref,
-                }),
-              });
+              await fetch(
+                `https://us-central1-dev-sample-31348.cloudfunctions.net/ravewithdrawal/player/verify`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${idToken}`,
+                  },
+                  body: JSON.stringify({
+                    reference: flw_ref,
+                  }),
+                }
+              );
             }
           },
         });

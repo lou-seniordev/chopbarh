@@ -23,6 +23,8 @@ export const authLogout = () => async () => {
 
   await firebase.auth().signOut();
 
+  // window.location = "/";
+
   return {
     type: actionType.AUTH_LOGOUT,
   };

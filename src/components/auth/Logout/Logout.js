@@ -6,18 +6,16 @@ import { authLogout } from "../../../store/actions/authActions";
 class Logout extends Component {
   componentDidMount = () => {
     this.props.authLogout();
+    window.location = "/";
   };
 
   render() {
-    return <Redirect to="/" />;
+    return null;
   }
 }
 
 const mapDispatchToProps = {
-  authLogout
+  authLogout,
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);
