@@ -185,7 +185,7 @@ class AccountNumber extends Component {
       const idToken = await firebase.auth().currentUser.getIdToken();
 
       const response = await fetch(
-        "https://us-central1-dev-sample-31348.cloudfunctions.net/us-central1/ravewithdrawal/player/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/raveWithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
@@ -272,7 +272,7 @@ class AccountNumber extends Component {
       const idToken = await firebase.auth().currentUser.getIdToken();
 
       const response = await fetch(
-        "https://us-central1-dev-sample-31348.cloudfunctions.net/us-central1/ravewithdrawal/player/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/raveWithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
