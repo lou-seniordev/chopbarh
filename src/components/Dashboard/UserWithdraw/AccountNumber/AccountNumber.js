@@ -30,6 +30,7 @@ import {
   setWithdrawalBankAccountData,
 } from "../../../../store/actions/withdrawalAccountActions";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
+import firebase from "../../../../firebase";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -181,17 +182,19 @@ class AccountNumber extends Component {
     try {
       const verif = process.env.REACT_APP_HASH_KEY_PROD;
 
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/us-central1/ravewithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: crypto.encrypt(this.state.password, verif),
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
+            verification: crypto.encrypt(this.state.password, verif),
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.amount,
             phone_number: this.props.playerData.PhoneNum,
@@ -266,17 +269,19 @@ class AccountNumber extends Component {
     try {
       const verif = process.env.REACT_APP_HASH_KEY_PROD;
 
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/us-central1/ravewithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
-            verification: crypto.encrypt(this.state.password, verif),
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
+            verification: crypto.encrypt(this.state.password, verif),
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.authAmount,
             phone_number: this.props.playerData.PhoneNum,
