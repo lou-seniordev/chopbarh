@@ -138,14 +138,16 @@ class RavePayment extends Component {
     this.setState({ paying: true });
 
     try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/make_deposit",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/ravecardcharge/player/deposit/card",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
             amount: +this.state.authAmount,
@@ -208,7 +210,6 @@ class RavePayment extends Component {
               "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${idToken}`,
-              "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
             },
             body: JSON.stringify({
               amount: +this.state.amount,

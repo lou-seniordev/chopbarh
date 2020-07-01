@@ -79,6 +79,7 @@ class BankCharge extends Component {
 
     try {
       const idToken = await firebase.auth().currentUser.getIdToken();
+      // console.log(idToken);
 
       const paystackBankListResponse = await (
         await fetch(
