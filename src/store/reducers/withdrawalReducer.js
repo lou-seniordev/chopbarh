@@ -3,9 +3,9 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   loading: true,
   withdrawalHistory: [],
-  withdrawalLimit: 500000,
+  withdrawalLimit: 50000,
   withdrawalStatus: 0,
-  error: false
+  error: false,
 };
 
 export default (state = initialState, action) => {
@@ -13,30 +13,30 @@ export default (state = initialState, action) => {
     case actionType.FETCH_WITHDRAWAL_HISTORY_INIT:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case actionType.FETCH_WITHDRAWAL_HISTORY_SUCCESS:
       return {
         ...state,
         withdrawalHistory: [...action.data],
-        loading: false
+        loading: false,
       };
     case actionType.FETCH_WITHDRAWAL_HISTORY_FAIL:
       return {
         ...state,
         loading: false,
-        error: true
+        error: true,
       };
     case actionType.SET_WITHDRAWAL_STATUS:
       return {
         ...state,
-        withdrawalStatus: action.value
+        withdrawalStatus: action.value,
       };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
         loading: true,
-        withdrawalHistory: null
+        withdrawalHistory: null,
       };
     default:
       return state;

@@ -191,11 +191,6 @@ class RavePayment extends Component {
       return;
     }
 
-    if (+this.state.amount > 500000) {
-      this.setState({ loading: false });
-      return;
-    }
-
     let reference = this.getReference();
 
     try {

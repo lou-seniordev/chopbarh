@@ -13,32 +13,73 @@ import {
   setWithdrawalStatus,
 } from "../../../store/actions/withdrawalActions";
 import { fetchPlayerData } from "../../../store/actions/playerDataActions";
+import { firestore } from "../../../firebase";
 
 class UserWithdraw extends Component {
-  componentDidMount = () => {
-    this.props.fetchWithdrawalHistoryData();
+  state = {
+    dailyWithdrawals: null,
+    loading: true,
+  };
+
+  componentDidMount = async () => {
+    const now = new Date(); // now
+
+    now.setHours(0); // set hours to 0
+    now.setMinutes(0); // set minutes to 0
+    now.setSeconds(0);
+
+    const startOfDay = Math.floor(now);
+
+    // console.log(startOfDay);
+
+    try {
+      const { docs } = await firestore
+        .collection("new_withdrawals")
+        .where("playerId", "==", localStorage.getItem("chopbarh-id"))
+        .where("status", "==", "SUCCESSFUL")
+        .where("paid_at", ">=", startOfDay)
+        .get();
+
+      const dailyWithdrawals = docs.map(doc => ({ ...doc.data() }));
+
+      // console.log(dailyWithdrawals);
+
+      if (dailyWithdrawals.length) {
+        const currentDailyWithdrawalTotal = dailyWithdrawals.reduce(
+          (acc, cur) => acc + Number(cur.amount),
+          0
+        );
+
+        this.props.setWithdrawalStatus(currentDailyWithdrawalTotal);
+      } else {
+        this.props.setWithdrawalStatus(0);
+      }
+      this.setState({ dailyWithdrawals, loading: false });
+    } catch (error) {
+      // console.log(error);
+      this.setState({ loading: false });
+    }
   };
 
   componentDidUpdate = prevProps => {
-    if (this.props !== prevProps) {
-      const today = new Date().toLocaleDateString();
-      if (this.props.withdrawals) {
-        const withdrawalsMade = this.props.withdrawals.filter(
-          withdrawal =>
-            new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
-        );
-
-        if (withdrawalsMade.length) {
-          const withdrawalsTotal = withdrawalsMade.reduce(
-            (acc, current) => acc + Number(current.amount),
-            0
-          );
-          this.props.setWithdrawalStatus(withdrawalsTotal);
-        } else {
-          this.props.setWithdrawalStatus(0);
-        }
-      }
-    }
+    // if (this.props !== prevProps) {
+    //   const today = new Date().toLocaleDateString();
+    //   if (this.props.withdrawals) {
+    //     const withdrawalsMade = this.props.withdrawals.filter(
+    //       withdrawal =>
+    //         new Date(withdrawal.withdrawal_date).toLocaleDateString() === today
+    //     );
+    //     if (withdrawalsMade.length) {
+    //       const withdrawalsTotal = withdrawalsMade.reduce(
+    //         (acc, current) => acc + Number(current.amount),
+    //         0
+    //       );
+    //       this.props.setWithdrawalStatus(withdrawalsTotal);
+    //     } else {
+    //       this.props.setWithdrawalStatus(0);
+    //     }
+    //   }
+    // }
   };
 
   render() {
@@ -50,7 +91,7 @@ class UserWithdraw extends Component {
         <div className="container">
           <div className="row ">
             <div className="col-lg-10 text-right mt-5 d-flex justify-content-end">
-              {this.props.loading ? (
+              {this.state.loading ? (
                 <div className="pr-lg-5 pr-md-3">
                   <Spinner />
                 </div>
@@ -58,7 +99,11 @@ class UserWithdraw extends Component {
                 <div className="pr-lg-5 pr-md-3">
                   <p style={{ fontWeight: "bold" }}>Withdrawal Status</p>
                   <p>
-                    Daily Limit: &#8358;
+                    <strong>Daily Limit:</strong> &#8358;
+                    {new Intl.NumberFormat().format(this.props.withdrawalLimit)}
+                  </p>
+                  <p>
+                    <strong>Available for withdrawal</strong>: &#8358;
                     {new Intl.NumberFormat().format(
                       this.props.withdrawalLimit - this.props.withdrawalStatus
                     )}
@@ -67,7 +112,7 @@ class UserWithdraw extends Component {
                     <p>Loading...</p>
                   ) : (
                     <p>
-                      Cash Balance: &#8358;
+                      <strong>Cash Balance</strong>: &#8358;
                       {new Intl.NumberFormat().format(
                         this.props.playerData.RealCoins
                       )}
