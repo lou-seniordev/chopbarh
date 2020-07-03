@@ -1,13 +1,13 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
-// import { Spinner } from "reactstrap";
-// import MediaQuery from "react-responsive";
+import { Spinner } from "reactstrap";
+import MediaQuery from "react-responsive";
 import UserHeader from "../shared/UserHeader/UserHeader";
 import Footer from "../../UI/Footer/Footer";
 import UserNavigation from "../shared/UserNavigation/UserNavigation";
-// import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
-// import WithdrawSmallScreens from "./WithdrawSmallScreens/WithdrawSmallScreens";
+import WithdrawTabs from "./WithdrawTabs/WithdrawTabs";
+import WithdrawSmallScreens from "./WithdrawSmallScreens/WithdrawSmallScreens";
 import {
   fetchWithdrawalHistoryData,
   setWithdrawalStatus,
@@ -47,7 +47,7 @@ class UserWithdraw extends Component {
         <Helmet title={`Chopbarh \u{2192} Withdraw`} />
         <UserHeader />
         <UserNavigation />
-        {/* <div className="container">
+        <div className="container">
           <div className="row ">
             <div className="col-lg-10 text-right mt-5 d-flex justify-content-end">
               {this.props.loading ? (
@@ -77,18 +77,18 @@ class UserWithdraw extends Component {
               )}
             </div>
           </div>
-        </div> */}
+        </div>
         <div style={{ minHeight: "80vh" }}>
-          {/* <MediaQuery minDeviceWidth={767}>
+          <MediaQuery minDeviceWidth={767}>
             <WithdrawTabs />
           </MediaQuery>
           <MediaQuery maxDeviceWidth={767}>
             <WithdrawSmallScreens />
-          </MediaQuery> */}
-          <p className="text-center mt-5">
+          </MediaQuery>
+          {/* <p className="text-center mt-5">
             The Withdrawal system will be down for maintenance till 3rd July
             2020.
-          </p>
+          </p> */}
         </div>
         <Footer />
       </>
