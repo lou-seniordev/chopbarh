@@ -74,7 +74,10 @@ class Layout extends Component {
               <Route path="/user" component={UserHomePage} />
               <Route path="/edit-profile" component={UserEditProfilePage} />
               <Route path="/deposit" component={UserDepositPage} />
-              <Route path="/withdraw" component={UserWithdrawPage} />
+              {this.props.playerData &&
+                this.props.playerData.PlayerStatus !== 6 && (
+                  <Route path="/withdraw" component={UserWithdrawPage} />
+                )}
               <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/play" component={UserPlayPage} />
               <Route path="/vendors" component={VendorsPage} />
@@ -108,6 +111,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.authenticated,
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {
