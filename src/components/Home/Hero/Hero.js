@@ -10,7 +10,7 @@ import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
 // import VendorButton from "../../assets/img/vendor_button@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
-import MegaMillions from "../../assets/img/MegaMillions.jpeg";
+// import MegaMillions from "../../assets/img/MegaMillions.jpeg";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -546,12 +546,12 @@ export default function Hero() {
                 >
                   DOWNLOAD NOW AND GET FREE COINS
                 </HeadingTwoFirst> */}
-                <img
+                {/* <img
                   src={MegaMillions}
                   alt="Mega Millions"
                   width="250"
                   className="mb-2"
-                />
+                /> */}
                 <ParagraphOne>
                   Play and win from collection of childhood games that live up
                   to the moment

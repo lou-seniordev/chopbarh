@@ -21,7 +21,6 @@ const UserEditProfilePage = lazy(() => import("../Pages/UserEditProfilePage"));
 const UserDepositPage = lazy(() => import("../Pages/UserDepositPage"));
 const UserWithdrawPage = lazy(() => import("../Pages/UserWithdrawPage"));
 const UserTransactionPage = lazy(() => import("../Pages/UserTransactionPage"));
-const VendorsPage = lazy(() => import("../Pages/VendorsPage"));
 const UpdateApplicationPage = lazy(() =>
   import("../Pages/UpdateApplicationPage")
 );
@@ -80,7 +79,6 @@ class Layout extends Component {
                 )}
               <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/play" component={UserPlayPage} />
-              <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
               <Route path="/login" component={LoginPage} />
@@ -95,7 +93,6 @@ class Layout extends Component {
               <Route path="/games" component={GamesPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/signup" component={SignUpPage} />
-              <Route path="/vendors" component={VendorsPage} />
               <Route path="/update" component={UpdateApplicationPage} />
               <Route path="/contacts" component={ContactUsPage} />
               {/* <Route path="/user" component={UserHomePage} /> */}

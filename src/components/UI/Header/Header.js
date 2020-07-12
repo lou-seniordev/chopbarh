@@ -141,11 +141,11 @@ class Header extends Component {
                   Games
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to="vendors" className="nav-link text-uppercase mr-5">
                   Become a Chopbarh Agent
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="faqs" className="nav-link text-uppercase mr-5">
                   FAQs

@@ -97,11 +97,11 @@ export default function Footer() {
               <span>Responsible Gaming</span>
             </p> */}
 
-            <p>
+            {/* <p>
               <Link to="vendors">
                 <span>Become a Chopbarh Agent</span>
               </Link>
-            </p>
+            </p> */}
           </FooterLinkContainer>
         </div>
         <div className="mb-3">
@@ -109,11 +109,11 @@ export default function Footer() {
             <p>Help</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            <p>
+            {/* <p>
               <span>
                 <a href="https://chopbarh.zendesk.com/hc">How to Play</a>
               </span>
-            </p>
+            </p> */}
             <p>
               <span>Games</span>
             </p>
@@ -150,12 +150,12 @@ export default function Footer() {
                 />
               </Link>
             </ContactBox>
-            <p>
+            {/* <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
                 Submit a Ticket
               </a>
-            </p>
+            </p> */}
             <p>&copy; {new Date().getFullYear()}</p>
           </FooterLinkContainer>
         </div>
