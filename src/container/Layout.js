@@ -10,9 +10,6 @@ const LandingPage = lazy(() => import("../Pages/LandingPage"));
 const GamesPage = lazy(() => import("../Pages/GamesPage"));
 const LoginPage = lazy(() => import("../Pages/LoginPage"));
 const SignUpPage = lazy(() => import("../Pages/SignUpPage"));
-const ForgotPassword = lazy(() =>
-  import("../components/auth/ForgotPassword/ForgotPassword")
-);
 // const NotFoundPage = lazy(() => import("../Pages/NotFoundPage"));
 const Logout = lazy(() => import("../components/auth/Logout/Logout"));
 const UserHomePage = lazy(() => import("../Pages/UserHomePage"));
@@ -50,16 +47,6 @@ class Layout extends Component {
       );
   }
 
-  // componentDidUpdate = prevProps => {
-  //   if (prevProps !== this.props) {
-  //     this.props.isAuthenticated &&
-  //       this.props.authSuccess(
-  //         localStorage.getItem("chopbarh-token"),
-  //         localStorage.getItem("chopbarh-id")
-  //       );
-  //   }
-  // };
-
   render() {
     return (
       <>
@@ -68,7 +55,6 @@ class Layout extends Component {
             <Switch>
               <Route path="/" exact component={LandingPage} />
               <Route path="/games" component={GamesPage} />
-              <Route path="/reset" component={ForgotPassword} />
               <Route path="/logout" component={Logout} />
               <Route path="/user" component={UserHomePage} />
               <Route path="/edit-profile" component={UserEditProfilePage} />

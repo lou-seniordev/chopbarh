@@ -128,14 +128,14 @@ class Header extends Component {
               </MediaQuery>
             </ul>
             <ul className="navbar-nav">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   href="https://chopbarh.zendesk.com/hc"
                   className="nav-link text-uppercase mr-5"
                 >
                   How to
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="games" className="nav-link text-uppercase mr-5">
                   Games

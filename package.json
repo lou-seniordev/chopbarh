@@ -10,7 +10,6 @@
     "cryptr": "^6.0.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
-    "eyowo-js": "^1.2.3",
     "firebase": "^6.1.0",
     "grommet-icons": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
