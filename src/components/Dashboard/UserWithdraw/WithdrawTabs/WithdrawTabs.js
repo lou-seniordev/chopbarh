@@ -72,7 +72,7 @@ class WithdrawTabs extends Component {
 
 const mapStateToProps = state => ({
   playerData: state.player.playerData,
-  loading: state.player.loading
+  loading: state.player.loading,
 });
 
 export default connect(mapStateToProps)(WithdrawTabs);

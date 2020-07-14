@@ -247,15 +247,22 @@ class UserHeader extends Component {
                         <Link className="" to="deposit">
                           <Icon icon={Deposit} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">
-                            Deposit
+                            Buy Coins
                           </span>
                         </Link>
-                        <Link className="" to="withdraw">
-                          <Icon icon={Withdrawal} height="15" color="#fff" />
-                          <span className="nav-link text-uppercase">
-                            Withdraw
-                          </span>
-                        </Link>
+                        {this.props.playerData &&
+                          this.props.playerData.PlayerStatus !== 6 && (
+                            <Link className="" to="withdraw">
+                              <Icon
+                                icon={Withdrawal}
+                                height="15"
+                                color="#fff"
+                              />
+                              <span className="nav-link text-uppercase">
+                                Withdraw
+                              </span>
+                            </Link>
+                          )}
                         <Link className="" to="play">
                           <Icon icon={Play} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">Play</span>

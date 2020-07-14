@@ -59,10 +59,7 @@ class Layout extends Component {
               <Route path="/user" component={UserHomePage} />
               <Route path="/edit-profile" component={UserEditProfilePage} />
               <Route path="/deposit" component={UserDepositPage} />
-              {this.props.playerData &&
-                this.props.playerData.PlayerStatus !== 6 && (
-                  <Route path="/withdraw" component={UserWithdrawPage} />
-                )}
+              <Route path="/withdraw" component={UserWithdrawPage} />
               <Route path="/transaction" component={UserTransactionPage} />
               <Route path="/play" component={UserPlayPage} />
               <Route path="/update" component={UpdateApplicationPage} />
