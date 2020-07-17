@@ -20,34 +20,29 @@ const SignUpWrapper = styled.div`
     text-align: center;
   }
 
-  img {
-    width: 35%;
-    margin: 1rem;
-    transition: all 0.2s;
-
-    &:hover {
-      transform: translateY(-3px);
-    }
-
-    @media only screen and (max-width: ${breakPoints.medium}) {
-      width: 60%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.small}) {
-      width: 70%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.smaller}) {
-      width: 90%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.smallest}) {
-      width: 100%;
-    }
-  }
-
   a {
     cursor: pointer;
+  }
+`;
+
+const Image = styled.img`
+  width: 20rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    width: 18rem;
+  }
+`;
+
+const AppleStoreImage = styled(Image)`
+  width: 18rem;
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    width: 15.6rem;
   }
 `;
 
@@ -61,15 +56,12 @@ class SignUp extends Component {
           <div>
             <p>
               <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                <img src={AppStore} alt="App Store" />
+                <AppleStoreImage src={AppStore} alt="App Store" />
               </a>
             </p>
             <p>
-              {/* <a href="https://drive.google.com/file/d/19ctMI6XBlFfrddM0Bq_cHAiDPfYfzYRW/view">
-                <img src={PlayStore} alt="Play Store" />
-              </a> */}
               <a href="https://chopbarh.live/download">
-                <img src={PlayStore} alt="Play Store" />
+                <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>
           </div>

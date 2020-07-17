@@ -99,8 +99,7 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
-  height: 6rem;
-  width: 17rem;
+  width: 19rem;
   transition: all 0.2s;
 
   &:hover {
@@ -108,19 +107,24 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.medium}) {
-    height: 5rem;
-    width: 17rem;
+    width: 20rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    height: 9rem;
-    width: 22rem;
+    width: 80%;
+  }
+`;
+
+const AppleStoreImage = styled(Image)`
+  width: 17.5rem;
+
+  @media only screen and (max-width: ${breakPoints.medium}) {
+    width: 18rem;
   }
 
-  /* @media only screen and (max-width: ${breakPoints.smaller}) {
-    height: 5rem;
-    width: 18rem;
-  } */
+  @media only screen and (max-width: ${breakPoints.small}) {
+    width: 70%;
+  }
 `;
 
 const AndroidInstructionImage = styled(Image)`
@@ -183,64 +187,9 @@ const SliderContentSmallScreens = styled(SliderContent)`
   align-items: flex-start;
 `;
 
-// const MainLink = styled.a`
-//   all: unset;
-//   border: 3px solid ${color.colorWhite};
-//   padding: 1rem 1.3rem;
-//   font-size: 1.5rem;
-//   font-weight: 600;
-//   transform: skew(-20deg);
-//   display: inline-block;
-//   transition: all 0.2s;
-//   cursor: pointer;
-
-//   span {
-//     display: inline-block;
-//     transform: skew(20deg);
-//   }
-
-//   &:hover {
-//     transform: translateY(-3px) skew(-20deg);
-//     color: ${color.colorWhite};
-//     background: ${color.colorPrimaryHover};
-//   }
-
-//   @media only screen and (max-width: ${breakPoints.medium}) {
-//     font-size: 1.3rem;
-//     padding: 0.7rem 1.3rem;
-//   }
-
-//   @media only screen and (max-width: ${breakPoints.small}) {
-//     font-size: 0.9rem;
-//     margin-right: 0.5rem;
-//     padding: 0.5rem 1rem;
-//   }
-
-//   @media only screen and (max-width: ${breakPoints.smaller}) {
-//     font-size: 0.8rem;
-//   }
-
-//   @media only screen and (max-width: ${breakPoints.smallest}) {
-//     padding: 0.5rem 0.8rem;
-//   }
-// `;
-
 const Container = styled.div`
   position: relative;
 `;
-
-// const ScrollContainer = styled.div`
-//   position: absolute;
-//   left: 50%;
-//   top: 90%;
-//   transform: translate(-50%, -50%);
-//   transition: all 0.2s;
-//   cursor: pointer;
-
-//   &:hover {
-//     transform: translate(-50%, -60%);
-//   }
-// `;
 
 const VendorButtonImage = styled.img`
   width: 48%;
@@ -302,25 +251,18 @@ export default function Hero() {
                 Play and win from collection of childhood games that live up to
                 the moment
               </ParagraphOne>
-              <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
-                {/* <MainLink
-                href="https://downloads.chopbarh.com/chopbarh.apk https://play.google.com/store/apps/details?id=com.chopbarh.common"
-                target="_blank"
-                className="mr-lg-4 mr-md-4 mr-sm-2"
-              >
-                <span style={{ color: "#ffffff" }}>Start Playing</span>{" "}
-              </MainLink> */}
+              <div className="hero__buttons mt-4">
                 <span style={{ cursor: "pointer" }}>
                   <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <Image
+                    <AppleStoreImage
                       src={AppStoreButton}
-                      className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
+                      className="mr-lg-2 mr-md-3 mr-sm-2 mb-md-2"
                       alt="App Store"
                     />
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://chopbarh.live/download">
+                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -338,9 +280,6 @@ export default function Hero() {
                   </a>
                 </span>
               </div>
-              {/* <Link to="vendors">
-                <VendorButtonImageFirstSlide src={VendorButton} />
-              </Link> */}
             </SliderContent>
             <SliderImage
               className="d-block"
@@ -355,10 +294,10 @@ export default function Hero() {
             }}
           >
             <SliderContent className="text-center">
-              <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <div className="hero__buttons mt-4">
                 <span style={{ cursor: "pointer" }}>
                   <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <Image
+                    <AppleStoreImage
                       src={AppStoreButton}
                       className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
                       alt="App Store"
@@ -366,7 +305,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://chopbarh.live/download">
+                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -401,10 +340,10 @@ export default function Hero() {
                 No be say come lick stew
               </HeadingTwo>
               <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <div className="hero__buttons mt-4">
                 <span style={{ cursor: "pointer" }}>
                   <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <Image
+                    <AppleStoreImage
                       src={AppStoreButton}
                       className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
                       alt="App Store"
@@ -412,7 +351,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://chopbarh.live/download">
+                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -442,10 +381,10 @@ export default function Hero() {
             }}
           >
             <SliderContent className="text-center">
-              <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <div className="hero__buttons mt-4">
                 <span style={{ cursor: "pointer" }}>
                   <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <Image
+                    <AppleStoreImage
                       src={AppStoreButton}
                       className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
                       alt="App Store"
@@ -453,7 +392,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://chopbarh.live/download">
+                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -483,10 +422,10 @@ export default function Hero() {
             }}
           >
             <SliderContent className="text-center">
-              <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
+              <div className="hero__buttons mt-4">
                 <span style={{ cursor: "pointer" }}>
                   <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <Image
+                    <AppleStoreImage
                       src={AppStoreButton}
                       className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
                       alt="App Store"
@@ -494,7 +433,7 @@ export default function Hero() {
                   </a>
                 </span>
                 <span style={{ cursor: "pointer" }}>
-                  <a href="https://chopbarh.live/download">
+                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
                       className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
@@ -559,7 +498,7 @@ export default function Hero() {
                 <div className="hero__buttons mt-4 ml-lg-3 ml-md-3">
                   <span style={{ cursor: "pointer" }}>
                     <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                      <Image
+                      <AppleStoreImage
                         src={AppStoreButton}
                         className="mr-lg-3 mr-md-3 mr-sm-2 mb-2"
                         alt="App Store"
@@ -567,7 +506,7 @@ export default function Hero() {
                     </a>
                   </span>
                   <span style={{ cursor: "pointer" }}>
-                    <a href="https://chopbarh.live/download">
+                    <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                       <Image
                         src={PlayStoreButton}
                         className="mr-lg-4 mr-md-4 mr-sm-2 mb-lg-3 mb-md-3 mb-2"
