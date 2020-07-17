@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
 import Slider from "react-animated-slider";
 import MediaQuery from "react-responsive";
 import color from "../../styles/colors";
@@ -8,9 +7,7 @@ import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
-// import VendorButton from "../../assets/img/vendor_button@2x.png";
 import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
-// import MegaMillions from "../../assets/img/MegaMillions.jpeg";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -236,7 +233,7 @@ export default function Hero() {
   return (
     <Container>
       <MediaQuery minDeviceWidth={767}>
-        <Slider autoplay={3000}>
+        <Slider disabled={true}>
           <div
             style={{
               background: `url('${Background}') ${color.colorPrimary} no-repeat center center`,
@@ -287,175 +284,6 @@ export default function Hero() {
               src="https://res.cloudinary.com/chopbarh/image/upload/v1564748049/Landing%20Page%20Assets/slider_1_vfw3gc.png"
               alt="User"
             />
-          </div>
-          <div
-            style={{
-              background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747886/Landing%20Page%20Assets/SliderImage1_byohor.jpg') ${color.colorPrimary} no-repeat center center`,
-              backgroundSize: "cover",
-            }}
-          >
-            <SliderContent className="text-center">
-              <div className="hero__buttons mt-4">
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <AppleStoreImage
-                      src={AppStoreButton}
-                      className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
-                      alt="App Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
-                    <Image
-                      src={PlayStoreButton}
-                      className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-                    <Image
-                      src={AndroidInstructions}
-                      className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-              </div>
-              {/* <Link to="vendors">
-                <VendorButtonImage src={VendorButton} />
-              </Link> */}
-            </SliderContent>
-          </div>
-          <div
-            style={{
-              background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage2_hkx0ey.jpg') ${color.colorPrimary} no-repeat center center`,
-              backgroundSize: "cover",
-              color: "#fff",
-            }}
-          >
-            <SliderContent className="text-center">
-              <HeadingTwo className="hero__title">
-                No be say come lick stew
-              </HeadingTwo>
-              <ParagraphOne>You go lick stew chop rice</ParagraphOne>
-              <div className="hero__buttons mt-4">
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <AppleStoreImage
-                      src={AppStoreButton}
-                      className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
-                      alt="App Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
-                    <Image
-                      src={PlayStoreButton}
-                      className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-                    <Image
-                      src={AndroidInstructions}
-                      className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-              </div>
-              {/* <Link to="vendors">
-                <VendorButtonImage src={VendorButton} />
-              </Link> */}
-            </SliderContent>
-          </div>
-          <div
-            style={{
-              background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747891/Landing%20Page%20Assets/SliderImage3_q37kzi.jpg') ${color.colorPrimary} no-repeat center center`,
-              backgroundSize: "cover",
-            }}
-          >
-            <SliderContent className="text-center">
-              <div className="hero__buttons mt-4">
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <AppleStoreImage
-                      src={AppStoreButton}
-                      className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
-                      alt="App Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
-                    <Image
-                      src={PlayStoreButton}
-                      className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-                    <Image
-                      src={AndroidInstructions}
-                      className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-              </div>
-              {/* <Link to="vendors">
-                <VendorButtonImage src={VendorButton} />
-              </Link> */}
-            </SliderContent>
-          </div>
-          <div
-            style={{
-              background: `url('https://res.cloudinary.com/chopbarh/image/upload/v1564747893/Landing%20Page%20Assets/SliderImage4_pjltmr.jpg') no-repeat center center`,
-              backgroundSize: "cover",
-            }}
-          >
-            <SliderContent className="text-center">
-              <div className="hero__buttons mt-4">
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                    <AppleStoreImage
-                      src={AppStoreButton}
-                      className="mr-lg-3 mr-md-3 mr-sm-2 mb-md-2"
-                      alt="App Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
-                    <Image
-                      src={PlayStoreButton}
-                      className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-                <span style={{ cursor: "pointer" }}>
-                  <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
-                    <Image
-                      src={AndroidInstructions}
-                      className="mb-lg-3 mb-md-3 mt-lg-3 mt-md-3"
-                      alt="Play Store"
-                    />
-                  </a>
-                </span>
-              </div>
-              {/* <Link to="vendors">
-                <VendorButtonImage src={VendorButton} />
-              </Link> */}
-            </SliderContent>
           </div>
         </Slider>
       </MediaQuery>
