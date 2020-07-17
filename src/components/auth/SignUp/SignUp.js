@@ -26,7 +26,7 @@ const SignUpWrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 20rem;
+  width: 27rem;
   transition: all 0.2s;
 
   &:hover {
@@ -39,7 +39,7 @@ const Image = styled.img`
 `;
 
 const AppleStoreImage = styled(Image)`
-  width: 18rem;
+  width: 24rem;
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
     width: 15.6rem;

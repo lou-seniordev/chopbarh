@@ -99,7 +99,7 @@ const ParagraphOne = styled.p`
 `;
 
 const Image = styled.img`
-  width: 19rem;
+  width: 23rem;
   transition: all 0.2s;
 
   &:hover {
@@ -107,7 +107,7 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.medium}) {
-    width: 20rem;
+    width: 21rem;
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
@@ -116,7 +116,7 @@ const Image = styled.img`
 `;
 
 const AppleStoreImage = styled(Image)`
-  width: 17.5rem;
+  width: 20rem;
 
   @media only screen and (max-width: ${breakPoints.medium}) {
     width: 18rem;
