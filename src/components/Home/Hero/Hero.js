@@ -111,7 +111,7 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    width: 80%;
+    width: 35rem;
   }
 `;
 
@@ -123,13 +123,14 @@ const AppleStoreImage = styled(Image)`
   }
 
   @media only screen and (max-width: ${breakPoints.small}) {
-    width: 70%;
+    width: 30rem;
   }
 `;
 
 const AndroidInstructionImage = styled(Image)`
   @media only screen and (max-width: ${breakPoints.small}) {
     margin-top: 5rem;
+    width: 30rem;
   }
 
   @media only screen and (max-width: ${breakPoints.smaller}) {
