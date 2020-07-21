@@ -7,7 +7,6 @@ import breakPoints from "../../styles/breakpoints";
 import Background from "../../assets/svg/WavyHeader.svg";
 import AppStoreButton from "../../assets/img/AppStore.png";
 import PlayStoreButton from "../../assets/img/PlayStore@2x.png";
-import AndroidInstructions from "../../assets/img/AndroidInstructions@2x.png";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -124,20 +123,20 @@ const AppleStoreImage = styled(Image)`
   }
 `;
 
-const AndroidInstructionImage = styled(Image)`
-  @media only screen and (max-width: ${breakPoints.small}) {
-    margin-top: 5rem;
-    width: 30rem;
-  }
+// const AndroidInstructionImage = styled(Image)`
+//   @media only screen and (max-width: ${breakPoints.small}) {
+//     margin-top: 5rem;
+//     width: 30rem;
+//   }
 
-  @media only screen and (max-width: ${breakPoints.smaller}) {
-    margin-top: 1rem;
-  }
+//   @media only screen and (max-width: ${breakPoints.smaller}) {
+//     margin-top: 1rem;
+//   }
 
-  @media only screen and (max-width: ${breakPoints.smallest}) {
-    margin-top: 0.8rem;
-  }
-`;
+//   @media only screen and (max-width: ${breakPoints.smallest}) {
+//     margin-top: 0.8rem;
+//   }
+// `;
 
 const SliderImage = styled.img`
   position: absolute;
@@ -263,12 +262,12 @@ export default function Hero() {
                   <a href="https://play.google.com/store/apps/details?id=com.chopbarh.common">
                     <Image
                       src={PlayStoreButton}
-                      className="mr-lg-3 mt-lg-3 mt-md-3 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
+                      className="mr-lg-3 mt-lg-2 mt-md-2 mr-md-3 mr-sm-2 mb-lg-3 mb-md-3"
                       alt="Play Store"
                     />
                   </a>
                 </span>
-                <span style={{ cursor: "pointer" }}>
+                {/* <span style={{ cursor: "pointer" }}>
                   <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
                     <Image
                       src={AndroidInstructions}
@@ -276,7 +275,7 @@ export default function Hero() {
                       alt="Play Store"
                     />
                   </a>
-                </span>
+                </span> */}
               </div>
             </SliderContent>
             <SliderImage
@@ -350,7 +349,7 @@ export default function Hero() {
                       Download now and get &#8358;100 free
                     </ParagraphOne>
                   </span> */}
-                  <span style={{ cursor: "pointer" }}>
+                  {/* <span style={{ cursor: "pointer" }}>
                     <a href="https://www.youtube.com/watch?v=5ESVBaQcoRA&feature=youtu.be">
                       <AndroidInstructionImage
                         src={AndroidInstructions}
@@ -358,10 +357,7 @@ export default function Hero() {
                         alt="Play Store"
                       />
                     </a>
-                  </span>
-                  {/* <Link to="vendors">
-                    <VendorButtonImageSmall src={VendorButton} />
-                  </Link> */}
+                  </span> */}
                 </div>
               </div>
             </SliderContentSmallScreens>
