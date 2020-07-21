@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
@@ -18,9 +18,8 @@ import {
   FormSubmitButton,
   ExistingCardForm,
   ExistingCardFormItem,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
-import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
 import {
   openOTPModal,
@@ -28,24 +27,31 @@ import {
   openBirthdayModal,
   closeBirthdayModal,
   openPhoneModal,
-  closePhoneModal
+  closePhoneModal,
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankBirthdayModal,
+  closeBankBirthdayModal,
+  openBankPhoneModal,
+  closeBankPhoneModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchBankAccountData,
-  removeBankAccount
+  removeBankAccount,
 } from "../../../../store/actions/bankAccountActions";
 import AccountUI from "./AccountUI/AccountUI";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
+import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitBirthday from "./SubmitBirthday/SubmitBirthday";
 import SubmitPhone from "./SubmitPhone/SubmitPhone";
+import firebase from "../../../../firebase";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
 function referenceId() {
   let text = "";
-  let possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 15; i++)
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (let i = 0; i < 25; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
@@ -64,27 +70,43 @@ class BankCharge extends Component {
     selectedValue: null,
     modalOpen: false,
     paying: false,
-    removeAccountModal: false
+    removeAccountModal: false,
+    error: false,
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.fetchBankAccountData();
 
-    fetch("https://api.paystack.co/bank?gateway=emandate&pay_with_bank=true", {
-      headers: {
-        Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
+    try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+      // console.log(idToken);
+
+      const paystackBankListResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbanklist/player/deposit/banks",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${idToken}`,
+              "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+            },
+          }
+        )
+      ).json();
+
+      if (paystackBankListResponse.status === true) {
         this.setState({
-          bankList: data.data,
+          bankList: paystackBankListResponse.data,
           dataLoading: false,
-          bank: data.data[0].code
+          bank: paystackBankListResponse.data[0].code,
         });
-      })
-      .catch(err => this.setState({ dataLoading: false }));
+      } else {
+        this.setState({ dataLoading: false, error: true });
+      }
+    } catch (error) {
+      this.setState({ dataLoading: false, error: true });
+    }
   };
 
   componentDidUpdate = prevProps => {
@@ -93,7 +115,7 @@ class BankCharge extends Component {
         this.props.bankAccount.length &&
           this.setState({
             selectedValue: this.props.bankAccount[0].auth_code,
-            bankName: this.props.bankAccount[0].bank
+            bankName: this.props.bankAccount[0].bank,
           });
       } catch (err) {}
     }
@@ -117,7 +139,7 @@ class BankCharge extends Component {
 
   toggleRemoveAccount = () => {
     this.setState({
-      removeAccountModal: !this.state.removeAccountModal
+      removeAccountModal: !this.state.removeAccountModal,
     });
   };
 
@@ -166,71 +188,61 @@ class BankCharge extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.authAmount * 100,
-      bank: {
-        code: bankAccountObject[0].bank_code,
-        account_number: bankAccountObject[0].account_number
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        bank_code: bankAccountObject[0].bank_code,
-        account_number: bankAccountObject[0].account_number,
-        refId
-      }
-    };
-
-    const historyObject = {
-      amount: this.state.authAmount,
-      channel: "Bank",
-      transaction_date: new Date().toISOString(),
-      fees: +this.state.authAmount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    this.props.setDepositHistory(historyObject);
-
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
-      const data = await response.json();
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const paystackBankChargeResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbankdeposit/player/deposit/bank_charge",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.authAmount),
+            playerId: this.props.playerData.PlayerID,
+            phone_number: this.props.playerData.PhoneNum,
+            bank_code: bankAccountObject[0].bank_code,
+            account_number: bankAccountObject[0].account_number,
+            refId,
+            transaction_reference: reference,
+          }),
+        }
+      );
+      const data = await paystackBankChargeResponse.json();
 
       this.setState({
         loading: false,
         authAmount: "",
-        paying: false
+        paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.toggleModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "send_birthday") {
-        this.toggleModal();
-        this.props.openBirthdayModal();
-      } else if (data.data.status === "open_url") {
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "pending") {
-        this.toggleModal();
-        toast.info("Transaction is processing");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.toggleModal();
+          this.props.openBankPhoneModal();
+        } else if (data.data.status === "send_birthday") {
+          this.toggleModal();
+          this.props.openBankBirthdayModal();
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "pending") {
+          this.toggleModal();
+          toast.info("Transaction is processing");
+        } else {
+          toast.error(`Transaction not successful`);
+        }
       } else {
-        toast.error(`Transaction not successful`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       toast.error(`Something went wrong`);
@@ -263,76 +275,67 @@ class BankCharge extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount: this.state.amount * 100,
-      bank: {
-        code: this.state.bank,
-        account_number: this.state.account_number
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        bank_code: this.state.bank,
-        account_number: this.state.account_number,
-        refId
-      }
-    };
-
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Bank",
-      transaction_date: new Date().toISOString(),
-      fees: +this.state.amount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    this.props.setDepositHistory(historyObject);
-
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
-      const data = await response.json();
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const paystackBankChargeResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackbankdeposit/player/deposit/bank_charge",
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.amount),
+            playerId: this.props.playerData.PlayerID,
+            phone_number: this.props.playerData.PhoneNum,
+            bank_code: this.state.bank,
+            account_number: this.state.account_number,
+            refId,
+            transaction_reference: reference,
+          }),
+        }
+      );
+      const data = await paystackBankChargeResponse.json();
 
       this.setState({
         loading: false,
         amount: "",
         bank: "",
         account_number: "",
-        paying: false
+        paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "send_birthday") {
-        this.props.setChargeReference(data.data.reference);
-        this.toggleModal();
-        this.props.openBirthdayModal();
-      } else if (data.data.status === "open_url") {
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "pending") {
-        this.toggleModal();
-        toast.info("Transaction is processing");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankPhoneModal();
+        } else if (data.data.status === "send_birthday") {
+          this.props.setChargeReference(data.data.reference);
+          this.toggleModal();
+          this.props.openBankBirthdayModal();
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "pending") {
+          this.toggleModal();
+          toast.info("Transaction is processing");
+        } else {
+          this.toggleModal();
+          toast.error(`Transaction not successful`);
+        }
       } else {
         this.toggleModal();
-        toast.error(`Transaction not successful`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.toggleModal();
@@ -349,7 +352,7 @@ class BankCharge extends Component {
           toggle={this.toggleRemoveAccount}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -371,11 +374,11 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.otpModal}
-          toggle={this.props.closeOTPModal}
+          isOpen={this.props.bankOTPModal}
+          toggle={this.props.closeBankOTPModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -383,11 +386,11 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.birthdayModal}
+          isOpen={this.props.bankBirthdayModal}
           toggle={this.props.closeBirthdayModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -395,11 +398,11 @@ class BankCharge extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.phoneModal}
-          toggle={this.props.closePhoneModal}
+          isOpen={this.props.bankPhoneModal}
+          toggle={this.props.closeBankPhoneModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -411,12 +414,12 @@ class BankCharge extends Component {
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody
             className="text-center mt-5 mb-5"
-            style={{ minHeight: "20vh" }}
+            style={{ minHeight: "5rem" }}
           >
             {this.state.amount ? (
               <>
@@ -648,12 +651,25 @@ class BankCharge extends Component {
                           </FormSubmitButton>
                         </Form>
                       ) : (
-                        <div
-                          className="mt-5 text-center"
-                          style={{ minHeight: "30vh" }}
-                        >
-                          <Spinner />
-                        </div>
+                        <>
+                          {!this.state.error ? (
+                            <div
+                              className="mt-5 text-center"
+                              style={{ minHeight: "30vh" }}
+                            >
+                              <Spinner />
+                            </div>
+                          ) : (
+                            <div
+                              className="mt-5 text-center"
+                              style={{ minHeight: "30vh" }}
+                            >
+                              <p>
+                                An error occured while fetching bank information
+                              </p>
+                            </div>
+                          )}
+                        </>
                       )}
                     </AccordionItemPanel>
                   </AccordionItem>
@@ -738,10 +754,15 @@ const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   phoneModal: state.modal.submitPhoneModal,
   birthdayModal: state.modal.submitBirthdayModal,
+
+  bankOTPModal: state.modal.bankOTPModal,
+  bankPhoneModal: state.modal.bankPhoneModal,
+  bankBirthdayModal: state.modal.bankBirthdayModal,
+
   bankAccount: state.bankAccount.bankAccount,
   loading: state.bankAccount.loading,
   removingAccount: state.bankAccount.removing,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {
@@ -754,7 +775,14 @@ const mapDispatchToProps = {
   openBirthdayModal,
   openPhoneModal,
   closeBirthdayModal,
-  closePhoneModal
+  closePhoneModal,
+
+  openBankOTPModal,
+  closeBankOTPModal,
+  openBankBirthdayModal,
+  closeBankBirthdayModal,
+  openBankPhoneModal,
+  closeBankPhoneModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(BankCharge));

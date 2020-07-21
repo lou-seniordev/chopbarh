@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   error: false,
   token: null,
-  id: null
+  id: null,
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case actionType.AUTH_START:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case actionType.AUTH_SUCCESS:
       return {
@@ -21,20 +21,20 @@ export default (state = initialState, action) => {
         authenticated: true,
         loading: false,
         token: action.token,
-        id: action.id
+        id: action.id,
       };
     case actionType.AUTH_FAILURE:
       return {
         ...state,
         loading: false,
-        error: true
+        error: true,
       };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
         authenticated: false,
         token: null,
-        id: null
+        id: null,
       };
     default:
       return state;

@@ -144,7 +144,7 @@ export default function VendorsContent() {
           Become a <br /> Chopbarh Agent
         </h3>
         <span>
-          Make over 50k profit everyday being a ChopBarh Chopbarh agent. <br />
+          Make over 50k profit everyday being a ChopBarh agent. <br />
           To become a Chopbarh Agent please visit any of our Authorized Centers
           near you to for requirements and onboarding. Or call 07063741315 for
           information
@@ -155,26 +155,17 @@ export default function VendorsContent() {
           <Row>
             <div className="col-md-6">
               <h4>What a Chopbarh Agent Does</h4>
-              <p>- Open a ChopBarh center</p>
               <p>- Install the Chopbarh App for users</p>
               <p>- Facilitate ChopBarh games</p>
-              <p>- Make money on every game played</p>
-              <p>- Make additional money on every win</p>
+              <p>- Sell Vouchers</p>
               <p>- Make money cashing out for customers</p>
-              <p>
-                - Open other sub-agents and make money from all their
-                transactions
-              </p>
+              <p>- Get N100 for every customer registered</p>
             </div>
             <div className="col-md-6">
               <h4>Minimum Requirements for a Chopbarh Chopbarh Agent</h4>
-              <p>- Location/Shop: Get a shop space</p>
               <p>
-                - Equipments: Minimum of 2 Smartphones(Android or iPhone), 2
-                TVs, 1 Generator set and good internet
-              </p>
-              <p>
-                - Branding: Location/Shop should be painted in Chopbarh colors
+                - A Smartphone either Android or iPhone. That's all. NO SHOP
+                REQUIRED
               </p>
             </div>
           </Row>

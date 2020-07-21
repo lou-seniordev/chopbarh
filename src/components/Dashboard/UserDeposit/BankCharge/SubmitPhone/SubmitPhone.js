@@ -7,8 +7,12 @@ import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+  openBankOTPModal,
+  closeBankOTPModal,
+  closeBankPhoneModal,
 } from "../../../../../store/actions/modalActions";
+import firebase from "../../../../../firebase";
 
 const Form = styled.form`
   min-height: 12rem;
@@ -17,7 +21,7 @@ const Form = styled.form`
 class SubmitPhone extends Component {
   state = {
     phone: "",
-    loading: false
+    loading: false,
   };
 
   formIsValid = ({ phone }) => {
@@ -43,38 +47,44 @@ class SubmitPhone extends Component {
 
     const postData = {
       phone: this.state.phone,
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_phone",
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const submitPhoneResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_phone",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
-      if (data.data.status === "success") {
-        // Verify payment before adding
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-        // const value = +data.data.amount / 100;
-        // this.props.setBankAccountData(data.data.authorization);
-        // this.props.setDepositHistory(data.data);
-        // this.props.setCoinBalance(value);
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
+      const data = await submitPhoneResponse.json();
+
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          this.setState({ loading: false });
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "open_url") {
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "send_otp") {
+          this.props.closeBankPhoneModal();
+          this.props.openBankOTPModal();
+        } else {
+          toast.error(`Please try again`);
+          this.setState({ loading: false });
+        }
       } else {
-        toast.error(`Please try again`);
+        toast.error(`Transaction Declined`);
         this.setState({ loading: false });
       }
     } catch (err) {
@@ -91,7 +101,7 @@ class SubmitPhone extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -100,10 +110,10 @@ class SubmitPhone extends Component {
         ) : (
           <>
             <FormItem>
-              <label>Enter Phone Number</label>
+              <label>Enter Phone</label>
               <input
                 type="text"
-                name="otp"
+                name="phone"
                 value={this.state.phone}
                 onChange={this.handleInputChange}
                 required
@@ -125,17 +135,18 @@ class SubmitPhone extends Component {
 }
 
 const mapStateToProps = state => ({
-  reference: state.charge.reference
+  reference: state.charge.reference,
 });
 
 const mapDispatchToProps = {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+
+  openBankOTPModal,
+  closeBankOTPModal,
+  closeBankPhoneModal,
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPhone))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPhone))
 );

@@ -13,23 +13,24 @@ import {
   FormItem,
   FormCheckBox,
   FormAction,
-  SignUpSignal
+  SignUpSignal,
 } from "../../styles/LoginStyles";
 import {
   authStart,
   authSuccess,
-  authFail
+  authFail,
 } from "../../../store/actions/authActions";
 import Logo from "../../UI/Logo/Logo";
+import firebase from "../../../firebase";
 
 const appRoutes = [
-  "/profile",
   "/edit-profile",
   "/change-pin",
   "/deposit",
   "/withdraw",
   "/play",
-  "/transaction"
+  "/transaction",
+  "/user",
 ];
 
 class Login extends Component {
@@ -38,7 +39,12 @@ class Login extends Component {
     accountErrorModal: false,
     userName: "",
     password: "",
-    loading: false
+    loading: false,
+  };
+
+  componentDidMount = () => {
+    localStorage.removeItem("chopbarh-token");
+    localStorage.removeItem("chopbarh-id");
   };
 
   toggleformErrorModal = () => {
@@ -54,11 +60,7 @@ class Login extends Component {
   };
 
   formIsValid = ({ userName, password }) => {
-    if (
-      userName.length !== 11 ||
-      !isNaN(userName) !== true ||
-      password.length !== 4
-    ) {
+    if (userName.length !== 11 || !isNaN(userName) !== true) {
       return false;
     }
     return true;
@@ -77,33 +79,59 @@ class Login extends Component {
     const newState = { ...this.state };
     const formState = {
       phone_number: newState.userName,
-      password: newState.password
+      password: newState.password,
     };
 
     const formValue = JSON.stringify(formState);
 
     const context = this;
 
-    fetch("https://chopbarh-api.nutod.repl.co/api/auth", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: formValue
-    })
+    // TODO: Change to async/await
+
+    fetch(
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/userAuth/login",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: formValue,
+      }
+    )
       .then(response => response.json())
       .then(data => {
         if (data.status === true) {
-          localStorage.setItem("chopbarh-token:live", data.authToken);
-          localStorage.setItem("chopbarh-id:live", data.userId);
-          context.props.authSuccess(data.authToken, data.userId);
-
-          if (appRoutes.includes(this.props.lastLocation.pathname)) {
-            context.props.history.push(this.props.lastLocation.pathname);
-          } else {
-            context.props.history.push("/user");
-          }
+          // localStorage.setItem("chopbarh-token", data.authToken);
+          // localStorage.setItem("chopbarh-id", data.userId);
+          // this.props.authSuccess(data.authToken, data.userId);
+          // if (
+          //   this.props.lastLocation !== null &&
+          //   appRoutes.includes(this.props.lastLocation.pathname)
+          // ) {
+          //   this.props.history.push(this.props.lastLocation.pathname);
+          // } else {
+          //   this.props.history.push("/user");
+          // }
+          return firebase
+            .auth()
+            .signInWithCustomToken(data.data.serviceToken)
+            .then(info => {
+              localStorage.setItem("chopbarh-token", data.data.userToken);
+              localStorage.setItem("chopbarh-id", data.data.PlayerID);
+              context.props.authSuccess(
+                data.data.userToken,
+                data.data.PlayerID
+              );
+              if (
+                context.props.lastLocation !== null &&
+                appRoutes.includes(context.props.lastLocation.pathname)
+              ) {
+                context.props.history.push(context.props.lastLocation.pathname);
+              } else {
+                context.props.history.push("/user");
+              }
+            });
         } else {
           context.setState({ accountErrorModal: true });
           context.props.authFail();
@@ -127,7 +155,7 @@ class Login extends Component {
           className="pt-5 mt-4"
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center">
@@ -141,7 +169,7 @@ class Login extends Component {
           className="pt-5 mt-4"
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center">
@@ -172,7 +200,7 @@ class Login extends Component {
               />
             </FormItem>
             <FormItem>
-              <label>Enter Pin</label>
+              <label>Enter Password</label>
               <input
                 type="password"
                 name="password"
@@ -180,7 +208,7 @@ class Login extends Component {
                 value={this.state.password}
                 required
                 minLength="4"
-                maxLength="4"
+                maxLength="12"
               />
             </FormItem>
             <FormAction>
@@ -213,13 +241,13 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.auth.loading
+  loading: state.auth.loading,
 });
 
 const mapDispatchToProps = {
   authStart,
   authSuccess,
-  authFail
+  authFail,
 };
 
 export default withRouter(

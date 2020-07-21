@@ -3,7 +3,7 @@ import * as actionType from "../actionTypes/actionTypes";
 const initialState = {
   loading: true,
   playerData: null,
-  error: false
+  error: false,
 };
 
 export default (state = initialState, action) => {
@@ -11,32 +11,34 @@ export default (state = initialState, action) => {
     case actionType.FETCH_PLAYER_DATA_INIT:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: false,
       };
     case actionType.FETCH_PLAYER_DATA_SUCCESS:
       return {
         ...state,
         playerData: {
-          ...action.data
+          ...action.data,
         },
-        loading: false
+        loading: false,
+        error: false,
       };
     case actionType.FETCH_PLAYER_DATA_FAIL:
       return {
         ...state,
         loading: false,
-        error: true
+        error: true,
       };
     case actionType.RESET_PLAYER_DATA:
       return {
         ...state,
-        playerData: null
+        playerData: null,
       };
     case actionType.AUTH_LOGOUT:
       return {
         ...state,
         loading: true,
-        playerData: null
+        playerData: null,
       };
     default:
       return state;

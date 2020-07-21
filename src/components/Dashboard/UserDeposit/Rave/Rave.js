@@ -9,22 +9,21 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import {
   FormItem,
   FormSubmitButton,
   ExistingCardForm,
   ExistingCardFormItem,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
-import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   fetchRaveCardData,
-  removeRaveCard
+  removeRaveCard,
 } from "../../../../store/actions/raveCardActions";
 import CreditCard from "./CreditCard/CreditCard";
-
+import firebase from "../../../../firebase";
 import "react-accessible-accordion/dist/fancy-example.css";
 
 const Form = styled.form`
@@ -41,13 +40,10 @@ class RavePayment extends Component {
     removeRaveCardModal: false,
     authAmount: "",
     last4Digits: "",
-    paying: false
+    paying: false,
   };
 
-  // key: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
-  // key: "FLWPUBK_TEST-195cdc10fea3cdfc1be0d60cf6aa0c80-X",
-
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.props.fetchRaveCardData();
   };
 
@@ -55,7 +51,7 @@ class RavePayment extends Component {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    for (let i = 0; i < 10; i++)
+    for (let i = 0; i < 25; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -80,7 +76,7 @@ class RavePayment extends Component {
 
   toggleRemoveCard = () => {
     this.setState({
-      removeRaveCardModal: !this.state.removeRaveCardModal
+      removeRaveCardModal: !this.state.removeRaveCardModal,
     });
   };
 
@@ -119,6 +115,12 @@ class RavePayment extends Component {
       return;
     }
 
+    if (+this.state.authAmount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     const raveCardObject = this.props.raveCard.filter(
       card => card.auth_code === this.state.selectedValue
     );
@@ -136,45 +138,16 @@ class RavePayment extends Component {
     this.setState({ paying: true });
 
     try {
-      const historyObject = {
-        amount: this.state.authAmount,
-        channel: "Card",
-        transaction_date: new Date().toISOString(),
-        fees: "0",
-        reference: "--",
-        status: "--",
-        refId: `${this.props.playerData.PhoneNum}-${reference}`,
-        gateway: "Flutterwave",
-        made_by: this.props.playerData.PhoneNum
-      };
+      const idToken = await firebase.auth().currentUser.getIdToken();
 
-      // this.props.setDepositHistory(historyObject);
-
-      // const response = await fetch(
-      //   "https://api.ravepay.co/flwv3-pug/getpaidx/api/tokenized/charge",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json"
-      //     },
-      //     body: JSON.stringify({
-      //       SECKEY: "FLWSECK-4f658855410a2a435b17aa5e0e3b5ba0-X",
-      //       token: raveCardObject[0].auth_code,
-      //       currency: "NGN",
-      //       amount: this.state.authAmount,
-      //       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      //       txRef: `${this.props.playerData.PhoneNum}-${reference}`
-      //     })
-      //   }
-      // );
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/make_deposit",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/ravecardcharge/player/deposit/card",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
             amount: +this.state.authAmount,
@@ -182,8 +155,8 @@ class RavePayment extends Component {
             token: raveCardObject[0].auth_code,
             reference: `${this.props.playerData.PhoneNum}-${reference}`,
             email: raveCardObject[0].email,
-            playerId: this.props.playerData.PlayerID
-          })
+            playerId: this.props.playerData.PlayerID,
+          }),
         }
       );
 
@@ -201,8 +174,10 @@ class RavePayment extends Component {
     // Fetch Flutterwave here
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+
+    this.setState({ loading: true });
 
     if (!this.formIsValid(this.state)) {
       this.setState({ loading: false });
@@ -218,72 +193,82 @@ class RavePayment extends Component {
 
     let reference = this.getReference();
 
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: "0",
-      reference: "--",
-      status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`,
-      gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum
-    };
+    try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
 
-    this.props.setDepositHistory(historyObject);
+      const raveModalRecordResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/ravemodal/player/deposit/record",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify({
+              amount: +this.state.amount,
+              transaction_reference: `${this.props.playerData.PhoneNum}-${reference}`,
+              transaction_fees: 0,
+              refId: `${this.props.playerData.PhoneNum}-${reference}`,
+              phone_number: `${this.props.playerData.PhoneNum}`,
+              playerId: `${this.props.playerData.PlayerID}`,
+            }),
+          }
+        )
+      ).json();
 
-    window.getpaidSetup({
-      PBFPubKey: this.state.key,
-      customer_email:
-        this.props.playerData.Email ||
-        `${this.props.playerData.PhoneNum}@mail.com`,
-      customer_firstname:
-        this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
-      customer_lastname:
-        this.props.playerData.FullName.split(" ")[1] ||
-        `${this.props.playerData.PhoneNum}`,
-      amount: Number(this.state.amount),
-      customer_phone: this.props.playerData.PhoneNum,
-      country: "NG",
-      currency: "NGN",
-      txref: `${this.props.playerData.PhoneNum}-${reference}`,
-      // redirect_url: "https://www.chopbarh.com/user",
-      onclose: function() {},
-      callback: async response => {
-        let flw_ref = response.tx.txRef;
-        console.log("This is the response returned after a charge", response);
-        if (
-          response.tx.chargeResponseCode == "00" ||
-          response.tx.chargeResponseCode == "0"
-        ) {
-          // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
-          const response = await fetch(
-            `https://pay.chopbarh.com/ng/api/verify`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                ref: flw_ref
-              })
+      this.setState({ loading: false });
+
+      if (raveModalRecordResponse.status === true) {
+        window.getpaidSetup({
+          PBFPubKey: this.state.key,
+          customer_email:
+            this.props.playerData.Email ||
+            `${this.props.playerData.PhoneNum}@mail.com`,
+          customer_firstname:
+            this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
+          customer_lastname:
+            this.props.playerData.FullName.split(" ")[1] ||
+            `${this.props.playerData.PhoneNum}`,
+          amount: Number(this.state.amount),
+          customer_phone: this.props.playerData.PhoneNum,
+          country: "NG",
+          currency: "NGN",
+          txref: `${this.props.playerData.PhoneNum}-${reference}`,
+          onclose: function () {},
+          callback: async response => {
+            let flw_ref = response.tx.txRef;
+
+            const idToken = await firebase.auth().currentUser.getIdToken();
+
+            if (
+              response.tx.chargeResponseCode === "00" ||
+              response.tx.chargeResponseCode === "0"
+            ) {
+              await fetch(
+                `https://us-central1-dev-sample-31348.cloudfunctions.net/ravewithdrawal/player/verify`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${idToken}`,
+                  },
+                  body: JSON.stringify({
+                    reference: flw_ref,
+                  }),
+                }
+              );
             }
-          );
-          // redirect to a success page
-          // window.open("https://www.chopbarh.com/user");
-          // window.open("localhost:3000/user");
-        } else {
-          // redirect to a failure page.
-          // window.open("https://www.chopbarh.com/user");
-          // window.open("localhost:3000/user");
-        }
+          },
+        });
+      } else {
+        toast.error("An error occured. Please try again later");
       }
-    });
+    } catch (error) {
+      toast.error("An error occured while processing the request");
+    }
   };
-
-  // Add handleAuthSubmit
-
-  // Add hanldInputChange, authAmount
 
   render() {
     return (
@@ -293,7 +278,7 @@ class RavePayment extends Component {
           toggle={this.toggleRemoveCard}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -469,13 +454,12 @@ class RavePayment extends Component {
 const mapStateToProps = state => ({
   playerData: state.player.playerData,
   raveCard: state.raveCard.raveCard,
-  loading: state.raveCard.loading
+  loading: state.raveCard.loading,
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   fetchRaveCardData,
-  removeRaveCard
+  removeRaveCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RavePayment);

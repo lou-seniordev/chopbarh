@@ -6,7 +6,14 @@ const initialState = {
   submitPhoneModal: false,
   submitBirthdayModal: false,
   transactionSuccessModal: false,
-  transactionFailModal: false
+  transactionFailModal: false,
+  cardPinModal: false,
+  cardOTPModal: false,
+  cardPhoneModal: false,
+  cardBirthdayModal: false,
+  bankOTPModal: false,
+  bankPhoneModal: false,
+  bankBirthdayModal: false,
 };
 
 export default (state = initialState, action) => {
@@ -14,62 +21,132 @@ export default (state = initialState, action) => {
     case actionType.OPEN_SUBMIT_PIN_MODAL:
       return {
         ...state,
-        submitPinModal: true
+        submitPinModal: true,
       };
     case actionType.CLOSE_SUBMIT_PIN_MODAL:
       return {
         ...state,
-        submitPinModal: false
+        submitPinModal: false,
       };
     case actionType.OPEN_SUBMIT_OTP_MODAL:
       return {
         ...state,
-        submitOTPModal: true
+        submitOTPModal: true,
       };
     case actionType.CLOSE_SUBMIT_OTP_MODAL:
       return {
         ...state,
-        submitOTPModal: false
+        submitOTPModal: false,
       };
     case actionType.OPEN_SUBMIT_PHONE_MODAL:
       return {
         ...state,
-        submitPhoneModal: true
+        submitPhoneModal: true,
       };
     case actionType.CLOSE_SUBMIT_PHONE_MODAL:
       return {
         ...state,
-        submitPhoneModal: false
+        submitPhoneModal: false,
       };
     case actionType.OPEN_SUBMIT_BIRTHDAY_MODAL:
       return {
         ...state,
-        submitBirthdayModal: true
+        submitBirthdayModal: true,
       };
     case actionType.CLOSE_SUBMIT_BIRTHDAY_MODAL:
       return {
         ...state,
-        submitBirthdayModal: false
+        submitBirthdayModal: false,
       };
     case actionType.OPEN_TRANSACTION_SUCCESS_MODAL:
       return {
         ...state,
-        transactionSuccessModal: true
+        transactionSuccessModal: true,
       };
     case actionType.CLOSE_TRANSACTION_SUCCESS_MODAL:
       return {
         ...state,
-        transactionSuccessModal: false
+        transactionSuccessModal: false,
       };
     case actionType.OPEN_TRANSACTION_FAIL_MODAL:
       return {
         ...state,
-        transactionFailModal: true
+        transactionFailModal: true,
       };
     case actionType.CLOSE_TRANSACTION_FAIL_MODAL:
       return {
         ...state,
-        transactionFailModal: false
+        transactionFailModal: false,
+      };
+    case actionType.OPEN_CARD_PIN_MODAL:
+      return {
+        ...state,
+        cardPinModal: true,
+      };
+    case actionType.CLOSE_CARD_PIN_MODAL:
+      return {
+        ...state,
+        cardPinModal: false,
+      };
+    case actionType.OPEN_CARD_OTP_MODAL:
+      return {
+        ...state,
+        cardOTPModal: true,
+      };
+    case actionType.CLOSE_CARD_OTP_MODAL:
+      return {
+        ...state,
+        cardOTPModal: false,
+      };
+    case actionType.OPEN_CARD_PHONE_MODAL:
+      return {
+        ...state,
+        cardPhoneModal: true,
+      };
+    case actionType.CLOSE_CARD_PHONE_MODAL:
+      return {
+        ...state,
+        cardPhoneModal: false,
+      };
+    case actionType.OPEN_CARD_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        cardBirthdayModal: true,
+      };
+    case actionType.CLOSE_CARD_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        cardBirthdayModal: false,
+      };
+    case actionType.OPEN_BANK_OTP_MODAL:
+      return {
+        ...state,
+        bankOTPModal: true,
+      };
+    case actionType.CLOSE_BANK_OTP_MODAL:
+      return {
+        ...state,
+        bankOTPModal: false,
+      };
+    case actionType.OPEN_BANK_PHONE_MODAL:
+      return {
+        ...state,
+        bankPhoneModal: true,
+      };
+    case actionType.CLOSE_BANK_PHONE_MODAL:
+      return {
+        ...state,
+        bankPhoneModal: false,
+      };
+    case actionType.OPEN_BANK_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        bankBirthdayModal: true,
+      };
+    case actionType.CLOSE_BANK_BIRTHDAY_MODAL:
+      return {
+        ...state,
+        bankBirthdayModal: false,
       };
     default:
       return state;

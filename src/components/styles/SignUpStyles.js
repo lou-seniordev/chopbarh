@@ -67,10 +67,12 @@ export const Form = styled.form`
     span {
       display: inline-block;
       transform: skew(20deg);
-      color: #fff;
+      color: #ffffff;
 
       @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio:0) {
-        color: #ffffff;
+        -webkit-text-fill-color: rgba(255, 255, 255, 1);
+        -webkit-opacity: 1;
+        color: rgba(255, 255, 255, 1);
       }
     }
 
@@ -100,6 +102,32 @@ export const FormItem = styled.div`
     background: #f6f6f6;
     outline: none;
     padding: 3px 5px;
+  }
+
+  & > * {
+    display: block;
+    font-family: inherit;
+  }
+`;
+
+export const FormTextArea = styled.div`
+  label {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #737773;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    color: #8d8e8d;
+    width: 100%;
+    height: 6rem;
+    margin-bottom: 2rem;
+    border: 0;
+    background: #f6f6f6;
+    outline: none;
+    padding-top: 0;
+    padding-left: 3px;
   }
 
   & > * {

@@ -1,14 +1,14 @@
 import React, { Component, memo } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
-// import NumberFormat from "react-number-format";
 import styled from "styled-components";
+import crypto from "crypto-extra";
 import {
   Accordion,
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
@@ -18,20 +18,19 @@ import {
   FormSubmitButton,
   ExistingCardForm,
   ExistingCardFormItem,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
 import { toast } from "react-toastify";
-import { setCashBalance } from "../../../../store/actions/cashBalanceActions";
 
 import { setWithdrawalHistory } from "../../../../store/actions/withdrawalActions";
-import { getReference } from "../../../../lib/getReference";
 import AccountUI from "../AccountUI/AccountUI";
 import {
   removeWithdrawalBankAccount,
   fetchWithdrawalBankAccountData,
-  setWithdrawalBankAccountData
+  setWithdrawalBankAccountData,
 } from "../../../../store/actions/withdrawalAccountActions";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
+import firebase from "../../../../firebase";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -40,11 +39,9 @@ const FormWrapper = styled(Form)`
   margin-bottom: 3.2rem;
 `;
 
-// API.... sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a   Secret
-// API.... pk_live_208123773de037158fe467875f0501886d105a8f  Public
-
-// FLWPUBK-e87a9fb00e960628ab7fe30288405116-X  .....Public Key
-// FLWSECK-6c50f0fa49045876075058059855ff70-X  .....Secret Key
+const PassworForm = styled(Form)`
+  min-height: 11rem;
+`;
 
 class AccountNumber extends Component {
   state = {
@@ -63,24 +60,20 @@ class AccountNumber extends Component {
     selectedValue: null,
     paying: false,
     popoverOpen: false,
-    removeWithdrawalBankAccountModal: false
+    removeWithdrawalBankAccountModal: false,
+    password: "",
+    passwordModal: false,
   };
 
   componentDidMount = () => {
     this.props.fetchWithdrawalBankAccountData();
-    // if (!this.props.withdrawalAccount.length) {
-    // } else {
-    //   this.setState({
-    //     selectedValue: this.props.withdrawalAccount[0].account_number
-    //   });
-    // }
 
     fetch(
       "https://api.ravepay.co/v2/banks/ng?public_key=FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
       {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     )
       .then(response => response.json())
@@ -91,7 +84,7 @@ class AccountNumber extends Component {
         this.setState({
           bankList,
           dataLoading: false,
-          bank: data.data.Banks[0].Code
+          bank: data.data.Banks[0].Code,
         });
       })
       .catch(err => this.setState({ error: err, dataLoading: false }));
@@ -101,13 +94,23 @@ class AccountNumber extends Component {
     if (this.props !== prevProps) {
       this.props.withdrawalAccount.length &&
         this.setState({
-          selectedValue: this.props.withdrawalAccount[0].account_number
+          selectedValue: this.props.withdrawalAccount[0].account_number,
         });
     }
   };
 
   toggleModal = () => {
-    this.setState({ modal: !this.state.modal, loading: false });
+    this.setState({
+      modal: !this.state.modal,
+      loading: false,
+      password: "",
+      amount: "",
+      authAmount: "",
+    });
+  };
+
+  togglePasswordModal = () => {
+    this.setState({ passwordModal: !this.state.passwordModal, loading: false });
   };
 
   handleRadioChange = value => {
@@ -116,14 +119,14 @@ class AccountNumber extends Component {
 
   toggle = () => {
     this.setState({
-      popoverOpen: !this.state.popoverOpen
+      popoverOpen: !this.state.popoverOpen,
     });
   };
 
   toggleRemoveWithdrawalBankAccount = () => {
     this.setState({
       removeWithdrawalBankAccountModal: !this.state
-        .removeWithdrawalBankAccountModal
+        .removeWithdrawalBankAccountModal,
     });
   };
 
@@ -134,6 +137,18 @@ class AccountNumber extends Component {
 
   handleInputChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  };
+
+  handlePasswordInputValidation = event => {
+    event.preventDefault();
+
+    if (this.state.password.length >= 4) {
+      this.setState({
+        passwordModal: false,
+        modal: true,
+        verifying: false,
+      });
+    }
   };
 
   formIsValid = ({ amount, account_number }) => {
@@ -148,31 +163,45 @@ class AccountNumber extends Component {
   };
 
   withdrawCash = async () => {
+    if (this.state.password.length < 4) {
+      this.setState({
+        amount: "",
+        account_number: "",
+        paying: false,
+        modal: false,
+      });
+      return;
+    }
+
     this.setState({ paying: true, loading: false });
-    const context = this;
 
     const bankName = this.state.bankList.filter(
       bank => bank.Code === this.state.bank
     );
 
     try {
+      const verif = process.env.REACT_APP_HASH_KEY_PROD;
+
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/raveWithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
+            verification: crypto.encrypt(this.state.password, verif),
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.amount,
             phone_number: this.props.playerData.PhoneNum,
             account_number: this.state.account_number,
             bank: this.state.bank,
-            bank_name: bankName[0].Name
-          })
+            bank_name: bankName[0].Name,
+          }),
         }
       );
 
@@ -183,15 +212,17 @@ class AccountNumber extends Component {
           amount: "",
           account_number: "",
           paying: false,
-          modal: false
+          modal: false,
         });
         toast.info("Transaction is Processing");
+        this.props.fetchPlayerData();
       } else {
         this.setState({
           amount: "",
           account_number: "",
           paying: false,
-          modal: false
+          modal: false,
+          password: "",
         });
         toast.error("Transaction was not successful. Please try again later");
       }
@@ -200,13 +231,24 @@ class AccountNumber extends Component {
         amount: "",
         account_number: "",
         paying: false,
-        modal: false
+        modal: false,
+        password: "",
       });
       toast.error("Something went wrong");
     }
   };
 
   withdrawCashAuth = async () => {
+    if (this.state.password.length < 4) {
+      this.setState({
+        authAmount: "",
+        account_number: "",
+        paying: false,
+        modal: false,
+      });
+      return;
+    }
+
     this.setState({ paying: true, loading: false });
 
     const bankInformation = this.props.withdrawalAccount.filter(
@@ -218,30 +260,35 @@ class AccountNumber extends Component {
         authAmount: "",
         account_number: "",
         paying: false,
-        modal: false
+        modal: false,
       });
       toast.error("Service is unavailable at the moment");
       return;
     }
 
     try {
+      const verif = process.env.REACT_APP_HASH_KEY_PROD;
+
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
       const response = await fetch(
-        "https://pay.chopbarh.com/ng/user/withdraw",
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/raveWithdrawal/player/withdraw",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
+            verification: crypto.encrypt(this.state.password, verif),
             playerId: this.props.playerData.PlayerID,
             amount: +this.state.authAmount,
             phone_number: this.props.playerData.PhoneNum,
             account_number: bankInformation[0].account_number,
             bank: bankInformation[0].code,
-            bank_name: ""
-          })
+            bank_name: "",
+          }),
         }
       );
 
@@ -252,15 +299,17 @@ class AccountNumber extends Component {
           authAmount: "",
           account_number: "",
           paying: false,
-          modal: false
+          modal: false,
         });
         toast.info("Transaction is being processed");
+        this.props.fetchPlayerData();
       } else {
         this.setState({
           authAmount: "",
           account_number: "",
           paying: false,
-          modal: false
+          modal: false,
+          password: "",
         });
         toast.error("Transaction was not successful. Please try again later");
       }
@@ -269,7 +318,8 @@ class AccountNumber extends Component {
         authAmount: "",
         account_number: "",
         paying: false,
-        modal: false
+        modal: false,
+        password: "",
       });
       toast.error("Something went wrong");
     }
@@ -283,7 +333,7 @@ class AccountNumber extends Component {
       return;
     }
 
-    this.setState({ loading: true });
+    this.setState({ loading: true, amount: "" });
 
     if (!isNaN(this.state.authAmount) !== true) {
       toast.error("Form is not valid");
@@ -325,7 +375,7 @@ class AccountNumber extends Component {
     }
 
     this.setState({
-      modal: true
+      passwordModal: true,
     });
   };
 
@@ -381,15 +431,15 @@ class AccountNumber extends Component {
     const postData = {
       recipientaccount: this.state.account_number,
       destbankcode: this.state.bank,
-      PBFPubKey: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X"
+      PBFPubKey: "FLWPUBK-48046ea864f738ab3e4506a5f741f99b-X",
     };
 
     fetch("https://api.ravepay.co/flwv3-pug/getpaidx/api/resolve_account", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(postData),
     })
       .then(response => response.json())
       .then(data => {
@@ -397,7 +447,7 @@ class AccountNumber extends Component {
           this.setState({
             account_confirmed: true,
             account_name: data.data.data.accountname,
-            modal: true
+            passwordModal: true,
           });
         } else {
           this.setState({ loading: false });
@@ -420,7 +470,7 @@ class AccountNumber extends Component {
           toggle={this.toggleRemoveWithdrawalBankAccount}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -448,7 +498,7 @@ class AccountNumber extends Component {
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody
@@ -539,15 +589,46 @@ class AccountNumber extends Component {
             )}
           </ModalBody>
         </Modal>
+        <Modal
+          isOpen={this.state.passwordModal}
+          toggle={this.togglePasswordModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <ModalBody
+            className="text-center mt-5 mb-5"
+            style={{ minHeight: "13.5vh" }}
+          >
+            <PassworForm onSubmit={this.handlePasswordInputValidation}>
+              <>
+                <FormItem>
+                  <label>Enter your Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleInputChange}
+                    minLength="4"
+                    maxLength="12"
+                    required
+                    placeholder="Password"
+                  />
+                </FormItem>
+                <FormSubmitButton type="submit" className="mr-2">
+                  <span>Submit</span>
+                </FormSubmitButton>
+              </>
+            </PassworForm>
+          </ModalBody>
+        </Modal>
         {this.props.loading || this.props.playerDataLoading ? (
           <div className="mt-5 text-center" style={{ minHeight: "30vh" }}>
             <Spinner />
           </div>
         ) : (
           <>
-            {/* {this.props.playerData.PlayerStatus === 1 && (
-              <p className="text-center">Service currently unavailable</p>
-            )} */}
             {this.props.playerData.PlayerStatus === 0 ? (
               <p className="text-center">Service currently unavailable</p>
             ) : (
@@ -816,16 +897,15 @@ const mapStateToProps = state => ({
   playerDataLoading: state.player.loading,
   withdrawalStatus: state.withdrawal.withdrawalStatus,
   withdrawalAccount: state.withdrawalAccount.withdrawalAccount,
-  removingAccount: state.withdrawalAccount.removing
+  removingAccount: state.withdrawalAccount.removing,
 });
 
 const mapDispatchToProps = {
-  setCashBalance,
   setWithdrawalHistory,
   removeWithdrawalBankAccount,
   fetchWithdrawalBankAccountData,
   setWithdrawalBankAccountData,
-  fetchPlayerData
+  fetchPlayerData,
 };
 
 export default connect(

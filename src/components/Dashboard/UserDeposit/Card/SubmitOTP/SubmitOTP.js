@@ -7,13 +7,15 @@ import { toast } from "react-toastify";
 import { FormItem, FormSubmitButton } from "../../../../styles/CardCharge";
 import {
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+  openCardOTPModal,
+  closeCardOTPModal,
 } from "../../../../../store/actions/modalActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import {
   setCreditCardData,
-  fetchCreditCardData
+  fetchCreditCardData,
 } from "../../../../../store/actions/creditCardActions";
+import firebase from "../../../../../firebase";
 
 const Form = styled.form`
   min-height: 12rem;
@@ -22,7 +24,7 @@ const Form = styled.form`
 class SubmitOTP extends Component {
   state = {
     otp: "",
-    loading: false
+    loading: false,
   };
 
   formIsValid = ({ otp }) => {
@@ -48,37 +50,49 @@ class SubmitOTP extends Component {
 
     const postData = {
       otp: this.state.otp,
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_otp",
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const submitOTPResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_otp",
         {
           method: "POST",
           mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
-      if (data.data.status === "success") {
-        this.props.closeOTPModal();
-        this.setState({ loading: false });
-        toast.info(`Transaction is processing`);
-      } else if (data.data.status === "send_otp") {
-        this.props.closeOTPModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "open_url") {
-        this.props.closeOTPModal();
-        window.open(data.data.url, "_self");
+      const data = await submitOTPResponse.json();
+
+      const context = this;
+      context.setState({ loading: false });
+
+      if (data.status === true) {
+        if (data.data.status === "success") {
+          context.props.closeCardOTPModal();
+          toast.info(`Transaction is processing`);
+        } else if (data.data.status === "send_otp") {
+          context.props.closeCardOTPModal();
+          context.props.openCardOTPModal();
+        } else if (data.data.status === "open_url") {
+          context.props.closeCardOTPModal();
+          window.open(data.data.url, "_self");
+        } else {
+          toast.error(`Please try again`);
+          context.props.closeCardOTPModal();
+        }
       } else {
-        toast.error(`Please try again`);
-        this.setState({ loading: false });
+        context.props.closeCardOTPModal();
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });
@@ -94,7 +108,7 @@ class SubmitOTP extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -129,16 +143,17 @@ class SubmitOTP extends Component {
 
 const mapStateToProps = state => ({
   reference: state.charge.reference,
-  loading: state.coinBalance.loading,
-  cvv: state.creditCard.cvv
+  cvv: state.creditCard.cvv,
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   setCreditCardData,
   fetchCreditCardData,
   openOTPModal,
-  closeOTPModal
+  closeOTPModal,
+
+  openCardOTPModal,
+  closeCardOTPModal,
 };
 
 export default withRouter(

@@ -1,25 +1,18 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
-import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
-import { setDepositHistory } from "../../../../store/actions/depositActions";
+import { FormSubmitButton } from "../../../styles/CardCharge";
 import {
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
-  removeInstantPaymentAccount
+  removeInstantPaymentAccount,
 } from "../../../../store/actions/instantPaymentActions";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
-const FormWrapper = styled(Form)`
-  min-height: 15.1rem;
-`;
-
 class InstantPayment extends Component {
   state = {
-    key: "FLWPUBK-c5932c92f9633277760b44c1faf57207-X",
     email: "chopbarh@mail.com",
     amount: "",
     account_active: false,
@@ -29,9 +22,9 @@ class InstantPayment extends Component {
     errorModal: false,
     paymentData: {
       accountnumber: null,
-      note: null
+      note: null,
     },
-    removing: false
+    removing: false,
   };
 
   componentDidMount = () => {
@@ -46,9 +39,9 @@ class InstantPayment extends Component {
 
   getReference = () => {
     let text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    for (let i = 0; i < 10; i++)
+    for (let i = 0; i < 25; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -77,45 +70,50 @@ class InstantPayment extends Component {
     this.setState({ loading: true });
     // Make request to Rave
     const chargeData = {
-      seckey: "FLWSECK-6a2153446d5f15349075c71f591f9290-X",
       narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
       email: `${this.props.playerData.PhoneNum}@mail.com`,
-      is_permanent: true,
       txRef: `${this.props.playerData.PhoneNum}-${this.getReference()}`,
       phonenumber: this.props.playerData.PhoneNum,
-      firstname: this.props.playerData.FullName.split(" ")[0],
-      lastname: this.props.playerData.FullName.split(" ")[1]
-        ? this.props.playerData.FullName.split(" ")[1]
-        : `${this.props.playerData.PhoneNum}`
+      firstname: `${this.props.playerData.PhoneNum}`,
+      lastname: `${this.props.playerData.PhoneNum}`,
     };
 
-    fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(chargeData)
-    })
+    fetch(
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/raveinstantpayment/player/request/account",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(chargeData),
+      }
+    )
       .then(response => response.json())
       .then(data => {
-        // Display the result in Modal
-        this.setState({
-          successModal: true,
-          paymentData: { ...data.data },
-          loading: false
-        });
-
-        //  Attach this account number to this person
-        this.props.setInstantPaymentAccountData({
-          account_number: data.data.accountnumber,
-          bank_name: data.data.bankname
-        });
+        if (data.status === "success") {
+          // Display the result in Modal
+          this.setState({
+            successModal: true,
+            paymentData: { ...data.data },
+            loading: false,
+          });
+          //  Attach this account number to this person
+          this.props.setInstantPaymentAccountData({
+            account_number: data.data.accountnumber,
+            bank_name: data.data.bankname,
+          });
+        } else {
+          this.setState({
+            loading: false,
+            errorModal: true,
+          });
+        }
       })
       .catch(err => {
         // Display error modal
         this.setState({
           loading: false,
-          errorModal: true
+          errorModal: true,
         });
       });
 
@@ -126,76 +124,6 @@ class InstantPayment extends Component {
     //  Delete Account
     this.setState({ removing: true });
     this.props.removeInstantPaymentAccount();
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    if (!this.formIsValid(this.state)) {
-      this.setState({ loading: false });
-      toast.error(`Amount is not valid`);
-      return;
-    }
-
-    if (+this.state.amount < 100) {
-      toast.error(`Minimum deposit is \u20a6${100}`);
-      this.setState({ loading: false });
-      return;
-    }
-
-    this.setState({ loading: true });
-
-    let reference = this.getReference();
-
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Bank Transfer",
-      transaction_date: new Date().toISOString(),
-      fees: "0",
-      reference: "--",
-      status: "--",
-      refId: `${this.props.playerData.PhoneNum}-${reference}`,
-      gateway: "Flutterwave",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    //   this.props.setDepositHistory(historyObject);
-
-    // Make request to Rave
-    const chargeData = {
-      seckey: "FLWSECK_TEST-98c53727b0776e98a1ad0e0dacc220f7-X",
-      narration: `CHOPBARH - ${this.props.playerData.NickName.toUpperCase()}`,
-      email: "chopbarh@mail.com",
-      is_permanent: true
-    };
-
-    fetch("https://api.ravepay.co/v2/banktransfers/accountnumbers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(chargeData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Display the result in Modal
-        this.setState({
-          successModal: true,
-          paymentData: { ...data.data },
-          loading: false
-        });
-
-        //  Attach this account number to this person
-        this.props.setInstantPaymentAccountData({
-          account_number: data.data.accountnumber
-        });
-      })
-      .catch(err => {
-        // Display error modal
-        this.setState({ loading: false, errorModal: true });
-      });
-
-    // If the user has used the moethod before, it should not have them
   };
 
   render() {
@@ -210,6 +138,21 @@ class InstantPayment extends Component {
             {this.props.account !== null ? (
               <>
                 <div className="text-center" style={{ minHeight: "5rem" }}>
+                  <div
+                    className="mb-2"
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      marginRight: "3rem",
+                    }}
+                  >
+                    <Button
+                      onClick={this.deleteAccount}
+                      disabled={this.state.removing}
+                    >
+                      {this.state.removing ? "Deleting..." : "X"}
+                    </Button>
+                  </div>
                   <p>
                     Please make Payment and save the Wema Account Number created
                     for you
@@ -228,11 +171,11 @@ class InstantPayment extends Component {
                   </p>
                   <p>
                     Funds Will be Automatically credited to your chopbarh
-                    account within 2-5 minutes of successful deposit
+                    account within 30 minutes to 1 hour of successful deposit.
+                    <br />
+                    However deposits could take up to 24 hours due to occasional
+                    banking delays.
                   </p>
-                  {/* <Button onClick={this.deleteAccount} disabled={this.state.removing}>
-          {this.state.removing ? "Deleting..." : "Delete Account"}
-         </Button> */}
                 </div>
               </>
             ) : (
@@ -242,7 +185,7 @@ class InstantPayment extends Component {
                   toggle={this.toggleErrorModal}
                   style={{
                     top: "50%",
-                    transform: "translateY(-50%)"
+                    transform: "translateY(-50%)",
                   }}
                 >
                   <ModalBody
@@ -260,7 +203,7 @@ class InstantPayment extends Component {
                   toggle={this.toggleSuccessModal}
                   style={{
                     top: "50%",
-                    transform: "translateY(-50%)"
+                    transform: "translateY(-50%)",
                   }}
                 >
                   <ModalBody
@@ -316,177 +259,13 @@ const mapStateToProps = state => ({
   playerData: state.player.playerData,
   account: state.instantPayment.account,
   error: state.instantPayment.error,
-  loading: state.instantPayment.loading
+  loading: state.instantPayment.loading,
 });
 
 const mapDispatchToProps = {
-  setDepositHistory,
   fetchInstantPaymentAccountData,
   setInstantPaymentAccountData,
-  removeInstantPaymentAccount
+  removeInstantPaymentAccount,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InstantPayment);
-
-// import React, { Component } from "react";
-// import { toast } from "react-toastify";
-// import styled from "styled-components";
-// import { connect } from "react-redux";
-// import { Form, FormItem, FormSubmitButton } from "../../../styles/CardCharge";
-// import { setDepositHistory } from "../../../../store/actions/depositActions";
-
-// import "react-accessible-accordion/dist/fancy-example.css";
-
-// const FormWrapper = styled(Form)`
-//  min-height: 15rem;
-// `;
-
-// class InstantPayment extends Component {
-//  state = {
-//   key: "FLWPUBK-c5932c92f9633277760b44c1faf57207-X",
-//   email: "chopbarh@mail.com",
-//   amount: ""
-//  };
-
-//  // FLWPUBK-c5932c92f9633277760b44c1faf57207-X
-
-//  getReference = () => {
-//   let text = "";
-//   let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-//   for (let i = 0; i < 10; i++)
-//    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-//   return text;
-//  };
-
-//  handleInputChange = ({ target }) => {
-//   this.setState({ [target.name]: target.value });
-//  };
-
-//  formIsValid = ({ amount }) => {
-//   if (!isNaN(amount) !== true) {
-//    return false;
-//   }
-//   return true;
-//  };
-
-//  handleSubmit = event => {
-//   event.preventDefault();
-
-//   if (!this.formIsValid(this.state)) {
-//    this.setState({ loading: false });
-//    toast.error(`Amount is not valid`);
-//    return;
-//   }
-
-//   if (+this.state.amount < 100) {
-//    toast.error(`Minimum deposit is \u20a6${100}`);
-//    this.setState({ loading: false });
-//    return;
-//   }
-
-//   let reference = this.getReference();
-
-//   const historyObject = {
-//    amount: this.state.amount,
-//    channel: "Bank Transfer",
-//    transaction_date: new Date().toISOString(),
-//    fees: "0",
-//    reference: "--",
-//    status: "--",
-//    refId: `${this.props.playerData.PhoneNum}-${reference}`,
-//    gateway: "Flutterwave",
-//    made_by: this.props.playerData.PhoneNum
-//   };
-
-//   this.props.setDepositHistory(historyObject);
-
-//   window.getpaidSetup({
-//    PBFPubKey: this.state.key,
-//    customer_email:
-//     this.props.playerData.Email || `${this.props.playerData.PhoneNum}@mail.com`,
-//    customer_firstname:
-//     this.props.playerData.FullName.split(" ")[0] || "Chopbarh",
-//    customer_lastname:
-//     this.props.playerData.FullName.split(" ")[1] ||
-//     `${this.props.playerData.PhoneNum}`,
-//    amount: Number(this.state.amount),
-//    customer_phone: this.props.playerData.PhoneNum,
-//    country: "NG",
-//    currency: "NGN",
-//    txref: `${this.props.playerData.PhoneNum}-${reference}`,
-//    // redirect_url: "https://www.chopbarh.com/user",
-//    onclose: function() {},
-//    callback: async response => {
-//     let flw_ref = response.tx.txRef;
-//     console.log("This is the response returned after a charge", response);
-//     if (
-//      response.tx.chargeResponseCode == "00" ||
-//      response.tx.chargeResponseCode == "0"
-//     ) {
-//      // window.location = `https://SimultaneousSarcasticArchitecture--dotunalukosprin.repl.co/api/rave?ref=${flw_ref}`;
-//      const response = await fetch(
-//       `https://SimultaneousSarcasticArchitecture.dotunalukosprin.repl.co/ng/api/rave`,
-//       {
-//        method: "POST",
-//        headers: {
-//         "Content-Type": "application/json"
-//        },
-//        body: JSON.stringify({
-//         ref: flw_ref
-//        })
-//       }
-//      );
-//      // redirect to a success page
-//      // window.open("https://www.chopbarh.com/user");
-//      // window.open("localhost:3000/user");
-//     } else {
-//      // redirect to a failure page.
-//      // window.open("https://www.chopbarh.com/user");
-//      // window.open("localhost:3000/user");
-//     }
-//    }
-//   });
-//  };
-
-//  render() {
-//   return (
-//    <div>
-//     <FormWrapper onSubmit={this.handleSubmit}>
-//      <FormItem>
-//       <label>Amount</label>
-//       <input
-//        onChange={this.handleInputChange}
-//        name="amount"
-//        value={this.state.amount}
-//        required
-//        minLength="1"
-//        placeholder="Amount(NGN)"
-//       />
-//      </FormItem>
-//      <FormSubmitButton
-//       type="submit"
-//       className="mr-2"
-//       disabled={this.state.loading}
-//      >
-//       <span>{this.state.loading ? "Please wait..." : "Load"}</span>
-//      </FormSubmitButton>
-//     </FormWrapper>
-//    </div>
-//   );
-//  }
-// }
-
-// const mapStateToProps = state => ({
-//  playerData: state.player.playerData
-// });
-
-// const mapDispatchToProps = {
-//  setDepositHistory
-// };
-
-// export default connect(
-//  mapStateToProps,
-//  mapDispatchToProps
-// )(InstantPayment);

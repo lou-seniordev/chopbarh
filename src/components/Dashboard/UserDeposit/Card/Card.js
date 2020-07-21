@@ -9,7 +9,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { RadioGroup, Radio } from "react-radio-group";
 import {
@@ -19,38 +19,43 @@ import {
   ExistingCardForm,
   ExistingCardFormItem,
   FormSubmitButton,
-  Button as FormElementButton
+  Button as FormElementButton,
 } from "../../../styles/CardCharge";
 import SubmitOTP from "./SubmitOTP/SubmitOTP";
 import SubmitPin from "./SubmitPin/SubmitPin";
+import SubmitPhone from "./SubmitPhone/SubmitPhone";
 import { setChargeReference } from "../../../../store/actions/chargeActions";
-import { setCoinBalance } from "../../../../store/actions/coinBalanceActions";
 import { setDepositHistory } from "../../../../store/actions/depositActions";
 import {
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 } from "../../../../store/actions/modalActions";
 import {
   fetchCreditCardData,
   setCreditCardData,
   setCreditCardCVV,
-  removeCreditCard
+  removeCreditCard,
 } from "../../../../store/actions/creditCardActions";
 // import SubmitAmount from "./SubmitAmount/SubmitAmount";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 import CreditCard from "./CreditCard/CreditCard";
-
-// Test sk_test_c644c86e3b42191b981bbc1c263f98c7020c9841
-// sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
+import firebase from "../../../../firebase";
 
 function referenceId() {
   let text = "";
-  let possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 15; i++)
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (let i = 0; i < 25; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
@@ -61,6 +66,7 @@ class Card extends Component {
     submitOTPModal: false,
     submitPinModal: false,
     submitAmountModal: false,
+    submitPhoneModal: true,
     selectedValue: null,
     amount: "",
     card: "",
@@ -72,7 +78,7 @@ class Card extends Component {
     popoverOpen: false,
     modalOpen: false,
     paying: false,
-    removeCardModal: false
+    removeCardModal: false,
   };
 
   componentDidMount = () => {
@@ -106,8 +112,12 @@ class Card extends Component {
 
   toggleRemoveCard = () => {
     this.setState({
-      removeCardModal: !this.state.removeCardModal
+      removeCardModal: !this.state.removeCardModal,
     });
+  };
+
+  toggleSubmitPhoneModal = () => {
+    this.setState({ submitPhoneModal: !this.state.submitPhoneModal });
   };
 
   removeCreditCard = () => {
@@ -154,6 +164,12 @@ class Card extends Component {
       return;
     }
 
+    if (+this.state.authAmount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     this.setState({ modalOpen: true });
   };
 
@@ -173,57 +189,41 @@ class Card extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const historyObject = {
-      amount: this.state.authAmount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: this.state.authAmount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    this.props.setDepositHistory(historyObject);
-
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount:
-        Number(this.state.authAmount) >= 2500
-          ? (Number(this.state.authAmount) + 100) * 100
-          : Number(this.state.authAmount) * 100,
-      authorization_code: creditCardObject[0].auth_code,
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        refId
-      }
-    };
-
     try {
-      const response = await fetch(
-        "https://api.paystack.co/transaction/charge_authorization",
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const paystackAuthChargeResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackauthdeposit/player/deposit/charge_authorization",
         {
           method: "POST",
-          mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify({
+            amount: Number(this.state.authAmount),
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            phone_number: this.props.playerData.PhoneNum,
+            playerId: this.props.playerData.PlayerID,
+            authorization_code: creditCardObject[0].auth_code,
+            transaction_reference: reference,
+            refId,
+          }),
         }
       );
-      const data = await response.json();
+      const data = await paystackAuthChargeResponse.json();
+
       this.setState({
         loading: false,
         authAmount: "",
         authCVV: "",
         modalOpen: false,
-        paying: false
+        paying: false,
       });
 
-      if (data.data.status === "success") {
+      if (data.status === true) {
         toast.info("Transaction is processing");
       } else {
         toast.error(`Transaction was not successful`);
@@ -250,6 +250,12 @@ class Card extends Component {
       return;
     }
 
+    if (+this.state.amount > 250000) {
+      // toast.error(`Minimum deposit is \u20a6${100}`);
+      this.setState({ loading: false });
+      return;
+    }
+
     this.setState({ modalOpen: true });
   };
 
@@ -259,56 +265,39 @@ class Card extends Component {
     let refId = `${this.props.playerData.PhoneNum}-${referenceId()}`;
     let reference = `${this.props.playerData.PhoneNum}-${referenceId()}`;
 
-    const historyObject = {
-      amount: this.state.amount,
-      channel: "Card",
-      transaction_date: new Date().toISOString(),
-      fees: this.state.amount < 2500 ? 0 : 100,
-      reference,
-      status: "--",
-      refId,
-      gateway: "Paystack",
-      made_by: this.props.playerData.PhoneNum
-    };
-
-    this.props.setDepositHistory(historyObject);
-
     const cardExpirationData = this.state.expiry.split("/");
     const year = `20${cardExpirationData[1]}`;
 
-    const postData = {
-      email: `${this.props.playerData.PhoneNum}@mail.com`,
-      amount:
-        Number(this.state.amount) >= 2500
-          ? (Number(this.state.amount) + 100) * 100
-          : Number(this.state.amount) * 100,
-      card: {
-        number: this.state.card,
-        cvv: this.state.cvv,
-        expiry_month: cardExpirationData[0],
-        expiry_year: year
-      },
-      reference,
-      metadata: {
-        phone: this.props.playerData.PhoneNum,
-        refId,
-        cvv: this.state.cvv
-      }
-    };
-
     this.props.setCreditCardCVV(this.state.cvv);
-    // sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
+
     try {
-      const response = await fetch("https://api.paystack.co/charge", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(postData)
-      });
-      const data = await response.json();
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const paystackCardChargeResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackcarddeposit/player/deposit/card_charge",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
+          },
+          body: JSON.stringify({
+            email: `${this.props.playerData.PhoneNum}@mail.com`,
+            amount: Number(this.state.amount),
+            phone_number: this.props.playerData.PhoneNum,
+            playerId: this.props.playerData.PlayerID,
+            expiry_month: cardExpirationData[0],
+            expiry_year: year,
+            card_number: this.state.card,
+            cvv: this.state.cvv,
+            transaction_reference: reference,
+            refId,
+          }),
+        }
+      );
+      const data = await paystackCardChargeResponse.json();
 
       this.setState({
         loading: false,
@@ -317,30 +306,28 @@ class Card extends Component {
         expiry: "",
         cvv: "",
         modalOpen: false,
-        paying: false
+        paying: false,
       });
 
-      if (data.data.status === "send_otp") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_pin") {
-        this.props.setChargeReference(data.data.reference);
-        this.props.openPinModal();
-      } else if (data.data.status === "success") {
-        toast.info("Transaction is processing");
-        // const payload = {
-        //   ...data.data.authorization,
-        //   cvv: postData.card.cvv
-        // };
-        // this.props.setCoinBalance(value);
-        // this.props.setCreditCardData(payload);
-      } else if (data.data.status === "pending") {
-        toast.info("Transaction is processing");
-      } else if (data.data.status === "open_url") {
-        this.props.setChargeReference(data.data.reference);
-        window.open(data.data.url, "_self");
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.setChargeReference(data.data.reference);
+          this.props.openCardOTPModal();
+        } else if (data.data.status === "send_pin") {
+          this.props.setChargeReference(data.data.reference);
+          this.props.openCardPinModal();
+        } else if (data.data.status === "success") {
+          toast.info("Transaction is processing");
+        } else if (data.data.status === "pending") {
+          toast.info("Transaction is processing");
+        } else if (data.data.status === "open_url") {
+          this.props.setChargeReference(data.data.reference);
+          window.open(data.data.url, "_self");
+        } else {
+          toast.error(`Please try again`);
+        }
       } else {
-        toast.error(`Please try again`);
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
       this.setState({ loading: false });
@@ -356,7 +343,7 @@ class Card extends Component {
           toggle={this.toggleRemoveCard}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center p-4" style={{ minHeight: "12rem" }}>
@@ -378,11 +365,11 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.pinModal}
-          toggle={this.props.closePinModal}
+          isOpen={this.props.cardPinModal}
+          toggle={this.props.closeCardPinModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -390,11 +377,11 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
-          isOpen={this.props.otpModal}
-          toggle={this.props.closeOTPModal}
+          isOpen={this.props.cardOTPModal}
+          toggle={this.props.closeCardOTPModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
@@ -402,11 +389,23 @@ class Card extends Component {
           </ModalBody>
         </Modal>
         <Modal
+          isOpen={this.props.cardPhoneModal}
+          toggle={this.props.closeCardPhoneModal}
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <ModalBody className="text-center" style={{ minHeight: "5rem" }}>
+            <SubmitPhone />
+          </ModalBody>
+        </Modal>
+        <Modal
           isOpen={this.state.modalOpen}
           toggle={this.toggleModal}
           style={{
             top: "50%",
-            transform: "translateY(-50%)"
+            transform: "translateY(-50%)",
           }}
         >
           <ModalBody
@@ -744,11 +743,15 @@ class Card extends Component {
 const mapStateToProps = state => ({
   otpModal: state.modal.submitOTPModal,
   pinModal: state.modal.submitPinModal,
+  cardPinModal: state.modal.cardPinModal,
+  cardOTPModal: state.modal.cardOTPModal,
+  cardPhoneModal: state.modal.cardPhoneModal,
+  cardBirthdayModal: state.modal.cardBirthdayModal,
   creditCard: state.creditCard.creditCard,
   loading: state.creditCard.loading,
   isDataFetched: state.creditCard.fetched,
   removingCard: state.creditCard.removing,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {
@@ -758,11 +761,19 @@ const mapDispatchToProps = {
   setCreditCardData,
   setCreditCardCVV,
   removeCreditCard,
-  setCoinBalance,
   openOTPModal,
   closeOTPModal,
   openPinModal,
-  closePinModal
+  closePinModal,
+
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 };
 
 export default withRouter(

@@ -2,10 +2,11 @@ import React, { Component, memo } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
+// import { Redirect } from "react-router-dom";
 import color from "../../../styles/colors";
 import {
   fetchPlayerData,
-  resetPlayerData
+  resetPlayerData,
 } from "../../../../store/actions/playerDataActions";
 
 const OverviewWrapper = styled.div`
@@ -44,11 +45,29 @@ const OverviewContentDescription = styled.p`
 
 class Overview extends Component {
   render() {
+    // if (this.props.error) {
+    //   return <Redirect to="/" />
+    // }
+
     return (
       <OverviewWrapper className="container">
-        {!this.props.loading ? (
+        {this.props.loading && (
+          <OverviewContainer className="row text-center">
+            <div className="text-center mx-auto">
+              <Spinner />
+            </div>
+          </OverviewContainer>
+        )}
+        {this.props.error && (
+          <OverviewContainer className="row text-center">
+            <div className="text-center mx-auto">
+              <p>DATA NOT AVAILABLE</p>
+            </div>
+          </OverviewContainer>
+        )}
+        {!this.props.loading && this.props.playerData && (
           <>
-            <HeadingFour className="mb-5">Overview</HeadingFour>
+            <HeadingFour className="mb-5 text-center">Overview</HeadingFour>
             <OverviewContainer className="row text-center">
               <OverviewContent className="col-lg-4">
                 <OverviewContentHeader>
@@ -84,22 +103,6 @@ class Overview extends Component {
               </OverviewContent>
             </OverviewContainer>
           </>
-        ) : (
-          <>
-            {!this.props.error ? (
-              <OverviewContainer className="row text-center">
-                <div className="text-center mx-auto">
-                  <Spinner />
-                </div>
-              </OverviewContainer>
-            ) : (
-              <OverviewContainer className="row text-center">
-                <div className="text-center mx-auto">
-                  <p>DATA NOT AVAILABLE</p>
-                </div>
-              </OverviewContainer>
-            )}
-          </>
         )}
       </OverviewWrapper>
     );
@@ -109,12 +112,9 @@ class Overview extends Component {
 const mapStateToProps = state => ({
   loading: state.player.loading,
   playerData: state.player.playerData,
-  error: state.player.error
+  error: state.player.error === true,
 });
 
 const mapDispatchToProps = { fetchPlayerData, resetPlayerData };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(Overview));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Overview));

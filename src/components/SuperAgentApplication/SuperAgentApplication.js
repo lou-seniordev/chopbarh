@@ -7,7 +7,7 @@ import {
   Container,
   HeadingTwo,
   Form,
-  FormItem
+  FormItem,
 } from "../styles/SignUpStyles";
 import { Spinner } from "reactstrap";
 import { firestore } from "../../firebase";
@@ -20,11 +20,16 @@ class SuperAgentApplication extends Component {
     state: "",
     email: "",
     gender: "Male",
-    phone: "",
+    chopbarh_phone: "",
+    alternate_phone: "",
+    address: "",
+    city: "",
+    type: "Individual",
+    description: "",
     loading: true,
     submitting: false,
     states: [],
-    error: false
+    error: false,
   };
 
   componentDidMount = async () => {
@@ -38,7 +43,7 @@ class SuperAgentApplication extends Component {
         this.setState({
           loading: false,
           states: statesResponse.data,
-          state: statesResponse.data[0].info.officialName
+          state: statesResponse.data[0].info.officialName,
         });
       } else {
         this.setState({ loading: false, error: true });
@@ -53,8 +58,8 @@ class SuperAgentApplication extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  formIsValid = ({ phone }) => {
-    if (phone.length !== 11 || !isNaN(phone) !== true) {
+  formIsValid = ({ chopbarh_phone }) => {
+    if (chopbarh_phone.length !== 11 || !isNaN(chopbarh_phone) !== true) {
       return false;
     }
     return true;
@@ -77,22 +82,59 @@ class SuperAgentApplication extends Component {
       email,
       gender,
       state,
-      phone,
-      dob
+      chopbarh_phone,
+      alternate_phone,
+      dob,
+      address,
+      type,
+      description,
+      city,
     } = this.state;
     // Submit to Firestore
     try {
-      const ref = await firestore.collection("super_agent").add({
+      await fetch("https://backend.chopbarh.com/api/accounts/super_agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "api-key": "200aeco-190aefd30-aecobdq",
+        },
+        body: JSON.stringify({
+          email,
+          first_name: firstname,
+          last_name: lastname,
+          phone_number: chopbarh_phone,
+          gender,
+          DOB: dob,
+          address,
+          alternate_phone: alternate_phone ? alternate_phone : "N/A",
+          city,
+          status: "PENDING",
+          type,
+          description: description ? description : "N/A",
+          state,
+        }),
+      });
+
+      const { id } = await firestore.collection("super_agent").add({
         firstname,
         lastname,
         email,
         gender,
         state,
-        phone_number: phone,
-        DOB: dob
+        phone_number: chopbarh_phone,
+        alternate_phone,
+        address,
+        type,
+        city,
+        description,
+        DOB: dob,
+        applied_at: Date.now(),
+        time: new Date().toString(),
+        status: "PENDING",
       });
 
-      if (ref.id) {
+      if (id) {
         toast.success(
           "Your application has been sent. You will receive a feedback soon."
         );
@@ -104,7 +146,12 @@ class SuperAgentApplication extends Component {
           state: "",
           email: "",
           gender: "Male",
-          phone: ""
+          type: "Individual",
+          chopbarh_phone: "",
+          alternate_phone: "",
+          address: "",
+          description: "N/A",
+          city: "",
         });
       } else {
         toast.error("Your application was not sent. Please try again later.");
@@ -116,7 +163,12 @@ class SuperAgentApplication extends Component {
           state: "",
           email: "",
           gender: "Male",
-          phone: ""
+          type: "Individual",
+          chopbarh_phone: "",
+          alternate_phone: "",
+          address: "",
+          description: "N/A",
+          city: "",
         });
       }
     } catch (err) {
@@ -140,7 +192,7 @@ class SuperAgentApplication extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginTop: "5rem"
+                  marginTop: "5rem",
                 }}
               >
                 <Spinner />
@@ -153,7 +205,7 @@ class SuperAgentApplication extends Component {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      marginTop: "5rem"
+                      marginTop: "5rem",
                     }}
                   >
                     <p>There was an error while loading this Page</p>
@@ -184,26 +236,6 @@ class SuperAgentApplication extends Component {
                       />
                     </FormItem>
                     <FormItem>
-                      <label>Email</label>
-                      <input
-                        type="email"
-                        value={this.state.email}
-                        name="email"
-                        onChange={this.handleInputChange}
-                        required
-                      />
-                    </FormItem>
-                    <FormItem>
-                      <label>Phone Number</label>
-                      <input
-                        type="text"
-                        value={this.state.phone}
-                        name="phone"
-                        onChange={this.handleInputChange}
-                        required
-                      />
-                    </FormItem>
-                    <FormItem>
                       <label>Date of Birth</label>
                       <input
                         type="date"
@@ -215,7 +247,7 @@ class SuperAgentApplication extends Component {
                       />
                     </FormItem>
                     <FormItem>
-                      <label>Gender</label>
+                      <label>Sex</label>
                       <select
                         value={this.state.gender}
                         name="gender"
@@ -225,6 +257,79 @@ class SuperAgentApplication extends Component {
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
+                    </FormItem>
+                    <FormItem>
+                      <label>Type</label>
+                      <select
+                        value={this.state.type}
+                        name="type"
+                        onChange={this.handleInputChange}
+                        required
+                      >
+                        <option value="Individual">Individual</option>
+                        <option value="Business">Business</option>
+                      </select>
+                    </FormItem>
+                    {this.state.type === "Business" && (
+                      <FormItem>
+                        <label>Description</label>
+                        <input
+                          type="textarea"
+                          value={this.state.description}
+                          name="description"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </FormItem>
+                    )}
+                    <FormItem>
+                      <label>Chopbarh Phone Number</label>
+                      <input
+                        type="text"
+                        value={this.state.chopbarh_phone}
+                        name="chopbarh_phone"
+                        onChange={this.handleInputChange}
+                        required
+                      />
+                    </FormItem>
+                    <FormItem>
+                      <label>Alternate Phone Number</label>
+                      <input
+                        type="text"
+                        value={this.state.alternate_phone}
+                        name="alternate_phone"
+                        onChange={this.handleInputChange}
+                      />
+                    </FormItem>
+                    <FormItem>
+                      <label>Email</label>
+                      <input
+                        type="email"
+                        value={this.state.email}
+                        name="email"
+                        onChange={this.handleInputChange}
+                        required
+                      />
+                    </FormItem>
+                    <FormItem>
+                      <label>Address</label>
+                      <input
+                        type="text"
+                        value={this.state.address}
+                        name="address"
+                        onChange={this.handleInputChange}
+                        required
+                      />
+                    </FormItem>
+                    <FormItem>
+                      <label>City</label>
+                      <input
+                        type="text"
+                        value={this.state.city}
+                        name="city"
+                        onChange={this.handleInputChange}
+                        required
+                      />
                     </FormItem>
                     <FormItem>
                       <label>State</label>
@@ -249,7 +354,7 @@ class SuperAgentApplication extends Component {
                       className="mr-2"
                       disabled={this.state.submitting}
                     >
-                      <span>
+                      <span style={{ color: "#fff" }}>
                         {this.state.submitting ? "Please wait..." : "Submit"}
                       </span>
                     </button>

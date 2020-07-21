@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import color from "../../../styles/colors";
@@ -9,6 +9,7 @@ import Deposit from "../../../assets/svg/Deposit.svg";
 import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
+import { connect } from "react-redux";
 
 const HeaderWrapper = styled.div`
   background: #6d0a23;
@@ -47,41 +48,49 @@ const NavItem = styled.div`
   margin-bottom: 0.3rem;
 `;
 
-function UserNavigation() {
-  return (
-    <HeaderWrapper>
-      <NavItem>
-        <Icon icon={Home} height="18" color="#fff" />
-        <NavLink activeClassName="active" to="user" className="ml-2">
-          Home
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <Icon icon={Deposit} height="18" />
-        <NavLink to="deposit" className="ml-2">
-          Deposit
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <Icon icon={Withdrawal} height="18" />
-        <NavLink to="withdraw" className="ml-2">
-          Withdraw
-        </NavLink>
-      </NavItem>
-      <NavItem>
-        <Icon icon={Play} height="18" />
-        <Link to="play" className="ml-2">
-          Play
-        </Link>
-      </NavItem>
-      <NavItem>
-        <Icon icon={Transactions} height="18" />
-        <Link to="transaction" className="ml-2">
-          Transactions
-        </Link>
-      </NavItem>
-    </HeaderWrapper>
-  );
+class UserNavigation extends Component {
+  render() {
+    return (
+      <HeaderWrapper>
+        <NavItem>
+          <Icon icon={Home} height="18" color="#fff" />
+          <NavLink activeClassName="active" to="user" className="ml-2">
+            Home
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <Icon icon={Deposit} height="18" />
+          <NavLink to="deposit" className="ml-2">
+            Buy Coins
+          </NavLink>
+        </NavItem>
+        {this.props.playerData && this.props.playerData.PlayerStatus !== 6 && (
+          <NavItem>
+            <Icon icon={Withdrawal} height="18" />
+            <NavLink to="withdraw" className="ml-2">
+              Withdraw
+            </NavLink>
+          </NavItem>
+        )}
+        <NavItem>
+          <Icon icon={Play} height="18" />
+          <Link to="play" className="ml-2">
+            Play
+          </Link>
+        </NavItem>
+        <NavItem>
+          <Icon icon={Transactions} height="18" />
+          <Link to="transaction" className="ml-2">
+            Transactions
+          </Link>
+        </NavItem>
+      </HeaderWrapper>
+    );
+  }
 }
 
-export default memo(UserNavigation);
+const mapStateToProps = state => ({
+  playerData: state.player.playerData,
+});
+
+export default connect(mapStateToProps)(UserNavigation);

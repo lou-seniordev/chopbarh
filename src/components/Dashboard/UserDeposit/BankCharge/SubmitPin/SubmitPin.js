@@ -16,7 +16,6 @@ import {
   openPhoneModal,
   closePhoneModal
 } from "../../../../../store/actions/modalActions";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
 import { setTransactionHistory } from "../../../../../store/actions/transactionHistoryActions";
 
 class SubmitPin extends Component {
@@ -80,9 +79,6 @@ class SubmitPin extends Component {
       } else if (data.data.status === "success") {
         this.props.closePinModal();
         toast.success("Transaction was successful");
-        // const value = +data.data.amount / 100;
-        // this.props.setTransactionHistory(data.data);
-        // this.props.setCoinBalance(value);
       } else {
         this.props.closePinModal();
         toast.error(`Please try again`);
@@ -146,13 +142,10 @@ const mapDispatchToProps = {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
-  setCoinBalance,
+
   setTransactionHistory
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPin))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPin))
 );

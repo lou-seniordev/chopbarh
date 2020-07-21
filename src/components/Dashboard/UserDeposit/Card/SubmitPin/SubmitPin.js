@@ -11,24 +11,30 @@ import {
   openPinModal,
   closePinModal,
   openPhoneModal,
-  closePhoneModal
+  closePhoneModal,
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 } from "../../../../../store/actions/modalActions";
-import { setCoinBalance } from "../../../../../store/actions/coinBalanceActions";
-import { setDepositHistory } from "../../../../../store/actions/depositActions";
 import {
   setCreditCardData,
-  fetchCreditCardData
+  fetchCreditCardData,
 } from "../../../../../store/actions/creditCardActions";
+import firebase from "../../../../../firebase";
 
 const Form = styled.form`
   min-height: 12rem;
 `;
 
-// sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a
 class SubmitPin extends Component {
   state = {
     pin: "",
-    loading: false
+    loading: false,
   };
 
   formIsValid = ({ pin }) => {
@@ -54,55 +60,51 @@ class SubmitPin extends Component {
 
     const postData = {
       pin: this.state.pin,
-      reference: this.props.reference
+      reference: this.props.reference,
     };
 
     try {
-      const response = await fetch(
-        "https://api.paystack.co/charge/submit_pin",
+      const idToken = await firebase.auth().currentUser.getIdToken();
+
+      const submitPinResponse = await fetch(
+        "https://us-central1-dev-sample-31348.cloudfunctions.net/paystackchargeresolvers/player/deposit/submit_pin",
         {
           method: "POST",
-          mode: "cors",
           headers: {
-            Authorization: `Bearer sk_live_f46f17bcba5eefbb48baabe5f54d10e67c90e83a`,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${idToken}`,
+            "x-api-key": process.env.REACT_APP_FUNCTIONS_API_KEY,
           },
-          body: JSON.stringify(postData)
+          body: JSON.stringify(postData),
         }
       );
 
-      const data = await response.json();
+      const data = await submitPinResponse.json();
+
       this.setState({ loading: false });
-      if (data.data.status === "send_otp") {
-        this.props.closePinModal();
-        this.props.openOTPModal();
-      } else if (data.data.status === "send_phone") {
-        this.props.closePinModal();
-        this.props.openPhoneModal();
-      } else if (data.data.status === "open_url") {
-        this.props.closePinModal();
-        window.open(data.data.url, "_self");
-      } else if (data.data.status === "success") {
-        this.props.closePinModal();
-        toast.info("Transaction is processing");
-        const payload = {
-          ...data.data.authorization,
-          cvv: this.props.cvv
-        };
-        // const historyObject = {
-        //   ...data.data,
-        //   fees: +data.data.amount / 100 < 2500 ? 0 : 100
-        // };
-        // const value = +data.data.amount / 100;
-        // this.props.setDepositHistory(historyObject);
-        // this.props.setCoinBalance(value);
-        this.props.setCreditCardData(payload);
+      if (data.status === true) {
+        if (data.data.status === "send_otp") {
+          this.props.closeCardPinModal();
+          this.props.openCardOTPModal();
+        } else if (data.data.status === "send_phone") {
+          this.props.closeCardPinModal();
+          this.props.openCardPhoneModal();
+        } else if (data.data.status === "open_url") {
+          this.props.closeCardPinModal();
+          window.open(data.data.url, "_self");
+        } else if (data.data.status === "success") {
+          this.props.closeCardPinModal();
+          toast.info("Transaction is processing");
+        } else {
+          this.props.closeCardPinModal();
+          toast.error(`Please try again`);
+        }
       } else {
-        this.props.closePinModal();
-        toast.error(`Please try again`);
+        this.props.closeCardPinModal();
+        toast.error(`Transaction Declined`);
       }
     } catch (err) {
-      console.log(err);
       this.setState({ loading: false });
       toast.error(`Something went wrong`);
     }
@@ -116,7 +118,7 @@ class SubmitPin extends Component {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
             className="mt-5"
           >
@@ -151,8 +153,7 @@ class SubmitPin extends Component {
 
 const mapStateToProps = state => ({
   reference: state.charge.reference,
-  loading: state.coinBalance.loading,
-  cvv: state.creditCard.cvv
+  cvv: state.creditCard.cvv,
 });
 
 const mapDispatchToProps = {
@@ -162,15 +163,19 @@ const mapDispatchToProps = {
   closePinModal,
   openPhoneModal,
   closePhoneModal,
-  setCoinBalance,
-  setDepositHistory,
   setCreditCardData,
-  fetchCreditCardData
+  fetchCreditCardData,
+
+  openCardPinModal,
+  closeCardPinModal,
+  openCardOTPModal,
+  closeCardOTPModal,
+  openCardPhoneModal,
+  closeCardPhoneModal,
+  openCardBirthdayModal,
+  closeCardBirthdayModal,
 };
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(memo(SubmitPin))
+  connect(mapStateToProps, mapDispatchToProps)(memo(SubmitPin))
 );

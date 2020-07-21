@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Phone } from "grommet-icons";
 import Logo from "../../assets/img/Logo.png";
 import color from "../../styles/colors";
 import breakpoint from "../../styles/breakpoints";
+import WhatsAppIcon from "../../assets/svg/WhatsAppIcon.svg";
 
 /* 
 
@@ -68,6 +70,8 @@ const FooterLinkContainer = styled.div`
   }
 `;
 
+const ContactBox = styled.div``;
+
 export default function Footer() {
   return (
     <FooterWrapper className="footer">
@@ -92,11 +96,12 @@ export default function Footer() {
             {/* <p>
               <span>Responsible Gaming</span>
             </p> */}
-            <p>
+
+            {/* <p>
               <Link to="vendors">
                 <span>Become a Chopbarh Agent</span>
               </Link>
-            </p>
+            </p> */}
           </FooterLinkContainer>
         </div>
         <div className="mb-3">
@@ -104,11 +109,11 @@ export default function Footer() {
             <p>Help</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            <p>
+            {/* <p>
               <span>
                 <a href="https://chopbarh.zendesk.com/hc">How to Play</a>
               </span>
-            </p>
+            </p> */}
             <p>
               <span>Games</span>
             </p>
@@ -134,13 +139,23 @@ export default function Footer() {
             <p>Contact Us</p>
           </FooterLinkHeader>
           <FooterLinkContainer>
-            <p>Telephone: 0903-662-3253</p>
-            <p>
+            <ContactBox className="mb-3">
+              <Link to="contacts">
+                <Phone size="25px" color="#dddddd" />
+                <img
+                  src={WhatsAppIcon}
+                  alt="Whatsapp Icon"
+                  className="ml-3"
+                  height="25"
+                />
+              </Link>
+            </ContactBox>
+            {/* <p>
               Email:{" "}
               <a href="https://chopbarh.zendesk.com/hc/en-us/requests/new">
                 Submit a Ticket
               </a>
-            </p>
+            </p> */}
             <p>&copy; {new Date().getFullYear()}</p>
           </FooterLinkContainer>
         </div>

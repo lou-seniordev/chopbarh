@@ -1,42 +1,62 @@
 import * as actionType from "../actionTypes/actionTypes";
-import apiService from "../../config/apiService";
+import firebase from "../../firebase";
+import { toast } from "react-toastify";
 
 export const fetchPlayerInit = () => ({
-	type: actionType.FETCH_PLAYER_DATA_INIT
+  type: actionType.FETCH_PLAYER_DATA_INIT,
 });
 
 export const fetchPlayerSuccess = data => ({
-	type: actionType.FETCH_PLAYER_DATA_SUCCESS,
-	data
+  type: actionType.FETCH_PLAYER_DATA_SUCCESS,
+  data,
 });
 
 export const fetchPlayerFail = () => ({
-	type: actionType.FETCH_PLAYER_DATA_FAIL
+  type: actionType.FETCH_PLAYER_DATA_FAIL,
 });
 
-export const fetchPlayerData = () => (dispatch, getState) => {
-	dispatch(fetchPlayerInit());
-	fetch("https://chopbarh-api.nutod.repl.co/api/get_user_profile", {
-		method: "POST",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({ playerId: getState().auth.id })
-	})
-		.then(response => response.json())
-		.then(data => {
-			if (data.status === true) {
-				dispatch(fetchPlayerSuccess(data.data));
-			} else {
-				dispatch(fetchPlayerFail());
-			}
-		})
-		.catch(err => {
-			dispatch(fetchPlayerFail());
-		});
+export const fetchPlayerData = () => async (dispatch, getState) => {
+  dispatch(fetchPlayerInit());
+
+  const idToken = await firebase.auth().currentUser.getIdToken();
+  const user = firebase.auth().currentUser;
+
+  if (user) {
+    fetch(
+      "https://us-central1-dev-sample-31348.cloudfunctions.net/userProfileUtil/profile/get",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          playerId: localStorage.getItem("chopbarh-id"),
+        }),
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === true) {
+          dispatch(fetchPlayerSuccess(data.data));
+        } else {
+          dispatch(fetchPlayerFail());
+          toast.error("There was a network error. Please, sign in again");
+          setTimeout(() => {
+            window.location = "/";
+          }, 5000);
+        }
+      })
+      .catch(err => {
+        dispatch(fetchPlayerFail());
+      });
+  } else {
+    window.location = "/";
+  }
 };
 
 export const resetPlayerData = () => ({
-	type: actionType.RESET_PLAYER_DATA
+  type: actionType.RESET_PLAYER_DATA,
 });

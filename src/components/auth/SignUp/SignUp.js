@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Header from "../../UI/Header/Header";
 import breakPoints from "../../styles/breakpoints";
 import AppStore from "../../assets/img/AppStore.png";
-import PlayStore from "../../assets/img/PlayStore.png";
+import PlayStore from "../../assets/img/PlayStore@2x.png";
 // import { SignUpWrapper } from "../../styles/SignUpStyles";
 
 const SignUpWrapper = styled.div`
@@ -20,34 +20,29 @@ const SignUpWrapper = styled.div`
     text-align: center;
   }
 
-  img {
-    width: 35%;
-    margin: 1rem;
-    transition: all 0.2s;
-
-    &:hover {
-      transform: translateY(-3px);
-    }
-
-    @media only screen and (max-width: ${breakPoints.medium}) {
-      width: 60%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.small}) {
-      width: 70%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.smaller}) {
-      width: 90%;
-    }
-
-    @media only screen and (max-width: ${breakPoints.smallest}) {
-      width: 100%;
-    }
-  }
-
   a {
     cursor: pointer;
+  }
+`;
+
+const Image = styled.img`
+  width: 27rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    width: 18rem;
+  }
+`;
+
+const AppleStoreImage = styled(Image)`
+  width: 24rem;
+
+  @media only screen and (max-width: ${breakPoints.smaller}) {
+    width: 15.6rem;
   }
 `;
 
@@ -61,12 +56,12 @@ class SignUp extends Component {
           <div>
             <p>
               <a href="https://apps.apple.com/us/app/chopbarh/id1463959707?ls=1">
-                <img src={AppStore} alt="App Store" />
+                <AppleStoreImage src={AppStore} alt="App Store" />
               </a>
             </p>
             <p>
-              <a href="https://downloads.chopbarh.com/chopbarh.apk">
-                <img src={PlayStore} alt="Play Store" />
+              <a href="https://chopbarh.live/download">
+                <Image src={PlayStore} alt="Play Store" />
               </a>
             </p>
           </div>

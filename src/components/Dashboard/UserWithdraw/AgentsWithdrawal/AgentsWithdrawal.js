@@ -6,7 +6,7 @@ import {
   Form,
   FormItem,
   HalfColumn,
-  FormSubmitButton
+  FormSubmitButton,
 } from "../../../styles/CardCharge";
 import firebase, { firestore } from "../../../../firebase";
 
@@ -20,7 +20,7 @@ class AgentsWithdrawal extends Component {
     loading: false,
     phone_number: "",
     amount: "",
-    currentTransferAmount: 0
+    currentTransferAmount: 0,
   };
 
   componentDidMount = async () => {
@@ -31,11 +31,11 @@ class AgentsWithdrawal extends Component {
     try {
       let snapshots = await firestore
         .collection("transfer_to_agent")
-        .where("playerId", "==", localStorage.getItem("chopbarh-id:live"))
+        .where("playerId", "==", localStorage.getItem("chopbarh-id"))
         .where("at", ">=", timestamp)
         .get();
 
-      let data = snapshots.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      let data = snapshots.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
       let totalTransferredSoFar = data.reduce(
         (acc, cur) => (acc += cur.amount),
@@ -64,7 +64,7 @@ class AgentsWithdrawal extends Component {
     return true;
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     if (this.props.playerData.PlayerStatus === 0) {
@@ -139,13 +139,13 @@ class AgentsWithdrawal extends Component {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            apiKey: "d979dfb8-5150-4b59-8402-4cc39e2e0f47"
+            apiKey: process.env.REACT_APP_NODE_SERVER_API_KEY,
           },
           body: JSON.stringify({
             amount: +this.state.amount,
             phone_number: this.state.phone_number,
-            playerId: this.props.playerData.PlayerID
-          })
+            playerId: this.props.playerData.PlayerID,
+          }),
         }
       );
 
@@ -153,13 +153,13 @@ class AgentsWithdrawal extends Component {
 
       if (data.status === true) {
         try {
-          const docRef = await firestore.collection("transfer_to_agent").add({
+          await firestore.collection("transfer_to_agent").add({
             amount: +this.state.amount,
             phone_number: this.state.phone_number,
             playerId: this.props.playerData.PlayerID,
             at: Date.now(),
             time: firebase.firestore.FieldValue.serverTimestamp(),
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
           });
         } catch (err) {}
 
@@ -221,19 +221,14 @@ class AgentsWithdrawal extends Component {
             <span>{this.state.loading ? "Processing..." : "Withdraw"}</span>
           </FormSubmitButton>
         </FormWrapper>
-        {/* <div className="text-center" style={{ color: "#000" }}>
-          <p>
-            **For all withdrawals there is a &#8358;50 deducted from your cash
-            balance**
-          </p>
-        </div> */}
+        {/* <p className="text-center">Service currently unavailable</p> */}
       </>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  playerData: state.player.playerData
+const mapStateToProps = (state) => ({
+  playerData: state.player.playerData,
 });
 
 export default connect(mapStateToProps)(AgentsWithdrawal);

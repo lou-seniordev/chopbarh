@@ -7,7 +7,7 @@ import { firestore } from "../../../../firebase";
 import {
   fetchWithdrawalHistoryData,
   fetchWithdrawalHistorySuccess,
-  fetchWithdrawalHistoryFail
+  fetchWithdrawalHistoryFail,
 } from "../../../../store/actions/withdrawalActions";
 
 const WithdrawalTableWrapper = styled.div`
@@ -21,14 +21,14 @@ class WithdrawalTable extends Component {
     withdrawalData: [],
     lastVisible: null,
     hasMore: true,
-    limit: 20
+    limit: 20,
   };
 
   componentDidMount = async () => {
     try {
       let snapshots = await firestore
         .collection("new_withdrawals")
-        .where("playerId", "==", this.props.playerData.PlayerID)
+        .where("playerId", "==", this.props.playerId)
         .orderBy("time", "desc")
         .limit(this.state.limit)
         .get();
@@ -49,7 +49,7 @@ class WithdrawalTable extends Component {
       this.setState(() => ({
         withdrawalData: data,
         lastVisible,
-        loading: false
+        loading: false,
       }));
     } catch (err) {
       this.setState({ error: true, loading: false });
@@ -60,7 +60,7 @@ class WithdrawalTable extends Component {
     try {
       let additionalQuery = await firestore
         .collection("new_withdrawals")
-        .where("playerId", "==", this.props.playerData.PlayerID)
+        .where("playerId", "==", this.props.playerId)
         .orderBy("time", "desc")
         .startAfter(this.state.lastVisible)
         .limit(this.state.limit);
@@ -76,7 +76,7 @@ class WithdrawalTable extends Component {
       // Set State
       this.setState({
         withdrawalData: [...this.state.withdrawalData, ...data],
-        lastVisible
+        lastVisible,
       });
     } catch (error) {
       this.setState({ error: true, loading: false });
@@ -86,7 +86,7 @@ class WithdrawalTable extends Component {
   render() {
     return (
       <WithdrawalTableWrapper>
-        {!this.state.loading ? (
+        {!this.state.loading && this.state.withdrawalData.length ? (
           <div
             className="table-responsive"
             id="scrollableDiv"
@@ -113,7 +113,7 @@ class WithdrawalTable extends Component {
                   style={{
                     background: "#8C1936",
                     color: "#fff",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   <tr>
@@ -174,16 +174,18 @@ class WithdrawalTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  playerData: state.player.playerData,
+  playerId: state.player.playerData
+    ? state.player.playerData.PlayerID
+    : localStorage.getItem("chopbarh-id"),
   loading: state.withdrawal.loading,
   error: state.withdrawal.error,
-  withdrawalData: state.withdrawal.withdrawalHistory
+  withdrawalData: state.withdrawal.withdrawalHistory,
 });
 
 const mapDispatchToProps = {
   fetchWithdrawalHistoryData,
   fetchWithdrawalHistorySuccess,
-  fetchWithdrawalHistoryFail
+  fetchWithdrawalHistoryFail,
 };
 
 export default connect(

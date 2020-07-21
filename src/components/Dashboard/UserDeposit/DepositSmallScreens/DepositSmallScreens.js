@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemButton,
-  AccordionItemPanel
+  AccordionItemPanel,
 } from "react-accessible-accordion";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
@@ -18,7 +18,7 @@ import GTBank from "../GTBank/GTBank";
 import NIBBS from "../NIBBS/NIBBS";
 import ATM from "../ATM/ATM";
 import RavePayment from "../Rave/Rave";
-import InstantPayment from "../InstantPayment/InstantPayment";
+import MonnifyPaymentAccount from "../MonnifyPaymentAccount/MonnifyPaymentAccount";
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
@@ -74,7 +74,7 @@ class DepositSmallScreens extends Component {
                       </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                      <InstantPayment />
+                      <MonnifyPaymentAccount />
                     </AccordionItemPanel>
                   </AccordionItem>
 
@@ -152,7 +152,7 @@ class DepositSmallScreens extends Component {
 
 const mapStateToProps = state => ({
   playerData: state.player.playerData,
-  loading: state.player.loading
+  loading: state.player.loading,
 });
 
 export default connect(mapStateToProps)(DepositSmallScreens);

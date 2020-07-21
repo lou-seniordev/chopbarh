@@ -4,11 +4,6 @@ import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { firestore } from "../../../../firebase";
-import {
-  fetchDepositHistoryData,
-  fetchDepositHistorySuccess,
-  fetchDepositHistoryFail
-} from "../../../../store/actions/depositActions";
 
 const DepositTableWrapper = styled.div`
   margin-top: 1rem;
@@ -21,7 +16,7 @@ class DepositTable extends Component {
     depositData: [],
     lastVisible: null,
     hasMore: true,
-    limit: 20
+    limit: 20,
   };
 
   componentDidMount = async () => {
@@ -49,7 +44,7 @@ class DepositTable extends Component {
       this.setState(() => ({
         depositData: data,
         lastVisible,
-        loading: false
+        loading: false,
       }));
     } catch (err) {
       this.setState({ error: true, loading: false });
@@ -76,7 +71,7 @@ class DepositTable extends Component {
       // Set State
       this.setState({
         depositData: [...this.state.depositData, ...data],
-        lastVisible
+        lastVisible,
       });
     } catch (error) {
       this.setState({ error: true, loading: false });
@@ -113,7 +108,7 @@ class DepositTable extends Component {
                   style={{
                     background: "#8C1936",
                     color: "#fff",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   <tr>
@@ -178,16 +173,10 @@ class DepositTable extends Component {
 const mapStateToProps = state => ({
   playerId: state.player.playerData
     ? state.player.playerData.PlayerID
-    : localStorage.getItem("chopbarh-id:live"),
+    : localStorage.getItem("chopbarh-id"),
   loading: state.deposit.loading,
   error: state.deposit.error,
-  depositData: state.deposit.depositHistory
+  depositData: state.deposit.depositHistory,
 });
 
-const mapDispatchToProps = {
-  fetchDepositHistoryData,
-  fetchDepositHistorySuccess,
-  fetchDepositHistoryFail
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(DepositTable));
+export default connect(mapStateToProps)(memo(DepositTable));

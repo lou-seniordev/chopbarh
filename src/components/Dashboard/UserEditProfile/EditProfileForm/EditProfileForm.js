@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Spinner } from "reactstrap";
 import { toast } from "react-toastify";
-import axios from "axios";
 import color from "../../../styles/colors";
 import breakPoints from "../../../styles/breakpoints";
-import keys from "../../../../config/keys";
+import firebase from "../../../../firebase";
 
 const EditProfileWrapper = styled.div`
   z-index: 2000;
@@ -132,55 +131,50 @@ class EditProfileForm extends Component {
     phone: "",
     dob: "",
     sex: "",
-    email: ""
+    email: "",
   };
 
   componentDidMount = () => {
     if (this.props.playerData !== null) {
-      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      const { FullName, PhoneNum, DOB, SEX, Email } = this.props.playerData;
       this.setState({
         name: FullName,
         phone: PhoneNum,
         dob: this.getDate(DOB),
-        sex: Sex,
-        email: Email
+        sex: SEX,
+        email: Email,
       });
     }
   };
 
   componentDidUpdate = prevProps => {
     if (this.props !== prevProps) {
-      const { FullName, PhoneNum, DOB, Sex, Email } = this.props.playerData;
+      const { FullName, PhoneNum, DOB, SEX, Email } = this.props.playerData;
       this.setState({
         name: FullName,
         phone: PhoneNum,
         dob: this.getDate(DOB),
-        sex: Sex,
-        email: Email
+        sex: SEX,
+        email: Email,
       });
     }
   };
 
   getDate = date => {
     const month =
-      Number(
-        new Date(
-          date
-            .split("/")
-            .reverse()
-            .join("/")
-        ).getMonth()
-      ) + 1;
+      Number(new Date(date.split("/").reverse().join("/")).getMonth()) + 1;
+
+    let updatedMonth;
+    if (month < 10) {
+      updatedMonth = `0${month}`;
+    } else {
+      updatedMonth = month;
+    }
+
     return `${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
-    ).getFullYear()}-0${month}-${new Date(
-      date
-        .split("/")
-        .reverse()
-        .join("/")
+      date.split("/").reverse().join("/")
+    ).getFullYear()}-${updatedMonth}-${new Date(
+      date.split("/").reverse().join("/")
     ).getDate()}`;
   };
 
@@ -188,47 +182,49 @@ class EditProfileForm extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
 
+    console.log(this.state);
+
     const postData = {
-      FULL_NAME: this.state.name,
-      DOB: this.state.dob,
-      SEX: this.state.sex.split("")[0],
-      EMAIL: this.state.email
+      name: this.state.name,
+      dob: this.state.dob,
+      sex: this.state.sex,
+      email: this.state.email,
+      playerId: this.props.id,
     };
 
-    postData["@class"] = ".LogEventRequest";
-    postData["eventKey"] = "PLAYER_PROFILE_UPDATE";
-    postData["playerId"] = this.props.id;
-    const formValue = JSON.stringify(postData);
+    try {
+      const idToken = await firebase.auth().currentUser.getIdToken();
 
-    axios(
-      `https://${keys.apiKeyPrefix}.gamesparks.net/rs/debug/${
-        keys.apiKeySuffix
-      }/LogEventRequest`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: formValue
-      }
-    )
-      .then(response => {
-        if (response.data.error) {
-          this.setState({ loading: false });
-          toast.error("Profile was not updated. Please, try again");
-        } else {
-          this.setState({ loading: false });
-          toast.success("Profile was successfully updated.");
-        }
-      })
-      .catch(err => {
+      const editProfileResponse = await (
+        await fetch(
+          "https://us-central1-dev-sample-31348.cloudfunctions.net/userProfileUtil/profile/update",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify(postData),
+          }
+        )
+      ).json();
+
+      if (editProfileResponse.status === true) {
         this.setState({ loading: false });
-      });
+        toast.success("Profile was successfully updated.");
+      } else {
+        this.setState({ loading: false });
+        toast.error("Profile was not updated. Please, try again");
+      }
+    } catch (error) {
+      this.setState({ loading: false });
+      toast.error("An error occurred. Please, try again");
+    }
   };
 
   render() {
@@ -242,7 +238,7 @@ class EditProfileForm extends Component {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginTop: "5rem"
+                  marginTop: "5rem",
                 }}
               >
                 <Spinner />
@@ -330,12 +326,9 @@ class EditProfileForm extends Component {
 const mapStateToProps = state => ({
   id: state.auth.id,
   loading: state.player.loading,
-  playerData: state.player.playerData
+  playerData: state.player.playerData,
 });
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditProfileForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileForm);

@@ -1,6 +1,6 @@
 import React, { Component, memo } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "reactstrap";
 import { Update } from "grommet-icons";
@@ -17,7 +17,6 @@ import Withdrawal from "../../../assets/svg/Withdrawal.svg";
 import Play from "../../../assets/svg/Play.svg";
 import Transactions from "../../../assets/svg/Transaction.svg";
 import { fetchPlayerData } from "../../../../store/actions/playerDataActions";
-// import { fetchTopEarners } from "../../../../store/actions/TopEarnersActions.js";
 
 const HeaderWrapper = styled.div`
   background: ${colors.colorGrayDarkOne};
@@ -36,14 +35,11 @@ const HeaderWrapper = styled.div`
 class UserHeader extends Component {
   state = {
     cashBalance: true,
-    coinBalance: true
+    coinBalance: true,
   };
 
   componentDidMount = () => {
     this.props.fetchPlayerData();
-    // this.props.fetchTopEarners();
-    // if (!this.props.isPlayerDataAvailable) {
-    // }
   };
 
   togglecashBalanceVisibility = () => {
@@ -55,6 +51,10 @@ class UserHeader extends Component {
   };
 
   render() {
+    if (!this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <HeaderWrapper>
         <nav
@@ -122,7 +122,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.CBCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -153,7 +153,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.RealCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -187,9 +187,9 @@ class UserHeader extends Component {
                           <Link className="dropdown-item" to="edit-profile">
                             Profile
                           </Link>
-                          <Link className="dropdown-item" to="change-pin">
+                          {/* <Link className="dropdown-item" to="change-pin">
                             Change Pin
-                          </Link>
+                          </Link> */}
                           <Link className="dropdown-item" to="logout">
                             Logout
                           </Link>
@@ -247,15 +247,22 @@ class UserHeader extends Component {
                         <Link className="" to="deposit">
                           <Icon icon={Deposit} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">
-                            Deposit
+                            Buy Coins
                           </span>
                         </Link>
-                        <Link className="" to="withdraw">
-                          <Icon icon={Withdrawal} height="15" color="#fff" />
-                          <span className="nav-link text-uppercase">
-                            Withdraw
-                          </span>
-                        </Link>
+                        {this.props.playerData &&
+                          this.props.playerData.PlayerStatus !== 6 && (
+                            <Link className="" to="withdraw">
+                              <Icon
+                                icon={Withdrawal}
+                                height="15"
+                                color="#fff"
+                              />
+                              <span className="nav-link text-uppercase">
+                                Withdraw
+                              </span>
+                            </Link>
+                          )}
                         <Link className="" to="play">
                           <Icon icon={Play} height="15" color="#fff" />
                           <span className="nav-link text-uppercase">Play</span>
@@ -289,7 +296,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.CBCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -320,7 +327,7 @@ class UserHeader extends Component {
                                     Number(this.props.playerData.RealCoins)
                                       .toString()
                                       .split("").length
-                                  )
+                                  ),
                                 ].map((item, id) => (
                                   <span key={id}>*</span>
                                 ))}
@@ -339,12 +346,12 @@ class UserHeader extends Component {
                         >
                           Profile
                         </Link>
-                        <Link
+                        {/* <Link
                           className="nav-link text-uppercase"
                           to="change-pin"
                         >
                           Change Pin
-                        </Link>
+                        </Link> */}
                         <Link className="nav-link text-uppercase" to="logout">
                           Logout
                         </Link>
@@ -407,11 +414,12 @@ const mapStateToProps = state => ({
   isPlayerDataAvailable: state.player.playerData !== null,
   playerData: state.player.playerData,
   loading: state.player.loading,
-  error: state.player.error
+  error: state.player.error,
+  isAuthenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = {
-  fetchPlayerData
+  fetchPlayerData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(UserHeader));

@@ -4,12 +4,11 @@
 
 .slider a.previousButton,
 .slider a.nextButton {
-  color: '#fff' !important;
-  background: rgba(109, 10, 35, 0.39);
+  display: none !important;
 }
 
 .accordion__button {
-  background-color: #6D0A23 !important;
+  background-color: #6d0a23 !important;
   color: #f9f9f9 !important;
   cursor: pointer;
   padding: 18px;
